@@ -176,6 +176,16 @@ def main():
         'evidence/e5/surface_uniqueness.json': 'e5_surface_uniqueness.json',
         'evidence/e5/uniqueness.json': 'e5_final_uniqueness.json',
         'evidence/e5/leaderboard_read.json': 'e5_leaderboard_read.json',
+        'evidence/p6_dualhorizon/run_card.json': 'p6_dualhorizon_run_card.json',
+        'evidence/p6_dualhorizon/canaries.json': 'p6_dualhorizon_canaries.json',
+        'evidence/p6_dualhorizon/instrumentA_holdout.json': 'p6_dualhorizon_instrumentA.json',
+        'evidence/p6_dualhorizon/instrumentB_prime.json': 'p6_dualhorizon_instrumentB_prime.json',
+        'evidence/p6_dualhorizon/instrumentB_double_prime.json': 'p6_dualhorizon_instrumentB_double_prime.json',
+        'evidence/p6_dualhorizon/instrumentB_all.json': 'p6_dualhorizon_instrumentB_all.json',
+        'evidence/p6_dualhorizon/sgmc_buffer_audit.json': 'sgmc_buffer_audit.json',
+        'evidence/p6_dualhorizon/e2_mutual_uniqueness.json': 'e2_mutual_uniqueness.json',
+        'evidence/p6_dualhorizon/uniqueness.json': 'p6_dualhorizon_uniqueness.json',
+        'evidence/p6_dualhorizon/surface_uniqueness.json': 'p6_dualhorizon_surface_uniqueness.json',
         'evidence/e6/run_card.json': 'e6_run_card.json',
         'evidence/e6/canaries.json': 'e6_canaries.json',
         'evidence/e6/training.json': 'e6_training.json',
@@ -397,6 +407,37 @@ SHA-256 <code>{esc(e5card['raster_sha256'])}</code>.</p>
 <p class="small">Name: <code>{esc(e5card['submission_name'])}</code> · Note ({e5card['note_chars']}/140):
 <code>{esc(e5card['submission_note'])}</code>. Negative results are deliverables: supervised ranking
 halved P4's B′ deficit but did not beat uniform halo sampling. Full tables on the results page.</p></section>"""
+    # ------------------------------------------------------- P6 dual-horizon lane
+    p6card = load('evidence/p6_dualhorizon/run_card.json', {})
+    p6_section = ''
+    if p6card and p6card.get('raster_sha256'):
+        _a6 = p6card['instrument_a_holdout']
+        _b6 = p6card['instrument_b_prime_proxy']
+        _bpp6 = p6card['instrument_b_double_prime_proxy']
+        _db6 = p6card['paired_b_prime_vs_h33']
+        _da6 = p6card['paired_a_vs_p4']
+        _u6 = p6card['correlation_overlap_vs_registry']
+        p6_section = f"""<section><h2>Concurrent P6 — dual-horizon LOQO scarp-rad-basement ranker + SGMC 1–20 px buffer calibration (verdict: {esc(p6card['verdict'])} — DO NOT SUBMIT)</h2>
+<p>Preregistered in <code>docs/hypotheses.md</code> (<code>H-P5-1</code> through <code>H-P5-5</code>): combines leave-one-quadrant-out
+scarp-radiometric-basement ranking (19-band stack + 1 m LiDAR scarp + 10 m 3DEP breaklines + GeoDAWN radiometric ratios)
+with the visible-catalogue tip/host-length halo across <code>5&times;5</code> strata and <code>3.2 px</code> NMS (<code>37,654</code> binary dots).
+<strong>Download for review: yes (<code>download_ok = true</code>). Submit a weekly slot: NO (<code>submit_recommended = false</code>)</strong> —
+Instrument A HOLDOUT-DTI <strong>{_a6['candidate']['dti']:.4f} {ci(_a6['candidate'])}</strong> (vs P4 {_a6['p4_reference']['dti']:.4f},
+paired &Delta; {_da6['delta']:+.4f} {ci(_da6)} straddles zero; vs H33 {_a6['h33_reference']['dti']:.4f});
+Instrument B′ PROXY-DTI (<code>d &ge; 3 px</code>) <strong>{_b6['candidate']['dti']:.4f} {ci(_b6['candidate'])}</strong>
+vs H33 {_b6['h33_reference']['dti']:.4f} (paired &Delta; {_db6['delta']:+.4f} {ci(_db6)}, +53.5%) and vs P4 {_b6['p4_reference']['dti']:.4f} (+77.4%);
+Instrument B′′ PROXY-DTI (<code>d &ge; 6 px</code>) <strong>{_bpp6['candidate']['dti']:.4f} {ci(_bpp6['candidate'])}</strong> vs H33 {_bpp6['h33_reference']['dti']:.4f};
+unsupervised breakline ablation (<code>Exp 5.2</code>, zero SGMC training) scores <strong>{_b6['exp5_2_brk_7x7']['dti']:.4f}</strong> on B′ and <strong>{_a6['exp5_2_brk_7x7']['dti']:.4f}</strong> on A.
+Held fail-closed because paired A vs P4 CI includes zero, SGMC B′ over-weights steep pre-Quaternary bedrock faults (<code>13.42&deg;</code> vs catalogue <code>5.55&deg;</code>),
+and literal forward overlap against the dense lattice is {_u6['worst_forward_overlap']:.2f} (worst mutual overlap {_u6['worst_mutual_overlap']:.4f} &le; 0.70, worst &rho; {_u6['worst_spearman_full_footprint']:.4f} &le; 0.90 across {_u6['rasters_checked']} rasters).
+SHA-256 <code>{esc(p6card['raster_sha256'])}</code>.</p>
+<div class="actions"><a class="button secondary" href="downloads/{esc(p6card['submission_name'])}.tif" download>Download P6 dual-horizon TIFF (review only — DO NOT SUBMIT)</a>
+<a class="button secondary" href="downloads/{esc(p6card['submission_name'])}.zip" download>Download P6 ZIP</a>
+<a class="button secondary" href="downloads/p6_dualhorizon_run_card.json" download>P6 run card</a>
+<a class="button secondary" href="downloads/sgmc_buffer_audit.json" download>SGMC 1–20 px buffer audit</a>
+<a class="button secondary" href="downloads/e2_mutual_uniqueness.json" download>E2 62-raster audit</a></div>
+<p class="small">Name: <code>{esc(p6card['submission_name'])}</code> · Note ({p6card['note_chars']}/140):
+<code>{esc(p6card['submission_note'])}</code>.</p></section>"""
     archive_rows = [[esc(Path(r['artifact']).name),
         f'<a href="{esc(r["artifact"].removeprefix("docs/"))}" download>Download for review — DO NOT SUBMIT</a>',
         'pass' if r['validator_output']['all_checks_passed'] else 'FAIL',
@@ -404,7 +445,7 @@ halved P4's B′ deficit but did not beat uniform halo sampling. Full tables on 
         for r in review['archived_artifacts']]
     archives = f'<h2>{len(review["archived_artifacts"])} frozen prior dot TIFFs — forensic review only</h2>' + table(
         ['Archive', 'Download', 'Local format', 'Forward overlap (limit 0.70)'], archive_rows)
-    (DOCS / 'index.html').write_text(frame('Overview', index + e6_section + s3_site.banner() + e5_section + e2_section + p5_section + archives))
+    (DOCS / 'index.html').write_text(frame('Overview', index + e6_section + s3_site.banner() + p6_section + e5_section + e2_section + p5_section + archives))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
@@ -580,6 +621,36 @@ labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed score
                     "<p>Completes HANDOFF Next Step 2: incremental shell density and enrichment of off-catalogue SGMC pixels (78,433 px) around the training fault catalogue (60,988 px).</p>"
                     + table(['Shell (px)', 'SGMC off-cat px', 'Shell area (px)', 'Density', 'Enrichment vs mean'],
                             _rbuf, 'SGMC off-catalogue shell enrichment around existing_faults.tif'))
+    if p6card:
+        _ra6 = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+                for k, v in sorted(p6card['instrument_a_holdout'].items(),
+                                   key=lambda kv: -kv[1]['dti'])]
+        _rb6 = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+                for k, v in sorted(p6card['instrument_b_prime_proxy'].items(),
+                                   key=lambda kv: -kv[1]['dti'])]
+        _rbpp6 = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+                  for k, v in sorted(p6card['instrument_b_double_prime_proxy'].items(),
+                                     key=lambda kv: -kv[1]['dti'])]
+        buf_audit = load('evidence/p6_dualhorizon/sgmc_buffer_audit.json', {})
+        buf_rows = [
+            [f"<= {r['buffer_px']} px ({r['buffer_m']} m)", f"{r['sgmc_pixels_within_buffer']:,}",
+             pct(r['sgmc_fraction_within_buffer']), pct(r['domain_fraction_within_buffer']),
+             f"{r['enrichment_ratio']:.2f}x", f"{r['sgmc_pixels_d_ge_r']:,}"]
+            for r in buf_audit.get('buffer_enrichment_curve', [])
+        ]
+        results += ("<h2>Lane P6 — dual-horizon LOQO scarp-rad-basement ranker &amp; SGMC 1–20 px buffer calibration (DO NOT SUBMIT)</h2>"
+                    "<p>Evaluates H-P5-1 (LOQO supervised 7x7), H-P5-2 (unsupervised 10m-3DEP breakline + LiDAR scarp + rad 7x7), "
+                    "and H-P5-3 (submodular dual-horizon 5x5, 3.2 px NMS, 37,654 binary dots). Held fail-closed (verdict negative) "
+                    "because paired Instrument A vs P4 CI straddles zero, SGMC B′ sits at 13.42 deg median slope vs catalogue 5.55 deg, "
+                    "and literal forward overlap vs the dense lattice is 1.00.</p>"
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _ra6,
+                            'P6 instrument A · HOLDOUT-DTI · gems57-pooled-hide-v2')
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _rb6,
+                            "P6 instrument B′ · PROXY-DTI · SGMC proxy d ≥ 3 px (LOQO)")
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _rbpp6,
+                            "P6 instrument B′′ · PROXY-DTI · SGMC proxy d ≥ 6 px (LOQO)")
+                    + table(['Buffer', 'SGMC px in band', 'SGMC %', 'Domain %', 'Enrichment', 'Remaining SGMC (d >= r)'],
+                            buf_rows, 'SGMC vs QFaults cartographic duplication calibration (1–20 px)'))
     results = s3_site.results_block(instrument_rows, table) + results
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 

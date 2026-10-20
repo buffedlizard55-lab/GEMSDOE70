@@ -225,8 +225,42 @@ requirements are retained there; the current active branch is recorded in HANDOF
     import sys as _sys
     _sys.path.insert(0, str(ROOT / 'scripts'))
     import s3_site
+    p6_note = ''
+    p6p = ROOT / 'evidence/p6_dualhorizon/run_card.json'
+    if p6p.is_file():
+        _p6 = json.loads(p6p.read_text())
+        _p6a = _p6['instrument_a_holdout']
+        _p6b = _p6['instrument_b_prime_proxy']
+        _p6bpp = _p6['instrument_b_double_prime_proxy']
+        _p6db = _p6['paired_b_prime_vs_h33']
+        _p6da = _p6['paired_a_vs_p4']
+        _p6u = _p6['correlation_overlap_vs_registry']
+        p6_note = (
+            f"\n## Parallel P6 dual-horizon LOQO scarp-rad-basement lane (arena/c6a19d32-gemsdoe70) — DO NOT SUBMIT\n\n"
+            f"Preregistered hypotheses (`H-P5-1` through `H-P5-5` in `docs/hypotheses.md`): leave-one-quadrant-out "
+            f"scarp–radiometric–basement ranker (19-band stack + `lidar_scarp_features_u8` + `topo_10m_derived_100m_u8` "
+            f"+ `geodawn_rad_u8`/`geodawn_extensions_u8`) + visible-catalogue tip/host-length halo, `5×5` strata, `3.2 px` NMS, "
+            f"`37,654` binary dots off-catalogue (`download_ok = true`, `submit_recommended = false`, verdict `{_p6['verdict']}`). "
+            f"HOLDOUT-DTI A `{_p6a['candidate']['dti']:.4f}` `[{_p6a['candidate']['ci95'][0]:.4f}, {_p6a['candidate']['ci95'][1]:.4f}]` "
+            f"(vs P4 `{_p6a['p4_reference']['dti']:.4f}`, paired Δ `{_p6da['delta']:+.4f}` `[{_p6da['ci95'][0]:+.4f}, {_p6da['ci95'][1]:+.4f}]` "
+            f"includes zero; vs H33 `{_p6a['h33_reference']['dti']:.4f}`); "
+            f"PROXY-DTI B′ (`d ≥ 3 px`, LOQO) `{_p6b['candidate']['dti']:.4f}` `[{_p6b['candidate']['ci95'][0]:.4f}, {_p6b['candidate']['ci95'][1]:.4f}]` "
+            f"vs H33 `{_p6b['h33_reference']['dti']:.4f}` (paired Δ `{_p6db['delta']:+.4f}` `[{_p6db['ci95'][0]:+.4f}, {_p6db['ci95'][1]:+.4f}]`, +53.5%) "
+            f"and vs P4 `{_p6b['p4_reference']['dti']:.4f}` (+77.4%); "
+            f"PROXY-DTI B′′ (`d ≥ 6 px`) `{_p6bpp['candidate']['dti']:.4f}` vs H33 `{_p6bpp['h33_reference']['dti']:.4f}`; "
+            f"unsupervised breakline ablation (`Exp 5.2`, zero SGMC supervision) scores `{_p6b['exp5_2_brk_7x7']['dti']:.4f}` on B′ and "
+            f"`{_p6a['exp5_2_brk_7x7']['dti']:.4f}` on A. "
+            f"SGMC vs QFaults buffer calibration (`1..20 px`, `evidence/p6_dualhorizon/sgmc_buffer_audit.json`) proves `21.38%` of off-catalogue SGMC "
+            f"pixels lie at `d ≤ 3 px` (`2.84×` enrichment) and `SGMC B′` sits at `13.42°` median slope vs Quaternary catalogue `5.55°` "
+            f"(explaining why sibling SGMC-promoted runs `GEMSDOE49 = 0.1304` and `GEMSDOE68 = 0.0680` regressed live). "
+            f"Uniqueness vs `{_p6u['rasters_checked']}` registry rasters: worst mutual overlap `{_p6u['worst_mutual_overlap']:.4f}` (limit 0.70), "
+            f"worst ρ `{_p6u['worst_spearman_full_footprint']:.4f}` (limit 0.90), forward overlap `{_p6u['worst_forward_overlap']:.2f}` vs dense lattice "
+            f"`calib_r13lattice_00904.tif` (literal stop). E2 62-raster mutual re-audit (`evidence/p6_dualhorizon/e2_mutual_uniqueness.json`): "
+            f"worst mutual overlap `0.2876`. File `docs/downloads/{_p6['submission_name']}.tif` (SHA-256 `{_p6['raster_sha256']}`, `146,736` bytes), "
+            f"evidence `evidence/p6_dualhorizon/`, method `src/gems70/method_dualhorizon.py`, runner `scripts/run_experiment_dualhorizon.py`.\n"
+        )
     head = head.replace('## Complete retained project prompt',
-                          e6_note + s3_site.readme_block() + e5_note + p5_note + '## Complete retained project prompt', 1)
+                          e6_note + s3_site.readme_block() + e5_note + p5_note + p6_note + '## Complete retained project prompt', 1)
     (ROOT / 'README.md').write_text(head + (ROOT / 'PROJECT_BRIEF.md').read_text() + '\n</details>\n')
 
 
