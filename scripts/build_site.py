@@ -553,8 +553,9 @@ is not an exhaustive organizer registry.</p>
 single-band float32 on the sample CRS/shape/transform; known-fault and outside-footprint
 cells are zero. The previous user's portal range error cannot be diagnosed without the rejected
 bytes, and local validation is not organizer acceptance. The competition page says outside
-bounds null/NaN, whereas the pinned sample and this conservative output use all-finite zeros;
-that convention remains an <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official-format ambiguity</a>.</p>
+bounds null/NaN; the pinned owner-mirrored sample has NaNs outside its footprint, while
+this output uses all-finite zeros there. Whether the portal accepts that safer range policy
+remains an <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">unresolved format question</a>.</p>
 <h2>Feature-alone leakage canaries</h2>
 <p>Each raw and derived feature was scored alone on {pa['withheld_positive_pixels']:,} withheld
 catalogue positives vs 200,000 negatives. AUC or inverse AUC above 0.90 would stop the run.

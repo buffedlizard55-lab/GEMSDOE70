@@ -11,7 +11,7 @@
         "Input GeoTIFF is UTM zone 11N / EPSG:32611 at 100 m resolution. Metric is distance-weighted Tversky with 300 m triangular support, alpha 0.2 and beta 0.8.",
         "Submission: one float32 layer with pixel-wise confidence in [0,1], matching bounds; page says outside bounds null or NaN."
       ],
-      "irregularity": "Owner-mirrored sample has 60,988 ones (not all-zero absence despite page wording); our all-finite zero-outside policy is locally accepted by the shared validator but portal acceptance has NOT been verified."
+      "irregularity": "Owner-mirrored sample has 60,988 known-fault ones (not all-zero absence despite page wording) and 7,111,787 NaN cells outside its finite footprint (DATA-MEASUREMENT, not an organizer-authenticated sample). Our review TIFF uses all-finite zero outside; shared validator accepts it locally, but portal acceptance has NOT been verified."
     },
     {
       "source": "Official GEMS Prize Rules, September 2026, sections 3.3–3.5",
