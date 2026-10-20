@@ -5,10 +5,10 @@
   "holdout": {
     "evidence_class": "HOLDOUT-DTI",
     "evaluator_version": "gems57-pooled-hide-v2",
-    "dti": 0.07304229212058164,
+    "dti": 0.08277116132149999,
     "ci95": [
-      0.06673987703804156,
-      0.07899496967047342
+      0.07551434562164547,
+      0.08951206859535318
     ],
     "withheld_positive_pixels": 11321,
     "provenance": "Archived phase4 instrument A, not rerun this session"
@@ -22,32 +22,32 @@
     "witnesses": [
       {
         "submission": "calib_r13lattice_00904.tif",
-        "spearman": -0.0004249861963070003,
+        "spearman": -0.0008660123043440202,
         "forward_overlap": 1.0
       },
       {
         "submission": "r11_greedy_mp.tif",
-        "spearman": -0.003451535346305423,
-        "forward_overlap": 0.8069262229776385
+        "spearman": -0.003146310910872073,
+        "forward_overlap": 0.8037658681680565
       },
       {
         "submission": "r13_lattice_s5_00904.tif",
-        "spearman": -0.0004249861963070003,
+        "spearman": -0.0008660123043440202,
         "forward_overlap": 1.0
       },
       {
         "submission": "r14_union_tips10_lat6.tif",
-        "spearman": 0.013011438060611235,
-        "forward_overlap": 0.7803686195357731
+        "spearman": 0.013275938070442599,
+        "forward_overlap": 0.802491103202847
       }
     ],
     "registry_rasters_checked": 62
   },
-  "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+  "raster_sha256": "aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4",
   "validator_output": {
-    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-    "bytes": 126097,
-    "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif",
+    "bytes": 149414,
+    "sha256": "aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4",
     "meta": {
       "crs": "EPSG:32611",
       "shape": [
@@ -101,7 +101,7 @@
     "footprint_fraction": 0.007286874781441169
   },
   "validator_provenance": "Archived shared-validator receipt; not a new data restoration",
-  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
+  "submission_name": "gems70-p5-analytic-halo-37654-20261020",
   "note": "Archived review only. Literal one-way overlap gate fails; DO NOT SUBMIT. No new candidate generated.",
   "verdict": "negative",
   "download_ok": true,

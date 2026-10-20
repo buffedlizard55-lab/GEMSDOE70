@@ -83,6 +83,50 @@ block at every mass. The archived mutual-rule receipts have not been rewritten t
 
 ## Publication and reproducibility
 
+* `docs/downloads/` contains several independently hash-inventoried review TIFF/ZIP pairs,
+  including this P5-cover file and the concurrent E5/P5 analytic lanes. No file is approved
+  for a weekly slot; `release.assert_no_public_rasters` rejects unlisted files and symlinks.
+* Large inputs (`training_features.tif`, the registry clone) live outside Git; restore commands are
+  in the README. Published evidence is small JSON.
+* The older dot TIFFs are binary 0/1; P5-cover is a continuous [0,1) review map. All have
+  all-finite zeros outside the footprint and no nodata tag. The shared local validator passes;
+  organizer acceptance of this policy remains unverified.
+
+## Parallel-session candidate (merged 2026-10-20)
+
+A concurrent branch added `gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif`
+(24,872 binary dots, sha256 recorded in `registry/published_artifacts.json`, verdict
+`DO NOT SUBMIT` in its own receipts). It is preserved and inventoried but is not the file this
+older run card selected; the current landing page now leads with the P5-cover research file,
+then the concurrent supervised and dot archives. Both files are hash-pinned by
+`release.assert_no_public_rasters`, so neither can be silently replaced. Its narrative pages were
+moved to `reports/archive/concurrent-v2/` to avoid two contradictory download instructions in the
+published tree.
+
+## Parallel E2/E3 lane (integrated PR #16, 2026-10-20)
+- E2 alluvial-step and E3 depth-step are additional negatives (see `docs/preregistration-e2.md`, `evidence/e2|e3/`). E2 bytes are published for selector review under `docs/publication-amendment-e2.md`; submit remains NO. E2 uniqueness used pre-fix R1 subset definitions — not directly comparable to the corrected 62-raster mutual audit until rerun.
+- Bridge `sample_submission.tif` positives are exactly the catalogue (60,988 px), not an all-zero sample; footprint use only. Two-round expanded-label composition and known-fault masking remain unverified from fetched organizer text.
+
+## E5 supervised lane (2026-10-20)
+- E5 executed the registered next step (SGMC-proxy LOQO ranking) and is a
+  measured negative on the frozen B′ gate: Δ −0.0051 [−0.0161, +0.0053] vs H33
+  (`evidence/e5/run_card.json`). Artifact published review-only; submit NO.
+- Emission Amendment 1: P4's one-per-block pass cannot reach 37,654 dots on a
+  sharp supervised surface (34,409 measured). Same-NMS fill added before any
+  DTI existed; disclosed in `docs/preregistration-e5.md`. P4 bytes unaffected.
+- New information: OOF AUC 0.69–0.78 (real within-halo signal) does not
+  convert to B′ DTI above uniform halo sampling at this dot budget — the
+  remaining gap to the 0.4413 public leader is not explained by 100 m
+  potential-field/topography ranking of the SGMC proxy. Candidate queues:
+  radiometric/lidar feature sets (E5-3/E5-4, obtainability unchecked), finer
+  (sub-100 m) emission geometry, or a genuinely independent additional-fault
+  truth set to replace the SGMC proxy.
+- E5 canary context defect (found in review, corrected post-hoc): the primary
+  canary table computed `d_cat` against the full catalogue, giving
+  Instrument-A AUC 0.0 by construction (A positives are catalogue pixels).
+  Prediction-time folds always used visible-only distance; its corrected
+  canary AUC is 0.245 (`evidence/e5/canaries_correction.json`). No leakage;
+  frozen receipts and artifact unchanged.
 All inventoried TIFF/ZIP bytes are preserved; none was renamed or reused as a new submission.
 Publication inventory and Pages guards still reject unauthorized rasters or symlinks. Current
 review evidence lives in `evidence/review/`; Phase 1–4, E2/E3 and historical cards remain frozen.

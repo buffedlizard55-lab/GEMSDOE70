@@ -253,7 +253,13 @@ def main():
     fold_rows_b = {k: [] for k in terms_b}
     oof = np.zeros(grid.shape, np.float32)
     training_receipts = []
-    prior_a = json.loads((ROOT / "evidence/phase4/instrumentA_folds.json").read_text())
+    # Concurrent main moved Phase-4's old P4 fold receipt to a new canonical
+    # analytic-halo lane. The exact original P4 fold bytes are frozen here;
+    # production P4 itself is regenerated from *visible* faults before scoring.
+    baseline_path = E / "p4_visible_baseline_folds.json"
+    if sha(baseline_path) != "e020d9f2ca79416a5c943bc9938ba46080008fe5bba252a9e120697c11a8b401":
+        raise ValueError("P4 visible-only baseline fold receipt changed")
+    prior_a = json.loads(baseline_path.read_text())
     for k in range(4):
         if time.monotonic() - start > MAX_SECONDS:
             raise TimeoutError("two-hour experiment budget exceeded")

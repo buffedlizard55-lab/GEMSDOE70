@@ -96,8 +96,8 @@
   },
   "correlation_overlap_vs_registry": {
     "stage": "final continuous production surface; no dot placement by preregistered literal stop",
-    "rasters_checked": 68,
-    "inventory_scope": "62 archived 60GEMSDOE rasters plus 6 locally inventoried prior TIFFs; external/unindexed/private files not enumerated. Binary-dot checker reports zero dots for this continuous field; positive-support overlap is independent.",
+    "rasters_checked": 70,
+    "inventory_scope": "62 archived 60GEMSDOE rasters plus 8 locally inventoried prior TIFFs; external/unindexed/private files not enumerated. Binary-dot checker reports zero dots for this continuous field; positive-support overlap is independent.",
     "worst_spearman_full_footprint": 0.023162112298445472,
     "worst_rho_submission": "h60_officialstack_50k.tif",
     "binary_one_dots": 0,
@@ -198,7 +198,7 @@
   },
   "method_source_sha256": {
     "src/gems70/phase5.py": "7e3670bc712a56ea39142e8a349ba753f10ecf86b845b713f8853075033d5cf3",
-    "scripts/run_experiment_p5_cover.py": "56de0c7562193651ec368d0089edbd7d26650602a31a8ed53a37bad9787c5cc4"
+    "scripts/run_experiment_p5_cover.py": "f8cffee242b2ad3a76ccf40a6cc2f0439991037894899cbec3144826c8fef422"
   },
   "production_train_receipt": {
     "positives_sampled": 25000,
@@ -213,5 +213,6 @@
     "No calibrated probabilities, private-test score or organizer acceptance is asserted.",
     "Positive-support overlap (not exact-one dots) against the lattice is above the user limit; never upload as a cleared dot submission."
   ],
-  "reporting_amendment": "After concurrent main integration: re-read unchanged TIFF; expanded comparison from 66 to current registry; repaired mislabelled training-region metadata, NOT the model or scores. Integration path relocation preserves main\u2019s unrelated P5 script; model output unchanged."
+  "reporting_amendment": "After concurrent main integration: re-read unchanged TIFF; expanded comparison from 66 to current registry; repaired mislabelled training-region metadata, NOT the model or scores. Integration path relocation preserves main\u2019s unrelated P5 script; model output unchanged. New concurrent inventory expands scan 68->70; TIFF and fold scores unchanged. P4 comparator fold receipt pinned at evidence/p5/p4_visible_baseline_folds.json after main changed canonical phase4; scores and TIFF unchanged.",
+  "p4_visible_baseline_folds_sha256": "e020d9f2ca79416a5c943bc9938ba46080008fe5bba252a9e120697c11a8b401"
 }

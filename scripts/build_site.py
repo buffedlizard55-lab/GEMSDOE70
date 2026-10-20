@@ -21,7 +21,7 @@ DOCS = ROOT / 'docs'
 DOWN = DOCS / 'downloads'
 
 NAV = [('index.html', 'Overview'), ('executive-summary.html', 'Executive summary'),
-       ('p5.html', 'New P5 research TIFF'),
+       ('p5.html', 'P5-cover research TIFF'),
        ('protocol-review.html', 'Protocol review'), ('submission.html', 'Submission guide'),
        ('results.html', 'Evidence'), ('hypotheses.html', 'Hypotheses'),
        ('h33-analysis.html', 'Why H33 scored'), ('e3-candidate.html', 'Archived scarp E3'), ('sources.html', 'Sources'),
@@ -59,12 +59,13 @@ def frame(title, body):
 <strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
 are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
 rule; neither a local validator nor distinct bytes authorize a slot.
-<a href="p5.html">P5 negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
+<a href="p5.html">P5-cover negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
 <a href="downloads/p5_run_card.json">New P5 run card</a> ·
 <a href="downloads/review_run_card.json">Prior review card</a>.</aside>{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/p5_run_card.json">New P5 negative card</a> ·
-<a href="downloads/phase4_run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·
+<a href="downloads/archived_p4_run_card.json">Archived P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>'''
 
@@ -122,6 +123,7 @@ def main():
     copies = {
         'evidence/run_card.json': 'run_card.json',
         'evidence/phase4/run_card.json': 'phase4_run_card.json',
+        'evidence/history/p4_stratified_halo/run_card.json': 'archived_p4_run_card.json',
         'evidence/review/run_card.json': 'review_run_card.json',
         'evidence/review/literal_protocol_audit.json': 'literal_protocol_audit.json',
         'evidence/phase4/uniqueness.json': 'uniqueness.json',
@@ -161,6 +163,15 @@ def main():
         'evidence/p5/official_source_review.json': 'p5_sources.json',
         'evidence/p5/reporting_amendment.json': 'p5_reporting_amendment.json',
         'evidence/p5/surface_registry.json': 'p5_surface_registry.json',
+        'evidence/e5/run_card.json': 'e5_run_card.json',
+        'evidence/e5/canaries.json': 'e5_canaries.json',
+        'evidence/e5/training.json': 'e5_training.json',
+        'evidence/e5/instrumentA_holdout.json': 'e5_instrumentA.json',
+        'evidence/e5/instrumentB_prime.json': 'e5_instrumentB_prime.json',
+        'evidence/e5/instrumentB_all.json': 'e5_instrumentB_all.json',
+        'evidence/e5/surface_uniqueness.json': 'e5_surface_uniqueness.json',
+        'evidence/e5/uniqueness.json': 'e5_final_uniqueness.json',
+        'evidence/e5/leaderboard_read.json': 'e5_leaderboard_read.json',
     }
     for src, dst in copies.items():
         s = ROOT / src
@@ -179,8 +190,8 @@ def main():
     db = p5['holdout_dti']['paired_vs_h33']
     p5name = p5['submission_name']
     latest_decision = f'''<section class="stop" aria-labelledby="p5-decision">
-<div class="eyebrow">NEW P5 EXPERIMENT · RESEARCH FILE ONLY</div>
-<h1 id="p5-decision">New TIFF: download for review. DO NOT SUBMIT.</h1>
+<div class="eyebrow">NEW P5-COVER EXPERIMENT · RESEARCH FILE ONLY</div>
+<h1 id="p5-decision">New P5-cover TIFF: download for review. DO NOT SUBMIT.</h1>
 <p><strong>Download: yes — for research only.</strong> This newly generated continuous GeoTIFF
 is distinct in bytes from the checked archive, all-finite within [0,1], single-band float32,
 and aligned to the pinned sample. <strong>Competition upload / weekly slot: NO.</strong>
@@ -201,7 +212,7 @@ forward 3-pixel overlap against the pinned lattice (limit 0.70). The witness cov
 {p5audit['feature_valid_pixels_after_12px_erosion']:,} / {p5audit['feature_valid_pixels_after_12px_erosion']:,}
 feature-valid interior cells. No discrete final dots were placed.</p>
 <div class="actions">
-<a class="button secondary" href="downloads/{esc(p5name)}.tif" download>Download NEW P5 research TIFF — DO NOT SUBMIT</a>
+<a class="button secondary" href="downloads/{esc(p5name)}.tif" download>Download NEW P5-cover research TIFF — DO NOT SUBMIT</a>
 <a class="button secondary" href="downloads/{esc(p5name)}.zip" download>One-TIFF ZIP — review only</a>
 <a class="button" href="p5.html">Read P5 evidence and limits</a>
 </div>
@@ -209,7 +220,7 @@ feature-valid interior cells. No discrete final dots were placed.</p>
 <strong>not an upload instruction</strong>): <code>{esc(p5['submission_note'])}</code> ·
 SHA-256 <code>{esc(p5['raster_sha256'])}</code>.</p></section>'''
     decision = f'''<section class="stop" aria-labelledby="decision">
-<div class="eyebrow">PRIOR SIX-ARCHIVE REVIEW · STILL BLOCKED</div>
+<div class="eyebrow">PRIOR {len(review['archived_artifacts'])}-ARCHIVE REVIEW · STILL BLOCKED</div>
 <h2 id="decision">Older files: DO NOT SUBMIT — literal protocol stop</h2>
 <p><strong>Download: yes — format-validated for review.</strong> For forensic review only.
 <strong>Competition submission: NO — not recommended.</strong>
@@ -233,10 +244,10 @@ new TIFF; P5 above is a separate subsequent negative continuous experiment. No s
     b = p4b['scores'] if p4b else {}
     ball = p4ball['scores'] if p4ball else {}
     metrics = f'''<div class="metrics">
-<section><div class="eyebrow">ARCHIVED P4 · INSTRUMENT A · HOLDOUT-DTI</div>
+<section><div class="eyebrow">ARCHIVED ANALYTIC-HALO P5 · INSTRUMENT A · HOLDOUT-DTI</div>
 <div class="number">{a['candidate']['dti']:.4f}</div>
 <p>{ci(a['candidate'])} · {a['candidate']['withheld_positive_pixels']:,} withheld catalogue pixels</p></section>
-<section><div class="eyebrow">ARCHIVED P4 · INSTRUMENT B′ · PROXY-DTI</div>
+<section><div class="eyebrow">ARCHIVED ANALYTIC-HALO P5 · INSTRUMENT B′ · PROXY-DTI</div>
 <div class="number">{b['candidate']['dti']:.4f}</div>
 <p>{ci(b['candidate'])} · SGMC proxy outside the duplication band</p></section>
 <section><div class="eyebrow">LITERAL OVERLAP · STOP</div>
@@ -245,7 +256,7 @@ new TIFF; P5 above is a separate subsequent negative continuous experiment. No s
 
     index = latest_decision + decision + f'''<section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
 <h2>A new research TIFF and prior format-valid archives — no protocol-cleared submission.</h2>
-<p>P5 is a deliberately measured negative. Earlier sessions ran the archived dot experiments below;
+<p>Our P5-cover continuous map is a deliberately measured negative. Other sessions ran the archived dot experiments below;
 a prior review found an unauthorized mutual-overlap substitution and corrected the current gate.
 Historical scientific evidence remains intact but cannot override the literal stop rule.</p>
 </section>{metrics}
@@ -271,7 +282,19 @@ presented as a leaderboard score.</p>
 <li><a href="results.html">All three experiments, ablations and canaries</a></li>
 <li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section>'''
 
-    # ------------------------------------------- parallel E2/E3 lane (integrated)
+    # Concurrent archive: analytic-signal dot halo. Distinct from P5-cover continuous.
+    p5card = load('evidence/phase5/run_card.json', {})
+    p5_section = ''
+    if p5card and p5card.get('submission_name') == 'gems70-p5-analytic-halo-37654-20261020':
+        pa_analytic = p5card['instrument_a_holdout']['candidate']
+        pb_analytic = p5card['instrument_b_prime_proxy']['candidate']
+        p5_section = f"""<section><h2>Concurrent lane P5 analytic-signal dots — DO NOT SUBMIT</h2>
+<p>Analytic-signal amplitude <code>hypot(tmi_hg, tmi_vg)</code> rank inside the 7×7 stratified halo (2.4–32 px), 37,654 dots off-catalogue, 5-px NMS. <strong>HOLDOUT-DTI A {pa_analytic['dti']:.4f} {ci(pa_analytic)} vs H33 0.0037 win; B′ {pb_analytic['dti']:.4f} {ci(pb_analytic)} vs 0.0938 H33 win Δ {p5card['paired_b_prime_vs_h33']['delta']:+.4f} {p5card['paired_b_prime_vs_h33']['ci95']}</strong> — negative on the pre-registered B′ gate, no slot. Uniqueness: 62 rasters, worst mutual 0.30 (limit 0.70), worst Spearman 0.042; forward 1.00 vs dense lattice (literal duplicate, review only).</p>
+<div class="actions"><a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.tif" download>Download P5 review TIFF</a>
+<a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.zip" download>Download P5 ZIP</a>
+<a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.json" download>P5 receipt</a></div>
+<p class="small">Name: <code>gems70-p5-analytic-halo-37654-20261020</code> · Note (93/140): <code>{esc(p5card.get('submission_note',''))}</code> · SHA-256 <code>{esc(p5card.get('raster_sha256',''))}</code> · Evidence <code>evidence/phase5/</code> · Hypotheses <code>docs/hypotheses.md</code> now ranks 5 candidates (H-2 tested, H-3 radiometric already fetched, H-4 lidar scarp, H-5 conductive breach, H-6 basement curvature).</p></section>"""
+        # ------------------------------------------- parallel E2/E3 lane (integrated)
     e2card = load('evidence/e2/run_card.json', {})
     e2pub = load('evidence/e2/publication.json', {})
     e2hold = load('evidence/e2/holdout.json', {})
@@ -291,6 +314,32 @@ fresh binary-witness comparison fails the literal overlap rule. Archived HOLDOUT
 <code>{esc(e2card.get('submission_note'))}</code>. E3 (depth-step) in the same lane family is
 negative with no file. Full tables on the results page; terms in
 <code>docs/publication-amendment-e2.md</code>.</p></section>"""
+    # ------------------------------------------------------- E5 supervised lane
+    e5card = load('evidence/e5/run_card.json', {})
+    e5_section = ''
+    if e5card and e5card.get('raster_sha256'):
+        _a = e5card['instrument_a_holdout']
+        _b = e5card['instrument_b_prime_proxy']
+        _d = e5card['paired_b_prime_vs_h33']
+        _u = e5card['correlation_overlap_vs_registry']['final_dots_stage']
+        e5_section = f"""<section><h2>Concurrent E5 — supervised within-halo ranking (distinct bytes, not literal-unique; verdict: {esc(e5card['verdict'])} — DO NOT SUBMIT)</h2>
+<p>Preregistered (<code>docs/preregistration-e5.md</code>): a gradient-boosted ranker trained on the
+SGMC off-catalogue proxy with leave-one-quadrant-out (OOF AUC 0.69–0.78; worst single-feature
+canary AUC {e5card['canary_worst_single_feature_auc']:.3f} &le; 0.90), emitted as 37,654 binary dots
+through the same stratified emitter. <strong>Download for review: yes. Submit a weekly slot: NO</strong> —
+on the pre-registered target-like gate B′ it scores {_b['candidate']['dti']:.4f} vs H33
+{_b['h33_reference']['dti']:.4f} (paired &Delta; {_d['delta']:+.4f}, 95% CI {ci(_d)}: includes zero, so no
+validated improvement over H33's 0.2778 is claimed). Instrument A HOLDOUT-DTI
+{_a['candidate']['dti']:.4f} vs H33 {_a['h33_reference']['dti']:.4f} favours it, as that instrument
+favours every catalogue-adjacent method. Uniqueness vs {_u['rasters_checked']} registry rasters:
+worst mutual overlap {_u['worst_mutual_overlap']:.3f} (limit 0.70), worst &rho;
+{_u['worst_spearman_full_footprint']:.3f} (limit 0.90). Values are exactly 0/1 — inside [0,1], no NaN.
+SHA-256 <code>{esc(e5card['raster_sha256'])}</code>.</p>
+<div class="actions"><a class="button secondary" href="downloads/{esc(e5card['submission_name'])}.tif" download>Download E5 TIFF (review only — DO NOT SUBMIT)</a>
+<a class="button secondary" href="downloads/e5_run_card.json" download>E5 run card</a></div>
+<p class="small">Name: <code>{esc(e5card['submission_name'])}</code> · Note ({e5card['note_chars']}/140):
+<code>{esc(e5card['submission_note'])}</code>. Negative results are deliverables: supervised ranking
+halved P4's B′ deficit but did not beat uniform halo sampling. Full tables on the results page.</p></section>"""
     archive_rows = [[esc(Path(r['artifact']).name),
         f'<a href="{esc(r["artifact"].removeprefix("docs/"))}" download>Download for review — DO NOT SUBMIT</a>',
         'pass' if r['validator_output']['all_checks_passed'] else 'FAIL',
@@ -298,7 +347,7 @@ negative with no file. Full tables on the results page; terms in
         for r in review['archived_artifacts']]
     archives = f'<h2>{len(review["archived_artifacts"])} frozen prior dot TIFFs — forensic review only</h2>' + table(
         ['Archive', 'Download', 'Local format', 'Forward overlap (limit 0.70)'], archive_rows)
-    (DOCS / 'index.html').write_text(frame('Overview', index + e2_section + archives))
+    (DOCS / 'index.html').write_text(frame('Overview', index + e5_section + e2_section + p5_section + archives))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
@@ -326,7 +375,7 @@ not from this blocked archive.</li>
 <li>Submit once and keep its filename, hash, timestamp and portal score receipt.</li>
 <li>Only then label the returned score ORGANIZER-CONFIRMED.</li>
 </ol>
-<p>For historical record only, the old P4 note was <code>{esc(card.get('submission_note', ''))}</code>.
+<p>For historical record only, the concurrent analytic-halo note was <code>{esc(card.get('submission_note', ''))}</code>.
 It is NOT an instruction to upload this archive.</p></section>
 <section><h2>Why the earlier portal error happened</h2>
 <p>“Predicted values must be in range [0, 1]” is raised by the portal's own range check. The shared
@@ -364,7 +413,7 @@ rejected upload, so we do not claim to know its specific defect.</p></section>
     history = []
     for tag, d in (('Exp 2 · gated prior A', p2a), ('Exp 2 · B proxy', p2b),
                    ('Exp 3 · damage zone A', p3a), ('Exp 3 · B′', p3b),
-                   ('Exp 4 · stratified A', p4a), ('Exp 4 · B′', p4b)):
+                   ('Canonical analytic P5 · A', p4a), ('Canonical analytic P5 · B′', p4b)):
         if not d:
             continue
         cand = d['scores']['candidate']
@@ -384,7 +433,7 @@ paired Δ {db['delta']:+.4f} {ci(db)}. These are not organizer-confirmed scores.
 across {p5['correlation_overlap_vs_registry']['rasters_checked']} archived/local TIFFs;
 positive-support forward overlap 1.00 vs the lattice, therefore <strong>DO NOT SUBMIT.</strong></p>
 <a href="p5.html">Full P5 reproducibility, feature canaries and downloadable research file →</a></section>'''
-    results = new_evidence + f'''<div class="eyebrow">ARCHIVED EVIDENCE</div><h1>Three prior experiments, two instruments, one old verdict.</h1>
+    results = new_evidence + f'''<div class="eyebrow">ARCHIVED EVIDENCE</div><h1>Other experiments, separate instruments and their negative verdicts.</h1>
 <p>All DTI values use α = 0.2, β = 0.8 and a 300 m triangular kernel on the pinned 100 m grid, with
 pooled terms and a paired spatial-cluster bootstrap (1,000 draws, 20 km blocks). Intervals are
 conditional on the fitted folds and the proxy truth; they are not leaderboard intervals.</p>
@@ -394,7 +443,7 @@ conditional on the fitted folds and the proxy truth; they are not leaderboard in
 The literal policy stops dot placement.</p>
 <p>Evaluator for catalogue HOLDOUT-DTI: gems57-pooled-hide-v2. SGMC tables below are separately
 labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed scores.</p>
-<h2>Archived P4 candidate (historical negative)</h2>
+<h2>Concurrent analytic-halo P5 candidate (historical negative)</h2>
 {table(['Arm', 'DTI', '95% CI', 'Positives'], rows_a, 'Instrument A · shared hide-and-recover catalogue holdout')}
 {table(['Arm', 'DTI', '95% CI', 'Positives'], rows_bp, "Instrument B′ · SGMC proxy, d ≥ 3 px from catalogue")}
 {table(['Arm', 'DTI', '95% CI', 'Positives'], rows_ball, 'SGMC PROXY-DTI B · unrestricted (possible map duplication)')}
@@ -420,6 +469,24 @@ labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed score
                     f"{e3card.get('holdout_dti', {}).get('dti', 0):.4f}. Both negative.</p>"
                     + table(['Arm', 'DTI', '95% CI', 'Positives'], _rows,
                             'E2 arms · gems57-pooled-hide-v2 · seed-20'))
+    if e5card:
+        _ra = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+               for k, v in sorted(e5card['instrument_a_holdout'].items(),
+                                  key=lambda kv: -kv[1]['dti'])]
+        _rb = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+               for k, v in sorted(e5card['instrument_b_prime_proxy'].items(),
+                                  key=lambda kv: -kv[1]['dti'])]
+        _d5 = e5card['paired_b_prime_vs_h33']
+        results += ("<h2>Lane E5 — supervised within-halo ranking (preregistered, negative)</h2>"
+                    "<p>SGMC-proxy LOQO ranker, OOF AUC by quadrant "
+                    + esc(json.dumps(e5card['oof_auc_by_quadrant'], default=float))
+                    + f"; worst canary AUC {e5card['canary_worst_single_feature_auc']:.3f}."
+                    + f" B′ paired Δ vs H33 {_d5['delta']:+.4f} {ci(_d5)} — gate fails, verdict "
+                    + f"<code>{esc(e5card['verdict'])}</code>, no slot used.</p>"
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _ra,
+                            'E5 instrument A · HOLDOUT-DTI · gems57-pooled-hide-v2')
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _rb,
+                            "E5 instrument B′ · PROXY-DTI · SGMC proxy d ≥ 3 px"))
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 
     # ------------------------------------- new P5 scientific negative (one lane)
@@ -511,7 +578,7 @@ byte consistency, not official-origin identity. Specific claims and limits are r
 The shared writer refuses to overwrite existing outputs; use a clean sandbox for full
 reproduction. <code>scripts/verify_p5_artifact.py</code> re-audits the immutable file
 without refitting. Data tab requires a DrivenData login; no GPU was required here.</p>'''
-    (DOCS / 'p5.html').write_text(frame('New P5 research TIFF', p5page))
+    (DOCS / 'p5.html').write_text(frame('New P5-cover research TIFF', p5page))
 
     # ------------------------------------- E3 scarp parallel candidate (PR17)
     e3 = load('evidence/run_card_e3_amended.json', {})

@@ -1,15 +1,15 @@
 {
   "hypothesis": "Protocol reconciliation of existing P4 coverage-stratified halo (not a new experiment)",
-  "mechanism": "one dot per 7x7-px stratum at the stratum maximum of (1+0.8*exp(-(d-2.4)/6))*(0.7+0.3*tip), 5-px NMS, band 2.4-32 px",
-  "non_fault_mimic": "colluvial/collinear basin-floor lineaments inside the halo",
+  "mechanism": "one dot per 7x7-px stratum at max of (0.5+0.5*analytic_rank)*(0.7+0.3*tip), 5-px NMS, band 2.4-32px",
+  "non_fault_mimic": "remanent magnetization contrasts and dike margins mimicking analytic-signal ridges",
   "holdout_dti": {
     "evidence_class": "HOLDOUT-DTI",
     "source": "evidence/phase4/run_card.json",
     "evaluator_version": "gems57-pooled-hide-v2",
-    "dti": 0.07304229212058164,
+    "dti": 0.08277116132149999,
     "ci95": [
-      0.06673987703804156,
-      0.07899496967047342
+      0.07551434562164547,
+      0.08951206859535318
     ],
     "withheld_positive_pixels": 11321,
     "status": "Historical measurement, not rerun; not an organizer score"
@@ -21,30 +21,30 @@
       {
         "submission": "calib_r13lattice_00904.tif",
         "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
-        "spearman_full_footprint": -0.0004249861963070003,
+        "spearman_full_footprint": -0.0008660123043440202,
         "my_dots_within_3px_of_theirs": 1.0,
-        "their_dots_within_3px_of_mine": 0.21055607917059377
+        "their_dots_within_3px_of_mine": 0.19921216075787235
       },
       {
         "submission": "r11_greedy_mp.tif",
         "sha256": "033df94ceef16350030a69d5cfdec0afe7bc605bb155d8f3b98b203aabf80abd",
-        "spearman_full_footprint": -0.003451535346305423,
-        "my_dots_within_3px_of_theirs": 0.8069262229776385,
-        "their_dots_within_3px_of_mine": 0.22230651669580323
+        "spearman_full_footprint": -0.003146310910872073,
+        "my_dots_within_3px_of_theirs": 0.8037658681680565,
+        "their_dots_within_3px_of_mine": 0.20214547760149237
       },
       {
         "submission": "r13_lattice_s5_00904.tif",
         "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
-        "spearman_full_footprint": -0.0004249861963070003,
+        "spearman_full_footprint": -0.0008660123043440202,
         "my_dots_within_3px_of_theirs": 1.0,
-        "their_dots_within_3px_of_mine": 0.21055607917059377
+        "their_dots_within_3px_of_mine": 0.19921216075787235
       },
       {
         "submission": "r14_union_tips10_lat6.tif",
         "sha256": "c9d1398e464603350e464fff7213a8a5e380f1ccf505e263a685607970ae28ef",
-        "spearman_full_footprint": 0.013011438060611235,
-        "my_dots_within_3px_of_theirs": 0.7803686195357731,
-        "their_dots_within_3px_of_mine": 0.2994366153221905
+        "spearman_full_footprint": 0.013275938070442599,
+        "my_dots_within_3px_of_theirs": 0.802491103202847,
+        "their_dots_within_3px_of_mine": 0.2757931863227055
       }
     ],
     "measurement_errors": [],
@@ -53,8 +53,8 @@
     "current_registry_clearance": false,
     "scope": "Frozen historical rows only; not a refreshed all-repository inventory."
   },
-  "registry_audit_sha256": "ec14a681aeca139a3db61e527024c456dced12ea6603265c10c6952b71ba593d",
-  "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+  "registry_audit_sha256": "5b145d47f4544e5430aa7615b178951687af9cc4be9b21fbc87651c714e40a61",
+  "raster_sha256": "aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4",
   "validator_output": {
     "checks": {
       "single_band": true,
@@ -69,7 +69,7 @@
     "all_pass": true,
     "scope": "Fresh byte/range/grid audit against cached reference metadata, not organizer acceptance"
   },
-  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
+  "submission_name": "gems70-p5-analytic-halo-37654-20261020",
   "submission_note": "P4 archive review only; forward-overlap stop. DO NOT SUBMIT.",
   "verdict": "negative",
   "download_ok_for_review": true,

@@ -4,12 +4,12 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">New P5 research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
 <aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
 <strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
 are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
 rule; neither a local validator nor distinct bytes authorize a slot.
-<a href="p5.html">P5 negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
+<a href="p5.html">P5-cover negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
 <a href="downloads/p5_run_card.json">New P5 run card</a> ·
 <a href="downloads/review_run_card.json">Prior review card</a>.</aside><h1>Limitations and current next steps</h1>
 <h2>P5 addendum — new, format-valid research TIFF; competition submit NO</h2>
@@ -89,7 +89,52 @@ block at every mass. The archived mutual-rule receipts have not been rewritten t
    checked. Save its authenticated submission-page receipt before reporting an organizer score.</li>
 </ol>
 <h2>Publication and reproducibility</h2>
-<p>All inventoried TIFF/ZIP bytes are preserved; none was renamed or reused as a new submission.
+<ul>
+<li><code>docs/downloads/</code> contains several independently hash-inventoried review TIFF/ZIP pairs,
+  including this P5-cover file and the concurrent E5/P5 analytic lanes. No file is approved
+  for a weekly slot; <code>release.assert_no_public_rasters</code> rejects unlisted files and symlinks.</li>
+<li>Large inputs (<code>training_features.tif</code>, the registry clone) live outside Git; restore commands are
+  in the README. Published evidence is small JSON.</li>
+<li>The older dot TIFFs are binary 0/1; P5-cover is a continuous [0,1) review map. All have
+  all-finite zeros outside the footprint and no nodata tag. The shared local validator passes;
+  organizer acceptance of this policy remains unverified.</li>
+</ul>
+<h2>Parallel-session candidate (merged 2026-10-20)</h2>
+<p>A concurrent branch added <code>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</code>
+(24,872 binary dots, sha256 recorded in <code>registry/published_artifacts.json</code>, verdict
+<code>DO NOT SUBMIT</code> in its own receipts). It is preserved and inventoried but is not the file this
+older run card selected; the current landing page now leads with the P5-cover research file,
+then the concurrent supervised and dot archives. Both files are hash-pinned by
+<code>release.assert_no_public_rasters</code>, so neither can be silently replaced. Its narrative pages were
+moved to <code>reports/archive/concurrent-v2/</code> to avoid two contradictory download instructions in the
+published tree.</p>
+<h2>Parallel E2/E3 lane (integrated PR #16, 2026-10-20)</h2>
+<ul>
+<li>E2 alluvial-step and E3 depth-step are additional negatives (see <code>docs/preregistration-e2.md</code>, <code>evidence/e2|e3/</code>). E2 bytes are published for selector review under <code>docs/publication-amendment-e2.md</code>; submit remains NO. E2 uniqueness used pre-fix R1 subset definitions — not directly comparable to the corrected 62-raster mutual audit until rerun.</li>
+<li>Bridge <code>sample_submission.tif</code> positives are exactly the catalogue (60,988 px), not an all-zero sample; footprint use only. Two-round expanded-label composition and known-fault masking remain unverified from fetched organizer text.</li>
+</ul>
+<h2>E5 supervised lane (2026-10-20)</h2>
+<ul>
+<li>E5 executed the registered next step (SGMC-proxy LOQO ranking) and is a
+  measured negative on the frozen B′ gate: Δ −0.0051 [−0.0161, +0.0053] vs H33
+  (<code>evidence/e5/run_card.json</code>). Artifact published review-only; submit NO.</li>
+<li>Emission Amendment 1: P4's one-per-block pass cannot reach 37,654 dots on a
+  sharp supervised surface (34,409 measured). Same-NMS fill added before any
+  DTI existed; disclosed in <code>docs/preregistration-e5.md</code>. P4 bytes unaffected.</li>
+<li>New information: OOF AUC 0.69–0.78 (real within-halo signal) does not
+  convert to B′ DTI above uniform halo sampling at this dot budget — the
+  remaining gap to the 0.4413 public leader is not explained by 100 m
+  potential-field/topography ranking of the SGMC proxy. Candidate queues:
+  radiometric/lidar feature sets (E5-3/E5-4, obtainability unchecked), finer
+  (sub-100 m) emission geometry, or a genuinely independent additional-fault
+  truth set to replace the SGMC proxy.</li>
+<li>E5 canary context defect (found in review, corrected post-hoc): the primary
+  canary table computed <code>d_cat</code> against the full catalogue, giving
+  Instrument-A AUC 0.0 by construction (A positives are catalogue pixels).
+  Prediction-time folds always used visible-only distance; its corrected
+  canary AUC is 0.245 (<code>evidence/e5/canaries_correction.json</code>). No leakage;
+  frozen receipts and artifact unchanged.
+All inventoried TIFF/ZIP bytes are preserved; none was renamed or reused as a new submission.
 Publication inventory and Pages guards still reject unauthorized rasters or symlinks. Current
 review evidence lives in <code>evidence/review/</code>; Phase 1–4, E2/E3 and historical cards remain frozen.
 The shared metric, evaluator, writer and vendored uniqueness bytes were not modified in this review.
@@ -97,9 +142,11 @@ The new policy adapter acts only on existing shared measurements and restores th
 literal decision rule. P5 uses the same shared evaluator/writer and a separate hash-pinned research
 artifact; it did not change the shared metric or its threshold. See the
 <a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/reports/p5-scientific-review.md">scientific review</a>
-for new source receipts, a failed controlled test and reproducible commands.</p></main>
+for new source receipts, a failed controlled test and reproducible commands.</li>
+</ul></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/p5_run_card.json">New P5 negative card</a> ·
-<a href="downloads/phase4_run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·
+<a href="downloads/archived_p4_run_card.json">Archived P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

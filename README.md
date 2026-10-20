@@ -1,6 +1,6 @@
 # GEMSDOE70 — geothermal fault research
 
-## NEW P5 FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
+## NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
 
 A newly generated, format-validated **continuous** GeoTIFF is available:
 [Download P5 TIFF — DO NOT SUBMIT](docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif) ·
@@ -27,7 +27,7 @@ cell of that domain. The continuous P5 map has no exact-one binary dots, but its
 **positive support has 1.00 forward overlap** with the same lattice; that is not a
 loophole or a protocol-unique submission. Distinct bytes/low rank correlation
 (ρ ≤ 0.0232 vs
-68 checked rasters) do not
+70 checked rasters) do not
 clear the other gate. No weekly slot was used; no organizer submission receipt exists.
 
 - [Executive summary / exact future submission workflow](docs/executive-summary.html)
@@ -57,9 +57,9 @@ not copied from a P5 submission. See [official problem](https://www.drivendata.o
 [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and),
 [DOE rules](https://docs.nlr.gov/docs/fy26osti/96647.pdf).
 
-## PRIOR REVIEW (6 archived dot files): DO NOT SUBMIT — literal lane stop
+## PRIOR REVIEW (8 archived dot files): DO NOT SUBMIT — literal lane stop
 
-**Download: yes, 6 older archived TIFFs for review only. Submit: NO.**
+**Download: yes, 8 older archived TIFFs for review only. Submit: NO.**
 That *prior* review generated no new protocol-compliant TIFF, geological experiment or slot.
 P5 above is a later, separate research-only negative, not a promoted competition submission.
 The frozen prior-review negative run card is [here](evidence/review/run_card.json).
@@ -77,7 +77,7 @@ The frozen prior-review negative run card is [here](evidence/review/run_card.jso
 
 The previous mutual-overlap gate weakened the prompt's **forward**-overlap rule without approval.
 Current policy applies the literal rule to shared-tool measurements; it does not change the
-metric, writer or frozen historical evidence. The 6 historically reviewed dot TIFFs have measured forward
+metric, writer or frozen historical evidence. The 8 historically reviewed dot TIFFs have measured forward
 overlap **1.0** against the pinned binary lattice, exceeding **0.70**. They are duplicates under
 the prompt's rule, even though their bytes differ. Small rank correlation does not cancel overlap.
 
@@ -87,7 +87,7 @@ handoff's fixed **37,654-dot mass**, even the minimum possible overlap is
 **0.823418495**, still a stop. This does not prove
 impossibility at every smaller mass. We did not optimize a boundary-only loophole.
 
-All 6 reviewed dot TIFFs pass shared local format checks (single-band float32, finite [0,1],
+All 8 reviewed dot TIFFs pass shared local format checks (single-band float32, finite [0,1],
 CRS/shape/transform matching the pinned sample); that is not portal acceptance or uniqueness.
 The previous canonical P4 card and historical receipts remain frozen and superseded for current
 policy by `evidence/review/run_card.json`.
@@ -126,6 +126,15 @@ authenticated submission page were not accessible within this session's outbound
 cap, eligibility and organizer acceptance remain unverified. GPU is preferred, not required by the
 organizer reference. `scripts/prepare_data.py` advertised in the historical prompt is absent.
 
+
+## E5 lane — supervised within-halo ranking (2026-10-20), verdict `negative` — DO NOT SUBMIT
+
+SGMC-proxy LOQO ranker (the previously deferred next step, now executed under its own preregistration `docs/preregistration-e5.md`), 37,654 dots: A HOLDOUT-DTI 0.0815 vs H33 0.0037; B′ PROXY-DTI 0.0886 vs H33 0.0938 (Δ -0.0051 [-0.0161, +0.0053] — includes zero) → negative. File `docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif` (sha256 `8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2`), review-only under the literal policy above (forward overlap 1.00 vs the dense lattice; mutual 0.308). Evidence: `evidence/e5/`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/e5/leaderboard_read.json`). No weekly slot used.
+
+
+## Parallel P5 analytic-signal lane (arena/97660a79-gemsdoe70) — DO NOT SUBMIT
+
+Analytic-signal halo 7px, 37,654 dots, `tmi_hg`+`tmi_vg` rank in 2.4–32 px halo with tip kernel. HOLDOUT-DTI A 0.0828 [0.0755,0.0895] vs H33 0.0037 win; **B′ 0.0766 [0.0687,0.0852] vs 0.0938 H33 win Δ -0.0172 [-0.027760492095023067, -0.006296864003715159] → negative**, no slot. Uniqueness: 62 rasters worst mutual 0.30 (limit 0.70) worst ρ 0.042; forward 1.00 vs dense lattice `calib_r13lattice_00904.tif` (literal duplicate, review only). File `docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif` (sha256 `aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4`, 149,414 bytes, ZIP `bf61cacc...`). Evidence `evidence/phase5/` (run_card, instrument holds, uniqueness, canaries), method `src/gems70/method_p5.py`. Hypotheses.md now ranks 5 candidates (H-2 tested P5, H-3 radiometric GeoDAWN already fetched 36+26 MB, H-4 lidar scarp 36 MB, H-5 conductive breach, H-6 basement curvature) with preregistered validation rule; h33-analysis.md PhD-level byte audit + metric algebra. Under literal forward rule, P5 is duplicate (as is H70 and P4) — download for review only.
 ## Complete retained project prompt
 
 Historical statements below are user-supplied requirements and claims, not verified results.

@@ -38,5 +38,21 @@
     "new_path": "scripts/run_experiment_p5_cover.py",
     "new_sha256": "56de0c7562193651ec368d0089edbd7d26650602a31a8ed53a37bad9787c5cc4",
     "reason": "Main advanced concurrently with a separate analytic-signal P5 lane. File path collision resolved without regenerating the TIFF or scores."
+  },
+  "expanded_inventory": {
+    "from_rasters": 68,
+    "to_rasters": 70,
+    "max_rho_after": 0.023162112298445472,
+    "literal_positive_support_forward_overlap": 1.0,
+    "tiff_sha256_unchanged": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a",
+    "no_retraining": true,
+    "no_rescoring": true
+  },
+  "reproducibility_fix": {
+    "note": "Concurrent main advanced and rewrote evidence/phase4 instrumentA_folds; pinned the byte-identical original P4 baseline under evidence/p5/ and updated only the lookup path, never retrained or rescored.",
+    "old_driver_sha256": "56de0c7562193651ec368d0089edbd7d26650602a31a8ed53a37bad9787c5cc4",
+    "new_driver_sha256": "f8cffee242b2ad3a76ccf40a6cc2f0439991037894899cbec3144826c8fef422",
+    "baseline_receipt_sha256": "e020d9f2ca79416a5c943bc9938ba46080008fe5bba252a9e120697c11a8b401",
+    "artifact_sha256_unchanged": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a"
   }
 }

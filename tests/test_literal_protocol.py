@@ -47,7 +47,7 @@ def test_generated_pages_show_current_stop():
         text = (ROOT / 'docs' / name).read_text()
         assert 'DO NOT SUBMIT — literal protocol stop' in text
     readme = (ROOT / 'README.md').read_text()
-    assert 'NEW P5 FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**' in readme
+    assert 'NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**' in readme
     assert 'PRIOR REVIEW (' in readme and 'archived dot files): DO NOT SUBMIT' in readme
 
 

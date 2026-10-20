@@ -72,16 +72,51 @@ def main():
     if all('train_region_pixels' in r and 'independent_train_quadrants' not in r for r in training):
         if ([r['train_region_pixels'] for r in training] != train_pixels
                 or card['production_train_receipt'].get('train_region_pixels') != prod_pixels
-                or card['method_source_sha256']['scripts/run_experiment_p5_cover.py'] != sha(ROOT / 'scripts/run_experiment_p5_cover.py')
-                or first_scan['registry_rasters_checked'] != scan['registry_rasters_checked']
-                or not np.isclose(first_scan['worst_spearman_full_footprint'],
-                                  scan['worst_spearman_full_footprint'], rtol=0, atol=1e-10)):
-            raise ValueError('saved P5 reporting audit differs from immutable TIFF recheck')
+                or card['method_source_sha256']['scripts/run_experiment_p5_cover.py'] != sha(ROOT / 'scripts/run_experiment_p5_cover.py')):
+            raise ValueError('saved training/source metadata differs from immutable TIFF recheck')
+        old_count = first_scan['registry_rasters_checked']
+        new_count = scan['registry_rasters_checked']
+        if new_count < old_count:
+            raise ValueError('accessible registry shrank; cannot imply uniqueness from fewer rasters')
+        old_by_hash = {(row['sha256'], row['submission']): row for row in first_scan['rows']}
+        current_by_hash = {(row['sha256'], row['submission']): row for row in scan['rows']}
+        for key, prior in old_by_hash.items():
+            current = current_by_hash.get(key)
+            if not current or not np.isclose(prior['spearman_full_footprint'],
+                                             current['spearman_full_footprint'], atol=1e-10, rtol=0):
+                raise ValueError('old registry measurement drifted at ' + str(key))
+        if new_count > old_count:
+            # Only this metadata may change: no fitting, no scoring, no TIFF write.
+            dump(E / f'surface_registry_{old_count}.json', first_scan)
+            dump(scan_p, scan)
+            corr = card['correlation_overlap_vs_registry']
+            corr.update(rasters_checked=new_count,
+                        inventory_scope=scan['scope_note'],
+                        worst_spearman_full_footprint=scan['worst_spearman_full_footprint'],
+                        worst_rho_submission=scan['worst_rho_submission'],
+                        forward_overlap_positive_support_lattice=scan['forward_overlap_3px_if_positive_cells_count_as_dots'],
+                        positive_support_pixels=scan['continuous_positive_pixels'],
+                        binary_one_dots=scan['binary_one_dots'],
+                        shared_tool_dot_uniqueness=scan['unique'])
+            card['reporting_amendment'] += (f' New concurrent inventory expands scan {old_count}->{new_count}; '
+                                            'TIFF and fold scores unchanged.')
+            dump(card_p, card)
+            amendment_path = E / 'reporting_amendment.json'
+            amendment = json.loads(amendment_path.read_text())
+            amendment['expanded_inventory'] = dict(from_rasters=old_count, to_rasters=new_count,
+                max_rho_after=scan['worst_spearman_full_footprint'],
+                literal_positive_support_forward_overlap=scan['forward_overlap_3px_if_positive_cells_count_as_dots'],
+                tiff_sha256_unchanged=sha(f), no_retraining=True, no_rescoring=True)
+            dump(amendment_path, amendment)
+        elif not np.isclose(first_scan['worst_spearman_full_footprint'],
+                            scan['worst_spearman_full_footprint'], rtol=0, atol=1e-10):
+            raise ValueError('saved P5 registry rho changed without a new raster')
         print(json.dumps({'immutable_tiff_sha256': sha(f),
                           'validated': val['all_checks_passed'],
-                          'rasters_checked': scan['registry_rasters_checked'],
+                          'rasters_checked': new_count,
                           'literal_positive_support_forward_overlap': scan['forward_overlap_3px_if_positive_cells_count_as_dots'],
-                          'reporting_metadata_unchanged': True}, indent=2))
+                          'reporting_metadata_unchanged': new_count == old_count,
+                          'scores_recomputed': False}, indent=2))
         return
     if any('independent_train_quadrants' not in r for r in training):
         raise ValueError('partially corrected P5 training metadata: refuse mutation')

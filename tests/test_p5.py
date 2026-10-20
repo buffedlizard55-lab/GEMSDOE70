@@ -100,6 +100,9 @@ def test_pooled_holdout_and_proxy_terms_match_saved_fold_receipts():
         delta = d['paired_differences'][best]
         assert delta['delta'] < 0 and delta['ci95'][1] < 0
     card = read(CARD)
+    baseline = ROOT / 'evidence/p5/p4_visible_baseline_folds.json'
+    assert hashlib.sha256(baseline.read_bytes()).hexdigest() == card['p4_visible_baseline_folds_sha256']
+    assert read(baseline)['candidate'] == read(ROOT / 'evidence/p5/folds_a.json')['visible_only_p4']
     assert not card['gate_results']['a_beats_visible_p4_significant']
     assert not card['gate_results']['b_prime_beats_h33_significant']
     assert card['holdout_dti']['instrument_a']['withheld_positive_pixels'] == 11321
@@ -137,7 +140,7 @@ def test_missing_or_tampered_review_artifact_fails_closed(tmp_path):
 
 def test_public_site_first_screen_is_unambiguous_and_receipted():
     idx = (ROOT / 'docs/index.html').read_text()
-    assert 'Download NEW P5 research TIFF — DO NOT SUBMIT' in idx
+    assert 'Download NEW P5-cover research TIFF — DO NOT SUBMIT' in idx
     assert 'Competition upload / weekly slot: NO' in idx
     assert 'positive cells have' in idx and 'forward 3-pixel overlap' in idx
     assert 'downloads/p5_run_card.json' in (ROOT / 'docs/p5.html').read_text()

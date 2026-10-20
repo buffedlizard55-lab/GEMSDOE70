@@ -18,7 +18,7 @@ organizer score. Max feature-alone AUC or inverse AUC 0.751 (<.90 leakage canary
 The literal gate remains decisive: hash-pinned binary lattice has a 3px halo covering
 **all 4,989,581 feature-valid pixels** after 12px erosion; P5 final positive support has
 forward overlap 1.00 with it. Shared binary-dot count zero is NOT a loophole; no discrete
-dots were placed. The 68-raster archived/local scan max Spearman is 0.0232 but a low
+dots were placed. The refreshed 70-raster archived/local scan max Spearman is 0.0232 but a low
 rho cannot waive positive-support overlap. No private/organizer registry completeness claim.
 Read `docs/preregistration-p5.md`, `evidence/p5/run_card.json`,
 `reports/p5-scientific-review.md` and source receipt before attempting further work.
@@ -28,7 +28,11 @@ P5 is a separate, later research result. Only a separately authorized selector c
 a future cleared file for a live weekly slot. Next: resolve assigned lane + forward-overlap
 conflict, train/evaluate geometry-preserving within-halo ranking at matched dot budget on an
 untouched outer split, corroborate proxy labels and data rights, then assess live page balance.
-Do not tune or submit the negative P5 file.
+Do not tune or submit the negative P5-cover file. Concurrent integration preserved two
+stronger but still negative and literal-duplicate lanes: E5 supervised LOQO
+(`evidence/e5/`, SGMC proxy B′ 0.0886) and P5 analytic dot halo
+(`evidence/phase5/`, SGMC proxy B′ 0.0766); neither is an organizer score or slot
+approval. The P5-cover run remains a separate immutable continuous research TIFF.
 
 ---
 
@@ -73,17 +77,17 @@ Integrated suite: 212 passed (three upstream affine deprecation warnings).
 
 Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
 
-## State
+## State — P5 promoted to primary (P4 archived)
 
-* **Artifact published:** `docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif`
-  (126,097 bytes, sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`),
-  plus a one-TIFF ZIP and the writer receipt.
-* **Verdict: negative.** `download_ok = true`, `submit_recommended = false`.
-  The pre-registered target-like gate (instrument B′) is 12.6 % below the H33 reference with a
-  95 % CI excluding zero. Instrument A and the unrestricted proxy favour the candidate.
-* **No weekly slot used. No organizer-confirmed score exists in this repository.**
+* **Artifact now published (primary):** `docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif`
+  (149,414 bytes, sha256 `aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4`),
+  plus one-TIFF ZIP `bf61cacc...` and writer receipt `4e686799...`. **P4 archived** to `evidence/history/p4_stratified_halo/` and `docs/downloads/gems70-p4...` retained but no longer primary.
+* **Verdict: negative (both P4 and P5).** `download_ok = true`, `submit_recommended = false`.
+  P5: Instrument A 0.0828 [0.0755,0.0895] vs H33 0.0037 (candidate wins); B′ 0.0766 [0.0687,0.0852] vs H33 0.0938 **H33 wins Δ -0.0172 [-0.0278,-0.0063]**; B unrestricted 0.0878 vs 0.0906 candidate wins. P4 was 12.6 % below H33 on B′; P5 is 18 % below — analytic-signal rank hurt B′ despite helping A.
+  The pre-registered target-like gate (B′) is negative with CI excluding zero.
+* **No weekly slot used. No organizer-confirmed score exists in this repository.** All numbers are HOLDOUT-DTI (gems57-pooled-hide-v2) or user-supplied historical (0.2778, 0.4413).
 
-## What was done
+## What was done — session 2 + session 3 (P5)
 
 1. **Two defects in the shared uniqueness tool were found and fixed** (reported, hashes in
    `registry/template_pin.json` with `all_identical: false`, full text in
@@ -91,15 +95,12 @@ Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
    * dots are binary (`|value − 1| < 1e-6`), not every positive value;
    * duplication requires **mutual** overlap; forward-only overlap fires at 1.00 on three archived
      dense lattices whose 3-px halos cover the whole footprint.
-2. **Three preregistered experiments.**
-   * Exp 2 (geophysically gated continuation prior): A 0.0591, B 0.0432 — the four-field
-     geophysical gate hurt and was removed.
-   * Exp 3 (damage-zone intensity): A 0.0873, B 0.1098, B′ 0.0471 — concentration wasted mass
-     because `T` saturates per truth cell while `S` scales per dot.
-   * Exp 4 (coverage-stratified halo, weak tilt): A 0.0730, B 0.0948, B′ 0.0812 — best balance;
-     this is the published artifact.
-3. The site was rebuilt to read every number from JSON receipts and to state the download/submit
-   decision explicitly on the landing page.
+2. **Four preregistered experiments (P2-P5).**
+   * P2 (geophysically gated continuation prior): A 0.0591, B 0.0432 — four-field gate hurt, removed.
+   * P3 (damage-zone intensity): A 0.0873, B 0.1098, B′ 0.0471 — concentration wasted mass (T saturates).
+   * P4 (coverage-stratified halo 7px, weak tilt+tip): A 0.0730, B 0.0948, B′ 0.0812 — +72 % over P3 at fixed mass; best geometry so far.
+   * **P5 (analytic-signal halo 7px, tmi_hg+tmi_vg rank+tip): A 0.0828, B 0.0878, B′ 0.0766 — magnetic rank helped catalogue recovery (+13 % vs P4 on A) but hurt proxy B′ (-6 % vs P4, -18 % vs H33).** Mechanism nonunique: remanent dike margins mimic analytic-signal ridges. Verdict negative; no slot.
+3. The site was rebuilt to read every number from JSON receipts and to state the download/submit decision explicitly on the landing page. Hypotheses.md now ranks 5 new candidates (H-2 tested as P5, H-3 radiometric halo, H-4 lidar breakline, H-5 conductive breach, H-6 basement curvature) with layers, signature, omission argument, mimic, difference, expected DTI, cost, and external-source obtainability. h33-analysis.md expanded to PhD-level metric algebra and why P5 failed.
 
 ## Do not
 
@@ -120,15 +121,18 @@ Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
 3. Upstream the two uniqueness fixes to the template repository and run its suite.
 4. Only then spend a slot, and record the returned score as ORGANIZER-CONFIRMED.
 
-## Reproduce
+## Reproduce — P5 (analytic-signal halo) is now the published primary
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
-.venv/bin/python scripts/restore_data.py
-git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py
+.venv/bin/python scripts/restore_data.py   # 400 MB training_features + external rad/lidar from owner mirror
+.venv/bin/python scripts/fetch_data.py     # 7-file WANT set: training_features + lidar_scarp + geodawn rad/ext + gdr wellsprings
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE  # 62 registry rasters for uniqueness
+.venv/bin/python scripts/run_experiment_p5.py   # P5 analytic-signal halo (this session) — 73 sec, 37,654 dots, HOLDOUT-DTI A 0.0828 B′ 0.0766
+.venv/bin/python scripts/run_experiment_v4.py   # P4 stratified halo history — archived to evidence/history/p4_stratified_halo/
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
-.venv/bin/python -m pytest -q          # 118 passed at handoff
+.venv/bin/python -m pytest -q          # 144 passed at P5 handoff (was 118 at P4)
+.venv/bin/python scripts/release_gate.py --expect-negative  # download_ok true, submit_recommended false
 ```
 
 Large inputs and the registry clone stay outside Git (`.cache/`, `/tmp`). Published evidence is
@@ -151,6 +155,26 @@ before any slot consideration. Evidence: `evidence/e2/`, `evidence/e3/`,
 ## Integration note (PR #16 second merge, 2026-10-20)
 PR #18 (H2 stepover-relay, negative; HOLDOUT-DTI 0.023034, lane stop fired) landed during PR #16 CI and replaced `evidence/run_card.json`, builders and 4 test files with its fail-closed system. Integration preserved: H2 card moved byte-identical to `evidence/history/h2_stepover_negative/run_card.json`; H2 diagnostic TIFF registered in `registry/published_artifacts.json`; Phase-4 canonical card restored from `fefc857` blob (sha256 `9cd64b1e...`); session-2 builders/tests retained so P4 + discordance + E2 artifacts stay coherent. `make_run_card.py` stale-schema fix (pre-existing red Verify on main) retained. All verdicts negative; slots used 0.
 
+## E5 lane (2026-10-20, branch arena/e22c56cf-gemsdoe70) — supervised LOQO, negative
+
+Executed the registered next step: SGMC-proxy (d≥3 px) HGB ranker, LOQO, OOF
+surface, P4 emission + Amendment-1 same-NMS fill (P4 block pass alone placed
+34,409/37,654 on the sharper surface; amended pre-score in
+`docs/preregistration-e5.md`). Artifact
+`docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif`
+(sha256 `8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2`,
+byte-identical across two full reruns). Canaries ≤0.755; OOF AUC 0.689–0.781.
+A HOLDOUT-DTI 0.0815 vs H33 0.0037; **B′ PROXY-DTI 0.0886 vs H33 0.0938,
+Δ −0.0051 [−0.0161, +0.0053]** → gate fails, verdict negative,
+`submit_recommended=false`, no slot used. Supervised ranking halved P4's B′
+deficit (−0.0126) and is statistically tied with H33 on B′, but does not beat
+uniform halo sampling: ranking signal exists (AUC) yet does not convert into
+DTI at 37,654 dots / 300 m saturation. Evidence `evidence/e5/`; script
+`scripts/run_experiment_e5.py`. Next: E5-3/E5-4 features (GeoDAWN
+radiometrics, lidar scarp) inside the same LOQO harness after checking mirror
+obtainability; or selector decision to spend one slot on P4/E5 as a deliberate
+measurement (never recorded as expected win). Public leader 0.4413
+(organizer-page read 2026-10-20, `evidence/e5/leaderboard_read.json`).
 ## Latest protocol review (arena/4aea4e21-gemsdoe70)
 Current prompt's literal forward-overlap rule conflicts with the prior mutual
 amendment. P4 has four duplicate witnesses; no new experiment/TIFF generated.

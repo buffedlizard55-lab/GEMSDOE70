@@ -65,6 +65,11 @@ it does **not** isolate whether the magnetic feature, model family, or emission 
 the shortfall. It does falsify this *preregistered end-to-end candidate* and is too weak to
 justify a leaderboard slot.
 
+The concurrently merged E5 supervised-dot lane (`evidence/e5/run_card.json`) is stronger on
+the SGMC proxy (HOLDOUT-DTI 0.088642 [0.079435, 0.098000], `gems57-pooled-hide-v2`,
+59,937 proxy positives), but its paired B′ delta vs frozen H33 has a 95% CI crossing zero.
+It still fails the same literal forward-dot gate; **none** of these is a slot recommendation.
+
 The measured H33 file is a subset of H27, itself a subset of D28; it deletes near-catalogue
 shells, leaving sparse fault-halo coverage (`evidence/h33_audit.json`). Sparse spreading plus
 removal of low-value near-catalogue mass is consistent with the asymmetric metric; it does
@@ -85,8 +90,9 @@ that valid interior has 100% forward overlap and must stop before placement. P5 
 **1.00 forward overlap** with that lattice if positive pixels count as dots. The shared
 binary-dot checker counts zero exact-one dots; using that observation to claim
 `<70%` would be a definitional loophole and is explicitly rejected. Worst full-footprint
-Spearman among 68 locally accessible archived/prior TIFFs is 0.023162; a low rho does
-not undo the positive-support stop. These 68 are not an exhaustive organizer registry.
+Spearman among 70 locally accessible archived/prior TIFFs (after final concurrent integration)
+is 0.023162; a low rho does
+not undo the positive-support stop. These 70 are not an exhaustive organizer registry.
 
 The shared `submission_writer.py` wrote a new TIFF/one-TIFF ZIP into distinct paths and
 refused all invalid arrays. We independently reopened the bytes and verified:
@@ -108,10 +114,15 @@ pixels and earlier portal range errors prompted the project's all-finite-zero-ou
 convention. This conflict remains unresolved without a real authenticated portal receipt;
 no claim of accepted submission is made.
 
-After a separate parallel merge to `main`, the old 66-raster scan was recomputed against
-68 accessible rasters **without retraining, changing scores, or changing TIFF bytes**.
+After parallel merges to `main`, the old 66-raster scan was recomputed first against
+68 and then against 70 accessible rasters **without retraining, changing scores,
+or changing TIFF bytes**.
 The metadata-only correction of a misleading registry URL and the training-region count is
-recorded in `evidence/p5/reporting_amendment.json`; original scan preserved.
+recorded in `evidence/p5/reporting_amendment.json`; both original 66- and intermediate
+68-raster scans are preserved. The original P4 visible-only comparator fold receipt was
+moved to `evidence/p5/p4_visible_baseline_folds.json` (byte-identical to the measured
+arm, SHA-256 pinned) after a parallel P5 analytic lane repurposed `evidence/phase4/`.
+Only the reproduction driver's lookup path changed, never the saved TIFF or holdout terms.
 
 ## Pass 3 — publication, source review, next work
 
@@ -120,8 +131,10 @@ flags: **review download yes, competition submit no**. The hash-pinned inventory
 Pages build policy permit only registered TIFF/ZIP bytes; other data and quarantined prior
 files remain excluded. Fresh tests exercise source hashes, grid/range, saved pooled terms,
 negative deltas, canaries, literal blocker, ZIP round-trip and tamper fail-closed release.
-The earlier archive protocol review is frozen within its own time/scope; P5-cover has
-its own run card. The static site has a dedicated evidence page and direct TIFF/ZIP links.
+The earlier eight-dot-file protocol review is frozen within its own time/scope; P5-cover has
+its own run card. Concurrent E5 supervised-dot and analytic P5-dot runs were preserved,
+not conflated with this map; both are negative under the literal forward stop.
+The static site has a dedicated evidence page and direct TIFF/ZIP links.
 
 Official text sources with exact claims/limits were read and stored in
 `evidence/p5/official_source_review.json`: [DrivenData problem](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/),
