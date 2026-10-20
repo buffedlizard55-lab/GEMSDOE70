@@ -3,3 +3,5 @@ evidence/mirrored_geodawn_report.txt -whitespace
 evidence/official-reference-excerpts.txt -whitespace
 # Quarantined concurrent session is retained exactly for forensic review.
 quarantine/** -whitespace
+# Preserve re-fetched organizer notebook excerpts exactly as extracted.
+evidence/review/official-reference-excerpts.txt -whitespace

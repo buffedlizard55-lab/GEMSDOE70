@@ -16,6 +16,7 @@ from pathlib import Path
 import zipfile
 
 from .release import valid_canary
+from .protocol import literal_lane_status
 
 # At the PR #17 merge, this lane's frozen drivers moved byte-identical to
 # *_scarp.py paths because the PR #16 lane owns the canonical driver paths.
@@ -56,6 +57,7 @@ def release_status_e3(root):
         }
     reasons, checks = [], {}
     card = None
+    final_uniq = {}
     try:
         card = _load(root, "evidence/run_card_e3_amended.json")
         original = _load(root, "evidence/run_card_e3.json")
@@ -122,6 +124,8 @@ def release_status_e3(root):
     ok = not reasons
     return {
         "download_candidate_ok": ok,
+        "download_scope": "historical candidate checks only; forensic review, not current uniqueness clearance",
+        "literal_lane_status": literal_lane_status(final_uniq.get("audit")),
         "download_and_submit_ok": False,
         "slot_authorized": False,
         "verdict": (card or {}).get("verdict", "negative"),
@@ -130,7 +134,7 @@ def release_status_e3(root):
         "checks": checks,
         "reasons": reasons,
         "policy": ("Candidate download requires every check above. Uploading still "
-                   "requires separate selector review (full-registry scan, weekly-cap "
+                   "requires current literal forward-overlap clearance plus separate selector review (full-registry scan, weekly-cap "
                    "check); local validation is not organizer acceptance."),
     }
 

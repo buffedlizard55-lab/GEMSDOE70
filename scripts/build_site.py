@@ -45,7 +45,7 @@ def frame(title, body):
     review = load('evidence/literal_protocol_review.json', {})
     if review.get('correlation_overlap_vs_registry', {}).get('stop'):
         body = ('''<section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
-<p>No TIFF is authorized for download or submission. The archived Phase-4 TIFF fails the requested one-way
+<p><strong>Current protocol: DO NOT SUBMIT.</strong> No TIFF is authorized for download or submission. The archived Phase-4 TIFF fails the requested one-way
 3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
 are not clearance under the current prompt. Archived files are quarantined for audit only.</p>
 <p><a href="protocol-review.html">Current protocol review and next steps</a> ·

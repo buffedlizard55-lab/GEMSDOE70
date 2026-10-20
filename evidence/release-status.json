@@ -2,6 +2,47 @@
   "verdict": "negative",
   "review_only": true,
   "current_forward_protocol_ok": false,
+  "protocol_unique": false,
+  "literal_lane_status": {
+    "rule": "Spearman > 0.90 OR candidate dots within 3px of registry dots > 0.70",
+    "policy": "Forward overlap, not mutual; exact threshold equality does not trigger.",
+    "witnesses": [
+      {
+        "submission": "calib_r13lattice_00904.tif",
+        "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+        "spearman_full_footprint": -0.0004249861963070003,
+        "my_dots_within_3px_of_theirs": 1.0,
+        "their_dots_within_3px_of_mine": 0.21055607917059377
+      },
+      {
+        "submission": "r11_greedy_mp.tif",
+        "sha256": "033df94ceef16350030a69d5cfdec0afe7bc605bb155d8f3b98b203aabf80abd",
+        "spearman_full_footprint": -0.003451535346305423,
+        "my_dots_within_3px_of_theirs": 0.8069262229776385,
+        "their_dots_within_3px_of_mine": 0.22230651669580323
+      },
+      {
+        "submission": "r13_lattice_s5_00904.tif",
+        "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+        "spearman_full_footprint": -0.0004249861963070003,
+        "my_dots_within_3px_of_theirs": 1.0,
+        "their_dots_within_3px_of_mine": 0.21055607917059377
+      },
+      {
+        "submission": "r14_union_tips10_lat6.tif",
+        "sha256": "c9d1398e464603350e464fff7213a8a5e380f1ccf505e263a685607970ae28ef",
+        "spearman_full_footprint": 0.013011438060611235,
+        "my_dots_within_3px_of_theirs": 0.7803686195357731,
+        "their_dots_within_3px_of_mine": 0.2994366153221905
+      }
+    ],
+    "measurement_errors": [],
+    "historical_scan_complete": true,
+    "stop_required": true,
+    "current_registry_clearance": false,
+    "scope": "Frozen historical rows only; not a refreshed all-repository inventory."
+  },
+  "download_scope": "No file cleared; archived TIFFs quarantined for audit only.",
   "download_ok": false,
   "submit_recommended": false,
   "download_and_submit_ok": false,
@@ -21,11 +62,13 @@
   ],
   "weekly_slots_used": 0,
   "policy": "Release hold must be explicitly resolved by a new reviewed evidence chain.",
-  "status": "BLOCKED",
+  "status": "REVIEW ONLY \u2014 LITERAL LANE STOP",
   "download_available": false,
   "generated_tif": null,
+  "archived_tif_available_for_review": null,
   "approved_for_weekly_slot": false,
-  "scientific_experiments_run": 1,
+  "scientific_experiments_run": 0,
+  "historical_experiment_count": 1,
   "submission_slots_used": 0,
   "template_integrity_ok": true
 }
