@@ -107,3 +107,18 @@ def test_explicit_inventory_allows_only_hash_pinned_review_artifact(tmp_path):
     raster.write_bytes(b'tampered')
     with pytest.raises(ValueError, match='Unsafe Pages build'):
         check_output(tmp_path, allowed_artifacts=allowed)
+
+
+def test_integrated_current_pages_after_markdown_exclusion(tmp_path):
+    import shutil
+    from gems70.release import published_artifacts
+    from gems70.pages_policy import PUBLIC_ROOTS
+    for name in PUBLIC_ROOTS:
+        p = ROOT / name
+        if p.is_dir():
+            shutil.copytree(p, tmp_path / name, ignore=shutil.ignore_patterns('*.md'))
+        elif p.is_file():
+            shutil.copyfile(p, tmp_path / name)
+    result = check_output(tmp_path, allowed_artifacts=published_artifacts(ROOT))
+    assert result['built_output_ok']
+    assert result['raster_downloads'] == len(published_artifacts(ROOT))

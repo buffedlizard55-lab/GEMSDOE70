@@ -1,0 +1,83 @@
+{
+  "hypothesis": "Protocol reconciliation of existing P4 coverage-stratified halo (not a new experiment)",
+  "mechanism": "one dot per 7x7-px stratum at the stratum maximum of (1+0.8*exp(-(d-2.4)/6))*(0.7+0.3*tip), 5-px NMS, band 2.4-32 px",
+  "non_fault_mimic": "colluvial/collinear basin-floor lineaments inside the halo",
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "source": "evidence/phase4/run_card.json",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.07304229212058164,
+    "ci95": [
+      0.06673987703804156,
+      0.07899496967047342
+    ],
+    "withheld_positive_pixels": 11321,
+    "status": "Historical measurement, not rerun; not an organizer score"
+  },
+  "correlation_overlap_vs_registry": {
+    "rule": "Spearman > 0.90 OR candidate dots within 3px of registry dots > 0.70",
+    "policy": "Forward overlap, not mutual; exact threshold equality does not trigger.",
+    "witnesses": [
+      {
+        "submission": "calib_r13lattice_00904.tif",
+        "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+        "spearman_full_footprint": -0.0004249861963070003,
+        "my_dots_within_3px_of_theirs": 1.0,
+        "their_dots_within_3px_of_mine": 0.21055607917059377
+      },
+      {
+        "submission": "r11_greedy_mp.tif",
+        "sha256": "033df94ceef16350030a69d5cfdec0afe7bc605bb155d8f3b98b203aabf80abd",
+        "spearman_full_footprint": -0.003451535346305423,
+        "my_dots_within_3px_of_theirs": 0.8069262229776385,
+        "their_dots_within_3px_of_mine": 0.22230651669580323
+      },
+      {
+        "submission": "r13_lattice_s5_00904.tif",
+        "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+        "spearman_full_footprint": -0.0004249861963070003,
+        "my_dots_within_3px_of_theirs": 1.0,
+        "their_dots_within_3px_of_mine": 0.21055607917059377
+      },
+      {
+        "submission": "r14_union_tips10_lat6.tif",
+        "sha256": "c9d1398e464603350e464fff7213a8a5e380f1ccf505e263a685607970ae28ef",
+        "spearman_full_footprint": 0.013011438060611235,
+        "my_dots_within_3px_of_theirs": 0.7803686195357731,
+        "their_dots_within_3px_of_mine": 0.2994366153221905
+      }
+    ],
+    "measurement_errors": [],
+    "historical_scan_complete": true,
+    "stop_required": true,
+    "current_registry_clearance": false,
+    "scope": "Frozen historical rows only; not a refreshed all-repository inventory."
+  },
+  "registry_audit_sha256": "ec14a681aeca139a3db61e527024c456dced12ea6603265c10c6952b71ba593d",
+  "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+  "validator_output": {
+    "checks": {
+      "single_band": true,
+      "shape_matches_cached_reference": true,
+      "crs_matches_cached_reference": true,
+      "transform_matches_cached_reference": true,
+      "no_nan_anywhere_including_footprint": true,
+      "values_in_0_1": true,
+      "file_sha_matches_frozen_card": true,
+      "file_sha_matches_registry_audit": true
+    },
+    "all_pass": true,
+    "scope": "Fresh byte/range/grid audit against cached reference metadata, not organizer acceptance"
+  },
+  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
+  "submission_note": "P4 archive review only; forward-overlap stop. DO NOT SUBMIT.",
+  "verdict": "negative",
+  "download_ok_for_review": true,
+  "submit_ok": false,
+  "new_tif_generated": false,
+  "experiments_this_session": 0,
+  "weekly_slots_used_this_session": 0,
+  "stop_reason": "Historical final-dot witness violates requested forward-overlap rule; lane paragraph absent. No new placement permitted.",
+  "surface_check": "Not run: stopped before a new surface or dots; historical final-dot failure already sufficient.",
+  "limitation": "No new unique submission certified. Existing distinct bytes do not establish protocol uniqueness."
+}

@@ -58,7 +58,7 @@ are not clearance under the current prompt. No new TIFF was generated in this re
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main">{nav}</nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a>.</section>{body}</main>
+<nav aria-label="Main">{nav}</nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a> · <a href="supplemental-protocol-review.html">Supplemental hypotheses and fresh format audit</a> · <a href="current_protocol_review.json">Supplemental JSON card</a>.</section>{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
@@ -113,6 +113,8 @@ def main():
 
     DOCS.mkdir(parents=True, exist_ok=True)
     DOWN.mkdir(parents=True, exist_ok=True)
+
+    shutil.copyfile(ROOT / 'evidence/current_protocol_review.json', DOCS / 'current_protocol_review.json')
 
     # ------------------------------------------------------------- copy evidence
     copies = {
@@ -407,6 +409,8 @@ Full inventory (862) scan remains a selector step. Literal readings are in the r
 
     # ------------------------------------------------------------------ markdown
     import markdown
+    supplemental = markdown.markdown((DOCS / "supplemental-protocol-review.md").read_text(), extensions=["tables"])
+    (DOCS / "supplemental-protocol-review.html").write_text(frame("Supplemental protocol review", supplemental))
     for src, dst, title in [('docs/hypotheses.md', 'hypotheses.html', 'Hypotheses'),
                             ('docs/h33-analysis.md', 'h33-analysis.html', 'Why H33 scored'),
                             ('docs/irregularities.md', 'limitations.html', 'Limitations')]:
