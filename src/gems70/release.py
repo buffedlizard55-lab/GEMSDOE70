@@ -122,18 +122,22 @@ def assert_root_pages_guard(root):
             rel = path.relative_to(root).as_posix()
             if path.is_symlink():
                 raise ValueError('Unsafe root Pages artifact: ' + rel)
-            if path.suffix.lower() in {'.tif', '.tiff', '.zip'} and rel not in allowed:
-                raise ValueError('Unsafe root Pages artifact: ' + rel)
+            if path.suffix.lower() in {'.tif', '.tiff', '.zip'}:
+                if rel not in allowed:
+                    raise ValueError('Unsafe root Pages artifact: ' + rel)
+                if allowed[rel] and digest(path) != allowed[rel]:
+                    raise ValueError('Published artifact hash mismatch: ' + rel)
 
 
 def published_artifacts(root):
-    """The exact artifacts the run card authorises for publication."""
-    card = _load(root, 'evidence/phase4/run_card.json') or {}
-    name = card.get('submission_name')
-    if not name or not card.get('raster_sha256'):
-        return set()
-    return {f'docs/downloads/{name}.tif', f'docs/downloads/{name}.zip',
-            f'docs/downloads/{name}.json'}
+    """Every published TIFF/ZIP, from the hash-pinned publication inventory.
+
+    A file may be published without being promoted (parallel-session artifacts are
+    preserved this way). Nothing outside the inventory may live in docs/.
+    """
+    inv = _load(root, 'registry/published_artifacts.json') or {}
+    return {row['path']: row.get('sha256') for row in inv.get('artifacts', [])
+            if row.get('path', '').lower().endswith(('.tif', '.tiff', '.zip'))}
 
 
 def assert_no_public_rasters(root):

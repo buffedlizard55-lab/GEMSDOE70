@@ -339,8 +339,9 @@ as a predictor.</li></ul>
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<meta http-equiv="refresh" content="0;url={target}"><title>GEMSDOE70</title>'
             f'</head><body><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
-    for name in ('run-card.json', 'status.json'):
-        (DOCS / name).unlink(missing_ok=True)
+    (DOCS / 'status.json').unlink(missing_ok=True)
+    # keep a root-level copy so older pages that link run-card.json still resolve
+    (DOCS / 'run-card.json').write_text((ROOT / 'evidence/run_card.json').read_text())
     # Phase-1 receipts keep their historical names only under the archived prefix.
     for stale in ('holdout.json', 'holdout_folds.json', 'holdout_split.json',
                   'registry_saturation.json', 'surface_uniqueness.json',

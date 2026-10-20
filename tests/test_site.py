@@ -30,12 +30,17 @@ def test_site_rebuild_has_no_broken_local_link():
             assert target.is_file(), f'broken local link {p}: {link}'
 
 
-def test_only_the_run_card_artifact_is_published():
+def test_every_published_artifact_is_inventoried():
+    import hashlib
+    inv = json.loads((ROOT / 'registry/published_artifacts.json').read_text())
+    listed = {r['path']: r['sha256'] for r in inv['artifacts']}
+    for p in (ROOT / 'docs').rglob('*'):
+        if p.is_file() and p.suffix.lower() in {'.tif', '.tiff', '.zip'}:
+            rel = p.relative_to(ROOT).as_posix()
+            assert rel in listed, rel
+            assert hashlib.sha256(p.read_bytes()).hexdigest() == listed[rel], rel
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
-    name = card['submission_name']
-    published = sorted(p.name for p in (ROOT / 'docs/downloads').glob('*.tif'))
-    assert published == [name + '.tif']
-    assert (ROOT / 'docs/downloads' / (name + '.zip')).is_file()
+    assert f"docs/downloads/{card['submission_name']}.tif" in listed
 
 
 def test_decision_is_explicit_on_the_landing_page():

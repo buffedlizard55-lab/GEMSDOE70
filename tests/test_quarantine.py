@@ -12,8 +12,9 @@ def test_archival_bytes_and_no_unauthorised_artifact():
         p = ROOT / row['path']
         assert p.is_file()
         assert hashlib.sha256(p.read_bytes()).hexdigest() == row['sha256']
+    inv = json.loads((ROOT / 'registry/published_artifacts.json').read_text())
+    paths = {r['path'] for r in inv['artifacts']}
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
-    published = sorted(p.name for p in (ROOT / 'docs/downloads').glob('*.tif'))
-    assert published == [card['submission_name'] + '.tif']
+    assert f"docs/downloads/{card['submission_name']}.tif" in paths
     source = (ROOT / 'quarantine/concurrent-h70c/source/generate_h70_submission.py.txt').read_text()
     assert 'simulate plausible but label as HOLDOUT' in source

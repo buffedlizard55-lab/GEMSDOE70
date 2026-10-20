@@ -57,3 +57,13 @@ with `all_identical: false`. They must be proposed upstream to the shared templa
   in the README. Published evidence is small JSON.
 * The published TIFF is binary 0/1 with no nodata tag; outside-footprint cells are 0, which the
   shared validator and the sample comparison both accept.
+
+## Parallel-session candidate (merged 2026-10-20)
+
+A concurrent branch added `gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif`
+(24,872 binary dots, sha256 recorded in `registry/published_artifacts.json`, verdict
+`DO NOT SUBMIT` in its own receipts). It is preserved and inventoried but is not the file this
+run card selects; the landing page points only at the P4 artifact. Both files are hash-pinned by
+`release.assert_no_public_rasters`, so neither can be silently replaced. Its narrative pages were
+moved to `reports/archive/concurrent-v2/` to avoid two contradictory download instructions in the
+published tree.

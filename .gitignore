@@ -9,3 +9,5 @@ submissions/
 data/external/
 data/training_features.tif
 evidence/ci-tests.xml
+
+_site/
