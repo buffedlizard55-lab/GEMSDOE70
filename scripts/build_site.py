@@ -330,7 +330,8 @@ always reported.</p>
     for src, dst, title in [('docs/hypotheses.md', 'hypotheses.html', 'Hypotheses'),
                             ('docs/h33-analysis.md', 'h33-analysis.html', 'Why H33 scored'),
                             ('docs/irregularities.md', 'limitations.html', 'Limitations'),
-                            ('docs/protocol-review.md', 'protocol-review.html', 'Current protocol review')]:
+                            ('docs/protocol-review.md', 'protocol-review.html', 'Current protocol review'),
+                            ('evidence/upstream_fix_report.md', 'upstream-fix-report.html', 'Historical shared-tool change report')]:
         text = (ROOT / src).read_text()
         body = markdown.markdown(text, extensions=['tables'])
         (DOCS / dst).write_text(frame(title, body))
@@ -369,7 +370,7 @@ as a predictor.</li></ul>
 <h2>Receipts</h2>
 <p><a href="downloads/data_receipt.json">Input SHA-256 pins</a> ·
 <a href="downloads/template_verification.json">Shared-template verification</a> ·
-<a href="downloads/upstream_fix_report.md">Upstream fix report</a></p>'''
+<a href="upstream-fix-report.html">Upstream fix report</a></p>'''
     (DOCS / 'sources.html').write_text(frame('Sources', src_page))
 
     # Root entry point (repository-root Pages keeps working).

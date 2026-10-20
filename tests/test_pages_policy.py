@@ -106,3 +106,19 @@ def test_only_hash_inventoried_review_rasters_are_allowed(tmp_path):
     p.write_bytes(b'changed')
     with pytest.raises(ValueError, match='not hash-authorized'):
         check_output(tmp_path, allowed_artifacts=allowed)
+
+
+def test_current_pages_tree_after_markdown_exclusion(tmp_path):
+    """Exercise deployed links: Jekyll excludes docs/**/*.md, unlike a checkout."""
+    import shutil
+    from gems70.release import published_artifacts
+    from gems70.pages_policy import PUBLIC_ROOTS
+    for name in PUBLIC_ROOTS:
+        p = ROOT / name
+        if p.is_dir():
+            shutil.copytree(p, tmp_path / name, ignore=shutil.ignore_patterns('*.md'))
+        elif p.is_file():
+            shutil.copyfile(p, tmp_path / name)
+    result = check_output(tmp_path, allowed_artifacts=published_artifacts(ROOT))
+    assert result['built_output_ok']
+    assert result['raster_downloads'] == len(published_artifacts(ROOT))
