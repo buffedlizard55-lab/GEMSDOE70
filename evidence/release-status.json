@@ -1,0 +1,18 @@
+{
+  "status": "BLOCKED \u2014 DO NOT SUBMIT",
+  "verdict": "negative",
+  "generated_tif": null,
+  "download_available": false,
+  "approved_for_weekly_slot": false,
+  "scientific_experiments_run": 0,
+  "submission_slots_used": 0,
+  "template_integrity_ok": true,
+  "blockers": [
+    "No single-method lane paragraph was supplied in the brief.",
+    "A hash-verified registry witness is positive at every sample-footprint pixel; the literal any-raster overlap gate rejects every nonempty candidate.",
+    "No fitted model, feature-alone canaries, pooled spatial holdout result, or comparable current-best holdout exists in this repository.",
+    "No current full-registry two-phase uniqueness scan or organizer submission receipt exists for a new GEMSDOE70 candidate.",
+    "The all-finite shared writer is a local precaution; official documentation describes null/NaN outside the footprint. Organizer acceptance of zero-outside export is unverified here."
+  ],
+  "policy": "Negative-only publication. A future positive release requires an explicitly resolved protocol and a separately reviewed evidence-bound gate; editing a run-card verdict cannot enable a download."
+}

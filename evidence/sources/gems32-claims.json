@@ -1,0 +1,20 @@
+{
+ "schema": 1,
+ "warning": "Every score in this file is an OWNER REPORT: a number the owner recorded from a DrivenData submission screen. None of them has an organizer receipt linking those bytes to that row (IR-32-SCORE-01). The only scores read directly from an official page by this repository are the other teams' public-leaderboard rows in registry/leaderboard_history.jsonl.",
+ "claims": [
+  {"id": "claim-d28-0260", "file": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+   "sha256": "91eae1ca42ec845eaa8c2ba32da49806e24751743459b8a10017c479bbe639b8",
+   "score": 0.26, "kind": "owner_report", "emitted_px": 44090,
+   "reported_by": "owner ledger (GEMSDOE25 site, research download section)",
+   "note": "group best; deterministic dot-thin of the H19-5 mask, verified here to be a strict subset of the H19-5 raster"},
+  {"id": "claim-d15-02477", "file": "d1-5 variant of H19-5 (owner mirror)",
+   "score": 0.2477, "kind": "owner_report", "emitted_px": 60069,
+   "reported_by": "owner ledger", "note": "same family, denser"},
+  {"id": "claim-h195-01922", "file": "gems19-h19-5-powerlaw-budget-multiline-corroborated-20260930-e27054cf-nan.tif",
+   "sha256": "ec1f9b56b83ce33cad781ceb9f104b18fb4f2ff785263a4e89616af4aabdee8d",
+   "score": 0.1922, "kind": "owner_report", "emitted_px": 121131,
+   "reported_by": "owner ledger", "note": "same family, densest"},
+  {"id": "claim-doe26-01223", "file": "26GEMSDOE detector-product emission",
+   "score": 0.1223, "kind": "owner_report", "reported_by": "owner ledger", "note": "different detector family"}
+ ]
+}

@@ -1,0 +1,9 @@
+{
+  "repository": "buffedlizard55-lab/60GEMSDOE",
+  "operation": "gh issue create",
+  "result": "DENIED",
+  "message": "GraphQL: Resource not accessible by integration (createIssue)",
+  "issue_created": false,
+  "private_fork_applied": false,
+  "report": "reports/research.md"
+}

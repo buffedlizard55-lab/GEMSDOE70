@@ -12,3 +12,7 @@ dependencies = [
 
 [build-system]
 requires = ["setuptools"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "vendor"]
+testpaths = ["tests"]
