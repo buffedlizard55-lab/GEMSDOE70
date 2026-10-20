@@ -1,71 +1,22 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## Submission status: **STOP — no file cleared**
 
-A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`negative` on the pre-registered target-like gate. No weekly slot was used.
+Do **not** download or submit any current artifact. Previously exposed TIFF/ZIP files have been moved out of the Pages tree into `quarantine/published-downloads-2026-10-20/` for audit only. No submission slot was used. This is a negative release decision; there is no organizer-confirmed score for a local candidate.
 
-- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
-- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
+- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission status](docs/submission.html)
+- [Release-integrity review and JSON run card](reports/review-release-integrity-2026-10-20.md)
+- [Historical H33 analysis](docs/h33-analysis.md) · [Project hypotheses](docs/hypotheses.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## What was measured this session
+## Why publication is blocked
 
-Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
-alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
-bootstrap. Exactly 37,654 binary dots are emitted, all
-off-catalogue.
-
-| Instrument | Candidate | H33 reference | Result |
-|---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
-
-Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
-is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
-21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
-artifact is published but not promoted. Nothing here is an organizer-confirmed score.
-
-**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
-(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
-whose halo covers the whole footprint — which is why the two-direction test was adopted.
-
-## Two fixes to the shared tool (reported, not silently forked)
-
-1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
-   registry surface blocks every candidate.
-2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
-   halos cover 100 % of the footprint would otherwise block every candidate.
-
-Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
-`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
-
-## Reproduce
-
-```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
-.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
-git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
-.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
-.venv/bin/python -m pytest -q
-```
-
-`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
-(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
-`evidence/history/phase1_negative/`.
+The recorded evidence does not form a consistent release chain: candidate filenames differ among the README, public pages and run cards; `evidence/run_card_v2.json` says promotion is allowed while recording empty registry measurements; and `evidence/surface_uniqueness.json` marks its scan incomplete with one checked-raster forward overlap of 1.0. Per the literal parallel-run rule, this is a stop condition. Format validation alone cannot resolve it. No new experiment, score or current leaderboard claim is made by this review.
 
 ## Next session
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+Resolve the protocol's surface-correlation / dot-overlap semantics in the shared template without weakening thresholds; freeze a single lane, preregister one hypothesis and untouched holdout; check all feature-only leakage canaries; then run a complete hash-bound registry audit before considering any output. Only a future candidate clearing all gates may reach a separate slot selector.
 
 ## Complete retained project prompt
 

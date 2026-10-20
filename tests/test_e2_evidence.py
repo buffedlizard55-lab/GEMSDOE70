@@ -41,7 +41,8 @@ def test_e3_saved_scores():
 def test_e2_publication_binds_exact_bytes():
     pub = json.loads((ROOT / "evidence/e2/publication.json").read_text())
     val = json.loads((ROOT / "evidence/e2/validator.json").read_text())
-    path = ROOT / "docs/downloads" / pub["file"]
+    path = ROOT / "quarantine/published-downloads-2026-10-20" / pub["file"]
+    assert not (ROOT / "docs/downloads" / pub["file"]).exists()
     assert hashlib.sha256(path.read_bytes()).hexdigest() == pub["sha256"] == val["artifact_sha256"]
     assert val["local_format_pass"] and val["shared_validator"]["all_checks_passed"]
     assert pub["recomputation_matches_experiment"] and pub["submit_ok"] is False

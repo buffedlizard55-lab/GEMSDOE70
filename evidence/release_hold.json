@@ -1,0 +1,17 @@
+{
+  "evidence_class": "RELEASE-BLOCK",
+  "date": "2026-10-20",
+  "verdict": "negative",
+  "download_ok": false,
+  "download_and_submit_ok": false,
+  "submit_recommended": false,
+  "weekly_slots_used": 0,
+  "blocking_evidence": [
+    "evidence/run_card_v2.json has empty registry measurements while asserting promotion",
+    "evidence/surface_uniqueness.json records an incomplete scan and 1.0 forward dot overlap",
+    "public-facing candidate names and receipts conflict",
+    "all previously exposed GeoTIFF/ZIP files are quarantined pending a complete independent release audit"
+  ],
+  "quarantine_directory": "quarantine/published-downloads-2026-10-20",
+  "review": "reports/review-release-integrity-2026-10-20.md"
+}

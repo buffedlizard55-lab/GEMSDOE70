@@ -1,4 +1,12 @@
-# Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
+# Handoff — current release-integrity status (2026-10-20)
+
+**This top section supersedes all earlier handoff instructions below.** Current branch is `arena/6a00f308-gemsdoe70`. Decision: **STOP; no TIFF cleared for download or submission**. Historical TIFF/ZIP files were moved out of the Pages tree into `quarantine/published-downloads-2026-10-20/`. No weekly slot was used. Read `README.md`, `PROJECT_BRIEF.md`, `reports/review-release-integrity-2026-10-20.md`, `evidence/release_hold.json`, then the historical sections below for context only. Do not follow older instructions below that say an artifact is downloadable or recommend new lane work before resolving this release hold.
+
+The hold is justified by candidate identity conflicts, empty registry values in a run card that asserted promotion, and an incomplete uniqueness witness with 1.0 forward dot overlap. Full software suite after fail-closed updates: 144 passed, 3 existing Rasterio deprecation warnings. This is software validation, not a scientific score.
+
+---
+
+# Historical handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
 
 Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
 

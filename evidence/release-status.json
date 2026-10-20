@@ -1,22 +1,25 @@
 {
   "verdict": "negative",
-  "download_ok": true,
+  "download_ok": false,
   "submit_recommended": false,
   "download_and_submit_ok": false,
-  "artifact": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-  "artifact_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
-  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
+  "artifact": null,
+  "artifact_sha256": null,
+  "submission_name": null,
   "reasons": [
-    "Candidate did not beat H33 on instrument B' with a 95% CI above zero."
+    "evidence/run_card_v2.json has empty registry measurements while asserting promotion",
+    "evidence/surface_uniqueness.json records an incomplete scan and 1.0 forward dot overlap",
+    "public-facing candidate names and receipts conflict",
+    "all previously exposed GeoTIFF/ZIP files are quarantined pending a complete independent release audit"
   ],
   "notes": [
-    "A downloadable, validated file is not a validated leaderboard improvement."
+    "No artifact is cleared; quarantined files are audit-only."
   ],
   "weekly_slots_used": 0,
-  "policy": "Never describe a non-promoted artifact as an improvement. Both flags are always published together.",
-  "status": "DOWNLOADABLE \u2014 NOT PROMOTED",
-  "download_available": true,
-  "generated_tif": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+  "policy": "Release hold must be explicitly resolved by a new reviewed evidence chain.",
+  "status": "BLOCKED",
+  "download_available": false,
+  "generated_tif": null,
   "approved_for_weekly_slot": false,
   "scientific_experiments_run": 4,
   "submission_slots_used": 0,
