@@ -1,0 +1,145 @@
+{
+  "repository": "buffedlizard55-lab/60GEMSDOE",
+  "commit": "32024716f218d06a94e01464157392119c03cb15",
+  "files": [
+    {
+      "file": "__init__.py",
+      "upstream_git_blob": "964b55b3be184774e11956963b3e0e10b6580c7b",
+      "manifest_git_blob": "964b55b3be184774e11956963b3e0e10b6580c7b",
+      "upstream_matches": true
+    },
+    {
+      "file": "anatomy.py",
+      "upstream_git_blob": "8245b7ecbb9bb16f7d8c3c0f6b67c3ddf6f19cea",
+      "manifest_git_blob": "8245b7ecbb9bb16f7d8c3c0f6b67c3ddf6f19cea",
+      "upstream_matches": true
+    },
+    {
+      "file": "damagezone_envelope.py",
+      "upstream_git_blob": "126f84b17a807a5e3e4bd7e2dd5c2b32395044e5",
+      "manifest_git_blob": "126f84b17a807a5e3e4bd7e2dd5c2b32395044e5",
+      "upstream_matches": true
+    },
+    {
+      "file": "emit.py",
+      "upstream_git_blob": "025eeb2cc697a8a0fbee5096119eebcb69b8b1ed",
+      "manifest_git_blob": "025eeb2cc697a8a0fbee5096119eebcb69b8b1ed",
+      "upstream_matches": true
+    },
+    {
+      "file": "evaluate_holdout.py",
+      "upstream_git_blob": "9c65eb9de1468fecfc909d9b2c1348bed52f67ca",
+      "manifest_git_blob": "9c65eb9de1468fecfc909d9b2c1348bed52f67ca",
+      "upstream_matches": true
+    },
+    {
+      "file": "evaluator_provenance.py",
+      "upstream_git_blob": "99a3047cfe80bb039694ef999f3e51e7f3684170",
+      "manifest_git_blob": "99a3047cfe80bb039694ef999f3e51e7f3684170",
+      "upstream_matches": true
+    },
+    {
+      "file": "faultzone.py",
+      "upstream_git_blob": "f1453067f335f8956c31d04d1959605936688748",
+      "manifest_git_blob": "f1453067f335f8956c31d04d1959605936688748",
+      "upstream_matches": true
+    },
+    {
+      "file": "fit.py",
+      "upstream_git_blob": "dd21072b82759575560b55a201eafc3729880b06",
+      "manifest_git_blob": "dd21072b82759575560b55a201eafc3729880b06",
+      "upstream_matches": true
+    },
+    {
+      "file": "fitting.py",
+      "upstream_git_blob": "fb2a04f716ba487923a5721d9e8cacb309ca2c9a",
+      "manifest_git_blob": "fb2a04f716ba487923a5721d9e8cacb309ca2c9a",
+      "upstream_matches": true
+    },
+    {
+      "file": "gates.py",
+      "upstream_git_blob": "cf7cbda418a6b0f80bbdc44a2e12822a97215963",
+      "manifest_git_blob": "cf7cbda418a6b0f80bbdc44a2e12822a97215963",
+      "upstream_matches": true
+    },
+    {
+      "file": "geo.py",
+      "upstream_git_blob": "ddb9ca2211277e9cd6ee78528c6be0483e27e554",
+      "manifest_git_blob": "ddb9ca2211277e9cd6ee78528c6be0483e27e554",
+      "upstream_matches": true
+    },
+    {
+      "file": "grid.py",
+      "upstream_git_blob": "e909e5a219ff242245e24477653a42306401495d",
+      "manifest_git_blob": "e909e5a219ff242245e24477653a42306401495d",
+      "upstream_matches": true
+    },
+    {
+      "file": "holdout.py",
+      "upstream_git_blob": "8c71ef3055cfdf130fd9ea617c986b232632f401",
+      "manifest_git_blob": "8c71ef3055cfdf130fd9ea617c986b232632f401",
+      "upstream_matches": true
+    },
+    {
+      "file": "metric.py",
+      "upstream_git_blob": "67008aae6782b6fece2c4dafdf99a5b59dc9e5fd",
+      "manifest_git_blob": "67008aae6782b6fece2c4dafdf99a5b59dc9e5fd",
+      "upstream_matches": true
+    },
+    {
+      "file": "network.py",
+      "upstream_git_blob": "3df35ca834dacbb8e7377c09f82f2ad5b64462bc",
+      "manifest_git_blob": "3df35ca834dacbb8e7377c09f82f2ad5b64462bc",
+      "upstream_matches": true
+    },
+    {
+      "file": "offcatalogue.py",
+      "upstream_git_blob": "d0e30a6054a2693dd8910295f2ab08696a9680a4",
+      "manifest_git_blob": "d0e30a6054a2693dd8910295f2ab08696a9680a4",
+      "upstream_matches": true
+    },
+    {
+      "file": "relay_bend_anatomy.py",
+      "upstream_git_blob": "2eb52c1d26c321f05c557385a67d9806261191f8",
+      "manifest_git_blob": "2eb52c1d26c321f05c557385a67d9806261191f8",
+      "upstream_matches": true
+    },
+    {
+      "file": "spatial.py",
+      "upstream_git_blob": "ebb32c2617bf4da74bb3e851e0f0080a9bb9c8d8",
+      "manifest_git_blob": "ebb32c2617bf4da74bb3e851e0f0080a9bb9c8d8",
+      "upstream_matches": true
+    },
+    {
+      "file": "strand_orientation.py",
+      "upstream_git_blob": "811c694fb18d0120e99725760f60d60ce5292432",
+      "manifest_git_blob": "811c694fb18d0120e99725760f60d60ce5292432",
+      "upstream_matches": true
+    },
+    {
+      "file": "strike_zone.py",
+      "upstream_git_blob": "a773824922e0e2325debce81773b5cedc2505d1c",
+      "manifest_git_blob": "a773824922e0e2325debce81773b5cedc2505d1c",
+      "upstream_matches": true
+    },
+    {
+      "file": "submission_writer.py",
+      "upstream_git_blob": "5a04a2b0d5d4137f0aad39d862889ef1b92198ea",
+      "manifest_git_blob": "5a04a2b0d5d4137f0aad39d862889ef1b92198ea",
+      "upstream_matches": true
+    },
+    {
+      "file": "uniqueness.py",
+      "upstream_git_blob": "71d66ff89aa3a5cfdaeffb11fe09fa2609cc73e5",
+      "manifest_git_blob": "71d66ff89aa3a5cfdaeffb11fe09fa2609cc73e5",
+      "upstream_matches": true
+    },
+    {
+      "file": "validate.py",
+      "upstream_git_blob": "6729226367b1b927ca1c17b469b1bb774680a654",
+      "manifest_git_blob": "6729226367b1b927ca1c17b469b1bb774680a654",
+      "upstream_matches": true
+    }
+  ],
+  "ok": true
+}

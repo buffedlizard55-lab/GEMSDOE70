@@ -56,3 +56,18 @@ This is a scoped engineering/scientific audit, not a claim that unavailable offi
 ## Acceptance boundary
 
 This delivers an honest negative experiment and a reusable audited workbench. It does **not** fully satisfy the requested end result of a unique, validated competition TIFF. The proof that the current literal protocol blocks every nonempty candidate is the central actionable deliverable; inventing or publishing a file anyway would violate the user's stop rule.
+
+## Post-review concurrent-main reconciliation
+
+Main advanced through two other parallel-session merges before this PR was
+ready. Merged origin/main into the assigned Arena branch without switching
+branches, retained prior reports/fixtures/audit helpers, archived the old
+review-only card and merged both writer test suites. Updated legacy publication
+entry points to prevent an old zero-experiment card from overwriting this
+scientific evidence. Historical root pages now redirect to the current site.
+
+**Combined verification: 68 tests passed, three upstream pending-deprecation
+warnings.** Earlier counts above describe earlier passes, not the final combined
+suite. No additional scientific experiment was run. Source and preregistration
+pins for the measured experiment are unchanged. An unrelated open submission PR
+was not merged or treated as validated.

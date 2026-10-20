@@ -87,6 +87,17 @@ separate weekly-slot selection are needed before enabling a real artifact link.
 [Source-health workflow](.github/workflows/source-health.yml) refreshes availability
 as a downloadable Actions artifact; it is not an authenticated live-score feed.
 
+## Concurrent review history
+
+Two parallel reviews merged into main during this session. Their reports, source
+notes, bridge fixtures, audit helpers and software tests are retained. The earlier
+review-only run card and handoff are archived under
+[evidence/history/parallel-review2](evidence/history/parallel-review2/), where their
+zero-experiment statements remain historically accurate. The canonical current
+card records the one fixed experiment reported here. Legacy publication entry
+points now delegate to this evidence-driven site; `make_run_card.py` verifies the
+existing card rather than overwrite it with an older schema.
+
 ## Own the outcome
 
 Do not use “maximize probability of winning” as permission to hide negatives,

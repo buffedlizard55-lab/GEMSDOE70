@@ -1,0 +1,64 @@
+> **Historical parallel-session review.** Retained for provenance. Current status, experiment count and evidence are in [README](../README.md) and [the current run card](../evidence/run_card.json); this document is not a current release authorization.
+
+# Scientific review and conditional research queue
+
+Reviewed 2026-10-20 UTC. This is a research queue, **not an assigned lane**, fitted model, new discovery, or predicted leaderboard result. No new scientific experiment was run because the preflight establishes a mandatory stop.
+
+## What is actually being predicted?
+
+The target is a surface **fault-location raster**, not a catalogue of geothermal vents and not a map of proven commercially viable reservoirs. The organizer's [problem description](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) distinguishes pre-existing public faults, expert-labeled new faults, public/private test subsets, and a later expanded label set. A thermal anomaly may corroborate a structural interpretation; it does not independently establish a fault or permeability at depth. Conversely, an absence of a thermal surface expression is not evidence of no buried fault.
+
+The [INGENIOUS project](https://gbcge.org/current-projects/ingenious/) explicitly targets hidden geothermal systems. Its [GDR compilation](https://gdr.openei.org/submissions/1391) includes spring/well chemistry, paleogeothermal deposits, geophysics, strain, and fault data. Those are opportunities for later corroboration, not permission to substitute temperatures for the competition labels.
+
+## Why the H33-2-B2 artifact is scientifically interesting
+
+**Measured, not inferred:** we reopened the prior TIFF for educational inspection, verified its SHA-256, and counted its support. See [reference-artifact.json](../evidence/reference-artifact.json). The file has 37,654 positive pixels; none are within two Euclidean grid pixels of the bridged existing-fault catalogue. The inspected artifact was not copied to this repository's submissions or download directory.
+
+**Code evidence:** the [pinned H33 validation source](https://github.com/buffedlizard55-lab/GEMSDOE32/blob/98901f3130e8704f4254f173784589e63f000673/scripts/run_h33_validation.py) constructs H33-2-B2 by deleting near-catalogue dots from an already constructed base. The [flank-sweep implementation](https://github.com/buffedlizard55-lab/GEMSDOE32/blob/98901f3130e8704f4254f173784589e63f000673/src/gems32/hypotheses33.py) is the relevant method, not the generic H33 hypothesis-union builder. Local source snapshots are in `evidence/sources/`.
+
+**Score provenance:** the prompt attributes **0.2778 (USER-REPORTED; NOT ORGANIZER-CONFIRMED)** to that artifact. No submission-page receipt tying that score to its exact bytes is available. The reference site's own landing page says no organizer score exists for its files, while describing model-based projections. Those historical projections are not scores and are not used as a gate here. We cannot establish from a public team leaderboard alone that this exact TIFF produced the reported result.
+
+**Plausible explanation, not proven causation:** sparse predictions can preserve most weighted truth coverage while removing low-value mass. Write:
+
+- `T = sum over truth pixels of maximum nearby probability × triangular kernel`;
+- `S = sum of prediction probabilities`;
+- `M = sum over prediction pixels of probability × nearest-truth kernel`;
+- `K = number of truth pixels`.
+
+The official formula becomes `DTI = T / [0.2(T + S − M) + 0.8K + epsilon]`.
+This identity keeps the asymmetric truth-side and prediction-side credits separate. Deleting a redundant prediction can reduce the false-positive term without reducing `T`. Deleting a useful prediction can instead harm recall. A wider buffer is therefore **not** automatically better. Hidden new faults can also be near mapped faults; a blanket halo exclusion can suppress real splays. A controlled same-evaluator comparison and an organizer receipt are required before attributing a reported improvement to pruning.
+
+The break-even statement often repeated in prior sites (`credit > alpha × current DTI`) has restrictive assumptions. In general an added binary dot has truth-side incremental credit `delta_T` and self-credit `k_self`. It helps iff `delta_T > alpha × DTI × (delta_T + 1 − k_self)` (ignoring the unchanged epsilon). One dot can cover multiple truth pixels. Do not assume `delta_T <= k_self` or that the truth-side and prediction-side credits are interchangeable.
+
+**Can we exceed the reported reference result?** Possibly, but not demonstrably from the current checkout. There is no comparable current-best holdout, new holdout measurement, or candidate model. We do not forecast a score or promise to beat the leaderboard.
+
+## Ranked hypotheses BEFORE any scientific implementation
+
+This checkout initially contained only `README.md`; none of the following methods was implemented locally. Related families already exist elsewhere. Novelty is **local and provisional**, not an assertion that no parallel agent or prior repository has tried them. All four are deferred until a lane is assigned and the literal registry conflict is resolved. Rankings reflect qualitative scientific judgment of potential DTI improvement, **not measured DTI**, and have no numerical improvement forecast. Band identifiers below follow the inherited mirror metadata and must be checked against organizer band definitions before use.
+
+| Expected benefit rank | Candidate, layers and transform | Why it might find missing faults | Distinction from inspected family work | Main non-fault mimic | Relative implementation cost |
+|---|---|---|---|---|---|
+| First | **Signed cross-edge gravity/conductance sidedness.** `iso_grav_anom` and `cond_surf`, checked with `depth_to_base_surf`. Estimate edge normals from scale-space derivatives; sample paired profiles across the normal; require consistent signed side contrasts along a connected edge rather than multiplying unsigned edge magnitudes. | An alluvium-covered basin-margin structure can lack a preserved topographic scarp but juxtapose density and electrical properties. This is an alternative discovery channel, not an interpolation of known traces. It need not be absent from the catalogue; only hide-and-recover testing can measure enrichment. | H33-A uses orientation consensus and H33-D straight-boundary gradients; H32-C uses a clay-cap hypothesis. The proposed discriminator is *side-order persistence and counterfactual reversed-profile nulls*, not a product of ridge scores. No such method is present in GEMSDOE70. | A sedimentary facies contact or intrusive margin with no displacement. | Moderate; cost rank second. |
+| Second | **Magnetic edge-width residual under conductive cover.** `rtp`, `tmi_hg`, `tmi_vg`, with `cond_surf` only after semantic checks. Compare edge-normal gradient width and multi-scale persistence against local amplitude and cover regime; require a connected transition rather than one strong anomaly. | A buried fault/contact may perturb magnetic sources under cover where surface mapping is difficult. The model must discriminate displacement-compatible edges from ordinary contacts. | Related to worm persistence and Euler-depth families, but does not invert an Euler source depth or reuse their emitted dots. Its proposed statistic is a cover-conditioned *width residual*. Broad family overlap remains a risk. | A buried dike or variable magnetic source depth without faulting; flight-line leveling artifacts. | Moderate/high; cost rank third. |
+| Third | **Repeated transverse elevation-step phase.** `det_elev`, `det_elev_slope`, and independently corroborating `iso_grav_anom_hg`. Aggregate the sign and position of paired curvature lobes across adjacent cross-strike profiles; reject profiles explained by local drainage concavity. | Degraded, low-amplitude scarps may be hard to map individually but retain repeated cross-profile asymmetry. The 100 m grid may be too coarse; a negative result is likely meaningful. | Existing scarp/ridge/collinear-chain methods use intensity or along-strike evidence. This proposal tests repeated *cross-profile phase* with an explicit drainage null; it is not claimed globally novel. | Shoreline terraces, erosional channel banks, or road embankments. | Low/moderate; cost rank first. |
+| Fourth | **Conductance/basement critical-point reconnection.** `cond_surf`, `depth_to_base_surf`, and `iso_grav_anom`. Detect scale-persistent Hessian saddles and test whether paired gradient branches reconnect consistently in both fields; compare to rotated, block-preserving nulls. | Concealed structural segmentation may connect basin boundaries without obvious scarps. This is speculative and inverse non-uniqueness is substantial. | Different from catalogue-tip relay graphs and simple clay-cap/gradient products: topology comes only from physical fields, never from mapped-fault tips. Related geological motifs still overlap prior work. | A depositional basin saddle, erosional unconformity, or interpolation/smoothing seam. | High; cost rank fourth. |
+
+### Data feasibility and source limits
+
+These four proposals require no new external layer beyond the template's pinned feature stack. The inherited manifest identifies a multipart public owner mirror with SHA-256 `4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5`; the reusable fetcher can restore it. The large stack is not restored for this stopped run. **We have not verified its current download completion or its official-origin identity in this session.** Therefore these are conditional proposals, not execution-ready data claims.
+
+Official context and sources actually read:
+
+- [USGS GeoDAWN release](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and): magnetic, radiometric, and associated lidar survey context; variable terrain clearance, acquisition blocks, line spacing, and processing are documented. Its page marks the work CC0. This supports explicit acquisition-artifact nulls rather than treating every linear anomaly as a structure.
+- [GDR INGENIOUS compilation](https://gdr.openei.org/submissions/1391): public, attribution-licensed collection; resource links for geodetics, MT, gravity/magnetics, thermal probes, paleogeothermal features, and fault compilations. A landing-page listing is not proof that a binary file can be downloaded from this sandbox.
+- [Official competition feature description](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/): supplies a projected feature stack, but does not authenticate the owner's mirror by itself.
+
+No proposal requiring unverified new data is labeled viable. A potentially useful **future, non-ranked** corroboration source is the free GDR paleogeothermal resource (`https://gdr.openei.org/files/1391/paleo_geothermal_regional.zip`, linked by the official page). Its binary was not retrieved, transformed, license-reviewed in detail, or checked for footprint coverage here. The sandbox's shell outbound-host policy excludes GDR and USGS binary hosts; a readable page through the research tool is not binary-download access.
+
+### Holdout preregistration required before any run
+
+After the blockers are resolved, preregister exactly one assigned method, its parameters, seeds, budgets and current-best comparator **before** evaluating outcomes. Use whole-segment withholding with a buffer and spatial blocks; rebuild every catalogue-derived feature only from visible faults. Fit calibration and feature transforms within training blocks, not on held-out labels. Mask visible faults pixel-exactly. Preserve physical block coordinates when pooling folds. Run a feature-alone AUC canary and investigate any value above the protocol threshold. Use the pinned `gems57-pooled-hide-v2` evaluator, pooled additive TP/FP/FN terms, and paired physical-block bootstrap confidence intervals.
+
+Do not score frozen full-catalogue artifacts against withheld faults as a fair holdout comparator: their catalogue-conditioned masks or features can leak. Rebuild the incumbent pipeline under the same visible-only split, or record that no comparable current best exists. Untouched blocks are necessary to avoid overfitting repeated research iterations. A catalogue holdout is a **proxy** for new expert-labeled faults, not an estimate of leaderboard performance.
+
+Surface uniqueness is checked **before** dot placement. Any duplicate stops the run; no final TIFF is then generated. Only if the surface passes may placement, final-dot checks, shared packaging, and exact-byte revalidation occur. A positive result can be promoted **to a separate selector**, never automatically consume a weekly slot.

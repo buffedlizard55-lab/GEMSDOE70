@@ -1,0 +1,11 @@
+{
+  "evidence_class": "REGISTRY-MEASUREMENT",
+  "repo": "buffedlizard55-lab/17GEMSDOE",
+  "source_path": "docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+  "git_blob": "374c88b1da2b803e2ed160de467fd71ae114010d",
+  "sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+  "bytes": 25065181,
+  "cache_path": ".cache/registry/dense_witness.tif",
+  "inherited_registry": "registry/inherited_registry_index.json",
+  "source_url": "https://github.com/buffedlizard55-lab/17GEMSDOE/blob/main/docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif"
+}

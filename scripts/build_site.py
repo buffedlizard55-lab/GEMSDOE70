@@ -100,6 +100,12 @@ def main():
     (DOCS/'sources.html').write_text(frame('Sources',srcpage))
     (DOCS/'.nojekyll').touch()
     (ROOT/'index.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70</title></head><body><h1>GEMSDOE70: DO NOT SUBMIT</h1><p>No eligible TIFF. <a href="docs/index.html">Open the research workbench and submission status</a>.</p></body></html>\n')
+    # Keep historical root entry points working without serving stale run claims.
+    redirects={'executive-summary':'executive-summary','research':'hypotheses',
+               'requirements':'irregularities','review':'irregularities',
+               'run-card':'results','sources':'sources'}
+    for old,target in redirects.items():
+        (ROOT/f'{old}.html').write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=docs/{target}.html"><title>GEMSDOE70 — DO NOT SUBMIT</title></head><body><h1>DO NOT SUBMIT</h1><p>This historical entry point now links to the current evidence. <a href="docs/{target}.html">Continue to the current workbench</a>.</p></body></html>\n')
     print('Built site. No eligible TIFF; no prediction files published.')
 
 if __name__=='__main__':main()

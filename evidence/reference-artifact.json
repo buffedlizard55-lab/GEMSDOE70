@@ -1,0 +1,30 @@
+{
+  "evidence_class": "ARTIFACT-MEASUREMENT-NOT-A-SCORE",
+  "source_repo_commit": "98901f3130e8704f4254f173784589e63f000673",
+  "source_file": "gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
+  "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+  "metadata": {
+    "crs": "EPSG:32611",
+    "shape": [
+      3730,
+      3292
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null
+  },
+  "positive_pixels": 37654,
+  "finite_all": true,
+  "minimum": 0.0,
+  "maximum": 1.0,
+  "positive_at_distance_le_2px": 0,
+  "note": "Prior artifact inspected for education only; never copied to submissions or offered for upload."
+}

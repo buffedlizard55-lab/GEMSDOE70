@@ -57,3 +57,14 @@ bash scripts/download_competition_data.sh
 Do not rerun scripts/run_experiment.py: its existing experiment manifest makes it
 refuse a second attempt. Data are reconstructible; large caches are ignored and
 not committed. Source-health refresh is separate from scientific validation.
+
+## Concurrent-main integration
+
+Main advanced through PRs 1 and 2 while this session ran. Their reports, audit
+helpers, bridge fixtures and tests are retained. The earlier review-only run card,
+README and handoff are archived in evidence/history/parallel-review2. Canonical
+publication scripts use the measured one-experiment card; the legacy card command
+now verifies it rather than overwrite it. Root historical HTML paths redirect to
+the current workbench. The combined suite passes 68 tests (three upstream
+Rasterio/Affine pending-deprecation warnings). No unrelated candidate PR is
+endorsed by this integration.
