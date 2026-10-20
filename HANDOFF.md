@@ -80,3 +80,12 @@ endorsed or linked as a submission. Source text is retained, not executed. The
 canonical site remains negative. No additional scientific experiment was run.
 
 Final suite after adding quarantine hash/publication coverage: **69 tests pass**.
+
+## Follow-up source-boundary review
+
+Pages API reports `main:/`, and updating it to `/docs` is denied (403 integration
+permission). Removed root `.nojekyll`, added Jekyll `_config.yml` exclusions, and
+added a root-tree guard plus symlink-bypass tests. Do not restore root `.nojekyll`:
+it bypasses those exclusions. The public GitHub archives are still public; this is
+not redaction. `scripts/check_pages.py` is read-only unless `--configure` is passed.
+See reports/followup-publication-review-20261020.md. No new scientific run or slot.
