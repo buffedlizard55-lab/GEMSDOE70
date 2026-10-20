@@ -459,5 +459,22 @@
       "docs/preregistration-s3-e2.md"
     ]
   },
-  "method_source_note": "src/gems70/supervised.py was later extended append-only with the E2 functions; the E1-recorded sha256 equals the sha256 of the file prefix before the line '# ----------------------------- S3-E2: marginal-matched placement' (checked by tests/test_s3_evidence.py)."
+  "method_source_note": "src/gems70/supervised.py was later extended append-only with the E2 functions; the E1-recorded sha256 equals the sha256 of the file prefix before the line '# ----------------------------- S3-E2: marginal-matched placement' (checked by tests/test_s3_evidence.py).",
+  "literal_lane_status": {
+    "policy": "literal-forward-v1",
+    "overlap_limit": 0.7,
+    "rho_limit": 0.9,
+    "stop_required": true,
+    "protocol_unique": false,
+    "complete_scan": true,
+    "duplicate_witnesses": [
+      "calib_r13lattice_00904.tif",
+      "r11_greedy_mp.tif",
+      "r13_lattice_s5_00904.tif",
+      "r14_union_tips10_lat6.tif"
+    ],
+    "invalid_rows": [],
+    "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+  },
+  "literal_lane_note": "Under the literal forward-overlap policy (main, gems70.protocol) this file is a duplicate witness of the dense r13 lattice like every 37,654-dot file (evidence/review/literal_protocol_audit.json: minimum forward overlap at fixed budget 0.823). Mutual-rule uniqueness is reported separately. Either way: DO NOT SUBMIT."
 }

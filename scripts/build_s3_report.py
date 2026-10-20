@@ -59,6 +59,10 @@ hide-and-recover, evaluator `{b1['evaluator_version']}`), and **owner/user-repor
 
 * **Download:** both new files are unique against the 62 archived registry rasters and pass the
   shared validator (finite, values in {{0, 1}}, EPSG:32611, 3730 × 3292, 100 m transform).
+* **Literal protocol** (`gems70.protocol`, forward overlap > 0.70 = duplicate): both files are
+  duplicate witnesses of the dense r13 lattice (`evidence/s3/literal_lane.json`:
+  stop_required = {e1['literal_lane_status']['stop_required']} / {e2['literal_lane_status']['stop_required']}), as is every 37,654-dot file
+  in this repository; they are review-only under that policy too.
 * **Submit a weekly slot: not recommended for either.** E1 passed its pre-registered proxy gate
   but is vetoed because the proxy demonstrably does not track the live board, and E1's gain is
   confounded with steep terrain. E2, which removes that confound, is negative.

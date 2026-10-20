@@ -1,0 +1,30 @@
+[
+  {
+    "positives_sampled": 25000,
+    "negatives_sampled": 125000,
+    "fold_index": 0,
+    "seed": 70501,
+    "train_region_pixels": 3785175
+  },
+  {
+    "positives_sampled": 25000,
+    "negatives_sampled": 125000,
+    "fold_index": 1,
+    "seed": 70502,
+    "train_region_pixels": 3522961
+  },
+  {
+    "positives_sampled": 25000,
+    "negatives_sampled": 125000,
+    "fold_index": 2,
+    "seed": 70503,
+    "train_region_pixels": 3539692
+  },
+  {
+    "positives_sampled": 25000,
+    "negatives_sampled": 125000,
+    "fold_index": 3,
+    "seed": 70504,
+    "train_region_pixels": 3800035
+  }
+]

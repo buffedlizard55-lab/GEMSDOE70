@@ -1,0 +1,26 @@
+{
+  "analytic_amp": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.531,
+    "inverse_auc": 0.469,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "tmi_hg": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.524,
+    "inverse_auc": 0.476,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "tmi_vg": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.518,
+    "inverse_auc": 0.482,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  }
+}

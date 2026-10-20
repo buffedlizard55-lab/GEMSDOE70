@@ -1,0 +1,204 @@
+{
+  "hypothesis": "P5 analytic-signal stratified halo (hg+vg rank inside 2.4-32px band)",
+  "mechanism": "one dot per 7x7-px stratum at max of (0.5+0.5*analytic_rank)*(0.7+0.3*tip), 5-px NMS, band 2.4-32px",
+  "non_fault_mimic": "remanent magnetization contrasts and dike margins mimicking analytic-signal ridges",
+  "verdict": "negative",
+  "evidence_class": "HOLDOUT-DTI (A) and PROXY-DTI (B/B'); neither organizer-confirmed",
+  "instrument_a_holdout": {
+    "candidate": {
+      "dti": 0.08277116132149999,
+      "ci95": [
+        0.07551434562164547,
+        0.08951206859535318
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "random_control": {
+      "dti": 0.043328292903593316,
+      "ci95": [
+        0.03834206666392739,
+        0.04815727235776552
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "h33_reference": {
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.0029878559789966543,
+        0.004435087767188226
+      ],
+      "withheld_positive_pixels": 11321
+    }
+  },
+  "instrument_b_prime_proxy": {
+    "candidate": {
+      "dti": 0.07655206112499978,
+      "ci95": [
+        0.06866315904755697,
+        0.08523996988832969
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "random_control": {
+      "dti": 0.07218808337850842,
+      "ci95": [
+        0.06840172061958215,
+        0.07556627264731151
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "h33_reference": {
+      "dti": 0.09377056861492462,
+      "ci95": [
+        0.08389705482840622,
+        0.10387427659716096
+      ],
+      "withheld_positive_pixels": 59937
+    }
+  },
+  "instrument_b_unrestricted": {
+    "candidate": {
+      "dti": 0.08776988943031397,
+      "ci95": [
+        0.07964793019271292,
+        0.09596249299694615
+      ]
+    },
+    "random_control": {
+      "dti": 0.07227148415156857,
+      "ci95": [
+        0.06896422900708095,
+        0.07531195995809752
+      ]
+    },
+    "h33_reference": {
+      "dti": 0.09059897608840377,
+      "ci95": [
+        0.0826015722048575,
+        0.09882244175136234
+      ]
+    }
+  },
+  "paired_a_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.07907137963587041,
+    "ci95": [
+      0.07183512083453227,
+      0.08605649351695648
+    ],
+    "withheld_positive_pixels": 11321
+  },
+  "paired_b_prime_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": -0.017218507489924845,
+    "ci95": [
+      -0.027760492095023067,
+      -0.006296864003715159
+    ],
+    "withheld_positive_pixels": 59937
+  },
+  "gate_a_candidate_ge_h33": true,
+  "gate_b_prime_candidate_gt_h33_significant": false,
+  "correlation_overlap_vs_registry": {
+    "stage": "final production dots (37,654 binary)",
+    "rasters_checked": 62,
+    "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
+    "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+    "worst_mutual_overlap": 0.30230956425914873,
+    "worst_mutual_submission": "calib_h25ctx_01280.tif",
+    "worst_forward_overlap": 1.0,
+    "worst_forward_submission": "calib_r13lattice_00904.tif",
+    "worst_spearman_full_footprint": 0.04215013751545713,
+    "worst_rho_submission": "57GEMSDOE__h57r2-shipped8-all-flank0-20261009T180433Z-90e532947353-zeros.tif",
+    "worst_jaccard": 0.02528419968576295,
+    "duplicate": false
+  },
+  "raster_sha256": "aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4",
+  "raster_sha256_reason": null,
+  "validator_output": {
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif",
+    "bytes": 149414,
+    "sha256": "aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "emitted_positive_pixels": 37654,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 37654,
+    "footprint_fraction": 0.007286874781441169
+  },
+  "submission_name": "gems70-p5-analytic-halo-37654-20261020",
+  "submission_note": "P5 analytic-signal halo 7px, 37654 dots, hg+vg rank in 2.4-32px band; dual-instrument holdout",
+  "note_chars": 93,
+  "download_and_submit_ok": false,
+  "weekly_slots_used": 0,
+  "experiment_count": 5,
+  "elapsed_seconds": 73.9,
+  "organizer_confirmed_score": null,
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "method_source_sha256": {
+    "src/gems70/method_p5.py": "4cbb381ad3daba0e017dce543073a498db23fc122f213b84bbc74b7697f5d1ce",
+    "scripts/run_experiment_p5.py": "dd1454582afb418bfaf1dcb99efe71d8311b6c99c11d7e0539ce278f87bf04f8"
+  },
+  "registered_parameters": {
+    "dot_count": 37654,
+    "block_px": 7,
+    "nms_px": 5.0,
+    "d_min_px": 2.4,
+    "d_max_px": 32.0,
+    "tip_floor": 0.7,
+    "tip_weight": 0.3,
+    "b_prime_gap_px": 3.0
+  }
+}

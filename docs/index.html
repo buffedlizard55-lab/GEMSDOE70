@@ -3,58 +3,87 @@
 <title>Overview · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">SESSION 3 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="s3-findings.html">Session 3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop" aria-labelledby="s3">
-<div class="eyebrow">LATEST · SESSION 3 · SUBMISSION DECISION</div>
-<h1 id="s3">No file on this site is recommended for a weekly slot.</h1>
-<p><strong>Every file below downloads and passes the shared validator</strong> (single band, float32,
-3730 × 3292, EPSG:32611, values exactly 0/1, no NaN) and is unique against 62 archived rasters.
-<strong>None is evidence of a score above 0.2778</strong>, so uploading any of them would be a test,
-not an expected improvement. Weekly slots used by this project: 0.</p>
-<div class="table-wrap"><table><caption>Download vs submit, per file</caption><thead><tr><th>File</th><th>What it is</th><th>Download</th><th>Submit</th><th>Why</th></tr></thead><tbody><tr><td><a href="downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif" download><code>gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif</code></a></td><td>Session 3 · E1 proxy-trained ranking</td><td>yes</td><td><strong>NO</strong></td><td>passed its pre-registered proxy gate (B′ Δ vs H33 +0.0300, CI [0.0034, 0.0557]) but is <strong>vetoed</strong>: the proxy does not track the live board (ρ = -0.28) and 64 % of its dots sit in the steepest terrain quartile; the live-tested gate_ortho file (48 % steep) was reported at 0.2376, below H33.</td></tr><tr><td><a href="downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif" download><code>gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif</code></a></td><td>Session 3 · E2 marginal-matched ranking</td><td>yes</td><td><strong>NO</strong></td><td>negative: within H33's distance × slope strata the model does not beat random placement (B′ Δ +0.0075, CI [-0.0186, 0.0327]).</td></tr><tr><td><a href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download><code>gems70-p4-stratified-halo-37654-20261020.tif</code></a></td><td>Session 2 · P4 stratified halo</td><td>yes</td><td><strong>NO</strong></td><td>negative on its pre-registered proxy gate (details below).</td></tr><tr><td><a href="downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif" download><code>gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif</code></a></td><td>Parallel lane · E2 alluvial step</td><td>review only</td><td><strong>NO</strong></td><td>negative; selector-review file from a parallel session.</td></tr></tbody></table></div>
-<p class="small">Session 3 details, calibration table and receipts: <a href="s3-findings.html">Session 3 findings</a> ·
-<a href="downloads/s3_run_card.json">E1 run card</a> · <a href="downloads/s3e2_run_card.json">E2 run card</a> ·
-<a href="downloads/s3_proxy_calibration.json">calibration receipt</a></p></section><section class="stop" aria-labelledby="decision">
-<div class="eyebrow">SESSION 2 · SUBMISSION STATUS</div>
-<h2 id="decision">Session 2 file (P4): Verified file · not promoted</h2>
-<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
-passes every shared-validator check, and its SHA-256 is recorded below.</p>
-<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
-<strong>negative</strong>: the pre-registered target-like gate (instrument B′) is
-negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
-not a validated improvement.</p>
+<span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
+<strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
+are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
+rule; neither a local validator nor distinct bytes authorize a slot.
+<a href="p5.html">P5-cover negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
+<a href="downloads/p5_run_card.json">New P5 run card</a> ·
+<a href="downloads/review_run_card.json">Prior review card</a>.</aside><section class="stop" aria-labelledby="p5-decision">
+<div class="eyebrow">NEW P5-COVER EXPERIMENT · RESEARCH FILE ONLY</div>
+<h1 id="p5-decision">New P5-cover TIFF: download for review. DO NOT SUBMIT.</h1>
+<p><strong>Download: yes — for research only.</strong> This newly generated continuous GeoTIFF
+is distinct in bytes from the checked archive, all-finite within [0,1], single-band float32,
+and aligned to the pinned sample. <strong>Competition upload / weekly slot: NO.</strong>
+It failed the pre-registered spatial holdout and the literal forward-overlap stop;
+it has no organizer receipt. Do not treat a format pass as submission approval.</p>
+<p>Catalogue HOLDOUT-DTI (gems57-pooled-hide-v2, 11,321
+withheld positives): <strong>0.0123 [0.0075, 0.0177]</strong> vs visible-only P4
+0.0730.
+SGMC-proxy HOLDOUT-DTI (gems57-pooled-hide-v2, 59,937
+proxy positives): <strong>0.0254 [0.0185, 0.0336]</strong> vs H33
+0.0938; paired difference
+-0.0683 [-0.0819, -0.0545]. Neither is a competition score.</p>
+<p>The binary-dot checker counts 0
+exact-one dots in a continuous map; this is <em>not</em> a loophole. Its
+54,512 positive cells have
+1.00
+forward 3-pixel overlap against the pinned lattice (limit 0.70). The witness covers
+4,989,581 / 4,989,581
+feature-valid interior cells. No discrete final dots were placed.</p>
 <div class="actions">
-<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download>Download submission TIFF</a>
-<a class="button secondary" href="downloads/gems70-p4-stratified-halo-37654-20261020.zip" download>Download one-TIFF ZIP</a>
-<a class="button secondary" href="submission.html">How to submit</a>
+<a class="button secondary" href="downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif" download>Download NEW P5-cover research TIFF — DO NOT SUBMIT</a>
+<a class="button secondary" href="downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.zip" download>One-TIFF ZIP — review only</a>
+<a class="button" href="p5.html">Read P5 evidence and limits</a>
 </div>
-<p class="small">Name: <code>gems70-p4-stratified-halo-37654-20261020</code> · Note (108/140 chars):
-<code>P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
-<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
-<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
-pre-registered experiments and published the best candidate. Two instruments favour it, one does
-not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+<p class="small">Name: <code>gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT</code> · Note (120/140 characters,
+<strong>not an upload instruction</strong>): <code>P5 magnetic width and cover, SGMC LOQO proxy; continuous review map. Literal dot overlap blocks promotion; DO NOT SUBMIT</code> ·
+SHA-256 <code>30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a</code>.</p></section><section class="stop" aria-labelledby="decision">
+<div class="eyebrow">PRIOR 8-ARCHIVE REVIEW · STILL BLOCKED</div>
+<h2 id="decision">Older files: DO NOT SUBMIT — literal protocol stop</h2>
+<p><strong>Download: yes — format-validated for review.</strong> For forensic review only.
+<strong>Competition submission: NO — not recommended.</strong>
+The witness scan is sufficient to reject, but covers not every private or uncommitted raster.
+These are 8 <em>prior</em> archived dot files, not protocol-compliant submissions.
+<strong>Submit a weekly slot: not recommended; blocked by your protocol.</strong></p>
+<p>All 8 prior dot TIFFs have forward overlap 1.00 against a verified binary registry lattice
+(limit 0.70). Mutual overlap is not an authorized exemption. The previous review generated no
+new TIFF; P5 above is a separate subsequent negative continuous experiment. No slot was used.</p>
+<div class="actions">
+<a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.tif" download>Download archived TIFF — DO NOT SUBMIT</a>
+<a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.zip" download>Archived one-TIFF ZIP — review only</a>
+<a class="button" href="executive-summary.html">Executive summary / next steps</a>
+</div>
+<p class="small">Archived name: <code>gems70-p5-analytic-halo-37654-20261020</code> · SHA-256 <code>aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4</code>.</p>
+<p class="small">Review card: <code>gems70-literal-lane-review-20261020-NO-SUBMISSION</code> · Note:
+<code>Negative preflight: fixed-mass overlap exceeds literal gate against binary registry lattice. No new TIFF or slot.</code> (not an upload instruction).</p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
+<h2>A new research TIFF and prior format-valid archives — no protocol-cleared submission.</h2>
+<p>Our P5-cover continuous map is a deliberately measured negative. Other sessions ran the archived dot experiments below;
+a prior review found an unauthorized mutual-overlap substitution and corrected the current gate.
+Historical scientific evidence remains intact but cannot override the literal stop rule.</p>
 </section><div class="metrics">
-<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
-<div class="number">0.0730</div>
-<p>[0.0667, 0.0790] · 11,321 withheld catalogue pixels</p></section>
-<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
-<div class="number">0.0812</div>
-<p>[0.0723, 0.0900] · SGMC proxy outside the duplication band</p></section>
-<section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
-<div class="number">0.31</div>
-<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ 0.050</p></section></div>
+<section><div class="eyebrow">ARCHIVED ANALYTIC-HALO P5 · INSTRUMENT A · HOLDOUT-DTI</div>
+<div class="number">0.0828</div>
+<p>[0.0755, 0.0895] · 11,321 withheld catalogue pixels</p></section>
+<section><div class="eyebrow">ARCHIVED ANALYTIC-HALO P5 · INSTRUMENT B′ · PROXY-DTI</div>
+<div class="number">0.0766</div>
+<p>[0.0687, 0.0852] · SGMC proxy outside the duplication band</p></section>
+<section><div class="eyebrow">LITERAL OVERLAP · STOP</div>
+<div class="number">1.00</div>
+<p>Forward overlap exceeds 0.70. Low correlation does not cancel this failure.</p></section></div>
 <div class="columns">
 <section class="panel"><h2>Why it is downloadable</h2>
 <p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
 transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
-Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
-lattice reaches 1.00 by construction and is reported separately).</p>
+The fresh binary-witness comparison fails the literal uniqueness rule. Format checks pass, but
+that is not organizer acceptance or permission to submit.</p>
 <a href="results.html">Full evidence →</a></section>
 <section class="panel"><h2>Why it is not promoted</h2>
-<p>On instrument B′ the candidate scores 0.0812 versus H33's
-0.0938 (paired Δ -0.0126,
-95% CI [-0.0241, -0.0018]). The pre-registered rule requires a
+<p>On instrument B′ the candidate scores 0.0766 versus H33's
+0.0938 (paired Δ -0.0172,
+95% CI [-0.0278, -0.0063]). The pre-registered rule requires a
 positive lower bound. It does not hold.</p>
 <a href="hypotheses.html">Why this rule →</a></section></div>
 <section><h2>What is measured and what is not</h2>
@@ -64,19 +93,56 @@ catalogue as a proxy for newly mapped faults. Every number is labelled, and no p
 presented as a leaderboard score.</p>
 <ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
 <li><a href="results.html">All three experiments, ablations and canaries</a></li>
-<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section><h2>Parallel lane E2 — alluvial step (second candidate, DO NOT SUBMIT YET)</h2>
+<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section class="stop" aria-labelledby="s3">
+<div class="eyebrow">SESSION 3 · SUPERVISED PROXY RANKING · DECISION</div>
+<h2 id="s3">Session 3 files: download for review — do NOT submit</h2>
+<p>Both files pass the shared validator (single band, float32, 3730 × 3292, EPSG:32611, values
+exactly 0/1, no NaN, 37,654 dots) and are unique under the mutual rule against
+62 archived rasters and every sibling TIFF in this repository (worst mutual
+overlap 0.29). Under the <em>literal</em> forward-overlap rule they
+reach 1.00 against the dense r13 lattice, like every dot file here.
+<strong>Neither is evidence of a live score above 0.2778.</strong> Weekly slots used: 0.</p>
+<div class="table-wrap"><table><caption>Session 3 · download vs submit</caption><thead><tr><th>File</th><th>What it is</th><th>Download</th><th>Submit</th><th>Why</th></tr></thead><tbody><tr><td><a href="downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif" download><code>gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif</code></a></td><td>E1 · proxy-trained ranking, H33 spacing</td><td>yes</td><td><strong>NO</strong></td><td>Passed its pre-registered proxy gate (B′ Δ vs H33 +0.0300, CI [0.0034, 0.0557]) but <strong>vetoed</strong>: offline B′ does not track the live board (ρ = -0.28, n = 18); 64 % of its dots are in the steepest terrain quartile, like the live-tested gate_ortho file (48 %, reported 0.2376 &lt; 0.2778).</td></tr><tr><td><a href="downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif" download><code>gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif</code></a></td><td>E2 · same model, ranking only within H33 distance × slope strata</td><td>yes</td><td><strong>NO</strong></td><td>Negative: no significant gain over random placement within the same strata (B′ Δ +0.0075, CI [-0.0186, 0.0327]).</td></tr></tbody></table></div>
+<p class="small"><a href="s3-findings.html">Session 3 findings and live-board calibration table</a> ·
+<a href="downloads/s3_run_card.json">E1 run card</a> · <a href="downloads/s3e2_run_card.json">E2 run card</a> ·
+<a href="downloads/s3_proxy_calibration.json">calibration receipt</a> ·
+<a href="downloads/s3_sibling_uniqueness.json">sibling uniqueness</a></p></section><section><h2>Concurrent E5 — supervised within-halo ranking (distinct bytes, not literal-unique; verdict: negative — DO NOT SUBMIT)</h2>
+<p>Preregistered (<code>docs/preregistration-e5.md</code>): a gradient-boosted ranker trained on the
+SGMC off-catalogue proxy with leave-one-quadrant-out (OOF AUC 0.69–0.78; worst single-feature
+canary AUC 0.755 &le; 0.90), emitted as 37,654 binary dots
+through the same stratified emitter. <strong>Download for review: yes. Submit a weekly slot: NO</strong> —
+on the pre-registered target-like gate B′ it scores 0.0886 vs H33
+0.0938 (paired &Delta; -0.0051, 95% CI [-0.0161, 0.0053]: includes zero, so no
+validated improvement over H33's 0.2778 is claimed). Instrument A HOLDOUT-DTI
+0.0815 vs H33 0.0037 favours it, as that instrument
+favours every catalogue-adjacent method. Uniqueness vs 62 registry rasters:
+worst mutual overlap 0.308 (limit 0.70), worst &rho;
+0.015 (limit 0.90). Values are exactly 0/1 — inside [0,1], no NaN.
+SHA-256 <code>8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2</code>.</p>
+<div class="actions"><a class="button secondary" href="downloads/gems70-e5-supervised-loqo-37654-20261020.tif" download>Download E5 TIFF (review only — DO NOT SUBMIT)</a>
+<a class="button secondary" href="downloads/e5_run_card.json" download>E5 run card</a></div>
+<p class="small">Name: <code>gems70-e5-supervised-loqo-37654-20261020</code> · Note (95/140):
+<code>E5 supervised LOQO within-halo ranking on SGMC proxy, 37654 binary dots; HOLDOUT+PROXY evidence</code>. Negative results are deliverables: supervised ranking
+halved P4's B′ deficit but did not beat uniform halo sampling. Full tables on the results page.</p></section><section><h2>Parallel lane E2 — alluvial step (second candidate, DO NOT SUBMIT YET)</h2>
 <p>An independent preregistered lane (oriented detrended-elevation step × basement edge,
-38,000 dots) merged from a parallel session. <strong>Download for selector review: yes.
-Submit: NO</strong> — its frozen bars failed (D28 catalogue-holdout best not beaten) and its
-complete-registry scan is still pending. HOLDOUT-DTI 0.0646 [0.0487, 0.0818] ·
+38,000 dots) merged from a parallel session. <strong>Download for forensic review: yes.
+Submit: NO</strong> — its frozen bars failed (D28 catalogue-holdout best not beaten) and the
+fresh binary-witness comparison fails the literal overlap rule. Archived HOLDOUT-DTI 0.0646 [0.0487, 0.0818] · gems57-pooled-hide-v2 · 11,321 withheld positives ·
 38,000 dots · SHA-256 <code>91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c</code>.</p>
 <div class="actions"><a class="button secondary" href="downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif" download>Download E2 review TIFF</a>
 <a class="button secondary" href="downloads/e2_run_card.json" download>E2 run card</a></div>
 <p class="small">Name: <code>GEMSDOE70-E2-alluvial-step-38000</code> · Note:
 <code>E2 oriented elev step x basement edge, 38k dots d&gt;2px; HOLDOUT-DTI in run card; selector scan pending</code>. E3 (depth-step) in the same lane family is
 negative with no file. Full tables on the results page; terms in
-<code>docs/publication-amendment-e2.md</code>.</p></section></main>
+<code>docs/publication-amendment-e2.md</code>.</p></section><section><h2>Concurrent lane P5 analytic-signal dots — DO NOT SUBMIT</h2>
+<p>Analytic-signal amplitude <code>hypot(tmi_hg, tmi_vg)</code> rank inside the 7×7 stratified halo (2.4–32 px), 37,654 dots off-catalogue, 5-px NMS. <strong>HOLDOUT-DTI A 0.0828 [0.0755, 0.0895] vs H33 0.0037 win; B′ 0.0766 [0.0687, 0.0852] vs 0.0938 H33 win Δ -0.0172 [-0.027760492095023067, -0.006296864003715159]</strong> — negative on the pre-registered B′ gate, no slot. Uniqueness: 62 rasters, worst mutual 0.30 (limit 0.70), worst Spearman 0.042; forward 1.00 vs dense lattice (literal duplicate, review only).</p>
+<div class="actions"><a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.tif" download>Download P5 review TIFF</a>
+<a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.zip" download>Download P5 ZIP</a>
+<a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.json" download>P5 receipt</a></div>
+<p class="small">Name: <code>gems70-p5-analytic-halo-37654-20261020</code> · Note (93/140): <code>P5 analytic-signal halo 7px, 37654 dots, hg+vg rank in 2.4-32px band; dual-instrument holdout</code> · SHA-256 <code>aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4</code> · Evidence <code>evidence/phase5/</code> · Hypotheses <code>docs/hypotheses.md</code> now ranks 5 candidates (H-2 tested, H-3 radiometric already fetched, H-4 lidar scarp, H-5 conductive breach, H-6 basement curvature).</p></section><h2>8 frozen prior dot TIFFs — forensic review only</h2><div class="table-wrap"><table><thead><tr><th>Archive</th><th>Download</th><th>Local format</th><th>Forward overlap (limit 0.70)</th></tr></thead><tbody><tr><td>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</td><td><a href="downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif</td><td><a href="downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-e5-supervised-loqo-37654-20261020.tif</td><td><a href="downloads/gems70-e5-supervised-loqo-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-h70-conductive-breach-37654-20261020.tif</td><td><a href="downloads/gems70-h70-conductive-breach-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-p4-stratified-halo-37654-20261020.tif</td><td><a href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-p5-analytic-halo-37654-20261020.tif</td><td><a href="downloads/gems70-p5-analytic-halo-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif</td><td><a href="downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif</td><td><a href="downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr></tbody></table></div></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/p5_run_card.json">New P5 negative card</a> ·
+<a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·
+<a href="downloads/archived_p4_run_card.json">Archived P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

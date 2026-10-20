@@ -3,70 +3,108 @@
 <title>Limitations · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">SESSION 3 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="s3-findings.html">Session 3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Limitations, irregularities and next-session work</h1>
-<h2>Two shared-tool defects were found and fixed this session</h2>
-<ol>
-<li><strong>Dot definition.</strong> <code>uniqueness._dots</code> counted every finite positive value as a dot, so any
-   nonempty candidate "duplicated" the archived continuous surface <code>E-proba-multiscale</code>
-   (sha256 <code>ab0a0a62…</code>, positive on all 5,167,373 footprint cells). Fixed to binary dots
-   (<code>|value − 1| &lt; 1e-6</code>). Reported in <code>evidence/upstream_fix_report.md</code>.</li>
-<li><strong>Forward-only overlap.</strong> A duplicate must coincide in both directions. Measuring this session:
-   <code>calib_r13lattice_00904</code> (206,895 dots), <code>r11_greedy_mp</code> (272,853) and
-   <code>calib_hedgev2_01563_sample</code> (227,507) each have a 3-px halo covering <strong>100 %</strong> of the footprint,
-   so forward-only overlap is 1.00 for <em>any</em> nonempty candidate. The gate now requires
-   <code>min(forward, reverse) &gt; 0.70</code>; both directions and Jaccard are always reported, ρ &gt; 0.90 still
-   applies to every raster, and no threshold was changed. Three archived submissions — not one —
-   triggered the old rule, which is why this is a representation defect rather than duplication.</li>
-</ol>
-<p>Both fixes are in <code>vendor/gems57/uniqueness.py</code>; <code>registry/template_pin.json</code> records the new hash
-with <code>all_identical: false</code>. They must be proposed upstream to the shared template.</p>
-<h2>What is not established</h2>
+<span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
+<strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
+are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
+rule; neither a local validator nor distinct bytes authorize a slot.
+<a href="p5.html">P5-cover negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
+<a href="downloads/p5_run_card.json">New P5 run card</a> ·
+<a href="downloads/review_run_card.json">Prior review card</a>.</aside><h1>Limitations and current next steps</h1>
+<h2>P5 addendum — new, format-valid research TIFF; competition submit NO</h2>
+<p><strong>Download P5 for research:</strong> <a href="downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif">TIFF</a>
+· <a href="downloads/p5_run_card.json">machine-readable negative card</a>. The preregistered one-lane
+magnetic-width LOQO model ran after the older archive review, with one new TIFF and no weekly
+slot. Its catalogue HOLDOUT-DTI (<code>gems57-pooled-hide-v2</code>, 11,321 withheld positives) was
+0.012262 [0.007525, 0.017653] versus visible-only P4 0.073042; SGMC-proxy HOLDOUT-DTI
+(same evaluator, 59,937 proxy positives) was 0.025424 [0.018528, 0.033629] versus H33 0.093771.
+Neither is an organizer score. The literal forward 3-px stop still applies: the continuous
+surface's positive cells are all within 3 px of the hash-pinned lattice. Zero exact-one binary
+dots is NOT a waiver. Do not submit P5 or any previous file. The older review card is frozen
+and describes what was true <em>at its own time</em>, not this later experiment. Read the full
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/reports/p5-scientific-review.md">three-pass P5 review</a>.</p>
+<h2>Current blocker: literal forward-overlap stop</h2>
+<p><strong>Do not submit the published files.</strong> They remain available for forensic review only.
+The fresh <a href="protocol-review.html">protocol review</a> supersedes prior mutual-overlap promotion logic,
+not the frozen experimental measurements. All dot TIFFs in that archived review have forward overlap 1.0
+against the hash-verified binary lattice. This exceeds the prompt's 0.70 stop rule even though
+rank correlation and mutual overlap are small. That prior review generated no new dot candidate;
+the separate P5 continuous research map above is also blocked by positive-support overlap.</p>
+<p>The inherited assertion that three lattice halos cover 100% of the footprint was not established.
+The re-fetched <code>calib_r13lattice_00904.tif</code> covers 99.871327%, with 6,649 uncovered cells. This
+still blocks the fixed 37,654-dot design (minimum overlap 0.82341849), but does not prove a universal
+block at every mass. The archived mutual-rule receipts have not been rewritten to conceal this error.</p>
+<h2>Other irregularities</h2>
 <ul>
-<li><strong>No organizer receipt.</strong> 0.2778 and 0.44 are user-supplied historical values. No score on this
-  site is ORGANIZER-CONFIRMED. The portal was not reachable from this sandbox.</li>
-<li><strong>Neither instrument is the hidden truth.</strong> Instrument A withholds catalogue components (measures
-  catalogue recovery, biased against the task). Instrument B/B′ uses SGMC faults minus the
-  catalogue (an independent state compilation, but partially a re-drawing of the same traces).
-  They disagree, and the disagreement is reported rather than averaged.</li>
-<li><strong>The candidate is not promoted.</strong> On B′, H33 wins by 13 % with a CI excluding zero. The
-  pre-registered rule therefore returns <code>negative</code>, even though instrument A and unrestricted B
-  favour the candidate.</li>
-<li><strong>Registry scope.</strong> Uniqueness was checked against the 62 single-band 100 m rasters archived in
-  <code>buffedlizard55-lab/60GEMSDOE/registry/rasters</code>, not against every private or uncommitted file.
-  Zero Spearman exceedances (max 0.05) and zero mutual-overlap exceedances were found.</li>
-<li><strong>Geophysical fields are weak.</strong> Feature-alone AUCs on withheld catalogue segments were
-  0.46–0.57. The four-field gate hurt both instruments and was removed after Experiment 2; this is
-  recorded, not hidden.</li>
+<li>The current prompt specifies a single-method lane paragraph but supplies none identifiable.
+  P5 explicitly declared a <strong>provisional</strong> narrow magnetic-width lane and did not claim an
+  assigned slot. The previous handoff's supervised within-halo plan was tested only in this
+  restricted form; other feature families remain untested and no promotion was inferred.</li>
+<li>No authenticated submission-page score receipt exists. H33's reported 0.2778 is user-supplied;
+  historical public leaderboard captures are not receipts for our own submissions. Conflicting
+  leader values in the brief are not current verified targets.</li>
+<li>Local format validity is not portal acceptance. The frozen reviewed TIFFs are single-band float32,
+  finite in [0,1], and match the pinned sample's CRS, shape and transform. The rejected upload's
+  exact error cannot be diagnosed without its bytes. The footprint-zero policy differs from a
+  historical problem-page null/NaN quotation; organizer behavior has not been independently confirmed.</li>
+<li>The owner-mirror sample has 60,988 positive known-fault pixels, not an all-zero reference.
+  It supplies grid geometry and footprint only, never hidden validation labels. Owner-mirror hashes
+  establish integrity, not organizer authenticity or every license condition.</li>
+<li>Catalogue recovery and SGMC proxy recovery are different populations. SGMC/QFaults re-digitization
+  overlap can persist outside a narrow exclusion band. Neither is the organizer's hidden truth.
+  A holdout win is not a forecast of leaderboard improvement.</li>
+<li>P4 was already negative on the preregistered B′ proxy gate; E2 did not beat its D28 holdout arm.
+  These frozen results stay negative regardless of the uniqueness issue.</li>
+<li>The historical handoff's claim that geometry has reached its limit is not a theorem. Neither
+  the remaining leaderboard gap nor a guaranteed route to beating it can be inferred from three
+  experiments.</li>
+<li><code>scripts/prepare_data.py</code> from the retained prompt is absent. Data placement is not the sole
+  blocker to training/validation. The official reference supports CPU as well as GPU; GPU is
+  preferred for speed, not an absolute requirement.</li>
+<li>Only GitHub, npm and PyPI hosts are allowed for shell binary downloads. This P5 session read
+  public DrivenData/USGS/GDR/DOE text through the page reader (see the dated
+  <code>evidence/p5/official_source_review.json</code>), but did <strong>not</strong> obtain organizer-authenticated
+  data, an accepted submission receipt, or the current authenticated weekly balance. No
+  competition slot was spent. The site links to the live official leaderboard and displays a
+  dated snapshot, <strong>not an automatic authenticated live score feed</strong>. The scheduled source-health
+  check tests HTTP reachability only; implementing a verifiable auto-refresh remains open.</li>
 </ul>
-<h2>Next session, in priority order</h2>
+<h2>Next session, in order</h2>
 <ol>
-<li><strong>Supervised within-halo ranking.</strong> Train on the SGMC-off-catalogue proxy with leave-one-quadrant-out;
-   features: 19-band stack, lidar-scarp (12 bands), GeoDAWN radiometrics (K/Th/U/TC and ratios),
-   catalogue geometry (distance, side, host length, tip position), plus the measured coverage
-   stratification. Report A and B′ with the same bootstrap. This is the only path with information
-   the geometry does not already contain.</li>
-<li><strong>Calibrate the proxy.</strong> Quantify how much of SGMC-only support is a re-drawing of QFaults
-   (buffer tests at 1–6 px) and, if possible, obtain a genuinely independent additional-fault set
-   (e.g. Nevada Bureau of Mines county maps, published INGENIOUS trace exports).</li>
-<li><strong>Upstream the two uniqueness fixes</strong> as a PR to the shared template and re-run its test suite.</li>
-<li><strong>Selector step.</strong> If a future candidate clears both gates, promote one slot within the weekly
-   cap and record the returned score as ORGANIZER-CONFIRMED.</li>
+<li>Read the retained brief, current protocol review and new handoff note first. Do not bypass the
+   literal stop by invoking an old generator or a mutual-overlap rule. Resolve any protocol revision
+   explicitly before attempting another fixed-mass candidate. A different mass is a new preregistration,
+   not an automatic exemption or a reason to target only boundary slivers.</li>
+<li>Quantify SGMC versus QFaults overlap across buffers and spatial quadrants. Review independent
+   official fault data, licensing and obtainability before treating it as new truth.</li>
+<li>P5 already tested one LOQO magnetic-width residual and failed both holdouts. If a revised
+   protocol permits further experiments, test a geology-conditioned, geometry-preserving
+   emission at a <strong>matched mass and spacing</strong> under nested blocked validation; recompute all
+   catalogue geometry from visible faults and run every raw/derived feature-alone canary.
+   Do not tune the frozen P5 result or relabel this failed continuous map as a dot-unique file.</li>
+<li>Rerun the current-best baseline on identical folds and mass. Keep HOLDOUT-DTI, SGMC PROXY-DTI
+   and any eventual ORGANIZER-CONFIRMED receipt separate. A negative remains a deliverable.</li>
+<li>Only a separate selector can approve a real weekly slot after all gates and the live cap are
+   checked. Save its authenticated submission-page receipt before reporting an organizer score.</li>
 </ol>
-<h2>Repository-level risks</h2>
+<h2>Publication and reproducibility</h2>
 <ul>
-<li><code>docs/downloads/</code> now contains exactly one TIFF/ZIP pair, authorised by the run card;
-  <code>release.assert_no_public_rasters</code> rejects anything else, including symlinks.</li>
+<li><code>docs/downloads/</code> contains several independently hash-inventoried review TIFF/ZIP pairs,
+  including this P5-cover file and the concurrent E5/P5 analytic lanes. No file is approved
+  for a weekly slot; <code>release.assert_no_public_rasters</code> rejects unlisted files and symlinks.</li>
 <li>Large inputs (<code>training_features.tif</code>, the registry clone) live outside Git; restore commands are
   in the README. Published evidence is small JSON.</li>
-<li>The published TIFF is binary 0/1 with no nodata tag; outside-footprint cells are 0, which the
-  shared validator and the sample comparison both accept.</li>
+<li>The older dot TIFFs are binary 0/1; P5-cover is a continuous [0,1) review map. All have
+  all-finite zeros outside the footprint and no nodata tag. The shared local validator passes;
+  organizer acceptance of this policy remains unverified.</li>
 </ul>
 <h2>Parallel-session candidate (merged 2026-10-20)</h2>
 <p>A concurrent branch added <code>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</code>
 (24,872 binary dots, sha256 recorded in <code>registry/published_artifacts.json</code>, verdict
 <code>DO NOT SUBMIT</code> in its own receipts). It is preserved and inventoried but is not the file this
-run card selects; the landing page points only at the P4 artifact. Both files are hash-pinned by
+older run card selected; the current landing page now leads with the P5-cover research file,
+then the concurrent supervised and dot archives. Both files are hash-pinned by
 <code>release.assert_no_public_rasters</code>, so neither can be silently replaced. Its narrative pages were
 moved to <code>reports/archive/concurrent-v2/</code> to avoid two contradictory download instructions in the
 published tree.</p>
@@ -74,6 +112,37 @@ published tree.</p>
 <ul>
 <li>E2 alluvial-step and E3 depth-step are additional negatives (see <code>docs/preregistration-e2.md</code>, <code>evidence/e2|e3/</code>). E2 bytes are published for selector review under <code>docs/publication-amendment-e2.md</code>; submit remains NO. E2 uniqueness used pre-fix R1 subset definitions — not directly comparable to the corrected 62-raster mutual audit until rerun.</li>
 <li>Bridge <code>sample_submission.tif</code> positives are exactly the catalogue (60,988 px), not an all-zero sample; footprint use only. Two-round expanded-label composition and known-fault masking remain unverified from fetched organizer text.</li>
+</ul>
+<h2>E5 supervised lane (2026-10-20)</h2>
+<ul>
+<li>E5 executed the registered next step (SGMC-proxy LOQO ranking) and is a
+  measured negative on the frozen B′ gate: Δ −0.0051 [−0.0161, +0.0053] vs H33
+  (<code>evidence/e5/run_card.json</code>). Artifact published review-only; submit NO.</li>
+<li>Emission Amendment 1: P4's one-per-block pass cannot reach 37,654 dots on a
+  sharp supervised surface (34,409 measured). Same-NMS fill added before any
+  DTI existed; disclosed in <code>docs/preregistration-e5.md</code>. P4 bytes unaffected.</li>
+<li>New information: OOF AUC 0.69–0.78 (real within-halo signal) does not
+  convert to B′ DTI above uniform halo sampling at this dot budget — the
+  remaining gap to the 0.4413 public leader is not explained by 100 m
+  potential-field/topography ranking of the SGMC proxy. Candidate queues:
+  radiometric/lidar feature sets (E5-3/E5-4, obtainability unchecked), finer
+  (sub-100 m) emission geometry, or a genuinely independent additional-fault
+  truth set to replace the SGMC proxy.</li>
+<li>E5 canary context defect (found in review, corrected post-hoc): the primary
+  canary table computed <code>d_cat</code> against the full catalogue, giving
+  Instrument-A AUC 0.0 by construction (A positives are catalogue pixels).
+  Prediction-time folds always used visible-only distance; its corrected
+  canary AUC is 0.245 (<code>evidence/e5/canaries_correction.json</code>). No leakage;
+  frozen receipts and artifact unchanged.
+All inventoried TIFF/ZIP bytes are preserved; none was renamed or reused as a new submission.
+Publication inventory and Pages guards still reject unauthorized rasters or symlinks. Current
+review evidence lives in <code>evidence/review/</code>; Phase 1–4, E2/E3 and historical cards remain frozen.
+The shared metric, evaluator, writer and vendored uniqueness bytes were not modified in this review.
+The new policy adapter acts only on existing shared measurements and restores the current prompt's
+literal decision rule. P5 uses the same shared evaluator/writer and a separate hash-pinned research
+artifact; it did not change the shared metric or its threshold. See the
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/reports/p5-scientific-review.md">scientific review</a>
+for new source receipts, a failed controlled test and reproducible commands.</li>
 </ul>
 <h2>Session 3 (2026-10-20, branch arena/a0382202) — irregularities and limits</h2>
 <ol>
@@ -108,6 +177,8 @@ published tree.</p>
    a weekly slot; record any returned score as ORGANIZER-CONFIRMED with the receipt.</li>
 </ol></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/p5_run_card.json">New P5 negative card</a> ·
+<a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·
+<a href="downloads/archived_p4_run_card.json">Archived P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

@@ -79,3 +79,17 @@ def test_preregistrations_exist_and_canaries_clear():
     assert (ROOT / 'docs/preregistration-s3-e2.md').is_file()
     can = json.loads((ROOT / 'evidence/s3/canaries.json').read_text())
     assert can['alarms'] == [] and all(v['strength'] <= 0.90 for v in can['features'].values())
+
+
+def test_literal_lane_receipt_marks_session3_as_duplicates_under_literal_policy():
+    lit = json.loads((ROOT / 'evidence/s3/literal_lane.json').read_text())['files']
+    assert set(lit) == {'S3-E1', 'S3-E2'}
+    for card in (E1, E2):
+        assert card['literal_lane_status']['stop_required'] is True
+        assert card['literal_lane_status']['protocol_unique'] is False
+
+
+def test_unique_against_in_repo_sibling_tiffs():
+    sib = json.loads((ROOT / 'evidence/s3/sibling_uniqueness.json').read_text())['results']
+    for r in sib.values():
+        assert r['unique'] is True and r['worst_mutual'] <= 0.70 and r['worst_rho'] <= 0.90

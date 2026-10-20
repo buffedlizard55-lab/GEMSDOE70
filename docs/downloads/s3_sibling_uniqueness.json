@@ -1,0 +1,154 @@
+{
+  "evidence_class": "REGISTRY-MEASUREMENT (in-repo sibling TIFFs on main after merge)",
+  "rule": "mutual 3-px overlap > 0.70 or Spearman > 0.90 = duplicate",
+  "results": {
+    "gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif": {
+      "checked": 9,
+      "unique": true,
+      "duplicate_count": 0,
+      "worst_mutual": 0.2825166666666667,
+      "worst_mutual_with": "gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+      "worst_rho": 0.028992087041055537,
+      "worst_rho_with": "gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+      "rows": [
+        {
+          "submission": "gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+          "mutual_overlap": 0.03245339140595953,
+          "my_dots_within_3px_of_theirs": 0.03245339140595953,
+          "their_dots_within_3px_of_mine": 0.09339819877774204,
+          "spearman_full_footprint": -0.001585895477183913
+        },
+        {
+          "submission": "gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif",
+          "mutual_overlap": 0.23994794709725395,
+          "my_dots_within_3px_of_theirs": 0.23994794709725395,
+          "their_dots_within_3px_of_mine": 0.2626578947368421,
+          "spearman_full_footprint": 0.009829605988666964
+        },
+        {
+          "submission": "gems70-e5-supervised-loqo-37654-20261020.tif",
+          "mutual_overlap": 0.15499017368672652,
+          "my_dots_within_3px_of_theirs": 0.2841132416210761,
+          "their_dots_within_3px_of_mine": 0.15499017368672652,
+          "spearman_full_footprint": 0.012188995414417089
+        },
+        {
+          "submission": "gems70-h70-conductive-breach-37654-20261020.tif",
+          "mutual_overlap": 0.1383385563286769,
+          "my_dots_within_3px_of_theirs": 0.2465076751473947,
+          "their_dots_within_3px_of_mine": 0.1383385563286769,
+          "spearman_full_footprint": 0.0024778212549389873
+        },
+        {
+          "submission": "gems70-p4-stratified-halo-37654-20261020.tif",
+          "mutual_overlap": 0.1382588835183513,
+          "my_dots_within_3px_of_theirs": 0.2465873479577203,
+          "their_dots_within_3px_of_mine": 0.1382588835183513,
+          "spearman_full_footprint": 0.001487977056865462
+        },
+        {
+          "submission": "gems70-p5-analytic-halo-37654-20261020.tif",
+          "mutual_overlap": 0.14484516917193394,
+          "my_dots_within_3px_of_theirs": 0.23272427896106657,
+          "their_dots_within_3px_of_mine": 0.14484516917193394,
+          "spearman_full_footprint": 0.003895706187314578
+        },
+        {
+          "submission": "gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+          "mutual_overlap": 0.0947309714771339,
+          "my_dots_within_3px_of_theirs": 0.0947309714771339,
+          "their_dots_within_3px_of_mine": 0.37588054006457294,
+          "spearman_full_footprint": 0.028992087041055537
+        },
+        {
+          "submission": "gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+          "mutual_overlap": 0.04105805492112392,
+          "my_dots_within_3px_of_theirs": 0.04105805492112392,
+          "their_dots_within_3px_of_mine": 0.1620539961290746,
+          "spearman_full_footprint": 0.002310566501751871
+        },
+        {
+          "submission": "gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+          "mutual_overlap": 0.2825166666666667,
+          "my_dots_within_3px_of_theirs": 0.5322940457853084,
+          "their_dots_within_3px_of_mine": 0.2825166666666667,
+          "spearman_full_footprint": 0.014586981823096055
+        }
+      ]
+    },
+    "gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif": {
+      "checked": 9,
+      "unique": true,
+      "duplicate_count": 0,
+      "worst_mutual": 0.27143333333333336,
+      "worst_mutual_with": "gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+      "worst_rho": 0.020594627914226178,
+      "worst_rho_with": "gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+      "rows": [
+        {
+          "submission": "gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+          "mutual_overlap": 0.041084612524565786,
+          "my_dots_within_3px_of_theirs": 0.041084612524565786,
+          "their_dots_within_3px_of_mine": 0.12849790929559343,
+          "spearman_full_footprint": 2.501348544002144e-05
+        },
+        {
+          "submission": "gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif",
+          "mutual_overlap": 0.23309608540925267,
+          "my_dots_within_3px_of_theirs": 0.23309608540925267,
+          "their_dots_within_3px_of_mine": 0.2708684210526316,
+          "spearman_full_footprint": 0.007459413964699512
+        },
+        {
+          "submission": "gems70-e5-supervised-loqo-37654-20261020.tif",
+          "mutual_overlap": 0.16617092473575185,
+          "my_dots_within_3px_of_theirs": 0.27734105274340043,
+          "their_dots_within_3px_of_mine": 0.16617092473575185,
+          "spearman_full_footprint": 0.00469828256413095
+        },
+        {
+          "submission": "gems70-h70-conductive-breach-37654-20261020.tif",
+          "mutual_overlap": 0.14436713230998036,
+          "my_dots_within_3px_of_theirs": 0.23288362458171774,
+          "their_dots_within_3px_of_mine": 0.14436713230998036,
+          "spearman_full_footprint": 0.0036549332742696664
+        },
+        {
+          "submission": "gems70-p4-stratified-halo-37654-20261020.tif",
+          "mutual_overlap": 0.1461730493440272,
+          "my_dots_within_3px_of_theirs": 0.23646890104636958,
+          "their_dots_within_3px_of_mine": 0.1461730493440272,
+          "spearman_full_footprint": 0.0029861196269226897
+        },
+        {
+          "submission": "gems70-p5-analytic-halo-37654-20261020.tif",
+          "mutual_overlap": 0.15679609072077336,
+          "my_dots_within_3px_of_theirs": 0.22783767992776333,
+          "their_dots_within_3px_of_mine": 0.15679609072077336,
+          "spearman_full_footprint": 0.004751787655918708
+        },
+        {
+          "submission": "gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+          "mutual_overlap": 0.0773091836192702,
+          "my_dots_within_3px_of_theirs": 0.0773091836192702,
+          "their_dots_within_3px_of_mine": 0.35041825653067216,
+          "spearman_full_footprint": 0.020594627914226178
+        },
+        {
+          "submission": "gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+          "mutual_overlap": 0.04974239124661391,
+          "my_dots_within_3px_of_theirs": 0.04974239124661391,
+          "their_dots_within_3px_of_mine": 0.19345879214005315,
+          "spearman_full_footprint": 0.004089557631496345
+        },
+        {
+          "submission": "gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+          "mutual_overlap": 0.27143333333333336,
+          "my_dots_within_3px_of_theirs": 0.4624475487332023,
+          "their_dots_within_3px_of_mine": 0.27143333333333336,
+          "spearman_full_footprint": 0.00802399502256058
+        }
+      ]
+    }
+  }
+}

@@ -360,5 +360,22 @@
   },
   "annotation_s3_e1_arm": "The 's3_e1_candidate' B' arm (0.4614) is the E1 PRODUCTION file, whose model was trained on all four quadrants' SGMC labels, so it is in-sample on B' and not comparable; E1's out-of-fold B' is 0.1237 (evidence/s3/instrumentB_prime.json). Preregistration intended an OOF reference; recorded as a design error, not used in any gate.",
   "annotation_h33_domain": "H33 has 35,216 of its 37,654 dots inside the scored valid domain (rest in the 12-px edge erosion or d<2.4 px); stratified arms place all 37,654 in-domain, which is why random_stratified also exceeds H33 on B'. The informative E2 comparison is vs random_stratified.",
-  "annotation_sibling_overlap": "E2 vs E1 mutual 3-px overlap 0.798: same model and lane; at most one of them should ever be considered."
+  "annotation_sibling_overlap": "E2 vs E1 mutual 3-px overlap 0.798: same model and lane; at most one of them should ever be considered.",
+  "literal_lane_status": {
+    "policy": "literal-forward-v1",
+    "overlap_limit": 0.7,
+    "rho_limit": 0.9,
+    "stop_required": true,
+    "protocol_unique": false,
+    "complete_scan": true,
+    "duplicate_witnesses": [
+      "calib_r13lattice_00904.tif",
+      "r11_greedy_mp.tif",
+      "r13_lattice_s5_00904.tif",
+      "r14_union_tips10_lat6.tif"
+    ],
+    "invalid_rows": [],
+    "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+  },
+  "literal_lane_note": "Under the literal forward-overlap policy (main, gems70.protocol) this file is a duplicate witness of the dense r13 lattice like every 37,654-dot file (evidence/review/literal_protocol_audit.json: minimum forward overlap at fixed budget 0.823). Mutual-rule uniqueness is reported separately. Either way: DO NOT SUBMIT."
 }
