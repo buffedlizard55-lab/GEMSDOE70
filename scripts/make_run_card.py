@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Verify the canonical run card instead of overwriting it with an older schema."""
+"""Verify the canonical run card instead of overwriting it with an older schema.
+
+Supports both schemas present in this repo's history:
+- Phase-4 card (evidence/run_card.json): instrument_a_holdout / instrument_b_prime_proxy
+- E1/E2-style cards: holdout_dti
+Fixes the stale-schema KeyError that left the Verify workflow red on main
+(pre-existing before PR #16; recorded in HANDOFF integration notes).
+"""
 from pathlib import Path
 import json
 import sys
@@ -12,8 +19,14 @@ from gems70.release import digest
 def main():
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
     assert card['verdict'] in {'promote', 'negative'}
-    assert card['holdout_dti']['evidence_class'].startswith('HOLDOUT-DTI')
-    for rel, pin in card['method_source_sha256'].items():
+    if 'holdout_dti' in card:
+        assert card['holdout_dti']['evidence_class'].startswith('HOLDOUT-DTI')
+    else:
+        # Phase-4 schema: labelled instruments, no organizer-confirmed score.
+        assert card.get('organizer_confirmed_score') is None
+        assert 'instrument_a_holdout' in card and 'instrument_b_prime_proxy' in card
+        assert len(card.get('submission_note', '')) <= 140
+    for rel, pin in (card.get('method_source_sha256') or {}).items():
         if digest(ROOT / rel) != pin:
             raise ValueError('scientific source changed: ' + rel)
     if card.get('raster_sha256'):
