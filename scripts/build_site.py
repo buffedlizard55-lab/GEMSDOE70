@@ -155,12 +155,13 @@ def main():
     decision = f'''<section class="{tone}" aria-labelledby="decision">
 <div class="eyebrow">SUBMISSION STATUS</div>
 <h1 id="decision">{esc(headline)}</h1>
-<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
-passes every shared-validator check, and its SHA-256 is recorded below.</p>
-<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
-<strong>{esc(card['verdict'])}</strong>: the pre-registered target-like gate (instrument B′) is
-negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
-not a validated improvement.</p>
+<p><strong>Download: yes — format-validated for review.</strong> The uniqueness check covers
+62 archived registry rasters only, not every private or uncommitted raster. Local validation does
+not establish organizer acceptance.</p>
+<p><strong>Competition submission: NO — not recommended.</strong> The pre-registered target-like
+gate (instrument B′) is negative, so improvement is not demonstrated. Verdict:
+<strong>{esc(card['verdict'])}</strong>; no weekly slot has been used. The historical 0.2778 figure
+is not an organizer-confirmed score in this project.</p>
 <div class="actions">
 <a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download submission TIFF</a>
 <a class="button secondary" href="downloads/{esc(name)}.zip" download>Download one-TIFF ZIP</a>
