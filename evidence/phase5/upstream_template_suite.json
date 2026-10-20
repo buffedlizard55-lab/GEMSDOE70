@@ -1,0 +1,16 @@
+{
+  "evidence_class": "SOFTWARE-TEST-RECEIPT",
+  "purpose": "Upstream template suite verification of vendor/gems57/uniqueness.py fixes (HANDOFF item 3)",
+  "upstream_repo": "buffedlizard55-lab/60GEMSDOE",
+  "upstream_commit": "32024716f218d06a94e01464157392119c03cb15",
+  "patched_file": "src/gems57/uniqueness.py",
+  "patched_sha256": "93726c6a7773e1743813fb63e4e8fe70e784efbce2564268e22cec90eb6e8349",
+  "patch_file": "evidence/phase5/upstream_uniqueness_patch.diff",
+  "pytest_command": "PYTHONPATH=/tmp/60GEMSDOE/src /tmp/venv60/bin/python -m pytest /tmp/60GEMSDOE/tests -q",
+  "exit_code": 0,
+  "passed": 190,
+  "failed": 0,
+  "skipped": 8,
+  "duration_seconds": 9.81,
+  "push_policy_note": "Session protocol restricts git push strictly to branch arena/c7049280-gemsdoe70 of buffedlizard55-lab/GEMSDOE70; the unified diff is verified against commit 32024716f218d06a94e01464157392119c03cb15 with 190/190 tests passing and published at evidence/phase5/upstream_uniqueness_patch.diff."
+}
