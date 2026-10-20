@@ -1,1 +1,72 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GEMSDOE70 · Review status</title><link rel="stylesheet" href="assets/site.css"></head><body><header><a class="brand" href="index.html">GEMS<span>DOE70</span></a></header><nav><a href="index.html">Overview</a><a href="submission.html">Submission status</a><a href="release-review.html">Release review</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main><section class="stop"><div class="eyebrow">RELEASE DECISION · 2026-10-20</div><h1>STOP — no TIFF cleared for download or submission</h1><p>Previously exposed TIFF/ZIP artifacts did not pass a consistent evidence and uniqueness release gate. They have been moved out of the public site into the excluded quarantine area. <strong>Do not submit them.</strong></p><p>This is not a claim that no historical artifact exists. It is a clear statement that none is currently authorized as a competition submission. No weekly slot was used and no candidate score is organizer-confirmed in this review.</p><a class="button secondary" href="submission.html">Read submission status and review findings</a></section><section><h2>Why the stop is required</h2><ul><li>The recorded uniqueness scan is incomplete and includes a 1.0 forward dot-overlap witness.</li><li>Several files and run cards identify different candidates, and some contradict their own registry and holdout receipts.</li><li>Local GeoTIFF format validation cannot replace scientific holdout validation or a complete uniqueness scan.</li></ul><p>Details: <a href="release-review.html">release-integrity review</a>. Historical user-provided scores are not represented as organizer-confirmed scores.</p></section><section><h2>Official sources for manual review</h2><ul><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition rules</a></li><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem and submission format</a></li><li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">Competition data (login may be required)</a></li><li><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a></li><li><a href="https://gdr.openei.org/submissions/1391">DOE INGENIOUS data repository</a></li><li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Organizer reference solution</a></li></ul></section></main><footer>Negative results are deliverables. Do not treat a local validator receipt as organizer acceptance.</footer></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Overview · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop" aria-labelledby="decision">
+<div class="eyebrow">SUBMISSION STATUS</div>
+<h1 id="decision">Verified file · not promoted</h1>
+<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
+passes every shared-validator check, and its SHA-256 is recorded below.</p>
+<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
+<strong>negative</strong>: the pre-registered target-like gate (instrument B′) is
+negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
+not a validated improvement.</p>
+<div class="actions">
+<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download>Download submission TIFF</a>
+<a class="button secondary" href="downloads/gems70-p4-stratified-halo-37654-20261020.zip" download>Download one-TIFF ZIP</a>
+<a class="button secondary" href="submission.html">How to submit</a>
+</div>
+<p class="small">Name: <code>gems70-p4-stratified-halo-37654-20261020</code> · Note (108/140 chars):
+<code>P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
+<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
+<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
+pre-registered experiments and published the best candidate. Two instruments favour it, one does
+not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+</section><div class="metrics">
+<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
+<div class="number">0.0730</div>
+<p>[0.0667, 0.0790] · 11,321 withheld catalogue pixels</p></section>
+<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
+<div class="number">0.0812</div>
+<p>[0.0723, 0.0900] · SGMC proxy outside the duplication band</p></section>
+<section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
+<div class="number">0.31</div>
+<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ 0.050</p></section></div>
+<div class="columns">
+<section class="panel"><h2>Why it is downloadable</h2>
+<p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
+transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
+Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
+lattice reaches 1.00 by construction and is reported separately).</p>
+<a href="results.html">Full evidence →</a></section>
+<section class="panel"><h2>Why it is not promoted</h2>
+<p>On instrument B′ the candidate scores 0.0812 versus H33's
+0.0938 (paired Δ -0.0126,
+95% CI [-0.0241, -0.0018]). The pre-registered rule requires a
+positive lower bound. It does not hold.</p>
+<a href="hypotheses.html">Why this rule →</a></section></div>
+<section><h2>What is measured and what is not</h2>
+<p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue
+components and measures catalogue recovery; instrument B/B′ uses USGS SGMC faults minus the
+catalogue as a proxy for newly mapped faults. Every number is labelled, and no projection is
+presented as a leaderboard score.</p>
+<ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
+<li><a href="results.html">All three experiments, ablations and canaries</a></li>
+<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section><h2>Parallel lane E2 — alluvial step (second candidate, DO NOT SUBMIT YET)</h2>
+<p>An independent preregistered lane (oriented detrended-elevation step × basement edge,
+38,000 dots) merged from a parallel session. <strong>Download for selector review: yes.
+Submit: NO</strong> — its frozen bars failed (D28 catalogue-holdout best not beaten) and its
+complete-registry scan is still pending. HOLDOUT-DTI 0.0646 [0.0487, 0.0818] ·
+38,000 dots · SHA-256 <code>91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c</code>.</p>
+<div class="actions"><a class="button secondary" href="downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif" download>Download E2 review TIFF</a>
+<a class="button secondary" href="downloads/e2_run_card.json" download>E2 run card</a></div>
+<p class="small">Name: <code>GEMSDOE70-E2-alluvial-step-38000</code> · Note:
+<code>E2 oriented elev step x basement edge, 38k dots d&gt;2px; HOLDOUT-DTI in run card; selector scan pending</code>. E3 (depth-step) in the same lane family is
+negative with no file. Full tables on the results page; terms in
+<code>docs/publication-amendment-e2.md</code>.</p></section></main>
+<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
+<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
