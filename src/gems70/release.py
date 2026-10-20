@@ -82,6 +82,12 @@ def release_status(root):
         if not card.get('gate_b_prime_candidate_gt_h33_significant'):
             reasons.append("Candidate did not beat H33 on instrument B' with a 95% CI above zero.")
         notes.append('A downloadable, validated file is not a validated leaderboard improvement.')
+    # A historical mutual-overlap clearance must never override a later literal
+    # protocol stop. Keep review downloads available; block scientific promotion.
+    current_review = _load(root, 'evidence/literal_protocol_review.json')
+    if current_review and current_review.get('correlation_overlap_vs_registry', {}).get('stop') is True:
+        submit = False
+        reasons.append('Current literal one-way uniqueness audit requires STOP; review download only.')
     return {
         'verdict': (card or {}).get('verdict', 'negative'),
         'download_ok': download_ok,

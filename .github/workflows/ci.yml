@@ -14,6 +14,8 @@ jobs:
           python-version: '3.11'
           cache: pip
       - run: pip install -r requirements.lock
+      - name: Audit literal parallel-run protocol against archived measurements
+        run: python scripts/audit_literal_protocol.py
       - name: Build evidence-driven site
         run: python scripts/build_site.py && python scripts/build_readme.py
       - name: Test metric, protocol, writer and site contracts

@@ -42,6 +42,14 @@ def ci(d):
 
 
 def frame(title, body):
+    review = load('evidence/literal_protocol_review.json', {})
+    if review.get('correlation_overlap_vs_registry', {}).get('stop'):
+        body = ('''<section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
+<p>Download for review only. The archived Phase-4 TIFF fails the requested one-way
+3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
+are not clearance under the current prompt. No new TIFF was generated in this review.</p>
+<p><a href="protocol-review.html">Current protocol review and next steps</a> ·
+<a href="literal-protocol-review.json">Current JSON run card</a></p></section>''' + body)
     nav = ''.join(f'<a href="{h}">{esc(t)}</a>' for h, t in NAV)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -75,6 +83,12 @@ def main():
     card = load('evidence/run_card.json', {})
     if not card:
         raise SystemExit('evidence/run_card.json missing; run the experiment first')
+    review = load('evidence/literal_protocol_review.json', {})
+    if review:
+        (DOCS / 'literal-protocol-review.json').write_text(json.dumps(review, indent=2) + '\n')
+        import markdown
+        text = (ROOT / 'reports/literal-protocol-review.md').read_text()
+        (DOCS / 'protocol-review.html').write_text(frame('Current protocol review', markdown.markdown(text, extensions=['tables'])))
     name = card['submission_name']
     sha = card['raster_sha256']
     val = card.get('validator_output') or {}
@@ -364,14 +378,14 @@ as a predictor.</li></ul>
 <h2>Receipts</h2>
 <p><a href="downloads/data_receipt.json">Input SHA-256 pins</a> ·
 <a href="downloads/template_verification.json">Shared-template verification</a> ·
-<a href="downloads/upstream_fix_report.md">Upstream fix report</a></p>'''
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/evidence/upstream_fix_report.md">Upstream fix report</a></p>'''
     (DOCS / 'sources.html').write_text(frame('Sources', src_page))
 
     # Root entry point (repository-root Pages keeps working).
     (ROOT / 'index.html').write_text(
         '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         '<meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70</title>'
-        '</head><body><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
+        '</head><body><p>DO NOT SUBMIT — review only.</p><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
         '</body></html>\n')
     (DOCS / '.nojekyll').touch()
     # Backwards-compatible entry points; they must not carry stale claims.
@@ -381,7 +395,7 @@ as a predictor.</li></ul>
         (DOCS / old).write_text(
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<meta http-equiv="refresh" content="0;url={target}"><title>GEMSDOE70</title>'
-            f'</head><body><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
+            f'</head><body><p>DO NOT SUBMIT — review only.</p><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
     (DOCS / 'status.json').unlink(missing_ok=True)
     # keep a root-level copy so older pages that link run-card.json still resolve
     (DOCS / 'run-card.json').write_text((ROOT / 'evidence/run_card.json').read_text())
