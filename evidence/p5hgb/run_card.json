@@ -267,7 +267,7 @@
   },
   "method_source_sha256": {
     "src/gems70/method_v5.py": "8466d0ad4387d162ce09ba43c437da9ef365a7449d6a7c85e2830f5cad46a877",
-    "scripts/run_experiment_v5.py": "5ab3c0d53a563cf9c7d913174d61f600b71d70b54923e443bc913e47052a9fc6"
+    "scripts/run_experiment_v5.py": "649c016e993ee28e458a649c0c3821ef603b1835a118cd683322d5c0af2b5a6f"
   },
   "registered_parameters": {
     "dot_count": 37654,
@@ -309,7 +309,7 @@
     "emission_topup": "3067 of 37654 production dots placed by the registered pass-2 completion (best NMS-feasible cell of empty strata); pass 1 is byte-identical to Phase-4, see docs/hypotheses.md Phase-5 implementation amendment"
   },
   "phase_evidence": {
-    "dir": "evidence/phase5",
+    "dir": "evidence/p5hgb",
     "canaries": "canaries.json",
     "uniqueness": "uniqueness.json",
     "surface_uniqueness": "surface_uniqueness.json",

@@ -28,7 +28,7 @@ from gems70 import method_v2 as m2
 from gems70 import method_v5 as m5
 from restore_data import DATA, PINS, sha
 
-E = ROOT / 'evidence' / 'phase5'
+E = ROOT / 'evidence' / 'p5hgb'
 CACHE = ROOT / '.cache'
 CLONE = Path('/tmp/60GEMSDOE')
 REG = CLONE / 'registry' / 'rasters'
@@ -394,14 +394,22 @@ def main():
     gate_b = bool(db['h33_reference']['delta'] > 0 and db['h33_reference']['ci95'][0] > 0)
     promoted = bool(not duplicate and validated and gate_a and gate_b)
 
-    prior = json.loads((ROOT / 'evidence/run_card.json').read_text())
-    history = dict(prior.get('experiment_history', {}))
-    history['phase4'] = {
-        'hypothesis': prior['hypothesis'], 'verdict': prior['verdict'],
-        'instrument_a': prior['instrument_a_holdout'],
-        'instrument_b_prime': prior['instrument_b_prime_proxy'],
-        'note': 'archived under evidence/phase4'}
-    history['phase5'] = {
+    history = {}
+    prior_path = ROOT / 'evidence/run_card.json'
+    if prior_path.is_file():
+        try:
+            prior = json.loads(prior_path.read_text())
+        except json.JSONDecodeError:
+            prior = {}
+        if all(k in prior for k in ('hypothesis', 'instrument_a_holdout',
+                                    'instrument_b_prime_proxy')):
+            history = dict(prior.get('experiment_history', {}))
+            history['phase4'] = {
+                'hypothesis': prior['hypothesis'], 'verdict': prior['verdict'],
+                'instrument_a': prior['instrument_a_holdout'],
+                'instrument_b_prime': prior['instrument_b_prime_proxy'],
+                'note': 'archived under evidence/phase4'}
+    history['p5hgb'] = {
         'hypothesis': 'H-P5-1 supervised within-halo ranking (this run)',
         'verdict': 'promote' if promoted else 'negative',
         'instrument_a': {k: {kk: v[kk] for kk in ('dti', 'ci95', 'withheld_positive_pixels')}
@@ -512,7 +520,7 @@ def main():
                             'pass-2 completion (best NMS-feasible cell of empty strata); '
                             'pass 1 is byte-identical to Phase-4, see docs/hypotheses.md '
                             'Phase-5 implementation amendment')),
-        'phase_evidence': {'dir': 'evidence/phase5',
+        'phase_evidence': {'dir': 'evidence/p5hgb',
                            'canaries': 'canaries.json',
                            'uniqueness': 'uniqueness.json',
                            'surface_uniqueness': 'surface_uniqueness.json',
@@ -530,8 +538,7 @@ def main():
              'promoted to the selector step (no weekly slot used).'
              if promoted else
              'failed; it is NOT promoted. Submitting is a deliberate test, not a validated improvement.'))
-    dump(E / 'run_card.json', card)
-    dump(ROOT / 'evidence' / 'run_card.json', card)
+    dump(E / 'run_card.json', card)  # lane card only; the canonical card is a merge decision
     print(json.dumps({k: card[k] for k in ('verdict', 'gate_a_candidate_ge_h33',
                                            'gate_b_prime_candidate_gt_h33_significant',
                                            'raster_sha256', 'elapsed_seconds')}, indent=2),

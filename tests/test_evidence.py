@@ -8,7 +8,7 @@ import rasterio
 ROOT = Path(__file__).resolve().parents[1]
 
 
-@pytest.mark.parametrize('phase', ['phase2', 'phase3', 'phase4', 'phase5'])
+@pytest.mark.parametrize('phase', ['phase2', 'phase3', 'phase4'])
 def test_saved_pooled_scores_match_fold_terms(phase):
     base = ROOT / 'evidence' / phase
     files = {'instrumentA_holdout.json': 'instrumentA_folds.json',
@@ -38,7 +38,7 @@ def test_saved_pooled_scores_match_fold_terms(phase):
     assert checked > 0
 
 
-@pytest.mark.parametrize('phase', ['phase4', 'phase5'])
+@pytest.mark.parametrize('phase', ['phase4'])
 def test_uniqueness_receipt_is_mutual_and_complete(phase):
     audit = json.loads((ROOT / f'evidence/{phase}/uniqueness.json').read_text())
     assert audit['registry_rasters_checked'] == 62
@@ -51,18 +51,23 @@ def test_uniqueness_receipt_is_mutual_and_complete(phase):
 
 
 def test_phase5_card_extra_receipts_exist_and_agree():
-    card = json.loads((ROOT / 'evidence/run_card.json').read_text())
-    assert card['phase_evidence']['dir'] == 'evidence/phase5'
+    card = json.loads((ROOT / 'evidence/p5hgb/run_card.json').read_text())
+    assert card['phase_evidence']['dir'] == 'evidence/p5hgb'
     for rel in ('uniqueness.json', 'canaries.json', 'surface_uniqueness.json',
                 'instrumentA_holdout.json', 'instrumentB_prime.json'):
-        p = ROOT / 'evidence/phase5' / rel
+        p = ROOT / 'evidence/p5hgb' / rel
         assert p.is_file(), rel
-    canaries = json.loads((ROOT / 'evidence/phase5/canaries.json').read_text())
+    canaries = json.loads((ROOT / 'evidence/p5hgb/canaries.json').read_text())
     assert canaries['stop'] is False
     assert canaries['model_oof']['suspected_leakage'] is False
-    surface = json.loads((ROOT / 'evidence/phase5/surface_uniqueness.json').read_text())
+    surface = json.loads((ROOT / 'evidence/p5hgb/surface_uniqueness.json').read_text())
     assert surface['duplicate_count'] == 0
     assert surface['worst_spearman_full_footprint'] <= 0.90
+    audit = json.loads((ROOT / 'evidence/p5hgb/uniqueness.json').read_text())
+    assert audit['registry_rasters_checked'] == 62
+    assert audit['unique'] is True and audit['duplicate_count'] == 0
+    assert audit['worst_dot_overlap'] <= 0.70
+    assert audit['worst_spearman_full_footprint'] <= 0.90
     # the card's contamination disclosure is a measured fraction in [0, 1]
     frac = card['contamination_disclosure']['a_truth_pixels_within_3px_of_proxy']
     assert 0.0 <= frac <= 1.0

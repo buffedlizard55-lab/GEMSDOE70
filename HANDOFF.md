@@ -53,7 +53,7 @@ Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
 .venv/bin/python scripts/restore_data.py
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v5.py   # ~11 min CPU; regenerates evidence/phase5/
+.venv/bin/python scripts/run_experiment_v5.py   # ~11 min CPU; regenerates evidence/p5hgb/
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```

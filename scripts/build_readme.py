@@ -30,7 +30,7 @@ A unique, format-validated competition TIFF is published:
 `{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used.
 
 - [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase5/uniqueness.json)
+- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/p5hgb/uniqueness.json)
 - [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
@@ -42,7 +42,7 @@ The handoff's top priority: **supervised within-halo ranking** — HistGradientB
 leave-one-quadrant-out, emitted through the measured P4 coverage-stratified design
 ({card['registered_parameters']['dot_count']:,} binary dots, all off-catalogue). Preregistered in
 `docs/hypotheses.md` (Phase-5 addendum) before the run; canaries, gates and uniqueness receipts in
-`evidence/phase5/`.
+`evidence/p5hgb/`.
 
 | Instrument | Candidate | H33 reference | P4 reference | Result |
 |---|---:|---:|---:|---|
