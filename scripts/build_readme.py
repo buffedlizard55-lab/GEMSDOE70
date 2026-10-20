@@ -11,57 +11,65 @@ def main():
     dref = card['instrument_a_holdout']['h33_reference']
     b = card['instrument_b_prime_proxy']['candidate']
     bref = card['instrument_b_prime_proxy']['h33_reference']
+    p4b = card['instrument_b_prime_proxy'].get('p4_reference')
     ball = card['instrument_b_unrestricted']['candidate']
     ballref = card['instrument_b_unrestricted']['h33_reference']
     u = card['uniqueness_detail']
     delta = card['paired_b_prime_vs_h33']
+    dp4 = card['paired_b_prime_vs_p4']
+    can = card['canaries']
+    promoted = card['verdict'] == 'promote'
+    status = 'PROMOTED TO SELECTOR' if promoted else 'DOWNLOADABLE — NOT PROMOTED'
     head = f'''# GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## Submission status: **{status}**
 
 A unique, format-validated competition TIFF is published:
 `docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
+**Download: yes. Submit a weekly slot: {'recommended by our evidence (selector decides)' if promoted else 'not recommended by our evidence'}** — verdict
 `{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used.
 
 - [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
+- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase5/uniqueness.json)
 - [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## What was measured this session
+## What was measured this session (session 3, experiment 5)
 
-Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
-alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
-bootstrap. Exactly {card['registered_parameters']['dot_count']:,} binary dots are emitted, all
-off-catalogue.
+The handoff's top priority: **supervised within-halo ranking** — HistGradientBoosting over the
+19-band physics stack + visible-catalogue geometry, trained on the SGMC off-catalogue proxy with
+leave-one-quadrant-out, emitted through the measured P4 coverage-stratified design
+({card['registered_parameters']['dot_count']:,} binary dots, all off-catalogue). Preregistered in
+`docs/hypotheses.md` (Phase-5 addendum) before the run; canaries, gates and uniqueness receipts in
+`evidence/phase5/`.
 
-| Instrument | Candidate | H33 reference | Result |
-|---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | {d['dti']:.4f} | {dref['dti']:.4f} | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | {b['dti']:.4f} | {bref['dti']:.4f} | **H33 wins, delta = {delta['delta']:+.4f} {delta['ci95']}** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | {ball['dti']:.4f} | {ballref['dti']:.4f} | candidate wins |
+| Instrument | Candidate | H33 reference | P4 reference | Result |
+|---|---:|---:|---:|---|
+| A · shared hide-and-recover catalogue holdout (label-independent) | {d['dti']:.4f} | {dref['dti']:.4f} | — | beats random 0.0531 |
+| B′ · SGMC proxy d ≥ 3 px, LOQO (pre-registered target-like gate) | {b['dti']:.4f} | {bref['dti']:.4f} | {p4b['dti']:.4f} | **H33 wins, Δ {delta['delta']:+.4f} {delta['ci95']}** |
+| B · unrestricted SGMC proxy, LOQO | {ball['dti']:.4f} | {ballref['dti']:.4f} | — | H33 wins |
 
-Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
-is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
-21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
-artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+Scientific reading (a deliverable, not a failure to hide): the model learns the proxy
+(out-of-fold AUC {can['model_oof_auc_vs_proxy']:.3f}) yet places dots no better than the pure-geometry
+halo — statistically indistinguishable from P4 on B′ (Δ {dp4['delta']:+.4f} {dp4['ci95']}). The
+SGMC off-catalogue proxy does not contain enough transferable within-halo information for this
+feature set; the ceiling is the label source, not the learner. No feature canary fired
+(worst A-truth AUC {can['worst_feature_auc_vs_a_truth']:.3f}); disclosure: 31.9 % of A-truth pixels
+lie within 3 px of proxy pixels (SGMC re-draws), and B′/B share the training label source.
 
-**Uniqueness (corrected):** {u['registry_rasters_checked']} archived rasters checked; worst mutual
-overlap {u['worst_dot_overlap']:.3f} (limit 0.70); worst Spearman {u['worst_spearman_full_footprint']:.3f}
-(limit 0.90). Forward-only overlap reaches {u['worst_forward_overlap']:.2f} against a dense lattice
-whose halo covers the whole footprint — which is why the two-direction test was adopted.
+**Uniqueness (corrected):** {u['registry_rasters_checked']} archived rasters checked on the score
+surface before placement (worst ρ {u['surface_precheck']['worst_spearman_full_footprint']:.3f}) and
+on the final dots (worst mutual overlap {u['worst_dot_overlap']:.3f}, limit 0.70; worst Spearman
+{u['worst_spearman_full_footprint']:.3f}, limit 0.90; {u['duplicate_count']} duplicates).
 
-## Two fixes to the shared tool (reported, not silently forked)
+## Earlier sessions (summaries)
 
-1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
-   registry surface blocks every candidate.
-2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
-   halos cover 100 % of the footprint would otherwise block every candidate.
-
-Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
-`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
+Sessions 1–2 ran four preregistered geometry experiments (all negative on B′; receipts in
+`evidence/phase2..4/`), audited why H33 scored 0.2778 (`docs/h33-analysis.md`: emission geometry,
+not geology), and fixed two shared-uniqueness defects (binary dots; mutual overlap), reported in
+`evidence/upstream_fix_report.md` and pinned in `registry/template_pin.json` with
+`all_identical: false`.
 
 ## Reproduce
 
@@ -69,20 +77,18 @@ Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records 
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
 .venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/run_experiment_v5.py   # registered Phase-5 run, regenerates the artifact
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
 
-`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
-(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
-`evidence/history/phase1_negative/`.
+`scripts/run_experiment_v2.py`/`v3.py`/`v4.py` reproduce the earlier negatives; the phase-1
+negative is archived in `evidence/history/phase1_negative/`.
 
 ## Next session
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+The proxy ceiling is now measured — see `docs/irregularities.md` for the revised priorities
+(independent truth source, band widening, mass calibration), ranked by expected information gain.
 
 ## Complete retained project prompt
 

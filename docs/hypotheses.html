@@ -3,7 +3,7 @@
 <title>Hypotheses · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<span class="edition">PHASE 5 · 2026-10-20</span></header>
 <nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Preregistered hypotheses — 2026-10-20</h1>
 <p>Written before the experiment. These are geological hypotheses, <strong>not established discoveries or predicted scores</strong>. This checkout originally had no implementation. Novelty is relative to that checkout and inspected GEMSDOE32/60/69 code, not an exhaustive claim across private parallel sessions.</p>
 <h2>Lane irregularity</h2>
@@ -152,7 +152,76 @@
 <li>At most one scientific experiment planned; never more than three or two hours. No competition upload or weekly slot.</li>
 </ul>
 <h2>Scientific limits</h2>
-<p>Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p></main>
+<p>Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p>
+<h2>Phase-5 addendum — preregistered 2026-10-20 (before the run)</h2>
+<p>Session priority from <code>HANDOFF.md</code>: supervised within-halo ranking. This is experiment 5 overall
+(in-session 1 of 3; budget 3 experiments / 2 hours). Written before any model was trained.</p>
+<h3>H-P5-1 supervised within-halo ranking on the SGMC off-catalogue proxy</h3>
+<ul>
+<li><strong>Hypothesis.</strong> SGMC off-catalogue fault pixels (the B′ population: SGMC ∧ ¬catalogue ∧ footprint
+  ∧ d_catalogue ≥ 3 px) are separable from the halo background by a gradient-boosted model over the
+  cached 19-band physics stack plus visible-catalogue geometry, and that ranking transfers both to
+  catalogue-withheld segments (instrument A) and to spatially held-out quadrants (instrument B′
+  leave-one-quadrant-out). This is the "within-halo information" that <code>docs/h33-analysis.md</code>
+  identifies as the only route past emission geometry.</li>
+<li><strong>Layers.</strong> All 19 bands of <code>training_features.tif</code> (mag_anom, rtp, tmi_hg, geod_2ndinv,
+  iso_grav_anom_slope, tc, geod_shearrate, geod_dilaterate, tmi_vg, deq_n100a15, iso_grav_anom_vg,
+  det_elev, iso_grav_anom, tmi, depth_to_base_surf, ieq_n100a15, cond_surf, iso_grav_anom_hg,
+  det_elev_slope) plus three catalogue-geometry features (d = distance to visible catalogue, u, v =
+  along/across-strike tip kernels, all from <code>method_v2.tip_kernels</code>). 22 features, no others.</li>
+<li><strong>Mechanism.</strong> <code>sklearn.ensemble.HistGradientBoostingClassifier</code> (random_state 70520,
+  max_iter 300, learning_rate 0.06, max_leaf_nodes 31, min_samples_leaf 40, l2 1.0,
+  early_stopping True, validation_fraction 0.1). Training rows: all in-band proxy positives
+  (measured 38,757) + 150,000 uniform in-band negatives (seed 70521). Allowed domain = the P4 band:
+  valid ∧ ¬catalogue ∧ 2.4 ≤ d ≤ 32 px (measured 2,768,584 cells; 63.7 % of B′ truth lies inside it
+  — the band caps reachable truth and widening it is deliberately NOT part of this experiment).
+  Leave-one-quadrant-out over the shared <code>holdout.quadrant_ids</code> split: four models for evaluation,
+  one production model trained on all quadrants.</li>
+<li><strong>Emission.</strong> The measured P4 design, unchanged: one dot per 7×7-px stratum at the stratum
+  maximum of the model score, keep the best 37,654 strata, 5-px Euclidean NMS. Fixed mass 37,654
+  binary dots, zero on the catalogue, zero outside the footprint.</li>
+<li><strong>Non-fault mimic (named).</strong> SGMC cartographic generalization: mapper habit and digitization
+  conventions (line-work following map-unit contacts, section lines, or scanner artifacts) can be
+  learned as if geology. Such structure transfers to the proxy labels but not to organizer truth.</li>
+<li><strong>Instruments and arms.</strong> A: shared <code>buffered_component_draw</code> (seed 20, buffer 3 px, boundary
+  12 px), candidate scored with the production model but fold-visible geometry. B′/B: quadrant
+  regions eroded 12 px, candidate dots in quadrant k from LOQO model k (full-catalogue geometry,
+  matching its training). Arms: candidate, random control (37,654 uniform on valid ∧ ¬visible),
+  h33_reference, and p4_reference (the published Phase-4 TIFF, hash-pinned) so the run is compared
+  against the current holdout best family, not only H33.</li>
+<li><strong>Canaries (rule 4).</strong> (i) every feature alone vs instrument-A withheld truth — STOP if any AUC<blockquote>
+<p>0.90; (ii) every feature alone vs the proxy labels — reported, because it measures what the
+  model can memorize (d is expected to be high: proxy traces hug the catalogue; that is label
+  structure, not feature leakage, and is disclosed rather than hidden); (iii) LOQO out-of-fold
+  model AUC vs the proxy — STOP if &gt; 0.90.</p>
+</blockquote>
+</li>
+<li><strong>Uniqueness (rule 1).</strong> Surface Spearman vs the 62 archived registry rasters BEFORE placement
+  (stop if ρ &gt; 0.90); final dot audit after writing (mutual 3-px overlap &gt; 0.70 or ρ &gt; 0.90 →
+  duplicate → negative, no promotion).</li>
+<li><strong>Gates (verdict <code>promote</code> iff ALL hold).</strong> gate A: candidate A-DTI ≥ H33 A-DTI; gate B′: paired
+  Δ vs H33 &gt; 0 with 95 % CI lower bound &gt; 0; uniqueness cleared; shared validator all checks pass.
+  Any failure → <code>negative</code>. Weekly slots remain 0; promotion to a real slot is a separate selector
+  step.</li>
+<li><strong>Registered honesty constraints.</strong> B′/B share the label source with training (LOQO spatial
+  split only) — they are PROXY-DTI (LOQO), partially in-sample; instrument A is the only
+  label-independent gate, which is why both gates are required. Instrument A itself has a
+  contamination channel: SGMC re-draws of withheld catalogue segments that sit ≥ 3 px from the
+  catalogue can appear in the training labels and within kernel range of A truth; the run measures
+  and discloses the fraction of A-truth pixels within 3 px of proxy pixels. Phase-4 measured the
+  supervised-free baseline at A 0.0730 / B′ 0.0812; H33 at A 0.0037 / B′ 0.0938.</li>
+</ul>
+<h3>Phase-5 implementation amendment (2026-10-20, before any score was seen)</h3>
+<p>The registered emission ("one dot per 7×7-px stratum at the stratum maximum, best 37,654 strata,
+5-px NMS, fixed mass 37,654") is under-determined for a spiky surface: on the first execution the
+model surface allowed only 34,587 block-argmax dots under NMS (the Phase-4 smooth halo never hit
+this). The run stopped at the mass invariant before any evaluation. Amendment, fixed before any
+DTI was computed: pass 1 stays <strong>byte-identical</strong> to the Phase-4 operator (blocks in score order,
+dot at the stratum maximum when NMS-feasible); only if pass 1 places fewer than 37,654 dots does
+a second pass place one dot at the best NMS-feasible <strong>positive-score</strong> cell of the
+highest-scoring strata that remain empty (positive cells are exactly the allowed-domain cells, so
+every dot stays off-catalogue and inside the footprint). One dot per stratum and the fixed mass
+are preserved; no threshold, mass or domain changed. Disclosed in the run card as <code>emission_topup</code>.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·

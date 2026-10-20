@@ -1,3 +1,65 @@
+# Handoff — 2026-10-20 (session 3, branch arena/9fff0647-gemsdoe70)
+
+Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
+
+## State
+
+* **Artifact published:** `docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif`
+  (150,877 bytes, sha256 `0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931`),
+  plus a one-TIFF ZIP and the writer receipt. **Verdict: negative.** `download_ok = true`,
+  `submit_recommended = false`. No weekly slot used; no organizer-confirmed score exists.
+
+## What was done (experiment 5 = session-3 in-session experiment 1 of 3)
+
+1. **Preregistered H-P5-1** (`docs/hypotheses.md` Phase-5 addendum) *before* the run: supervised
+   within-halo ranking — HistGradientBoosting over the 19-band stack + visible-catalogue geometry
+   (d, tip u, v), trained on the SGMC off-catalogue proxy (d ≥ 3 px) with leave-one-quadrant-out;
+   emission = P4 coverage-stratified design at fixed mass 37,654; arms candidate / random / H33 /
+   P4; canaries (A-truth, proxy-label disclosure, OOF); surface Spearman pre-check; mutual-overlap
+   final audit; both gates.
+2. **Result (negative, informative):** A 0.0822 [0.0745, 0.0902] (random 0.0531); B′ LOQO
+   0.0793 [0.0716, 0.0879] vs H33 0.0938 (gate fails, Δ −0.0145) and vs P4 0.0812
+   (indistinguishable, Δ −0.0019 CI [−0.0060, +0.0024]); OOF AUC 0.641. **The proxy, not the
+   learner, is the ceiling.** Canaries clean (worst A-truth feature AUC 0.565). Contamination
+   disclosed and measured: 31.9 % of A-truth pixels within 3 px of proxy pixels.
+3. **Two implementation events, both disclosed:** the emission top-up amendment (fixed mass under
+   NMS collisions; pass 1 byte-identical to P4, unit-tested) and a writer-caught defect (first
+   top-up placed dots on catalogue zero-score cells; shared writer rejected it; fixed + regression
+   test). See `docs/irregularities.md`.
+4. **Repo contract:** `release.py` now resolves the current candidate from the canonical card's
+   `phase_evidence` mapping (dot count card-driven); `registry/published_artifacts.json` pins the
+   three new files; site/readme regenerated from receipts; tests extended (155 passing at
+   handoff).
+
+## Do not
+
+* Do not relabel the P5 artifact as promoted, and do not edit the card's gates.
+* Do not describe 0.2778 / 0.44 / 0.3195 as organizer-confirmed (all user-supplied).
+* Do not rerun `run_experiment_v5.py` expecting an overwrite — the writer refuses existing files.
+* Do not remove the emission amendment or its regression tests.
+
+## Next session, in order
+
+1. Quantify SGMC-vs-QFaults duplication (buffer tests 1–6 px), then pursue an independent truth
+   source (NBMG county maps, INGENIOUS trace exports) — the measured bottleneck.
+2. Registered band-widening experiment (D_MAX 48/64 px at fixed mass) — 36.3 % of B′ truth lies
+   beyond the current 32-px halo.
+3. Registered dot-count sweep (25k/37k/50k) on the existing P5 surface, B′ LOQO only.
+4. Upstream the two uniqueness fixes to the template and run its suite.
+
+## Reproduce
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_experiment_v5.py   # ~11 min CPU; regenerates evidence/phase5/
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+.venv/bin/python -m pytest -q
+```
+
+---
+
 # Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
 
 Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.

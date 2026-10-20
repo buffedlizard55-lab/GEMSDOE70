@@ -3,9 +3,9 @@
   "download_ok": true,
   "submit_recommended": false,
   "download_and_submit_ok": false,
-  "artifact": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-  "artifact_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
-  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
+  "artifact": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif",
+  "artifact_sha256": "0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931",
+  "submission_name": "gems70-p5-halo-rank-hgb-37654-20261020",
   "reasons": [
     "Candidate did not beat H33 on instrument B' with a 95% CI above zero."
   ],
@@ -16,9 +16,9 @@
   "policy": "Never describe a non-promoted artifact as an improvement. Both flags are always published together.",
   "status": "DOWNLOADABLE \u2014 NOT PROMOTED",
   "download_available": true,
-  "generated_tif": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+  "generated_tif": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif",
   "approved_for_weekly_slot": false,
-  "scientific_experiments_run": 4,
+  "scientific_experiments_run": 5,
   "submission_slots_used": 0,
   "template_integrity_ok": true
 }

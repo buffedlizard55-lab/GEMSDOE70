@@ -43,18 +43,56 @@ def _load(root, rel):
     return json.loads(p.read_text()) if p.is_file() else None
 
 
+def _canary_records(canaries):
+    """Canary records from either the legacy flat file or the Phase-5 nested one."""
+    if not isinstance(canaries, dict):
+        return []
+    records = []
+    for value in canaries.values():
+        if not isinstance(value, dict):
+            continue
+        if 'auc' in value:
+            records.append(value)
+        else:
+            records.extend(v for v in value.values()
+                           if isinstance(v, dict) and 'auc' in v)
+    return records
+
+
+def _phase_paths(card):
+    """Resolve the current candidate's evidence locations from the card itself.
+
+    Legacy Phase-4 card: no ``phase_evidence`` block, canaries in phase2,
+    uniqueness in phase4. Phase-5+ cards carry an explicit mapping.
+    """
+    phase = card.get('phase_evidence') or {}
+    base = phase.get('dir', 'evidence/phase4')
+    return dict(
+        canaries=phase.get('canaries', 'canaries.json') if phase
+        else '../phase2/canaries.json',
+        uniqueness=phase.get('uniqueness', 'uniqueness.json'),
+        base=base,
+    )
+
+
 def release_status(root):
-    """Report the published candidate's status without ever inventing a score."""
+    """Report the published candidate's status without ever inventing a score.
+
+    Reads the canonical ``evidence/run_card.json`` (the current candidate,
+    Phase-5 as of 2026-10-20 session 3) and resolves its phase receipts through
+    the card's own ``phase_evidence`` mapping. Fail-closed in both directions.
+    """
     root = Path(root)
-    card = _load(root, 'evidence/phase4/run_card.json')
-    canaries = _load(root, 'evidence/phase2/canaries.json')
-    audit = _load(root, 'evidence/phase4/uniqueness.json')
+    card = _load(root, 'evidence/run_card.json')
+    paths = _phase_paths(card) if card else {}
+    canaries = _load(root, f"{paths['base']}/{paths['canaries']}") if card else None
+    audit = _load(root, f"{paths['base']}/{paths['uniqueness']}") if card else None
     reasons, notes = [], []
     download_ok = False
     submit = False
     tif = sha = None
     if not card:
-        reasons.append('Phase-4 run card is missing.')
+        reasons.append('Run card is missing.')
     else:
         name = card.get('submission_name', '')
         tif = root / 'docs/downloads' / f'{name}.tif'
@@ -68,13 +106,19 @@ def release_status(root):
         if not checks or not all(bool(v) for v in checks.values()):
             reasons.append('Shared validator checks did not all pass.')
             download_ok = False
-        if validator.get('emitted_positive_pixels') != 37654:
-            reasons.append('Emitted dot count differs from the registered 37,654.')
+        expected_dots = (card.get('registered_parameters') or {}).get('dot_count')
+        if not expected_dots:
+            reasons.append('Run card does not record its registered dot count.')
+            download_ok = False
+        elif validator.get('emitted_positive_pixels') != expected_dots:
+            reasons.append('Emitted dot count differs from the registered '
+                           f'{expected_dots:,}.')
             download_ok = False
         if not audit or audit.get('unique') is not True or int(audit.get('duplicate_count', 1)) != 0:
             reasons.append('Uniqueness is not cleared under the corrected mutual-overlap rule.')
             download_ok = False
-        if not canaries or not all(valid_canary(c) for c in canaries.values()):
+        records = _canary_records(canaries) if canaries else []
+        if not canaries or not records or not all(valid_canary(c) for c in records):
             reasons.append('Feature-alone leakage evidence is missing or fails.')
         submit = bool(card.get('download_and_submit_ok') is True and download_ok)
         if not card.get('gate_a_candidate_ge_h33'):

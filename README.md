@@ -3,48 +3,51 @@
 ## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
 A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
+`docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif` (sha256 `0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `negative` on the pre-registered target-like gate. No weekly slot was used.
 
 - [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
+- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase5/uniqueness.json)
 - [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## What was measured this session
+## What was measured this session (session 3, experiment 5)
 
-Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
-alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
-bootstrap. Exactly 37,654 binary dots are emitted, all
-off-catalogue.
+The handoff's top priority: **supervised within-halo ranking** — HistGradientBoosting over the
+19-band physics stack + visible-catalogue geometry, trained on the SGMC off-catalogue proxy with
+leave-one-quadrant-out, emitted through the measured P4 coverage-stratified design
+(37,654 binary dots, all off-catalogue). Preregistered in
+`docs/hypotheses.md` (Phase-5 addendum) before the run; canaries, gates and uniqueness receipts in
+`evidence/phase5/`.
 
-| Instrument | Candidate | H33 reference | Result |
-|---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
+| Instrument | Candidate | H33 reference | P4 reference | Result |
+|---|---:|---:|---:|---|
+| A · shared hide-and-recover catalogue holdout (label-independent) | 0.0822 | 0.0037 | — | beats random 0.0531 |
+| B′ · SGMC proxy d ≥ 3 px, LOQO (pre-registered target-like gate) | 0.0793 | 0.0938 | 0.0812 | **H33 wins, Δ -0.0145 [-0.024286076863923648, -0.003909813992753573]** |
+| B · unrestricted SGMC proxy, LOQO | 0.0844 | 0.0906 | — | H33 wins |
 
-Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
-is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
-21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
-artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+Scientific reading (a deliverable, not a failure to hide): the model learns the proxy
+(out-of-fold AUC 0.641) yet places dots no better than the pure-geometry
+halo — statistically indistinguishable from P4 on B′ (Δ -0.0019 [-0.005952404035546539, 0.002392549234704787]). The
+SGMC off-catalogue proxy does not contain enough transferable within-halo information for this
+feature set; the ceiling is the label source, not the learner. No feature canary fired
+(worst A-truth AUC 0.565); disclosure: 31.9 % of A-truth pixels
+lie within 3 px of proxy pixels (SGMC re-draws), and B′/B share the training label source.
 
-**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
-(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
-whose halo covers the whole footprint — which is why the two-direction test was adopted.
+**Uniqueness (corrected):** 62 archived rasters checked on the score
+surface before placement (worst ρ 0.096) and
+on the final dots (worst mutual overlap 0.301, limit 0.70; worst Spearman
+0.015, limit 0.90; 0 duplicates).
 
-## Two fixes to the shared tool (reported, not silently forked)
+## Earlier sessions (summaries)
 
-1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
-   registry surface blocks every candidate.
-2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
-   halos cover 100 % of the footprint would otherwise block every candidate.
-
-Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
-`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
+Sessions 1–2 ran four preregistered geometry experiments (all negative on B′; receipts in
+`evidence/phase2..4/`), audited why H33 scored 0.2778 (`docs/h33-analysis.md`: emission geometry,
+not geology), and fixed two shared-uniqueness defects (binary dots; mutual overlap), reported in
+`evidence/upstream_fix_report.md` and pinned in `registry/template_pin.json` with
+`all_identical: false`.
 
 ## Reproduce
 
@@ -52,20 +55,18 @@ Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records 
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
 .venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/run_experiment_v5.py   # registered Phase-5 run, regenerates the artifact
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
 
-`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
-(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
-`evidence/history/phase1_negative/`.
+`scripts/run_experiment_v2.py`/`v3.py`/`v4.py` reproduce the earlier negatives; the phase-1
+negative is archived in `evidence/history/phase1_negative/`.
 
 ## Next session
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+The proxy ceiling is now measured — see `docs/irregularities.md` for the revised priorities
+(independent truth source, band widening, mass calibration), ranked by expected information gain.
 
 ## Complete retained project prompt
 

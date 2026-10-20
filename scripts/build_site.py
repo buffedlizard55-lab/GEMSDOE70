@@ -48,7 +48,7 @@ def frame(title, body):
 <title>{esc(title)} · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<span class="edition">PHASE 5 · 2026-10-20</span></header>
 <nav aria-label="Main">{nav}</nav><main id="main">{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
@@ -79,8 +79,12 @@ def main():
     sha = card['raster_sha256']
     val = card.get('validator_output') or {}
     checks = val.get('checks') or {}
-    uniqueness = load('evidence/phase4/uniqueness.json', {})
-    canaries = load('evidence/phase2/canaries.json', {})
+    phase_dir = (card.get('phase_evidence') or {}).get('dir', 'evidence/phase4')
+    uniqueness = load(f'{phase_dir}/uniqueness.json', {})
+    canaries = load(f'{phase_dir}/canaries.json', {}) or load('evidence/phase2/canaries.json', {})
+    p5a = load(f'{phase_dir}/instrumentA_holdout.json')
+    p5b = load(f'{phase_dir}/instrumentB_prime.json')
+    p5ball = load(f'{phase_dir}/instrumentB_all.json')
     p2a = load('evidence/phase2/instrumentA_holdout.json')
     p2b = load('evidence/phase2/instrumentB_proxy.json')
     p3a = load('evidence/phase3/instrumentA_holdout.json')
@@ -99,13 +103,19 @@ def main():
     # ------------------------------------------------------------- copy evidence
     copies = {
         'evidence/run_card.json': 'run_card.json',
-        'evidence/phase4/uniqueness.json': 'uniqueness.json',
-        'evidence/phase4/instrumentA_holdout.json': 'instrumentA_holdout.json',
-        'evidence/phase4/instrumentA_folds.json': 'instrumentA_folds.json',
-        'evidence/phase4/instrumentB_prime.json': 'instrumentB_prime.json',
-        'evidence/phase4/instrumentB_all.json': 'instrumentB_all.json',
-        'evidence/phase4/instrumentB_prime_folds.json': 'instrumentB_prime_folds.json',
-        'evidence/phase2/canaries.json': 'canaries.json',
+        f'{phase_dir}/uniqueness.json': 'uniqueness.json',
+        f'{phase_dir}/instrumentA_holdout.json': 'instrumentA_holdout.json',
+        f'{phase_dir}/instrumentA_folds.json': 'instrumentA_folds.json',
+        f'{phase_dir}/instrumentB_prime.json': 'instrumentB_prime.json',
+        f'{phase_dir}/instrumentB_all.json': 'instrumentB_all.json',
+        f'{phase_dir}/instrumentB_prime_folds.json': 'instrumentB_prime_folds.json',
+        f'{phase_dir}/canaries.json': 'canaries.json',
+        f'{phase_dir}/surface_uniqueness.json': 'surface_uniqueness.json',
+        'evidence/phase4/uniqueness.json': 'phase4_uniqueness.json',
+        'evidence/phase4/instrumentA_holdout.json': 'phase4_instrumentA.json',
+        'evidence/phase4/instrumentB_prime.json': 'phase4_instrumentB_prime.json',
+        'evidence/phase4/instrumentB_all.json': 'phase4_instrumentB_all.json',
+        'evidence/phase2/canaries.json': 'phase2_canaries.json',
         'evidence/phase2/instrumentA_holdout.json': 'phase2_instrumentA.json',
         'evidence/phase2/instrumentB_proxy.json': 'phase2_instrumentB.json',
         'evidence/phase3/instrumentA_holdout.json': 'phase3_instrumentA.json',
@@ -138,15 +148,26 @@ def main():
     promoted = bool(card.get('download_and_submit_ok'))
     tone = 'stop' if not promoted else 'ok'
     headline = ('Verified file · not promoted' if not promoted else 'Promoted candidate')
+    n_reg = uniqueness.get('registry_rasters_checked', 62)
+    delta_b = card.get('paired_b_prime_vs_h33') or {}
+    if promoted:
+        gate_text = ('the pre-registered gates <strong>passed</strong>: the candidate beat H33 '
+                     'significantly on instrument B′ and matched it on instrument A. It is '
+                     'promoted to the separate selector step; no weekly slot has been used.')
+    else:
+        gate_text = (f'the pre-registered target-like gate (instrument B′) is '
+                     f'negative (paired Δ {delta_b.get("delta", 0):+.4f}, '
+                     f'95% CI [{delta_b.get("ci95", [0, 0])[0]:.4f}, '
+                     f'{delta_b.get("ci95", [0, 0])[1]:.4f}]), so we cannot claim this beats the '
+                     'family best of 0.2778. Uploading is a deliberate test, not a validated '
+                     'improvement.')
     decision = f'''<section class="{tone}" aria-labelledby="decision">
 <div class="eyebrow">SUBMISSION STATUS</div>
 <h1 id="decision">{esc(headline)}</h1>
-<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
+<p><strong>Download: yes.</strong> The file is unique among the {n_reg} archived registry rasters,
 passes every shared-validator check, and its SHA-256 is recorded below.</p>
 <p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
-<strong>{esc(card['verdict'])}</strong>: the pre-registered target-like gate (instrument B′) is
-negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
-not a validated improvement.</p>
+<strong>{esc(card['verdict'])}</strong>: {gate_text}</p>
 <div class="actions">
 <a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download submission TIFF</a>
 <a class="button secondary" href="downloads/{esc(name)}.zip" download>Download one-TIFF ZIP</a>
@@ -156,46 +177,53 @@ not a validated improvement.</p>
 <code>{esc(card.get('submission_note', ''))}</code></p></section>'''
 
     # ------------------------------------------------------------------ overview
-    a = p4a['scores'] if p4a else {}
-    b = p4b['scores'] if p4b else {}
-    ball = p4ball['scores'] if p4ball else {}
+    a = p5a['scores'] if p5a else {}
+    b = p5b['scores'] if p5b else {}
     metrics = f'''<div class="metrics">
 <section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
 <div class="number">{a['candidate']['dti']:.4f}</div>
 <p>{ci(a['candidate'])} · {a['candidate']['withheld_positive_pixels']:,} withheld catalogue pixels</p></section>
-<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
+<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI (LOQO)</div>
 <div class="number">{b['candidate']['dti']:.4f}</div>
-<p>{ci(b['candidate'])} · SGMC proxy outside the duplication band</p></section>
-<section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
+<p>{ci(b['candidate'])} · SGMC proxy outside the duplication band, leave-one-quadrant-out</p></section>
+<section><div class="eyebrow">UNIQUENESS · {n_reg} RASTERS</div>
 <div class="number">{uniqueness.get('worst_dot_overlap', 0):.2f}</div>
 <p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ {uniqueness.get('worst_spearman_full_footprint', 0):.3f}</p></section></div>'''
 
     index = decision + f'''<section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
 <h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
-<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
-pre-registered experiments and published the best candidate. Two instruments favour it, one does
-not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+<p>Session 3 ran the handoff's top priority: a supervised within-halo ranking model trained on the
+SGMC off-catalogue proxy with leave-one-quadrant-out, over the cached 19-band physics stack plus
+catalogue geometry. Five pre-registered experiments now agree on one thing — emission geometry is
+solved, the remaining gap is information. Both instruments are shown with confidence intervals,
+and the verdict follows the pre-registered rule.</p>
 </section>{metrics}
 <div class="columns">
 <section class="panel"><h2>Why it is downloadable</h2>
 <p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
-transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
-Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
-lattice reaches 1.00 by construction and is reported separately).</p>
+transform 100 m, values exactly 0/1, {val.get('emitted_positive_pixels', 0):,} dots, zero on mapped
+faults, zero outside the footprint. Uniqueness: worst mutual overlap
+{uniqueness.get('worst_dot_overlap', 0):.2f} against {n_reg} archived rasters, checked on the score
+surface before placement (worst ρ {(card.get('uniqueness_detail') or {}).get('surface_precheck', {}).get('worst_spearman_full_footprint', 0):.3f})
+and on the final dots.</p>
 <a href="results.html">Full evidence →</a></section>
 <section class="panel"><h2>Why it is not promoted</h2>
 <p>On instrument B′ the candidate scores {b['candidate']['dti']:.4f} versus H33's
-{b['h33_reference']['dti']:.4f} (paired Δ {p4b['paired_differences']['h33_reference']['delta']:+.4f},
-95% CI {ci(p4b['paired_differences']['h33_reference'])}). The pre-registered rule requires a
-positive lower bound. It does not hold.</p>
+{b['h33_reference']['dti']:.4f} (paired Δ {delta_b.get('delta', 0):+.4f},
+95% CI {ci(delta_b)}). The pre-registered rule requires a
+positive lower bound. It does not hold — and the model's out-of-fold AUC on the proxy was only
+{(card.get('canaries') or {}).get('model_oof_auc_vs_proxy', 0):.3f}, so the proxy itself, not the
+learner, looks like the ceiling.</p>
 <a href="hypotheses.html">Why this rule →</a></section></div>
 <section><h2>What is measured and what is not</h2>
 <p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue
 components and measures catalogue recovery; instrument B/B′ uses USGS SGMC faults minus the
-catalogue as a proxy for newly mapped faults. Every number is labelled, and no projection is
-presented as a leaderboard score.</p>
+catalogue as a proxy for newly mapped faults — and for this candidate it also supplied the training
+labels, so B′ is a leave-one-quadrant-out reading, not an independent one. Instrument A stays the
+only label-independent gate. Every number is labelled, and no projection is presented as a
+leaderboard score.</p>
 <ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
-<li><a href="results.html">All three experiments, ablations and canaries</a></li>
+<li><a href="results.html">All five experiments, canaries and ablations</a></li>
 <li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section>'''
 
     # ------------------------------------------- parallel E2/E3 lane (integrated)
@@ -222,6 +250,15 @@ negative with no file. Full tables on the results page; terms in
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
+    if promoted:
+        upload_text = ('recommended by our evidence (verdict '
+                       f'{esc(card["verdict"])}); the separate selector step decides the slot.')
+    else:
+        pct_below = 100 * (1 - b['candidate']['dti'] / max(b['h33_reference']['dti'], 1e-9))
+        upload_text = (f'not recommended. Verdict <code>{esc(card["verdict"])}</code>. '
+                       f'Our target-like proxy says it is {pct_below:.1f}% below H33; our '
+                       'catalogue holdout says it is far above it. Neither is the hidden truth. '
+                       'This is a defensible test, not a validated win.')
     guide = f'''<div class="eyebrow">SUBMISSION GUIDE</div>
 <h1>How to submit this file — and what the number will mean.</h1>
 <p class="lead"><strong>The file:</strong> <code>downloads/{esc(name)}.tif</code>
@@ -230,9 +267,7 @@ A one-TIFF ZIP of the same file is provided for portals that ask for it. Upload 
 <section class="panel"><h2>Decision, stated plainly</h2>
 <ul>
 <li><strong>Download:</strong> yes — the file is unique, format-validated and reproducible.</li>
-<li><strong>Upload a weekly slot:</strong> not recommended. Verdict <code>{esc(card['verdict'])}</code>.
-Our target-like proxy says it is 12.6% below H33; our catalogue holdout says it is 20× above it.
-Neither is the hidden truth. This is a defensible test, not a validated win.</li>
+<li><strong>Upload a weekly slot:</strong> {upload_text}</li>
 <li><strong>Never</strong> upload the ZIP and the TIFF as two different submissions.</li></ul></section>
 <section><h2>Steps</h2><ol class="steps">
 <li>Open the competition <em>New submission</em> page (DrivenData competition 306).</li>
@@ -264,28 +299,55 @@ rejected upload, so we do not claim to know its specific defect.</p></section>
     (DOCS / 'submission.html').write_text(frame('Submit a file', guide))
 
     # ------------------------------------------------------------------- results
-    rows_a = instrument_rows(p4a)
-    rows_bp = instrument_rows(p4b)
-    rows_ball = instrument_rows(p4ball)
+    rows_a = instrument_rows(p5a)
+    rows_bp = instrument_rows(p5b)
+    rows_ball = instrument_rows(p5ball)
     ablate = []
     for tag, d in (('A · shared holdout', p3a), ('B′ · proxy', p3b), ('B · unrestricted proxy', p3ball)):
         if d:
             for k in ('candidate', 'ablation_no_tip', 'random_control', 'h33_reference'):
                 if k in d['scores']:
                     ablate.append([tag, esc(k), f"{d['scores'][k]['dti']:.4f}", ci(d['scores'][k])])
-    canary_rows = [[esc(k), f"{v['auc']:.3f}", 'STOP' if v['suspected_leakage'] else 'clear']
-                   for k, v in canaries.items()]
+    # Phase-5 canaries are nested: instrument_a_truth / proxy_labels / model_oof.
+    can_a = (canaries or {}).get('instrument_a_truth', {})
+    can_p = (canaries or {}).get('proxy_labels', {})
+    can_m = (canaries or {}).get('model_oof', {}) or {}
+    canary_rows = [[esc(k), f"{v['auc']:.3f}",
+                    'STOP' if v.get('suspected_leakage') else 'clear']
+                   for k, v in can_a.items() if isinstance(v, dict)]
+    canary_p_rows = [[esc(k), f"{v['auc']:.3f}",
+                      'STOP' if v.get('suspected_leakage') else 'clear']
+                     for k, v in can_p.items() if isinstance(v, dict)]
+    canary_summary = [[
+        'worst feature AUC vs instrument-A truth',
+        f"{max((v['auc'] for v in can_a.values() if isinstance(v, dict) and v.get('auc') is not None), default=0):.3f}",
+        'clear'],
+        ['worst feature AUC vs proxy labels (disclosure, not a stop rule)',
+         f"{max((v['auc'] for v in can_p.values() if isinstance(v, dict) and v.get('auc') is not None), default=0):.3f}",
+         'clear'],
+        ['model out-of-fold AUC vs proxy labels',
+         f"{can_m.get('auc', 0):.3f}",
+         'STOP' if can_m.get('suspected_leakage') else 'clear']]
     history = []
     for tag, d in (('Exp 2 · gated prior A', p2a), ('Exp 2 · B proxy', p2b),
                    ('Exp 3 · damage zone A', p3a), ('Exp 3 · B′', p3b),
-                   ('Exp 4 · stratified A', p4a), ('Exp 4 · B′', p4b)):
+                   ('Exp 4 · stratified A', p4a), ('Exp 4 · B′', p4b),
+                   ('Exp 5 · supervised A', p5a), ('Exp 5 · B′ LOQO', p5b)):
         if not d:
             continue
         cand = d['scores']['candidate']
         ref = d['scores'].get('h33_reference')
         history.append([esc(tag), f"{cand['dti']:.4f}", ci(cand),
                         f"{ref['dti']:.4f}" if ref else '—'])
-    results = f'''<div class="eyebrow">EVIDENCE</div><h1>Three experiments, two instruments, one verdict.</h1>
+    p4ref_note = ''
+    if p5b and 'p4_reference' in p5b['scores']:
+        p4ref_note = (f"<p>The Phase-4 stratified halo was scored in the same run as a fourth arm: "
+                      f"B′ {p5b['scores']['p4_reference']['dti']:.4f} "
+                      f"{ci(p5b['scores']['p4_reference'])} — the supervised candidate is "
+                      f"statistically indistinguishable from it "
+                      f"(paired Δ {card['paired_b_prime_vs_p4']['delta']:+.4f}, "
+                      f"95% CI {ci(card['paired_b_prime_vs_p4'])}).</p>")
+    results = f'''<div class="eyebrow">EVIDENCE</div><h1>Five experiments, two instruments, one verdict.</h1>
 <p>All DTI values use α = 0.2, β = 0.8 and a 300 m triangular kernel on the pinned 100 m grid, with
 pooled terms and a paired spatial-cluster bootstrap (1,000 draws, 20 km blocks). Intervals are
 conditional on the fitted folds and the proxy truth; they are not leaderboard intervals.</p>
@@ -293,14 +355,17 @@ conditional on the fitted folds and the proxy truth; they are not leaderboard in
 <code>calib_r13lattice_00904.tif</code> (206,895 dots) has a 3-px halo covering <strong>100 %</strong>
 of the footprint, so forward-only overlap is 1.00 for any nonempty candidate. Both directions are
 always reported.</p>
-<h2>Published candidate</h2>
-{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_a, 'Instrument A · shared hide-and-recover catalogue holdout')}
-{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_bp, "Instrument B′ · SGMC proxy, d ≥ 3 px from catalogue")}
-{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_ball, 'Instrument B · unrestricted SGMC proxy (contaminated by map duplication)')}
+<h2>Published candidate — Experiment 5, supervised within-halo ranking</h2>
+{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_a, 'Instrument A · shared hide-and-recover catalogue holdout (label-independent)')}
+{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_bp, "Instrument B′ · SGMC proxy, d ≥ 3 px from catalogue (LOQO; shares the training label source)")}
+{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_ball, 'Instrument B · unrestricted SGMC proxy (map-duplication band; LOQO)')}
+{p4ref_note}
 <h2>Experiment 3 ablations</h2>
 {table(['Instrument', 'Arm', 'DTI', '95% CI'], ablate, 'Ablations were registered before their runs.')}
-<h2>Leakage canaries</h2>
-{table(['Feature', 'AUC (held-out)', 'Result'], canary_rows, 'Each feature alone, 11,321 withheld positives vs 200,000 negatives. AUC > 0.90 would stop the run.')}
+<h2>Leakage canaries — Experiment 5</h2>
+{table(['Check', 'AUC', 'Result'], canary_summary, 'Registered stop rule: any feature AUC > 0.90 vs instrument-A truth, or model OOF AUC > 0.90.')}
+{table(['Feature', 'AUC vs A-truth', 'Result'], canary_rows, 'Each of the 22 features alone, 11,321 withheld positives vs 200,000 sampled negatives.')}
+{table(['Feature', 'AUC vs proxy labels', 'Result'], canary_p_rows, 'Label-structure disclosure: geometry ranks the proxy without physics (d = distance to catalogue). Not a stop rule.')}
 <h2>Experiment history</h2>
 {table(['Run', 'Candidate DTI', '95% CI', 'H33 DTI'], history)}
 <p><a href="downloads/run_card.json">Full run card</a> ·
@@ -386,9 +451,9 @@ as a predictor.</li></ul>
     # keep a root-level copy so older pages that link run-card.json still resolve
     (DOCS / 'run-card.json').write_text((ROOT / 'evidence/run_card.json').read_text())
     # Phase-1 receipts keep their historical names only under the archived prefix.
+    # (surface_uniqueness.json is now the CURRENT candidate's pre-placement receipt.)
     for stale in ('holdout.json', 'holdout_folds.json', 'holdout_split.json',
-                  'registry_saturation.json', 'surface_uniqueness.json',
-                  'experiment_manifest.json'):
+                  'registry_saturation.json', 'experiment_manifest.json'):
         (DOWN / stale).unlink(missing_ok=True)
     print('site built:', ', '.join(sorted(p.name for p in DOCS.glob('*.html'))))
 

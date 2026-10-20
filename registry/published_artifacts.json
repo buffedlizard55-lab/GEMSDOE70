@@ -55,6 +55,24 @@
       "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
       "bytes": 498152,
       "note": "parallel H2 session (PR #18), blocked diagnostic, NOT a submission; card evidence/history/h2_stepover_negative/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif",
+      "sha256": "0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931",
+      "bytes": 150877,
+      "note": "session 3 (P5) supervised within-halo ranking, published candidate; run card evidence/phase5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.zip",
+      "sha256": "a551e48e03e72240d8d0d75d845850eb4ba7f353cb8ebc961d3f65d6ababb56a",
+      "bytes": 118855,
+      "note": "session 3 (P5), one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.json",
+      "sha256": "0a65bfd3d110081cc4adfba7d1cb00741bfa0192a2b3e8d1fa3dfe78ea3db0bc",
+      "bytes": 3474,
+      "note": "session 3 (P5), writer receipt"
     }
   ]
 }
