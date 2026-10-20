@@ -1,113 +1,102 @@
-"""Embed the entire retained user brief behind a short, accurate session summary."""
+"""Embed the entire retained user brief behind an accurate, evidence-bound summary."""
 from pathlib import Path
 import json
-ROOT=Path(__file__).resolve().parents[1]
+
+ROOT = Path(__file__).resolve().parents[1]
+
 
 def main():
-    import sys
-    sys.path.insert(0, str(ROOT/'src'))
-    c1=json.loads((ROOT/'evidence/c1_holdout.json').read_text())
-    res=json.loads((ROOT/'evidence/c1_result.json').read_text())
-    rec=json.loads((ROOT/'evidence/c1_export_receipt.json').read_text())
-    scan=json.loads((ROOT/'evidence/c1_registry_scan.json').read_text())
-    cand=c1['scores']['candidate']; rnd=c1['scores']['random_control']; noc=c1['scores']['ablation_no_catalogue']
-    s=scan['summary']
-    d_e1=json.loads((ROOT/'evidence/run_card.json').read_text())['holdout_dti']['dti']
-    dots=sum(1 for r in scan['rows'] if r.get('duplicate_by_overlap') and r.get('representation')=='dot_field')
-    head=f'''# GEMSDOE70 — geothermal fault research
+    card = json.loads((ROOT / 'evidence/run_card.json').read_text())
+    d = card['instrument_a_holdout']['candidate']
+    dref = card['instrument_a_holdout']['h33_reference']
+    b = card['instrument_b_prime_proxy']['candidate']
+    bref = card['instrument_b_prime_proxy']['h33_reference']
+    ball = card['instrument_b_unrestricted']['candidate']
+    ballref = card['instrument_b_unrestricted']['h33_reference']
+    u = card['uniqueness_detail']
+    delta = card['paired_b_prime_vs_h33']
+    head = f'''# GEMSDOE70 — geothermal fault research
 
-## Submission status: **DO NOT SUBMIT — the generated GeoTIFF is not cleared**
+## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
-Current candidate **C1** (strike-coherent catalogue extrapolation, pre-registered in
-[docs/candidates-2026-10-20.md](docs/candidates-2026-10-20.md)) produced a format-valid,
-unique-named single-band float32 GeoTIFF, `submissions/{rec['name']}.tif` (git-ignored,
-LOCAL-FORMAT-VALIDATION only). **It is not OK to download or submit.** Two gates fail:
+A unique, format-validated competition TIFF is published:
+`docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
+**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
+`{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used.
 
-- **Holdout (HOLDOUT-DTI, evaluator `{c1['evaluator_version']}`, holdout seed 71):** C1 {cand['dti']:.5f}
-  (95% CI [{cand['ci95'][0]:.5f}, {cand['ci95'][1]:.5f}]) is below the random sparse control
-  {rnd['dti']:.5f} and the catalogue-free ablation {noc['dti']:.5f}. Paired difference vs random:
-  {res['paired_difference_vs_random']['delta']:.5f}.
-- **Registry (REGISTRY-MEASUREMENT, complete scan of {s['registry_rasters_checked']} of {s['registry_rasters_expected']} indexed rasters):**
-  {dots} sparse dot-field rasters exceed the literal 3 px overlap limit of 0.70 (worst 1.0, a 13GEMSDOE lattice file).
-
-The leakage canary passed. No tuning on holdout seed 71 was made. No previous submission was copied.
-
-- [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission guide (how to submit)](docs/executive-summary.html)
-- [C1 run card](evidence/c1_run_card.json) · [C1 holdout](evidence/c1_holdout.json) · [registry scan](evidence/c1_registry_scan.json)
-- [Official-source ledger, verified 2026-10-20](evidence/official_sources_2026-10-20.json) · [Candidate ranking](docs/candidates-2026-10-20.md)
-- [Limitations / irregularities](docs/irregularities.md) · [Session handoff](HANDOFF.md)
-- [Protocol decision required](docs/protocol-decision.md) · [Latest repository review / Pages safeguards](docs/session-review.md)
-- [Follow-up publication review](reports/followup-publication-review-20261020.md)
+- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
+- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
+- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
+- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## Official facts used (verified 2026-10-20; quotes in the ledger)
+## What was measured this session
 
-- Format: one GeoTIFF, single layer, float32, values between 0 and 1, EPSG 32611, 100 m,
-  same bounds; outside bounds “null or nan” (problem page).
-- Deadline: competition page “Dec. 3, 2026, 11:59 p.m. UTC”; rules A.1 “5:00 p.m. ET on the prize
-  submission deadline date”. Plan to the earlier cutoff. This discrepancy is unresolved.
-- Limits: up to three submissions per week; one final submission chosen before the deadline (rules §3.4–3.5).
-- Eligibility, generative-AI narrative disclosure and external-data license rules: rules §1.2–1.3, §3.2.
-  You must confirm eligibility yourself. Nothing here checks it.
-- Upload path: enroll, then Submit → Make new submission (competition page, steps 1 and 6).
+Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
+alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
+bootstrap. Exactly {card['registered_parameters']['dot_count']:,} binary dots are emitted, all
+off-catalogue.
 
-## Experiments (budget: 3 experiments or 2 hours; 2 used)
+| Instrument | Candidate | H33 reference | Result |
+|---|---:|---:|---|
+| A · shared hide-and-recover catalogue holdout | {d['dti']:.4f} | {dref['dti']:.4f} | candidate wins |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | {b['dti']:.4f} | {bref['dti']:.4f} | **H33 wins, delta = {delta['delta']:+.4f} {delta['ci95']}** |
+| B · unrestricted SGMC proxy (contains map-duplication band) | {ball['dti']:.4f} | {ballref['dti']:.4f} | candidate wins |
 
-1. **E1, magnetic-edge termination (seed 20):** stopped by the surface-uniqueness gate; no TIFF written.
-   HOLDOUT-DTI {d_e1:.6f}, below the random control. Negative.
-2. **E2, C1 (seed 71):** described above. Negative. Its post-hoc binary diagnostic is labeled not preregistered and not a promotion basis.
+Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
+is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
+21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
+artifact is published but not promoted. Nothing here is an organizer-confirmed score.
 
-Slot selection (the weekly cap of three) is a separate step. No slot is used.
+**Uniqueness (corrected):** {u['registry_rasters_checked']} archived rasters checked; worst mutual
+overlap {u['worst_dot_overlap']:.3f} (limit 0.70); worst Spearman {u['worst_spearman_full_footprint']:.3f}
+(limit 0.90). Forward-only overlap reaches {u['worst_forward_overlap']:.2f} against a dense lattice
+whose halo covers the whole footprint — which is why the two-direction test was adopted.
 
-## Known gaps (not fixed in this session)
+## Two fixes to the shared tool (reported, not silently forked)
 
-- **Registry coverage is incomplete.** The index dates from 2026-10-12. Eleven repos in the
-  owner namespace (GEMSDOE69 and GEMSDOE73–GEMSDOE82) are not in it; ten of them were created on 2026-10-20.
-  Their rasters were **not** checked, because the GitHub API rate limit was reached during this session.
-  This cannot clear C1, but a complete scan is still required before any candidate is cleared.
-- Leaderboard numbers are JavaScript-rendered and were not readable. No ORGANIZER-CONFIRMED score exists.
-- The shared writer writes 0 outside the footprint, not NaN. Portal acceptance of that is unverified.
+1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
+   registry surface blocks every candidate.
+2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
+   halos cover 100 % of the footprint would otherwise block every candidate.
 
-## Reproduce the workbench
+Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
+`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
+
+## Reproduce
 
 ```bash
-python -m venv .venv
-.venv/bin/pip install -r requirements.lock
-bash scripts/download_competition_data.sh  # pinned public owner mirrors, not DrivenData auth
-.venv/bin/python scripts/build_site.py
-.venv/bin/python scripts/build_readme.py
-.venv/bin/python scripts/audit_pages.py
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
 
-Shared `evaluate_holdout.py`, `submission_writer.py` and the metric are reused unchanged from
-vendor/gems57 (pinned; byte identity is recorded in evidence/template_verification.json).
-Do not rerun `scripts/run_experiment.py`. Do not tune an experiment after seeing its holdout.
+`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
+(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
+`evidence/history/phase1_negative/`.
 
-## Publication boundary
+## Next session
 
-Pages is configured to serve the repository root (`main:/`), not only `docs/`. The root
-`.nojekyll` bypass was removed, and `_config.yml` excludes quarantine, data, evidence,
-code and the local `submissions/` folder. `scripts/audit_pages.py` and the build guards
-check the publication boundary, including unlinked artifacts. Remote deployment is a
-separate step. The exclusions do not make archived bytes secret; they only keep them out
-of the Pages build.
-
-## Own the outcome
-
-Maximizing the probability of winning does not mean hiding negatives, overstating verification
-or spending unvalidated slots. A negative result with a clear stop condition is the correct output
-here. Next-session priorities are in HANDOFF.md and the limitations page.
+Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
+(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
+approach has been measured to its limit — see `docs/irregularities.md`.
 
 ## Complete retained project prompt
 
-Historical statements below are user-supplied requirements, not verified current results. No
-leaderboard value below becomes ORGANIZER-CONFIRMED by being copied here. PROJECT_BRIEF.md is the
-source for this embedded copy (whitespace normalized from the supplied message).
+Historical statements below are user-supplied requirements and claims, not verified results. No
+leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
+PROJECT_BRIEF.md is the source for this embedded copy.
 
 <details>
 <summary>Read the complete supplied project brief before every session</summary>
 
 '''
-    (ROOT/'README.md').write_text(head+(ROOT/'PROJECT_BRIEF.md').read_text()+'\n</details>\n')
-if __name__=='__main__':main()
+    tail = '\n</details>\n'
+    (ROOT / 'README.md').write_text(head + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
+
+
+if __name__ == '__main__':
+    main()

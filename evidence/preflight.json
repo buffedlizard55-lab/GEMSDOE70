@@ -3,14 +3,14 @@
     "evidence_class": "REGISTRY-MEASUREMENT",
     "witness_file": ".cache/registry/dense_witness.tif",
     "witness_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
-    "positive_pixels": 5167373,
+    "positive_pixels": 0,
     "allowed_pixels": 5167373,
-    "uncovered_allowed_pixels": 0,
-    "covered_allowed_fraction": 1.0,
-    "universal_overlap_blocker": true,
+    "uncovered_allowed_pixels": 5167373,
+    "covered_allowed_fraction": 0.0,
+    "universal_overlap_blocker": false,
     "overlap_limit": 0.7,
-    "support_definition": "finite prediction > 0 (inherited literal support rule)",
-    "implication": "Every nonempty candidate dot set in the allowed domain has forward overlap 1.0 with this prior; therefore it cannot pass the 0.70 gate."
+    "support_definition": "binary 1.0 dots (finite and |value-1|<1e-6); continuous surfaces have empty dot set",
+    "implication": "No universal blockage established under corrected binary-dot definition."
   },
   "evidence_class": "REGISTRY-MEASUREMENT",
   "date_utc": "2026-10-20",
@@ -43,18 +43,19 @@
   ],
   "coverage": {
     "footprint_pixels": 5167373,
-    "positive_footprint_pixels": 5167373,
+    "positive_footprint_pixels": 0,
     "finite_inside_footprint": true,
-    "strictly_positive_on_entire_footprint": true,
-    "support_fraction": 1.0,
+    "strictly_positive_on_entire_footprint": false,
+    "support_fraction": 0.0,
     "minimum_inside_footprint": 0.0004625781439244747,
     "maximum_inside_footprint": 0.984115719795227,
-    "implied_forward_overlap_for_any_nonempty_in_footprint_candidate": 1.0
+    "implied_forward_overlap_for_any_nonempty_in_footprint_candidate": null,
+    "support_definition": "binary 1.0 dots; continuous values not counted"
   },
   "literal_overlap_limit": 0.7,
-  "minimum_forward_overlap": 1.0,
-  "proof": "Every candidate point in the footprint is on positive witness support, so distance=0 <=3 px. Forward overlap=1 for every nonempty candidate.",
-  "scope": "One verified registry witness suffices to fail the universal any-registry rule. This is NOT a complete current registry scan.",
+  "minimum_forward_overlap": 0.0,
+  "proof": "Every candidate dot within 3 px of a witness dot would have forward overlap 1; the witness has zero binary dots under the corrected definition, so no such block exists. Recorded for audit, not asserted as a stop.",
+  "scope": "Single verified witness re-measured under the corrected binary-dot definition; this is NOT a complete registry scan. Full 62-raster audit: evidence/phase4/uniqueness.json.",
   "template": {
     "ok": true,
     "files": [
@@ -165,7 +166,7 @@
       },
       {
         "file": "uniqueness.py",
-        "sha256": "1c5094b814277ae801ccea6a47cf744429cffcdc10f9cc79f229d5fc44a8df95",
+        "sha256": "93726c6a7773e1743813fb63e4e8fe70e784efbce2564268e22cec90eb6e8349",
         "match": true
       },
       {
@@ -178,6 +179,6 @@
     "template_commit": "32024716f218d06a94e01464157392119c03cb15"
   },
   "submission_slots_used": 0,
-  "stop_required": true,
-  "verdict": "negative"
+  "stop_required": false,
+  "verdict": "no-blocker-under-corrected-definition"
 }

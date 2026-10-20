@@ -155,10 +155,11 @@
   },
   {
    "file": "uniqueness.py",
-   "sha256": "1c5094b814277ae801ccea6a47cf744429cffcdc10f9cc79f229d5fc44a8df95",
-   "git_blob": "71d66ff89aa3a5cfdaeffb11fe09fa2609cc73e5",
-   "identical_to_template": true,
-   "bytes": 24437
+   "sha256": "93726c6a7773e1743813fb63e4e8fe70e784efbce2564268e22cec90eb6e8349",
+   "git_blob": "75c80c540dd8a6137c364dc3339ebefde14c1b60",
+   "identical_to_template": false,
+   "bytes": 26785,
+   "fix_note": "2026-10-20 (a) binary-dot definition, (b) mutual-overlap duplication test; see evidence/upstream_fix_report.md"
   },
   {
    "file": "validate.py",
@@ -168,5 +169,6 @@
    "bytes": 4765
   }
  ],
- "all_identical": true
+ "all_identical": false,
+ "fix_commit": "arena/9fe83934 local fix pending upstream PR"
 }

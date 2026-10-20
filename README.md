@@ -1,63 +1,77 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **READY TO DOWNLOAD — validated TIFF**
+## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
-A **new unique TIFF** passes all local format checks (all finite, values in [0,1], CRS/shape/transform match, zero outside footprint and on catalogue). **It is obvious you may download it.**
+A unique, format-validated competition TIFF is published:
+`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
+**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
+`negative` on the pre-registered target-like gate. No weekly slot was used.
 
-**⬇ Download:** [`docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif`](docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif) (105 KB, 24 872 dots) — SHA256 `d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d`  
-**Alternate:** [`gems70-discordance-corridor-v1-20261020-7f3a9c2e.zip`](docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.zip) (58 KB, one-TIFF ZIP)  
-**Note (92 chars):** `Discordance corridor: grav/basement vs topo, Hz ridge thin, 37k dots, 3px catalogue gap`  
-**Validator:** `all_checks_passed true` — see `evidence/submission_v2.json` and run `python scripts/validate_submission.py docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif`
+- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
+- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
+- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
+- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
+- **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-- [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission guide — 60-sec steps](docs/executive-summary.html)
-- [New submission card](evidence/submission_v2.json) · [Holdout + canaries](evidence/submission_v2.json)
-- [Historical negative card](evidence/run_card.json) · [H33 forensic analysis](docs/h33-analysis.md) · [Five ranked hypotheses](docs/hypotheses.md)
-- [Deep research — why H33 scored 0.2778](docs/research.md) · [Limitations](docs/irregularities.md) · [Session handoff](HANDOFF.md)
-- **Session start:** read this README, PROJECT_BRIEF.md, AGENTS.md, HANDOFF.md
+## What was measured this session
 
-## What was verified (v2)
+Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
+alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
+bootstrap. Exactly 37,654 binary dots are emitted, all
+off-catalogue.
 
-This checkout originally had an eleven-byte README; we restored the SHA-pinned numerical stack, sample and mapped faults from owner mirrors (consistency, not organizer authentication). Shared `grid.py`, `evaluate_holdout.py`, `submission_writer.py`, metric, holdout and uniqueness are byte-identical to the pinned template (`evidence/template_verification.json`).
+| Instrument | Candidate | H33 reference | Result |
+|---|---:|---:|---|
+| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
+| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
 
-**New candidate (v2)** targets **gravity–basement discordance** (subsurface step without topographic scarp) — the geological setting where a fault is most plausibly missing from USGS SGMC/QFaults (blind normal faults under alluvial cover). See `docs/hypotheses.md` for 5 ranked hypotheses; v2 is the top-ranked, lowest-cost CPU hypothesis.
+Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
+is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
+21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
+artifact is published but not promoted. Nothing here is an organizer-confirmed score.
 
-- **Layers:** `rtp` (RTP magnetic, band 2), `iso_grav_anom` (13) + `iso_grav_anom_hg` (18) (isostatic gravity), `depth_to_base_surf` (15) (basement depth), `det_elev` (12) + `det_elev_slope` (19) (detrended elevation) + derived gradients.
-- **Signature:** Rank-normalized discordance `grav_edge · base_grad · (1-rank(topo))` weighted by `basement_normal` and magnetic `termination`; Hessian ridge strength (σ1) → 85th percentile → skeletonize (Lee) → 1-px lines → catalogue-distance pruning >3 px (300 m) → 24 872 dots (binary 0/1). Target 37 654 (H33 budget) but sparser after strict pruning; future tuning can relax to 2 px.
-- **Non-fault mimic:** Volcanic dike / intrusive contact (magnetic) and depositional onlap / paleovalley (basement).
-- **Leakage canaries:** All 18 features AUC 0.458–0.571, none >0.90 (no leakage).
-- **HOLDOUT-DTI:** candidate 0.000 [0.000,0.000] vs random 0.023 [0.020,0.026], evaluator `gems57-pooled-hide-v2`, 11 321 withheld positives, pooled spatial-block bootstrap (1000 draws). Candidate does not recover withheld *mapped* faults (expected: pruning removes near-catalogue withheld components). This diagnostic does NOT predict hidden-label DTI.
-- **REGISTRY-MEASUREMENT:** Literal forward overlap 1.0 vs dense continuous prior `ab0a0a62…` (17GEMSDOE E-proba-multiscale, 5 167 373 positives, 0 allowed uncovered) is **universal** for any nonempty dot field — a protocol representation conflict, not duplication. Like-for-like (dot-field-only, `DENSE_SUPPORT_FRACTION=0.20`) is the informative gate; this submission is a sparse dot field (0.48% of footprint) distinct from H33 (37 654 dots, median 1.965 km from catalogue) by SHA and geometry.
-- **Validator:** `all_checks_passed true` (single-band, float32, 3730×3292, EPSG:32611, transform [100,0,243350,0,-100,4508550], no NaN/Inf/sentinel, range [0,1], zero outside footprint and on catalogue). This will **not** trigger portal error `Predicted values must be in range [0, 1]`.
+**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
+overlap 0.312 (limit 0.70); worst Spearman 0.050
+(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
+whose halo covers the whole footprint — which is why the two-direction test was adopted.
 
-**Historical v1** (preserved): Magnetic-edge termination along gravity-supported basement boundary — HOLDOUT-DTI 0.010 [0.006,0.015] vs random 0.047, 11 321 positives, failed literal uniqueness (100% overlap vs dense prior). No TIFF exported; card at `evidence/run_card.json` remains `verdict negative`.
+## Two fixes to the shared tool (reported, not silently forked)
 
-## Why H33 scored 0.2778 — and can we beat it?
+1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
+   registry surface blocks every candidate.
+2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
+   halos cover 100 % of the footprint would otherwise block every candidate.
 
-**H33 B2** `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778` is an **unverified historical claim** (no ORGANIZER-CONFIRMED receipt here). Byte-verified: D2.8 44 090 → H27 40 199 (delete 1 px near catalogue) → H33 37 654 (delete √2–2 px). Its success is **emission efficiency** under DTI (α=0.2, β=0.8, R=300 m): each dot must earn `k > α·DTI ≈0.055` non-redundant coverage; redundant near-catalogue mass hurts. Pruning low-`k` mass raised DTI without much recall loss because hidden truth is apparently far from mapped faults (median 1.965 km, 5.77% within 300 m).
-
-**Can v2 beat 0.2778 (or prompt's conflicting 0.3195/0.3774/0.4413)?** Possibly — by placing the same sparsity (~37k) more accurately on cover-buried structures (discordance) rather than by blind pruning. HOLDOUT-DTI on catalogue-withheld folds cannot certify this (withheld = mapped faults), but the geological rationale is coherent with Great Basin science: step-overs/relay ramps (32%), terminations (25%), intersections (22%) host most geothermal systems (Faulds et al. 2015, https://www.osti.gov/servlets/purl/1724082; Giddens et al. 2025, https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2025/Giddens.pdf). GeoDAWN (Glen & Earney 2024, DOI 10.5066/P93LGLVQ, https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and) provides the magnetic/gravity layers at 400 m/150 m resolution. No leaderboard projection is made.
+Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
+`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
 
 ## Reproduce
 
 ```bash
-python -m venv .venv
-.venv/bin/pip install -r requirements.lock
-bash scripts/download_competition_data.sh  # owner mirrors, not DrivenData auth (requires login)
-python scripts/prepare_data.py  # if full training pipeline present
-python scripts/generate_new_submission.py  # CPU: builds docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif
-python scripts/validate_submission.py docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif
-python -m pytest -q
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+.venv/bin/python -m pytest -q
 ```
 
-`run_experiment.py` is the preserved v1 one-experiment; it refuses reruns. The shared writer's round-trip and range rejection are tested with synthetic fixtures. The static Pages site does not train in-browser. Weekly-slot selection is separate.
+`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
+(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
+`evidence/history/phase1_negative/`.
 
-## Own the outcome
+## Next session
 
-Maximize P(Win) means honest evidence and good resource allocation. A measured negative (v1) plus a validated new candidate (v2) with clear download_ok is preferable to a false score or unsafe download. Next priorities: full registry fetch outside rate-limit, relax pruning 3→2 px, test basement-ramp endpoint (hypothesis 3), and obtain organizer receipt before claiming ORGANIZER-CONFIRMED.
+Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
+(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
+approach has been measured to its limit — see `docs/irregularities.md`.
 
 ## Complete retained project prompt
 
-Historical statements below are user-supplied requirements/claims, not verified current results. No leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated PROJECT_BRIEF.md is the source for this embedded copy.
+Historical statements below are user-supplied requirements and claims, not verified results. No
+leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
+PROJECT_BRIEF.md is the source for this embedded copy.
 
 <details>
 <summary>Read the complete supplied project brief before every session</summary>
@@ -757,4 +771,5 @@ Pass 3: Re-check the entire implementation against the original request. Improve
 Do not stop after the first pass. Each pass must build on the previous one. Before finishing, verify that the final result fully satisfies the original request.  Work line by line verify everything no hallucinations.
 
 Go ahead and create a pull request and then merge the pull request onto the main. Make suggestions for what work still needs to be done and any limitations that is in the way of a successful project.  It should be worked on in this next session or the next session.  Work line by line verify everything no hallucinations.
+
 </details>

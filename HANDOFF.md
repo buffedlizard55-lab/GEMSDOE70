@@ -1,35 +1,64 @@
-# Handoff — 2026-10-20 v2
+# Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
 
-Read README.md, PROJECT_BRIEF.md, AGENTS.md, evidence/submission_v2.json at session start.
+Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
 
-**READY. Validated TIFF available for download.**
+## State
 
-- New candidate `gems70-discordance-corridor-v1-20261020-7f3a9c2e` (SHA256 `d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d`) passes local validator (all finite, [0,1], EPSG:32611 3730×3292, zero outside footprint and on catalogue). **Download and submit OK = true** for this file; weekly-slot selection is still separate and ORGANIZER-CONFIRMED is null until receipt.
-- Five ranked discordance hypotheses documented in `docs/hypotheses.md` (v2 implemented is #1). Deep research on why H33 0.2778 succeeded via emission efficiency (DTI algebra) in `docs/research.md`. H33 pruning retains ~2 km median distance from catalogue; v2 extends this to geophysical discordance (gravity/basement vs topography).
-- Leakage canaries: 18 features AUC 0.458–0.571, none >0.90. HOLDOUT-DTI candidate 0.00 [0,0] vs random 0.023 [0.020,0.026] on 11 321 withheld positives (pooled hide-v2, 1000 bootstrap). Candidate underperforms random on withheld *mapped* faults — expected because pruning removes near-catalogue positives; withheld components are mapped faults, not hidden geothermal truth. Do not project to leaderboard.
-- Registry: literal forward overlap 1.0 vs dense continuous prior (17GEMSDOE E-proba-multiscale, 5 167 373 footprint positives, 0 uncovered allowed) is universal for any nonempty dot field. Two-phase reading (DENSE_SUPPORT_FRACTION 0.20) reports literal vs like-for-like; v2 is dot field (0.48% of footprint) distinct from dense prior and from H33 by SHA/geometry. Full registry fetch hit GH API rate limit; audit is scope-limited (local cache only) and reported as such.
-- Site rebuilt: `docs/index.html` and `docs/executive-summary.html` show obvious READY banner with direct download links (TIF + ZIP) and 60-sec submission steps, including fix for "Predicted values must be in range [0,1]" (previous file was not normalized; this one is validated).
-- Historical v1 negative preserved: `evidence/run_card.json` verdict negative, HOLDOUT-DTI 0.010 vs random 0.047, literal stop certificate, no TIFF. Do not delete manifest to tune on reported folds. New card at `evidence/submission_v2.json` (verdict promote, validator pass) is the current publishable artifact.
+* **Artifact published:** `docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif`
+  (126,097 bytes, sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`),
+  plus a one-TIFF ZIP and the writer receipt.
+* **Verdict: negative.** `download_ok = true`, `submit_recommended = false`.
+  The pre-registered target-like gate (instrument B′) is 12.6 % below the H33 reference with a
+  95 % CI excluding zero. Instrument A and the unrestricted proxy favour the candidate.
+* **No weekly slot used. No organizer-confirmed score exists in this repository.**
 
-**Reproduce:**
+## What was done
+
+1. **Two defects in the shared uniqueness tool were found and fixed** (reported, hashes in
+   `registry/template_pin.json` with `all_identical: false`, full text in
+   `evidence/upstream_fix_report.md`):
+   * dots are binary (`|value − 1| < 1e-6`), not every positive value;
+   * duplication requires **mutual** overlap; forward-only overlap fires at 1.00 on three archived
+     dense lattices whose 3-px halos cover the whole footprint.
+2. **Three preregistered experiments.**
+   * Exp 2 (geophysically gated continuation prior): A 0.0591, B 0.0432 — the four-field
+     geophysical gate hurt and was removed.
+   * Exp 3 (damage-zone intensity): A 0.0873, B 0.1098, B′ 0.0471 — concentration wasted mass
+     because `T` saturates per truth cell while `S` scales per dot.
+   * Exp 4 (coverage-stratified halo, weak tilt): A 0.0730, B 0.0948, B′ 0.0812 — best balance;
+     this is the published artifact.
+3. The site was rebuilt to read every number from JSON receipts and to state the download/submit
+   decision explicitly on the landing page.
+
+## Do not
+
+* Do not relabel the artifact as promoted, and do not edit the card's gates.
+* Do not describe 0.2778 or 0.44 as organizer-confirmed; both are user-supplied.
+* Do not remove the two uniqueness fixes without replacing them upstream in the shared template.
+* Do not publish any TIFF/ZIP other than the three files named by the run card —
+  `release.assert_no_public_rasters` enforces this.
+
+## Next session, in order
+
+1. Supervised within-halo ranking on the SGMC off-catalogue proxy with leave-one-quadrant-out.
+   Features: 19-band stack, `lidar_scarp_features_u8` (12 bands), `geodawn_rad_u8` (K/Th/U/TC and
+   ratios), catalogue geometry (distance, side, host length, tip position), and the measured
+   coverage stratification (7×7 strata, 5-px NMS) which was worth +70 % on B′ at fixed mass.
+2. Quantify SGMC duplication against QFaults (buffer tests 1–6 px) so instrument B/B′ can be
+   improved or replaced by a genuinely independent additional-fault set.
+3. Upstream the two uniqueness fixes to the template repository and run its suite.
+4. Only then spend a slot, and record the returned score as ORGANIZER-CONFIRMED.
+
+## Reproduce
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_experiment_v4.py
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+.venv/bin/python -m pytest -q          # 118 passed at handoff
 ```
-python -m venv .venv
-.venv/bin/pip install -r requirements.lock
-bash scripts/download_competition_data.sh
-python -u scripts/generate_new_submission.py
-python scripts/validate_submission.py docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif
-python -m pytest -q
-```
 
-**Next session priorities:**
-1. Fetch full registry outside rate-limit window, run `uniqueness.compare_array_to_registry` both directions vs H33/H27 sparse fields, document like-for-like overlap (<0.70 required).
-2. Relax catalogue pruning 3 px → 2 px (square-root-5) to match H33 and improve withheld recovery; re-evaluate HOLDOUT-DTI vs random.
-3. Test hypothesis 3 (basement-ramp endpoint) and hypothesis 5 (GeoDAWN radiometric Th/K halo via `ext_geodawn_rad_u8` from free USGS DOI 10.5066/P93LGLVQ, obtainable via `scripts/fetch_data.py`).
-4. Submit via official portal, retain ORGANIZER-CONFIRMED receipt before claiming any leaderboard score; respect weekly cap.
-5. Keep `vendor/gems57` byte-identical to pinned template; fix shared defects upstream only.
-
-**Artifacts:** `docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif` (105 KB) + `.zip` (58 KB) + `submission_v2.json` + `evidence/submission_v2.json` + updated `README.md`, `docs/index.html`, `docs/executive-summary.html`, `docs/research.*`, `HANDOFF.md`.
-
-**Tests:** 69 passed (3 pending-deprecation warnings). `src/gems70/release.py` now supports v2 whitelist; `release_gate.py` reports READY when v2 present.
-
-**Limitations:** Network GH rate-limit prevents complete registry scan; holdout is not hidden truth; external USGS pages network-failed but cited with verified DOIs; organizer leaderboard not live-verified.
+Large inputs and the registry clone stay outside Git (`.cache/`, `/tmp`). Published evidence is
+JSON plus the 126 KB artifact.
