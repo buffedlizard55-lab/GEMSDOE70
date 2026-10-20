@@ -22,11 +22,7 @@ including `calib_r13lattice_00904.tif` with forward overlap 1.0. The accessible 
 62 rasters, not all private or future submissions. These are REGISTRY-MEASUREMENTS, not scores.
 The current run card is `evidence/literal_protocol_review.json`.
 
-A dense reference whose halo covers the footprint makes this rule unsatisfiable for every
-nonempty candidate within that footprint. This is a protocol-design issue, not proof of identical
-geological predictions. Nevertheless, only a separately authorized protocol revision can relax it.
-No new surface, placement, training or additional raster experiment was run after this stop.
-A fresh surface cannot be claimed to have passed an unexecuted surface audit.
+The separately archived E3 scarp-curvature candidate also fails the same literal rule in its saved final-dot scan (`evidence/final_uniqueness_e3.json`): **REGISTRY-MEASUREMENT**, forward overlap 1.0000 to `calib_r13lattice_00904.tif`, 0.9467833 to `r11_greedy_mp.tif`, 1.0000 to `r13_lattice_s5_00904.tif`, 0.7604 to `r14_union_tips10_lat6.tif`, and 1.0000 to the recorded dense-probability witness. The E3 run used an adjusted saturation-specific criterion that is not the prompt's literal criterion. Its previously public TIFF/ZIP are also quarantined. A dense reference whose halo covers the footprint makes the literal rule unsatisfiable for every nonempty candidate within that footprint. This is a protocol-design issue, not proof of identical geological predictions. Only a separately authorized protocol revision can relax it. No new surface, placement, training or additional raster experiment was run after the stop.
 
 ## Scientific interpretation of H33
 
