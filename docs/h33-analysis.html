@@ -9,116 +9,103 @@
 3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
 are not clearance under the current prompt. No new TIFF was generated in this review.</p>
 <p><a href="protocol-review.html">Current protocol review and next steps</a> ·
-<a href="literal-protocol-review.json">Current JSON run card</a></p></section><h1>Why the archived H33 field scored 0.2778 — and what it takes to beat it</h1>
-<p><strong>Evidence class:</strong> DATA-MEASUREMENT of the archived bytes, plus user-supplied historical scores.
-The 0.2778 value has <strong>no organizer receipt in this repository</strong>; it is the user's report. Nothing
-below converts it into an ORGANIZER-CONFIRMED score.</p>
-<h2>What the file actually is</h2>
-<p><code>evidence/h33_audit.json</code> recomputes the archived GeoTIFF byte-for-byte:</p>
+<a href="literal-protocol-review.json">Current JSON run card</a></p></section><h1>H33: what the archived file shows — and what it cannot prove</h1>
+<blockquote>
+<p><strong>Current status: DO NOT SUBMIT.</strong> The archived Phase-4 TIFF is review-only because its final-dot
+raster fails the literal one-way registry-overlap rule. This page is a historical analysis, not
+a current method assignment or promotion decision.</p>
+</blockquote>
+<h2>The reported leaderboard value is not verified here</h2>
+<p>The value <strong>0.2778</strong> was supplied by the user as the historical H33 result. There is no submission-page
+receipt for it in this repository, so it is <strong>not ORGANIZER-CONFIRMED</strong>. The other leaderboard values
+in the retained prompt conflict and were not freshly fetched from the official competition page in
+this sandbox. The <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official competition problem page</a>
+and <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>
+are provided for manual review. No claim here guarantees that a new method can exceed H33.</p>
+<h2>What the archived H33 raster actually is</h2>
+<p><code>evidence/h33_audit.json</code> records comparisons of the archived raster bytes, not competition scores:</p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
+<th>Archived field</th>
 <th style="text-align: right;">Positive pixels</th>
-<th>Measured relation to its predecessor</th>
+<th>Measured relation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>D28 (<code>dotted-d2-8</code>)</td>
 <td style="text-align: right;">44,090</td>
-<td>Poisson 300 m dots, minimum catalogue distance 1 px</td>
+<td>300 m Poisson dots, minimum catalogue distance 1 px</td>
 </tr>
 <tr>
 <td>H27</td>
 <td style="text-align: right;">40,199</td>
-<td>exactly the 3,891 D28 dots at <strong>1 px</strong> removed</td>
+<td>the 3,891 D28 dots at 1 px removed</td>
 </tr>
 <tr>
 <td>H33 B2</td>
 <td style="text-align: right;">37,654</td>
-<td>exactly the 2,545 H27 dots at <strong>√2 or 2 px</strong> removed</td>
+<td>the 2,545 H27 dots at √2 or 2 px removed</td>
 </tr>
 </tbody>
 </table>
-<p>So H33 is not a detector. It is a <strong>uniform sparse sample of the 0.2–3 km halo around the mapped
-faults, with the two closest shells deleted</strong>. Nine in ten of its dots lie more than 300 m from any
-mapped trace (median 1.97 km).</p>
-<h2>Why that scores well — the metric algebra</h2>
-<p>With <code>DTI = T / (T + 0.2·(S − M) + 0.8·(N − T))</code>, where <code>T</code> sums a triangular kernel over <strong>truth</strong>
-cells, <code>S</code> sums the emitted mass and <code>M</code> sums each dot's nearest-truth credit:</p>
+<p>These are counts and set relations, not DTI scores. The byte-level audit indicates H33 is a sparse
+sample of the mapped-fault halo with the closest distance shells removed. The artifact itself does
+not establish that those dots correspond to undiscovered faults or geothermal vents.</p>
+<h2>A plausible metric explanation, not a causal finding</h2>
+<p>The local evaluator implements a pooled DTI whose true-positive credit saturates per truth cell,
+while prediction mass and false-positive penalties depend on emitted dots. Consequently, spreading
+fixed prediction mass across distinct truth neighborhoods can outperform crowding many dots into the
+same neighborhoods. Removing dots very close to known traces can also reduce wasted prediction mass
+when the hidden positives do not follow those traces exactly.</p>
+<p>That algebra makes sparse coverage a plausible explanation for why the archived H33 pattern might
+score well. It does <strong>not</strong> identify why the organizer returned the user-reported 0.2778: the hidden
+labels, a controlled organizer ablation, and the corresponding submission receipt are unavailable.
+Other explanations—including label construction, mask rules, and the distribution of hidden traces—
+remain possible. The physical interpretation is especially limited: the target is fault detection,
+not a verified map of vents, permeability, fluid temperature, or commercial geothermal resources.</p>
+<p>The evaluator implementation is local and version-pinned; for source/manual review see the
+<a href="https://github.com/drivendataorg/gems-prize-reference-solution">organizer reference repository</a>
+and the competition problem page. Availability of the public reference repository does not prove
+that the historical H33 value came from a particular hidden-label mechanism.</p>
+<h2>Archived HOLDOUT-DTI evidence — not leaderboard scores</h2>
+<p>The Phase-4 receipts use evaluator <code>gems57-pooled-hide-v2</code>; both entries below are <strong>HOLDOUT-DTI</strong>
+from archived internal holdouts, not ORGANIZER-CONFIRMED competition results. Instrument A withholds
+catalogue components. Instrument B′ withholds SGMC-derived proxy positives; it is not organizer
+hidden truth. Neither result was recomputed in the current review.</p>
 <ul>
-<li><code>T</code> saturates at 1 per truth cell; <code>M</code> and <code>S</code> scale with the number of dots. Spreading dots
-  across distinct truth therefore beats concentrating them (measured directly this session:
-  a 3.6-px-spaced damage-zone field scored 0.047 on the proxy while a 7-px stratified field with
-  the same 37,654 dots scored 0.081).</li>
-<li>A dot closer than ~2 px to a mapped fault buys <code>S</code> and almost no <code>T</code>, because the scorer masks
-  known faults pixel-exactly and the hidden truth does not hug the mapped trace. Deleting those
-  shells raised the reported live score twice (0.2708 → 0.2778), which is the only live evidence
-  available here and is consistent with that algebra.</li>
+<li>Instrument A candidate: <strong>HOLDOUT-DTI 0.0730</strong>, 95% CI [0.0667, 0.0790], 11,321 withheld catalogue-positive pixels.</li>
+<li>Instrument B′ candidate: <strong>HOLDOUT-DTI 0.0812</strong>, 95% CI [0.0723, 0.0900], 59,937 withheld SGMC-proxy-positive pixels.</li>
+<li>Paired B′ candidate-minus-H33 difference: <strong>HOLDOUT-DTI Δ −0.0126</strong>, 95% CI [−0.0241, −0.0018], 59,937 withheld SGMC-proxy-positive pixels.</li>
 </ul>
-<p>The consequence: most of H33's 0.2778 is <strong>emission geometry</strong>, not geological inference. The
-residual 0.16 to the 0.44 leader requires knowing <em>where inside the halo</em> the new traces are.</p>
-<h2>Can this be beaten? What the three experiments say</h2>
-<table>
-<thead>
-<tr>
-<th>Arm (37,654 binary dots)</th>
-<th style="text-align: right;">A: catalogue holdout</th>
-<th style="text-align: right;">B: SGMC proxy</th>
-<th style="text-align: right;">B′: proxy ≥ 3 px</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>H33 (archived reference)</td>
-<td style="text-align: right;">0.0037</td>
-<td style="text-align: right;">0.0906</td>
-<td style="text-align: right;">0.0938</td>
-</tr>
-<tr>
-<td>Exp 2: offset × tip × geophysics</td>
-<td style="text-align: right;">0.0591</td>
-<td style="text-align: right;">0.0432</td>
-<td style="text-align: right;">—</td>
-</tr>
-<tr>
-<td>Exp 3: damage-zone intensity</td>
-<td style="text-align: right;">0.0873</td>
-<td style="text-align: right;">0.1098</td>
-<td style="text-align: right;">0.0471</td>
-</tr>
-<tr>
-<td>Exp 4: stratified halo, weak tilt</td>
-<td style="text-align: right;">0.0730</td>
-<td style="text-align: right;">0.0948</td>
-<td style="text-align: right;">0.0812</td>
-</tr>
-</tbody>
-</table>
-<p>Readings:</p>
-<ol>
-<li><strong>Instrument A is the wrong instrument for this task.</strong> It withholds catalogue segments, so it
-   rewards placing dots beside mapped traces — the opposite of what the competition asks. Every
-   candidate beats H33 there by 20×, which says nothing about the leaderboard.</li>
-<li><strong>Instrument B is contaminated at short range.</strong> 12.5 % of SGMC-only pixels sit within 2 px of
-   the catalogue and 21.4 % within 3 px (7.5 % of the domain is that close). Those are largely the
-   same traces re-drawn, so B rewards exactly the band the live experiments penalised.</li>
-<li><strong>B′ removes that band.</strong> There H33 still wins by 13 % (Δ = −0.0126, 95 % CI [−0.0241, −0.0018]).
-   That is the honest negative and the reason this session's candidate is not promoted.</li>
-</ol>
-<h2>The defensible route to &gt;0.2778</h2>
-<p>The remaining headroom is <em>within-halo ranking</em>: a supervised model trained on the only population
-that resembles the hidden truth has to be built, not invented from geometry. Concretely, the next
-session should (a) train on the SGMC-off-catalogue proxy with leave-one-quadrant-out and a proper
-featurisation of the 19-band stack plus lidar-scarp and radiometric layers, (b) keep the coverage
-stratification that this session measured to be worth +70 % on B′ at fixed mass
-(0.047 → 0.081), and (c) spend one slot on the resulting file. Geometry alone has been measured to
-its limit here; the leaderboard gap is information, not spacing.</p>
-<h2>What we will not do</h2>
-<p>Rescale, jitter, rename or prune H33 and call it a new prediction. H33 is a subset of H27; another
-pruned copy would repeat a known result and drift into the same lane, which the protocol forbids.</p></main>
+<p>The pre-registered proxy comparison was negative. The full receipts, including reference arms and
+implementation details, are linked from the <a href="results.html">archived results page</a>. These internal
+holdouts neither estimate the organizer score nor authorize a weekly submission slot.</p>
+<h2>Current protocol status and next work</h2>
+<p>The user-specified literal one-way registry rule is controlling for this review. The archived
+Phase-4 final dots have four forward-overlap witnesses in the 62-raster accessible inventory, with
+maximum overlap 1.00 (<strong>REGISTRY-MEASUREMENT</strong>, not a score). The inventory is not exhaustive. The
+prior mutual-overlap clearance is not clearance under the current prompt; no new surface was created,
+so no surface-stage pass is claimed. The TIFF is therefore downloadable for review only and must not
+be submitted.</p>
+<p>Three unvalidated research hypotheses are ranked in the
+<a href="protocol-review.html">current protocol review</a>. The top proposal was not tested because the current
+stop is active and no single method paragraph assigns a lane. A future experiment requires an
+explicit protocol ruling and lane assignment, a restored and hashed feature cache, feature-alone
+leakage canaries, whole-segment buffered spatial holdout, surface uniqueness before placement, final
+dot uniqueness after placement, and comparison to the current best on the same split. No weekly slot
+should be selected before those gates pass.</p>
+<h2>Official-source links and limits</h2>
+<ul>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData competition problem and rules</a> — not freshly fetched in this sandbox.</li>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">DrivenData leaderboard</a> — not freshly fetched; no organizer receipt was available.</li>
+<li><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data release</a> — official provenance link for manual review; not newly verified or downloaded here.</li>
+<li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Organizer reference solution</a> — GitHub-hosted reference; its public repository availability is not itself verification of the H33 submission result.</li>
+</ul></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
+<a href="literal-protocol-review.json">Current literal-protocol card</a> ·
+<a href="downloads/run_card.json">Archived Phase-4 run card</a> ·
+<a href="downloads/uniqueness.json">Historical mutual-rule uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Archived Instrument A HOLDOUT-DTI</a> ·
+<a href="downloads/instrumentB_prime.json">Archived Instrument B′ HOLDOUT-DTI</a></footer></body></html>

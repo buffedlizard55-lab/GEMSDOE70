@@ -137,8 +137,39 @@ Rebuilt generated pages, reran tests, checked publication boundaries and reviewe
 registered review downloads, while source checks already allowed those exact files. Aligned the
 built-output audit with the existing SHA-pinned publication inventory, still rejecting unknown,
 modified or symlinked rasters. Added a copy/tamper regression test. Redirect entry points now
-also show the negative warning rather than relying solely on their destination page.</p></main>
+also show the negative warning rather than relying solely on their destination page.</p>
+<h2>Continuation review after the PR #20 fast-forward — 2026-10-20</h2>
+<h3>Pass 1 — re-establish current state</h3>
+<p>Fast-forwarded the required work branch to remote <code>main</code> at <code>c18241b9d50799840ae64ff3fd65a158b8bf30ee</code>
+(PR #20) without switching branches. Re-read the current README, complete retained brief, AGENTS,
+handoff, irregularities, hypotheses and archived run card. Re-ran the deterministic policy audit:
+the archived final-dot file still has four literal one-way witnesses in 62 accessible rasters. No new
+method, data, holdout, surface or raster experiment was started.</p>
+<h3>Pass 2 — check user-facing status and fail-closed cases</h3>
+<p>Found a publication inconsistency: the landing page showed a DO-NOT-SUBMIT banner but also said
+“unique” and offered a “Download submission TIFF” button. Reworked the site and README so the P4
+artifact is explicitly downloadable <strong>for review only</strong>, with no current upload invitation. The
+submission guide now says no file is eligible and gives upload steps only for a separately cleared
+future candidate. Release metadata distinguishes <code>download_ok</code> from <code>download_for_review_only</code>,
+<code>literal_uniqueness_stop</code> and <code>submit_recommended</code>. Added regression checks for page links staying
+inside the published <code>/docs</code> tree, status text, current holdout metadata and malformed registry rows
+without a submission name. Updated historical H33 and limitation pages to distinguish a plausible
+metric explanation from a causal finding and to label archived HOLDOUT-DTI evidence correctly.</p>
+<h3>Pass 3 — reproduce and verify the final documentation/build</h3>
+<p>Regenerated the literal-policy card, evidence site and README. <code>python -m pytest -q</code> passed <strong>153 tests</strong>
+with three existing Rasterio <code>PendingDeprecationWarning</code>s. <code>scripts/audit_pages.py</code> passed
+its root-publication source policy check; site tests checked generated local links and the review-only
+status. <code>git diff --check</code> was clean. The archived P4 SHA-256 remains
+<code>0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7</code>. The card records zero
+experiments, zero weekly slots, <code>surface_check: not_run</code>, <code>download_for_review_only: true</code>, and
+<code>submit_recommended: false</code>. Only bridge rasters exist under <code>data/</code>; the feature cache is absent,
+and the SGMC proxy remains outside <code>scripts/fetch_data.py</code>'s default <code>WANT</code>. No official DrivenData,
+USGS, Dropbox or DOE source was fetched in this continuation because those hosts are outside the
+sandbox allowlist. These are implementation/status checks, not scientific validation or organizer
+acceptance.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
+<a href="literal-protocol-review.json">Current literal-protocol card</a> ·
+<a href="downloads/run_card.json">Archived Phase-4 run card</a> ·
+<a href="downloads/uniqueness.json">Historical mutual-rule uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Archived Instrument A HOLDOUT-DTI</a> ·
+<a href="downloads/instrumentB_prime.json">Archived Instrument B′ HOLDOUT-DTI</a></footer></body></html>

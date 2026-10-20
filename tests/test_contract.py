@@ -73,10 +73,13 @@ def test_constant_ranks_do_not_manufacture_edges():
     assert not p.any()
 
 
-def test_release_reports_both_flags(tmp_path):
+def test_release_reports_both_flags_and_review_purpose(tmp_path):
     from gems70.release import release_status
     real=release_status(ROOT)
     assert real['download_ok'] is True and real['submit_recommended'] is False
+    assert real['download_for_review_only'] is True
+    assert real['literal_uniqueness_stop'] is True
+    assert real['download_purpose'] == 'review only'
     assert release_status(tmp_path)['download_ok'] is False
     (tmp_path/'docs/downloads').mkdir(parents=True)
     (tmp_path/'docs/downloads/stale.tif').write_bytes(b'not-a-tiff')
@@ -96,8 +99,10 @@ def test_pages_links_and_decision_banner():
         text=p.read_text();parser=Links();parser.feed(text)
         for link in parser.links:assert (p.parent/link.split('#')[0].split('?')[0]).is_file(),(p,link)
     home=(ROOT/'docs/index.html').read_text()
-    assert 'Download: yes.' in home
-    assert 'Submit a weekly slot: not recommended' in home
+    assert 'DO NOT SUBMIT — literal protocol stop' in home
+    assert 'Download archived TIFF (review only)' in home
+    assert 'Submit to DrivenData:</strong> no' in home
+    assert 'Download submission TIFF' not in home
 
 
 def test_full_brief_embedded_in_readme():

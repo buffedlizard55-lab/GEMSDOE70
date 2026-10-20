@@ -10,61 +10,53 @@
 are not clearance under the current prompt. No new TIFF was generated in this review.</p>
 <p><a href="protocol-review.html">Current protocol review and next steps</a> ·
 <a href="literal-protocol-review.json">Current JSON run card</a></p></section><section class="stop" aria-labelledby="decision">
-<div class="eyebrow">SUBMISSION STATUS</div>
-<h1 id="decision">Verified file · not promoted</h1>
-<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
-passes every shared-validator check, and its SHA-256 is recorded below.</p>
-<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
-<strong>negative</strong>: the pre-registered target-like gate (instrument B′) is
-negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
-not a validated improvement.</p>
+<div class="eyebrow">ARTIFACT STATUS · REVIEW COPY ONLY</div>
+<h1 id="decision">DO NOT SUBMIT — archived TIFF for review only</h1>
+<p><strong>Download:</strong> yes, for review and analysis only.
+<strong>Submit to DrivenData:</strong> no. The archived final-dot raster fails the current literal
+one-way uniqueness gate: 4 witness rasters in the 62-raster accessible inventory;
+maximum forward overlap 1.00. Witnesses: <code>calib_r13lattice_00904.tif, r11_greedy_mp.tif, r13_lattice_s5_00904.tif, r14_union_tips10_lat6.tif</code>.
+This is a REGISTRY-MEASUREMENT, not a competition score. The inventory is not exhaustive.</p>
+<p>The historical local format/range validator passed, but that does not override this uniqueness
+stop. No new TIFF was generated in this review, and no weekly slot was used.</p>
 <div class="actions">
-<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download>Download submission TIFF</a>
-<a class="button secondary" href="downloads/gems70-p4-stratified-halo-37654-20261020.zip" download>Download one-TIFF ZIP</a>
-<a class="button secondary" href="submission.html">How to submit</a>
+<a class="button" style="background:#8b1e1e;color:#fff" href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download>Download archived TIFF (review only)</a>
+<a class="button secondary" href="downloads/gems70-p4-stratified-halo-37654-20261020.zip" download>Download one-TIFF ZIP (review only)</a>
+<a class="button secondary" href="protocol-review.html">Read the protocol stop</a>
 </div>
-<p class="small">Name: <code>gems70-p4-stratified-halo-37654-20261020</code> · Note (108/140 chars):
-<code>P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
-<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
-<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
-pre-registered experiments and published the best candidate. Two instruments favour it, one does
-not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+<p class="small">Archived identifier: <code>gems70-p4-stratified-halo-37654-20261020</code> · The historical note below is for identification only; it is not approved for submission.</p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
+<h2>Archived Phase-4 evidence — no current submission candidate</h2>
+<p>The published TIFF is a historical review artifact. This review ran no new experiment, created no candidate surface, and used no weekly slot. The literal one-way registry gate fails on the archived final dots; the prior mutual-overlap result is not clearance under the current prompt.</p>
 </section><div class="metrics">
-<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
+<section><div class="eyebrow">ARCHIVED HOLDOUT-DTI · gems57-pooled-hide-v2</div>
 <div class="number">0.0730</div>
-<p>[0.0667, 0.0790] · 11,321 withheld catalogue pixels</p></section>
-<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
-<div class="number">0.0812</div>
-<p>[0.0723, 0.0900] · SGMC proxy outside the duplication band</p></section>
-<section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
-<div class="number">0.31</div>
-<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ 0.050</p></section></div>
+<p>95% CI [0.0667, 0.0790] · 11,321 withheld-positive pixels; copied from archived Phase-4 evidence, not rerun.</p></section>
+<section><div class="eyebrow">REGISTRY-MEASUREMENT · LITERAL GATE</div>
+<div class="number">STOP</div>
+<p>4 one-way overlap witnesses among 62 accessible rasters · maximum forward overlap 1.00.</p></section>
+<section><div class="eyebrow">SUBMISSION STATUS</div>
+<div class="number">DO NOT SUBMIT</div>
+<p>Review download only · no new TIFF generated · no weekly slot used.</p></section></div>
 <div class="columns">
-<section class="panel"><h2>Why it is downloadable</h2>
-<p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
-transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
-Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
-lattice reaches 1.00 by construction and is reported separately).</p>
-<a href="results.html">Full evidence →</a></section>
-<section class="panel"><h2>Why it is not promoted</h2>
-<p>On instrument B′ the candidate scores 0.0812 versus H33's
-0.0938 (paired Δ -0.0126,
-95% CI [-0.0241, -0.0018]). The pre-registered rule requires a
-positive lower bound. It does not hold.</p>
-<a href="hypotheses.html">Why this rule →</a></section></div>
+<section class="panel"><h2>Why the archived file can be downloaded only for review</h2>
+<p>Its archived local validator receipt reports a single-band float32 GeoTIFF with the competition grid and values in [0,1]. That is a format/range preflight only. It does not establish uniqueness, organizer acceptance, or permission to submit. The literal protocol review is controlling.</p>
+<a href="protocol-review.html">Current protocol review →</a> · <a href="results.html">Archived evidence →</a></section>
+<section class="panel"><h2>Scientific decision: negative; no slot</h2>
+<p>The archived Phase-4 candidate did not pass its pre-registered target-like HOLDOUT-DTI gate. The current report carries the archived catalogue HOLDOUT-DTI receipt and its evaluator, withheld-positive count and 95% CI; no ORGANIZER-CONFIRMED score exists. No new scientific test was run here.</p>
+<a href="hypotheses.html">Research queue →</a></section></div>
 <section><h2>What is measured and what is not</h2>
-<p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue
-components and measures catalogue recovery; instrument B/B′ uses USGS SGMC faults minus the
-catalogue as a proxy for newly mapped faults. Every number is labelled, and no projection is
-presented as a leaderboard score.</p>
-<ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
-<li><a href="results.html">All three experiments, ablations and canaries</a></li>
-<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section><h2>Parallel lane E2 — alluvial step (second candidate, DO NOT SUBMIT YET)</h2>
+<p>Instrument A is a hide-and-recover catalogue holdout. Instrument B/B′ uses USGS SGMC faults as
+proxy positives and is not organizer hidden truth. Every reported internal score must be read with
+its HOLDOUT-DTI evidence class, evaluator version, positive count and 95% CI; none is an
+ORGANIZER-CONFIRMED submission score.</p>
+<ul><li><a href="h33-analysis.html">What the archive can and cannot establish about the user-reported H33 result</a></li>
+<li><a href="results.html">Archived experiments, ablations and canaries</a></li>
+<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section><h2>Parallel lane E2 — alluvial step (review only, DO NOT SUBMIT)</h2>
 <p>An independent preregistered lane (oriented detrended-elevation step × basement edge,
-38,000 dots) merged from a parallel session. <strong>Download for selector review: yes.
-Submit: NO</strong> — its frozen bars failed (D28 catalogue-holdout best not beaten) and its
-complete-registry scan is still pending. HOLDOUT-DTI 0.0646 [0.0487, 0.0818] ·
-38,000 dots · SHA-256 <code>91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c</code>.</p>
+38,000 output dots) merged from a parallel session. <strong>Download for selector review: yes.
+Submit: NO</strong> — its frozen comparison did not beat D28, and its complete literal-registry scan is
+pending. HOLDOUT-DTI, evaluator <code>gems57-pooled-hide-v2</code>, 11,321 withheld-positive pixels:
+0.0646, 95% CI [0.0487, 0.0818]. SHA-256 <code>91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c</code>.</p>
 <div class="actions"><a class="button secondary" href="downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif" download>Download E2 review TIFF</a>
 <a class="button secondary" href="downloads/e2_run_card.json" download>E2 run card</a></div>
 <p class="small">Name: <code>GEMSDOE70-E2-alluvial-step-38000</code> · Note:
@@ -72,6 +64,8 @@ complete-registry scan is still pending. HOLDOUT-DTI 0.0646 [0.0487, 0.0818] ·
 negative with no file. Full tables on the results page; terms in
 <code>docs/publication-amendment-e2.md</code>.</p></section></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
+<a href="literal-protocol-review.json">Current literal-protocol card</a> ·
+<a href="downloads/run_card.json">Archived Phase-4 run card</a> ·
+<a href="downloads/uniqueness.json">Historical mutual-rule uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Archived Instrument A HOLDOUT-DTI</a> ·
+<a href="downloads/instrumentB_prime.json">Archived Instrument B′ HOLDOUT-DTI</a></footer></body></html>

@@ -112,3 +112,39 @@ registered review downloads, while source checks already allowed those exact fil
 built-output audit with the existing SHA-pinned publication inventory, still rejecting unknown,
 modified or symlinked rasters. Added a copy/tamper regression test. Redirect entry points now
 also show the negative warning rather than relying solely on their destination page.
+
+## Continuation review after the PR #20 fast-forward — 2026-10-20
+
+### Pass 1 — re-establish current state
+
+Fast-forwarded the required work branch to remote `main` at `c18241b9d50799840ae64ff3fd65a158b8bf30ee`
+(PR #20) without switching branches. Re-read the current README, complete retained brief, AGENTS,
+handoff, irregularities, hypotheses and archived run card. Re-ran the deterministic policy audit:
+the archived final-dot file still has four literal one-way witnesses in 62 accessible rasters. No new
+method, data, holdout, surface or raster experiment was started.
+
+### Pass 2 — check user-facing status and fail-closed cases
+
+Found a publication inconsistency: the landing page showed a DO-NOT-SUBMIT banner but also said
+“unique” and offered a “Download submission TIFF” button. Reworked the site and README so the P4
+artifact is explicitly downloadable **for review only**, with no current upload invitation. The
+submission guide now says no file is eligible and gives upload steps only for a separately cleared
+future candidate. Release metadata distinguishes `download_ok` from `download_for_review_only`,
+`literal_uniqueness_stop` and `submit_recommended`. Added regression checks for page links staying
+inside the published `/docs` tree, status text, current holdout metadata and malformed registry rows
+without a submission name. Updated historical H33 and limitation pages to distinguish a plausible
+metric explanation from a causal finding and to label archived HOLDOUT-DTI evidence correctly.
+
+### Pass 3 — reproduce and verify the final documentation/build
+
+Regenerated the literal-policy card, evidence site and README. `python -m pytest -q` passed **153 tests**
+with three existing Rasterio `PendingDeprecationWarning`s. `scripts/audit_pages.py` passed
+its root-publication source policy check; site tests checked generated local links and the review-only
+status. `git diff --check` was clean. The archived P4 SHA-256 remains
+`0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`. The card records zero
+experiments, zero weekly slots, `surface_check: not_run`, `download_for_review_only: true`, and
+`submit_recommended: false`. Only bridge rasters exist under `data/`; the feature cache is absent,
+and the SGMC proxy remains outside `scripts/fetch_data.py`'s default `WANT`. No official DrivenData,
+USGS, Dropbox or DOE source was fetched in this continuation because those hosts are outside the
+sandbox allowlist. These are implementation/status checks, not scientific validation or organizer
+acceptance.

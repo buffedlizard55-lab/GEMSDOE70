@@ -43,6 +43,10 @@
     ],
     "registry_rasters_checked": 62
   },
+  "surface_check": {
+    "status": "not_run",
+    "reason": "No new candidate surface was generated in this review. The archived final-dot witness is a stop condition; no surface pass is claimed."
+  },
   "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
   "validator_output": {
     "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
@@ -105,6 +109,9 @@
   "note": "Archived review only. Literal one-way overlap gate fails; DO NOT SUBMIT. No new candidate generated.",
   "verdict": "negative",
   "download_ok": true,
+  "download_for_review_only": true,
+  "literal_uniqueness_stop": true,
+  "download_purpose": "review only",
   "submit_recommended": false,
   "new_candidate_generated": false,
   "experiments_this_session": 0,

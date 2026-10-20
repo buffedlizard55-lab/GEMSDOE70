@@ -59,9 +59,11 @@ are not clearance under the current prompt. No new TIFF was generated in this re
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
 <nav aria-label="Main">{nav}</nav><main id="main">{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>'''
+<a href="literal-protocol-review.json">Current literal-protocol card</a> ·
+<a href="downloads/run_card.json">Archived Phase-4 run card</a> ·
+<a href="downloads/uniqueness.json">Historical mutual-rule uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Archived Instrument A HOLDOUT-DTI</a> ·
+<a href="downloads/instrumentB_prime.json">Archived Instrument B′ HOLDOUT-DTI</a></footer></body></html>'''
 
 
 def table(headers, rows, caption=None):
@@ -79,11 +81,27 @@ def instrument_rows(d):
             for k, v in d['scores'].items()]
 
 
+def score_receipt(score):
+    """Render every archived DTI with its evidence class, evaluator, n and CI."""
+    return (f"{esc(score.get('evidence_class', 'evidence class not recorded'))} · "
+            f"evaluator {esc(score.get('evaluator_version', 'not recorded'))} · "
+            f"{esc(score.get('withheld_positive_pixels', 'not recorded'))} withheld positives · "
+            f"DTI {score['dti']:.4f}, 95% CI {ci(score)}")
+
+
 def main():
     card = load('evidence/run_card.json', {})
     if not card:
         raise SystemExit('evidence/run_card.json missing; run the experiment first')
     review = load('evidence/literal_protocol_review.json', {})
+    review_gate = (review.get('correlation_overlap_vs_registry') or {}) if review else {}
+    literal_stop = review_gate.get('stop') is True
+    literal_witnesses = review_gate.get('witnesses') or []
+    literal_forward_values = [
+        row['forward_overlap'] for row in literal_witnesses
+        if type(row.get('forward_overlap')) in (int, float)
+    ]
+    literal_max_forward = max(literal_forward_values, default=0.0)
     if review:
         (DOCS / 'literal-protocol-review.json').write_text(json.dumps(review, indent=2) + '\n')
         import markdown
@@ -103,8 +121,6 @@ def main():
     p4a = load('evidence/phase4/instrumentA_holdout.json')
     p4b = load('evidence/phase4/instrumentB_prime.json')
     p4ball = load('evidence/phase4/instrumentB_all.json')
-    h33 = load('evidence/h33_audit.json', {})
-    receipt = load(f'docs/downloads/{name}.json', {})
     sources = load('registry/sources.json', [])
 
     DOCS.mkdir(parents=True, exist_ok=True)
@@ -150,19 +166,37 @@ def main():
 
     # --------------------------------------------------------------- decision box
     promoted = bool(card.get('download_and_submit_ok'))
-    tone = 'stop' if not promoted else 'ok'
-    headline = ('Verified file · not promoted' if not promoted else 'Promoted candidate')
-    decision = f'''<section class="{tone}" aria-labelledby="decision">
+    if literal_stop:
+        witness_names = ', '.join(
+            esc(row.get('submission', 'unnamed raster')) for row in literal_witnesses[:4]
+        ) or 'one or more archived rasters'
+        decision = f'''<section class="stop" aria-labelledby="decision">
+<div class="eyebrow">ARTIFACT STATUS · REVIEW COPY ONLY</div>
+<h1 id="decision">DO NOT SUBMIT — archived TIFF for review only</h1>
+<p><strong>Download:</strong> yes, for review and analysis only.
+<strong>Submit to DrivenData:</strong> no. The archived final-dot raster fails the current literal
+one-way uniqueness gate: {len(literal_witnesses)} witness rasters in the {review_gate.get('registry_rasters_checked', 0)}-raster accessible inventory;
+maximum forward overlap {literal_max_forward:.2f}. Witnesses: <code>{witness_names}</code>.
+This is a REGISTRY-MEASUREMENT, not a competition score. The inventory is not exhaustive.</p>
+<p>The historical local format/range validator passed, but that does not override this uniqueness
+stop. No new TIFF was generated in this review, and no weekly slot was used.</p>
+<div class="actions">
+<a class="button" style="background:#8b1e1e;color:#fff" href="downloads/{esc(name)}.tif" download>Download archived TIFF (review only)</a>
+<a class="button secondary" href="downloads/{esc(name)}.zip" download>Download one-TIFF ZIP (review only)</a>
+<a class="button secondary" href="protocol-review.html">Read the protocol stop</a>
+</div>
+<p class="small">Archived identifier: <code>{esc(name)}</code> · The historical note below is for identification only; it is not approved for submission.</p></section>'''
+    else:
+        tone = 'stop' if not promoted else 'ok'
+        headline = ('Verified file · not promoted' if not promoted else 'Promoted candidate')
+        decision = f'''<section class="{tone}" aria-labelledby="decision">
 <div class="eyebrow">SUBMISSION STATUS</div>
 <h1 id="decision">{esc(headline)}</h1>
-<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
-passes every shared-validator check, and its SHA-256 is recorded below.</p>
+<p><strong>Download: yes.</strong> The file passed the shared-validator checks, and its SHA-256 is recorded below.</p>
 <p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
-<strong>{esc(card['verdict'])}</strong>: the pre-registered target-like gate (instrument B′) is
-negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
-not a validated improvement.</p>
+<strong>{esc(card['verdict'])}</strong>. Uploading is a deliberate test, not a validated improvement.</p>
 <div class="actions">
-<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download submission TIFF</a>
+<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download TIFF</a>
 <a class="button secondary" href="downloads/{esc(name)}.zip" download>Download one-TIFF ZIP</a>
 <a class="button secondary" href="submission.html">How to submit</a>
 </div>
@@ -173,59 +207,91 @@ not a validated improvement.</p>
     a = p4a['scores'] if p4a else {}
     b = p4b['scores'] if p4b else {}
     ball = p4ball['scores'] if p4ball else {}
-    metrics = f'''<div class="metrics">
-<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
+    if literal_stop:
+        metrics = f'''<div class="metrics">
+<section><div class="eyebrow">ARCHIVED HOLDOUT-DTI · gems57-pooled-hide-v2</div>
 <div class="number">{a['candidate']['dti']:.4f}</div>
-<p>{ci(a['candidate'])} · {a['candidate']['withheld_positive_pixels']:,} withheld catalogue pixels</p></section>
-<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
+<p>95% CI {ci(a['candidate'])} · {a['candidate']['withheld_positive_pixels']:,} withheld-positive pixels; copied from archived Phase-4 evidence, not rerun.</p></section>
+<section><div class="eyebrow">REGISTRY-MEASUREMENT · LITERAL GATE</div>
+<div class="number">STOP</div>
+<p>{len(literal_witnesses)} one-way overlap witnesses among {review_gate.get('registry_rasters_checked', 0)} accessible rasters · maximum forward overlap {literal_max_forward:.2f}.</p></section>
+<section><div class="eyebrow">SUBMISSION STATUS</div>
+<div class="number">DO NOT SUBMIT</div>
+<p>Review download only · no new TIFF generated · no weekly slot used.</p></section></div>'''
+    else:
+        metrics = f'''<div class="metrics">
+<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI · gems57-pooled-hide-v2</div>
+<div class="number">{a['candidate']['dti']:.4f}</div>
+<p>95% CI {ci(a['candidate'])} · {a['candidate']['withheld_positive_pixels']:,} withheld-positive pixels</p></section>
+<section><div class="eyebrow">INSTRUMENT B′ · HOLDOUT-DTI · gems57-pooled-hide-v2</div>
 <div class="number">{b['candidate']['dti']:.4f}</div>
-<p>{ci(b['candidate'])} · SGMC proxy outside the duplication band</p></section>
-<section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
+<p>95% CI {ci(b['candidate'])} · {b['candidate']['withheld_positive_pixels']:,} proxy positives; SGMC is not organizer hidden truth.</p></section>
+<section><div class="eyebrow">UNIQUENESS · REGISTRY-MEASUREMENT</div>
 <div class="number">{uniqueness.get('worst_dot_overlap', 0):.2f}</div>
-<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ {uniqueness.get('worst_spearman_full_footprint', 0):.3f}</p></section></div>'''
+<p>Historical mutual overlap (limit 0.70) · Spearman {uniqueness.get('worst_spearman_full_footprint', 0):.3f}</p></section></div>'''
 
+    if literal_stop:
+        summary_heading = 'Archived Phase-4 evidence — no current submission candidate'
+        summary_copy = ('The published TIFF is a historical review artifact. This review ran no new '
+                        'experiment, created no candidate surface, and used no weekly slot. The '
+                        'literal one-way registry gate fails on the archived final dots; the prior '
+                        'mutual-overlap result is not clearance under the current prompt.')
+        download_heading = 'Why the archived file can be downloaded only for review'
+        download_copy = ('Its archived local validator receipt reports a single-band float32 GeoTIFF '
+                         'with the competition grid and values in [0,1]. That is a format/range '
+                         'preflight only. It does not establish uniqueness, organizer acceptance, '
+                         'or permission to submit. The literal protocol review is controlling.')
+        promotion_heading = 'Scientific decision: negative; no slot'
+        promotion_copy = ('The archived Phase-4 candidate did not pass its pre-registered target-like '
+                          'HOLDOUT-DTI gate. The current report carries the archived catalogue '
+                          'HOLDOUT-DTI receipt and its evaluator, withheld-positive count and 95% CI; '
+                          'no ORGANIZER-CONFIRMED score exists. No new scientific test was run here.')
+        h33_link = 'What the archive can and cannot establish about the user-reported H33 result'
+    else:
+        summary_heading = 'A reviewed candidate and the evidence behind its status.'
+        summary_copy = ('The archive records the method, held-out comparisons and validator receipt. '
+                        'A non-promoted artifact is not a validated improvement.')
+        download_heading = 'Format and file-integrity receipt'
+        download_copy = ('The shared validator re-read the published bytes. See the local format/range '
+                         'preflight and registry measurements in the linked evidence; neither is an '
+                         'organizer acceptance receipt.')
+        promotion_heading = 'Scientific decision'
+        promotion_copy = ('The pre-registered target-like HOLDOUT-DTI gate did not pass; no weekly '
+                          'slot is recommended by the recorded evidence.')
+        h33_link = 'Analysis of the user-reported H33 result'
     index = decision + f'''<section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
-<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
-<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
-pre-registered experiments and published the best candidate. Two instruments favour it, one does
-not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+<h2>{esc(summary_heading)}</h2>
+<p>{esc(summary_copy)}</p>
 </section>{metrics}
 <div class="columns">
-<section class="panel"><h2>Why it is downloadable</h2>
-<p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
-transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
-Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
-lattice reaches 1.00 by construction and is reported separately).</p>
-<a href="results.html">Full evidence →</a></section>
-<section class="panel"><h2>Why it is not promoted</h2>
-<p>On instrument B′ the candidate scores {b['candidate']['dti']:.4f} versus H33's
-{b['h33_reference']['dti']:.4f} (paired Δ {p4b['paired_differences']['h33_reference']['delta']:+.4f},
-95% CI {ci(p4b['paired_differences']['h33_reference'])}). The pre-registered rule requires a
-positive lower bound. It does not hold.</p>
-<a href="hypotheses.html">Why this rule →</a></section></div>
+<section class="panel"><h2>{esc(download_heading)}</h2>
+<p>{esc(download_copy)}</p>
+<a href="protocol-review.html">Current protocol review →</a> · <a href="results.html">Archived evidence →</a></section>
+<section class="panel"><h2>{esc(promotion_heading)}</h2>
+<p>{esc(promotion_copy)}</p>
+<a href="hypotheses.html">Research queue →</a></section></div>
 <section><h2>What is measured and what is not</h2>
-<p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue
-components and measures catalogue recovery; instrument B/B′ uses USGS SGMC faults minus the
-catalogue as a proxy for newly mapped faults. Every number is labelled, and no projection is
-presented as a leaderboard score.</p>
-<ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
-<li><a href="results.html">All three experiments, ablations and canaries</a></li>
+<p>Instrument A is a hide-and-recover catalogue holdout. Instrument B/B′ uses USGS SGMC faults as
+proxy positives and is not organizer hidden truth. Every reported internal score must be read with
+its HOLDOUT-DTI evidence class, evaluator version, positive count and 95% CI; none is an
+ORGANIZER-CONFIRMED submission score.</p>
+<ul><li><a href="h33-analysis.html">{esc(h33_link)}</a></li>
+<li><a href="results.html">Archived experiments, ablations and canaries</a></li>
 <li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section>'''
 
     # ------------------------------------------- parallel E2/E3 lane (integrated)
     e2card = load('evidence/e2/run_card.json', {})
     e2pub = load('evidence/e2/publication.json', {})
     e2hold = load('evidence/e2/holdout.json', {})
-    e3card = load('evidence/e3/run_card.json', {})
     e2_section = ''
     if e2card and e2pub:
         _d = e2card['holdout_dti']
-        e2_section = f"""<section><h2>Parallel lane E2 — alluvial step (second candidate, DO NOT SUBMIT YET)</h2>
+        e2_section = f"""<section><h2>Parallel lane E2 — alluvial step (review only, DO NOT SUBMIT)</h2>
 <p>An independent preregistered lane (oriented detrended-elevation step × basement edge,
-38,000 dots) merged from a parallel session. <strong>Download for selector review: yes.
-Submit: NO</strong> — its frozen bars failed (D28 catalogue-holdout best not beaten) and its
-complete-registry scan is still pending. HOLDOUT-DTI {_d['dti']:.4f} {ci(_d)} ·
-{e2card['final_dot_count']:,} dots · SHA-256 <code>{esc(e2pub.get('sha256',''))}</code>.</p>
+{e2card['final_dot_count']:,} output dots) merged from a parallel session. <strong>Download for selector review: yes.
+Submit: NO</strong> — its frozen comparison did not beat D28, and its complete literal-registry scan is
+pending. HOLDOUT-DTI, evaluator <code>{esc(_d['evaluator_version'])}</code>, {_d['withheld_positive_pixels']:,} withheld-positive pixels:
+{_d['dti']:.4f}, 95% CI {ci(_d)}. SHA-256 <code>{esc(e2pub.get('sha256',''))}</code>.</p>
 <div class="actions"><a class="button secondary" href="downloads/{esc(e2pub.get('file',''))}" download>Download E2 review TIFF</a>
 <a class="button secondary" href="downloads/e2_run_card.json" download>E2 run card</a></div>
 <p class="small">Name: <code>{esc(e2card.get('submission_name',''))}</code> · Note:
@@ -236,45 +302,78 @@ negative with no file. Full tables on the results page; terms in
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
-    guide = f'''<div class="eyebrow">SUBMISSION GUIDE</div>
-<h1>How to submit this file — and what the number will mean.</h1>
-<p class="lead"><strong>The file:</strong> <code>downloads/{esc(name)}.tif</code>
-({val.get('bytes', 0):,} bytes, SHA-256 <code>{esc(sha)}</code>).
-A one-TIFF ZIP of the same file is provided for portals that ask for it. Upload exactly one of them.</p>
+    if literal_stop:
+        literal_rows = [
+            ['Current literal decision', 'STOP — archived candidate is not cleared'],
+            ['One-way overlap witnesses', str(len(literal_witnesses))],
+            ['Accessible registry rasters checked', str(review_gate.get('registry_rasters_checked', 0))],
+            ['Maximum forward overlap', f'{literal_max_forward:.4f} (REGISTRY-MEASUREMENT, not a score)'],
+            ['Inventory completeness', 'Accessible archive only; not exhaustive'],
+        ]
+        guide = f'''<div class="eyebrow">SUBMISSION GUIDE · CURRENT FILE NOT ELIGIBLE</div>
+<h1>Do not submit the archived TIFF.</h1>
+<p class="lead"><strong>Current decision: DO NOT SUBMIT.</strong> The archived file
+<code>downloads/{esc(name)}.tif</code> ({val.get('bytes', 0):,} bytes, SHA-256 <code>{esc(sha)}</code>)
+is downloadable only for review and analysis. Its final-dot raster fails the current literal
+one-way overlap rule. The same applies to its one-TIFF ZIP. This is not a new submission candidate.</p>
+<div class="actions"><a class="button" style="background:#8b1e1e;color:#fff" href="downloads/{esc(name)}.tif" download>Download archived TIFF (review only)</a>
+<a class="button secondary" href="downloads/{esc(name)}.zip" download>Download archive ZIP (review only)</a>
+<a class="button secondary" href="protocol-review.html">Read the current stop report</a></div>
+<section class="panel"><h2>Current suitability — stated plainly</h2>
+<ul>
+<li><strong>Download:</strong> yes, for review only; local format/range validation is not uniqueness clearance.</li>
+<li><strong>Submit to the competition:</strong> no. The literal one-way registry gate has a duplicate witness.</li>
+<li><strong>Weekly slot:</strong> none used. No slot selection or upload was made.</li>
+<li><strong>Submission name/note:</strong> the archive identifier is historical only; no note is authorized for upload.</li>
+</ul></section>
+<section><h2>Why a local format pass is not enough</h2>
+<p>The archived shared validator reports a single-band float32 GeoTIFF on the expected 3,730 × 3,292,
+EPSG:32611 grid, values within [0,1], and no NaN or infinity. Its validation class is a local
+format/range preflight, not organizer acceptance or uniqueness clearance. We cannot infer the
+specific defect in the previously rejected upload because its bytes are unavailable.</p>
+{table(['Check', 'Archived local validator'], vrows, 'Historical shared-validator receipt; not a current submit approval.')}
+<p class="small">Validator class: {esc(val.get('validation_class', 'local format/range preflight'))}.</p></section>
+<section><h2>Current uniqueness decision</h2>
+<p>The current prompt requires a stop when any checked raster exceeds the one-way overlap threshold.
+The recorded final-dot audit triggers that rule. This is a REGISTRY-MEASUREMENT, not a competition
+score; the accessible archive is not exhaustive. A surface-stage audit was not run in this review
+because no new candidate surface was generated.</p>
+{table(['Measurement', 'Current evidence'], literal_rows, 'Literal one-way stop; historical mutual-overlap clearance is superseded.')}
+<p>The earlier mutual-overlap results below are retained for provenance only and do not clear this
+artifact under the current prompt.</p>
+{table(['Historical measurement', 'Value'],
+ [['Rasters checked', uniqueness.get('registry_rasters_checked')],
+  ['Worst mutual overlap', f"{uniqueness.get('worst_dot_overlap'):.4f} ({esc(uniqueness.get('worst_overlap_submission'))})"],
+  ['Worst forward-only overlap', f"{uniqueness.get('worst_forward_overlap'):.4f} ({esc(uniqueness.get('worst_forward_submission'))})"],
+  ['Worst Spearman ρ', f"{uniqueness.get('worst_spearman_full_footprint'):.4f}"]],
+ 'Archived mutual-rule audit only; not current clearance.')}</section>
+<section><h2>For a future candidate that is separately cleared</h2>
+<ol class="steps">
+<li>Wait for an explicit selector decision and a run card with <code>submit_recommended: true</code>; do not use the file above.</li>
+<li>Open DrivenData’s competition 306 <em>New submission</em> page.</li>
+<li>Select exactly one cleared single-band GeoTIFF or one ZIP containing only that TIFF; never upload both.</li>
+<li>Paste the cleared candidate’s run-card note (at most 140 characters).</li>
+<li>Keep the portal receipt with filename, SHA-256, timestamp and returned score. Only then label that result ORGANIZER-CONFIRMED.</li>
+</ol></section>'''
+    else:
+        guide = f'''<div class="eyebrow">SUBMISSION GUIDE</div>
+<h1>How to submit a separately cleared file.</h1>
+<p class="lead">Check the run card before upload. A format-valid download is not automatically recommended for a weekly slot.</p>
 <section class="panel"><h2>Decision, stated plainly</h2>
 <ul>
-<li><strong>Download:</strong> yes — the file is unique, format-validated and reproducible.</li>
-<li><strong>Upload a weekly slot:</strong> not recommended. Verdict <code>{esc(card['verdict'])}</code>.
-Our target-like proxy says it is 12.6% below H33; our catalogue holdout says it is 20× above it.
-Neither is the hidden truth. This is a defensible test, not a validated win.</li>
+<li><strong>Download:</strong> check the release flags and the artifact SHA-256.</li>
+<li><strong>Upload a weekly slot:</strong> only if the selector has approved it and <code>submit_recommended</code> is true.</li>
 <li><strong>Never</strong> upload the ZIP and the TIFF as two different submissions.</li></ul></section>
 <section><h2>Steps</h2><ol class="steps">
 <li>Open the competition <em>New submission</em> page (DrivenData competition 306).</li>
-<li>Choose <code>{esc(name)}.tif</code> (or the matching <code>.zip</code>, which contains only that TIFF).</li>
-<li>Paste the note exactly as below (one line, {card.get('note_chars', len(card.get('submission_note', '')))} characters).</li>
+<li>Choose one cleared TIFF or its matching ZIP (which contains only that TIFF).</li>
+<li>Paste the note from the cleared run card (at most 140 characters).</li>
 <li>Submit and keep the receipt: filename, SHA-256, timestamp and the score the portal returns.</li>
-<li>Record the returned score as ORGANIZER-CONFIRMED — nothing on this site may be relabelled as one.</li>
-</ol>
-<p><code>{esc(card.get('submission_note', ''))}</code></p></section>
-<section><h2>Why the earlier portal error happened</h2>
-<p>“Predicted values must be in range [0, 1]” is raised by the portal's own range check. The shared
-writer refuses non-finite, negative or &gt;1 values instead of clipping them, then re-reads the file
-from disk. This file is all-finite with values in exactly {{0, 1}}. We cannot inspect the earlier
-rejected upload, so we do not claim to know its specific defect.</p></section>
+<li>Record the returned score as ORGANIZER-CONFIRMED only from that receipt.</li>
+</ol></section>
 <section><h2>On-disk validator receipt</h2>
-<p>Every check below was recomputed from the published bytes by the shared template validator.</p>
 {table(['Check', 'Result'], vrows, 'Shared validator, all checks must pass.')}
-<p class="small">Validator class: {esc(val.get('validation_class', 'local format/range preflight'))}.</p></section>
-<section><h2>Uniqueness receipt</h2>
-<p>{esc(uniqueness.get('overlap_definition', ''))}</p>
-{table(['Measurement', 'Value'],
- [['Rasters checked', uniqueness.get('registry_rasters_checked')],
-  ['Duplicate count (mutual rule)', uniqueness.get('duplicate_count')],
-  ['Worst mutual overlap', f"{uniqueness.get('worst_dot_overlap'):.4f} ({esc(uniqueness.get('worst_overlap_submission'))})"],
-  ['Worst forward-only overlap', f"{uniqueness.get('worst_forward_overlap'):.4f} ({esc(uniqueness.get('worst_forward_submission'))})"],
-  ['Worst Spearman ρ', f"{uniqueness.get('worst_spearman_full_footprint'):.4f}"],
-  ['Inventory scope', esc(uniqueness.get('inventory_scope'))]],
- 'Corrected binary-dot definition; forward-only overlap with a dense sampling grid is uninformative.')}</section>'''
+<p class="small">Validator class: {esc(val.get('validation_class', 'local format/range preflight'))}.</p></section>'''
     (DOCS / 'submission.html').write_text(frame('Submit a file', guide))
 
     # ------------------------------------------------------------------- results
@@ -286,7 +385,7 @@ rejected upload, so we do not claim to know its specific defect.</p></section>
         if d:
             for k in ('candidate', 'ablation_no_tip', 'random_control', 'h33_reference'):
                 if k in d['scores']:
-                    ablate.append([tag, esc(k), f"{d['scores'][k]['dti']:.4f}", ci(d['scores'][k])])
+                    ablate.append([tag, esc(k), score_receipt(d['scores'][k])])
     canary_rows = [[esc(k), f"{v['auc']:.3f}", 'STOP' if v['suspected_leakage'] else 'clear']
                    for k, v in canaries.items()]
     history = []
@@ -297,26 +396,33 @@ rejected upload, so we do not claim to know its specific defect.</p></section>
             continue
         cand = d['scores']['candidate']
         ref = d['scores'].get('h33_reference')
-        history.append([esc(tag), f"{cand['dti']:.4f}", ci(cand),
-                        f"{ref['dti']:.4f}" if ref else '—'])
-    results = f'''<div class="eyebrow">EVIDENCE</div><h1>Three experiments, two instruments, one verdict.</h1>
-<p>All DTI values use α = 0.2, β = 0.8 and a 300 m triangular kernel on the pinned 100 m grid, with
-pooled terms and a paired spatial-cluster bootstrap (1,000 draws, 20 km blocks). Intervals are
-conditional on the fitted folds and the proxy truth; they are not leaderboard intervals.</p>
-<p><strong>Regression: only mutual overlap now counts as duplication.</strong> Measured this session:
-<code>calib_r13lattice_00904.tif</code> (206,895 dots) has a 3-px halo covering <strong>100 %</strong>
-of the footprint, so forward-only overlap is 1.00 for any nonempty candidate. Both directions are
-always reported.</p>
-<h2>Published candidate</h2>
-{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_a, 'Instrument A · shared hide-and-recover catalogue holdout')}
-{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_bp, "Instrument B′ · SGMC proxy, d ≥ 3 px from catalogue")}
-{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_ball, 'Instrument B · unrestricted SGMC proxy (contaminated by map duplication)')}
+        history.append([esc(tag), score_receipt(cand), score_receipt(ref) if ref else '—'])
+    results = f'''<div class="eyebrow">ARCHIVED EVIDENCE</div><h1>Archived experiments, two instruments, one recorded verdict.</h1>
+<p>Each DTI table below reports HOLDOUT-DTI from its receipt, evaluator <code>gems57-pooled-hide-v2</code>,
+95% CI, and withheld-positive count. The candidate rows in B/B′ use SGMC-derived proxy positives;
+those labels are not organizer hidden truth and must not be called ORGANIZER-CONFIRMED. Values use
+α = 0.2, β = 0.8 and a 300 m triangular kernel, with pooled terms and a paired spatial-cluster
+bootstrap (1,000 draws, 20 km blocks). Intervals are conditional on the fitted folds/proxy truth,
+not leaderboard intervals.</p>
+<p><strong>Current status: DO NOT SUBMIT.</strong> The archived literal one-way registry audit stops
+on four final-dot witnesses; see the current protocol review. Historical mutual-overlap clearance
+is not current clearance.</p>
+<p><strong>Historical tool regression:</strong> the archived mutual-overlap implementation treated
+only mutual overlap as duplication. The reviewed final dots have forward overlap 1.00 with a dense
+lattice; the literal prompt's one-way rule therefore triggers a stop.</p>
+<p><strong>Historical measurement:</strong> archived raster <code>calib_r13lattice_00904.tif</code>
+(206,895 registry dots) has a 3-px halo covering 100% of the footprint. Its forward overlap with
+the reviewed candidate is 1.00, so the current one-way rule stops this artifact.</p>
+<h2>Historical Phase-4 candidate — HOLDOUT-DTI, not organizer score</h2>
+{table(['Arm', 'DTI', '95% CI', 'Withheld-positive pixels'], rows_a, 'Instrument A · gems57-pooled-hide-v2 · hide-and-recover catalogue holdout')}
+{table(['Arm', 'DTI', '95% CI', 'Withheld-positive pixels'], rows_bp, "Instrument B′ · gems57-pooled-hide-v2 · SGMC proxy holdout, not organizer hidden truth")}
+{table(['Arm', 'DTI', '95% CI', 'Withheld-positive pixels'], rows_ball, 'Instrument B · gems57-pooled-hide-v2 · unrestricted SGMC proxy holdout; not organizer hidden truth')}
 <h2>Experiment 3 ablations</h2>
-{table(['Instrument', 'Arm', 'DTI', '95% CI'], ablate, 'Ablations were registered before their runs.')}
+{table(['Instrument', 'Arm', 'HOLDOUT-DTI receipt'], ablate, 'Each DTI includes evidence class, evaluator version, withheld-positive count, value and 95% CI.')}
 <h2>Leakage canaries</h2>
-{table(['Feature', 'AUC (held-out)', 'Result'], canary_rows, 'Each feature alone, 11,321 withheld positives vs 200,000 negatives. AUC > 0.90 would stop the run.')}
+{table(['Feature', 'AUC (held-out)', 'Result'], canary_rows, 'Each feature alone; AUC is a leakage diagnostic, not DTI. AUC > 0.90 would stop the run.')}
 <h2>Experiment history</h2>
-{table(['Run', 'Candidate DTI', '95% CI', 'H33 DTI'], history)}
+{table(['Run', 'Candidate HOLDOUT-DTI receipt', 'H33 reference HOLDOUT-DTI receipt'], history)}
 <p><a href="downloads/run_card.json">Full run card</a> ·
 <a href="downloads/uniqueness.json">Uniqueness audit</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
@@ -326,13 +432,12 @@ always reported.</p>
     if e2hold:
         _rows = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
                  for k, v in sorted(e2hold['scores'].items(), key=lambda kv: -kv[1]['dti'])]
-        results += ("<h2>Parallel lane E2/E3 — catalogue holdout (same instrument A family)</h2>"
-                    "<p>E2 beats random and every ablation, ties H19-solid at one-third mass, "
-                    "loses to D28; H33 ranks last here by construction (live new faults vs catalogue "
-                    "pieces). E3 depth-step mechanism AUC 0.506 (null), candidate "
-                    f"{e3card.get('holdout_dti', {}).get('dti', 0):.4f}. Both negative.</p>"
+        results += ("<h2>Parallel lane E2/E3 — archived catalogue holdouts</h2>"
+                    "<p>E2 did not beat the D28 catalogue-holdout comparison; E3 depth-step was a null result. "
+                    "Both are negative and not organizer-confirmed. See the E2/E3 run cards for the "
+                    "complete HOLDOUT-DTI receipts, evaluator versions, withheld-positive counts and CIs.</p>"
                     + table(['Arm', 'DTI', '95% CI', 'Positives'], _rows,
-                            'E2 arms · gems57-pooled-hide-v2 · seed-20'))
+                            'E2 HOLDOUT-DTI arms · gems57-pooled-hide-v2 · seed-20'))
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 
     # ------------------------------------------------------------------ markdown

@@ -1,5 +1,11 @@
 # Preregistered hypotheses — 2026-10-20
 
+> **Current status: archived research only.** The provisional lane and experiments below are historical;
+> no single method paragraph assigns the current review a lane. The literal one-way final-dot audit
+> triggers a stop, so no new surface or candidate was created. Do not treat this document as current
+> authorization to run or submit. See [the current protocol review](protocol-review.html)
+> for the active stop and the three unvalidated research proposals.
+
 Written before the experiment. These are geological hypotheses, **not established discoveries or predicted scores**. This checkout originally had no implementation. Novelty is relative to that checkout and inspected GEMSDOE32/60/69 code, not an exhaustive claim across private parallel sessions.
 
 ## Lane irregularity
@@ -19,7 +25,7 @@ Qualitative ranking only; none is a verified score improvement. Each names layer
 
 | Rank | Hypothesis / layers | Physical signature | Catalogue-omission argument | Named non-fault mimic | Difference from repo implementations | Expected DTI | Cost | External data |
 |------|---------------------|--------------------|-----------------------------|-----------------------|--------------------------------------|--------------|------|---------------|
-| 1 (tested) | H-1 Stepover-relay dilation propensity: visible catalogue endpoints paired within 1.2 km x RTP edge | Off-catalogue corridor density at endpoint pairs x magnetic gradient magnitude | New cross-faults nucleate in dilational jogs between mapped traces, not on the traces themselves | Volcanic contact endpoints, leveling artifacts | Network/topology endpoint pairing vs the tested lane's along-tangent edge-amplitude truncation | 0.0230 vs random control 0.0472 (negative) | Low | None (cached stack) |
+| 1 (tested) | H-1 Stepover-relay dilation propensity: visible catalogue endpoints paired within 1.2 km x RTP edge | Off-catalogue corridor density at endpoint pairs x magnetic gradient magnitude | New cross-faults nucleate in dilational jogs between mapped traces, not on the traces themselves | Volcanic contact endpoints, leveling artifacts | Network/topology endpoint pairing vs the tested lane's along-tangent edge-amplitude truncation | Negative: HOLDOUT-DTI 0.0230, evaluator `gems57-pooled-hide-v2`, 11,321 withheld positives, 95% CI [0.0142, 0.0321] (archived surface-stage receipt) | Low | None (cached stack) |
 | 2 | H-2 Magnetic analytic-signal ridge amplitude: rtp, tmi_hg, tmi_vg | Analytic-signal amplitude ridge = total gradient magnitude including vertical derivative; buried source edges independent of magnetization direction | Concealed magnetic-contact faults produce no surface rupture or topographic scarp | Remanence/magnetization contrast without slip; dike margins | Repo uses unsigned RTP horizontal gradient only; adds vertical derivative and analytic-signal envelope | Moderate | Medium | None (bands 2, 3, 9 in stack) |
 | 3 | H-3 Radiometric alteration-edge halo: GeoDAWN K, Th, total-count (USGS) | Gradient edges of potassium/thorium depletion or uranium enrichment along hydrothermal alteration halos | Hydrothermal alteration can be detectable where the fault trace itself is unmapped or buried | Primary lithologic K/Th variation unrelated to faulting; flight-line artifacts | Repo uses no radiometric data at all | Uncertain (untested) | Medium-high | ext_geodawn_rad_u8 via fetch_data.py WANT set from public owner mirror; obtainability not yet checked in this session |
 | 4 | H-4 Detrended elevation breakline density: det_elev, det_elev_slope | Subtle breakline/curvature concentration of blind fault scarps in detrended topography | Blind scarps displace topography without a mapped trace | Depositional/erosional geomorphology (fans, paleochannels); road cuts | Repo's potential-field lane does not use topography | Low-moderate | Low | None (band 11 in stack) |

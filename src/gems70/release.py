@@ -2,11 +2,14 @@
 
 Two independent facts are tracked and must never be conflated:
 
-* ``download_ok``  - the file exists, matches its recorded SHA-256, passed the shared
-  validator, and cleared the (corrected) mutual-overlap uniqueness gate.
-* ``submit_recommended`` - the pre-registered scientific promotion gate passed.
+* ``download_ok`` - the archived bytes are present, hash-matched, and pass the local
+  format/range preflight. When the literal protocol stop is active this means review-only
+  distribution, not clearance for competition upload.
+* ``submit_recommended`` - the pre-registered scientific promotion gate passed and no
+  active protocol stop blocks submission.
 
-The page and the run card always show both. A downloadable file is not a promise.
+The page and run card show both flags plus an explicit review-only purpose when stopped.
+A downloadable file is not a promise of uniqueness, organizer acceptance, or improvement.
 """
 from __future__ import annotations
 
@@ -81,16 +84,22 @@ def release_status(root):
             reasons.append("Candidate did not match H33 on instrument A.")
         if not card.get('gate_b_prime_candidate_gt_h33_significant'):
             reasons.append("Candidate did not beat H33 on instrument B' with a 95% CI above zero.")
-        notes.append('A downloadable, validated file is not a validated leaderboard improvement.')
+        notes.append('A downloadable, format-validated file is not a validated leaderboard improvement.')
     # A historical mutual-overlap clearance must never override a later literal
     # protocol stop. Keep review downloads available; block scientific promotion.
     current_review = _load(root, 'evidence/literal_protocol_review.json')
-    if current_review and current_review.get('correlation_overlap_vs_registry', {}).get('stop') is True:
+    literal_stop = bool(current_review and
+                        (current_review.get('correlation_overlap_vs_registry') or {}).get('stop') is True)
+    if literal_stop:
         submit = False
         reasons.append('Current literal one-way uniqueness audit requires STOP; review download only.')
+        notes.append('Download is for review only; do not submit this archived TIFF.')
     return {
         'verdict': (card or {}).get('verdict', 'negative'),
         'download_ok': download_ok,
+        'download_for_review_only': bool(download_ok and literal_stop),
+        'literal_uniqueness_stop': literal_stop,
+        'download_purpose': 'review only' if download_ok and literal_stop else ('candidate file' if download_ok else 'unavailable'),
         'submit_recommended': submit,
         'download_and_submit_ok': bool(download_ok and submit),
         'artifact': str(tif) if tif else None,

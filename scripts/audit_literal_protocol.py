@@ -16,12 +16,17 @@ def literal_gate(audit):
     witnesses = []
     invalid = []
     for row in rows:
+        if not isinstance(row, dict):
+            invalid.append(None)
+            continue
         rho = row.get('spearman_full_footprint')
         overlap = row.get('my_dots_within_3px_of_theirs')
-        if (type(rho) not in (int, float) or not math.isfinite(rho)
+        submission = row.get('submission')
+        if (not isinstance(submission, str) or not submission.strip()
+                or type(rho) not in (int, float) or not math.isfinite(rho)
                 or not -1 <= rho <= 1 or type(overlap) not in (int, float)
                 or not math.isfinite(overlap) or not 0 <= overlap <= 1):
-            invalid.append(row.get('submission'))
+            invalid.append(submission)
             continue
         if rho > .90 or overlap > .70:
             witnesses.append({'submission': row['submission'],
@@ -53,12 +58,21 @@ def main():
                     **old['instrument_a_holdout']['candidate'],
                     'provenance': 'Archived phase4 instrument A, not rerun this session'},
         'correlation_overlap_vs_registry': gate,
+        'surface_check': {
+            'status': 'not_run',
+            'reason': ('No new candidate surface was generated in this review. The archived final-dot '
+                       'witness is a stop condition; no surface pass is claimed.')
+        },
         'raster_sha256': sha,
         'validator_output': old['validator_output'],
         'validator_provenance': 'Archived shared-validator receipt; not a new data restoration',
         'submission_name': old['submission_name'],
         'note': 'Archived review only. Literal one-way overlap gate fails; DO NOT SUBMIT. No new candidate generated.',
-        'verdict': 'negative', 'download_ok': True, 'submit_recommended': False,
+        'verdict': 'negative', 'download_ok': True,
+        'download_for_review_only': bool(gate['stop']),
+        'literal_uniqueness_stop': bool(gate['stop']),
+        'download_purpose': 'review only' if gate['stop'] else 'candidate file',
+        'submit_recommended': False,
         'new_candidate_generated': False, 'experiments_this_session': 0,
         'weekly_slots_used': 0,
         'limitation': 'No single method paragraph assigns this session a lane. Stop on existing duplicate witness; do not invent a new lane.',

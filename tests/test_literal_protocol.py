@@ -30,6 +30,12 @@ def test_fail_closed_for_missing_nonfinite_and_wrong_type():
     incomplete = audit()
     incomplete['registry_rasters_expected'] = 2
     assert module.literal_gate(incomplete)['stop']
+    missing_name = audit(overlap=.8)
+    del missing_name['rows'][0]['submission']
+    assert module.literal_gate(missing_name)['stop']
+    malformed_row = audit()
+    malformed_row['rows'] = [None]
+    assert module.literal_gate(malformed_row)['stop']
 
 
 def test_current_card_is_negative_and_does_not_invent_experiment():
@@ -46,11 +52,24 @@ def test_generated_pages_show_current_stop():
     for name in ('index.html', 'submission.html', 'results.html', 'protocol-review.html'):
         text = (ROOT / 'docs' / name).read_text()
         assert 'DO NOT SUBMIT — literal protocol stop' in text
-    assert 'CURRENT REVIEW: DO NOT SUBMIT' in (ROOT / 'README.md').read_text()
+    readme = (ROOT / 'README.md').read_text()
+    assert 'CURRENT STATUS: DO NOT SUBMIT' in readme
+    assert 'Download the archived Phase-4 TIFF for review only' in readme
+    assert 'Do not upload this TIFF' in readme
+    assert 'A unique, format-validated competition TIFF is published' not in readme
+    home = (ROOT / 'docs/index.html').read_text()
+    assert 'Download archived TIFF (review only)' in home
+    assert 'Download submission TIFF' not in home
+    assert 'fails the current literal' in (ROOT / 'docs/submission.html').read_text()
+    card = json.loads((ROOT / 'evidence/literal_protocol_review.json').read_text())
+    assert card['surface_check']['status'] == 'not_run'
 
 
 def test_release_api_enforces_current_stop():
     from gems70.release import release_status
     status = release_status(ROOT)
     assert status['submit_recommended'] is False
+    assert status['download_for_review_only'] is True
+    assert status['literal_uniqueness_stop'] is True
+    assert status['download_purpose'] == 'review only'
     assert any('literal one-way' in reason for reason in status['reasons'])

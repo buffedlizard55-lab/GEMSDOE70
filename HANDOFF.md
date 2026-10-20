@@ -89,3 +89,39 @@ no weekly slot. Frozen scientific receipts are preserved, not reclassified as ne
 Site-wide warnings and the README opening supersede old uniqueness claims for this prompt.
 Reproduce: `.venv/bin/python scripts/audit_literal_protocol.py`, rebuild site/readme, pytest.
 Resolve the protocol contradiction and explicit lane assignment before the supervised next step.
+
+## Current Arena continuation — 2026-10-20 (branch `arena/85eff40e-gemsdoe70`)
+
+This branch was fast-forwarded to remote main `c18241b9d50799840ae64ff3fd65a158b8bf30ee` (PR #20)
+before work continued. The current literal one-way audit remains a STOP: four final-dot witnesses
+in 62 accessible registry rasters, maximum forward overlap 1.00. This is a registry measurement,
+not a competition score. The archived P4 TIFF remains available only for review at
+`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif`, SHA-256
+`0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`. Do not submit it. Its
+local format validator does not clear uniqueness. The surface check was not run; do not claim it
+passed.
+
+No new data was restored, no model or raster was generated, no holdout was recomputed, no experiment
+was started, and no weekly slot was used. The evidence card is `evidence/literal_protocol_review.json`;
+current report is `reports/literal-protocol-review.md`. The front page and submission guide now say
+review-only / DO NOT SUBMIT and must stay consistent. `AGENTS.md` explicitly records that the active
+literal rule supersedes historical mutual-overlap clearance without changing the pinned shared metric.
+
+The README retains the complete project prompt. Three unvalidated cache-based hypotheses are ranked
+in the current report; the top one was not validated because no single lane is assigned and the stop
+is active. Sibling evidence shows related SGMC proxy work in GEMSDOE72, CV scarp work in GEMSDOE66,
+and thermal-data work in GEMSDOE71; do not resume the prior supervised SGMC lane without method-level
+deduplication.
+
+Verification for this continuation: `.venv/bin/python scripts/audit_literal_protocol.py`, static
+site/README rebuild, `.venv/bin/python -m pytest -q` → 153 passed, 3 existing deprecation warnings,
+`.venv/bin/python scripts/audit_pages.py` source-policy pass, and `git diff --check` clean. Only the
+bridge rasters are present under `data/`; the feature cache is absent and `ext_derived_sgmc_faults_100m_u8`
+remains missing from the fetch script's default `WANT` list. Official DrivenData/USGS/DOE page links
+are retained for manual review, but none was freshly fetched due the sandbox host allowlist.
+
+Next: resolve the literal overlap conflict with the selector; assign a non-duplicated lane; only then
+restore and hash the cache and proxy, run leakage canaries and whole-segment buffered HOLDOUT-DTI,
+check surface uniqueness before placement and final-dot uniqueness after placement, and compare to the
+current best. Never use a weekly slot unless a cleared candidate beats the HOLDOUT-DTI baseline and
+is separately selected.

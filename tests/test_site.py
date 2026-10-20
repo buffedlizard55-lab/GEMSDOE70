@@ -30,6 +30,19 @@ def test_site_rebuild_has_no_broken_local_link():
             assert target.is_file(), f'broken local link {p}: {link}'
 
 
+def test_docs_pages_do_not_link_outside_published_site_root():
+    site = ROOT / 'docs'
+    for p in site.rglob('*.html'):
+        parser = Links(); parser.feed(p.read_text())
+        for link in parser.links:
+            u = urlsplit(link)
+            if u.scheme or u.netloc or not u.path:
+                continue
+            target = (p.parent / unquote(u.path)).resolve()
+            assert target.is_relative_to(site.resolve()), f'link escapes published site {p}: {link}'
+            assert target.is_file(), f'broken published-site link {p}: {link}'
+
+
 def test_every_published_artifact_is_inventoried():
     import hashlib
     inv = json.loads((ROOT / 'registry/published_artifacts.json').read_text())
@@ -45,6 +58,28 @@ def test_every_published_artifact_is_inventoried():
 
 def test_decision_is_explicit_on_the_landing_page():
     home = (ROOT / 'docs/index.html').read_text()
-    assert 'Download: yes.' in home
-    assert 'Submit a weekly slot: not recommended' in home
-    assert 'Download submission TIFF' in home
+    assert 'DO NOT SUBMIT — literal protocol stop' in home
+    assert 'Download archived TIFF (review only)' in home
+    assert 'Submit to DrivenData:</strong> no' in home
+    assert 'Download submission TIFF' not in home
+    assert 'unique, auditable candidate' not in home
+
+
+def test_submission_guide_does_not_invite_upload_of_review_artifact():
+    guide = (ROOT / 'docs/submission.html').read_text()
+    assert 'Do not submit the archived TIFF.' in guide
+    assert 'downloadable only for review and analysis' in guide
+    assert 'do not use the file above' in guide
+    assert 'Upload a weekly slot' not in guide
+
+
+def test_published_dti_results_carry_evidence_metadata():
+    results = (ROOT / 'docs/results.html').read_text()
+    assert 'HOLDOUT-DTI' in results
+    assert 'gems57-pooled-hide-v2' in results
+    assert 'withheld positives' in results
+    assert '95% CI' in results
+    analysis = (ROOT / 'docs/h33-analysis.html').read_text()
+    assert 'not ORGANIZER-CONFIRMED' in analysis
+    assert 'plausible explanation' in analysis
+    assert 'not</strong> identify why' in analysis
