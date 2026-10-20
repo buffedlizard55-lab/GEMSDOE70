@@ -20,7 +20,7 @@
 - `.venv/bin/python scripts/release_gate.py --expect-negative`: exited 0 and reported template integrity OK, negative verdict, `generated_tif: null`, `download_available: false`, zero submission slots used, and explicit release blockers.
 - `.venv/bin/python scripts/release_gate.py`: returned exit 2 as designed for a blocked release.
 - `.venv/bin/python scripts/check_pages.py`: returned exit 2. The live GitHub Pages API reports legacy publication from `main:/`, not `/docs`. The previous configuration write attempt is documented as denied with HTTP 403 (`Resource not accessible by integration`). Root Jekyll exclusions are a source-tree mitigation, not proof of a changed Pages source or of deployed output contents. Treat publication-boundary assurance as unresolved until an authorized configuration change and deployment check succeed.
-- No `.tif`, `.tiff`, or `.zip` is present under `docs/`. Historical TIFF/ZIP artifacts exist only under `quarantine/concurrent-h70c/`; they are explicitly not endorsed and must not be downloaded or submitted.
+- No `.tif`, `.tiff`, or `.zip` is present under `docs/`. Historical candidate-submission TIFF/ZIP artifacts exist under `quarantine/concurrent-h70c/`; they are explicitly not endorsed and must not be downloaded or submitted. Reference/sample rasters under `data/bridge/` are input examples, not candidate submissions.
 - Official DrivenData, USGS, DOE repository and NLR sources are not verified in this environment; the recorded HTTP checks failed from the sandbox. GitHub reference/template content was available. Do not infer global source unavailability, a login redirect, current leaderboard status, or organizer score confirmation from those failures.
 
 ## Pass 3 — compare with the requested outcome
