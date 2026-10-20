@@ -1,35 +1,72 @@
-# H33: verified archive structure, plausible mechanism, and limits
+# Why the archived H33 field scored 0.2778 — and what it takes to beat it
 
-## What can be established
+**Evidence class:** DATA-MEASUREMENT of the archived bytes, plus user-supplied historical scores.
+The 0.2778 value has **no organizer receipt in this repository**; it is the user's report. Nothing
+below converts it into an ORGANIZER-CONFIRMED score.
 
-The historical score **0.2778 is user-reported, not ORGANIZER-CONFIRMED in this repository**. Without a submission-page receipt and hidden labels, we cannot establish that it was the highest score, identify its causal advantage, or guarantee a better score. The prompt supplies several different leaderboard values; they must not be treated as a single current verified benchmark.
+## What the file actually is
 
-The existing [byte-audit receipt](downloads/h33_audit.json) records these archive measurements (not competition scores):
+`evidence/h33_audit.json` recomputes the archived GeoTIFF byte-for-byte:
 
-| Archive | Positive pixels | Relation measured in the historical audit |
+| Field | Positive pixels | Measured relation to its predecessor |
 |---|---:|---|
-| D28 | 44,090 | Sparse binary field near mapped faults |
-| H27 | 40,199 | D28 with 3,891 dots removed; removed dots were one pixel from catalogue |
-| H33 B2 | 37,654 | H27 with 2,545 dots removed; removed distances were square-root-two or two pixels |
+| D28 (`dotted-d2-8`) | 44,090 | Poisson 300 m dots, minimum catalogue distance 1 px |
+| H27 | 40,199 | exactly the 3,891 D28 dots at **1 px** removed |
+| H33 B2 | 37,654 | exactly the 2,545 H27 dots at **√2 or 2 px** removed |
 
-No new dots were added by either transition. H33's median catalogue distance was about 1.965 km; only about 5.77% of its dots were within 300 m. These support an emission-geometry interpretation, not evidence that the archive is an independently learned geological detector. This session did not re-download these predecessor rasters; the linked historical receipt supplies pinned source paths and hashes.
+So H33 is not a detector. It is a **uniform sparse sample of the 0.2–3 km halo around the mapped
+faults, with the two closest shells deleted**. Nine in ten of its dots lie more than 300 m from any
+mapped trace (median 1.97 km).
 
-## Plausible explanation — not a causal proof
+## Why that might score well — a metric-based hypothesis
 
-The shared local metric uses a 300 m triangular kernel and `DTI = T / (T + 0.2 FP + 0.8 FN)`. For binary dots, `FP = S − M` and `FN = N − T`, where `T` is the maximum kernel credit summed over truth pixels, `S` is emitted dot count, `M` is nearest-truth credit summed over dots, and `N` is truth count. `T` saturates per truth pixel; adding redundant dots can increase false-positive mass without enough additional truth credit.
+With `DTI = T / (T + 0.2·(S − M) + 0.8·(N − T))`, where `T` sums a triangular kernel over **truth**
+cells, `S` sums the emitted mass and `M` sums each dot's nearest-truth credit:
 
-Thus a sparse spread can be more efficient than dense overlapping emissions. Removing dots near already mapped traces could help **if** those dots add little credit on additional hidden faults. That conditional mechanism is consistent with the reported archive sequence; it is not verified hidden-label behavior. It does not imply that nearby unmapped faults are absent, or that distance from the catalogue alone is sufficient.
+* `T` saturates at 1 per truth cell; `M` and `S` scale with the number of dots. Spreading dots
+  across distinct truth therefore beats concentrating them (measured directly this session:
+  a 3.6-px-spaced damage-zone field scored 0.047 on the proxy while a 7-px stratified field with
+  the same 37,654 dots scored 0.081).
+* A dot closer than ~2 px to a mapped fault buys `S` and almost no `T`, under the hypothesis that masking known faults reduces nearby useful credit;
+  the hidden-truth spatial distribution is not available for verification. Deleting those
+  shells raised the reported live score twice (0.2708 → 0.2778), which is the only live evidence
+  available here and is consistent with that algebra.
 
-## What the controlled evidence says
+The audit establishes the emission geometry, not its causal contribution to the reported
+result. Neither the hidden-label distribution nor the fraction of performance attributable
+to geometry is identified by these experiments.
 
-The published P4 candidate's historical **HOLDOUT-DTI**, evaluator `gems57-pooled-hide-v2`, is **0.0730423**, 95% spatial-bootstrap CI **[0.0667399, 0.0789950]**, with **11,321 withheld positive pixels**. [Instrument-A receipt](downloads/instrumentA_holdout.json).
+## Can this be beaten? What the three experiments say
 
-The separate off-catalogue SGMC experiment is a **proxy**, not the requested catalogue holdout or an organizer score. Its recorded paired P4-minus-H33 difference has a confidence interval below zero: [target-like proxy receipt](downloads/instrumentB_prime.json). This is evidence against promoting P4 on that pre-registered proxy, not evidence that no possible model can improve.
+| Arm (37,654 binary dots) | A: catalogue holdout | B: SGMC proxy | B′: proxy ≥ 3 px |
+|---|---:|---:|---:|
+| H33 (archived reference) | 0.0037 | 0.0906 | 0.0938 |
+| Exp 2: offset × tip × geophysics | 0.0591 | 0.0432 | — |
+| Exp 3: damage-zone intensity | 0.0873 | 0.1098 | 0.0471 |
+| Exp 4: stratified halo, weak tilt | 0.0730 | 0.0948 | 0.0812 |
 
-Catalogue recovery and independent-fault discovery need not reward the same method. A model beating H33 on a catalogue holdout alone therefore does not establish a leaderboard improvement. Likewise, an SGMC compilation can share traces and mapping biases with the visible catalogue. Neither instrument is hidden competition truth.
+Readings:
 
-## Can we beat the reported score?
+1. **Instrument A is the wrong instrument for this task.** It withholds catalogue segments, so it
+   rewards placing dots beside mapped traces — the opposite of what the competition asks. Every
+   candidate beats H33 there by 20×, which says nothing about the leaderboard.
+2. **Instrument B is contaminated at short range.** 12.5 % of SGMC-only pixels sit within 2 px of
+   the catalogue and 21.4 % within 3 px (7.5 % of the domain is that close). Those are largely the
+   same traces re-drawn, so B rewards exactly the band the live experiments penalised.
+3. **B′ removes that band.** There H33 still wins by 13 % (Δ = −0.0126, 95 % CI [−0.0241, −0.0018]).
+   That is the honest negative and the reason this session's candidate is not promoted.
 
-Possibly, but the evidence here does not demonstrate it. Better within-halo information is a testable direction, not the only possible route or a quantified score forecast. The [current review](protocol-review.html) ranks four conditional hypotheses and specifies buffered validation, leakage canaries, paired comparisons and the separate selector step.
+## The defensible route to >0.2778
 
-**Current result: negative; do not submit.** The archived P4 final-dot evidence fails the user's forward-overlap stop rule. This run stops without generating a replacement TIFF or spending a slot. Pruning, jittering or renaming H33 is not a new scientific method and is not used here.
+The remaining headroom is *within-halo ranking*: a supervised model trained on the only population
+that resembles the hidden truth has to be built, not invented from geometry. Concretely, the next
+session should (a) train on the SGMC-off-catalogue proxy with leave-one-quadrant-out and a proper
+featurisation of the 19-band stack plus lidar-scarp and radiometric layers, (b) keep the coverage
+stratification that this session measured to be worth +70 % on B′ at fixed mass
+(0.047 → 0.081), and (c) spend one slot on the resulting file. These experiments do not establish a limit on geometry-based methods or identify the
+source of any leaderboard gap. No slot is authorized by this suggestion.
+
+## What we will not do
+
+Rescale, jitter, rename or prune H33 and call it a new prediction. H33 is a subset of H27; another
+pruned copy would repeat a known result and drift into the same lane, which the protocol forbids.

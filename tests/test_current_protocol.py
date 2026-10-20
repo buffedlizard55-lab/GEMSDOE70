@@ -55,7 +55,7 @@ def test_site_warning_and_protocol_card_are_published():
         if name == 'executive-summary.html':
             assert 'submission.html' in text  # legacy redirect
         else:
-            assert 'CURRENT PROTOCOL: DO NOT SUBMIT.' in text
+            assert 'current protocol: do not submit.' in text.lower()
             assert 'protocol-review.html' in text
     assert json.loads((ROOT/'docs/current_protocol_review.json').read_text()) == json.loads(
         (ROOT/'evidence/current_protocol_review.json').read_text())

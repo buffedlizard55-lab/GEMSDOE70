@@ -77,15 +77,40 @@ def release_status(root):
             download_ok = False
         if not canaries or not all(valid_canary(c) for c in canaries.values()):
             reasons.append('Feature-alone leakage evidence is missing or fails.')
-        submit = bool(card.get('download_and_submit_ok') is True and download_ok)
+        # Current user protocol is forward-only; historical mutual audits stay immutable.
+        literal_ok = bool(audit and audit.get('complete_accessible_scan') is True
+                          and audit.get('rows'))
+        for row in (audit or {}).get('rows', []):
+            overlap = row.get('my_dots_within_3px_of_theirs')
+            rho = row.get('spearman_full_footprint')
+            if (type(overlap) not in (int, float) or not math.isfinite(overlap)
+                    or not 0 <= overlap <= .70
+                    or type(rho) not in (int, float) or not math.isfinite(rho)
+                    or not -1 <= rho <= .90):
+                literal_ok = False
+        if not literal_ok:
+            reasons.append('Current forward-overlap protocol not cleared: duplicate or incomplete evidence; stop.')
+        submit = bool(
+            card.get('download_and_submit_ok') is True and download_ok
+            and card.get('verdict') == 'promote'
+            and card.get('gate_a_candidate_ge_h33') is True
+            and card.get('gate_b_prime_candidate_gt_h33_significant') is True
+            and canaries and all(valid_canary(c) for c in canaries.values())
+            and literal_ok
+        )
         if not card.get('gate_a_candidate_ge_h33'):
             reasons.append("Candidate did not match H33 on instrument A.")
         if not card.get('gate_b_prime_candidate_gt_h33_significant'):
             reasons.append("Candidate did not beat H33 on instrument B' with a 95% CI above zero.")
         notes.append('A downloadable, validated file is not a validated leaderboard improvement.')
+    # A historical mutual-overlap clearance must never override a later literal
+    # protocol stop. Keep review downloads available; block scientific promotion.
+    current_review = _load(root, 'evidence/literal_protocol_review.json')
+    if current_review and current_review.get('correlation_overlap_vs_registry', {}).get('stop') is True:
+        submit = False
+        reasons.append('Current literal one-way uniqueness audit requires STOP; review download only.')
     protocol = strict_gate(audit or {})
-    protocol_ok = (not protocol['stop_required']
-                   and protocol['current_registry_clearance'] is True)
+    protocol_ok = not protocol['stop_required']
     if not protocol_ok:
         submit = False
         reasons.append('Current forward-overlap protocol requires STOP; archive download is review-only.')

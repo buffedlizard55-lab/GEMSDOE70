@@ -8,7 +8,6 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
 from gems70.pages_policy import check_source, check_output
-from gems70.release import published_artifacts
 
 
 def main():
@@ -18,7 +17,9 @@ def main():
     try:
         report = check_source(ROOT)
         if args.site is not None:
-            report.update(check_output(args.site, allowed_artifacts=published_artifacts(ROOT)))
+            inventory = json.loads((ROOT / 'registry/published_artifacts.json').read_text())
+            allowed = {r['path']: r['sha256'] for r in inventory['artifacts']}
+            report.update(check_output(args.site, allowed_artifacts=allowed))
     except (OSError, ValueError, TypeError) as exc:
         print(json.dumps({'ok': False, 'error': str(exc)}))
         # Surface diagnostics via the Checks API even when log-download hosts
