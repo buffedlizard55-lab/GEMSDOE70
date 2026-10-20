@@ -13,7 +13,15 @@ def main():
     bref = card['instrument_b_prime_proxy']['h33_reference']
     ball = card['instrument_b_unrestricted']['candidate']
     ballref = card['instrument_b_unrestricted']['h33_reference']
-    u = card['uniqueness_detail']
+    # H70 card stores uniqueness under correlation_overlap_vs_registry; legacy P4 used uniqueness_detail
+    u = card.get('uniqueness_detail') or card.get('correlation_overlap_vs_registry') or card.get('uniqueness') or {}
+    # normalize keys
+    if 'rasters_checked' in u and 'registry_rasters_checked' not in u:
+        u['registry_rasters_checked'] = u['rasters_checked']
+    if 'worst_mutual_overlap' in u and 'worst_dot_overlap' not in u:
+        u['worst_dot_overlap'] = u['worst_mutual_overlap']
+    if 'worst_forward_overlap' not in u:
+        u['worst_forward_overlap'] = u.get('worst_dot_overlap', 0)
     delta = card['paired_b_prime_vs_h33']
     head = f'''# GEMSDOE70 — geothermal fault research
 

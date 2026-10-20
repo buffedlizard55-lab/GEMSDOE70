@@ -1,0 +1,16 @@
+{
+  "started_utc": "2026-10-20T22:50:34Z",
+  "preregistration_sha256": "089a1c14e09b4ce2ecc81aac2ae2bf642f2ea7dbfb32f854f2713d5a910bc6ad",
+  "source_sha256": {
+    "src/gems70/method_h70.py": "3491144e58ec165a4c09bc02656241637b7f2a8d411043adced9a4b8e93b7810",
+    "scripts/run_experiment_h70.py": "d07a78ccc8a636da504ae55cb6e636549e145960f380f7635a88c10d387651ee"
+  },
+  "dot_count": 37654,
+  "block": 7,
+  "nms": 5.0,
+  "d_min": 2.4,
+  "d_max": 32.0,
+  "gap_px": 3.0,
+  "max_experiments": 3,
+  "max_seconds": 7200
+}

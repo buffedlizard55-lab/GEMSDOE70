@@ -32,3 +32,12 @@ Candidate `gems70e3-scarpcurv-60k-ex3-20261020-zeros` published; catalogue-holdo
 B′ unscored. Frozen one-shot drivers: `scripts/run_experiment_e2_scarp.py`,
 `scripts/run_experiment_e3_scarp.py`, `scripts/complete_e3_release.py` — do not rerun.
 `src/gems70/release_e3.py` guards its hash binding (RENAMED_AT_MERGE resolves frozen pins).
+
+## Current-request override (2026-10-20, arena/3169a6c0-gemsdoe70)
+The user explicitly requires **forward** overlap >0.70 to stop. Historical mutual-overlap
+clearances are not sufficient for this request. Read `docs/protocol-review.md` and
+`evidence/current_protocol_review.json` first; a P4 final-dot witness requires STOP.
+No new lane paragraph was identifiable. Do not generate a new candidate or silently waive the
+stop. `gems70.protocol` is a policy adapter over frozen measurements, not a replacement metric.
+The shared scientific cards/evaluator/writer remain unchanged. Review-only downloads are allowed;
+no slot is authorized. A passing historical subset audit cannot certify current registry coverage.

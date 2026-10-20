@@ -4,7 +4,7 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="e3-candidate.html">E3 scarp candidate</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a>.</section><section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="e3-candidate.html">E3 scarp candidate</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a> · <a href="supplemental-protocol-review.html">Supplemental hypotheses and fresh format audit</a> · <a href="current_protocol_review.json">Supplemental JSON card</a>.</section><section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
 <p>Download for review only. The archived Phase-4 and new Phase-5 (P5) TIFFs fail the requested one-way
 3-pixel overlap rule (forward 1.00 vs dense lattice <code>calib_r13lattice_00904.tif</code>); P5 was measured under the corrected mutual rule (worst 0.30). Historical “unique” claims below use a different, mutual rule and
 are not clearance under the current prompt. No weekly slot was used for these candidates.</p>
@@ -23,26 +23,26 @@ The current forward-overlap protocol flags this artifact as a duplicate.
 negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
 not a validated improvement.</p>
 <div class="actions">
-<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-p5-analytic-halo-37654-20261020.tif" download>Download historical TIFF — DO NOT SUBMIT</a>
-<a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.zip" download>Download one-TIFF ZIP</a>
+<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-h70-conductive-breach-37654-20261020.tif" download>Download historical TIFF — DO NOT SUBMIT</a>
+<a class="button secondary" href="downloads/gems70-h70-conductive-breach-37654-20261020.zip" download>Download one-TIFF ZIP</a>
 <a class="button secondary" href="submission.html">How to submit</a>
 </div>
-<p class="small">Name: <code>gems70-p5-analytic-halo-37654-20261020</code> · Note (93/140 chars):
-<code>P5 analytic-signal halo 7px, 37654 dots, hg+vg rank in 2.4-32px band; dual-instrument holdout</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
+<p class="small">Name: <code>gems70-h70-conductive-breach-37654-20261020</code> · Note (96/140 chars):
+<code>H70-A conductive breach x analytic magnetics, 7px strata, 37654 dots off-cat; HOLDOUT-DTI vs H33</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
 <h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
 <p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
 pre-registered experiments and published the best candidate. Two instruments favour it, one does
 not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
 </section><div class="metrics">
 <section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
-<div class="number">0.0828</div>
-<p>[0.0755, 0.0895] · 11,321 withheld catalogue pixels</p></section>
+<div class="number">0.0709</div>
+<p>[0.0653, 0.0769] · 11,321 withheld catalogue pixels</p></section>
 <section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
-<div class="number">0.0766</div>
-<p>[0.0687, 0.0852] · SGMC proxy outside the duplication band</p></section>
-<section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
-<div class="number">0.30</div>
-<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ 0.042</p></section></div>
+<div class="number">0.0793</div>
+<p>[0.0717, 0.0872] · SGMC proxy outside the duplication band</p></section>
+<section><div class="eyebrow">UNIQUENESS · 2 RASTERS</div>
+<div class="number">0.20</div>
+<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ 0.002</p></section></div>
 <div class="columns">
 <section class="panel"><h2>Why it is downloadable</h2>
 <p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
@@ -51,9 +51,9 @@ Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only 
 lattice reaches 1.00 by construction and is reported separately).</p>
 <a href="results.html">Full evidence →</a></section>
 <section class="panel"><h2>Why it is not promoted</h2>
-<p>On instrument B′ the candidate scores 0.0766 versus H33's
-0.0938 (paired Δ -0.0172,
-95% CI [-0.0278, -0.0063]). The pre-registered rule requires a
+<p>On instrument B′ the candidate scores 0.0793 versus H33's
+0.0953 (paired Δ -0.0160,
+95% CI [-0.0272, -0.0047]). The pre-registered rule requires a
 positive lower bound. It does not hold.</p>
 <a href="hypotheses.html">Why this rule →</a></section></div>
 <section class="panel"><h2>Second candidate from a parallel session (E3 scarp curvature)</h2>

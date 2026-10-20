@@ -1,4 +1,6 @@
 {
+  "current_forward_protocol_ok": false,
+  "review_only": true,
   "verdict": "negative",
   "download_ok": true,
   "submit_recommended": false,
@@ -7,7 +9,8 @@
   "artifact_sha256": "aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4",
   "submission_name": "gems70-p5-analytic-halo-37654-20261020",
   "reasons": [
-    "Candidate did not beat H33 on instrument B' with a 95% CI above zero."
+    "Candidate did not beat H33 on instrument B' with a 95% CI above zero.",
+    "Current forward-overlap protocol requires STOP; archive download is review-only."
   ],
   "notes": [
     "A downloadable, validated file is not a validated leaderboard improvement."

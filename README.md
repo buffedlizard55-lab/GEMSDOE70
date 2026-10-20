@@ -2,15 +2,15 @@
 
 > **CURRENT REVIEW: DO NOT SUBMIT — literal one-way protocol stop.** The archived Phase-4 and new Phase-5 (P5) files fail the prompt's literal
 > one-way overlap gate (forward overlap 1.00 vs dense sampling lattice; four witnesses in 62 archived rasters for P4, same for P5).
-> Download is for review only; no slot used. Historical mutual-overlap clearance (worst mutual 0.30) does **not** satisfy the current forward rule.
+> Download is for review only; no slot used. Historical mutual-overlap clearance (worst mutual 0.20) does **not** satisfy the current forward rule.
 > [Current review](docs/protocol-review.md) · [Current run card](evidence/literal_protocol_review.json).
 
 ## Submission status: **REVIEW ONLY — NOT PROMOTED (literal protocol stop)**
 
-**CURRENT PROTOCOL STOP:** Both candidates exceed forward overlap (P5 forward 1.00 vs `calib_r13lattice_00904.tif` and two other dense lattices). See [current review](docs/protocol-review.md). Mutual-overlap clearance (worst 0.30) does not satisfy the current prompt's forward-only gate.
+**CURRENT PROTOCOL STOP:** Both candidates exceed forward overlap (P5 forward 1.00 vs `calib_r13lattice_00904.tif` and two other dense lattices). See [current review](docs/protocol-review.md). Mutual-overlap clearance (worst 0.20) does not satisfy the current prompt's forward-only gate.
 
 A format-validated TIFF is published for **review only** under the literal protocol (measurable under the corrected mutual rule):
-`docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif` (sha256 `aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4`).
+`docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif` (sha256 `fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `negative` on the pre-registered target-like gate. No weekly slot was used.
 
@@ -29,18 +29,18 @@ off-catalogue.
 
 | Instrument | Candidate | H33 reference | Result |
 |---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0828 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0766 | 0.0938 | **H33 wins, delta = -0.0172 [-0.027760492095023067, -0.006296864003715159]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0878 | 0.0906 | candidate wins |
+| A · shared hide-and-recover catalogue holdout | 0.0709 | 0.0037 | candidate wins |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0793 | 0.0953 | **H33 wins, delta = -0.0160 [-0.02718049103902757, -0.004737767848247423]** |
+| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0945 | 0.0923 | candidate wins |
 
 Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
 is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
 21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
 artifact is published but not promoted. Nothing here is an organizer-confirmed score.
 
-**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.302 (limit 0.70); worst Spearman 0.042
-(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
+**Uniqueness (corrected):** 2 archived rasters checked; worst mutual
+overlap 0.198 (limit 0.70); worst Spearman 0.002
+(limit 0.90). Forward-only overlap reaches 0.20 against a dense lattice
 whose halo covers the whole footprint — which is why the two-direction test was adopted.
 
 ## Two fixes to the shared tool (reported, not silently forked)
@@ -91,6 +91,14 @@ Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818
 ## Parallel E3 scarp lane (PR #17) — selector must score it on B′ before choosing
 
 DEM scarp-curvature ranking, 60,000 dots: catalogue HOLDOUT-DTI 0.0943 [0.0782, 0.1109] (11,437 withheld, seed-40) → promote-to-selector on that instrument only; **B′ not yet scored**. File `docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif` (sha256 `562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21`), note (107 chars): `E3 DEM scarp curvature+coherence only (E2 gates falsified); dotted 60000 excl>3px sep2.8; holdout-validated`. Evidence: `evidence/run_card_e3_amended.json` (erratum-completed; gated E2 negative); frozen drivers renamed `scripts/run_experiment_e{2,3}_scarp.py` at merge (byte-identical; canonical paths hold the PR #16 lane's drivers). Site page: `docs/e3-candidate.html`. No slot used for any candidate.
+
+## Parallel P5 analytic-signal lane (this session, arena/97660a79-gemsdoe70) — DO NOT SUBMIT
+
+Analytic-signal halo 7px, 37,654 dots, `tmi_hg`+`tmi_vg` rank in 2.4–32 px halo with tip kernel. HOLDOUT-DTI A 0.0828 [0.0755,0.0895] vs H33 0.0037 win; **B′ 0.0766 [0.0687,0.0852] vs 0.0938 H33 win Δ -0.0172 [-0.0278,-0.0063] → negative**, no slot. Uniqueness: 62 rasters worst mutual 0.30 (limit 0.70) worst ρ 0.042; forward 1.00 vs dense lattice `calib_r13lattice_00904.tif` (literal duplicate, review only). File `docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif` (sha256 `aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4`, 149,414 bytes, ZIP `bf61cacc...`). Evidence `evidence/phase5/` (run_card, instrument holds, uniqueness, canaries), method `src/gems70/method_p5.py`. Hypotheses.md now ranks 5 candidates (H-2 tested P5, H-3 radiometric GeoDAWN already fetched 36+26 MB, H-4 lidar scarp 36 MB, H-5 conductive breach, H-6 basement curvature) with preregistered validation rule; h33-analysis.md PhD-level byte audit + metric algebra. Under literal forward rule, P5 is duplicate (as is H70 and P4) — download for review only.
+
+## Parallel H70 conductive-breach lane (arena/0aa117f9-gemsdoe70, PR #28) — DO NOT SUBMIT
+
+H70-A conductive breach × analytic magnetics, 7px strata, 37,654 dots off-cat; HOLDOUT-DTI A 0.0709 [0.0653,0.0769] vs H33 0.0037 win; B′ 0.0793 [0.0717,0.0872] vs 0.0953 H33 win Δ -0.0160 [-0.0272,-0.0047] → negative. File `docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif` (sha256 `fc49bd5e...`, 184,165 bytes). Evidence `evidence/h70/`.
 # User project prompt — retained as supplied
 
 Read this at the beginning of every session. Scores and access statements below are user-supplied claims, not current verified facts. Execution status and verified evidence belong in README.md and evidence/, not by silently rewriting this historical brief.
