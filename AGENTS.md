@@ -15,10 +15,13 @@
 7. Own the outcome: a measured negative with a reproducible receipt beats a false score, an
    unsupported promotion, or an unsafe download.
 
-## Parallel-session E3 lane (merged 2026-10-20)
+## Parallel-lane addendum (2026-10-20, PR #16)
+- E2/E3 evidence and cards (`evidence/e2|e3/`) are frozen like Phase 1-4. The E2 review TIFF is inventoried but never promoted; `release.candidate_status().submit_ok` stays False until selector gates in `docs/publication-amendment-e2.md` are recorded.
+- E2 uniqueness numbers predate the mutual-overlap fix (R1 subset audit). Re-audit E2 under the corrected rule before comparing uniqueness across lanes.
 
-- E3 candidate `gems70e3-scarpcurv-60k-ex3-20261020-zeros` (DEM scarp curvature) is published and
-  promoted to selector on catalogue HOLDOUT-DTI only; it lacks a B′ score. Frozen drivers
-  `run_experiment_e2.py`/`run_experiment_e3.py`/`complete_e3_release.py` are one-shot; do not rerun.
-- `src/gems70/release_e3.py` guards the E3 hash binding; `download_and_submit_ok` stays False there
-  by design — slot decisions are selector-only.
+## Parallel-session E3 scarp lane (PR #17)
+
+- Candidate `gems70e3-scarpcurv-60k-ex3-20261020-zeros` published; promoted to selector on
+  catalogue HOLDOUT-DTI only; lacks a B′ score. Frozen drivers `scripts/run_experiment_e2_scarp.py`,
+  `scripts/run_experiment_e3_scarp.py`, `scripts/complete_e3_release.py` are one-shot; do not rerun.
+- `src/gems70/release_e3.py` guards the E3 hash binding; slot decisions remain selector-only.

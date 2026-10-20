@@ -1,10 +1,8 @@
-"""Report E3 candidate release status; never writes a decoy submission.
+"""Status entry point. Never creates a submission; publishing is publish_e2_candidate.py.
 
-The released TIFF was written once by scripts/complete_e3_release.py through
-the byte-pinned shared writer (vendor/gems57/submission_writer.py) after all
-preregistered gates passed. This entry point only verifies/reports that
-hash-bound artifact. Exit 0 iff the candidate download is intact; uploading
-remains a separate selector step.
+Prints the E2 selector-review status (download-for-review vs submit are kept
+distinct) and exits 2 while submit_ok is False, so automation cannot mistake
+this for an approval. The shared writer is vendor/gems57/submission_writer.py.
 """
 from pathlib import Path
 import json
@@ -12,9 +10,9 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from gems70.release_e3 import release_status_e3  # noqa: E402
+from gems70.release import candidate_status  # noqa: E402
 
 if __name__ == "__main__":
-    status = release_status_e3(ROOT)
+    status = candidate_status(ROOT)
     print(json.dumps(status, indent=2))
-    sys.exit(0 if status["download_candidate_ok"] else 2)
+    sys.exit(0 if status["submit_ok"] else 2)

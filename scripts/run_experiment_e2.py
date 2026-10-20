@@ -1,9 +1,9 @@
-"""E2 bounded experiment: scarp-strain-cover ranking + dotted emission.
+"""E2 preregistered experiment: subsurface-strike-guided alluvial step.
 
-Preregistration: docs/hypotheses-e2.md. Shared evaluator/writer/uniqueness
-from vendor/gems57 (byte-pinned, unmodified). Refuses to rerun if the E2
-manifest exists. Writes a submission TIFF only if every preregistered gate
-passes; otherwise verdict negative and no TIFF is published.
+Spec: docs/preregistration-e2.md (hashed into the manifest before scoring).
+Uniqueness: docs/protocol-revision-uniqueness.md (R1) + literal template numbers.
+E1 evidence at evidence/*.json is never overwritten; E2 writes evidence/e2/*.
+Refuses to rerun if its manifest exists (no silent tuning on these folds).
 """
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path[:0] = [str(ROOT / "src"), str(ROOT / "vendor")]
+sys.path[:0] = [str(ROOT / "src"), str(ROOT / "vendor"), str(ROOT / "scripts")]
 
 import numpy as np
 import rasterio
@@ -24,34 +24,25 @@ from sklearn.metrics import roc_auc_score
 
 from gems57 import evaluate_holdout, holdout, uniqueness
 from gems57.grid import load_grid
-from gems70.method_e2 import (
-    dotted_emission, fill_nearest, joint_field_e2, physical_features_e2,
-    random_dotted, rank01, upper_surface_e2,
-)
+from gems70.method import rank01, upper_surface
+from gems70 import method2
+from restore_data import DATA, PINS, sha
 
-E = ROOT / "evidence"
-DATA = ROOT / ".cache/data"
-REG_DIR = ROOT / ".cache/src/g60/registry/rasters"
-DENSE_WITNESS = ROOT / ".cache/src/g17/docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif"
-H33_PATH = REG_DIR / "GEMSDOE32__h33-2-b2-zeros.tif"
-PINS = {
-    "training_features.tif": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-    "existing_faults.tif": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-    "sample_submission.tif": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+E = ROOT / "evidence" / "e2"
+CACHE = ROOT / ".cache"
+REG = CACHE / "registry_e2"
+BUDGET_S = 7200
+# Registry subset (file -> expected sha256). Dense witness + H33 lineage + scorers.
+REGISTRY_FILES = {
+    "h33_b2.tif": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "d28.tif": "3e78737f0da8dd2ca66cc6caac0ce8eeefcd6715707f8d1bd3091845cd9bcc30",
+    "h27.tif": "2fc94a38d77f74d4f4ed1a97a83e7bb71a1ceea090515ec641e6681cc47c44c8",
+    "h19solid.tif": "ef2ae808eb717986",
+    "anderson.tif": "e15891020b9c5705",
+    "gateortho.tif": "3722e26fbf912987",
+    "dense17.tif": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
 }
-H33_SHA = "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9"
-DENSE_SHA = "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be"
-BANDS = {"inv2": 4, "shear": 7, "dilat": 8, "det_elev": 12, "depth": 15, "slope19": 19}
-BUDGETS = (20000, 30000, 38000, 45000)
-EXCLUSIONS = (0, 1, 2, 3)
-
-
-def sha(p):
-    h = hashlib.sha256()
-    with Path(p).open("rb") as f:
-        for b in iter(lambda: f.read(1 << 20), b""):
-            h.update(b)
-    return h.hexdigest()
+REF_ARMS = {"h33_ref": "h33_b2.tif", "d28_ref": "d28.tif", "h19solid_ref": "h19solid.tif"}
 
 
 def dump(path, data):
@@ -61,113 +52,96 @@ def dump(path, data):
     tmp.replace(path)
 
 
-def cropped_terms(folds, p, valid):
-    """Pooled block terms for one full-grid field over all folds (E1 pattern)."""
-    total = None
-    per_fold = []
-    for fold in folds:
-        y, x = np.nonzero(fold["region"])
-        y0, x0 = max(0, int(y.min()) - 6), max(0, int(x.min()) - 6)
-        y1, x1 = min(p.shape[0], int(y.max()) + 7), min(p.shape[1], int(x.max()) + 7)
-        sl = np.s_[y0:y1, x0:x1]
-        sub = {k: v[sl] for k, v in fold.items()
-               if isinstance(v, np.ndarray) and v.shape == p.shape}
-        res, terms = evaluate_holdout.evaluate(
-            p[sl], sub, valid[sl], origin=(y0, x0), global_shape=p.shape)
-        per_fold.append(res)
-        total = terms if total is None else total + terms
-    return per_fold, total
+def cropped(fold, p, valid):
+    y, x = np.nonzero(fold["region"])
+    y0, x0 = max(0, int(y.min()) - 6), max(0, int(x.min()) - 6)
+    y1, x1 = min(p.shape[0], int(y.max()) + 7), min(p.shape[1], int(x.max()) + 7)
+    sl = np.s_[y0:y1, x0:x1]
+    sub = {k: v[sl] for k, v in fold.items() if isinstance(v, np.ndarray) and v.shape == p.shape}
+    return evaluate_holdout.evaluate(p[sl], sub, valid[sl], origin=(y0, x0), global_shape=p.shape)
 
 
-def registry_index():
-    recs = []
-    for p in sorted(REG_DIR.glob("*.tif")):
-        recs.append(dict(repo="60GEMSDOE@3202471", submission=f"registry/rasters/{p.name}",
-                         file=str(p), sha256=sha(p)))
-    recs.append(dict(repo="17GEMSDOE", submission="docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
-                     file=str(DENSE_WITNESS), sha256=sha(DENSE_WITNESS)))
-    return recs
+def read_ref(name):
+    p = REG / name
+    with rasterio.open(p) as src:
+        a = src.read(1).astype(np.float32)
+    return a
 
 
 def main():
     start = time.monotonic()
-
-    def budget_check():
-        if time.monotonic() - start > 7200:
-            raise TimeoutError("two-hour experiment budget exhausted")
-
-    manifest = E / "experiment_manifest_e2.json"
+    manifest = E / "experiment_manifest.json"
     if manifest.exists():
-        raise RuntimeError("E2 already attempted. Inspect evidence; no silent reruns/tuning.")
+        raise RuntimeError("E2 already attempted. Inspect evidence/e2; no silent reruns/tuning.")
+    E.mkdir(parents=True, exist_ok=True)
     dump(manifest, {
         "started_utc": dt.datetime.now(dt.timezone.utc).isoformat(),
-        "experiment_count": 2, "maximum_experiments": 3, "maximum_seconds": 7200,
-        "preregistration": "docs/hypotheses-e2.md",
-        "preregistration_sha256": sha(ROOT / "docs/hypotheses-e2.md"),
+        "experiment": "E2-alluvial-step", "experiment_count_this_session": 1,
+        "maximum_experiments": 3, "maximum_seconds": BUDGET_S,
+        "preregistration_sha256": sha(ROOT / "docs/preregistration-e2.md"),
+        "protocol_revision_sha256": sha(ROOT / "docs/protocol-revision-uniqueness.md"),
         "source_sha256": {p: sha(ROOT / p) for p in
-                          ["src/gems70/method_e2.py", "scripts/run_experiment_e2.py"]},
+                          ["src/gems70/method2.py", "src/gems70/method.py",
+                           "scripts/run_experiment_e2.py"]},
     })
-    for name, exp in PINS.items():
-        if sha(DATA / name) != exp:
-            raise ValueError(f"input pin mismatch: {name}")
-    if sha(H33_PATH) != H33_SHA or sha(DENSE_WITNESS) != DENSE_SHA:
-        raise ValueError("registry witness pin mismatch")
-    dump(E / "data_receipt_e2.json", {
-        "evidence_class": "DATA-MEASUREMENT",
-        "provenance": "Public owner mirrors via git sparse checkout; hash consistency is not organizer authentication",
-        "files": {n: {"sha256": sha(DATA / n), "expected": v, "ok": True} for n, v in PINS.items()},
-        "h33_reference_sha256": H33_SHA, "dense_witness_sha256": DENSE_SHA,
-    })
+
+    def budget():
+        if time.monotonic() - start > BUDGET_S:
+            raise TimeoutError("two-hour experiment budget exhausted")
+
+    for name, expected in PINS.items():
+        if sha(DATA / name) != expected:
+            raise ValueError("input pin mismatch: " + name)
+    for name, prefix in REGISTRY_FILES.items():
+        h = sha(REG / name)
+        if not h.startswith(prefix):
+            raise ValueError(f"registry pin mismatch: {name} {h} !~ {prefix}")
 
     grid = load_grid(DATA)
     fp = grid.footprint
+    print("grid loaded", grid.shape, "footprint", int(fp.sum()), flush=True)
+
     raw = {}
     with rasterio.open(DATA / "training_features.tif") as src:
-        if (src.shape, str(src.crs), tuple(src.transform)[:6]) != (
-                grid.shape, str(grid.crs), tuple(grid.transform)[:6]):
+        if (src.shape, src.crs, src.transform) != (grid.shape, grid.crs, grid.transform):
             raise ValueError("feature grid mismatch")
-        dump(E / "feature_metadata_e2.json", {
-            "descriptions": list(src.descriptions), "nodata": src.nodata,
-            "crs": str(src.crs), "shape": list(src.shape),
-            "transform": list(src.transform)[:6], "bands_used_1indexed": BANDS})
-        for key, idx in BANDS.items():
-            a = src.read(idx).astype(np.float32)
+        for index, name in [(12, "det_elev"), (2, "rtp"), (15, "basement"), (19, "det_elev_slope")]:
+            a = src.read(index).astype(np.float32)
             a[(a <= -1e30) | ~np.isfinite(a) | ~fp] = np.nan
-            raw[key] = a
+            raw[name] = a
     valid0 = fp.copy()
     for a in raw.values():
         valid0 &= np.isfinite(a)
-    # Fill from ORIGINAL finite domain, then erode output support (E1 fix).
-    filled = {k: fill_nearest(raw[k]) for k in ("det_elev", "inv2", "shear", "dilat", "depth")}
     valid = ndi.binary_erosion(valid0, iterations=12)
     if not valid.any():
         raise ValueError("no valid interior features")
-    print(f"valid0={int(valid0.sum())} eroded_valid={int(valid.sum())}", flush=True)
-    feats = physical_features_e2(filled, valid)
-    del filled
-    budget_check()
-    print("features complete", flush=True)
+    print("valid0", int(valid0.sum()), "valid(eroded)", int(valid.sum()), flush=True)
 
-    joint = joint_field_e2(feats, valid)
-    joints = {
-        "joint": joint,
-        "joint_nostrain": joint_field_e2(feats, valid, 0.75, 0.0, 0.25),
-        "joint_nocover": joint_field_e2(feats, valid, 0.75, 0.25, 0.0),
-        "joint_nocoh": joint_field_e2(feats, valid, scarp_key="scarp_nocoh"),
+    elev_f = method2.fill_nearest_from(raw["det_elev"], valid0)
+    rtp_f = method2.fill_nearest_from(raw["rtp"], valid0)
+    base_f = method2.fill_nearest_from(raw["basement"], valid0)
+    elev_s = ndi.gaussian_filter(elev_f.astype(np.float64), 1.0)
+    axis_index, coherence = method2.structure_tensor_normal(rtp_f)
+    step_oriented, step_max = method2.oriented_step(elev_s, axis_index)
+    basement_edge = method2.gradient_magnitude(base_f, 2.0)
+    features = {
+        "step_oriented": np.where(valid, step_oriented, 0).astype(np.float32),
+        "step_max": np.where(valid, step_max, 0).astype(np.float32),
+        "coherence": np.where(valid, coherence, 0).astype(np.float32),
+        "basement_edge": np.where(valid, basement_edge, 0).astype(np.float32),
     }
-    slope19_rank = rank01(np.where(np.isfinite(raw["slope19"]), raw["slope19"], 0), valid)
+    print("features computed", flush=True)
 
-    folds, _ = holdout.buffered_component_draw(grid, seed=30, buffer_px=3, boundary_px=12)
-    dump(E / "holdout_split_e2.json", {
+    folds, _ = holdout.buffered_component_draw(grid, seed=20, buffer_px=3, boundary_px=12)
+    dump(E / "holdout_split.json", {
         "evidence_class": "HOLDOUT-DTI", "evaluator_version": evaluate_holdout.VERSION,
         "receipts": [f["receipt"] for f in folds],
         "total_withheld_positive_pixels": int(sum((f["truth"] & valid).sum() for f in folds)),
-        "catalogue_predictors": ["fold-visible catalogue mask/distance for emission allowed-mask only; ranking is catalogue-independent"],
-        "valid_feature_pixels": int(valid.sum()),
-        "seed": 30, "note": "Untouched seed (E1 used 20). Mapped components are a surrogate for hidden expert faults.",
+        "catalogue_predictors": [], "valid_feature_pixels": int(valid.sum()),
+        "known_mask_rule": "catalogue minus globally withheld components, pixel exact",
+        "limitation": "Mapped components are a surrogate for previously unmapped faults; no hidden organizer labels.",
     })
 
-    # --- leakage canaries (every raw + derived feature alone) ---
     truth = np.zeros(fp.shape, bool)
     active = np.zeros(fp.shape, bool)
     for fold in folds:
@@ -175,246 +149,226 @@ def main():
         truth |= valid & fold["truth"]
     positives = np.flatnonzero(truth)
     negatives = np.flatnonzero(active & ~truth)
-    rng = np.random.default_rng(70030)
+    rng = np.random.default_rng(70020)
     negatives = rng.choice(negatives, min(200000, len(negatives)), replace=False)
     labels = np.r_[np.ones(len(positives)), np.zeros(len(negatives))]
-    canary_fields = {
-        **{f"raw_{k}": v for k, v in raw.items()},
-        **feats, **joints, "slope19_rank": slope19_rank,
-    }
     canaries = {}
-    for name, a in canary_fields.items():
+    for name, a in {**raw, **features}.items():
         values = np.r_[a.ravel()[positives], a.ravel()[negatives]]
         if not np.isfinite(values).all():
-            raise ValueError(f"canary field {name} non-finite on scored sample")
+            raise ValueError(f"canary {name}: non-finite values on evaluation domain")
         auc = float(roc_auc_score(labels, values))
-        canaries[name] = {"evidence_class": "LEAKAGE-CANARY", "auc": auc,
-                          "inverse_auc": 1 - auc,
+        canaries[name] = {"evidence_class": "LEAKAGE-CANARY", "auc": auc, "inverse_auc": 1 - auc,
                           "withheld_positive_pixels": int(len(positives)),
                           "negative_sample_pixels": int(len(negatives)),
                           "suspected_leakage": bool(max(auc, 1 - auc) > 0.90)}
-    dump(E / "canaries_e2.json", canaries)
+        print("canary", name, round(auc, 4), flush=True)
+    dump(E / "canaries.json", canaries)
     if any(c["suspected_leakage"] for c in canaries.values()):
-        raise RuntimeError("LEAKAGE CANARY STOP: AUC > .90; no joint interpretation permitted")
-    print("canaries complete", flush=True)
+        raise RuntimeError("LEAKAGE CANARY STOP: feature-alone AUC > .90; no joint interpretation permitted")
 
-    # --- continuous arms (E1-continuity diagnostic) ---
-    cont_defs = {
-        "slope19": slope19_rank, "dem_slope": rank01(feats["dem_slope"], valid),
-        "dem_curv": rank01(feats["dem_curv"], valid),
-        "dem_coherence": feats["dem_coherence"],
-        "scarp": feats["scarp"], "strain": feats["strain"], "shallow": feats["shallow"],
-        **joints,
-    }
-    cont_terms, cont_folds = {}, {}
-    for name, rank_field in cont_defs.items():
-        budget_check()
-        arm = upper_surface_e2(rank_field, valid)
-        per, terms = cropped_terms(folds, arm, valid)
-        cont_terms[name], cont_folds[name] = terms, per
-        del arm
-        print(f"continuous {name} evaluated", flush=True)
-    rnd = np.zeros(fp.shape, np.float32)
-    n_top = int((upper_surface_e2(joint, valid) > 0).sum())
-    ids = rng.choice(np.flatnonzero(valid), n_top, replace=False)
-    rnd.ravel()[ids] = 0.5
-    per, terms = cropped_terms(folds, rnd, valid)
-    cont_terms["random_iid"], cont_folds["random_iid"] = terms, per
-    del rnd
-    cont_summary = evaluate_holdout.pooled_summary(cont_terms, draws=1000, seed=70030, candidate="joint")
-    cont_summary["interpretation"] = "Continuous top-2% diagnostic HOLDOUT-DTI (E1 continuity), not primary endpoint."
-    dump(E / "holdout_continuous_e2.json", cont_summary)
-    dump(E / "holdout_continuous_folds_e2.json", cont_folds)
-    singles = ["slope19", "dem_slope", "dem_curv", "dem_coherence", "scarp", "strain", "shallow"]
-    best_single = max(singles, key=lambda n: cont_summary["scores"][n]["dti"])
-    print(f"best single continuous: {best_single}", flush=True)
+    candidate_rank = method2.joint_rank(features, valid, ("step_oriented", "basement_edge"))
+    np.save(CACHE / "e2_candidate_rank.npy", candidate_rank)
 
-    # --- dotted selection grid (primary endpoint) ---
-    visible = folds[0]["visible"]
-    masked_known = folds[0]["masked_known"]
-    dist_visible = ndi.distance_transform_edt(~visible)
-    grid_rows, dotted_terms_cache = [], {}
-    for excl in EXCLUSIONS:
-        allowed = valid & ~masked_known & (dist_visible > excl)
-        for bud in BUDGETS:
-            budget_check()
-            dots = dotted_emission(joint, allowed, bud)
-            field = dots.astype(np.float32)
-            per, terms = cropped_terms(folds, field, valid)
-            dti = float(evaluate_holdout.from_terms(terms.sum(axis=0)))
-            grid_rows.append({"budget": bud, "exclusion_px": excl,
-                              "dots_emitted_global": int(dots.sum()),
-                              "pooled_dotted_dti": dti})
-            dotted_terms_cache[(bud, excl)] = (terms, per)
-            del dots, field
-            print(f"dotted budget={bud} excl={excl} DTI={dti:.5f}", flush=True)
-    sel = max(grid_rows, key=lambda r: (r["pooled_dotted_dti"], -r["budget"], -r["exclusion_px"]))
-    sel_bud, sel_excl = sel["budget"], sel["exclusion_px"]
-    if sel["dots_emitted_global"] < sel_bud:
-        raise RuntimeError("selected emission truncated by candidate cap; preregistered budget unreachable")
-    dump(E / "selection_grid_e2.json", {
-        "evidence_class": "HOLDOUT-DTI", "evaluator_version": evaluate_holdout.VERSION,
-        "rows": grid_rows, "selected": sel,
-        "rule": "max pooled dotted DTI; tie -> smaller budget, then smaller exclusion"})
+    def dots_for(rank_field, allowed):
+        mask, n = method2.priority_thin(rank_field, allowed)
+        return mask.astype(np.float32), n
 
-    # --- dotted comparators at selected cell ---
-    allowed_sel = valid & ~masked_known & (dist_visible > sel_excl)
-    dotted_terms = {"joint_dotted": dotted_terms_cache[(sel_bud, sel_excl)][0]}
-    dotted_folds = {"joint_dotted": dotted_terms_cache[(sel_bud, sel_excl)][1]}
-    comp_fields = {"scarp_dotted": feats["scarp"], "slope19_dotted": slope19_rank,
-                   "best_single_dotted": cont_defs[best_single]}
-    for name, rank_field in comp_fields.items():
-        budget_check()
-        dots = dotted_emission(rank_field, allowed_sel, sel_bud)
-        per, terms = cropped_terms(folds, dots.astype(np.float32), valid)
-        dotted_terms[name], dotted_folds[name] = terms, per
-        del dots
-        print(f"comparator {name} evaluated", flush=True)
-    rdots = random_dotted(allowed_sel, sel_bud, seed=70030)
-    per, terms = cropped_terms(folds, rdots.astype(np.float32), valid)
-    dotted_terms["random_dotted"], dotted_folds["random_dotted"] = terms, per
-    del rdots
-    with rasterio.open(H33_PATH) as src:
-        h33 = src.read(1).astype(np.float32)
-    h33 = np.where(np.isfinite(h33), h33, 0)
-    per, terms = cropped_terms(folds, h33, valid)
-    dotted_terms["h33_reference"], dotted_folds["h33_reference"] = terms, per
-    del h33
-    dotted_summary = evaluate_holdout.pooled_summary(
-        dotted_terms, draws=1000, seed=70030, candidate="joint_dotted")
-    dotted_summary["interpretation"] = (
-        "Primary dotted HOLDOUT-DTI. h33_reference used the full catalogue when built "
-        "(pruning saw withheld traces); reference only, never the promotion bar.")
-    dotted_summary["best_single_continuous_name"] = best_single
-    dotted_summary["selected_budget"] = sel_bud
-    dotted_summary["selected_exclusion_px"] = sel_excl
-    dump(E / "holdout_e2.json", dotted_summary)
-    dump(E / "holdout_folds_e2.json", dotted_folds)
-    print(json.dumps(dotted_summary["scores"], indent=2), flush=True)
+    arms, arm_dots = {}, {}
+    cand_dots, n_cand = dots_for(candidate_rank, valid)
+    arms["candidate_dots"] = cand_dots; arm_dots["candidate_dots"] = n_cand
+    arms["candidate_surface"] = upper_surface(candidate_rank, valid)
+    for fname in ("step_oriented", "step_max", "basement_edge"):
+        r = rank01(features[fname], valid)
+        d, n = dots_for(r, valid)
+        arms[f"{fname}_dots"] = d; arm_dots[f"{fname}_dots"] = n
+        print("thinned", fname, n, flush=True)
+    random_dots = np.zeros(fp.shape, np.float32)
+    ids = rng.choice(np.flatnonzero(valid), method2.TARGET_DOTS, replace=False)
+    random_dots.ravel()[ids] = 1.0
+    arms["random_dots"] = random_dots; arm_dots["random_dots"] = method2.TARGET_DOTS
+    for arm, fname in REF_ARMS.items():
+        a = read_ref(fname)
+        if a.shape != fp.shape or not np.isfinite(a).all() or (a < 0).any() or (a > 1).any():
+            raise ValueError(f"reference {fname}: not finite [0,1] on grid")
+        arms[arm] = a; arm_dots[arm] = int((a > 0).sum())
+    print("arms built", arm_dots, flush=True)
 
-    # --- surface uniqueness BEFORE final placement (rho gate) ---
-    surface = joint.copy()
-    surface[grid.catalogue] = 0
-    surface[~fp] = 0
-    idx = registry_index()
-    print(f"registry rasters to check: {len(idx)}", flush=True)
-    surf_audit = uniqueness.compare_array_to_registry(
-        surface, idx, fp, include_reverse=True, expected_grid=(grid.shape, grid.crs, grid.transform))
-    surf_two = uniqueness.two_phase_summary(surf_audit["rows"], int(fp.sum()),
-                                            expected_rasters=len(idx))
-    dump(E / "surface_uniqueness_e2.json", {"audit": surf_audit, "two_phase": surf_two})
-    surface_rho_dup = surf_two["literal_reading"]["worst_spearman_full_footprint"] is not None and \
-        surf_two["literal_reading"]["worst_spearman_full_footprint"] > 0.90
-    print(f"surface worst rho={surf_two['literal_reading']['worst_spearman_full_footprint']}", flush=True)
+    terms, fold_results = {}, {}
+    for name, a in arms.items():
+        budget()
+        per_fold = [cropped(f, a, valid) for f in folds]
+        terms[name] = sum(t for _, t in per_fold)
+        fold_results[name] = [r for r, _ in per_fold]
+        print(name, "evaluated", flush=True)
+    result = evaluate_holdout.pooled_summary(terms, draws=1000, seed=70020, candidate="candidate_dots")
+    result["arm_dot_counts"] = arm_dots
+    result["interpretation"] = ("Binary-dot HOLDOUT-DTI (candidate_dots primary) on withheld catalogue "
+                                "components; not final submission dots, not organizer-confirmed.")
+    result["reference_caveat"] = ("H33/D28/H19 fields were built with full-catalogue knowledge; "
+                                  "reference measurements on this instrument, not clean generalization.")
+    dump(E / "holdout.json", result)
+    dump(E / "holdout_folds.json", fold_results)
 
-    # --- final dots (only if surface rho passes) ---
-    final_audit = final_two = None
-    final_dots = None
-    n_final = 0
-    if not surface_rho_dup:
-        dist_full = ndi.distance_transform_edt(~grid.catalogue)
-        allowed_final = valid & ~grid.catalogue & (dist_full > sel_excl)
-        final_dots = dotted_emission(joint, allowed_final, sel_bud)
-        n_final = int(final_dots.sum())
-        print(f"final dots: {n_final} (budget {sel_bud})", flush=True)
-        final_field = final_dots.astype(np.float32)
-        final_audit = uniqueness.compare_array_to_registry(
-            final_field, idx, fp, include_reverse=True,
+    # Confirmatory untouched draw (candidate dots + H33 only; never tuned on).
+    folds21, _ = holdout.buffered_component_draw(grid, seed=21, buffer_px=3, boundary_px=12)
+    terms21 = {}
+    for name in ("candidate_dots", "h33_ref"):
+        per_fold = [cropped(f, arms[name], valid) for f in folds21]
+        terms21[name] = sum(t for _, t in per_fold)
+    confirm = evaluate_holdout.pooled_summary(terms21, draws=1000, seed=70021, candidate="candidate_dots")
+    dump(E / "holdout_confirm_seed21.json", confirm)
+    print("confirmatory seed21 done", flush=True)
+
+    # Final submission dots: full-catalogue distance > 2 px hygiene, refilled to budget.
+    dist_cat = ndi.distance_transform_edt(~grid.catalogue)
+    allowed_final = valid & (dist_cat > 2)
+    final_dots, n_final = dots_for(candidate_rank, allowed_final)
+    print("final dots", n_final, flush=True)
+    np.save(CACHE / "e2_final_dots.npy", final_dots)
+
+    # Uniqueness subset audit (literal template rows + R1 clarified overlaps).
+    def audit_array(arr, label):
+        idx = {"complete_accessible_scan": False,
+               "errors": ["Disclosed subset audit only (7 rasters); not a complete registry scan."],
+               "rasters": []}
+        for fname in REGISTRY_FILES:
+            idx["rasters"].append({
+                "repo_first": "subset", "sources": [f"subset:{fname}"],
+                "cache_file": str((REG / fname).resolve()), "sha256": sha(REG / fname)})
+        audit = uniqueness.compare_array_to_registry(
+            arr, idx, fp, include_reverse=False,
             expected_grid=(grid.shape, grid.crs, grid.transform))
-        final_two = uniqueness.two_phase_summary(final_audit["rows"], int(fp.sum()),
-                                                 expected_rasters=len(idx))
-        dump(E / "final_uniqueness_e2.json", {"audit": final_audit, "two_phase": final_two})
-        np.save(ROOT / ".cache/final_dots_e2.npy", final_field)
-        print(f"final like-for-like: {final_two['like_for_like_reading']}", flush=True)
+        my_dots = (np.asarray(arr) > 0) & fp
+        n_mine = int(my_dots.sum())
+        r1_rows = []
+        for fname in REGISTRY_FILES:
+            theirs = read_ref(fname)
+            pos = np.isfinite(theirs) & (theirs > 0) & fp
+            frac = float(pos.sum() / fp.sum())
+            dense = frac > 0.10
+            if dense:
+                support = method2.topn_mask(theirs, fp, n_mine)
+                r1_overlap = uniqueness.dot_overlap(my_dots.astype(np.float32),
+                                                    support.astype(np.float32))
+            else:
+                r1_overlap = uniqueness.dot_overlap(my_dots.astype(np.float32), theirs)
+            r1_rows.append({"file": fname, "positive_fraction_footprint": frac,
+                            "dense_by_R1": bool(dense), "r1_overlap_within_3px": float(r1_overlap)})
+        return {"stage": label, "template_literal_audit": audit, "r1_rows": r1_rows,
+                "r1_worst_overlap": max(r["r1_overlap_within_3px"] for r in r1_rows),
+                "scope": "7-raster disclosed subset; complete 862-raster scan remains a selector prerequisite."}
 
-    # --- promotion gates ---
-    scores = dotted_summary["scores"]
-    diffs = dotted_summary["paired_differences"]
-    gates_detail = {
-        "canaries_pass": not any(c["suspected_leakage"] for c in canaries.values()),
-        "beats_random_ci": bool(diffs["random_dotted"]["ci95"][0] > 0),
-        "beats_singles_point": bool(all(
-            scores["joint_dotted"]["dti"] > scores[n]["dti"]
-            for n in ("scarp_dotted", "slope19_dotted", "best_single_dotted"))),
-        "surface_rho_pass": not surface_rho_dup,
-        "final_unique_pass": bool(final_two and not final_two["like_for_like_reading"]["duplicate"]),
-        "final_budget_reached": bool(n_final == sel_bud),
+    surface = arms["candidate_surface"].copy()
+    surface[grid.catalogue] = 0
+    surface_audit = audit_array(surface, "surface_upper2pct_before_placement")
+    dump(E / "surface_uniqueness.json", surface_audit)
+    print("surface audit done", flush=True)
+    final_audit = audit_array(final_dots, "final_dots")
+    dump(E / "final_uniqueness.json", final_audit)
+    print("final audit done", flush=True)
+
+    scores = result["scores"]
+    cand_dti = scores["candidate_dots"]["dti"]
+    best_other = max((n for n in scores if n != "candidate_dots"), key=lambda n: scores[n]["dti"])
+    d_h33 = result["paired_differences"]["h33_ref"]
+    d_rand = result["paired_differences"]["random_dots"]
+    def rho_ok(audit):
+        rows = [r for r in audit["template_literal_audit"]["rows"] if "error" not in r]
+        return all((r.get("spearman_full_footprint") is None or
+                    r["spearman_full_footprint"] <= uniqueness.RHO_LIMIT) for r in rows)
+    bars = {
+        "a_point_beats_every_arm": bool(all(cand_dti > scores[n]["dti"] for n in scores if n != "candidate_dots")),
+        "b_ci_vs_h33_above_0": bool(d_h33["ci95"][0] > 0),
+        "b_ci_vs_random_above_0": bool(d_rand["ci95"][0] > 0),
+        "c_no_canary_alarm": bool(not any(c["suspected_leakage"] for c in canaries.values())),
+        "d_surface_rho_ok_subset": bool(rho_ok(surface_audit)),
+        "d_surface_r1_overlap_ok_subset": bool(surface_audit["r1_worst_overlap"] <= 0.70),
+        "d_final_rho_ok_subset": bool(rho_ok(final_audit)),
+        "d_final_r1_overlap_ok_subset": bool(final_audit["r1_worst_overlap"] <= 0.70),
     }
-    promote = all(gates_detail.values())
-    print(f"gates: {gates_detail} promote={promote}", flush=True)
-
-    # --- writer (only on promote) ---
-    receipt = None
-    sub_name = f"gems70e2-scarpstrain-{sel_bud // 1000}k-ex{sel_excl}-20261020-zeros"
-    note = (f"E2 DEM scarp-curvature x geodetic strain, shallow-cover gate; "
-            f"dotted {n_final} excl>{sel_excl}px sep2.8; holdout-validated")
-    assert len(note) <= 140 and len(sub_name) <= 140, (len(note), len(sub_name))
-    raster_sha = None
-    validator_out = {"submission_tiff": None, "status": "NOT_WRITTEN",
-                     "reason": "Promotion gates failed; see gates in run card."}
-    if promote:
-        budget_check()
-        from gems57.submission_writer import write_submission
-        out = ROOT / "submissions" / f"{sub_name}.tif"
-        field = final_dots.astype(np.float32)
-        assert np.isfinite(field).all() and field.min() >= 0 and field.max() <= 1
-        assert not field[grid.catalogue].any() and not field[~fp].any()
-        receipt = write_submission(out, field, DATA / "sample_submission.tif", fp,
-                                   note=note, name=sub_name, catalogue=grid.catalogue,
-                                   metadata={"run": "E2", "holdout_evaluator": evaluate_holdout.VERSION,
-                                             "selected_budget": sel_bud, "selected_exclusion_px": sel_excl})
-        raster_sha = receipt["sha256"]
-        validator_out = receipt["validator"]
-        dump(E / "validator_e2.json", receipt)
+    science_pass = all(bars.values())
+    print("bars", bars, "best_other", best_other, flush=True)
 
     card = {
-        "hypothesis": "DEM scarp curvature gated by geodetic strain partitioning and shallow basement cover",
-        "mechanism": "Strike-coherent profile-curvature scarp steps (slope x curvature x tensor coherence) weighted by smoothed geodetic strain corridor and inverted depth-to-basement; rank-ordered 2.8px dotted emission off-catalogue",
-        "non_fault_mimic": "Lake-shoreline or fluvial terrace riser; road cut",
-        "hypothesis_status": "Provisional lane declared in docs/hypotheses-e2.md: prompt supplies no identifiable method paragraph",
-        "verdict": "promote" if promote else "negative",
-        "stop_reason": None if promote else "promotion gates failed (see gates)",
-        "gates": gates_detail,
-        "holdout_dti": {**scores["joint_dotted"],
-                        "stage": "final dotted emission rule scored on hide-and-recover folds (visible-only masks)",
-                        "selected_budget": sel_bud, "selected_exclusion_px": sel_excl,
-                        "random_control_dti": scores["random_dotted"]["dti"],
-                        "paired_delta_vs_random": diffs["random_dotted"]},
-        "continuous_diagnostic_dti": cont_summary["scores"]["joint"],
+        "hypothesis": "Subsurface-strike-guided alluvial step (E2)",
+        "mechanism": "Oriented detrended-elevation mean-shift across RTP tensor normal, rank-fused with basement edge; 2.8px priority-thinned binary dots",
+        "non_fault_mimic": "Terrace riser, paleoshoreline, or road grade",
+        "hypothesis_status": "Declared lane: method paragraph absent from supplied prompt; preregistered docs/preregistration-e2.md",
+        "verdict": "pending-writer" if science_pass else "negative",
+        "promotion_bars": bars, "best_other_arm": best_other,
+        "holdout_dti": {**scores["candidate_dots"], "stage": "binary holdout dots (no catalogue exclusion), seed-20 primary",
+                        "current_best_verified": bool(bars["a_point_beats_every_arm"] and bars["b_ci_vs_h33_above_0"])},
+        "holdout_all_arms": scores, "paired_vs_h33": d_h33, "paired_vs_random": d_rand,
+        "confirmatory_seed21": {"candidate_dots": confirm["scores"]["candidate_dots"],
+                                "h33_ref": confirm["scores"]["h33_ref"],
+                                "paired_vs_h33": confirm["paired_differences"]["h33_ref"]},
         "correlation_overlap_vs_registry": {
-            "stage": "surface rho pre-placement + final dots",
-            "rasters_checked": len(idx), "registry_complete": False,
-            "registry_scope": "62 pinned 60GEMSDOE registry rasters + 17GEMSDOE dense witness, hash-verified locally; inherited inventory lists 862 unique rasters - full scan is a selector step",
-            "surface_worst_spearman": surf_two["literal_reading"]["worst_spearman_full_footprint"],
-            "surface_worst_spearman_submission": surf_two["literal_reading"]["worst_spearman_submission"],
-            "final_worst_spearman": (final_two["literal_reading"]["worst_spearman_full_footprint"] if final_two else None),
-            "final_worst_dot_overlap_like_for_like": (final_two["like_for_like_reading"]["worst_forward_overlap_dot_fields"] if final_two else None),
-            "final_worst_dot_overlap_submission": (final_two["like_for_like_reading"]["worst_forward_overlap_dot_field_submission"] if final_two else None),
-            "final_literal_worst_overlap": (final_two["literal_reading"]["worst_forward_overlap"] if final_two else None),
-            "duplicate_like_for_like": (final_two["like_for_like_reading"]["duplicate"] if final_two else None),
+            "stage": "surface + final dots, 7-raster disclosed subset (R1)",
+            "surface_worst_spearman": surface_audit["template_literal_audit"]["worst_spearman_full_footprint"],
+            "surface_literal_worst_overlap": surface_audit["template_literal_audit"]["worst_dot_overlap"],
+            "surface_r1_worst_overlap": surface_audit["r1_worst_overlap"],
+            "final_worst_spearman": final_audit["template_literal_audit"]["worst_spearman_full_footprint"],
+            "final_literal_worst_overlap": final_audit["template_literal_audit"]["worst_dot_overlap"],
+            "final_r1_worst_overlap": final_audit["r1_worst_overlap"],
+            "registry_complete": False,
+            "literal_dense_overlap_degenerate": "Dense witness positive on whole footprint; see protocol revision R1. Literal values published in audits, not hidden.",
         },
-        "raster_sha256": raster_sha,
-        "raster_sha256_reason": None if raster_sha else "No TIFF written: promotion gates failed.",
-        "surface_decoded_float32_sha256": hashlib.sha256(np.ascontiguousarray(surface).tobytes()).hexdigest(),
-        "validator_output": validator_out,
-        "submission_name": sub_name if promote else f"{sub_name}-NOT-RELEASED",
-        "submission_note": (note if promote else
-                            "E2 scarp-strain-cover dotted candidate; NEGATIVE gates; DO NOT SUBMIT.")[:140],
-        "download_and_submit_ok": False,
-        "download_candidate_ok": bool(promote),
-        "slot_authorized": False,
-        "slot_note": "Slot use requires separate selector step incl. full-registry scan + weekly-cap check on official submission page.",
-        "weekly_slots_used": 0,
-        "experiment_count": 2,
-        "elapsed_seconds": round(time.monotonic() - start, 2),
+        "raster_sha256": None, "validator_output": {"status": "NOT_WRITTEN"},
+        "submission_name": "GEMSDOE70-E2-alluvial-step-38000",
+        "submission_note": "E2 oriented elev step x basement edge, 38k dots d>2px; HOLDOUT-DTI in run card; selector scan pending",
+        "download_and_submit_ok": False, "weekly_slots_used": 0,
+        "experiment_count": 1, "elapsed_seconds": round(time.monotonic() - start, 2),
         "organizer_confirmed_score": None,
-        "n_final_dots": n_final,
         "evaluator_implementation_sha256": evaluate_holdout.implementation_hashes(),
         "method_source_sha256": {p: sha(ROOT / p) for p in
-                                 ["src/gems70/method_e2.py", "scripts/run_experiment_e2.py"]},
+                                 ["src/gems70/method2.py", "src/gems70/method.py",
+                                  "scripts/run_experiment_e2.py"]},
+        "final_dot_count": int(n_final), "holdout_dot_count": int(n_cand),
     }
-    dump(E / "run_card_e2.json", card)
-    print(json.dumps(card, indent=2), flush=True)
+    assert len(card["submission_note"]) <= 140 and len(card["submission_name"]) <= 140
+
+    if science_pass:
+        from gems57.submission_writer import write_submission
+        from gems57.validate import validate
+        stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        out = ROOT / "docs" / "downloads" / f"gems70-e2-alluvialstep-38000-{stamp}-zeros.tif"
+        pred = np.where(fp, final_dots, 0).astype(np.float32)
+        pred[grid.catalogue] = 0
+        receipt = write_submission(out, pred, DATA / "sample_submission.tif", fp,
+                                   note=card["submission_note"], name=card["submission_name"],
+                                   catalogue=grid.catalogue,
+                                   metadata={"experiment": "E2", "holdout_dti": cand_dti})
+        v = validate(out, fp, grid.catalogue)
+        dump(E / "validator.json", {"writer_receipt": receipt, "validate": v})
+        card["verdict"] = "promote"
+        card["raster_sha256"] = receipt["sha256"]
+        card["raster_file"] = out.name
+        card["validator_output"] = {"status": "PASS" if v["all_checks_passed"] else "FAIL",
+                                    "checks": v["checks"], "min": v["min"], "max": v["max"],
+                                    "emitted_positive_pixels": v["emitted_positive_pixels"]}
+        card["download_ok_for_selector_review"] = True
+        card["submit_ok"] = False
+        card["submit_blocker"] = "Separate selector step + complete registry scan + R1 acknowledgment required (protocol rule 6)."
+        if not v["all_checks_passed"]:
+            card["verdict"] = "negative"
+    else:
+        card["raster_sha256_reason"] = "Promotion bars failed; no submission TIFF written or published."
+        card["validator_output"] = {
+            "status": "NOT_WRITTEN",
+            "pre_export_array_checks": {
+                "no_nan_inside_footprint": bool(np.isfinite(final_dots[fp]).all()),
+                "values_in_0_1": bool((final_dots >= 0).all() and (final_dots <= 1).all()),
+                "shape_matches": final_dots.shape == grid.shape,
+                "zero_on_catalogue": not bool(final_dots[grid.catalogue].any()),
+            },
+            "reason": "Array checks are not a TIFF validator receipt; export stopped by promotion bars.",
+        }
+    card["elapsed_seconds"] = round(time.monotonic() - start, 2)
+    dump(E / "run_card.json", card)
+    print(json.dumps({"verdict": card["verdict"], "candidate_dti": cand_dti,
+                      "h33_dti": scores["h33_ref"]["dti"], "random_dti": scores["random_dots"]["dti"],
+                      "bars": bars}, indent=2), flush=True)
 
 
 if __name__ == "__main__":

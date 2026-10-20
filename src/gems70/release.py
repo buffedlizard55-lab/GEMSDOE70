@@ -158,3 +158,36 @@ def assert_no_public_rasters(root):
             bad.append(rel)
     if bad:
         raise ValueError('Unauthorised TIFF/ZIP in the publication tree: ' + ', '.join(bad))
+
+
+def candidate_status(root):
+    """Parallel E2-lane status (selector-review only; never a submit approval).
+
+    Kept distinct from release_status (Phase-4 candidate). submit_ok is False
+    unconditionally here: complete R1 scan, R1 acknowledgment, cap check and
+    separate selector authorization remain (docs/publication-amendment-e2.md).
+    """
+    root = Path(root)
+    out = {"download_ok_for_selector_review": False, "submit_ok": False,
+           "download_and_submit_ok": False, "verdict": "negative",
+           "status": "DO NOT SUBMIT YET — selector-review candidate only",
+           "reasons": [], "file": None, "sha256": None, "zip_file": None,
+           "submission_name": None, "submission_note": None, "weekly_slots_used": 0}
+    try:
+        card = _load(root, "evidence/e2/run_card.json") or {}
+        pub = _load(root, "evidence/e2/publication.json") or {}
+        val = _load(root, "evidence/e2/validator.json") or {}
+        out["file"] = pub.get("file"); out["zip_file"] = pub.get("zip_file")
+        out["submission_name"] = card.get("submission_name")
+        out["submission_note"] = card.get("submission_note")
+        path = root / "docs" / "downloads" / str(pub.get("file"))
+        ok = (card.get("verdict") == "negative" and pub.get("recomputation_matches_experiment")
+              and val.get("local_format_pass") and path.is_file()
+              and digest(path) == pub.get("sha256") == val.get("artifact_sha256"))
+        out["sha256"] = digest(path) if path.is_file() else None
+        out["download_ok_for_selector_review"] = bool(ok)
+        out["reasons"].append(
+            "E2 promotion bars failed (D28 catalogue-holdout best not beaten); selector gates remain.")
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        out["reasons"].append("Missing or invalid E2 evidence: " + str(exc))
+    return out

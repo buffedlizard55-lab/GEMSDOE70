@@ -1,0 +1,202 @@
+{
+  "stage": "final_dots",
+  "template_literal_audit": {
+    "my_file": null,
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "my_dots": 38000,
+    "candidate_decoded_sha256": "29856f3771a583f0d5a12e92ba0f108195914e5dcdf5522a630fcf0b035b4513",
+    "candidate_file_sha256": null,
+    "rho_limit": 0.9,
+    "overlap_limit": 0.7,
+    "jaccard_limit": 0.5,
+    "registry_rasters_expected": 7,
+    "registry_rasters_checked": 7,
+    "complete_accessible_scan": false,
+    "missing_or_invalid": 0,
+    "source_errors": [
+      "Disclosed subset audit only (7 rasters); not a complete registry scan."
+    ],
+    "worst_spearman_full_footprint": 0.0064447978102303806,
+    "worst_rho_submission": "subset:dense17.tif",
+    "worst_dot_overlap": 1.0,
+    "worst_overlap_submission": "subset:dense17.tif",
+    "worst_jaccard_dot_sets": 0.007353833369489681,
+    "worst_jaccard_submission": "subset:dense17.tif",
+    "byte_unique_among_checked": true,
+    "pixel_unique_among_checked": true,
+    "duplicate_count": 1,
+    "unique": false,
+    "rows": [
+      {
+        "repo": "subset",
+        "submission": "subset:h33_b2.tif",
+        "file": "/home/user/GEMSDOE70/.cache/registry_e2/h33_b2.tif",
+        "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+        "decoded_sha256": "aec92fc3ff1e95f0b7a84d48294683199f2a3b25d9cdce2a95329aeccbfd839e",
+        "their_dots": 37654,
+        "my_dots_within_3px_of_theirs": 0.18152631578947367,
+        "their_dots_within_3px_of_mine": 0.0,
+        "spearman_full_footprint": 0.0026657671746529795,
+        "jaccard_dot_sets": 0.005008169826108904,
+        "identical_bytes": false,
+        "identical_decoded_predictions": false,
+        "duplicate_by_rho": false,
+        "duplicate_by_overlap": false,
+        "duplicate_by_jaccard": false
+      },
+      {
+        "repo": "subset",
+        "submission": "subset:d28.tif",
+        "file": "/home/user/GEMSDOE70/.cache/registry_e2/d28.tif",
+        "sha256": "3e78737f0da8dd2ca66cc6caac0ce8eeefcd6715707f8d1bd3091845cd9bcc30",
+        "decoded_sha256": "c1390c6717526ab454bb67cee9fe47f29854a6d98fb3b261ec10c521ed93096e",
+        "their_dots": 44090,
+        "my_dots_within_3px_of_theirs": 0.19097368421052632,
+        "their_dots_within_3px_of_mine": 0.0,
+        "spearman_full_footprint": 0.0012995246451766745,
+        "jaccard_dot_sets": 0.004613708956959113,
+        "identical_bytes": false,
+        "identical_decoded_predictions": false,
+        "duplicate_by_rho": false,
+        "duplicate_by_overlap": false,
+        "duplicate_by_jaccard": false
+      },
+      {
+        "repo": "subset",
+        "submission": "subset:h27.tif",
+        "file": "/home/user/GEMSDOE70/.cache/registry_e2/h27.tif",
+        "sha256": "2fc94a38d77f74d4f4ed1a97a83e7bb71a1ceea090515ec641e6681cc47c44c8",
+        "decoded_sha256": "43fc377484b716aad131f9898127592c767dd0f5b748c3079d97daad5da013b0",
+        "their_dots": 40199,
+        "my_dots_within_3px_of_theirs": 0.1866578947368421,
+        "their_dots_within_3px_of_mine": 0.0,
+        "spearman_full_footprint": 0.002098139024761549,
+        "jaccard_dot_sets": 0.004844388476266352,
+        "identical_bytes": false,
+        "identical_decoded_predictions": false,
+        "duplicate_by_rho": false,
+        "duplicate_by_overlap": false,
+        "duplicate_by_jaccard": false
+      },
+      {
+        "repo": "subset",
+        "submission": "subset:h19solid.tif",
+        "file": "/home/user/GEMSDOE70/.cache/registry_e2/h19solid.tif",
+        "sha256": "ef2ae808eb7179861b9f1ff753fd3ded625ace7b7c158e29cec45bbd8fa3cfaa",
+        "decoded_sha256": "3020681a4b0bed4b2697d8fa012d2995e9890987dbded62285df9e9b4d4d47a2",
+        "their_dots": 121131,
+        "my_dots_within_3px_of_theirs": 0.21563157894736842,
+        "their_dots_within_3px_of_mine": 0.0,
+        "spearman_full_footprint": 0.002518367278513185,
+        "jaccard_dot_sets": 0.006699478718558632,
+        "identical_bytes": false,
+        "identical_decoded_predictions": false,
+        "duplicate_by_rho": false,
+        "duplicate_by_overlap": false,
+        "duplicate_by_jaccard": false
+      },
+      {
+        "repo": "subset",
+        "submission": "subset:anderson.tif",
+        "file": "/home/user/GEMSDOE70/.cache/registry_e2/anderson.tif",
+        "sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+        "decoded_sha256": "92f76d87e9b9fb3bd202e4193f3480b1561e0545cf2b3313119cbe50158d0025",
+        "their_dots": 38854,
+        "my_dots_within_3px_of_theirs": 0.18521052631578946,
+        "their_dots_within_3px_of_mine": 0.0,
+        "spearman_full_footprint": 0.002629184391320534,
+        "jaccard_dot_sets": 0.005047863158445362,
+        "identical_bytes": false,
+        "identical_decoded_predictions": false,
+        "duplicate_by_rho": false,
+        "duplicate_by_overlap": false,
+        "duplicate_by_jaccard": false
+      },
+      {
+        "repo": "subset",
+        "submission": "subset:gateortho.tif",
+        "file": "/home/user/GEMSDOE70/.cache/registry_e2/gateortho.tif",
+        "sha256": "3722e26fbf9129874be1fb8c687825803952c57ef1154ed0a21029596bc412f1",
+        "decoded_sha256": "3f1ebb384ed25bccf87cb964e62ca642d47c15f86eafd49de756b115799a5446",
+        "their_dots": 40000,
+        "my_dots_within_3px_of_theirs": 0.133,
+        "their_dots_within_3px_of_mine": 0.0,
+        "spearman_full_footprint": -0.0006500757893852548,
+        "jaccard_dot_sets": 0.0034606527640195033,
+        "identical_bytes": false,
+        "identical_decoded_predictions": false,
+        "duplicate_by_rho": false,
+        "duplicate_by_overlap": false,
+        "duplicate_by_jaccard": false
+      },
+      {
+        "repo": "subset",
+        "submission": "subset:dense17.tif",
+        "file": "/home/user/GEMSDOE70/.cache/registry_e2/dense17.tif",
+        "sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+        "decoded_sha256": "11cb7dffcc88926fee8260f61df01d7712d3a7bb34fcc1bb333fb6b47f77ec05",
+        "their_dots": 5167373,
+        "my_dots_within_3px_of_theirs": 1.0,
+        "their_dots_within_3px_of_mine": 0.0,
+        "spearman_full_footprint": 0.0064447978102303806,
+        "jaccard_dot_sets": 0.007353833369489681,
+        "identical_bytes": false,
+        "identical_decoded_predictions": false,
+        "duplicate_by_rho": false,
+        "duplicate_by_overlap": true,
+        "duplicate_by_jaccard": false
+      }
+    ],
+    "jaccard_diagnostic_only": true,
+    "verdict": "negative",
+    "stop_required": true,
+    "candidate_rank_variation": true,
+    "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+  },
+  "r1_rows": [
+    {
+      "file": "h33_b2.tif",
+      "positive_fraction_footprint": 0.007286874781441169,
+      "dense_by_R1": false,
+      "r1_overlap_within_3px": 0.18152631578947367
+    },
+    {
+      "file": "d28.tif",
+      "positive_fraction_footprint": 0.00853238192791579,
+      "dense_by_R1": false,
+      "r1_overlap_within_3px": 0.19097368421052632
+    },
+    {
+      "file": "h27.tif",
+      "positive_fraction_footprint": 0.007779388095266202,
+      "dense_by_R1": false,
+      "r1_overlap_within_3px": 0.1866578947368421
+    },
+    {
+      "file": "h19solid.tif",
+      "positive_fraction_footprint": 0.023441504996833014,
+      "dense_by_R1": false,
+      "r1_overlap_within_3px": 0.21563157894736842
+    },
+    {
+      "file": "anderson.tif",
+      "positive_fraction_footprint": 0.0075191010983724224,
+      "dense_by_R1": false,
+      "r1_overlap_within_3px": 0.18521052631578946
+    },
+    {
+      "file": "gateortho.tif",
+      "positive_fraction_footprint": 0.007740877231041769,
+      "dense_by_R1": false,
+      "r1_overlap_within_3px": 0.133
+    },
+    {
+      "file": "dense17.tif",
+      "positive_fraction_footprint": 1.0,
+      "dense_by_R1": true,
+      "r1_overlap_within_3px": 0.012578947368421052
+    }
+  ],
+  "r1_worst_overlap": 0.21563157894736842,
+  "scope": "7-raster disclosed subset; complete scan remains a selector prerequisite."
+}

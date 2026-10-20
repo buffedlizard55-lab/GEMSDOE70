@@ -4,7 +4,7 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="e3-candidate.html">E3 scarp candidate</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Limitations, irregularities and next-session work</h1>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Limitations, irregularities and next-session work</h1>
 <h2>Two shared-tool defects were found and fixed this session</h2>
 <ol>
 <li><strong>Dot definition.</strong> <code>uniqueness._dots</code> counted every finite positive value as a dot, so any
@@ -70,6 +70,11 @@ run card selects; the landing page points only at the P4 artifact. Both files ar
 <code>release.assert_no_public_rasters</code>, so neither can be silently replaced. Its narrative pages were
 moved to <code>reports/archive/concurrent-v2/</code> to avoid two contradictory download instructions in the
 published tree.</p>
+<h2>Parallel E2/E3 lane (integrated PR #16, 2026-10-20)</h2>
+<ul>
+<li>E2 alluvial-step and E3 depth-step are additional negatives (see <code>docs/preregistration-e2.md</code>, <code>evidence/e2|e3/</code>). E2 bytes are published for selector review under <code>docs/publication-amendment-e2.md</code>; submit remains NO. E2 uniqueness used pre-fix R1 subset definitions — not directly comparable to the corrected 62-raster mutual audit until rerun.</li>
+<li>Bridge <code>sample_submission.tif</code> positives are exactly the catalogue (60,988 px), not an all-zero sample; footprint use only. Two-round expanded-label composition and known-fault masking remain unverified from fetched organizer text.</li>
+</ul>
 <h2>E2/E3 addendum — 2026-10-20 (supersedes "no eligible TIFF" for E1 only)</h2>
 <ul>
 <li><strong>E2 negative (gated scarp).</strong> Scarp×strain×cover joint dotted HOLDOUT-DTI 0.0598 [0.0437, 0.0762] (11,342 withheld, seed 30) failed preregistered gates: paired Δ vs random includes 0 and scarp alone (0.0794) beat it significantly. Cover direction was wrong (shallow AUC 0.468); strain diluted. No E2 TIFF published.</li>

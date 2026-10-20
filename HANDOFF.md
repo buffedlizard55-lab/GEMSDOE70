@@ -63,14 +63,31 @@ git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSD
 Large inputs and the registry clone stay outside Git (`.cache/`, `/tmp`). Published evidence is
 JSON plus the 126 KB artifact.
 
-## Parallel-session (E2/E3) integration note — 2026-10-20
+## Parallel E2/E3 lane integrated 2026-10-20 (branch arena/ef718aa0-gemsdoe70, PR #16)
 
-A second lane ran three frozen experiments on untouched folds: E1 contact-termination (negative,
-archived), E2 gated joint scarp×strain×cover (negative — the gates delete scarp signal), E3
-scarp-curvature alone (PROMOTE-to-selector on catalogue HOLDOUT-DTI 0.0943 [0.0782, 0.1109],
-seed-40/11,437 withheld). Candidate `docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif`
-(sha256 in `evidence/run_card_e3_amended.json`, erratum-completed; original negative card preserved).
-**E3 has not been scored on instrument B′** — that scoring is the selector's next step before any
-weekly slot is spent on either candidate. Do not rerun the frozen E1/E2/E3 drivers; their manifests
-block second runs. The E3 lane's forward-overlap saturation finding independently matches the
-mutual-overlap fix landed in `vendor/gems57/uniqueness.py` above.
+Independent preregistered lane merged after session 2: E2 alluvial-step candidate
+`gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif`
+(sha256 `91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c`, 38,000 dots,
+registered in `registry/published_artifacts.json`). Verdict **negative**; download-for-selector-review
+only, submit NO. Catalogue HOLDOUT-DTI 0.06465 [0.04869,0.08181] (11,321 withheld) beats random,
+loses to D28 0.09192; independently replicates Instrument-A H33 = 0.0037. E3 depth-step null.
+Uniqueness for E2 was measured pre-fix under disclosed R1 on a 7-raster subset
+(rho <= 0.039, R1 overlap <= 0.443) — rerun under the corrected mutual rule + complete scan
+before any slot consideration. Evidence: `evidence/e2/`, `evidence/e3/`,
+`docs/preregistration-e2.md`, `docs/publication-amendment-e2.md`. Organizer pages fetched
+2026-10-20: public leader 0.4413 (`evidence/leaderboard_read.json`). No slot used.
+
+## Integration note (PR #16 second merge, 2026-10-20)
+PR #18 (H2 stepover-relay, negative; HOLDOUT-DTI 0.023034, lane stop fired) landed during PR #16 CI and replaced `evidence/run_card.json`, builders and 4 test files with its fail-closed system. Integration preserved: H2 card moved byte-identical to `evidence/history/h2_stepover_negative/run_card.json`; H2 diagnostic TIFF registered in `registry/published_artifacts.json`; Phase-4 canonical card restored from `fefc857` blob (sha256 `9cd64b1e...`); session-2 builders/tests retained so P4 + discordance + E2 artifacts stay coherent. `make_run_card.py` stale-schema fix (pre-existing red Verify on main) retained. All verdicts negative; slots used 0.
+
+## Parallel-session E3 scarp lane (PR #17, merged 2026-10-20)
+
+Independent lane, three frozen experiments on untouched folds: E1 contact-termination (negative,
+archived), gated joint scarp×strain×cover (negative — gates delete scarp signal), scarp-curvature
+alone (PROMOTE-to-selector on catalogue HOLDOUT-DTI 0.0943 [0.0782, 0.1109], seed-40/11,437
+withheld). Candidate `docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif` (sha256 in
+`evidence/run_card_e3_amended.json`; erratum-completed, original negative card preserved).
+**Not yet scored on instrument B′** — selector's next step before any weekly slot. Frozen drivers
+were renamed at merge to `scripts/run_experiment_e2_scarp.py` / `run_experiment_e3_scarp.py`
+(byte-identical) because the PR #16 lane owns the canonical driver paths; do not rerun them.
+Not to be confused with PR #16's negative depth-step E3 (`evidence/e3/`).

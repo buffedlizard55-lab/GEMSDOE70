@@ -17,6 +17,15 @@ import zipfile
 
 from .release import valid_canary
 
+# At the PR #17 merge, this lane's frozen drivers moved byte-identical to
+# *_scarp.py paths because the PR #16 lane owns the canonical driver paths.
+# Frozen manifests/cards still name the original paths; verification resolves
+# through this map so hash pins keep binding the exact original bytes.
+RENAMED_AT_MERGE = {
+    "scripts/run_experiment_e2.py": "scripts/run_experiment_e2_scarp.py",
+    "scripts/run_experiment_e3.py": "scripts/run_experiment_e3_scarp.py",
+}
+
 
 def digest(path):
     h = hashlib.sha256()
@@ -52,7 +61,8 @@ def release_status_e3(root):
             original.get("verdict") == "negative"
             and digest(root / "evidence/run_card_e3.json") == card["erratum"]["original_card_sha256"])
         checks["sources_pinned"] = all(
-            digest(root / rel) == pin for rel, pin in manifest["source_sha256"].items())
+            digest(root / RENAMED_AT_MERGE.get(rel, rel)) == pin
+            for rel, pin in manifest["source_sha256"].items())
         checks["prereg_pinned"] = (
             digest(root / "docs/hypotheses-e3.md") == manifest["preregistration_sha256"])
         checks["completion_pinned"] = (

@@ -1,0 +1,7 @@
+{
+  "attempted_utc": "2026-10-20T22:13:13.104238+00:00",
+  "command": "gh issue create --repo buffedlizard55-lab/60GEMSDOE (title/body per evidence/upstream_uniqueness_report.md)",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "GraphQL: Resource not accessible by integration (createIssue)"
+}

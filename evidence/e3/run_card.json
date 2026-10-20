@@ -1,0 +1,201 @@
+{
+  "hypothesis": "Magnetic source-depth step at a basement edge (E3)",
+  "mechanism": "Cross-edge step of multi-scale depth index A3/(A1+eps) along RTP tensor normal, rank-fused with basement edge; 2.8px priority-thinned binary dots",
+  "non_fault_mimic": "Intrusive contact with depth change or remanence boundary",
+  "hypothesis_status": "Contingent preregistered lane; docs/preregistration-e2.md E3 section",
+  "verdict": "negative",
+  "promotion_bars": {
+    "a_point_beats_every_arm": false,
+    "b_ci_vs_h33_above_0": true,
+    "b_ci_vs_random_above_0": false,
+    "c_no_canary_alarm": true,
+    "d_surface_rho_ok_subset": true,
+    "d_surface_r1_overlap_ok_subset": true,
+    "d_final_rho_ok_subset": true,
+    "d_final_r1_overlap_ok_subset": true
+  },
+  "best_other_arm": "d28_ref",
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.05054272482285654,
+    "ci95": [
+      0.03897857283754446,
+      0.06128858477772192
+    ],
+    "withheld_positive_pixels": 11321,
+    "tpw": 834.7894835827351,
+    "fpw": 36463.76680998146,
+    "fnw": 10486.210516417268,
+    "stage": "binary holdout dots (no catalogue exclusion), seed-20 primary",
+    "current_best_verified": false
+  },
+  "holdout_all_arms": {
+    "candidate_dots": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.05054272482285654,
+      "ci95": [
+        0.03897857283754446,
+        0.06128858477772192
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 834.7894835827351,
+      "fpw": 36463.76680998146,
+      "fnw": 10486.210516417268
+    },
+    "candidate_surface": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.016704532697686535,
+      "ci95": [
+        0.010497357235197891,
+        0.023032158767849996
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 312.57350486111415,
+      "fpw": 47962.91436527951,
+      "fnw": 11008.426495138883
+    },
+    "depth_step_dots": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.045139919451395824,
+      "ci95": [
+        0.03805027571665471,
+        0.05247421810490247
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 746.8294510879647,
+      "fpw": 36693.00570020305,
+      "fnw": 10574.170548912034
+    },
+    "basement_edge_dots": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.029766432973320597,
+      "ci95": [
+        0.015634906405578956,
+        0.04614221891595715
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 489.3311970068321,
+      "fpw": 36421.80408262434,
+      "fnw": 10831.668802993167
+    },
+    "random_dots": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.04242525742520503,
+      "ci95": [
+        0.03702008655540402,
+        0.04735445439832137
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 700.0737719202921,
+      "fpw": 36522.64680066662,
+      "fnw": 10620.92622807971
+    },
+    "h33_ref": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.002998923688171992,
+        0.004409116627766518
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 59.65441084410811,
+      "fpw": 35275.171121231586,
+      "fnw": 11261.345589155892
+    },
+    "d28_ref": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.09192198709430605,
+      "ci95": [
+        0.07885399208012285,
+        0.10473606242508803
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 1605.884660575932,
+      "fpw": 40460.525798262286,
+      "fnw": 9715.115339424063
+    },
+    "h19solid_ref": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.06546175700753229,
+      "ci95": [
+        0.055868270808412286,
+        0.07558220177667217
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 2075.619913883473,
+      "fpw": 111177.21202943298,
+      "fnw": 9245.380086116525
+    }
+  },
+  "paired_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.04684294313722695,
+    "ci95": [
+      0.03515044037210921,
+      0.05757806603313392
+    ],
+    "withheld_positive_pixels": 11321
+  },
+  "paired_vs_random": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.008117467397651505,
+    "ci95": [
+      -0.0027560397376917402,
+      0.019163750434821953
+    ],
+    "withheld_positive_pixels": 11321
+  },
+  "correlation_overlap_vs_registry": {
+    "stage": "surface + final dots, 7-raster disclosed subset (R1)",
+    "surface_worst_spearman": 0.011287461597496506,
+    "surface_literal_worst_overlap": 1.0,
+    "surface_r1_worst_overlap": 0.19992691913399174,
+    "final_worst_spearman": 0.0064447978102303806,
+    "final_literal_worst_overlap": 1.0,
+    "final_r1_worst_overlap": 0.21563157894736842,
+    "registry_complete": false
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "status": "NOT_WRITTEN",
+    "pre_export_array_checks": {
+      "no_nan_inside_footprint": true,
+      "values_in_0_1": true,
+      "shape_matches": true,
+      "zero_on_catalogue": true
+    },
+    "reason": "Array checks are not a TIFF validator receipt; export stopped by promotion bars."
+  },
+  "submission_name": "GEMSDOE70-E3-depth-step-38000",
+  "submission_note": "E3 magnetic depth-step x basement edge, 38k dots d>2px; HOLDOUT-DTI in run card; selector scan pending",
+  "download_and_submit_ok": false,
+  "weekly_slots_used": 0,
+  "experiment_count": 2,
+  "elapsed_seconds": 53.04,
+  "organizer_confirmed_score": null,
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "method_source_sha256": {
+    "src/gems70/method2.py": "cf4f75f3acea1cf379a4447bb5d71fc3c8c6a455e6090ed518724eaa43fde689",
+    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
+    "scripts/run_experiment_e3.py": "b6350bc4fbe82a16f1b5df045862a14e957f0692a9e225f0157f1e7a16291253"
+  },
+  "final_dot_count": 38000,
+  "holdout_dot_count": 38000,
+  "raster_sha256_reason": "Promotion bars failed; no submission TIFF written or published."
+}

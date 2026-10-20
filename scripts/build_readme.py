@@ -94,25 +94,38 @@ PROJECT_BRIEF.md is the source for this embedded copy.
 <summary>Read the complete supplied project brief before every session</summary>
 
 '''
-    e3 = json.loads((ROOT / 'evidence/run_card_e3_amended.json').read_text())
-    e3d = e3['holdout_dti']
-    e3_block = f'''
-## Parallel-session candidate E3 (scarp curvature) — selector must score it on B′ before choosing
-
-A second unique, format-validated TIFF from a parallel session is published:
-`docs/downloads/{e3['submission_name']}.tif` (sha256 `{e3['raster_sha256']}`),
-note ({len(e3['submission_note'])} chars): `{e3['submission_note']}`.
-DEM scarp-curvature ranking, {e3['n_final_dots']:,} dots. Catalogue hide-and-recover
-(seed-40) HOLDOUT-DTI {e3d['dti']:.4f} [{e3d['ci95'][0]:.4f}, {e3d['ci95'][1]:.4f}]
-({e3d['withheld_positive_pixels']:,} withheld) — promoted to selector on that
-instrument, but **not yet scored on instrument B′**, so it does not supersede the
-Phase-4 verdict above. Score this exact TIF on B′ first. Evidence:
-`evidence/run_card_e3_amended.json` (with erratum; E2 gated variant negative).
-Site page: `docs/e3-candidate.html`. No slot used for either candidate.
-
-'''
     tail = '\n</details>\n'
-    (ROOT / 'README.md').write_text(head + e3_block + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
+    e2_note = ''
+    e2p = ROOT / 'evidence/e2/run_card.json'
+    if e2p.is_file():
+        import json as _json
+        _e2 = _json.loads(e2p.read_text())
+        _d = _e2['holdout_dti']
+        e2_note = (f"\n## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET\n\n"
+                   f"Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI {_d['dti']:.4f} "
+                   f"[{_d['ci95'][0]:.4f}, {_d['ci95'][1]:.4f}] (beats random, loses to D28 0.0919) → negative. "
+                   f"File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` "
+                   f"(selector-review only; complete corrected uniqueness scan pending). "
+                   f"Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. "
+                   f"Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).\n")
+    e3_note = ''
+    e3p = ROOT / 'evidence/run_card_e3_amended.json'
+    if e3p.is_file():
+        import json as _json3
+        _e3 = _json3.loads(e3p.read_text())
+        _d3 = _e3['holdout_dti']
+        e3_note = (f"\n## Parallel E3 scarp lane (PR #17) — selector must score it on B′ before choosing\n\n"
+                   f"DEM scarp-curvature ranking, {_e3['n_final_dots']:,} dots: catalogue HOLDOUT-DTI "
+                   f"{_d3['dti']:.4f} [{_d3['ci95'][0]:.4f}, {_d3['ci95'][1]:.4f}] "
+                   f"({_d3['withheld_positive_pixels']:,} withheld, seed-40) → promote-to-selector on "
+                   f"that instrument only; **B′ not yet scored**. File "
+                   f"`docs/downloads/{_e3['submission_name']}.tif` (sha256 `{_e3['raster_sha256']}`), "
+                   f"note ({len(_e3['submission_note'])} chars): `{_e3['submission_note']}`. "
+                   f"Evidence: `evidence/run_card_e3_amended.json` (erratum-completed; gated E2 "
+                   f"negative); frozen drivers renamed `scripts/run_experiment_e{{2,3}}_scarp.py` "
+                   f"at merge (byte-identical; canonical paths hold the PR #16 lane's drivers). "
+                   f"Site page: `docs/e3-candidate.html`. No slot used for any candidate.\n")
+    (ROOT / 'README.md').write_text(head + e2_note + e3_note + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
 
 
 if __name__ == '__main__':

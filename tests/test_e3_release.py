@@ -77,8 +77,10 @@ def test_uniqueness_vs_champion_and_erratum_binding():
     assert len(CARD["submission_note"]) <= 140
     assert CARD["organizer_confirmed_score"] is None
     assert CARD["weekly_slots_used"] == 0 and CARD["experiment_count"] == 3
+    from gems70.release_e3 import RENAMED_AT_MERGE
     for rel, pin in CARD["method_source_sha256"].items():
-        assert hashlib.sha256((ROOT / rel).read_bytes()).hexdigest() == pin
+        actual = ROOT / RENAMED_AT_MERGE.get(rel, rel)
+        assert hashlib.sha256(actual.read_bytes()).hexdigest() == pin
 
 
 def test_emission_separation_and_budget():

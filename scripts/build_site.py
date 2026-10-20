@@ -18,7 +18,6 @@ DOCS = ROOT / 'docs'
 DOWN = DOCS / 'downloads'
 
 NAV = [('index.html', 'Overview'), ('submission.html', 'Submit a file'),
-       ('e3-candidate.html', 'E3 scarp candidate'),
        ('results.html', 'Evidence'), ('hypotheses.html', 'Hypotheses'),
        ('h33-analysis.html', 'Why H33 scored'), ('sources.html', 'Sources'),
        ('limitations.html', 'Limitations')]
@@ -127,6 +126,17 @@ def main():
         'evidence/validator_e3.json': 'validator_e3.json',
         'evidence/selection_grid_e3.json': 'selection_grid_e3.json',
         'evidence/holdout_e2.json': 'holdout_e2.json',
+        'evidence/e2/run_card.json': 'e2_run_card.json',
+        'evidence/e2/holdout.json': 'e2_holdout.json',
+        'evidence/e2/canaries.json': 'e2_canaries.json',
+        'evidence/e2/holdout_confirm_seed21.json': 'e2_confirm_seed21.json',
+        'evidence/e2/final_uniqueness.json': 'e2_final_uniqueness.json',
+        'evidence/e2/publication.json': 'e2_publication.json',
+        'evidence/e2/validator.json': 'e2_validator.json',
+        'evidence/e3/run_card.json': 'e3_run_card.json',
+        'evidence/e3/holdout.json': 'e3_holdout.json',
+        'evidence/e3/canaries.json': 'e3_canaries.json',
+        'evidence/leaderboard_read.json': 'leaderboard_read.json',
     }
     for src, dst in copies.items():
         s = ROOT / src
@@ -201,7 +211,28 @@ presented as a leaderboard score.</p>
 <ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
 <li><a href="results.html">All three experiments, ablations and canaries</a></li>
 <li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section>'''
-    (DOCS / 'index.html').write_text(frame('Overview', index))
+
+    # ------------------------------------------- parallel E2/E3 lane (integrated)
+    e2card = load('evidence/e2/run_card.json', {})
+    e2pub = load('evidence/e2/publication.json', {})
+    e2hold = load('evidence/e2/holdout.json', {})
+    e3card = load('evidence/e3/run_card.json', {})
+    e2_section = ''
+    if e2card and e2pub:
+        _d = e2card['holdout_dti']
+        e2_section = f"""<section><h2>Parallel lane E2 — alluvial step (second candidate, DO NOT SUBMIT YET)</h2>
+<p>An independent preregistered lane (oriented detrended-elevation step × basement edge,
+38,000 dots) merged from a parallel session. <strong>Download for selector review: yes.
+Submit: NO</strong> — its frozen bars failed (D28 catalogue-holdout best not beaten) and its
+complete-registry scan is still pending. HOLDOUT-DTI {_d['dti']:.4f} {ci(_d)} ·
+{e2card['final_dot_count']:,} dots · SHA-256 <code>{esc(e2pub.get('sha256',''))}</code>.</p>
+<div class="actions"><a class="button secondary" href="downloads/{esc(e2pub.get('file',''))}" download>Download E2 review TIFF</a>
+<a class="button secondary" href="downloads/e2_run_card.json" download>E2 run card</a></div>
+<p class="small">Name: <code>{esc(e2card.get('submission_name',''))}</code> · Note:
+<code>{esc(e2card.get('submission_note'))}</code>. E3 (depth-step) in the same lane family is
+negative with no file. Full tables on the results page; terms in
+<code>docs/publication-amendment-e2.md</code>.</p></section>"""
+    (DOCS / 'index.html').write_text(frame('Overview', index + e2_section))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
@@ -291,9 +322,20 @@ always reported.</p>
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a> ·
 <a href="downloads/phase3_instrumentB_all.json">Experiment 3 B</a></p>'''
+
+    if e2hold:
+        _rows = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+                 for k, v in sorted(e2hold['scores'].items(), key=lambda kv: -kv[1]['dti'])]
+        results += ("<h2>Parallel lane E2/E3 — catalogue holdout (same instrument A family)</h2>"
+                    "<p>E2 beats random and every ablation, ties H19-solid at one-third mass, "
+                    "loses to D28; H33 ranks last here by construction (live new faults vs catalogue "
+                    "pieces). E3 depth-step mechanism AUC 0.506 (null), candidate "
+                    f"{e3card.get('holdout_dti', {}).get('dti', 0):.4f}. Both negative.</p>"
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _rows,
+                            'E2 arms · gems57-pooled-hide-v2 · seed-20'))
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 
-    # ------------------------------------------------- E3 parallel candidate
+    # ------------------------------------- E3 scarp parallel candidate (PR17)
     e3 = load('evidence/run_card_e3_amended.json', {})
     if e3:
         e3h = load('evidence/holdout_e3.json', {})
@@ -308,14 +350,15 @@ always reported.</p>
         e3rows = instrument_rows(e3h) if e3h else []
         e3checks = [[esc(k), 'pass' if v else 'FAIL']
                     for k, v in (e3v.get('checks') or {}).items()]
-        e3page = f'''<div class="eyebrow">PARALLEL-SESSION CANDIDATE E3</div>
+        e3page = f'''<div class="eyebrow">PARALLEL-SESSION CANDIDATE E3 (SCARP LANE)</div>
 <h1>Scarp-curvature candidate — score it on B′ before choosing.</h1>
 <p class="lead"><strong>Download: yes.</strong> <code>downloads/{esc(e3name)}.tif</code>
 ({e3['n_final_dots']:,} dots, SHA-256 <code>{esc(e3['raster_sha256'])}</code>).
 <strong>Slot decision: selector-owned.</strong> E3 was promoted on catalogue
 hide-and-recover only and has <strong>not</strong> been scored on instrument B′;
-the Phase-4 candidate above remains the only B′-scored option (negative there).
-Do not upload either file until E3 is B′-scored and the weekly cap is checked.</p>
+the Phase-4 candidate remains the only B′-scored option (negative there).
+Do not upload either file until E3 is B′-scored and the weekly cap is checked.
+(Not to be confused with the PR #16 lane's negative depth-step E3.)</p>
 <div class="actions">
 <a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(e3name)}.tif" download>Download E3 TIFF</a>
 <a class="button secondary" href="downloads/{esc(e3name)}.zip" download>Download one-TIFF ZIP</a>
@@ -323,7 +366,7 @@ Do not upload either file until E3 is B′-scored and the weekly cap is checked.
 <p class="small">Note ({len(e3['submission_note'])}/140 chars): <code>{esc(e3['submission_note'])}</code></p>
 <h2>Catalogue holdout (seed-40, untouched folds)</h2>
 <p>HOLDOUT-DTI {e3d['dti']:.4f} {ci(e3d)} · {e3d['withheld_positive_pixels']:,} withheld ·
-{e3d['evaluator_version']}. E2 gated variant was falsified first (negative deliverable).</p>
+{e3d['evaluator_version']}. The same lane's gated E2 variant was falsified first (negative).</p>
 {table(['Arm', 'DTI', '95% CI', 'Positives'], e3rows, 'E3 dotted arms at the selected cell')}
 <h2>Uniqueness vs H33 (63 hash-verified rasters, saturation-adjusted)</h2>
 <p>Forward overlap {h33row.get('my_dots_within_3px_of_theirs', float('nan')):.3f} ·

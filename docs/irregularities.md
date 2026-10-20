@@ -68,6 +68,10 @@ run card selects; the landing page points only at the P4 artifact. Both files ar
 moved to `reports/archive/concurrent-v2/` to avoid two contradictory download instructions in the
 published tree.
 
+## Parallel E2/E3 lane (integrated PR #16, 2026-10-20)
+- E2 alluvial-step and E3 depth-step are additional negatives (see `docs/preregistration-e2.md`, `evidence/e2|e3/`). E2 bytes are published for selector review under `docs/publication-amendment-e2.md`; submit remains NO. E2 uniqueness used pre-fix R1 subset definitions — not directly comparable to the corrected 62-raster mutual audit until rerun.
+- Bridge `sample_submission.tif` positives are exactly the catalogue (60,988 px), not an all-zero sample; footprint use only. Two-round expanded-label composition and known-fault masking remain unverified from fetched organizer text.
+
 ## E2/E3 addendum — 2026-10-20 (supersedes "no eligible TIFF" for E1 only)
 
 - **E2 negative (gated scarp).** Scarp×strain×cover joint dotted HOLDOUT-DTI 0.0598 [0.0437, 0.0762] (11,342 withheld, seed 30) failed preregistered gates: paired Δ vs random includes 0 and scarp alone (0.0794) beat it significantly. Cover direction was wrong (shallow AUC 0.468); strain diluted. No E2 TIFF published.

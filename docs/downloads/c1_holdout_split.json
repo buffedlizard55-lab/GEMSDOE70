@@ -52,7 +52,15 @@
       "evaluation_region_label_blind": true
     }
   ],
+<<<<<<<< HEAD:evidence/e2/holdout_split.json
+  "total_withheld_positive_pixels": 11321,
+  "catalogue_predictors": [],
+  "valid_feature_pixels": 4989581,
+  "known_mask_rule": "catalogue minus globally withheld components, pixel exact",
+  "limitation": "Mapped components are a surrogate for previously unmapped faults; no hidden organizer labels."
+========
   "total_withheld_positive_pixels": 11425,
   "visible_catalogue_pixels": 48557,
   "catalogue_features_from": "visible traces only (holdout-visible mask)"
+>>>>>>>> origin/main:docs/downloads/c1_holdout_split.json
 }
