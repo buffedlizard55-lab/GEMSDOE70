@@ -108,3 +108,23 @@ HOLDOUT-DTI 0.0943 [0.0782, 0.1109], seed-40/11,437 withheld). Candidate
 `evidence/run_card_e3_amended.json`). **Not yet scored on instrument B′** — selector's next step.
 Frozen drivers live at `scripts/run_experiment_e2_scarp.py` / `run_experiment_e3_scarp.py`
 (byte-identical rename; PR #16 owns canonical paths). Do not rerun.
+
+## Current-request review — arena/3169a6c0-gemsdoe70 (2026-10-20)
+
+**Overrides historical uniqueness clearance: DO NOT SUBMIT.** The latest user request explicitly
+uses forward overlap, not the inherited mutual criterion. `scripts/audit_current_protocol.py`
+reapplies that rule to frozen P4 rows: multiple witnesses fail, including forward overlap 1.00.
+This is a historical negative witness, not a refreshed registry scan. No scientific experiment,
+new TIFF, fitting, placement or competition upload occurred in this session. All TIFF bytes and
+frozen scientific cards are preserved. Fresh local validation confirms P4 finite [0,1] and grid
+consistency against cached reference metadata, not organizer acceptance.
+
+- Current JSON: `evidence/current_protocol_review.json` (also published under docs).
+- Review / ranked conditional hypotheses: `docs/protocol-review.md`.
+- Official reference README retrieved at pinned commit and archived in `evidence/current-review/`;
+  CPU-only training is supported (GPU is not a hard requirement).
+- Website has a global DO NOT SUBMIT override, archive downloads remain available for review.
+- Reconcile explicit lane and uniqueness policy before the old supervised-ranking next step.
+- Reproduce: audit_current_protocol.py, build_site.py, build_readme.py, pytest; no data download needed.
+
+Integration: main advanced concurrently with PRs adding a separate E3 scarp artifact and a literal-protocol review. All those frozen receipts, artifacts, tests and drivers were retained. This session's four conditional hypotheses and fresh P4 format card are supplemental (`docs/supplemental-protocol-review.html`), not a replacement for the concurrent review or an authorization of E3.

@@ -1,0 +1,10 @@
+{
+  "evidence_class": "SOURCE-RETRIEVAL",
+  "retrieved_date_utc": "2026-10-20",
+  "repository": "drivendataorg/gems-prize-reference-solution",
+  "commit": "aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+  "path": "README.md",
+  "sha256": "cfa4d55559c9128313beb9417eae7e0a94c31677132afb1120f9e86222804239",
+  "verified_claim": "Official reference supports CPU-only setup; GPU accelerates training.",
+  "unverified": "No organizer scores, data access, PDF rules or geological hypotheses are verified by this README."
+}
