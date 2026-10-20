@@ -42,6 +42,7 @@ def literal_lane_status(audit):
     complete = (bool(rows) and audit.get('complete_accessible_scan') is True
                 and type(audit.get('registry_rasters_expected')) is int
                 and len(rows) == audit['registry_rasters_expected']
+                and audit.get('missing_or_invalid', 0) == 0
                 and not invalid and not audit.get('source_errors'))
     return {
         'policy': 'literal-forward-v1',

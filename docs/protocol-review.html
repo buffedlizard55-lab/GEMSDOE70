@@ -4,8 +4,8 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
-<aside class="stop"><strong>DO NOT SUBMIT.</strong> Archived TIFFs are downloadable for review only.
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<aside class="stop"><strong>DO NOT SUBMIT — literal protocol stop.</strong> Archived TIFFs are downloadable for review only.
 The current literal forward-overlap gate fails. <a href="protocol-review.html">Current audit</a> ·
 <a href="downloads/review_run_card.json">Current negative run card</a>.
 Historical receipts below are not current submission approval.</aside><h1>Literal-protocol review — 2026-10-20</h1>
@@ -33,10 +33,10 @@ literal thresholds to their reported measurements. Vendor bytes and frozen exper
   <strong>at that mass</strong>, before a new surface or final dots are built. It does not prove impossibility
   at every smaller mass. Deliberately predicting only edge slivers would be optimizing the registry
   loophole, not validating the geological hypothesis; no such experiment was attempted.</li>
-<li><strong>REGISTRY-MEASUREMENT:</strong> all four inventoried final TIFFs (P4, discordance, E2, H2 diagnostic)
+<li><strong>REGISTRY-MEASUREMENT:</strong> all five inventoried final TIFFs (P4, discordance, E2, H2 diagnostic, and integrated scarp E3)
   have measured forward overlap <strong>1.0</strong> against this binary witness. P4 Spearman is
   <strong>−0.0004249862</strong>. Each is a duplicate <strong>under the prompt's rule</strong>, not necessarily a copied file.</li>
-<li>All four pass the shared local format validator, including finite [0,1], CRS, shape and transform.
+<li>All five pass the shared local format validator, including finite [0,1], CRS, shape and transform.
   Format validity does not imply uniqueness, portal acceptance or scientific usefulness.</li>
 </ul>
 <p>Receipts: <a href="downloads/literal_protocol_audit.json">full fresh audit</a>,
@@ -161,8 +161,18 @@ in <code>docs/hypotheses.md</code> also mis-indexed detrended elevation (correct
 (correctly band 10); the table here uses the recorded metadata and avoids inferring ambiguous units.
 <code>prepare_data.py</code> is absent, so the retained prompt's advertised command is not a working pipeline.
 Data placement is not the single blocker: protocol consistency, proxy validity and independent model
-validation remain. No scientific-discovery or leaderboard-improvement claim is established.</p></main>
+validation remain. No scientific-discovery or leaderboard-improvement claim is established.</p>
+<h2>Integration and upstream report</h2>
+<p>During this review, parallel PRs #17, #21 and #22 advanced main. Their frozen evidence and
+scarp E3 artifact were preserved, then the fresh audit was rerun against the expanded five-TIFF
+inventory. The existing literal-policy CLI and the release API now share one policy adapter;
+this avoids two subtly different interpretations of the threshold rule. Historical policy cards
+remain available with provenance. The newest measured review card is linked at the top of every page.</p>
+<p>An attempted upstream issue to the shared template repository returned
+<code>Resource not accessible by integration (createIssue)</code>. It was not posted. The report is retained
+in <code>evidence/review/upstream-policy-report.md</code>; GitHub issue-creation permission, not credentials
+in chat, is needed for that operation. No shared-template code was changed during this review.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

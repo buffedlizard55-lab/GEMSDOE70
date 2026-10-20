@@ -20,7 +20,7 @@ DOWN = DOCS / 'downloads'
 NAV = [('index.html', 'Overview'), ('executive-summary.html', 'Executive summary'),
        ('protocol-review.html', 'Protocol review'), ('submission.html', 'Submission guide'),
        ('results.html', 'Evidence'), ('hypotheses.html', 'Hypotheses'),
-       ('h33-analysis.html', 'Why H33 scored'), ('sources.html', 'Sources'),
+       ('h33-analysis.html', 'Why H33 scored'), ('e3-candidate.html', 'Archived scarp E3'), ('sources.html', 'Sources'),
        ('limitations.html', 'Limitations')]
 
 
@@ -51,12 +51,12 @@ def frame(title, body):
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
 <nav aria-label="Main">{nav}</nav><main id="main">
-<aside class="stop"><strong>DO NOT SUBMIT.</strong> Archived TIFFs are downloadable for review only.
+<aside class="stop"><strong>DO NOT SUBMIT — literal protocol stop.</strong> Archived TIFFs are downloadable for review only.
 The current literal forward-overlap gate fails. <a href="protocol-review.html">Current audit</a> ·
 <a href="downloads/review_run_card.json">Current negative run card</a>.
 Historical receipts below are not current submission approval.</aside>{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>'''
 
@@ -121,7 +121,7 @@ def main():
         'evidence/h33_audit.json': 'h33_audit.json',
         'evidence/data_receipt.json': 'data_receipt.json',
         'evidence/template_verification.json': 'template_verification.json',
-        'evidence/upstream_fix_report.md': 'upstream_fix_report.md',
+        'evidence/upstream_fix_report.md': 'upstream_fix_report.txt',
         'evidence/registry_saturation.json': 'phase1_registry_saturation.json',
         'evidence/history/phase1_negative/run_card.json': 'phase1_run_card.json',
         'evidence/e2/run_card.json': 'e2_run_card.json',
@@ -149,11 +149,13 @@ def main():
         raise SystemExit('Current literal protocol audit missing; refusing stale publication')
     decision = f'''<section class="stop" aria-labelledby="decision">
 <div class="eyebrow">CURRENT SUBMISSION STATUS · NEGATIVE PREFLIGHT</div>
-<h1 id="decision">DO NOT SUBMIT — literal lane stop</h1>
-<p><strong>Download: yes.</strong> For forensic review only. These are existing archived files,
+<h1 id="decision">DO NOT SUBMIT — literal protocol stop</h1>
+<p><strong>Download: yes — format-validated for review.</strong> For forensic review only.
+<strong>Competition submission: NO — not recommended.</strong>
+The witness scan is sufficient to reject, but covers not every private or uncommitted raster. These are existing archived files,
 not a newly generated protocol-compliant submission. <strong>Submit a weekly slot: not recommended;
 blocked by your protocol.</strong></p>
-<p>All four archived TIFFs have forward overlap 1.00 against a verified binary registry lattice
+<p>All five archived TIFFs have forward overlap 1.00 against a verified binary registry lattice
 (limit 0.70). Mutual overlap is not an authorized exemption. No new TIFF, experiment or slot.</p>
 <div class="actions">
 <a class="button secondary" href="downloads/{esc(name)}.tif" download>Download archived TIFF — DO NOT SUBMIT</a>
@@ -333,6 +335,52 @@ labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed score
                             'E2 arms · gems57-pooled-hide-v2 · seed-20'))
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 
+    # ------------------------------------- E3 scarp parallel candidate (PR17)
+    e3 = load('evidence/run_card_e3_amended.json', {})
+    if e3:
+        e3h = load('evidence/holdout_e3.json', {})
+        e3u = load('evidence/final_uniqueness_e3.json', {})
+        e3v = (load('evidence/validator_e3.json', {}) or {}).get('validator') or {}
+        e3name = e3['submission_name']
+        e3d = e3['holdout_dti']
+        h33row = {}
+        for r in (e3u.get('audit') or {}).get('rows', []):
+            if str(r.get('submission', '')).endswith('GEMSDOE32__h33-2-b2-zeros.tif'):
+                h33row = r
+        e3rows = instrument_rows(e3h) if e3h else []
+        e3checks = [[esc(k), 'pass' if v else 'FAIL']
+                    for k, v in (e3v.get('checks') or {}).items()]
+        e3page = f"""<div class="eyebrow">PARALLEL-SESSION CANDIDATE E3 (SCARP LANE)</div>
+<h1>Archived scarp-curvature candidate — DO NOT SUBMIT.</h1>
+<p class="lead"><strong>Download: yes.</strong> <code>downloads/{esc(e3name)}.tif</code>
+({e3['n_final_dots']:,} dots, SHA-256 <code>{esc(e3['raster_sha256'])}</code>).
+<strong>Slot decision: selector-owned.</strong> E3 was promoted on catalogue
+hide-and-recover only and has <strong>not</strong> been scored on instrument B′;
+the Phase-4 candidate remains the only B′-scored option (negative there).
+Fresh binary-witness comparison also fails the literal overlap gate. Do not upload this archive;
+B′ scoring and a cap check alone cannot override the current stop.
+(Not to be confused with the PR #16 lane's negative depth-step E3.)</p>
+<div class="actions">
+<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(e3name)}.tif" download>Download archived E3 TIFF — DO NOT SUBMIT</a>
+<a class="button secondary" href="downloads/{esc(e3name)}.zip" download>Download one-TIFF ZIP</a>
+<a class="button secondary" href="downloads/run_card_e3_amended.json">E3 run card + erratum</a></div>
+<p class="small">Note ({len(e3['submission_note'])}/140 chars): <code>{esc(e3['submission_note'])}</code></p>
+<h2>Catalogue holdout (seed-40, untouched folds)</h2>
+<p>HOLDOUT-DTI {e3d['dti']:.4f} {ci(e3d)} · {e3d['withheld_positive_pixels']:,} withheld ·
+{e3d['evaluator_version']}. The same lane's gated E2 variant was falsified first (negative).</p>
+{table(['Arm', 'DTI', '95% CI', 'Positives'], e3rows, 'E3 dotted arms at the selected cell')}
+<h2>Uniqueness vs H33 (63 hash-verified rasters, saturation-adjusted)</h2>
+<p>Forward overlap {h33row.get('my_dots_within_3px_of_theirs', float('nan')):.3f} ·
+Jaccard {h33row.get('jaccard_dot_sets', float('nan')):.4f} ·
+Spearman {h33row.get('spearman_full_footprint', float('nan')):.4f}.
+Full inventory (862) scan remains a selector step. Literal readings are in the receipt.</p>
+<h2>On-disk validator</h2>
+{table(['Check', 'Result'], e3checks, 'Shared validator on the published E3 bytes.')}
+<p><a href="downloads/holdout_e3.json">Holdout</a> ·
+<a href="downloads/final_uniqueness_e3.json">Uniqueness</a> ·
+<a href="downloads/validator_e3.json">Writer receipt</a></p>"""
+        (DOCS / 'e3-candidate.html').write_text(frame('E3 scarp candidate', e3page))
+
     # ------------------------------------------------------------------ markdown
     import markdown
     for src, dst, title in [('docs/hypotheses.md', 'hypotheses.html', 'Hypotheses'),
@@ -342,6 +390,8 @@ labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed score
         text = (ROOT / src).read_text()
         body = markdown.markdown(text, extensions=['tables'])
         (DOCS / dst).write_text(frame(title, body))
+        if dst == 'protocol-review.html':
+            (DOCS / 'research-review.html').write_text(frame('Current research review', body))
 
     # -------------------------------------------------------------------- sources
     srows = [[f'<a href="{esc(s["url"])}">{esc(s["id"])}</a>', esc(s.get('authority', '')),
@@ -378,14 +428,14 @@ as a predictor.</li></ul>
 <h2>Receipts</h2>
 <p><a href="downloads/data_receipt.json">Input SHA-256 pins</a> ·
 <a href="downloads/template_verification.json">Shared-template verification</a> ·
-<a href="downloads/upstream_fix_report.md">Upstream fix report</a></p>'''
+<a href="downloads/upstream_fix_report.txt">Upstream fix report</a></p>'''
     (DOCS / 'sources.html').write_text(frame('Sources', src_page))
 
     # Root entry point (repository-root Pages keeps working).
     (ROOT / 'index.html').write_text(
         '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         '<meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70</title>'
-        '</head><body><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
+        '</head><body><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p><p>DO NOT SUBMIT — review downloads only.</p>'
         '</body></html>\n')
     (DOCS / '.nojekyll').touch()
     # Backwards-compatible entry points; they must not carry stale claims.
@@ -411,7 +461,7 @@ not portal acceptance. See the <a href="submission.html">detailed validator and 
     (DOCS / 'executive-summary.html').write_text(frame('Executive summary', executive))
     (DOCS / 'status.json').unlink(missing_ok=True)
     # keep a root-level copy so older pages that link run-card.json still resolve
-    (DOCS / 'run-card.json').write_text((ROOT / 'evidence/run_card.json').read_text())
+    (DOCS / 'run-card.json').write_text((ROOT / 'evidence/review/run_card.json').read_text())
     # Phase-1 receipts keep their historical names only under the archived prefix.
     for stale in ('holdout.json', 'holdout_folds.json', 'holdout_split.json',
                   'registry_saturation.json', 'surface_uniqueness.json',

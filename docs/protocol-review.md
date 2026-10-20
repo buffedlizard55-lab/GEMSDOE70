@@ -28,10 +28,10 @@ literal thresholds to their reported measurements. Vendor bytes and frozen exper
   **at that mass**, before a new surface or final dots are built. It does not prove impossibility
   at every smaller mass. Deliberately predicting only edge slivers would be optimizing the registry
   loophole, not validating the geological hypothesis; no such experiment was attempted.
-- **REGISTRY-MEASUREMENT:** all four inventoried final TIFFs (P4, discordance, E2, H2 diagnostic)
+- **REGISTRY-MEASUREMENT:** all five inventoried final TIFFs (P4, discordance, E2, H2 diagnostic, and integrated scarp E3)
   have measured forward overlap **1.0** against this binary witness. P4 Spearman is
   **−0.0004249862**. Each is a duplicate **under the prompt's rule**, not necessarily a copied file.
-- All four pass the shared local format validator, including finite [0,1], CRS, shape and transform.
+- All five pass the shared local format validator, including finite [0,1], CRS, shape and transform.
   Format validity does not imply uniqueness, portal acceptance or scientific usefulness.
 
 Receipts: [full fresh audit](downloads/literal_protocol_audit.json),
@@ -93,3 +93,16 @@ in `docs/hypotheses.md` also mis-indexed detrended elevation (correctly band 12)
 `prepare_data.py` is absent, so the retained prompt's advertised command is not a working pipeline.
 Data placement is not the single blocker: protocol consistency, proxy validity and independent model
 validation remain. No scientific-discovery or leaderboard-improvement claim is established.
+
+## Integration and upstream report
+
+During this review, parallel PRs #17, #21 and #22 advanced main. Their frozen evidence and
+scarp E3 artifact were preserved, then the fresh audit was rerun against the expanded five-TIFF
+inventory. The existing literal-policy CLI and the release API now share one policy adapter;
+this avoids two subtly different interpretations of the threshold rule. Historical policy cards
+remain available with provenance. The newest measured review card is linked at the top of every page.
+
+An attempted upstream issue to the shared template repository returned
+`Resource not accessible by integration (createIssue)`. It was not posted. The report is retained
+in `evidence/review/upstream-policy-report.md`; GitHub issue-creation permission, not credentials
+in chat, is needed for that operation. No shared-template code was changed during this review.

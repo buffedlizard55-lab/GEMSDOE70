@@ -1,6 +1,6 @@
 # GEMSDOE70 — geothermal fault research
 
-## **DO NOT SUBMIT — literal lane stop**
+## CURRENT REVIEW: DO NOT SUBMIT — literal lane stop
 
 **Download: yes, existing archived TIFFs for review only. Submit: NO.**
 No new protocol-compliant TIFF was generated in this review; no new geological experiment or
@@ -20,7 +20,7 @@ The current negative run card is [here](evidence/review/run_card.json).
 
 The previous mutual-overlap gate weakened the prompt's **forward**-overlap rule without approval.
 Current policy applies the literal rule to shared-tool measurements; it does not change the
-metric, writer or frozen historical evidence. All four published final TIFFs have measured forward
+metric, writer or frozen historical evidence. All five published final TIFFs have measured forward
 overlap **1.0** against the pinned binary lattice, exceeding **0.70**. They are duplicates under
 the prompt's rule, even though their bytes differ. Small rank correlation does not cancel overlap.
 
@@ -30,7 +30,7 @@ handoff's fixed **37,654-dot mass**, even the minimum possible overlap is
 **0.823418495**, still a stop. This does not prove
 impossibility at every smaller mass. We did not optimize a boundary-only loophole.
 
-All four existing TIFFs pass shared local format checks (single-band float32, finite [0,1],
+All five existing TIFFs pass shared local format checks (single-band float32, finite [0,1],
 CRS/shape/transform matching the pinned sample); that is not portal acceptance or uniqueness.
 The previous canonical P4 card and historical receipts remain frozen and superseded for current
 policy by `evidence/review/run_card.json`.

@@ -14,6 +14,8 @@ jobs:
           python-version: '3.11'
           cache: pip
       - run: pip install -r requirements.lock
+      - name: Audit literal parallel-run protocol against archived measurements
+        run: python scripts/audit_literal_protocol.py
       - name: Reproduce literal lane stop against pinned binary witness
         env:
           GH_TOKEN: ${{ github.token }}
