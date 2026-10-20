@@ -104,3 +104,11 @@ Rebuilt generated pages, reran tests, checked publication boundaries and reviewe
    baseline. Report pooled HOLDOUT-DTI with evaluator version, positives and clustered intervals.
 4. Publish a new TIFF only after both uniqueness stages pass; distinguish format-valid review
    downloads from scientific promotion. Obtain a submission-page receipt before reporting a live score.
+
+### CI follow-up
+
+The real Jekyll output check exposed an existing mismatch: its blanket raster ban predated
+registered review downloads, while source checks already allowed those exact files. Aligned the
+built-output audit with the existing SHA-pinned publication inventory, still rejecting unknown,
+modified or symlinked rasters. Added a copy/tamper regression test. Redirect entry points now
+also show the negative warning rather than relying solely on their destination page.

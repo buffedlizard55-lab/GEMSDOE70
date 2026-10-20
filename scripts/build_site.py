@@ -385,7 +385,7 @@ as a predictor.</li></ul>
     (ROOT / 'index.html').write_text(
         '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         '<meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70</title>'
-        '</head><body><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
+        '</head><body><p>DO NOT SUBMIT — review only.</p><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
         '</body></html>\n')
     (DOCS / '.nojekyll').touch()
     # Backwards-compatible entry points; they must not carry stale claims.
@@ -395,7 +395,7 @@ as a predictor.</li></ul>
         (DOCS / old).write_text(
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<meta http-equiv="refresh" content="0;url={target}"><title>GEMSDOE70</title>'
-            f'</head><body><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
+            f'</head><body><p>DO NOT SUBMIT — review only.</p><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
     (DOCS / 'status.json').unlink(missing_ok=True)
     # keep a root-level copy so older pages that link run-card.json still resolve
     (DOCS / 'run-card.json').write_text((ROOT / 'evidence/run_card.json').read_text())
