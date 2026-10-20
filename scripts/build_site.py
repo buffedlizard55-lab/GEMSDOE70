@@ -111,7 +111,7 @@ def build_blocked_site(review):
     redirect = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=protocol-review.html"><title>GEMSDOE70 — DO NOT SUBMIT</title></head><body><p>DO NOT SUBMIT — no TIFF cleared. <a href="protocol-review.html">Review status</a>.</p></body></html>'
     (DOCS / 'executive-summary.html').write_text(
         '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=submission.html"><title>GEMSDOE70 — DO NOT SUBMIT</title></head><body><p>DO NOT SUBMIT — no TIFF cleared. <a href="submission.html">Review status</a>.</p></body></html>')
-    for name in ('e3-candidate.html', 'research-review.html', 'supplemental-protocol-review.html'):
+    for name in ('e3-candidate.html', 'research-review.html', 'supplemental-protocol-review.html', 'upstream-fix-report.html'):
         (DOCS / name).write_text(redirect)
     print('Rendered fail-closed publication pages; no downloads or candidate metrics published.')
 
