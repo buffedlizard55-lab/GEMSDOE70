@@ -128,6 +128,15 @@ def main():
         'evidence/e3/holdout.json': 'e3_holdout.json',
         'evidence/e3/canaries.json': 'e3_canaries.json',
         'evidence/leaderboard_read.json': 'leaderboard_read.json',
+        'evidence/e5/run_card.json': 'e5_run_card.json',
+        'evidence/e5/canaries.json': 'e5_canaries.json',
+        'evidence/e5/training.json': 'e5_training.json',
+        'evidence/e5/instrumentA_holdout.json': 'e5_instrumentA.json',
+        'evidence/e5/instrumentB_prime.json': 'e5_instrumentB_prime.json',
+        'evidence/e5/instrumentB_all.json': 'e5_instrumentB_all.json',
+        'evidence/e5/surface_uniqueness.json': 'e5_surface_uniqueness.json',
+        'evidence/e5/uniqueness.json': 'e5_final_uniqueness.json',
+        'evidence/e5/leaderboard_read.json': 'e5_leaderboard_read.json',
     }
     for src, dst in copies.items():
         s = ROOT / src
@@ -218,7 +227,33 @@ complete-registry scan is still pending. HOLDOUT-DTI {_d['dti']:.4f} {ci(_d)} ·
 <code>{esc(e2card.get('submission_note'))}</code>. E3 (depth-step) in the same lane family is
 negative with no file. Full tables on the results page; terms in
 <code>docs/publication-amendment-e2.md</code>.</p></section>"""
-    (DOCS / 'index.html').write_text(frame('Overview', index + e2_section))
+    # ------------------------------------------------------- E5 supervised lane
+    e5card = load('evidence/e5/run_card.json', {})
+    e5_section = ''
+    if e5card and e5card.get('raster_sha256'):
+        _a = e5card['instrument_a_holdout']
+        _b = e5card['instrument_b_prime_proxy']
+        _d = e5card['paired_b_prime_vs_h33']
+        _u = e5card['correlation_overlap_vs_registry']['final_dots_stage']
+        e5_section = f"""<section><h2>New lane E5 — supervised within-halo ranking (unique TIFF, verdict: {esc(e5card['verdict'])})</h2>
+<p>Preregistered (<code>docs/preregistration-e5.md</code>): a gradient-boosted ranker trained on the
+SGMC off-catalogue proxy with leave-one-quadrant-out (OOF AUC 0.69–0.78; worst single-feature
+canary AUC {e5card['canary_worst_single_feature_auc']:.3f} &le; 0.90), emitted as 37,654 binary dots
+through the same stratified emitter. <strong>Download: yes. Submit a weekly slot: NO</strong> —
+on the pre-registered target-like gate B′ it scores {_b['candidate']['dti']:.4f} vs H33
+{_b['h33_reference']['dti']:.4f} (paired &Delta; {_d['delta']:+.4f}, 95% CI {ci(_d)}: includes zero, so no
+validated improvement over H33's 0.2778 is claimed). Instrument A HOLDOUT-DTI
+{_a['candidate']['dti']:.4f} vs H33 {_a['h33_reference']['dti']:.4f} favours it, as that instrument
+favours every catalogue-adjacent method. Uniqueness vs {_u['rasters_checked']} registry rasters:
+worst mutual overlap {_u['worst_mutual_overlap']:.3f} (limit 0.70), worst &rho;
+{_u['worst_spearman_full_footprint']:.3f} (limit 0.90). Values are exactly 0/1 — inside [0,1], no NaN.
+SHA-256 <code>{esc(e5card['raster_sha256'])}</code>.</p>
+<div class="actions"><a class="button secondary" href="downloads/{esc(e5card['submission_name'])}.tif" download>Download E5 TIFF (review only — do not submit)</a>
+<a class="button secondary" href="downloads/e5_run_card.json" download>E5 run card</a></div>
+<p class="small">Name: <code>{esc(e5card['submission_name'])}</code> · Note ({e5card['note_chars']}/140):
+<code>{esc(e5card['submission_note'])}</code>. Negative results are deliverables: supervised ranking
+halved P4's B′ deficit but did not beat uniform halo sampling. Full tables on the results page.</p></section>"""
+    (DOCS / 'index.html').write_text(frame('Overview', index + e5_section + e2_section))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
@@ -319,6 +354,24 @@ always reported.</p>
                     f"{e3card.get('holdout_dti', {}).get('dti', 0):.4f}. Both negative.</p>"
                     + table(['Arm', 'DTI', '95% CI', 'Positives'], _rows,
                             'E2 arms · gems57-pooled-hide-v2 · seed-20'))
+    if e5card:
+        _ra = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+               for k, v in sorted(e5card['instrument_a_holdout'].items(),
+                                  key=lambda kv: -kv[1]['dti'])]
+        _rb = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+               for k, v in sorted(e5card['instrument_b_prime_proxy'].items(),
+                                  key=lambda kv: -kv[1]['dti'])]
+        _d5 = e5card['paired_b_prime_vs_h33']
+        results += ("<h2>Lane E5 — supervised within-halo ranking (preregistered, negative)</h2>"
+                    "<p>SGMC-proxy LOQO ranker, OOF AUC by quadrant "
+                    + esc(json.dumps(e5card['oof_auc_by_quadrant'], default=float))
+                    + f"; worst canary AUC {e5card['canary_worst_single_feature_auc']:.3f}."
+                    + f" B′ paired Δ vs H33 {_d5['delta']:+.4f} {ci(_d5)} — gate fails, verdict "
+                    + f"<code>{esc(e5card['verdict'])}</code>, no slot used.</p>"
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _ra,
+                            'E5 instrument A · HOLDOUT-DTI · gems57-pooled-hide-v2')
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _rb,
+                            "E5 instrument B′ · PROXY-DTI · SGMC proxy d ≥ 3 px"))
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 
     # ------------------------------------------------------------------ markdown

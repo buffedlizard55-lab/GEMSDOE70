@@ -108,7 +108,24 @@ PROJECT_BRIEF.md is the source for this embedded copy.
                    f"(selector-review only; complete corrected uniqueness scan pending). "
                    f"Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. "
                    f"Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).\n")
-    (ROOT / 'README.md').write_text(head + e2_note + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
+    e5_note = ''
+    e5p = ROOT / 'evidence/e5/run_card.json'
+    if e5p.is_file():
+        import json as _json
+        _e5 = _json.loads(e5p.read_text())
+        _a = _e5['instrument_a_holdout']
+        _b = _e5['instrument_b_prime_proxy']
+        _db = _e5['paired_b_prime_vs_h33']
+        e5_note = (f"\n## E5 lane — supervised within-halo ranking (2026-10-20), unique TIFF, verdict `{_e5['verdict']}`\n\n"
+                   f"SGMC-proxy LOQO ranker (the registered next step below, now executed), 37,654 dots: "
+                   f"A HOLDOUT-DTI {_a['candidate']['dti']:.4f} vs H33 {_a['h33_reference']['dti']:.4f}; "
+                   f"B′ PROXY-DTI {_b['candidate']['dti']:.4f} vs H33 {_b['h33_reference']['dti']:.4f} "
+                   f"(Δ {_db['delta']:+.4f} [{_db['ci95'][0]:+.4f}, {_db['ci95'][1]:+.4f}] — includes zero) → "
+                   f"**download yes, submit NO**. File `docs/downloads/{_e5['submission_name']}.tif` "
+                   f"(sha256 `{_e5['raster_sha256']}`). Evidence: `evidence/e5/`, preregistration "
+                   f"`docs/preregistration-e5.md`. Public leader at organizer-page read 2026-10-20: 0.4413 "
+                   f"(`evidence/e5/leaderboard_read.json`). No weekly slot used.\n")
+    (ROOT / 'README.md').write_text(head + e5_note + e2_note + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
 
 
 if __name__ == '__main__':

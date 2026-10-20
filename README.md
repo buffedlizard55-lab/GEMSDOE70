@@ -77,6 +77,10 @@ PROJECT_BRIEF.md is the source for this embedded copy.
 <summary>Read the complete supplied project brief before every session</summary>
 
 
+## E5 lane — supervised within-halo ranking (2026-10-20), unique TIFF, verdict `negative`
+
+SGMC-proxy LOQO ranker (the registered next step below, now executed), 37,654 dots: A HOLDOUT-DTI 0.0815 vs H33 0.0037; B′ PROXY-DTI 0.0886 vs H33 0.0938 (Δ -0.0051 [-0.0161, +0.0053] — includes zero) → **download yes, submit NO**. File `docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif` (sha256 `8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2`). Evidence: `evidence/e5/`, preregistration `docs/preregistration-e5.md`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/e5/leaderboard_read.json`). No weekly slot used.
+
 ## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET
 
 Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818] (beats random, loses to D28 0.0919) → negative. File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` (selector-review only; complete corrected uniqueness scan pending). Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).
