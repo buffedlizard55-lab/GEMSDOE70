@@ -1,6 +1,6 @@
 # H33: measured geometry, plausible metric benefit, unproven causation
 
-**The reported leaderboard value 0.2778 is user-supplied, not ORGANIZER-CONFIRMED.**
+**The reported leaderboard value 0.2778 is a user-supplied historical claim, not HOLDOUT-DTI and not ORGANIZER-CONFIRMED.**
 There is no authenticated submission-page receipt for it in this repository. Conflicting leader
 values in the retained brief cannot establish the current leader or predict a new score.
 

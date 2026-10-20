@@ -22,6 +22,8 @@ The current negative run card is [here](evidence/review/run_card.json).
 - [Download archived P4 TIFF — DO NOT SUBMIT](docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif)
 - [Fresh literal-protocol audit](evidence/review/literal_protocol_audit.json)
 - [Four ranked hypotheses / source table / limitations](docs/protocol-review.md)
+- [Official page and owner-site evidence record](evidence/web_sources_review_2026-10-20.json)
+- [Partial GEMSDOE66–72 TIFF inventory — not complete clearance](evidence/sibling_registry_refresh_20261020.json)
 - [H33 analysis — measured geometry, not a verified leaderboard explanation](docs/h33-analysis.md)
 - [Handoff](HANDOFF.md)
 - **Session start:** read this README, the complete retained brief below, AGENTS.md and HANDOFF.md.
@@ -40,17 +42,22 @@ handoff's fixed **37,654-dot mass**, even the minimum possible overlap is
 **{audit['minimum_forward_overlap_at_fixed_budget']:.9f}**, still a stop. This does not prove
 impossibility at every smaller mass. We did not optimize a boundary-only loophole.
 
-All six existing TIFFs pass shared local format checks (single-band float32, finite [0,1],
-CRS/shape/transform matching the pinned sample); that is not portal acceptance or uniqueness.
-The previous canonical P4 card and historical receipts remain frozen and superseded for current
-policy by `evidence/review/run_card.json`.
+All six existing TIFFs pass the shared local grid/range preflight (single-band float32, finite
+[0,1], CRS/shape/transform matching the pinned sample); that is not complete competition-format
+compliance, portal acceptance or uniqueness. The official page requires null/NaN outside bounds,
+while the shared writer produces an all-finite raster with `nodata=None` and finite zeros outside
+the mapped footprint. No upstream fix or organizer clarification was made; do not upload these
+archives. The previous canonical P4 card and historical receipts remain frozen and superseded for
+current policy by `evidence/review/run_card.json`. The format mismatch is a separate blocker.
 
 ## Scientific outcome and next session
 
 No new HOLDOUT-DTI or ORGANIZER-CONFIRMED score exists from this review. The historical P4
 HOLDOUT-DTI is 0.07304 [0.06674, 0.07899], evaluator `gems57-pooled-hide-v2`, 11,321 withheld
-catalogue positives. Its SGMC proxy gate was already negative. H33's reported 0.2778 and the
-conflicting leader values in the brief lack authenticated submission-page receipts here.
+catalogue positives. Its SGMC proxy gate was already negative. H33's **USER-SUPPLIED historical leaderboard
+claim of 0.2778** is neither HOLDOUT-DTI nor ORGANIZER-CONFIRMED here; no submission-page receipt
+binds it to a file. The conflicting leader values in the brief are historical user claims, not a
+current verified target.
 
 The prior handoff's supervised within-halo ranking remains deferred. Four ranked, specific
 hypotheses and their non-fault mimics are in the review. Resolve the literal-gate conflict by a
@@ -72,10 +79,13 @@ python3 -m venv .venv
 
 The witness fetch uses the configured GitHub connection and immutable revision/SHA pins. It lands
 in ignored `.cache/`, not Git. Data bridge files already in the repo supply the reference geometry.
-Official reference README/notebook were re-fetched via GitHub API. Other official hosts and the
-authenticated submission page were not accessible within this session's outbound allowlist; live
-cap, eligibility and organizer acceptance remain unverified. GPU is preferred, not required by the
-organizer reference. `scripts/prepare_data.py` advertised in the historical prompt is absent.
+The official competition problem/About and public leaderboard, USGS GeoDAWN/SGMC, DOE GDR 1391,
+and cited papers were read through the Arena web reader; date-stamped excerpts and limits are in
+`evidence/web_sources_review_2026-10-20.json`. No external data binary or authenticated submission
+page was accessed. The September 2026 rules PDF says up to three submissions per week; the live
+account quota, eligibility and organizer acceptance remain unverified. The public leaderboard is
+not a receipt for this project's file. GPU is preferred, not required by the organizer reference.
+`scripts/prepare_data.py` advertised in the historical prompt is absent.
 
 ## Complete retained project prompt
 

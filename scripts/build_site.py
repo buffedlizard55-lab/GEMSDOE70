@@ -137,6 +137,8 @@ def main():
         'evidence/e3/holdout.json': 'e3_holdout.json',
         'evidence/e3/canaries.json': 'e3_canaries.json',
         'evidence/leaderboard_read.json': 'leaderboard_read.json',
+        'evidence/web_sources_review_2026-10-20.json': 'web_sources_review_2026-10-20.json',
+        'evidence/sibling_registry_refresh_20261020.json': 'sibling_registry_refresh_20261020.json',
     }
     for src, dst in copies.items():
         s = ROOT / src
@@ -152,11 +154,11 @@ def main():
     decision = f'''<section class="stop" aria-labelledby="decision">
 <div class="eyebrow">CURRENT SUBMISSION STATUS · NEGATIVE PREFLIGHT</div>
 <h1 id="decision">DO NOT SUBMIT — literal protocol stop</h1>
-<p><strong>Download: yes — format-validated for review.</strong> For forensic review only.
-<strong>Competition submission: NO — not recommended.</strong>
-The witness scan is sufficient to reject, but covers not every private or uncommitted raster. These are existing archived files,
-not a newly generated protocol-compliant submission. <strong>Submit a weekly slot: not recommended;
-blocked by your protocol.</strong></p>
+<p><strong>Download: yes — existing bytes available for forensic review only.</strong>
+<strong>They are not certified for upload format or uniqueness.</strong>
+<strong>Competition submission: NO.</strong> The witness scan is sufficient to reject, but covers
+not every private or uncommitted raster. These are existing archived files, not a newly generated
+protocol-compliant submission. <strong>Submit a weekly slot: not recommended.</strong></p>
 <p>All six archived TIFFs have forward overlap 1.00 against a verified binary registry lattice
 (limit 0.70). Mutual overlap is not an authorized exemption. No new TIFF, experiment or slot.</p>
 <div class="actions">
@@ -175,26 +177,29 @@ blocked by your protocol.</strong></p>
     metrics = f'''<div class="metrics">
 <section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
 <div class="number">{a['candidate']['dti']:.4f}</div>
-<p>{ci(a['candidate'])} · {a['candidate']['withheld_positive_pixels']:,} withheld catalogue pixels</p></section>
+<p>{ci(a['candidate'])} · {a['candidate']['withheld_positive_pixels']:,} withheld catalogue positives · {esc(a['candidate']['evaluator_version'])}</p></section>
 <section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
 <div class="number">{b['candidate']['dti']:.4f}</div>
-<p>{ci(b['candidate'])} · SGMC proxy outside the duplication band</p></section>
+<p>{ci(b['candidate'])} · {b['candidate']['withheld_positive_pixels']:,} proxy positives · {esc(b['candidate']['evaluator_version'])} · SGMC proxy outside the duplication band</p></section>
 <section><div class="eyebrow">LITERAL OVERLAP · STOP</div>
 <div class="number">{uniqueness.get('worst_forward_overlap', 0):.2f}</div>
 <p>Forward overlap exceeds 0.70. Low correlation does not cancel this failure.</p></section></div>'''
 
     index = decision + f'''<section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
-<h2>Format-valid archives, but no protocol-compliant new submission.</h2>
+<h2>Review-only archives; no format-certified or protocol-compliant new submission.</h2>
 <p>Previous sessions ran the experiments below. This review found an unauthorized mutual-overlap
-substitution and corrected the current submission gate. Historical scientific evidence remains
-unchanged; it does not override the literal stop rule.</p>
+substitution and corrected the current submission gate. The official null/NaN-outside requirement
+also conflicts with the shared writer's all-finite zero-outside export. Historical scientific
+receipts remain unchanged; they do not override either blocker.</p>
 </section>{metrics}
 <div class="columns">
-<section class="panel"><h2>Why it is downloadable</h2>
-<p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
-transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
-The fresh binary-witness comparison fails the literal uniqueness rule. Format checks pass, but
-that is not organizer acceptance or permission to submit.</p>
+<section class="panel"><h2>Why it is downloadable for review</h2>
+<p>The shared validator re-read the archived bytes: single band, float32, 3,730 × 3,292,
+EPSG:32611, 100 m transform, values 0/1, 37,654 dots, and zero on mapped faults. This is a local
+grid/range preflight only. The file has finite zero-valued cells outside the mapped footprint and
+no nodata marker, while the official problem page specifies null/NaN outside bounds. The shared
+writer's behavior is unresolved upstream, so this archive is <strong>not certified for upload
+format</strong>. The fresh binary-witness comparison also fails the literal uniqueness rule.</p>
 <a href="results.html">Full evidence →</a></section>
 <section class="panel"><h2>Why it is not promoted</h2>
 <p>On instrument B′ the candidate scores {b['candidate']['dti']:.4f} versus H33's
@@ -249,14 +254,15 @@ negative with no file. Full tables on the results page; terms in
 A one-TIFF ZIP is retained for review. Do not upload either current file.</p>
 <section class="panel"><h2>Decision, stated plainly</h2>
 <ul>
-<li><strong>Download:</strong> yes — archived, format-validated; NOT protocol-unique.</li>
+<li><strong>Download for review:</strong> yes — byte/grid/range checked only; NOT certified for official null/NaN-outside format or protocol uniqueness.</li>
 <li><strong>Upload a weekly slot:</strong> not recommended. Verdict <code>{esc(card['verdict'])}</code>.
 Our target-like proxy says it is 12.6% below H33; our catalogue holdout says it is 20× above it.
 Neither is the hidden truth. The literal overlap gate also fails: do not submit.</li>
 <li><strong>Never</strong> upload the ZIP and the TIFF as two different submissions.</li></ul></section>
 <section><h2>For a future promoted file only — NOT this archive</h2>
-<p>First pass the current literal uniqueness and scientific gates, then obtain a separate selector
-decision and verify the live weekly cap. Stop now for the current files.</p><ol class="steps">
+<p>First resolve the writer's null/NaN-outside mismatch through the shared template (or obtain
+explicit organizer clarification), then pass the current literal uniqueness and scientific gates.
+Obtain a separate selector decision and verify the live weekly cap. Stop now for the current files.</p><ol class="steps">
 <li>Open the competition <em>New submission</em> page (DrivenData competition 306).</li>
 <li>Choose <code>{esc(name)}.tif</code> (or the matching <code>.zip</code>, which contains only that TIFF).</li>
 <li>Paste the note exactly as below (one line, {card.get('note_chars', len(card.get('submission_note', '')))} characters).</li>
@@ -264,11 +270,13 @@ decision and verify the live weekly cap. Stop now for the current files.</p><ol 
 <li>Record the returned score as ORGANIZER-CONFIRMED — nothing on this site may be relabelled as one.</li>
 </ol>
 <p><code>{esc(card.get('submission_note', ''))}</code></p></section>
-<section><h2>Why the earlier portal error happened</h2>
-<p>“Predicted values must be in range [0, 1]” is raised by the portal's own range check. The shared
-writer refuses non-finite, negative or &gt;1 values instead of clipping them, then re-reads the file
-from disk. This file is all-finite with values in exactly {{0, 1}}. We cannot inspect the earlier
-rejected upload, so we do not claim to know its specific defect.</p></section>
+<section><h2>What the earlier portal error does and does not establish</h2>
+<p>“Predicted values must be in range [0, 1]” is consistent with a range-check rejection, but the
+rejected upload is unavailable, so its specific defect is unknown. The shared writer refuses
+non-finite, negative or &gt;1 model values rather than clipping them and re-reads its output; that
+local behavior does not establish organizer acceptance. Separately, the official format page calls
+for null/NaN outside bounds, while this writer emits finite values with no nodata marker. That
+mismatch must be resolved upstream before a future upload is called format-compliant.</p></section>
 <section><h2>On-disk validator receipt</h2>
 <p>Every check below was recomputed from the published bytes by the shared template validator.</p>
 {table(['Check', 'Result'], vrows, 'Shared validator, all checks must pass.')}
@@ -312,8 +320,8 @@ rejected upload, so we do not claim to know its specific defect.</p></section>
 pooled terms and a paired spatial-cluster bootstrap (1,000 draws, 20 km blocks). Intervals are
 conditional on the fitted folds and the proxy truth; they are not leaderboard intervals.</p>
 <p><strong>Historical results, not a current uniqueness pass.</strong> Fresh measurement:
-<code>calib_r13lattice_00904.tif</code> has halo coverage 99.871327%, not 100%. All four
-archived final TIFFs have forward overlap 1.00. The literal policy therefore stops the lane.</p>
+<code>calib_r13lattice_00904.tif</code> has halo coverage 99.871327%, not 100%. All six
+published final TIFFs have forward overlap 1.00. The literal policy therefore stops the lane.</p>
 <p>Evaluator for catalogue HOLDOUT-DTI: gems57-pooled-hide-v2. SGMC tables below are separately
 labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed scores.</p>
 <h2>Published candidate</h2>
@@ -395,7 +403,8 @@ Full inventory (862) scan remains a selector step. Literal readings are in the r
     for src, dst, title in [('docs/hypotheses.md', 'hypotheses.html', 'Hypotheses'),
                             ('docs/h33-analysis.md', 'h33-analysis.html', 'Why H33 scored'),
                             ('docs/irregularities.md', 'limitations.html', 'Limitations'),
-                            ('docs/protocol-review.md', 'protocol-review.html', 'Protocol review')]:
+                            ('docs/protocol-review.md', 'protocol-review.html', 'Protocol review'),
+                            ('docs/supplemental-protocol-review.md', 'supplemental-protocol-review.html', 'Historical supplemental review')]:
         text = (ROOT / src).read_text()
         body = markdown.markdown(text, extensions=['tables'])
         (DOCS / dst).write_text(frame(title, body))
@@ -407,10 +416,13 @@ Full inventory (862) scan remains a selector step. Literal readings are in the r
               esc(s.get('status', '')), esc(s.get('claim', '')) + '<br><small>'
               + esc(s.get('limit', '')) + '</small>'] for s in sources]
     src_page = f'''<div class="eyebrow">SOURCES</div><h1>Every claim points at a source or a receipt.</h1>
-<p>Retrieved content is cached in the repository where licensing allows; scores reported by the user
-are labelled as user-supplied, never as organizer-confirmed. Historical organizer-page quotations are retained with their original provenance. This review
-re-fetched the official reference on GitHub; other official hosts are outside the outbound allowlist.
-The current slot cap and an authenticated score receipt were not verified.</p>
+<p>Time-stamped source-page summaries and limitations are in
+<a href="downloads/web_sources_review_2026-10-20.json">the web research record</a>.
+The organizer problem/About pages, public leaderboard, USGS GeoDAWN/SGMC pages, DOE GDR page and
+cited papers were retrieved with the Arena page reader; no external data binaries were downloaded.
+Public leaderboard rows and owner-site metrics are not submission-page receipts. The published
+rules state up to three submissions per week, but the authenticated account's live remaining quota
+and any file-specific organizer receipt were not accessed.</p>
 {table(['Source', 'Authority', 'Status', 'Claim and limit'], srows)}
 <h2>Competition and data</h2>
 <ul>
@@ -418,9 +430,12 @@ The current slot cap and an authenticated score receipt were not verified.</p>
 <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem and metric</a> ·
 <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Leaderboard</a></li>
 <li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Organizer reference solution</a></li>
-<li><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data release (DOI 10.5066/P93LGLVQ)</a></li>
+<li><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data release (DOI 10.5066/P93LGLVQ)</a> ·
+<a href="https://www.usgs.gov/data/geologic-map-schema-gems-version-state-geologic-map-compilation-sgmc-geodatabase-conterminous">USGS GeMS/SGMC (DOI 10.5066/P1A3DQZK)</a></li>
 <li><a href="https://gdr.openei.org/submissions/1391">DOE GDR INGENIOUS submission 1391</a> ·
 <a href="https://gbcge.org/current-projects/ingenious/">GBCGE INGENIOUS</a></li>
+<li><a href="https://doi.org/10.1144/geoenergy2023-009">Siler (2023), structural discontinuities in Great Basin geothermal systems</a> ·
+<a href="https://doi.org/10.1029/2020JB021269">Mattéo et al. (2021), optical/topographic fault mapping</a></li>
 <li><a href="https://epsg.io/32611">EPSG:32611</a> ·
 <a href="https://en.wikipedia.org/wiki/Tversky_index">Tversky index</a></li>
 <li><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR report 96647</a></li>
@@ -437,7 +452,9 @@ as a predictor.</li></ul>
 <h2>Receipts</h2>
 <p><a href="downloads/data_receipt.json">Input SHA-256 pins</a> ·
 <a href="downloads/template_verification.json">Shared-template verification</a> ·
-<a href="downloads/upstream_fix_report.txt">Upstream fix report</a></p>'''
+<a href="downloads/upstream_fix_report.txt">Upstream fix report</a> ·
+<a href="downloads/web_sources_review_2026-10-20.json">Web research record</a> ·
+<a href="downloads/sibling_registry_refresh_20261020.json">Partial sibling TIFF inventory</a></p>'''
     (DOCS / 'sources.html').write_text(frame('Sources', src_page))
 
     # Root entry point (repository-root Pages keeps working).
@@ -464,8 +481,9 @@ No authenticated competition session is available here; no slot has been spent b
 at-most-140-character note, submit once, and save the portal receipt.</li>
 <li>Only a score copied from that submission-page receipt is ORGANIZER-CONFIRMED.</li></ol>
 <p>The old range error cannot be diagnosed without the rejected bytes. The reviewed TIFFs are
-finite float32 in [0,1], with the pinned sample's CRS/shape/transform; this is local format validity,
-not portal acceptance. See the <a href="submission.html">detailed validator and future workflow</a>.</p>
+finite float32 in [0,1] and match the pinned sample's grid, but they do not demonstrate the official
+null/NaN-outside requirement. This is a partial local preflight, not full format compliance or portal
+acceptance. See the <a href="submission.html">detailed validator and future workflow</a>.</p>
 <p><a href="protocol-review.html">Four ranked hypotheses, source table, limitations and next steps</a></p>'''
     (DOCS / 'executive-summary.html').write_text(frame('Executive summary', executive))
     (DOCS / 'status.json').unlink(missing_ok=True)

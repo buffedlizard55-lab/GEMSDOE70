@@ -20,38 +20,38 @@
     "id": "competition-problem",
     "authority": "organizer",
     "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-    "status": "verified-content",
-    "claim": "Official problem description: single GeoTIFF, pixel probabilities in [0,1]; EPSG:32611; 100 m; same bounds; outside bounds null or NaN; single float32 layer; metric alpha 0.2, beta 0.8, 300 m triangular kernel; private initial round then expanded final round; one submission must be chosen.",
-    "limit": "Text verified on the page. Organizer sample and the platform validator were not run here. Note the page says the sample predicts total fault absence; the local sample raster contains 60,988 positive pixels (see docs/irregularities.md).",
-    "retrieved": "2026-10-20 (session fetch_page)"
+    "status": "retrieved-content-2026-10-20",
+    "claim": "Official problem page specifies fault mapping with incomplete/inaccurate known faults; DTI alpha=0.2, beta=0.8, triangular 300 m support; one float32 GeoTIFF, EPSG:32611, 100 m, matching bounds, [0,1], null/NaN outside.",
+    "limit": "Browser page retrieval only; no organizer sample/portal validator or upload was run. The shared finite-only writer uses nodata=None and finite zeros outside the footprint, so existing archives are not certified to meet the null/NaN requirement.",
+    "retrieved": "2026-10-20 (Arena web-page reader)"
   },
   {
     "id": "competition-report",
-    "authority": "official source requested by user",
+    "authority": "DOE/NLR official rules document",
     "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
-    "status": "verified-content",
-    "claim": "NLR Official Rules (Sept 2026): one GeoTIFF with a single raster layer at 100 m (s3.2); up to three submissions per week (s3.2 and s3.4); one final selected submission per entity (s3.4); generative-AI use must be disclosed in the narrative (s3.2); eligibility in s1.3 includes U.S. citizen/permanent resident individuals and U.S.-incorporated private entities.",
-    "limit": "Rules PDF was retrieved via docs.nlr.gov after redirect from www.nlr.gov. Eligibility of any individual or team must be confirmed by that person; it is not checked here.",
-    "retrieved": "2026-10-20 (session fetch_page)"
+    "status": "retrieved-content-2026-10-20",
+    "claim": "September 2026 rules: up to three submissions per week (§3.2), choose one final prediction (§§3.4–3.5), and disclose generative-AI use in the narrative (§3.2).",
+    "limit": "The authenticated account remaining quota was not read. The rules PDF deadline cutoff conflicts with the competition page; see evidence/official_sources_2026-10-20.json. Eligibility is not assessed here.",
+    "retrieved": "2026-10-20 (Arena web-page reader; redirected PDF text)"
   },
   {
     "id": "competition-rules-pdf",
     "authority": "organizer (DOE/NLR rules document)",
     "url": "https://www.nlr.gov/docs/fy26osti/96647.pdf",
     "retrieved_via": "fetch_page 2026-10-20 (redirects to docs.nlr.gov); document dated SEPTEMBER 2026",
-    "status": "verified-content",
-    "claim": "Eligibility (\u00a71.3), up to three submissions per week and one final selection (\u00a73.2, \u00a73.4, \u00a73.5), 5:00 p.m. ET deadline-date cutoff (A.1), generative-AI narrative disclosure (\u00a73.2).",
+    "status": "retrieved-content-2026-10-20",
+    "claim": "September 2026 official rules: eligibility (§1.3), three weekly submissions (§3.2), one final selection (§§3.4–3.5), generative-AI disclosure (§3.2), and 5:00 p.m. ET deadline-day cutoff (A.1).",
     "evidence": "evidence/official_sources_2026-10-20.json",
-    "limit": "Confirms rule text only. Not a portal receipt; the deadline timestamp conflicts with the competition page and is flagged."
+    "limit": "Rule text only, not an authenticated submission-page receipt or remaining-quota check; deadline conflicts with the DrivenData competition page."
   },
   {
     "id": "e3-candidate",
     "authority": "this repository (not organizer)",
     "url": "https://github.com/buffedlizard55-lab/GEMSDOE70",
-    "status": "holdout-validated-candidate",
-    "claim": "E3 scarp-curvature candidate TIF with HOLDOUT-DTI evidence, validator receipt and 63-raster uniqueness audit.",
+    "status": "historical-holdout-candidate-current-literal-stop",
+    "claim": "Archived E3 scarp-curvature candidate has historical HOLDOUT-DTI evidence and validator receipts, but the current literal audit measures forward overlap 1.0 against the lattice witness; it is review-only, not promoted or submit-ready.",
     "evidence": "evidence/run_card_e3_amended.json; evidence/validator_e3.json; evidence/final_uniqueness_e3.json",
-    "limit": "No organizer receipt or score; selector full-registry scan outstanding."
+    "limit": "Owner repository evidence, not an organizer receipt. Full current registry clearance and official null/NaN-outside format compliance are absent."
   },
   {
     "id": "features",
@@ -66,18 +66,18 @@
     "id": "geodawn",
     "authority": "USGS",
     "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
-    "status": "not-retrieved-this-session",
-    "claim": "GeoDAWN source named by the problem page and rules (DOI 10.5066/P93LGLVQ, cited in the NLR rules footnote 3).",
-    "limit": "Not fetched in this session."
+    "status": "retrieved-page-2026-10-20",
+    "claim": "USGS GeoDAWN DOI 10.5066/P93LGLVQ: northern/western Nevada and eastern California airborne magnetic/radiometric survey context, nominal 200 m and 400 m survey-area line spacing, CC0 1.0.",
+    "limit": "Source page only; no data binary was downloaded or matched to the owner-mirrored feature raster. Survey discontinuities are a possible confound, not a proven explanation for a local model feature."
   },
   {
     "id": "h33",
     "authority": "owner archive, not organizer",
     "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/tree/98901f3130e8704f4254f173784589e63f000673",
-    "status": "reviewed-source-and-artifact",
+    "status": "reviewed-owner-archive-no-organizer-receipt",
     "claim": "Archived H33 bundle describes catalogue-flank pruning, not a newly trained detector.",
     "evidence": "evidence/h33_audit.json; evidence/inherited_h33_submission_bundles.json",
-    "limit": "Reported historical score has no organizer submission-page receipt in this session."
+    "limit": "The reported historical 0.2778 is a user/owner-reported leaderboard claim, not HOLDOUT-DTI; no authenticated submission-page receipt exists here, so it is not ORGANIZER-CONFIRMED or a forecast."
   },
   {
     "id": "h69-handoff",
@@ -91,17 +91,17 @@
     "id": "ingenious",
     "authority": "DOE Geothermal Data Repository",
     "url": "https://gdr.openei.org/submissions/1391",
-    "status": "not-retrieved-this-session",
-    "claim": "Official-source research queue entry from the user prompt.",
-    "limit": "Licensing, contents and current downloads not independently checked in this environment."
+    "status": "retrieved-page-2026-10-20",
+    "claim": "DOE GDR submission 1391 / DOI 10.15121/1881483 is public and states CC-BY 4.0; it lists Quaternary fault, geophysical, geologic and paleogeothermal resources.",
+    "limit": "Page metadata only; no archive downloaded, transformed or used in this continuation. The page places fitness-for-use responsibility on the user."
   },
   {
     "id": "leaderboard",
     "authority": "organizer",
     "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-    "status": "js-rendered-unverified",
-    "claim": "The leaderboard HTML returns only a Loading placeholder; numeric leaderboard values cannot be verified from this environment.",
-    "limit": "Any leaderboard number in a prompt, README or site is UNVERIFIED unless copied from a submission-page receipt.",
+    "status": "PUBLIC-LEADERBOARD-OBSERVATION-2026-10-20",
+    "claim": "On 2026-10-20, the public page displayed top three public DW-Tversky rows 0.4413, 0.3811 and 0.3788.",
+    "limit": "These public rows are not this repository’s HOLDOUT-DTI and are not ORGANIZER-CONFIRMED for a named GEMSDOE file because no submission-page receipt was available.",
     "retrieved": "2026-10-20 (session fetch_page)"
   },
   {
@@ -122,5 +122,45 @@
     "claim": "Shared evaluator, writer, validator, holdout and uniqueness implementation reused unchanged.",
     "evidence": "registry/template_pin.json; evidence/template_verification.json",
     "limit": "Implements the requested protocol; transcription is not independent organizer authentication."
+  },
+  {
+    "id": "sgmc-usgs-2026",
+    "authority": "U.S. Geological Survey",
+    "url": "https://www.usgs.gov/data/geologic-map-schema-gems-version-state-geologic-map-compilation-sgmc-geodatabase-conterminous",
+    "status": "retrieved-page-2026-10-20",
+    "claim": "USGS GeMS/SGMC DOI 10.5066/P1A3DQZK: 2026 compilation of 48 state maps at heterogeneous scales, with unreconciled units across some state boundaries; CC0 1.0.",
+    "limit": "Page does not establish provenance/correctness of an owner-mirrored proxy raster. SGMC/QFaults overlap means it is not independent hidden organizer truth; no binary was downloaded here."
+  },
+  {
+    "id": "siler-2023",
+    "authority": "USGS-indexed peer-reviewed Geoenergy article",
+    "url": "https://doi.org/10.1144/geoenergy2023-009",
+    "status": "metadata-and-abstract-retrieved-2026-10-20",
+    "claim": "Siler (2023) models stress/strain at representative discontinuities in Great Basin hydrothermal systems and discusses stepovers/terminations as common structural settings.",
+    "limit": "Hydrothermal-system study population is not a general fault-occurrence map and does not validate any local prediction or score."
+  },
+  {
+    "id": "matteo-2021",
+    "authority": "AGU peer-reviewed article",
+    "url": "https://doi.org/10.1029/2020JB021269",
+    "status": "metadata-retrieved-2026-10-20",
+    "claim": "Mattéo et al. (2021), Automatic Fault Mapping in Remote Optical Images and Topographic Data With Deep Learning; open access CC BY-NC-ND 4.0.",
+    "limit": "Methodological context only; not direct evidence for the competition geophysical stack or expected local improvement."
+  },
+  {
+    "id": "web-research-record",
+    "authority": "retrieval/evidence record",
+    "url": "downloads/web_sources_review_2026-10-20.json",
+    "status": "recorded-excerpts-and-limitations",
+    "claim": "Auditable dated summaries for official page reads, current public leaderboard observation, and GEMSDOE66–72 owner-page review.",
+    "limit": "Browser text and owner reports are not source binaries or authenticated submission receipts."
+  },
+  {
+    "id": "current-sibling-scan",
+    "authority": "public owner GitHub repositories",
+    "url": "downloads/sibling_registry_refresh_20261020.json",
+    "status": "partial-seven-repository-head-scan",
+    "claim": "Current default-branch TIFF inventory for GEMSDOE66–72, exact grid hashes and shared-definition binary-dot counts.",
+    "limit": "Partial owner-repository inventory only; not the entire GEMSDOE family, private submissions, uncommitted files, or organizer registry. No candidate was cleared by this scan."
   }
 ]

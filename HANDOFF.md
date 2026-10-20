@@ -1,37 +1,40 @@
-# Current handoff — literal protocol review, arena/9d9f624f-gemsdoe70
+# Current handoff — literal protocol review, arena/2149863c-gemsdoe70
 
-This note supersedes older submission-approval language below, not the frozen scientific evidence.
+This current snapshot was refreshed after fast-forwarding the active Arena branch to `4b870be`
+(PR #29). It supersedes older submission-approval and source-access language below, not frozen
+scientific receipts or TIFF bytes. Sections below this snapshot are historical handoffs unless
+explicitly revalidated here.
 
-- **DO NOT SUBMIT.** New current card: `evidence/review/run_card.json`; new measured audit:
+- **DO NOT SUBMIT.** Canonical current card: `evidence/review/run_card.json`; measured audit:
   `evidence/review/literal_protocol_audit.json`. All six published final TIFFs have forward overlap
-  1.0 with the pinned binary `calib_r13lattice_00904.tif` witness. No new TIFF, experiment or slot.
-- The inherited "100% halo coverage" claim was false: fresh coverage is 0.9987132726822701,
-  leaving 6649 cells uncovered. At fixed mass 37654, the minimum possible overlap is still
-  0.8234184947150369 > 0.70. Do not generalize the proof to every smaller mass.
-- Vendor metric/evaluator/writer/uniqueness bytes and Phase1–4 / E2 / E3 / scarp E3 receipts are
-  preserved. `src/gems70/protocol.py` applies literal thresholds to shared measurements; no mutual
-  exemption is authorized. Both historical audit CLI and release API use this adapter.
-- Parallel main advanced during the review (including scarp E3, PR17). Integration preserved
-  that artifact and its hash pins, all incoming scientific tests and publication guards.
-- Website: current review-only banner everywhere, real executive summary, current measured
-  run-card links, ranked research queue and conservative H33 analysis. The default public
-  `docs/run-card.json` is the new negative card; old P4 evidence stays at its historical path.
-- Official organizer GitHub README/notebook re-fetched. Other official hosts, portal auth, live
-  weekly cap and score receipts remain unavailable this session. Upstream issue creation was
-  denied integration permission; report retained in `evidence/review/upstream-policy-report.md`.
+  1.0 with the pinned binary `calib_r13lattice_00904.tif` witness. No new TIFF, experiment, holdout
+  score, or weekly slot was produced in this continuation.
+- Fresh witness coverage is 0.9987132726822701, leaving 6,649 cells uncovered. At the historical
+  fixed mass 37,654, minimum forward overlap is 0.8234184947150369 > 0.70. This is not a proof for
+  every smaller mass. No boundary-only loophole was tested.
+- The official format page requires null/NaN outside bounds. The shared writer rejects nonfinite
+  output and writes `nodata=None` with finite zeros outside the mapped footprint. The six files pass
+  only local grid/range preflight; they are not certified upload-format-compliant. No local writer
+  fork or upstream code change was made.
+- The freshly refreshed partial sibling inventory covers public default branches GEMSDOE66–72:
+  302 tracked TIFF paths, 175 unique grid-matching hashes, 98 in the inherited 862-hash set and 77
+  not in it. This does not constitute full family/private/organizer registry clearance.
+- Official competition, USGS and DOE page text and peer-page summaries are recorded in
+  `evidence/web_sources_review_2026-10-20.json`; no external binaries or authenticated portal were
+  accessed. The September rules PDF states three submissions/week, but live remaining quota and a
+  submission-page score receipt remain unverified.
+- Four ranked, untested hypotheses and source/peer limitations are in `docs/protocol-review.md`.
+  No lane is authorized for an experiment. Do not spend a slot or generate a candidate before an
+  explicit protocol resolution and separate selector decision.
+- Current continuation verification: **218 tests passed** (three upstream rasterio deprecation
+  warnings); `scripts/audit_pages.py` passed; `scripts/review_literal_protocol.py --verify` rechecked
+  all six archives and kept the stop true. No current candidate was generated.
+- Added current source and partial-scan records: `evidence/web_sources_review_2026-10-20.json`,
+  `evidence/sibling_registry_refresh_20261020.json`, with inventory utility and parser/safety tests.
 
-Next: resolve explicit protocol authorization before another fixed-mass experiment; quantify SGMC
-redigitization overlap; then evaluate the first residual-ranking hypothesis with nested spatial
-validation, feature-alone canaries and a matched current-best baseline. No boundary-only loophole
-experiment or new slot without the separate selector gates. Reproduce this review with
-`python scripts/review_literal_protocol.py --fetch`, builders, pytest and audit_pages.
-
-
-Latest integration: PR #28 H70 conductive-breach archive and PR #24 protocol audit preserved.
-Canonical `evidence/run_card.json` remains H70 as set by that session; P4 builders/audits now
-read `evidence/phase4/run_card.json` explicitly. The new measured review card remains
-`evidence/review/run_card.json`. All six artifacts directly fail the binary-witness forward rule.
-Integrated suite: 212 passed (three upstream affine deprecation warnings).
+Next: submit the review/source/partial-scan improvement through a PR and merge only if CI permits.
+Preserve the stop. The shared writer mismatch should be resolved upstream or with the organizer
+before any future candidate is called format-compliant.
 
 ---
 
@@ -122,13 +125,13 @@ Current prompt's literal forward-overlap rule conflicts with the prior mutual
 amendment. P4 has four duplicate witnesses; no new experiment/TIFF generated.
 Historical artifact remains downloadable FOR REVIEW ONLY. Release policy now
 prevents stale promotion flags bypassing scientific, leakage, and literal overlap
-gates. See docs/protocol-review.md and evidence/review-20261020/run_card.json.
+gates. See docs/protocol-review.md and evidence/review/run_card.json.
 Do not resume the earlier next-session plan without a named lane and resolution
 of the explicit stop. Official reference README confirms CPU training support.
 
 ## Current literal-protocol review (2026-10-20, arena/00dc63c0-gemsdoe70)
 
-Read `reports/literal-protocol-review.md` and `evidence/literal_protocol_review.json`
+Read `reports/literal-protocol-review.md` and the canonical `evidence/review/run_card.json`
 before interpreting the historical mutual-overlap clearance above. The requested forward-only
 rule fails on four archived Phase-4 witnesses (maximum 1.0). Stop; no new experiment or TIFF,
 no weekly slot. Frozen scientific receipts are preserved, not reclassified as new measurements.
@@ -156,8 +159,8 @@ new TIFF, fitting, placement or competition upload occurred in this session. All
 frozen scientific cards are preserved. Fresh local validation confirms P4 finite [0,1] and grid
 consistency against cached reference metadata, not organizer acceptance.
 
-- Current JSON: `evidence/current_protocol_review.json` (also published under docs).
-- Review / ranked conditional hypotheses: `docs/protocol-review.md`.
+- Historical compatibility JSON: `evidence/current_protocol_review.json`; it is not the current card.
+- Canonical current card: `evidence/review/run_card.json`; review / ranked hypotheses: `docs/protocol-review.md`.
 - Official reference README retrieved at pinned commit and archived in `evidence/current-review/`;
   CPU-only training is supported (GPU is not a hard requirement).
 - Website has a global DO NOT SUBMIT override, archive downloads remain available for review.

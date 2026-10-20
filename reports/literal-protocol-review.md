@@ -1,114 +1,98 @@
-# Current review — 2026-10-20: DO NOT SUBMIT
+# Current literal-protocol review — 2026-10-20 continuation
 
-**Download archived TIFFs for review only. No new submission was generated in this session.**
-The request for a new, protocol-cleared TIFF is not fulfilled: a stop condition takes precedence
-over manufacturing another file. No weekly slot used. This is a negative deliverable, not a promotion.
+## Decision: DO NOT SUBMIT; review-only archives
 
-## Pass 1 — inspect, reproduce, find the governing blocker
+**No new TIFF, geological experiment, holdout score, or competition slot was produced in this continuation.**
+The user's request for a new protocol-compliant submission remains unfulfilled. No candidate was
+created or placed because the recorded forward-overlap stop fires on prior final TIFFs and no
+separate protocol authorization or identifiable method-lane paragraph exists.
 
-Read README, retained PROJECT_BRIEF, AGENTS, handoff, irregularities, hypotheses, H33 analysis,
-shared release code and archived receipts. Installed CPU requirements and ran the existing suite.
-The repository already has multiple parallel negative candidates; it is not blocked solely by data
-placement and does not require a GPU merely to audit or generate these classical predictions.
-No single method paragraph unambiguously assigns this new session a lane. Do not silently enter
-another lane or restart already completed experiments.
+### Canonical current records
 
-The prompt says **stop if more than 70% of candidate dots are within 3 pixels of one registry
-raster's dots**. The prior implementation instead required both directional overlaps to exceed
-that threshold. That is a material policy change, not a mathematically equivalent bug fix.
-The previous measurements are preserved; this review does not privately fork the shared evaluator.
+- Run card: [`evidence/review/run_card.json`](../evidence/review/run_card.json)
+- Literal audit: [`evidence/review/literal_protocol_audit.json`](../evidence/review/literal_protocol_audit.json)
+- Three-pass record: [`evidence/review/verification-passes.md`](../evidence/review/verification-passes.md)
+- Public copies: `docs/downloads/review_run_card.json` and `docs/downloads/literal_protocol_audit.json`
+- Source-page and sibling review: [`evidence/web_sources_review_2026-10-20.json`](../evidence/web_sources_review_2026-10-20.json)
+- Partial current TIFF inventory: [`evidence/sibling_registry_refresh_20261020.json`](../evidence/sibling_registry_refresh_20261020.json)
 
-`python scripts/audit_literal_protocol.py` reinterprets the archived full-scan rows under the
-literal rule and SHA-links them to the published candidate. Four witnesses fail the forward rule,
-including `calib_r13lattice_00904.tif` with forward overlap 1.0. The accessible inventory contains
-62 rasters, not all private or future submissions. These are REGISTRY-MEASUREMENTS, not scores.
-The current run card is `evidence/literal_protocol_review.json`.
+The compatibility files `evidence/current_protocol_review.json` and
+`evidence/literal_protocol_review.json` preserve historical schemas/measurements. They are not the
+canonical current run card and do not authorize a release.
 
-A dense reference whose halo covers the footprint makes this rule unsatisfiable for every
-nonempty candidate within that footprint. This is a protocol-design issue, not proof of identical
-geological predictions. Nevertheless, only a separately authorized protocol revision can relax it.
-No new surface, placement, training or additional raster experiment was run after this stop.
-A fresh surface cannot be claimed to have passed an unexecuted surface audit.
+## Stop evidence — measured, not inferred from old mutual-overlap results
 
-## Scientific interpretation of H33
+The current rule is the supplied **forward** overlap: stop if more than 70% of candidate dots lie
+within 3 pixels of one registry raster, or if rank correlation exceeds 0.90. The inherited mutual
+rule is not an approved exemption. The pinned binary witness
+[`calib_r13lattice_00904.tif`](https://github.com/buffedlizard55-lab/60GEMSDOE/blob/32024716f218d06a94e01464157392119c03cb15/registry/rasters/calib_r13lattice_00904.tif)
+has SHA-256 `b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2` and 206,895 binary
+dots. Its 3-pixel halo covers 5,160,724 of 5,167,373 footprint cells (99.871327%), leaving 6,649
+uncovered. At the historical fixed mass of 37,654 dots, even the best possible allocation to those
+uncovered cells has minimum forward overlap `1 − 6649/37654 = 0.823418495`, above the stop. This
+bound is specific to that mass; it does not prove impossibility for every smaller candidate.
 
-The archived H33 audit finds H33 to be a subset of H27, itself a subset of D28, after deleting
-near-catalogue distance shells. Sparse emission can reduce redundant per-truth-cell kernel credit
-and false-positive mass. This is a plausible metric explanation, not an identified causal reason
-for the reported organizer result. Hidden labels, controlled organizer ablations and a submission
-receipt are unavailable here. The user-reported historical value 0.2778 is **not
-ORGANIZER-CONFIRMED**. The several leaderboard values in the prompt conflict and cannot be treated
-as a current verified target. No new live leaderboard read was performed in this session.
+The latest inherited review measured forward overlap 1.0 against this witness for all six published
+final TIFFs (P4, discordance, E2, H2 diagnostic, scarp E3, and H70 conductive breach). A low reverse
+overlap, low Spearman value, distinct file hash, or old `unique:true` result does not cancel that
+forward failure. No new pre-placement surface or final dots were tested.
 
-Beating a reported live value cannot be guaranteed from catalogue recovery alone. Archived
-Phase-4 **HOLDOUT-DTI**, evaluator `gems57-pooled-hide-v2`, is 0.0730423,
-95% CI [0.0667399, 0.0789950], 11,321 withheld positive pixels. This is copied from archived
-evidence, not recomputed this session. The target-like SGMC proxy gate was negative; its population
-is not organizer hidden truth. Fault prediction also does not establish geothermal vents,
-permeability, fluid temperature or commercial viability.
+## Separate format blocker
 
-## Ranked research queue — not executable under the current stop
+The official DrivenData problem page states that the output is one float32 GeoTIFF in EPSG:32611 at
+100 m with matching bounds and values in [0,1], with null/NaN outside bounds. The shared writer
+currently rejects non-finite arrays, writes `nodata=None`, and emits finite zero-valued cells outside
+the mapped footprint. Existing archives pass only the shared local single-band/grid/range preflight;
+they are **not certified compliant with the complete official format**. No local vendor fork or
+shared-writer modification was made. Resolve this upstream or obtain organizer clarification before
+any future positive release.
 
-These are unimplemented refinements, not claims of novelty across private parallel work. All use
-existing named feature families; actual cache availability must be restored and hashed before a
-future test. Expected improvement is qualitative hypothesis, never a projected score.
+## Current research position
 
-| Rank | Hypothesis, layers and signature | Why potentially missing from catalogue | Non-fault mimic | Difference from inspected implementations | Expected benefit / cost |
-|---|---|---|---|---|---|
-| 1 | Signed magnetic-profile displacement across a gravity boundary: RTP, gravity; estimate cross-profile translation on either side of an along-strike break | Concealed lateral offset without surface scarp | Magnetization/remanence change | Signed profile translation rather than existing unsigned gradient termination or relay topology | Most plausible conditional gain / medium |
-| 2 | Contact-normal basement asymmetry: basement depth, gravity and detrended elevation; compare curvature signs on opposite sides, suppress topographically supported erosional relief | Buried basin step with little surface expression | Depositional onlap, paleovalley | Signed cross-contact curvature consistency rather than scalar edge strength or existing depth-step amplitude | Uncertain / medium |
-| 3 | Scale-dependent magnetic/gravity edge offset: RTP and gravity; displacement of edge position over smoothing scales | Concealed source boundary whose apparent location varies with depth sensitivity | Superposed intrusive bodies | Edge-position migration rather than ridge persistence or co-oriented consensus | Uncertain, high confounding / medium-high |
+Four hypotheses are ranked in [`docs/protocol-review.md`](../docs/protocol-review.md), with exact
+cached band IDs, target signatures, non-fault mimics, qualitative expected HOLDOUT-DTI direction,
+cost, and differences from local methods. They are untested and unauthorized, not projected scores.
+The first (fold-trained residual cross-sensor ranking) is the highest qualitative information/cost
+option, not globally novel: the reviewed sibling pages include multiscale multi-physics and
+relief-conditioned methods. No experiment or canary is authorized until protocol and lane are
+resolved. Existing historical P4 HOLDOUT-DTI is 0.0730422921, 95% CI [0.0667398770, 0.0789949697],
+evaluator `gems57-pooled-hide-v2`, 11,321 withheld positives; it is copied historical evidence, not
+recomputed here and not an organizer score.
 
-No new external data is required for these conditional cache-based proposals; no unverified
-external-data-dependent idea is declared viable. All must first pass input-alone leakage canaries,
-whole-segment buffered holdout, surface uniqueness, final-dot uniqueness, paired comparison to the
-current best on the same split, shared writer and shared validator. No slot before selection.
-The earlier handoff's within-halo supervised ranking remains deferred because it is a different
-lane and the current stop already fires.
+## Source and registry findings
 
-## Sources and verification boundary
+- The organizer problem, About, public leaderboard, rules PDF, USGS GeoDAWN/SGMC pages, DOE GDR
+  1391, and selected literature were retrieved through the Arena web reader. Exact summaries,
+  dates, and limits are recorded in `evidence/web_sources_review_2026-10-20.json`.
+- On 2026-10-20, the public leaderboard displayed 0.4413, 0.3811, and 0.3788 for its first three
+  public rows. These are **PUBLIC-LEADERBOARD-OBSERVATIONS**, not local HOLDOUT-DTI and not
+  ORGANIZER-CONFIRMED scores for a named GEMSDOE file; no submission-page receipt was accessed.
+- A refresh of the current public default branches for GEMSDOE66–72 found 302 tracked TIFF paths
+  matching the grid, 175 unique SHA-256 hashes, 98 hashes in the inherited 862-hash set, and 77
+  absent from that set. This partial owner-site scan is **not** the complete family, private, future,
+  or organizer registry and clears no candidate.
+- Peer-site metrics remain self-reported. GEMSDOE66's LIDAR-05 page/run-card identifiers conflict;
+  GEMSDOE68's shared evaluator label hides differing implementation hashes and fold settings;
+  GEMSDOE67/69/72 do not expose enough metadata in the retrieved summaries for comparable DTI
+  reporting; GEMSDOE71's “ORGANIZER-CONFIRMED” H33 label has no receipt. Full details and links are
+  in the source-review JSON.
 
-- [Organizer reference repository](https://github.com/drivendataorg/gems-prize-reference-solution):
-  public GitHub contents API reachable this session; this verifies repository availability, not all
-  scientific or competition-rule claims.
-- [Official competition problem](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/),
-  [format/data](https://www.drivendata.org/competitions/306/competition-doe-gems/data/),
-  [leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/):
-  manual-review links; not freshly fetched under this environment's outbound host allowlist.
-- [USGS GeoDAWN data source](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and):
-  official provenance link supplied by the user; not newly verified here.
-- Local reproducible evidence: `evidence/h33_audit.json`, `evidence/phase4/uniqueness.json`,
-  `evidence/phase4/instrumentA_holdout.json`, `evidence/run_card.json`.
+## Reproduction and continuation
 
-GitHub-hosted owner mirrors are not official data provenance merely because they are downloadable.
-No DrivenData credentials, submission receipt or weekly-cap read is available in this session.
-The active network allowlist excludes DrivenData, Dropbox, USGS and NLR hosts. Do not claim those
-sources were fetched, that the slot cap is known, or that an automatic scientific feed is current.
+```bash
+PYTHONPATH=. .venv/bin/python scripts/refresh_sibling_registry.py \
+  --output evidence/sibling_registry_refresh_20261020.json --workers 4 --refresh
+.venv/bin/python scripts/review_literal_protocol.py --fetch
+.venv/bin/python scripts/build_site.py
+.venv/bin/python scripts/build_readme.py
+.venv/bin/python -m pytest -q
+.venv/bin/python scripts/audit_pages.py
+```
 
-## Passes 2 and 3 — corrections and checks
-
-Added a deterministic literal-policy audit, threshold/malformed-evidence regression tests and an
-explicit warning on every generated site page. Frozen experimental receipts and TIFF bytes stay
-unchanged; historical mutual-rule statements are explicitly superseded, not silently overwritten.
-The README retains the original project brief and places the current stop before its historical
-summary. The executive-summary redirect reaches a submission guide with the same warning.
-Rebuilt generated pages, reran tests, checked publication boundaries and reviewed the diff.
-
-## Next-session priorities
-
-1. Resolve the forward-overlap protocol contradiction with the selector before new experiments;
-   record a new protocol version explicitly, never silently reinterpret the old one.
-2. Assign a single lane and retain the budget across parallel runs. Restore hashed caches only
-   after authorization to proceed; do not rebuild duplicate tools.
-3. Validate one signed-profile hypothesis, feature by feature, against an identical split and best
-   baseline. Report pooled HOLDOUT-DTI with evaluator version, positives and clustered intervals.
-4. Publish a new TIFF only after both uniqueness stages pass; distinguish format-valid review
-   downloads from scientific promotion. Obtain a submission-page receipt before reporting a live score.
-
-### CI follow-up
-
-The real Jekyll output check exposed an existing mismatch: its blanket raster ban predated
-registered review downloads, while source checks already allowed those exact files. Aligned the
-built-output audit with the existing SHA-pinned publication inventory, still rejecting unknown,
-modified or symlinked rasters. Added a copy/tamper regression test. Redirect entry points now
-also show the negative warning rather than relying solely on their destination page.
+The partial sibling refresh uses sparse Git clones and shared binary-dot semantics. Its cached files
+stay in ignored `.cache/`; the evidence JSON records exact scope. Full project test/site results for
+this continuation are recorded in `evidence/review/verification-passes.md`. The next authorized action
+is protocol resolution, not a candidate or slot: preserve the stop, report the shared writer's
+format defect upstream, and only then revisit one ranked hypothesis with feature-alone leakage
+canaries, matched shared HOLDOUT-DTI, surface-first uniqueness, final-dot uniqueness, and a separate
+selector decision.

@@ -96,8 +96,9 @@ def test_pages_links_and_decision_banner():
         text=p.read_text();parser=Links();parser.feed(text)
         for link in parser.links:assert (p.parent/link.split('#')[0].split('?')[0]).is_file(),(p,link)
     home=(ROOT/'docs/index.html').read_text()
-    assert 'Download: yes — format-validated for review.' in home
-    assert 'Competition submission: NO — not recommended.' in home
+    assert 'Download: yes — existing bytes available for forensic review only.' in home
+    assert 'not certified for upload format or uniqueness' in home
+    assert 'Competition submission: NO.' in home
     assert 'not every private or uncommitted raster' in home
 
 

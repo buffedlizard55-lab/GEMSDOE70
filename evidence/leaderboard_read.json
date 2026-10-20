@@ -1,5 +1,6 @@
 {
-  "evidence_class": "ORGANIZER-PAGE-READ",
+  "evidence_class": "PUBLIC-LEADERBOARD-OBSERVATION",
+  "score_classification": "Public-board display only; not this project's HOLDOUT-DTI and not ORGANIZER-CONFIRMED for a named GEMSDOE file without a submission-page receipt.",
   "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
   "retrieved": "2026-10-20 via page fetch in this session (public leaderboard, DW-Tversky descending)",
   "top_rows_at_read": [

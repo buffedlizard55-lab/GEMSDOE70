@@ -1,22 +1,28 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Supplemental protocol review · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<title>Historical supplemental review · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="e3-candidate.html">E3 scarp candidate</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a> · <a href="supplemental-protocol-review.html">Supplemental hypotheses and fresh format audit</a> · <a href="current_protocol_review.json">Supplemental JSON card</a>.</section><section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
-<p>Download for review only. The archived Phase-4 TIFF fails the requested one-way
-3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
-are not clearance under the current prompt. No new TIFF was generated in this review.</p>
-<p><a href="protocol-review.html">Current protocol review and next steps</a> · <a href="research-review.html">Research and source review</a> ·
-<a href="literal-protocol-review.json">Current JSON run card</a></p></section><h1>Current protocol review — 2026-10-20</h1>
-<h2>Decision: download for review only. DO NOT SUBMIT.</h2>
+<span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
+<strong>DO NOT SUBMIT — literal protocol stop.</strong> Archived TIFFs are downloadable for review only.
+The current literal forward-overlap gate fails. <a href="protocol-review.html">Current audit</a> ·
+<a href="downloads/review_run_card.json">Current negative run card</a>.
+Historical receipts below are not current submission approval.</aside><h1>Historical supplemental protocol review — superseded 2026-10-20</h1>
+<blockquote>
+<p>This is a retained earlier review. For current status, use <a href="protocol-review.html">the current protocol review</a>,
+current card (<a href="downloads/review_run_card.json">JSON</a>), and current audit
+(<a href="downloads/literal_protocol_audit.json">JSON</a>). The <code>current_protocol_review.json</code> reference below
+is historical, not the current card.</p>
+</blockquote>
+<h2>Historical decision: download for review only. DO NOT SUBMIT.</h2>
 <p><strong>No new TIFF was generated in this session.</strong> The mandatory duplicate-stop rule takes precedence over generating another candidate after a failed lane check. No experiment, training run, placement or competition upload was performed. No weekly slot was used by this session. This is a negative deliverable, not completion of the requested new unique submission.</p>
-<p><a href="downloads/gems70-p4-stratified-halo-37654-20261020.tif">Download existing P4 TIFF for review</a> · <a href="current_protocol_review.json">Machine-readable current run card</a> · <a href="submission.html">Submission instructions</a></p>
-<p>The existing bytes were freshly re-read: one band, finite everywhere (hence inside the footprint), all values in [0,1], shape/CRS/transform equal to the <strong>cached</strong> reference metadata. SHA-256 equals both the frozen card and registry audit. This is local format validation, not organizer acceptance. No rescaling, copying, jittering or renaming a previous prediction was used to claim a new submission.</p>
+<p><a href="downloads/gems70-p4-stratified-halo-37654-20261020.tif">Download existing P4 TIFF for review</a> · <a href="current_protocol_review.json">Historical card</a> · <a href="downloads/review_run_card.json">Current card</a> · <a href="submission.html">Submission instructions</a></p>
+<p>The existing bytes were re-read in that earlier review: one band, finite everywhere, values in [0,1], shape/CRS/transform equal to cached metadata, and matching historical SHA-256. This is only a local grid/range preflight. The official page requires null/NaN outside bounds, whereas the shared writer produces finite values with <code>nodata=None</code>; these archives are not certified upload-format-compliant. No rescaling, copying, jittering or renaming a previous prediction is a new submission.</p>
 <h2>Pass 1 — repository and evidence review</h2>
 <p>Read the retained README/PROJECT_BRIEF, AGENTS, handoff, irregularities and current evidence. The user instruction says <strong>forward</strong> overlap above 0.70 requires a stop. The inherited code instead uses <strong>mutual</strong> overlap. Those are different gates; an alleged tool fix cannot silently authorize a change to the user's rule. Frozen historical results remain intact but are not a clearance under the current instruction.</p>
-<p>The frozen P4 final-dot audit contains multiple failing forward-overlap rows, including <code>calib_r13lattice_00904.tif</code> with candidate-to-registry overlap 1.00. Its reverse overlap is about 0.211. This explains the disagreement with the inherited mutual gate, but does not remove the stop. All raw measurements and registry hashes are in <a href="downloads/uniqueness.json">the frozen audit</a>; exact witnesses and validation checks are in <a href="current_protocol_review.json">the current card</a>. This is a reapplication of policy to historical measurements, <strong>not a fresh registry scan</strong>. It is sufficient for a negative, not for a positive uniqueness claim.</p>
+<p>The frozen P4 final-dot audit contains multiple failing forward-overlap rows, including <code>calib_r13lattice_00904.tif</code> with candidate-to-registry overlap 1.00. Its reverse overlap is about 0.211. This explains the disagreement with the inherited mutual gate, but does not remove the stop. All raw measurements and registry hashes are in <a href="downloads/uniqueness.json">the frozen audit</a>; exact witnesses and validation checks are in <a href="current_protocol_review.json">the historical card</a>. This is a reapplication of policy to historical measurements, <strong>not a fresh registry scan</strong>. It is sufficient for a negative, not for a positive uniqueness claim.</p>
 <p>The supplied prompt references a "single method paragraph below" but does not identify one. No new lane is silently invented. These two blockers make the supervised within-halo next step in the old handoff unauthorized in this run.</p>
 <h2>Pass 2 — scientific interpretation and candidate queue</h2>
 <p>H33's archived bytes support a sparse halo-sampling explanation, not demonstrated fault physics: <a href="downloads/h33_audit.json">the existing byte audit</a> documents successive subsets of predecessor dots. Sparse emission can reduce redundant mass while maintaining distance-tolerant coverage. It does <strong>not</strong> prove why a hidden organizer evaluation rewarded it. The historical 0.2778 and the several inconsistent leaderboard values in the prompt are <strong>user-reported, not ORGANIZER-CONFIRMED here</strong>. The apparent headroom is not a forecast. There is no defensible promise that any new method will beat that value.</p>
@@ -72,15 +78,10 @@ are not clearance under the current prompt. No new TIFF was generated in this re
 <li>Check the surface before placement and final dots against every accessible registry raster. A single failure stops. Use shared writer only after passing; re-read output and check exact sample grid, finite footprint and [0,1]. No private evaluator or writer fork.</li>
 <li>Stop at the experiment/time cap. Promotion is a separate selector step and requires a positive controlled result, registry clearance and verified weekly cap. No portal access or organizer receipt exists in this session.</li>
 </ol>
-<h2>Pass 3 — source/access and release review</h2>
-<p>Freshly retrieved the <a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md">official reference README</a>, commit <code>aebe92f7c8a990f0e3443451b7a825d9afd6336b</code>, through the GitHub API. It explicitly supports CPU-only training. The inherited statement "GPU needed" is therefore not a universal requirement; GPUs accelerate that reference approach. The README instructs downloading competition data but does not grant access to restricted labels.</p>
-<p>Official links for manual review, <strong>not freshly retrieved or asserted verified in this sandbox</strong>:</p>
-<ul>
-<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Organizer problem</a>, <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data</a>, <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>: organizer acceptance, current scoring rules and cap require direct verification. Network access here is restricted to GitHub and package registries.</li>
-<li><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a>: original survey provenance; this run makes no new claim about download availability.</li>
-<li><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Competition report supplied by user</a>: not fetched here; no PDF-specific rule is claimed verified.</li>
-</ul>
-<p>No new third-party data is proposed as obtainable on speculation. The existing source-health workflow checks availability, not scientific validity or live scores. Automatic uploading is intentionally absent. Future work should reconcile stale prose (e.g. older "exactly one TIFF" claims despite multiple inventory entries) and carry a single authoritative protocol status into all release paths.</p>
+<h2>Pass 3 — historical source/access review (superseded by the continuation record)</h2>
+<p>This earlier pass retrieved the <a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b">official reference README</a> through GitHub and confirmed CPU support. Its statement that other official pages had not been fetched is no longer current.</p>
+<p>The continuation later retrieved the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">organizer problem</a>, <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About page</a>, <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">public leaderboard</a>, <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a>, <a href="https://www.usgs.gov/data/geologic-map-schema-gems-version-state-geologic-map-compilation-sgmc-geodatabase-conterminous">USGS SGMC</a>, <a href="https://gdr.openei.org/submissions/1391">DOE GDR 1391</a>, and selected literature through the Arena web reader. The official problem page states the null/NaN-outside format requirement; the shared writer mismatch remains unresolved. The September 2026 rules PDF states three submissions per week, but no authenticated account/quota was read and no slot was used.</p>
+<p>The dated excerpts, owner-page review, and uncertainty boundaries are in <a href="downloads/web_sources_review_2026-10-20.json">the web-source record</a>. No external data binaries were downloaded or used. The separate seven-repository sibling TIFF inventory is partial, not a family or organizer registry. Automatic uploading remains absent.</p>
 <h2>Reproduce this negative audit</h2>
 <p><code>bash
 .venv/bin/python scripts/audit_current_protocol.py
@@ -89,6 +90,6 @@ are not clearance under the current prompt. No new TIFF was generated in this re
 .venv/bin/python -m pytest -q</code></p>
 <p>The frozen scientific cards, TIFF bytes, shared evaluator and writer are untouched. The new policy report is additive and explicitly overrides inherited uniqueness claims for this request.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/phase4_run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

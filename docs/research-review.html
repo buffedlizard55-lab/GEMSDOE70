@@ -14,7 +14,11 @@ Historical receipts below are not current submission approval.</aside><h1>Litera
 <p><strong>No new TIFF was generated. No new geological experiment was run. No competition slot was used.</strong>
 This is a negative deliverable, not completion of the request for a new protocol-compliant submission.
 The supplied prompt has no identifiable single-method lane paragraph; the prior handoff's supervised
-within-halo ranking is the deferred lane, not an invented assignment.</p>
+within-halo ranking is the deferred lane, not an invented or authorized assignment.</p>
+<p>Canonical current pointers: <code>evidence/review/run_card.json</code> and
+<code>evidence/review/literal_protocol_audit.json</code>; their public copies are under <code>docs/downloads/</code>.
+<code>evidence/current_protocol_review.json</code> and <code>evidence/literal_protocol_review.json</code> are historical
+compatibility receipts and do not supersede the canonical current card.</p>
 <p>The current prompt explicitly requires a stop when <strong>forward</strong> dot overlap exceeds 70% within
 3 pixels, or rank correlation exceeds 0.90. Earlier work changed forward overlap to mutual overlap
 without user approval. That change does not satisfy the current prompt. A low reverse overlap or
@@ -37,21 +41,29 @@ literal thresholds to their reported measurements. Vendor bytes and frozen exper
 <li><strong>REGISTRY-MEASUREMENT:</strong> all six inventoried final TIFFs (P4, discordance, E2, H2 diagnostic, scarp E3, and H70 conductive breach)
   have measured forward overlap <strong>1.0</strong> against this binary witness. P4 Spearman is
   <strong>−0.0004249862</strong>. Each is a duplicate <strong>under the prompt's rule</strong>, not necessarily a copied file.</li>
-<li>All six pass the shared local format validator, including finite [0,1], CRS, shape and transform.
-  Format validity does not imply uniqueness, portal acceptance or scientific usefulness.</li>
+<li>All six pass the shared <strong>local grid/range preflight</strong> (single-band float32, finite [0,1], CRS,
+  shape and transform). This is not complete competition-format compliance: the official page says
+  values outside the bounds must be null/NaN, while the shared writer currently emits all-finite
+  rasters with <code>nodata=None</code> and finite zero-valued cells outside the mapped footprint. No upstream
+  writer fix or organizer clarification was made here. Do <strong>not</strong> call these archives format-valid
+  for upload; this issue is independent of the uniqueness stop.</li>
 </ul>
 <p>Receipts: <a href="downloads/literal_protocol_audit.json">full fresh audit</a>,
 <a href="downloads/review_run_card.json">current negative run card</a>,
-<a href="downloads/instrumentA_holdout.json">historical P4 holdout</a>.
-One positive witness suffices to reject. This is not an exhaustive scan of all GEMSDOE sites.</p>
+<a href="downloads/instrumentA_holdout.json">historical P4 holdout</a>,
+<a href="downloads/sibling_registry_refresh_20261020.json">partial current sibling scan</a>, and
+<a href="downloads/web_sources_review_2026-10-20.json">official/source-page review</a>.
+One positive witness suffices to reject. The seven-repository scan is not an exhaustive inventory of
+all GEMSDOE sites, private submissions, or future/uncommitted rasters.</p>
 <h2>Research queue: four candidates, ranked before any new implementation</h2>
 <p>These are <strong>untested conjectures</strong>, ranked qualitatively for expected useful information versus
-implementation cost, not projected DTI scores. Novelty is relative to the inspected local methods
-(<code>method.py</code>, <code>method2.py</code>, <code>method_v2.py</code>, <code>strike.py</code>) and archived experiments, not every other
-team's private work. They stay within supervised residual within-halo ranking from the handoff.
-No added external source is required; layer identities below come from
-<code>evidence/inherited_band_metadata.json</code>, not independent validation of survey units or inversions.
-The large feature stack has not been restored during this stopped review.</p>
+implementation cost, not projected DTI scores. The feature cache was re-inspected in this continuation;
+no experiment was run. Layer identities come from <code>evidence/inherited_band_metadata.json</code>, not
+independent validation of survey units, inversion assumptions, or spatial resolution. The stack is an
+owner-mirrored input, not a fresh organizer download. Novelty is relative to inspected local methods
+(<code>method.py</code>, <code>method2.py</code>, <code>method_v2.py</code>, <code>strike.py</code>) and archived experiments, not every parallel
+site or private run. The sibling-page review already shows multiscale multi-physics learning and
+relief-conditioned methods elsewhere in the family, so no candidate is claimed globally novel.</p>
 <table>
 <thead>
 <tr>
@@ -60,6 +72,7 @@ The large feature stack has not been restored during this stopped review.</p>
 <th>Proposed physical signature</th>
 <th>Why an unmapped fault is plausible</th>
 <th>Named non-fault mimic</th>
+<th>Expected HOLDOUT-DTI direction (qualitative only)</th>
 <th>Difference from local implementations; cost</th>
 </tr>
 </thead>
@@ -70,7 +83,8 @@ The large feature stack has not been restored during this stopped review.</p>
 <td>A fold-trained model learns departures from each sensor's local smooth background, conditional on visible-catalogue distance; paired elevation break and magnetic/conductivity gradient evidence</td>
 <td>A covered fault may perturb basement and electrical structure while having a weak surface trace</td>
 <td>Saline groundwater boundaries and lithologic contacts</td>
-<td>Learned residual interactions rather than P4 geometry, C1 prescribed discordance product or E2 oriented step; medium cost, highest qualitative priority</td>
+<td>Low-to-moderate possible gain if the joint residual is stable; highly uncertain, no score projected</td>
+<td>Learned residual interactions rather than P4 geometry, C1 prescribed discordance product or E2 oriented step; medium cost. Not family-new given GEMSDOE68's AutoContext/multi-physics result</td>
 </tr>
 <tr>
 <td>Second</td>
@@ -78,7 +92,8 @@ The large feature stack has not been restored during this stopped review.</p>
 <td>Opposite-side magnetic texture matches best after a nonzero along-strike offset, with a stable offset across scales and gravity support</td>
 <td>Concealed displacement can offset a contact without an exposed scarp</td>
 <td>Intrusive margins or independent volcanic flows</td>
-<td>Patch phase-correlation displacement, not the prior along-tangent amplitude derivative or E3 depth step; high cost, potentially useful but nonunique</td>
+<td>Low/uncertain; non-unique potential-field textures and high implementation cost</td>
+<td>Patch phase-correlation displacement, not the prior along-tangent amplitude derivative or E3 depth step; high cost</td>
 </tr>
 <tr>
 <td>Third</td>
@@ -86,7 +101,8 @@ The large feature stack has not been restored during this stopped review.</p>
 <td>Supervised basement/magnetic boundary evidence is upweighted only where surface-relief response is unexpectedly weak within a training-fold relief stratum</td>
 <td>Sedimentary burial may hide a fault scarp</td>
 <td>Depositional onlap or an erosional paleovalley</td>
-<td>Explicit conditional residual by relief, not E2's elevation-step product or weak geometric tilt; medium cost, uncertain gain</td>
+<td>Low-to-moderate but uncertain; explicitly test against acquisition/geologic confounds</td>
+<td>Explicit conditional residual by relief, not E2's elevation-step product or weak geometric tilt; medium cost. Related relief stratification appears in GEMSDOE66</td>
 </tr>
 <tr>
 <td>Fourth</td>
@@ -94,6 +110,7 @@ The large feature stack has not been restored during this stopped review.</p>
 <td>Broad strain context conditions local gravity/magnetic evidence instead of being interpreted as a 100m fault locator</td>
 <td>Distributed deformation can include structures absent from a mapped-trace catalogue</td>
 <td>Aquifer compaction, broad regional strain or geodetic interpolation</td>
+<td>Very low/uncertain at the 100 m scoring scale; unlikely to justify a run without a scale audit</td>
 <td>Learned context interaction, not univariate geodetic weighting or catalogue-endpoint relay pairing; low–medium cost, lowest qualitative priority because effective resolution is uncertain</td>
 </tr>
 </tbody>
@@ -110,8 +127,8 @@ QFaults must be quantified, not called independent truth.</p>
 <p>Evaluate pooled HOLDOUT-DTI (shared evaluator <code>gems57-pooled-hide-v2</code>, alpha 0.2, beta 0.8,
 300m triangular kernel), withheld-positive count, and paired spatial-bootstrap 95% intervals.
 Re-evaluate D28 and the current best on exactly the same folds/mass; compare B′ separately as a proxy,
-not as HOLDOUT-DTI or an organizer score. The cached E2 D28 HOLDOUT-DTI 0.0919 is an <strong>archived</strong>
-reference, not a newly rerun baseline. No promotion without a matched best-baseline comparison,
+not as HOLDOUT-DTI or an organizer score. The cached E2 D28 HOLDOUT-DTI is an <strong>archived</strong>
+reference in its original run card, not a newly rerun baseline. No promotion without a matched best-baseline comparison,
 canaries, both-stage literal uniqueness, format validation and a separate selector decision.
 Stop after at most three experiments or two hours. No automatic weekly submission.</p>
 <h2>Source/evidence audit and limitations</h2>
@@ -125,58 +142,79 @@ Stop after at most three experiments or two hours. No automatic weekly submissio
 </thead>
 <tbody>
 <tr>
-<td>The task predicts faults, not a catalogue of geothermal vents</td>
-<td><a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb">Official organizer notebook</a>, opening cell</td>
-<td>Re-fetched via GitHub API this review; excerpts in <code>evidence/review/official-reference-excerpts.txt</code></td>
+<td>Target, incompleteness of mapped faults, metric and file format</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official DrivenData problem page</a></td>
+<td>Retrieved 2026-10-20 via the Arena web reader. Confirms α=0.2, β=0.8, 300 m triangular support and float32/EPSG:32611/100 m/null-outside requirements. It is not an upload or validator receipt.</td>
 </tr>
 <tr>
-<td>CPU training is possible, GPU preferred</td>
-<td><a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md">Official README</a></td>
-<td>Re-fetched; the retained prompt's GPU-required statement is too strong</td>
+<td>Public reference solution and CPU support</td>
+<td><a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md">Organizer reference README</a>, <a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb">notebook</a></td>
+<td>README/notebook retrieved through GitHub. Training-loss weights are not independent confirmation of the full competition scorer.</td>
 </tr>
 <tr>
-<td>Training-loss weights are 0.2/0.8</td>
-<td>Same notebook, cell 16</td>
-<td>Verified training loss; this notebook excerpt alone does not establish the distance-transform competition scorer</td>
+<td>Rules and weekly cap</td>
+<td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">September 2026 rules PDF</a></td>
+<td>Retrieved 2026-10-20; §3.2 states three submissions per week, and §3.4–3.5 requires selecting one. The authenticated account's current remaining quota was not read; no slot was used. A deadline discrepancy is recorded in <code>evidence/official_sources_2026-10-20.json</code>.</td>
 </tr>
 <tr>
-<td>Competition format, scoring and current slot cap</td>
-<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem page</a>, <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">rules</a>, submission-page cap</td>
-<td>Historical fetched quotations in <code>evidence/official_sources_2026-10-20.json</code>; these hosts are not in this session's outbound allowlist. No fresh cap or authenticated receipt verified</td>
+<td>USGS GeoDAWN survey provenance</td>
+<td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN release, DOI 10.5066/P93LGLVQ</a></td>
+<td>Page retrieved 2026-10-20; it describes 200 m and 400 m nominal line spacing across survey areas and CC0. No source binary was downloaded or matched to the model raster. Acquisition boundaries are a possible mimic, not a demonstrated fault confound in this stack.</td>
 </tr>
 <tr>
-<td>GeoDAWN / INGENIOUS source provenance</td>
-<td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a>, <a href="https://gdr.openei.org/submissions/1391">DOE GDR 1391</a></td>
-<td>Official manual-review links; availability and licensing not re-verified this review. No new external-data-dependent candidate asserted viable</td>
+<td>INGENIOUS / GDR 1391 source provenance</td>
+<td><a href="https://gdr.openei.org/submissions/1391">DOE Geothermal Data Repository, DOI 10.15121/1881483</a></td>
+<td>Page retrieved 2026-10-20; states public/CC-BY 4.0 and lists multiple geophysical/geologic resources. No archive was downloaded or used.</td>
 </tr>
 <tr>
-<td>Reported H33 performance and leader values</td>
-<td>User's brief and historical page captures</td>
-<td>No submission-page receipt. Not ORGANIZER-CONFIRMED; conflicting values are not averaged or treated as forecasts</td>
+<td>Geologic-map proxy context</td>
+<td><a href="https://www.usgs.gov/data/geologic-map-schema-gems-version-state-geologic-map-compilation-sgmc-geodatabase-conterminous">USGS GeMS/SGMC, DOI 10.5066/P1A3DQZK</a></td>
+<td>Page retrieved 2026-10-20; 48 state maps at heterogeneous scales with unreconciled boundaries. This does not validate the owner-mirrored raster or make SGMC an independent hidden-fault truth.</td>
+</tr>
+<tr>
+<td>Structural-process context</td>
+<td><a href="https://doi.org/10.1144/geoenergy2023-009">Siler (2023), DOI 10.1144/geoenergy2023-009</a>; <a href="https://doi.org/10.1029/2020JB021269">Mattéo et al. (2021), DOI 10.1029/2020JB021269</a></td>
+<td>Retrieved metadata/abstract supports hypotheses about geothermal structural discontinuities and optical/topographic fault mapping, respectively—not direct evidence of local score improvement or a general fault-occurrence map.</td>
+</tr>
+<tr>
+<td>Current public leaderboard</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Organizer leaderboard</a></td>
+<td>On 2026-10-20 it displayed 0.4413, 0.3811 and 0.3788 for the first three public rows. This is a PUBLIC-LEADERBOARD-OBSERVATION, not HOLDOUT-DTI for this project and not an ORGANIZER-CONFIRMED file receipt.</td>
+</tr>
+<tr>
+<td>Peer methods and page-reported metrics</td>
+<td><a href="https://buffedlizard55-lab.github.io/GEMSDOE66/docs/index.html">GEMSDOE66–72 owner pages</a></td>
+<td>The per-repo findings and exact reporting gaps are in <code>evidence/web_sources_review_2026-10-20.json</code>. Owner pages are self-reports, not organizer receipts; run-card/artifact inconsistencies and missing evaluator metadata limit comparison.</td>
+</tr>
+<tr>
+<td>Historical H33 value</td>
+<td>User brief and <a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html">GEMSDOE32 owner archive</a></td>
+<td>The 0.2778 value is a historical user/owner-reported leaderboard claim, not a HOLDOUT-DTI result; no authenticated submission-page receipt was found. It is not ORGANIZER-CONFIRMED and is not a forecast target.</td>
 </tr>
 </tbody>
 </table>
-<p>Hash consistency on an owner mirror is not organizer authentication. The local sample contains known
-fault positives, so it is a geometry/footprint template, not hidden validation labels. Earlier snippets
-in <code>docs/hypotheses.md</code> also mis-indexed detrended elevation (correctly band 12) and seismicity distance
-(correctly band 10); the table here uses the recorded metadata and avoids inferring ambiguous units.
-<code>prepare_data.py</code> is absent, so the retained prompt's advertised command is not a working pipeline.
-Data placement is not the single blocker: protocol consistency, proxy validity and independent model
-validation remain. No scientific-discovery or leaderboard-improvement claim is established.</p>
+<p>A fresh partial Git inventory at <code>evidence/sibling_registry_refresh_20261020.json</code> inspected seven
+public repositories (GEMSDOE66–72): 302 tracked TIFF paths matched the single-band grid, with 175
+unique SHA-256 hashes; 98 hashes occurred in the inherited 862-hash set and 77 did not. This is a
+current owner-repository measurement, not an exhaustive family/private/organizer registry and not a
+clearance for any new candidate. Hash consistency on owner mirrors is not organizer authentication.</p>
+<p>The local sample contains known-fault positives, so it is a geometry/footprint template, not hidden
+validation labels. <code>docs/hypotheses.md</code> and older preregistrations retain historical plans; the four
+rows above are the current ranked queue. <code>prepare_data.py</code> is absent, so the retained prompt's
+advertised command is not a working pipeline. No scientific-discovery, projected score or
+leaderboard-improvement claim is established. Detailed extracted records and limitations are linked
+in <a href="downloads/web_sources_review_2026-10-20.json">the web-source evidence</a>.</p>
 <h2>Integration and upstream report</h2>
-<p>During this review, parallel PRs #17, #21 and #22 advanced main. Their frozen evidence and
-scarp E3 artifact were preserved, then the fresh audit was rerun against the expanded five-TIFF
-inventory. The existing literal-policy CLI and the release API now share one policy adapter;
-this avoids two subtly different interpretations of the threshold rule. Historical policy cards
-remain available with provenance. The newest measured review card is linked at the top of every page.</p>
-<p>An attempted upstream issue to the shared template repository returned
-<code>Resource not accessible by integration (createIssue)</code>. It was not posted. The report is retained
-in <code>evidence/review/upstream-policy-report.md</code>; GitHub issue-creation permission, not credentials
-in chat, is needed for that operation. No shared-template code was changed during this review.</p>
-<p>A second concurrent integration added PR #28's H70 conductive-breach archive (negative). It is
-not this review's new experiment. Its original canonical card is preserved at <code>evidence/run_card.json</code>
-and <code>evidence/h70/</code>; P4 pages read P4's own frozen card explicitly. The fresh audit now checks all
-six TIFFs. The concurrent <code>strict_gate</code> API delegates to the same literal policy implementation.</p></main>
+<p>The active branch is <code>arena/2149863c-gemsdoe70</code>, fast-forwarded to PR #29's main commit
+<code>4b870be</code>. That merged state preserves the earlier six-artifact literal audit and the single
+policy adapter. The canonical current negative card is <code>evidence/review/run_card.json</code>; historical
+cards, including <code>evidence/current_protocol_review.json</code> and <code>evidence/literal_protocol_review.json</code>,
+remain available but are not current authorization. Review-pass details are maintained in
+<code>evidence/review/verification-passes.md</code>.</p>
+<p>A prior attempt to report a shared-template issue returned
+<code>Resource not accessible by integration (createIssue)</code>. No issue was posted and no shared-template
+code was changed. The finite-only writer/null-outside mismatch remains unresolved upstream; do not
+maintain a private fork or claim that existing archives meet the complete official format.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/phase4_run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·

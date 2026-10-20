@@ -20,10 +20,13 @@ block at every mass. The archived mutual-rule receipts have not been rewritten t
 - No authenticated submission-page score receipt exists. H33's reported 0.2778 is user-supplied;
   historical public leaderboard captures are not receipts for our own submissions. Conflicting
   leader values in the brief are not current verified targets.
-- Local format validity is not portal acceptance. All six re-read TIFFs are single-band float32,
-  finite in [0,1], and match the pinned sample's CRS, shape and transform. The rejected upload's
-  exact error cannot be diagnosed without its bytes. The footprint-zero policy differs from a
-  historical problem-page null/NaN quotation; organizer behavior has not been independently confirmed.
+- Local grid/range preflight is not full submission-format compliance or portal acceptance. All
+  six re-read TIFFs are single-band float32, finite in [0,1], and match the pinned sample's CRS,
+  shape and transform. The official problem page, retrieved 2026-10-20, requires null/NaN outside
+  bounds; the shared writer rejects nonfinite arrays, writes `nodata=None`, and emits finite zero
+  values outside the mapped footprint. No shared upstream fix or organizer clarification was made.
+  Do not call these archives upload-format-valid. The earlier rejected upload's exact range error
+  still cannot be diagnosed without its bytes.
 - The owner-mirror sample has 60,988 positive known-fault pixels, not an all-zero reference.
   It supplies grid geometry and footprint only, never hidden validation labels. Owner-mirror hashes
   establish integrity, not organizer authenticity or every license condition.
@@ -38,9 +41,10 @@ block at every mass. The archived mutual-rule receipts have not been rewritten t
 - `scripts/prepare_data.py` from the retained prompt is absent. Data placement is not the sole
   blocker to training/validation. The official reference supports CPU as well as GPU; GPU is
   preferred for speed, not an absolute requirement.
-- Only GitHub, npm and PyPI hosts are allowed for outbound traffic in this session. The organizer
-  reference README/notebook were re-fetched on GitHub; other official pages and the current
-  authenticated slot cap were not re-verified. No competition slot was spent.
+- Official competition, USGS and DOE page text was retrieved with the Arena web reader and recorded
+  in `evidence/web_sources_review_2026-10-20.json`. This did not download external binaries or access
+  the authenticated submission portal. The rules PDF states three submissions per week, but the
+  account's live remaining quota is unknown. No competition slot was spent.
 
 ## Next session, in order
 

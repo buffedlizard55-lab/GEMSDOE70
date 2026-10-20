@@ -154,6 +154,20 @@ def run(fetch=False, verify=False):
                         'validator_output': p4['validator_output'],
                         'download_ok_for_review': True, 'protocol_unique': False,
                         'submit_recommended': False},
+        'official_format_compliance': {
+            'status': 'NOT_CERTIFIED_FOR_UPLOAD',
+            'evidence_class': 'OFFICIAL_FORMAT_TEXT_PLUS_LOCAL_BYTE_MEASUREMENT',
+            'source_url': 'https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/',
+            'source_record': 'evidence/web_sources_review_2026-10-20.json',
+            'outside_bounds_requirement': 'null or NaN',
+            'archived_p4_observed': {
+                'nodata': p4['validator_output']['meta']['nodata'],
+                'finite_zero_outside_footprint': p4['validator_output']['checks']['outside_footprint_zero'],
+                'no_nan_anywhere': p4['validator_output']['checks']['no_nan_anywhere'],
+            },
+            'shared_writer_behavior': 'Rejects non-finite model arrays and emits an all-finite raster with nodata=None; current archives encode the outside-footprint mask as finite zeros.',
+            'resolution': 'Unresolved upstream; do not maintain a private fork or upload these archives. Obtain a shared-template fix or organizer clarification before a future positive release.'
+        },
         'submission_name': 'gems70-literal-lane-review-20261020-NO-SUBMISSION',
         'submission_note': 'Negative preflight: fixed-mass overlap exceeds literal gate against binary registry lattice. No new TIFF or slot.',
         'verdict': 'negative', 'download_ok': False, 'submit_recommended': False,

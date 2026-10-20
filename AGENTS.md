@@ -1,5 +1,14 @@
 # Session start contract
 
+## Active-branch snapshot — 2026-10-20
+
+The current Arena branch is `arena/2149863c-gemsdoe70`, active at `4b870be` before the
+continuation changes. Canonical current status is **DO NOT SUBMIT**; read
+`evidence/review/run_card.json` and `evidence/review/literal_protocol_audit.json`. The partial
+GEMSDOE66–72 refresh is not a complete registry clearance. The shared writer's all-finite
+`nodata=None` behavior does not meet the official null/NaN-outside requirement; no local fork or
+candidate experiment is authorized. Older dated sections below are provenance unless revalidated.
+
 1. Read README.md and the complete PROJECT_BRIEF.md before any new work.
 2. Read HANDOFF.md, evidence/run_card.json and docs/irregularities.md.
 3. Read docs/protocol-review.md and evidence/review/run_card.json. Current policy is literal forward overlap; the inherited mutual rule below is superseded. No new fixed-mass candidate or slot after the recorded stop.
@@ -37,8 +46,7 @@ B′ unscored. Frozen one-shot drivers: `scripts/run_experiment_e2_scarp.py`,
 
 ## Current-request override (2026-10-20, arena/3169a6c0-gemsdoe70)
 The user explicitly requires **forward** overlap >0.70 to stop. Historical mutual-overlap
-clearances are not sufficient for this request. Read `docs/protocol-review.md` and
-`evidence/current_protocol_review.json` first; a P4 final-dot witness requires STOP.
+clearances are not sufficient for this request. Read `docs/protocol-review.md` and canonical `evidence/review/run_card.json` first; a P4 final-dot witness requires STOP.
 No new lane paragraph was identifiable. Do not generate a new candidate or silently waive the
 stop. `gems70.protocol` is a policy adapter over frozen measurements, not a replacement metric.
 The shared scientific cards/evaluator/writer remain unchanged. Review-only downloads are allowed;

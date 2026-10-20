@@ -1,18 +1,23 @@
-# Current protocol review — 2026-10-20
+# Historical supplemental protocol review — superseded 2026-10-20
 
-## Decision: download for review only. DO NOT SUBMIT.
+> This is a retained earlier review. For current status, use [the current protocol review](protocol-review.html),
+> current card ([JSON](downloads/review_run_card.json)), and current audit
+> ([JSON](downloads/literal_protocol_audit.json)). The `current_protocol_review.json` reference below
+> is historical, not the current card.
+
+## Historical decision: download for review only. DO NOT SUBMIT.
 
 **No new TIFF was generated in this session.** The mandatory duplicate-stop rule takes precedence over generating another candidate after a failed lane check. No experiment, training run, placement or competition upload was performed. No weekly slot was used by this session. This is a negative deliverable, not completion of the requested new unique submission.
 
-[Download existing P4 TIFF for review](downloads/gems70-p4-stratified-halo-37654-20261020.tif) · [Machine-readable current run card](current_protocol_review.json) · [Submission instructions](submission.html)
+[Download existing P4 TIFF for review](downloads/gems70-p4-stratified-halo-37654-20261020.tif) · [Historical card](current_protocol_review.json) · [Current card](downloads/review_run_card.json) · [Submission instructions](submission.html)
 
-The existing bytes were freshly re-read: one band, finite everywhere (hence inside the footprint), all values in [0,1], shape/CRS/transform equal to the **cached** reference metadata. SHA-256 equals both the frozen card and registry audit. This is local format validation, not organizer acceptance. No rescaling, copying, jittering or renaming a previous prediction was used to claim a new submission.
+The existing bytes were re-read in that earlier review: one band, finite everywhere, values in [0,1], shape/CRS/transform equal to cached metadata, and matching historical SHA-256. This is only a local grid/range preflight. The official page requires null/NaN outside bounds, whereas the shared writer produces finite values with `nodata=None`; these archives are not certified upload-format-compliant. No rescaling, copying, jittering or renaming a previous prediction is a new submission.
 
 ## Pass 1 — repository and evidence review
 
 Read the retained README/PROJECT_BRIEF, AGENTS, handoff, irregularities and current evidence. The user instruction says **forward** overlap above 0.70 requires a stop. The inherited code instead uses **mutual** overlap. Those are different gates; an alleged tool fix cannot silently authorize a change to the user's rule. Frozen historical results remain intact but are not a clearance under the current instruction.
 
-The frozen P4 final-dot audit contains multiple failing forward-overlap rows, including `calib_r13lattice_00904.tif` with candidate-to-registry overlap 1.00. Its reverse overlap is about 0.211. This explains the disagreement with the inherited mutual gate, but does not remove the stop. All raw measurements and registry hashes are in [the frozen audit](downloads/uniqueness.json); exact witnesses and validation checks are in [the current card](current_protocol_review.json). This is a reapplication of policy to historical measurements, **not a fresh registry scan**. It is sufficient for a negative, not for a positive uniqueness claim.
+The frozen P4 final-dot audit contains multiple failing forward-overlap rows, including `calib_r13lattice_00904.tif` with candidate-to-registry overlap 1.00. Its reverse overlap is about 0.211. This explains the disagreement with the inherited mutual gate, but does not remove the stop. All raw measurements and registry hashes are in [the frozen audit](downloads/uniqueness.json); exact witnesses and validation checks are in [the historical card](current_protocol_review.json). This is a reapplication of policy to historical measurements, **not a fresh registry scan**. It is sufficient for a negative, not for a positive uniqueness claim.
 
 The supplied prompt references a "single method paragraph below" but does not identify one. No new lane is silently invented. These two blockers make the supervised within-halo next step in the old handoff unauthorized in this run.
 
@@ -40,17 +45,13 @@ These are not vent detections: the competition target is fault mapping. None est
 5. Check the surface before placement and final dots against every accessible registry raster. A single failure stops. Use shared writer only after passing; re-read output and check exact sample grid, finite footprint and [0,1]. No private evaluator or writer fork.
 6. Stop at the experiment/time cap. Promotion is a separate selector step and requires a positive controlled result, registry clearance and verified weekly cap. No portal access or organizer receipt exists in this session.
 
-## Pass 3 — source/access and release review
+## Pass 3 — historical source/access review (superseded by the continuation record)
 
-Freshly retrieved the [official reference README](https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md), commit `aebe92f7c8a990f0e3443451b7a825d9afd6336b`, through the GitHub API. It explicitly supports CPU-only training. The inherited statement "GPU needed" is therefore not a universal requirement; GPUs accelerate that reference approach. The README instructs downloading competition data but does not grant access to restricted labels.
+This earlier pass retrieved the [official reference README](https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b) through GitHub and confirmed CPU support. Its statement that other official pages had not been fetched is no longer current.
 
-Official links for manual review, **not freshly retrieved or asserted verified in this sandbox**:
+The continuation later retrieved the [organizer problem](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/), [About page](https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/), [public leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/), [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and), [USGS SGMC](https://www.usgs.gov/data/geologic-map-schema-gems-version-state-geologic-map-compilation-sgmc-geodatabase-conterminous), [DOE GDR 1391](https://gdr.openei.org/submissions/1391), and selected literature through the Arena web reader. The official problem page states the null/NaN-outside format requirement; the shared writer mismatch remains unresolved. The September 2026 rules PDF states three submissions per week, but no authenticated account/quota was read and no slot was used.
 
-- [Organizer problem](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/), [data](https://www.drivendata.org/competitions/306/competition-doe-gems/data/), [leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/): organizer acceptance, current scoring rules and cap require direct verification. Network access here is restricted to GitHub and package registries.
-- [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and): original survey provenance; this run makes no new claim about download availability.
-- [Competition report supplied by user](https://docs.nlr.gov/docs/fy26osti/96647.pdf): not fetched here; no PDF-specific rule is claimed verified.
-
-No new third-party data is proposed as obtainable on speculation. The existing source-health workflow checks availability, not scientific validity or live scores. Automatic uploading is intentionally absent. Future work should reconcile stale prose (e.g. older "exactly one TIFF" claims despite multiple inventory entries) and carry a single authoritative protocol status into all release paths.
+The dated excerpts, owner-page review, and uncertainty boundaries are in [the web-source record](downloads/web_sources_review_2026-10-20.json). No external data binaries were downloaded or used. The separate seven-repository sibling TIFF inventory is partial, not a family or organizer registry. Automatic uploading remains absent.
 
 ## Reproduce this negative audit
 

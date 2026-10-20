@@ -37,7 +37,7 @@
         "source_errors": [
           "Legacy list has no complete-inventory certificate; diagnostic only"
         ],
-        "worst_spearman_full_footprint": 0.00015912424557190517,
+        "worst_spearman_full_footprint": 0.00015912424557190378,
         "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
         "worst_dot_overlap": 0.039411295584716885,
         "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
@@ -61,7 +61,7 @@
             "my_dots_within_3px_of_theirs": 1.0,
             "their_dots_within_3px_of_mine": 0.039411295584716885,
             "mutual_overlap": 0.039411295584716885,
-            "spearman_full_footprint": 0.00015912424557190517,
+            "spearman_full_footprint": 0.00015912424557190378,
             "jaccard_dot_sets": 0.00436384122031548,
             "identical_bytes": false,
             "identical_decoded_predictions": false,
@@ -166,7 +166,7 @@
         "source_errors": [
           "Legacy list has no complete-inventory certificate; diagnostic only"
         ],
-        "worst_spearman_full_footprint": 0.00012164145169402089,
+        "worst_spearman_full_footprint": 0.00012164145169402022,
         "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
         "worst_dot_overlap": 0.10930665313323183,
         "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
@@ -190,7 +190,7 @@
             "my_dots_within_3px_of_theirs": 1.0,
             "their_dots_within_3px_of_mine": 0.10930665313323183,
             "mutual_overlap": 0.10930665313323183,
-            "spearman_full_footprint": 0.00012164145169402089,
+            "spearman_full_footprint": 0.00012164145169402022,
             "jaccard_dot_sets": 0.006295122923369616,
             "identical_bytes": false,
             "identical_decoded_predictions": false,
@@ -295,7 +295,7 @@
         "source_errors": [
           "Legacy list has no complete-inventory certificate; diagnostic only"
         ],
-        "worst_spearman_full_footprint": -0.0004249861963070026,
+        "worst_spearman_full_footprint": -0.0004249861963070003,
         "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
         "worst_dot_overlap": 0.21055607917059377,
         "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
@@ -319,7 +319,7 @@
             "my_dots_within_3px_of_theirs": 1.0,
             "their_dots_within_3px_of_mine": 0.21055607917059377,
             "mutual_overlap": 0.21055607917059377,
-            "spearman_full_footprint": -0.0004249861963070026,
+            "spearman_full_footprint": -0.0004249861963070003,
             "jaccard_dot_sets": 0.006051555467792231,
             "identical_bytes": false,
             "identical_decoded_predictions": false,
@@ -424,7 +424,7 @@
         "source_errors": [
           "Legacy list has no complete-inventory certificate; diagnostic only"
         ],
-        "worst_spearman_full_footprint": 6.763416330195876e-05,
+        "worst_spearman_full_footprint": 6.76341633020085e-05,
         "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
         "worst_dot_overlap": 4.833369583605211e-06,
         "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
@@ -448,7 +448,7 @@
             "my_dots_within_3px_of_theirs": 1.0,
             "their_dots_within_3px_of_mine": 4.833369583605211e-06,
             "mutual_overlap": 4.833369583605211e-06,
-            "spearman_full_footprint": 6.763416330195876e-05,
+            "spearman_full_footprint": 6.76341633020085e-05,
             "jaccard_dot_sets": 0.0,
             "identical_bytes": false,
             "identical_decoded_predictions": false,
@@ -553,7 +553,7 @@
         "source_errors": [
           "Legacy list has no complete-inventory certificate; diagnostic only"
         ],
-        "worst_spearman_full_footprint": 0.00039323355095309835,
+        "worst_spearman_full_footprint": 0.00039323355095309705,
         "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
         "worst_dot_overlap": 0.20999540829889557,
         "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
@@ -577,7 +577,7 @@
             "my_dots_within_3px_of_theirs": 1.0,
             "their_dots_within_3px_of_mine": 0.20999540829889557,
             "mutual_overlap": 0.20999540829889557,
-            "spearman_full_footprint": 0.00039323355095309835,
+            "spearman_full_footprint": 0.00039323355095309705,
             "jaccard_dot_sets": 0.009245604083947817,
             "identical_bytes": false,
             "identical_decoded_predictions": false,
@@ -682,7 +682,7 @@
         "source_errors": [
           "Legacy list has no complete-inventory certificate; diagnostic only"
         ],
-        "worst_spearman_full_footprint": -0.0016087931178800626,
+        "worst_spearman_full_footprint": -0.0016087931178800539,
         "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
         "worst_dot_overlap": 0.20886923318591555,
         "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
@@ -706,7 +706,7 @@
             "my_dots_within_3px_of_theirs": 1.0,
             "their_dots_within_3px_of_mine": 0.20886923318591555,
             "mutual_overlap": 0.20886923318591555,
-            "spearman_full_footprint": -0.0016087931178800626,
+            "spearman_full_footprint": -0.0016087931178800539,
             "jaccard_dot_sets": 0.005629574800559257,
             "identical_bytes": false,
             "identical_decoded_predictions": false,

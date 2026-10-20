@@ -1,0 +1,244 @@
+{
+  "evidence_class": "WEB_PAGE_RETRIEVAL_AND_OWNER_SITE_REVIEW",
+  "retrieved_utc": "2026-10-20",
+  "retrieval_method": "Arena web-page reader (functions.fetch_page) and public GitHub partial clones; browser-extracted text summarized below. No external data binaries were downloaded by this review.",
+  "official_sources": [
+    {
+      "id": "drivendata-problem-967",
+      "authority": "competition organizer",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "status": "retrieved-2026-10-20",
+      "verified_page_facts": [
+        "The target is geological faults indicative of geothermal resources; the public fault set is incomplete and may contain inaccuracies.",
+        "The initial private-test labels were manually identified by fault experts; the final prize round uses an expanded expert-reviewed label set.",
+        "The distance-weighted Tversky definition uses alpha=0.2, beta=0.8 and a triangular kernel with 300 m support (3 pixels at 100 m).",
+        "Submission format text specifies one float32 GeoTIFF, EPSG:32611, 100 m, matching bounds, probabilities in [0,1], and null/NaN outside the bounds."
+      ],
+      "limits": [
+        "A browser page read is not a submission receipt or an authenticated upload test.",
+        "The organizer says known faults are incomplete; a catalogue holdout is a proxy, not the hidden expert-labeled truth."
+      ]
+    },
+    {
+      "id": "drivendata-about-968",
+      "authority": "competition organizer",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/",
+      "status": "retrieved-2026-10-20",
+      "verified_page_facts": [
+        "The task is fault mapping; the page discusses geophysical, topographic, remote-sensing and computational fault-mapping approaches.",
+        "The cited Mattéo et al. (2021) work concerns deep learning on remote optical images and topographic data, not this competition's geophysical stack directly."
+      ],
+      "limits": [
+        "Background citations motivate methods but do not validate any local prediction or expected score."
+      ]
+    },
+    {
+      "id": "usgs-geodawn",
+      "authority": "U.S. Geological Survey",
+      "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "doi": "10.5066/P93LGLVQ",
+      "status": "retrieved-2026-10-20",
+      "verified_page_facts": [
+        "The release covers northern/western Nevada and eastern California and includes aeromagnetic and radiometric products with related lidar coverage.",
+        "The two survey areas have different nominal flight-line spacing (200 m in Area 1 and 400 m in Area 2), different tie-line spacing and varying nominal terrain clearance; the page cautions that actual clearance can vary in steep terrain.",
+        "The page marks the data release CC0 1.0."
+      ],
+      "limits": [
+        "Page accessibility and license metadata were checked; no source binary was downloaded or compared with the owner-mirrored model feature raster.",
+        "Survey block/flight differences are a plausible non-fault source of feature discontinuities, not proof that any particular model edge is an acquisition artifact."
+      ]
+    },
+    {
+      "id": "doe-gdr-ingenious-1391",
+      "authority": "U.S. DOE Geothermal Data Repository",
+      "url": "https://gdr.openei.org/submissions/1391",
+      "doi": "10.15121/1881483",
+      "status": "retrieved-2026-10-20",
+      "verified_page_facts": [
+        "The page marks the compilation public and CC-BY 4.0.",
+        "It lists Quaternary faults, volcanics, geodetic shear/dilation, magnetotelluric conductance, magnetics, gravity, paleogeothermal features, seismicity, wells/springs and related measurements.",
+        "The page exposes downloadable resource links, including Quaternary-fault and paleogeothermal archives."
+      ],
+      "limits": [
+        "The page states the compilation is provided as-is and places fitness-for-use responsibility on the user.",
+        "No GDR archive was downloaded, transformed, license-reviewed beyond the page's stated CC-BY 4.0, or used in this continuation."
+      ]
+    },
+    {
+      "id": "usgs-gems-sgmc-2026",
+      "authority": "U.S. Geological Survey",
+      "url": "https://www.usgs.gov/data/geologic-map-schema-gems-version-state-geologic-map-compilation-sgmc-geodatabase-conterminous",
+      "doi": "10.5066/P1A3DQZK",
+      "status": "retrieved-2026-10-20",
+      "verified_page_facts": [
+        "The 2026 GeMS release compiles 48 state geologic maps at scales from 1:50,000 to 1:1,000,000.",
+        "The page notes unreconciled geologic units across state boundaries and that the release represents bedrock maps where both bedrock and surficial maps exist.",
+        "The page marks the release CC0 1.0."
+      ],
+      "limits": [
+        "The source page confirms a public geologic-map compilation, not the provenance or correctness of the inherited SGMC-derived raster proxy in owner mirrors.",
+        "No source database binary was downloaded or validated here."
+      ]
+    },
+    {
+      "id": "siler-2023-structural-discontinuities",
+      "authority": "USGS-indexed, peer-reviewed Geoenergy article",
+      "url": "https://pubs.usgs.gov/publication/70246663",
+      "doi": "10.1144/geoenergy2023-009",
+      "publisher_url": "https://www.lyellcollection.org/doi/full/10.1144/geoenergy2023-009",
+      "status": "metadata-and-abstract-retrieved-2026-10-20",
+      "verified_page_facts": [
+        "The article models stress and strain at representative structural discontinuities in Great Basin hydrothermal systems.",
+        "Its abstract reports prior classifications of 313 known systems and highlights stepovers and fault terminations as common settings; the modeling is process-based support for a structural hypothesis, not a map-wide fault detector."
+      ],
+      "limits": [
+        "The paper's hydrothermal-system population is not identical to the competition target population of all hidden fault traces.",
+        "No claim is made that a particular local geophysical pattern uniquely diagnoses a fault or geothermal resource."
+      ]
+    },
+    {
+      "id": "matteo-2021-fault-mapping",
+      "authority": "AGU peer-reviewed open-access article",
+      "url": "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2020JB021269",
+      "doi": "10.1029/2020JB021269",
+      "status": "metadata-retrieved-2026-10-20",
+      "verified_page_facts": [
+        "The paper is titled Automatic Fault Mapping in Remote Optical Images and Topographic Data With Deep Learning and is marked open access under CC BY-NC-ND 4.0."
+      ],
+      "limits": [
+        "It supports the general use of image/terrain learning, not the validity of the proposed potential-field interactions or a competition score."
+      ]
+    },
+    {
+      "id": "drivendata-reference-solution",
+      "authority": "competition organizer GitHub repository",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+      "status": "retrieved-2026-10-20",
+      "verified_page_facts": [
+        "The public reference repository describes a U-Net baseline and provides CPU-only and GPU environments; the README says GPU training is faster."
+      ],
+      "limits": [
+        "A reference implementation is a baseline, not an official score or independent verification of this checkout's evaluator."
+      ]
+    },
+    {
+      "id": "drivendata-leaderboard",
+      "authority": "competition organizer public leaderboard",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "status": "PUBLIC-LEADERBOARD-OBSERVATION",
+      "retrieved_utc": "2026-10-20",
+      "top_rows_at_read": [
+        {
+          "rank": 1,
+          "participant": "xiaofanhu",
+          "public_dw_tversky": 0.4413
+        },
+        {
+          "rank": 2,
+          "participant": "Batik Shirt Brothers",
+          "public_dw_tversky": 0.3811
+        },
+        {
+          "rank": 3,
+          "participant": "cfld__",
+          "public_dw_tversky": 0.3788
+        }
+      ],
+      "limits": [
+        "These are public-board observations for other participants, not local HOLDOUT-DTI measurements.",
+        "They are not submission-page receipts for any GEMSDOE artifact and must not be labeled ORGANIZER-CONFIRMED under the user's receipt rule."
+      ]
+    }
+  ],
+  "owner_site_review": {
+    "scope": "Public page review for GEMSDOE66-69 and GEMSDOE71-72, plus a current partial-Git scan of GEMSDOE66-72.",
+    "authority_limit": "Owner-authored pages and owner GitHub files are inherited claims, not organizer receipts.",
+    "sites": [
+      {
+        "repo": "GEMSDOE66",
+        "url": "https://buffedlizard55-lab.github.io/GEMSDOE66/docs/index.html",
+        "current_page_method": "1 m + 3 m LiDAR scarp products, Steger/Frangi line responses, road/canal filtering and relief-balanced spatial CV.",
+        "page_reported_holdout": {
+          "label": "HOLDOUT-DTI (external owner-site report)",
+          "evaluator_version": "src/gems/metric.py::dti@v1.0 (alpha=0.2, beta=0.8, 300m triangular kernel)",
+          "withheld_positive_count": 27379,
+          "value": 0.21392,
+          "ci95": [
+            0.20743,
+            0.2182
+          ]
+        },
+        "artifact_binding_caveat": "The published LIDAR-05 headline names a 24,000-dot file, while linked run-card content uses run_id/lane names LIDAR-03 and a lidar03_full arm. Do not treat the score as independently bound to the headline artifact without resolving that discrepancy.",
+        "uniqueness_scope_claimed_by_page": "60 registry rasters; not the 862-row inherited index or a complete current owner-site inventory.",
+        "evidence_urls": [
+          "https://buffedlizard55-lab.github.io/GEMSDOE66/evidence/lidar05_e2_holdout.json",
+          "https://buffedlizard55-lab.github.io/GEMSDOE66/docs/data/run-card-lidar05.json"
+        ]
+      },
+      {
+        "repo": "GEMSDOE67",
+        "url": "https://buffedlizard55-lab.github.io/GEMSDOE67/docs/index.html",
+        "current_page_method": "OVTR map-cover emission using an HGB head and greedy 3-pixel kernel coverage; page also contains separate orientation/tip lanes.",
+        "score_policy": "The page's OVTR headline omits a verifiable 95% CI/evaluator identity in the retrieved summary; excluded from quantitative comparisons. A separate H67A lane has a complete but much lower HOLDOUT-DTI receipt; it is not substituted for OVTR.",
+        "limits": "The page explicitly says no organizer score exists for its candidate."
+      },
+      {
+        "repo": "GEMSDOE68",
+        "url": "https://buffedlizard55-lab.github.io/GEMSDOE68/",
+        "current_page_method": "Auto-context stacked refinement with multiscale, multi-physics inputs and nested spatial validation.",
+        "page_reported_holdout": {
+          "label": "HOLDOUT-DTI (external owner-site report)",
+          "evaluator_version": "gems57-pooled-hide-v2",
+          "withheld_positive_count": 11321,
+          "value": 0.2068966651053915,
+          "ci95": [
+            0.18846645025707084,
+            0.22375290381891827
+          ]
+        },
+        "comparability_caveat": "The public run card lists evaluator implementation hashes that differ from this checkout's pinned implementation, and its fold parameters include a 2-pixel exclusion and 5.2-km core separation. The shared version label alone does not make it an exact replication.",
+        "uniqueness_scope_claimed_by_page": "69 rasters; the local current seven-repository inventory is broader but still not the complete family inventory.",
+        "evidence_urls": [
+          "https://buffedlizard55-lab.github.io/GEMSDOE68/evidence/s68_run_card.json"
+        ]
+      },
+      {
+        "repo": "GEMSDOE69",
+        "url": "https://buffedlizard55-lab.github.io/GEMSDOE69/",
+        "current_page_status": "The page says DO NOT SUBMIT and offers no TIFF/ZIP; it reports a literal forward-overlap stop against family rasters.",
+        "limits": "Page summary does not provide a complete evaluator version for its listed holdout, so no DTI value is imported into the ranked comparison."
+      },
+      {
+        "repo": "GEMSDOE71",
+        "url": "https://buffedlizard55-lab.github.io/GEMSDOE71/",
+        "current_page_method": "Hydrothermal-structural conduit/alteration-demagnetization combination with GDR 1391 features.",
+        "page_reported_holdout": {
+          "label": "HOLDOUT-DTI (external owner-site report)",
+          "evaluator_version": "gems57-pooled-hide-v3-se",
+          "withheld_positive_count": 11321,
+          "value": 0.073036,
+          "ci95": [
+            0.0582,
+            0.0883
+          ]
+        },
+        "score_integrity_warning": "The page calls the user-reported H33 value 0.2778 ORGANIZER-CONFIRMED; this review rejects that classification because no submission-page receipt was found."
+      },
+      {
+        "repo": "GEMSDOE72",
+        "url": "https://buffedlizard55-lab.github.io/GEMSDOE72/",
+        "current_page_method": "H72-1 directly rasterizes and thins SGMC-derived off-catalogue fault traces; additional listed ideas include raw magnetic-gradient and structural-tip arms.",
+        "score_policy": "The retrieved H72-1 summary does not expose evaluator version and withheld-positive count; do not use its DTI claim in the comparative ranking.",
+        "validation_caveat": "A score against an SGMC-derived off-catalogue truth is proxy performance, not hidden organizer truth; using SGMC-derived traces as both candidate source and proxy truth is circular for novelty claims.",
+        "evidence_urls": [
+          "https://buffedlizard55-lab.github.io/GEMSDOE72/docs/hypotheses.html"
+        ]
+      }
+    ],
+    "current_sibling_git_scan": "evidence/sibling_registry_refresh_20261020.json"
+  },
+  "historical_claims": {
+    "h33_reported_value": "0.2778 is a user/page-reported historical leaderboard claim, not a HOLDOUT-DTI result; it lacks an authenticated submission-page receipt and is not ORGANIZER-CONFIRMED.",
+    "prompt_leaderboard_values": "Conflicting historical values remain user-supplied claims; the public page observation is recorded separately above."
+  }
+}

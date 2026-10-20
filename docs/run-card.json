@@ -38,7 +38,7 @@
       "my_dots_within_3px_of_theirs": 1.0,
       "their_dots_within_3px_of_mine": 0.21055607917059377,
       "mutual_overlap": 0.21055607917059377,
-      "spearman_full_footprint": -0.0004249861963070026,
+      "spearman_full_footprint": -0.0004249861963070003,
       "jaccard_dot_sets": 0.006051555467792231,
       "identical_bytes": false,
       "identical_decoded_predictions": false,
@@ -114,6 +114,20 @@
     "download_ok_for_review": true,
     "protocol_unique": false,
     "submit_recommended": false
+  },
+  "official_format_compliance": {
+    "status": "NOT_CERTIFIED_FOR_UPLOAD",
+    "evidence_class": "OFFICIAL_FORMAT_TEXT_PLUS_LOCAL_BYTE_MEASUREMENT",
+    "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "source_record": "evidence/web_sources_review_2026-10-20.json",
+    "outside_bounds_requirement": "null or NaN",
+    "archived_p4_observed": {
+      "nodata": null,
+      "finite_zero_outside_footprint": true,
+      "no_nan_anywhere": true
+    },
+    "shared_writer_behavior": "Rejects non-finite model arrays and emits an all-finite raster with nodata=None; current archives encode the outside-footprint mask as finite zeros.",
+    "resolution": "Unresolved upstream; do not maintain a private fork or upload these archives. Obtain a shared-template fix or organizer clarification before a future positive release."
   },
   "submission_name": "gems70-literal-lane-review-20261020-NO-SUBMISSION",
   "submission_note": "Negative preflight: fixed-mass overlap exceeds literal gate against binary registry lattice. No new TIFF or slot.",

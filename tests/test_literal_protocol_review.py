@@ -91,6 +91,11 @@ def test_fresh_review_binds_every_archived_final_file_and_does_not_claim_univers
         assert row['validator_output']['all_checks_passed']
     card = json.loads((ROOT / 'evidence/review/run_card.json').read_text())
     assert card['raster_sha256'] is None and card['validator_output'] is None
+    format_status = card['official_format_compliance']
+    assert format_status['status'] == 'NOT_CERTIFIED_FOR_UPLOAD'
+    assert format_status['outside_bounds_requirement'] == 'null or NaN'
+    assert format_status['archived_p4_observed']['nodata'] is None
+    assert format_status['archived_p4_observed']['finite_zero_outside_footprint'] is True
     assert card['holdout_dti']['dti'] is None and card['holdout_dti']['ci95'] is None
     assert card['weekly_slots_used'] == 0 and card['new_scientific_experiments'] == 0
     assert card['verdict'] == 'negative' and len(card['submission_note']) <= 140

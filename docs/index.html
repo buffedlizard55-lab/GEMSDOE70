@@ -12,11 +12,11 @@ The current literal forward-overlap gate fails. <a href="protocol-review.html">C
 Historical receipts below are not current submission approval.</aside><section class="stop" aria-labelledby="decision">
 <div class="eyebrow">CURRENT SUBMISSION STATUS · NEGATIVE PREFLIGHT</div>
 <h1 id="decision">DO NOT SUBMIT — literal protocol stop</h1>
-<p><strong>Download: yes — format-validated for review.</strong> For forensic review only.
-<strong>Competition submission: NO — not recommended.</strong>
-The witness scan is sufficient to reject, but covers not every private or uncommitted raster. These are existing archived files,
-not a newly generated protocol-compliant submission. <strong>Submit a weekly slot: not recommended;
-blocked by your protocol.</strong></p>
+<p><strong>Download: yes — existing bytes available for forensic review only.</strong>
+<strong>They are not certified for upload format or uniqueness.</strong>
+<strong>Competition submission: NO.</strong> The witness scan is sufficient to reject, but covers
+not every private or uncommitted raster. These are existing archived files, not a newly generated
+protocol-compliant submission. <strong>Submit a weekly slot: not recommended.</strong></p>
 <p>All six archived TIFFs have forward overlap 1.00 against a verified binary registry lattice
 (limit 0.70). Mutual overlap is not an authorized exemption. No new TIFF, experiment or slot.</p>
 <div class="actions">
@@ -27,26 +27,29 @@ blocked by your protocol.</strong></p>
 <p class="small">Archived name: <code>gems70-p4-stratified-halo-37654-20261020</code> · SHA-256 <code>0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7</code>.</p>
 <p class="small">Review card: <code>gems70-literal-lane-review-20261020-NO-SUBMISSION</code> · Note:
 <code>Negative preflight: fixed-mass overlap exceeds literal gate against binary registry lattice. No new TIFF or slot.</code> (not an upload instruction).</p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
-<h2>Format-valid archives, but no protocol-compliant new submission.</h2>
+<h2>Review-only archives; no format-certified or protocol-compliant new submission.</h2>
 <p>Previous sessions ran the experiments below. This review found an unauthorized mutual-overlap
-substitution and corrected the current submission gate. Historical scientific evidence remains
-unchanged; it does not override the literal stop rule.</p>
+substitution and corrected the current submission gate. The official null/NaN-outside requirement
+also conflicts with the shared writer's all-finite zero-outside export. Historical scientific
+receipts remain unchanged; they do not override either blocker.</p>
 </section><div class="metrics">
 <section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
 <div class="number">0.0730</div>
-<p>[0.0667, 0.0790] · 11,321 withheld catalogue pixels</p></section>
+<p>[0.0667, 0.0790] · 11,321 withheld catalogue positives · gems57-pooled-hide-v2</p></section>
 <section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
 <div class="number">0.0812</div>
-<p>[0.0723, 0.0900] · SGMC proxy outside the duplication band</p></section>
+<p>[0.0723, 0.0900] · 59,937 proxy positives · gems57-pooled-hide-v2 · SGMC proxy outside the duplication band</p></section>
 <section><div class="eyebrow">LITERAL OVERLAP · STOP</div>
 <div class="number">1.00</div>
 <p>Forward overlap exceeds 0.70. Low correlation does not cancel this failure.</p></section></div>
 <div class="columns">
-<section class="panel"><h2>Why it is downloadable</h2>
-<p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
-transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
-The fresh binary-witness comparison fails the literal uniqueness rule. Format checks pass, but
-that is not organizer acceptance or permission to submit.</p>
+<section class="panel"><h2>Why it is downloadable for review</h2>
+<p>The shared validator re-read the archived bytes: single band, float32, 3,730 × 3,292,
+EPSG:32611, 100 m transform, values 0/1, 37,654 dots, and zero on mapped faults. This is a local
+grid/range preflight only. The file has finite zero-valued cells outside the mapped footprint and
+no nodata marker, while the official problem page specifies null/NaN outside bounds. The shared
+writer's behavior is unresolved upstream, so this archive is <strong>not certified for upload
+format</strong>. The fresh binary-witness comparison also fails the literal uniqueness rule.</p>
 <a href="results.html">Full evidence →</a></section>
 <section class="panel"><h2>Why it is not promoted</h2>
 <p>On instrument B′ the candidate scores 0.0812 versus H33's
