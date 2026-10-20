@@ -9,28 +9,28 @@
     "candidate": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "dti": 0.07304229212058164,
+      "dti": 3.487040937621885e-06,
       "ci95": [
-        0.06673987703804156,
-        0.07899496967047342
+        0.0,
+        1.0874256807831837e-05
       ],
       "withheld_positive_pixels": 11321,
-      "tpw": 1208.3106567824766,
-      "fpw": 36220.773893449084,
-      "fnw": 10112.689343217526
+      "tpw": 0.05719095841793653,
+      "fpw": 36720.94280904158,
+      "fnw": 11320.942809041582
     },
     "random_control": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "dti": 0.0505547543622084,
+      "dti": 0.04886365802839466,
       "ci95": [
-        0.045115887268522566,
-        0.05583407617316418
+        0.04287610060660186,
+        0.05487744610170376
       ],
       "withheld_positive_pixels": 11321,
-      "tpw": 836.7157244009225,
-      "fpw": 36632.700344652236,
-      "fnw": 10484.284275599077
+      "tpw": 806.7553847342693,
+      "fpw": 36460.921800942655,
+      "fnw": 10514.24461526573
     },
     "h33_reference": {
       "evidence_class": "HOLDOUT-DTI",
@@ -51,20 +51,20 @@
     "random_control": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "delta": 0.022487537758373234,
+      "delta": -0.048860170987457034,
       "ci95": [
-        0.01678975383937246,
-        0.028362397424952772
+        -0.05487744610170377,
+        -0.04287268407670434
       ],
       "withheld_positive_pixels": 11321
     },
     "h33_reference": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "delta": 0.06934251043495206,
+      "delta": -0.003696294644691964,
       "ci95": [
-        0.06291014535705214,
-        0.07537236714056564
+        -0.004493651126629179,
+        -0.003037134722219959
       ],
       "withheld_positive_pixels": 11321
     }
@@ -83,5 +83,5 @@
     "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
     "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
   },
-  "instrument": "A: shared hide-and-recover catalogue holdout"
+  "instrument": "A hide-and-recover (approx static)"
 }

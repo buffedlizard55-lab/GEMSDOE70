@@ -9,28 +9,28 @@
     "candidate": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "dti": 0.09483894035517236,
+      "dti": 0.11178209218440598,
       "ci95": [
-        0.08573631335752449,
-        0.10339452460864469
+        0.10252729667380639,
+        0.12086184391614928
       ],
       "withheld_positive_pixels": 74740,
-      "tpw": 6447.2540158053225,
-      "fpw": 34498.16835924002,
-      "fnw": 68292.74598419471
+      "tpw": 7615.383917219043,
+      "fpw": 34059.854178700836,
+      "fnw": 67124.61608278101
     },
     "random_control": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "dti": 0.07101315599892798,
+      "dti": 0.07260519919085918,
       "ci95": [
-        0.067852845424844,
-        0.07407922986767024
+        0.06912507516774574,
+        0.07634391897370656
       ],
       "withheld_positive_pixels": 74740,
-      "tpw": 4812.591466284612,
-      "fpw": 35079.512667578914,
-      "fnw": 69927.40853371547
+      "tpw": 4920.011237839442,
+      "fpw": 34939.47363858642,
+      "fnw": 69819.98876216059
     },
     "h33_reference": {
       "evidence_class": "HOLDOUT-DTI",
@@ -51,20 +51,20 @@
     "random_control": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "delta": 0.023825784356244384,
+      "delta": 0.03917689299354679,
       "ci95": [
-        0.01331495613062335,
-        0.03406527202531153
+        0.027643110054724786,
+        0.050576149239274
       ],
       "withheld_positive_pixels": 74740
     },
     "h33_reference": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "delta": 0.004239964266768592,
+      "delta": 0.021183116096002208,
       "ci95": [
-        -0.00667662665608025,
-        0.01478003822888557
+        0.010062140904966859,
+        0.03213360889554195
       ],
       "withheld_positive_pixels": 74740
     }
@@ -83,5 +83,5 @@
     "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
     "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
   },
-  "instrument": "B: unrestricted SGMC proxy (contains duplication band)"
+  "instrument": "B unrestricted"
 }

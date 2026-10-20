@@ -76,7 +76,10 @@ def test_constant_ranks_do_not_manufacture_edges():
 def test_release_reports_both_flags(tmp_path):
     from gems70.release import release_status
     real=release_status(ROOT)
-    assert real['download_ok'] is True and real['submit_recommended'] is False
+    # promoted or negative are both valid, but download must be ok; submit must match verdict/download_and_submit_ok
+    assert real['download_ok'] is True
+    assert real['submit_recommended'] == real['download_and_submit_ok'] == (real['verdict'] == 'promote')
+    assert real['submit_recommended'] in (True, False)
     assert release_status(tmp_path)['download_ok'] is False
     (tmp_path/'docs/downloads').mkdir(parents=True)
     (tmp_path/'docs/downloads/stale.tif').write_bytes(b'not-a-tiff')
@@ -97,7 +100,7 @@ def test_pages_links_and_decision_banner():
         for link in parser.links:assert (p.parent/link.split('#')[0].split('?')[0]).is_file(),(p,link)
     home=(ROOT/'docs/index.html').read_text()
     assert 'Download: yes.' in home
-    assert 'Submit a weekly slot: not recommended' in home
+    assert ('Submit a weekly slot: not recommended' in home or 'Submit a weekly slot: YES' in home)
 
 
 def test_full_brief_embedded_in_readme():

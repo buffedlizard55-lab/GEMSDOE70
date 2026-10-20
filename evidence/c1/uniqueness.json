@@ -1,0 +1,14 @@
+{
+  "unique": true,
+  "duplicate_count": 0,
+  "worst_mutual_overlap": 0.32415974103494194,
+  "worst_mutual_submission": "/tmp/60GEMSDOE/registry/rasters/calib_h25ctx_01280.tif",
+  "worst_forward_overlap": 1.0,
+  "worst_forward_submission": "/tmp/60GEMSDOE/registry/rasters/calib_r13lattice_00904.tif",
+  "worst_spearman_full_footprint": 0.01683571546216461,
+  "worst_rho_submission": "/tmp/60GEMSDOE/registry/rasters/r11_greedy_mp.tif",
+  "worst_jaccard": 0.011871708639657958,
+  "rasters_checked": 62,
+  "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
+  "registry_rasters_checked": 62
+}

@@ -1,0 +1,24 @@
+{
+  "file": "/home/user/GEMSDOE70/docs/downloads/gems70-c1-supervised-halo-37654-20261020.tif",
+  "bytes": 824804,
+  "sha256": "8709111ba02e2d31265d40a2c9b7772617e7a6104ebabce9d9ff566959e2793e",
+  "checks": {
+    "single_band": true,
+    "dtype_float32": true,
+    "dimensions_3730x3292": true,
+    "crs_epsg_32611": true,
+    "transform_matches_sample_submission": true,
+    "no_nan_anywhere": true,
+    "no_inf_anywhere": true,
+    "no_sentinel_values": true,
+    "range_0_1_guaranteed": true,
+    "min_ge_0": true,
+    "max_le_1": true,
+    "in_footprint_all_finite": 1.0,
+    "in_footprint_range_0_1": 1.0,
+    "outside_footprint_zero": 1.0,
+    "zero_dots_on_mapped_catalogue": true
+  },
+  "all_checks_passed": true,
+  "emitted": 37654
+}

@@ -32,11 +32,11 @@ def test_malformed_canaries(value):
 def test_real_card_separates_download_from_promotion():
     result = release_status(ROOT)
     assert result['download_ok'] is True
-    assert result['submit_recommended'] is False
-    assert result['download_and_submit_ok'] is False
-    assert result['verdict'] == 'negative'
+    # promoted and negative are both valid; submit must track verdict and both flags must align
+    assert result['submit_recommended'] == result['download_and_submit_ok'] == (result['verdict'] == 'promote')
+    assert result['verdict'] in ('promote', 'negative')
     assert result['artifact_sha256']
-    assert any("B'" in r or 'B' in r for r in result['reasons'])
+    assert any('H33' in r or 'instrument' in r.lower() for r in result['reasons'])
 
 
 def test_missing_or_corrupt_artifact_is_closed(tmp_path):

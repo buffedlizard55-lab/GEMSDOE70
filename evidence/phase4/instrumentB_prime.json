@@ -9,28 +9,28 @@
     "candidate": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "dti": 0.08116240066330835,
+      "dti": 0.11071761318224514,
       "ci95": [
-        0.07234947587460432,
-        0.09002008521926923
+        0.09999103430007998,
+        0.12179705032801388
       ],
       "withheld_positive_pixels": 59937,
-      "tpw": 4534.37510614471,
-      "fpw": 35057.26178772765,
-      "fnw": 55402.62489385531
+      "tpw": 6208.68625999451,
+      "fpw": 34427.169639011816,
+      "fnw": 53728.313740005506
     },
     "random_control": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "dti": 0.06972784527138284,
+      "dti": 0.07300002426560784,
       "ci95": [
-        0.06575396086921854,
-        0.07316676604814398
+        0.06905530495181807,
+        0.0771687095689933
       ],
       "withheld_positive_pixels": 59937,
-      "tpw": 3891.6375660062354,
-      "fpw": 35419.434950853014,
-      "fnw": 56045.36243399379
+      "tpw": 4074.5977395733826,
+      "fpw": 35259.34644911,
+      "fnw": 55862.402260426665
     },
     "h33_reference": {
       "evidence_class": "HOLDOUT-DTI",
@@ -51,20 +51,20 @@
     "random_control": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "delta": 0.011434555391925505,
+      "delta": 0.037717588916637304,
       "ci95": [
-        0.0006786699932028943,
-        0.022242443918010356
+        0.023798802245726045,
+        0.05094058176988731
       ],
       "withheld_positive_pixels": 59937
     },
     "h33_reference": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "delta": -0.012608167951616275,
+      "delta": 0.01694704456732052,
       "ci95": [
-        -0.02407310642988495,
-        -0.0017959437463979239
+        0.004442152965204899,
+        0.029185393806017416
       ],
       "withheld_positive_pixels": 59937
     }
@@ -83,7 +83,6 @@
     "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
     "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
   },
-  "instrument": "B': SGMC proxy truth restricted to d_cat >= 3 px",
-  "proxy_positive_pixels_prime": 62649,
-  "proxy_positive_pixels_all": 78433
+  "instrument": "B': SGMC proxy d>=3px quadrant",
+  "proxy_prime": 62649
 }

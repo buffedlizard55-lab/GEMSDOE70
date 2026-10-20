@@ -1,0 +1,11 @@
+{
+  "worst_spearman_full_footprint": 0.09556950287494809,
+  "worst_rho_submission": "/tmp/60GEMSDOE/registry/rasters/57GEMSDOE__faultzone-anatomy-60000px-prev.tif",
+  "worst_mutual_overlap": 0,
+  "worst_mutual_submission": null,
+  "worst_forward_overlap": 0,
+  "worst_forward_submission": null,
+  "worst_jaccard": 0,
+  "rasters_checked": 62,
+  "unique": true
+}

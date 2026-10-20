@@ -1,0 +1,170 @@
+{
+  "b1_mag_anom": {
+    "auc": 0.5219557739892149,
+    "suspected_leakage": false
+  },
+  "b2_rtp": {
+    "auc": 0.5198651146889594,
+    "suspected_leakage": false
+  },
+  "b3_tmi_hg": {
+    "auc": 0.49288923949222074,
+    "suspected_leakage": false
+  },
+  "b4_geod_2ndinv": {
+    "auc": 0.4647676743556003,
+    "suspected_leakage": false
+  },
+  "b5_iso_grav_anom_slope": {
+    "auc": 0.44121974675542486,
+    "suspected_leakage": false
+  },
+  "b6_tc": {
+    "auc": 0.38131620133137245,
+    "suspected_leakage": false
+  },
+  "b7_geod_shearrate": {
+    "auc": 0.4655066951131408,
+    "suspected_leakage": false
+  },
+  "b8_geod_dilaterate": {
+    "auc": 0.44985668221224556,
+    "suspected_leakage": false
+  },
+  "b9_tmi_vg": {
+    "auc": 0.5015472902959466,
+    "suspected_leakage": false
+  },
+  "b10_deq_n100a15": {
+    "auc": 0.4742474442036277,
+    "suspected_leakage": false
+  },
+  "b11_iso_grav_anom_vg": {
+    "auc": 0.463612772982945,
+    "suspected_leakage": false
+  },
+  "b12_det_elev": {
+    "auc": 0.6614931449157572,
+    "suspected_leakage": false
+  },
+  "b13_iso_grav_anom": {
+    "auc": 0.6097495500812756,
+    "suspected_leakage": false
+  },
+  "b14_tmi": {
+    "auc": 0.5300090172097943,
+    "suspected_leakage": false
+  },
+  "b15_depth_to_base_surf": {
+    "auc": 0.3596373818923033,
+    "suspected_leakage": false
+  },
+  "b16_ieq_n100a15": {
+    "auc": 0.4727222926826121,
+    "suspected_leakage": false
+  },
+  "b17_cond_surf": {
+    "auc": 0.5311692120133137,
+    "suspected_leakage": false
+  },
+  "b18_iso_grav_anom_hg": {
+    "auc": 0.49163717412338415,
+    "suspected_leakage": false
+  },
+  "b19_det_elev_slope": {
+    "auc": 0.7330731594292643,
+    "suspected_leakage": false
+  },
+  "lidar_ex_max": {
+    "auc": 0.5691021822509482,
+    "suspected_leakage": false
+  },
+  "lidar_ex_mean": {
+    "auc": 0.5701275830172614,
+    "suspected_leakage": false
+  },
+  "lidar_step_max": {
+    "auc": 0.5786776844828032,
+    "suspected_leakage": false
+  },
+  "lidar_lapneg_max": {
+    "auc": 0.5752542246561911,
+    "suspected_leakage": false
+  },
+  "lidar_lappos_max": {
+    "auc": 0.5800027471811543,
+    "suspected_leakage": false
+  },
+  "lidar_downface_max": {
+    "auc": 0.597988498013262,
+    "suspected_leakage": false
+  },
+  "lidar_upface_max": {
+    "auc": 0.593087911990092,
+    "suspected_leakage": false
+  },
+  "lidar_cross_max": {
+    "auc": 0.6029895914286452,
+    "suspected_leakage": false
+  },
+  "lidar_relief": {
+    "auc": 0.589546378460665,
+    "suspected_leakage": false
+  },
+  "lidar_coh100": {
+    "auc": 0.4462143425703744,
+    "suspected_leakage": false
+  },
+  "lidar_strike": {
+    "auc": 0.45370462574502674,
+    "suspected_leakage": false
+  },
+  "lidar_valid": {
+    "auc": 0.4558910992852905,
+    "suspected_leakage": false
+  },
+  "rad_K": {
+    "auc": 0.35385516474443324,
+    "suspected_leakage": false
+  },
+  "rad_Th": {
+    "auc": 0.4345778509688572,
+    "suspected_leakage": false
+  },
+  "rad_U": {
+    "auc": 0.41719195693681144,
+    "suspected_leakage": false
+  },
+  "rad_TC": {
+    "auc": 0.38136442429754625,
+    "suspected_leakage": false
+  },
+  "ext_ThK": {
+    "auc": 0.5304182416079677,
+    "suspected_leakage": false
+  },
+  "ext_UK": {
+    "auc": 0.5673089316123539,
+    "suspected_leakage": false
+  },
+  "ext_UTh": {
+    "auc": 0.5221544637742859,
+    "suspected_leakage": false
+  },
+  "ext_TMI_up150": {
+    "auc": 0.544272938630441,
+    "suspected_leakage": false
+  },
+  "geom_d": {
+    "auc": 0.4827538168588899,
+    "suspected_leakage": false
+  },
+  "geom_log_len": {
+    "auc": 0.5294160051087545,
+    "suspected_leakage": false
+  },
+  "geom_tip": {
+    "auc": 0.5008916179012823,
+    "suspected_leakage": false
+  }
+}

@@ -55,6 +55,24 @@
       "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
       "bytes": 498152,
       "note": "parallel H2 session (PR #18), blocked diagnostic, NOT a submission; card evidence/history/h2_stepover_negative/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-c1-supervised-halo-37654-20261020.tif",
+      "sha256": "8709111ba02e2d31265d40a2c9b7772617e7a6104ebabce9d9ff566959e2793e",
+      "bytes": 824804,
+      "note": "C1 supervised halo SGMC proxy HGB, promoted; run card evidence/c1/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-c1-supervised-halo-37654-20261020.zip",
+      "sha256": "9d1a6c03a9ccfbe21649cb63b85e1ced2407a795d6927c3a196d09a649e1de9a",
+      "bytes": 189789,
+      "note": "C1 supervised halo one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-c1-supervised-halo-37654-20261020.json",
+      "sha256": "0054731f8a547b27c605bc3ef9e6f911db3b81cb69f06e24400deb94aa4450fb",
+      "bytes": 1266,
+      "note": "C1 writer receipt"
     }
   ]
 }
