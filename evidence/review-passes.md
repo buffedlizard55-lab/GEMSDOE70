@@ -81,3 +81,7 @@ uniqueness clearance. All source, claims and files are preserved with hashes in
 quarantine/concurrent-h70c and evidence/concurrent_h70c_quarantine.json; none is
 endorsed or linked as a submission. Source text is retained, not executed. The
 canonical site remains negative. No additional scientific experiment was run.
+
+Final post-quarantine local suite: **69 tests passed**, with three upstream
+Rasterio/Affine pending-deprecation warnings. The added test verifies archival
+artifact byte hashes and absence of any TIFF/ZIP in the published docs tree.

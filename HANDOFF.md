@@ -78,3 +78,5 @@ uniqueness clearance. All source, claims and files are preserved with hashes in
 quarantine/concurrent-h70c and evidence/concurrent_h70c_quarantine.json; none is
 endorsed or linked as a submission. Source text is retained, not executed. The
 canonical site remains negative. No additional scientific experiment was run.
+
+Final suite after adding quarantine hash/publication coverage: **69 tests pass**.
