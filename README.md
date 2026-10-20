@@ -3,7 +3,7 @@
 ## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
 A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
+`docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif` (sha256 `fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `negative` on the pre-registered target-like gate. No weekly slot was used.
 
@@ -22,18 +22,18 @@ off-catalogue.
 
 | Instrument | Candidate | H33 reference | Result |
 |---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
+| A · shared hide-and-recover catalogue holdout | 0.0709 | 0.0037 | candidate wins |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0793 | 0.0953 | **H33 wins, delta = -0.0160 [-0.02718049103902757, -0.004737767848247423]** |
+| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0945 | 0.0923 | candidate wins |
 
 Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
 is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
 21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
 artifact is published but not promoted. Nothing here is an organizer-confirmed score.
 
-**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
-(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
+**Uniqueness (corrected):** 2 archived rasters checked; worst mutual
+overlap 0.198 (limit 0.70); worst Spearman 0.002
+(limit 0.90). Forward-only overlap reaches 0.20 against a dense lattice
 whose halo covers the whole footprint — which is why the two-direction test was adopted.
 
 ## Two fixes to the shared tool (reported, not silently forked)
