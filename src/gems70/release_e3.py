@@ -42,6 +42,19 @@ def _load(root, rel):
 
 def release_status_e3(root):
     root = Path(root)
+    global_hold = _load(root, 'evidence/release_hold.json')
+    if isinstance(global_hold, dict) and global_hold.get('verdict') == 'negative':
+        return {
+            'download_candidate_ok': False,
+            'download_and_submit_ok': False,
+            'slot_authorized': False,
+            'verdict': 'negative',
+            'submission_name': None,
+            'raster_sha256': None,
+            'checks': {'global_release_hold': False},
+            'reasons': list(global_hold.get('blocking_evidence', [])),
+            'policy': 'Global literal-protocol release hold blocks all candidate downloads and submissions.',
+        }
     reasons, checks = [], {}
     card = None
     final_uniq = {}
@@ -131,6 +144,13 @@ def released_filenames(root):
     E3 pair plus every inventoried raster/archive from parallel sessions
     (registry/published_artifacts.json is the shared source of truth)."""
     root = Path(root)
+    hold = root / 'evidence/release_hold.json'
+    if hold.is_file():
+        try:
+            if json.loads(hold.read_text()).get('verdict') == 'negative':
+                return set()
+        except (OSError, ValueError, TypeError):
+            return set()
     names = set()
     try:
         card = _load(root, "evidence/run_card_e3_amended.json")

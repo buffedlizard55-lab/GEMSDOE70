@@ -6,7 +6,7 @@ Written before Phase-2 experiments. These are geological hypotheses, **not estab
 
 ## Why H33 scored 0.2778 and how to beat it — PhD-level analysis
 
-**What H33 actually is (DATA-MEASUREMENT, not ORGANIZER-CONFIRMED score):**  
+**What H33 actually is (DATA-MEASUREMENT, not ORGANIZER-CONFIRMED score):**
 `evidence/h33_audit.json` shows D2.8 → H27 → H33 B2 is *pure catalogue-flank pruning*, not a new detector:
 - D2.8: 44,090 Poisson 300-m dots off-catalogue (2.8 ≈ distance factor, measured min catalogue distance 1 px)
 - H27: 40,199 dots — exactly 3,891 D2.8 dots removed, all exactly 1 px from mapped catalogue
@@ -14,17 +14,17 @@ Written before Phase-2 experiments. These are geological hypotheses, **not estab
 
 H33 is binary 0/1, min catalogue distance √5 px (~224 m), median 1,965 m, only 5.77% within 300 m of catalogue. It is not a ribbon around faults.
 
-**Mechanism (conditional algebra from `docs/h33-analysis.md`):**  
+**Mechanism (conditional algebra from `docs/h33-analysis.md`):**
 For DTI = T / (T + α(S−M) + β(N−T)), α=0.2 β=0.8, triangular kernel 300 m (3 px):
 - T = kernel-weighted truth coverage, S = emitted prediction mass, M = nearest-truth kernel credit, N = truth count
 - New dot improves DTI iff ΔT > α·old_DTI·(ΔT+1−k), where k is its nearest-truth credit
 - Near-catalogue dots have low k (they lie on already-covered truth halo of known faults) and low ΔT (they duplicate coverage), so deleting them reduces denominator faster than numerator → DTI rises
 - Sparse Poisson already reduces S−M penalty; pruning 6,436 low-credit dots (44,090→37,654) gives the reported sequential gains 0.2600→0.2708→0.2778 (user-supplied, not ORGANIZER-CONFIRMED)
 
-**Why it does not prove geological discovery:**  
+**Why it does not prove geological discovery:**
 Catalogue-flank pruning is optimal *conditional on the unknown hidden faults being far from catalogue*. If hidden faults cluster near catalogue (e.g. relay ramps, horsetails), pruning hurts. The holdout `catalogue_hidden_mean` for H33 is only 0.0046 on the pooled hide-and-recover instrument (withheld whole fault components, 12-px erosion, pixel-exact known-fault masking) — low absolute signal, but slot-eligible after drift correction. Beating H33 requires *higher T per dot*, not just lower S: a ranking that places dots where hidden truth actually lies.
 
-**Path to beat 0.2778:**  
+**Path to beat 0.2778:**
 A geophysically-guided rank can achieve higher T/S than Poisson-random if it correlates with the off-catalogue fault population. The 19-band `training_features.tif` (SHA256 `4371c82e…`, `evidence/feature_metadata.json`, `evidence/data_receipt.json`) provides catalogue-independent signals: magnetic anomaly/tilt/horizontal gradient, isostatic gravity anomaly/slope/horizontal/vertical gradients, detrended elevation/slope, depth-to-basement, conductivity, and Geodetic strain (second invariant, shear, dilatation). These are all finite inside the 5,167,373-cell footprint (5,165,852 training-valid) and are not derived from the catalogue, so they pass leakage canaries (AUC ≤0.55 in Phase 1). External layers (lidar scarp 12-band, GeoDAWN radiometrics) are pinned in `registry/data_manifest_gemsdoe32.json` but not needed for Phase 2; they are obtainable from USGS/GeoDAWN if future hypotheses require them.
 
 ## Five candidate hypotheses not yet tried (ranked by expected DTI gain / cost)

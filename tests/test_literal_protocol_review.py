@@ -82,10 +82,14 @@ def test_fresh_review_binds_every_archived_final_file_and_does_not_claim_univers
     assert review['minimum_forward_overlap_at_fixed_budget'] == pytest.approx(1 - 6649 / 37654)
     assert review['minimum_forward_overlap_at_fixed_budget'] > .70
     inv = json.loads((ROOT / 'registry/published_artifacts.json').read_text())
-    expected = {r['path'] for r in inv['artifacts'] if r['path'].endswith('.tif')}
-    assert {r['artifact'] for r in review['archived_artifacts']} == expected
+    assert not [r for r in inv['artifacts'] if r['path'].lower().endswith(('.tif', '.tiff', '.zip'))]
+    manifest = json.loads((ROOT / 'quarantine/published-downloads-2026-10-20/manifest.json').read_text())
+    quarantined = {row['file']: row['sha256'] for row in manifest['files']}
+    assert len(review['archived_artifacts']) == 6
     for row in review['archived_artifacts']:
-        assert digest(ROOT / row['artifact']) == row['raster_sha256']
+        name = Path(row['artifact']).name
+        assert digest(ROOT / 'quarantine/published-downloads-2026-10-20' / name) == row['raster_sha256']
+        assert quarantined[name] == row['raster_sha256']
         assert literal_lane_status(row['shared_measurements'])['stop_required']
         assert row['literal_lane_status']['protocol_unique'] is False
         assert row['validator_output']['all_checks_passed']
@@ -96,13 +100,13 @@ def test_fresh_review_binds_every_archived_final_file_and_does_not_claim_univers
     assert card['verdict'] == 'negative' and len(card['submission_note']) <= 140
 
 
-def test_release_reports_forensic_download_not_protocol_uniqueness():
+def test_release_blocks_download_and_submission_on_literal_stop():
     status = release_status(ROOT)
-    assert status['download_ok']
+    assert status['download_ok'] is False
     assert status['literal_lane_status']['stop_required']
     assert status['protocol_unique'] is False
     assert status['submit_recommended'] is False
-    assert 'review only' in status['download_scope']
+    assert 'quarantined for audit only' in status['download_scope']
 
 
 def test_promote_flag_alone_cannot_waive_literal_gate(tmp_path):
@@ -118,22 +122,23 @@ def test_promote_flag_alone_cannot_waive_literal_gate(tmp_path):
     path.write_text(json.dumps(card))
     artifact = f"docs/downloads/{card['submission_name']}.tif"
     (tmp_path / artifact).parent.mkdir(parents=True)
-    shutil.copyfile(ROOT / artifact, tmp_path / artifact)
+    shutil.copyfile(ROOT / 'quarantine/published-downloads-2026-10-20' / Path(artifact).name, tmp_path / artifact)
     result = release_status(tmp_path)
     assert result['download_ok']
     assert result['submit_recommended'] is False
 
 
-def test_current_pages_have_unambiguous_review_only_banner():
+def test_current_pages_have_unambiguous_no_download_banner():
     for page in ['index.html', 'executive-summary.html', 'submission.html', 'protocol-review.html',
                  'results.html', 'h33-analysis.html']:
         text = (ROOT / 'docs' / page).read_text()
         assert 'DO NOT SUBMIT' in text
-        assert 'review_run_card.json' in text
+        assert 'Current protocol: DO NOT SUBMIT.' in text or page == 'executive-summary.html'
+        assert 'No TIFF is authorized for download or submission' in text or page == 'executive-summary.html'
+        assert 'Download submission TIFF' not in text
     executive = (ROOT / 'docs/executive-summary.html').read_text()
-    assert 'http-equiv="refresh"' not in executive
-    assert 'live submission-page cap' in executive
-    assert 'Download archived TIFF' in executive
+    assert 'http-equiv="refresh"' in executive
+    assert 'submission.html' in executive
 
 
 @pytest.mark.parametrize('damage', ['truthy_string', 'validator_hash', 'validator_summary'])
@@ -152,12 +157,11 @@ def test_format_receipt_must_be_literal_true_and_hash_bound(tmp_path, damage):
     assert not result['download_ok'] and not result['submit_recommended']
 
 
-def test_scarp_e3_download_does_not_imply_current_uniqueness():
+def test_scarp_e3_is_blocked_by_global_literal_hold():
     from gems70.release_e3 import release_status_e3
     result = release_status_e3(ROOT)
-    assert result['download_candidate_ok']  # frozen historical checks unchanged
-    assert result['literal_lane_status']['stop_required']
-    assert not result['literal_lane_status']['protocol_unique']
+    assert result['download_candidate_ok'] is False
+    assert result['checks']['global_release_hold'] is False
     assert not result['slot_authorized'] and not result['download_and_submit_ok']
 
 

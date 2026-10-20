@@ -47,8 +47,29 @@ def _load(root, rel):
 
 
 def release_status(root):
-    """Report the published candidate's status without ever inventing a score."""
+    """Report release status; an explicit integrity hold fails closed."""
     root = Path(root)
+    hold = _load(root, 'evidence/release_hold.json')
+    if isinstance(hold, dict) and hold.get('verdict') == 'negative':
+        return {
+            'verdict': 'negative',
+            'review_only': True,
+            'current_forward_protocol_ok': False,
+            'protocol_unique': False,
+            'literal_lane_status': (_load(root, 'evidence/current_protocol_review.json') or {}).get(
+                'correlation_overlap_vs_registry', {}),
+            'download_scope': 'No file cleared; archived TIFFs quarantined for audit only.',
+            'download_ok': False,
+            'submit_recommended': False,
+            'download_and_submit_ok': False,
+            'artifact': None,
+            'artifact_sha256': None,
+            'submission_name': None,
+            'reasons': list(hold.get('blocking_evidence', [])),
+            'notes': ['No artifact is cleared; quarantined files are audit-only.'],
+            'weekly_slots_used': 0,
+            'policy': 'Release hold must be explicitly resolved by a new reviewed evidence chain.',
+        }
     card = _load(root, 'evidence/phase4/run_card.json')
     canaries = _load(root, 'evidence/phase2/canaries.json')
     audit = _load(root, 'evidence/phase4/uniqueness.json')

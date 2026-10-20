@@ -52,18 +52,16 @@ def test_historical_receipt_is_mutual_but_not_a_literal_pass():
     assert not literal_lane_status(audit)['protocol_unique']
 
 
-def test_published_tiff_matches_card_and_is_binary():
+def test_historical_candidate_is_quarantined_not_published():
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
-    path = ROOT / 'docs/downloads' / (card['submission_name'] + '.tif')
-    with rasterio.open(path) as src:
-        a = src.read(1)
-        assert src.count == 1 and src.dtypes[0] == 'float32'
-        assert (src.height, src.width) == (3730, 3292)
-        assert str(src.crs) == 'EPSG:32611'
-    vals = np.unique(a)
-    assert set(np.round(vals, 6)).issubset({0.0, 1.0})
-    assert int((a > 0).sum()) == 37654
-    assert np.isfinite(a).all()
+    name = card['submission_name'] + '.tif'
+    assert not (ROOT / 'docs/downloads' / name).exists()
+    path = ROOT / 'quarantine/published-downloads-2026-10-20' / name
+    assert path.is_file()
+    import hashlib
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == card['raster_sha256']
+    hold = json.loads((ROOT / 'evidence/release_hold.json').read_text())
+    assert hold['download_ok'] is False and hold['verdict'] == 'negative'
 
 
 def test_no_historical_projection_is_current_score():

@@ -15,15 +15,18 @@ from gems70.release_e3 import digest, release_status_e3
 ROOT = Path(__file__).resolve().parents[1]
 E = ROOT / "evidence"
 CARD = json.loads((E / "run_card_e3_amended.json").read_text())
-TIF = ROOT / "docs/downloads" / f"{CARD['submission_name']}.tif"
+TIF = ROOT / "quarantine/published-downloads-2026-10-20" / f"{CARD['submission_name']}.tif"
 
 
-def test_release_contract_all_checks():
+def test_global_literal_protocol_hold_blocks_e3_release():
     status = release_status_e3(ROOT)
-    assert status["download_candidate_ok"] is True
-    assert status["download_and_submit_ok"] is False  # slot selection is separate
+    assert status["download_candidate_ok"] is False
+    assert status["download_and_submit_ok"] is False
     assert status["slot_authorized"] is False
-    assert all(status["checks"].values()), status
+    assert status["checks"]["global_release_hold"] is False
+    assert any('literal one-way overlap rule' in reason for reason in status['reasons'])
+    from gems70.release_e3 import released_filenames
+    assert released_filenames(ROOT) == set()
 
 
 def test_tif_bytes_revalidate_independently():
@@ -69,7 +72,9 @@ def test_uniqueness_vs_champion_and_erratum_binding():
     assert h33["my_dots_within_3px_of_theirs"] <= 0.70
     assert h33["jaccard_dot_sets"] <= 0.50
     assert abs(h33["spearman_full_footprint"]) <= 0.90
-    assert uniq["adjusted"]["duplicate_adjusted"] is False
+    assert uniq["adjusted"]["duplicate_adjusted"] is False  # historical preregistered adjusted rule
+    assert any(r.get('my_dots_within_3px_of_theirs', 0) > 0.70
+               for r in uniq['audit']['rows'] if 'error' not in r)  # literal current rule: STOP
     assert CARD["erratum"]["original_card_sha256"] == digest(E / "run_card_e3.json")
     original = json.loads((E / "run_card_e3.json").read_text())
     assert original["verdict"] == "negative" and original["raster_sha256"] is None

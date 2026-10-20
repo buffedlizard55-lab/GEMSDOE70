@@ -95,6 +95,11 @@ def adjusted_from_rows(rows, grid, need_certs):
 
 
 def main():
+    hold_path = E / "release_hold.json"
+    if hold_path.is_file():
+        hold = json.loads(hold_path.read_text())
+        if hold.get("verdict") == "negative":
+            raise SystemExit("Global literal-protocol release hold is active; no candidate completion or publication allowed.")
     start = time.monotonic()
     amended_path = E / "run_card_e3_amended.json"
     if amended_path.exists():

@@ -96,29 +96,10 @@ def test_project_pages_mount_is_resolved_against_site(tmp_path):
     assert check_output(tmp_path)['built_output_ok']
 
 
-def test_explicit_inventory_allows_only_hash_pinned_review_artifact(tmp_path):
-    import hashlib
+def test_quarantined_review_bytes_are_not_published(tmp_path):
     safe_output(tmp_path)
-    rel = 'docs/review.tif'
-    raster = tmp_path / rel
-    raster.write_bytes(b'review fixture')
-    allowed = {rel: hashlib.sha256(raster.read_bytes()).hexdigest()}
-    assert check_output(tmp_path, allowed_artifacts=allowed)['raster_downloads'] == 1
-    raster.write_bytes(b'tampered')
-    with pytest.raises(ValueError, match='Unsafe Pages build'):
-        check_output(tmp_path, allowed_artifacts=allowed)
-
-
-def test_integrated_current_pages_after_markdown_exclusion(tmp_path):
-    import shutil
-    from gems70.release import published_artifacts
-    from gems70.pages_policy import PUBLIC_ROOTS
-    for name in PUBLIC_ROOTS:
-        p = ROOT / name
-        if p.is_dir():
-            shutil.copytree(p, tmp_path / name, ignore=shutil.ignore_patterns('*.md'))
-        elif p.is_file():
-            shutil.copyfile(p, tmp_path / name)
-    result = check_output(tmp_path, allowed_artifacts=published_artifacts(ROOT))
-    assert result['built_output_ok']
-    assert result['raster_downloads'] == len(published_artifacts(ROOT))
+    rel = 'docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif'
+    assert not (ROOT / rel).exists()
+    assert (ROOT / 'quarantine/published-downloads-2026-10-20' /
+            'gems70-p4-stratified-halo-37654-20261020.tif').is_file()
+    assert check_output(tmp_path)['raster_downloads'] == 0

@@ -1,46 +1,71 @@
 {
-  "current_forward_protocol_ok": false,
-  "review_only": true,
   "verdict": "negative",
-  "download_ok": true,
-  "download_scope": "archived negative; forensic review only",
+  "review_only": true,
+  "current_forward_protocol_ok": false,
   "protocol_unique": false,
   "literal_lane_status": {
-    "policy": "literal-forward-v1",
-    "overlap_limit": 0.7,
-    "rho_limit": 0.9,
-    "stop_required": true,
-    "protocol_unique": false,
-    "complete_scan": true,
-    "duplicate_witnesses": [
-      "calib_r13lattice_00904.tif",
-      "r11_greedy_mp.tif",
-      "r13_lattice_s5_00904.tif",
-      "r14_union_tips10_lat6.tif"
+    "rule": "Spearman > 0.90 OR candidate dots within 3px of registry dots > 0.70",
+    "policy": "Forward overlap, not mutual; exact threshold equality does not trigger.",
+    "witnesses": [
+      {
+        "submission": "calib_r13lattice_00904.tif",
+        "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+        "spearman_full_footprint": -0.0004249861963070003,
+        "my_dots_within_3px_of_theirs": 1.0,
+        "their_dots_within_3px_of_mine": 0.21055607917059377
+      },
+      {
+        "submission": "r11_greedy_mp.tif",
+        "sha256": "033df94ceef16350030a69d5cfdec0afe7bc605bb155d8f3b98b203aabf80abd",
+        "spearman_full_footprint": -0.003451535346305423,
+        "my_dots_within_3px_of_theirs": 0.8069262229776385,
+        "their_dots_within_3px_of_mine": 0.22230651669580323
+      },
+      {
+        "submission": "r13_lattice_s5_00904.tif",
+        "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+        "spearman_full_footprint": -0.0004249861963070003,
+        "my_dots_within_3px_of_theirs": 1.0,
+        "their_dots_within_3px_of_mine": 0.21055607917059377
+      },
+      {
+        "submission": "r14_union_tips10_lat6.tif",
+        "sha256": "c9d1398e464603350e464fff7213a8a5e380f1ccf505e263a685607970ae28ef",
+        "spearman_full_footprint": 0.013011438060611235,
+        "my_dots_within_3px_of_theirs": 0.7803686195357731,
+        "their_dots_within_3px_of_mine": 0.2994366153221905
+      }
     ],
-    "invalid_rows": [],
-    "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+    "measurement_errors": [],
+    "historical_scan_complete": true,
+    "stop_required": true,
+    "current_registry_clearance": false,
+    "scope": "Frozen historical rows only; not a refreshed all-repository inventory."
   },
+  "download_scope": "No file cleared; archived TIFFs quarantined for audit only.",
+  "download_ok": false,
   "submit_recommended": false,
   "download_and_submit_ok": false,
-  "artifact": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-  "artifact_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
-  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
+  "artifact": null,
+  "artifact_sha256": null,
+  "submission_name": null,
   "reasons": [
-    "Literal forward-overlap lane gate is not cleared; mutual overlap is not an exemption.",
-    "Candidate did not beat H33 on instrument B' with a 95% CI above zero.",
-    "Current literal one-way uniqueness audit requires STOP; review download only.",
-    "Current forward-overlap protocol requires STOP; archive download is review-only."
+    "literal one-way overlap rule exceeds 70 percent on four accessible registry rasters, including 1.0 forward overlap",
+    "the 62-raster public inventory is not complete for private or uncommitted artifacts",
+    "historical mutual-overlap clearance did not satisfy the literal prompt threshold",
+    "public-facing candidate names and receipts conflict",
+    "all previously exposed GeoTIFF/ZIP files are quarantined for audit only",
+    "H70-A archived comparison covers only two registry rasters and has no cleared complete-inventory or surface-stage audit"
   ],
   "notes": [
-    "A downloadable, validated file is not a validated leaderboard improvement."
+    "No artifact is cleared; quarantined files are audit-only."
   ],
   "weekly_slots_used": 0,
-  "policy": "Never describe a non-promoted artifact as an improvement. Both flags are always published together.",
+  "policy": "Release hold must be explicitly resolved by a new reviewed evidence chain.",
   "status": "REVIEW ONLY \u2014 LITERAL LANE STOP",
-  "download_available": true,
+  "download_available": false,
   "generated_tif": null,
-  "archived_tif_available_for_review": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+  "archived_tif_available_for_review": null,
   "approved_for_weekly_slot": false,
   "scientific_experiments_run": 0,
   "historical_experiment_count": 1,

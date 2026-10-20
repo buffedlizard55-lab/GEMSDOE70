@@ -30,8 +30,15 @@ def main():
         if digest(ROOT / rel) != pin:
             raise ValueError('scientific source changed: ' + rel)
     if card.get('raster_sha256'):
-        tif = ROOT / 'docs/downloads' / (card['submission_name'] + '.tif')
-        if not tif.is_file() or digest(tif) != card['raster_sha256']:
+        name = card['submission_name'] + '.tif'
+        tif = ROOT / 'docs/downloads' / name
+        hold_path = ROOT / 'evidence/release_hold.json'
+        hold = json.loads(hold_path.read_text()) if hold_path.is_file() else {}
+        if hold.get('verdict') == 'negative':
+            archived = ROOT / hold.get('quarantine_directory', 'quarantine') / name
+            if tif.exists() or not archived.is_file() or digest(archived) != card['raster_sha256']:
+                raise ValueError('release-held TIFF must be absent from Pages and hash-match quarantine')
+        elif not tif.is_file() or digest(tif) != card['raster_sha256']:
             raise ValueError('published TIFF does not match the run card')
     print('Verified existing run card and (if present) its published artifact.')
 

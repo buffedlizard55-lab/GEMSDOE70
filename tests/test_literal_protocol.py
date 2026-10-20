@@ -36,6 +36,7 @@ def test_current_card_is_negative_and_does_not_invent_experiment():
     card = json.loads((ROOT / 'evidence/literal_protocol_review.json').read_text())
     assert card['verdict'] == 'negative'
     assert card['submit_recommended'] is False
+    assert card['download_ok'] is False
     assert card['new_candidate_generated'] is False
     assert card['correlation_overlap_vs_registry']['duplicate'] is True
     assert len(card['note']) <= 140
@@ -45,8 +46,10 @@ def test_current_card_is_negative_and_does_not_invent_experiment():
 def test_generated_pages_show_current_stop():
     for name in ('index.html', 'submission.html', 'results.html', 'protocol-review.html'):
         text = (ROOT / 'docs' / name).read_text()
-        assert 'DO NOT SUBMIT — literal protocol stop' in text
-    assert 'CURRENT REVIEW: DO NOT SUBMIT' in (ROOT / 'README.md').read_text()
+        assert 'DO NOT SUBMIT' in text
+        assert 'No TIFF is authorized for download or submission' in text
+        assert 'downloads/' not in text
+    assert 'CURRENT DECISION: DO NOT DOWNLOAD OR SUBMIT' in (ROOT / 'README.md').read_text()
 
 
 def test_release_api_enforces_current_stop():

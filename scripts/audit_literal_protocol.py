@@ -5,34 +5,42 @@ scientific receipts and the shared template are deliberately left unchanged.
 """
 import hashlib
 import json
+import math
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def literal_gate(audit):
-    # One policy implementation across the historical and freshly measured audits.
-    import sys
-    sys.path.insert(0, str(ROOT / 'src'))
-    from gems70.protocol import literal_lane_status
-    result = literal_lane_status(audit)
-    witnesses = [
-        {'submission': row['submission'], 'spearman': row['spearman_full_footprint'],
-         'forward_overlap': row['my_dots_within_3px_of_theirs']}
-        for row in audit.get('rows', []) if isinstance(row, dict)
-        and row.get('submission') in result['duplicate_witnesses']]
+    rows = audit.get('rows', [])
+    witnesses = []
+    invalid = []
+    for row in rows:
+        rho = row.get('spearman_full_footprint')
+        overlap = row.get('my_dots_within_3px_of_theirs')
+        if (type(rho) not in (int, float) or not math.isfinite(rho)
+                or not -1 <= rho <= 1 or type(overlap) not in (int, float)
+                or not math.isfinite(overlap) or not 0 <= overlap <= 1):
+            invalid.append(row.get('submission'))
+            continue
+        if rho > .90 or overlap > .70:
+            witnesses.append({'submission': row['submission'],
+                              'spearman': rho, 'forward_overlap': overlap})
+    complete = (audit.get('complete_accessible_scan') is True
+                and audit.get('missing_or_invalid') == 0
+                and len(rows) == audit.get('registry_rasters_expected')
+                and len(rows) > 0 and not invalid)
     return {'rule': 'spearman > 0.90 OR candidate dots within 3 px > 0.70',
-            'duplicate': result['stop_required'], 'stop': not result['protocol_unique'],
-            'complete_accessible_scan': result['complete_scan'],
-            'invalid_rows': result['invalid_rows'], 'witnesses': witnesses,
-            'registry_rasters_checked': len(audit.get('rows', []))}
+            'duplicate': bool(witnesses), 'stop': bool(witnesses) or not complete,
+            'complete_accessible_scan': complete, 'invalid_rows': invalid,
+            'witnesses': witnesses, 'registry_rasters_checked': len(rows)}
 
 
 def main():
     audit = json.loads((ROOT / 'evidence/phase4/uniqueness.json').read_text())
     old = json.loads((ROOT / 'evidence/phase4/run_card.json').read_text())
     gate = literal_gate(audit)
-    artifact = ROOT / 'docs/downloads' / (old['submission_name'] + '.tif')
+    artifact = ROOT / 'quarantine/published-downloads-2026-10-20' / (old['submission_name'] + '.tif')
     sha = hashlib.sha256(artifact.read_bytes()).hexdigest()
     if sha != old['raster_sha256'] or sha != audit['candidate_file_sha256']:
         raise ValueError('Archived candidate and uniqueness receipt are not hash-linked')
@@ -49,8 +57,8 @@ def main():
         'validator_output': old['validator_output'],
         'validator_provenance': 'Archived shared-validator receipt; not a new data restoration',
         'submission_name': old['submission_name'],
-        'note': 'Archived review only. Literal one-way overlap gate fails; DO NOT SUBMIT. No new candidate generated.',
-        'verdict': 'negative', 'download_ok': True, 'submit_recommended': False,
+        'note': 'No file cleared. Archived TIFF quarantined for audit only; literal one-way overlap gate fails. DO NOT SUBMIT.',
+        'verdict': 'negative', 'download_ok': False, 'submit_recommended': False,
         'new_candidate_generated': False, 'experiments_this_session': 0,
         'weekly_slots_used': 0,
         'limitation': 'No single method paragraph assigns this session a lane. Stop on existing duplicate witness; do not invent a new lane.',

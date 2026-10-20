@@ -70,9 +70,9 @@
     "scope": "Fresh byte/range/grid audit against cached reference metadata, not organizer acceptance"
   },
   "submission_name": "gems70-p4-stratified-halo-37654-20261020",
-  "submission_note": "P4 archive review only; forward-overlap stop. DO NOT SUBMIT.",
+  "submission_note": "No file cleared; historical P4 TIFF is quarantined for audit only. DO NOT SUBMIT.",
   "verdict": "negative",
-  "download_ok_for_review": true,
+  "download_ok_for_review": false,
   "submit_ok": false,
   "new_tif_generated": false,
   "experiments_this_session": 0,

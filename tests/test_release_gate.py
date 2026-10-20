@@ -31,12 +31,12 @@ def test_malformed_canaries(value):
 
 def test_real_card_separates_download_from_promotion():
     result = release_status(ROOT)
-    assert result['download_ok'] is True
+    assert result['download_ok'] is False
     assert result['submit_recommended'] is False
     assert result['download_and_submit_ok'] is False
     assert result['verdict'] == 'negative'
-    assert result['artifact_sha256']
-    assert any("B'" in r or 'B' in r for r in result['reasons'])
+    assert result['artifact_sha256'] is None
+    assert any('literal one-way overlap rule' in r for r in result['reasons'])
 
 
 def test_missing_or_corrupt_artifact_is_closed(tmp_path):
@@ -84,6 +84,8 @@ def promotion_fixture(tmp_path):
     for rel in ('evidence/phase4', 'evidence/phase2', 'docs/downloads'):
         shutil.copytree(ROOT / rel, tmp_path / rel)
     card_path = tmp_path / 'evidence/phase4/run_card.json'
+    archived_tif = ROOT / 'quarantine/published-downloads-2026-10-20' / 'gems70-p4-stratified-halo-37654-20261020.tif'
+    (tmp_path / 'docs/downloads' / 'gems70-p4-stratified-halo-37654-20261020.tif').write_bytes(archived_tif.read_bytes())
     card = json.loads(card_path.read_text())
     card.update(download_and_submit_ok=True, verdict='promote',
                 gate_a_candidate_ge_h33=True,

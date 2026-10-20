@@ -23,7 +23,10 @@ def build(root=ROOT):
     raw = root / 'evidence/phase4/uniqueness.json'
     audit = json.loads(raw.read_text())
     card = json.loads((root / 'evidence/phase4/run_card.json').read_text())
-    tif = root / 'docs/downloads' / (card['submission_name'] + '.tif')
+    tif_name = card['submission_name'] + '.tif'
+    tif = root / 'docs/downloads' / tif_name
+    if not tif.is_file():
+        tif = root / 'quarantine/published-downloads-2026-10-20' / tif_name
     sha = hashlib.sha256(tif.read_bytes()).hexdigest()
     meta = json.loads((root / 'evidence/feature_metadata.json').read_text())
     with rasterio.open(tif) as src:
@@ -49,8 +52,8 @@ def build(root=ROOT):
         'raster_sha256': sha, 'validator_output': {'checks': checks, 'all_pass': all(checks.values()),
             'scope': 'Fresh byte/range/grid audit against cached reference metadata, not organizer acceptance'},
         'submission_name': card['submission_name'],
-        'submission_note': 'P4 archive review only; forward-overlap stop. DO NOT SUBMIT.',
-        'verdict': 'negative', 'download_ok_for_review': all(checks.values()),
+        'submission_note': 'No file cleared; historical P4 TIFF is quarantined for audit only. DO NOT SUBMIT.',
+        'verdict': 'negative', 'download_ok_for_review': False,
         'submit_ok': False, 'new_tif_generated': False, 'experiments_this_session': 0,
         'weekly_slots_used_this_session': 0,
         'stop_reason': 'Historical final-dot witness violates requested forward-overlap rule; lane paragraph absent. No new placement permitted.',

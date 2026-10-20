@@ -30,21 +30,18 @@ def test_site_rebuild_has_no_broken_local_link():
             assert target.is_file(), f'broken local link {p}: {link}'
 
 
-def test_every_published_artifact_is_inventoried():
-    import hashlib
+def test_no_prediction_rasters_are_public():
     inv = json.loads((ROOT / 'registry/published_artifacts.json').read_text())
-    listed = {r['path']: r['sha256'] for r in inv['artifacts']}
+    assert not [row for row in inv['artifacts']
+                if row['path'].lower().endswith(('.tif', '.tiff', '.zip'))]
     for p in (ROOT / 'docs').rglob('*'):
-        if p.is_file() and p.suffix.lower() in {'.tif', '.tiff', '.zip'}:
-            rel = p.relative_to(ROOT).as_posix()
-            assert rel in listed, rel
-            assert hashlib.sha256(p.read_bytes()).hexdigest() == listed[rel], rel
-    card = json.loads((ROOT / 'evidence/run_card.json').read_text())
-    assert f"docs/downloads/{card['submission_name']}.tif" in listed
+        assert not (p.is_file() and p.suffix.lower() in {'.tif', '.tiff', '.zip'}), p
+    manifest = json.loads((ROOT / 'quarantine/published-downloads-2026-10-20/manifest.json').read_text())
+    assert len(manifest['files']) >= 11
 
 
 def test_decision_is_explicit_on_the_landing_page():
     home = (ROOT / 'docs/index.html').read_text()
-    assert 'Download: yes — format-validated for review.' in home
-    assert 'Submit a weekly slot: not recommended' in home
-    assert 'Download archived TIFF — DO NOT SUBMIT' in home
+    assert 'STOP — no TIFF cleared for download or submission' in home
+    assert 'No TIFF is authorized for download or submission' in home
+    assert 'Download submission TIFF' not in home

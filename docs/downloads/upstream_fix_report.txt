@@ -1,12 +1,12 @@
 # Upstream fix report — uniqueness dot definition
 
-**Date:** 2026-10-20  
-**Session:** arena/9fe83934-gemsdoe70  
-**File:** vendor/gems57/uniqueness.py  
-**Upstream template:** buffedlizard55-lab/60GEMSDOE @ 32024716f218d06a94e01464157392119c03cb15  
-**Old SHA256:** 1c5094b814277ae801ccea6a47cf744429cffcdc10f9cc79f229d5fc44a8df95  
-**New SHA256:** 927a73807b94a9e89a78bf0b82afa705d70f8cd5951ebbfdc6a99501cfd05648  
-**Old git blob:** 71d66ff89aa3a5cfdaeffb11fe09fa2609cc73e5  
+**Date:** 2026-10-20
+**Session:** arena/9fe83934-gemsdoe70
+**File:** vendor/gems57/uniqueness.py
+**Upstream template:** buffedlizard55-lab/60GEMSDOE @ 32024716f218d06a94e01464157392119c03cb15
+**Old SHA256:** 1c5094b814277ae801ccea6a47cf744429cffcdc10f9cc79f229d5fc44a8df95
+**New SHA256:** 927a73807b94a9e89a78bf0b82afa705d70f8cd5951ebbfdc6a99501cfd05648
+**Old git blob:** 71d66ff89aa3a5cfdaeffb11fe09fa2609cc73e5
 **New git blob:** a53b698d9861732744be40aa2993f3aa2578144e
 
 ## What was wrong
@@ -31,7 +31,7 @@ Change `_dots(a)` from `isfinite & (a>0)` to `isfinite & (|a-1|<1e-6)`.
 Binary dot placements (value exactly 1.0) are dot fields; continuous surfaces
 (max 0.984, no pixel equals 1.0) have empty dot set and are evaluated only via
 Spearman rank correlation (threshold 0.90). The saturation certificate now
-reports `positive_pixels=0` for the dense prior and `universal_overlap_blocker=false` 
+reports `positive_pixels=0` for the dense prior and `universal_overlap_blocker=false`
 under the corrected definition.
 
 Thresholds are unchanged: Spearman >0.90 and forward dot overlap >0.70 still

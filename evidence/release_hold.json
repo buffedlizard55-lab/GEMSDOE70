@@ -1,0 +1,19 @@
+{
+  "evidence_class": "RELEASE-BLOCK",
+  "date": "2026-10-20",
+  "verdict": "negative",
+  "download_ok": false,
+  "download_and_submit_ok": false,
+  "submit_recommended": false,
+  "weekly_slots_used": 0,
+  "blocking_evidence": [
+    "literal one-way overlap rule exceeds 70 percent on four accessible registry rasters, including 1.0 forward overlap",
+    "the 62-raster public inventory is not complete for private or uncommitted artifacts",
+    "historical mutual-overlap clearance did not satisfy the literal prompt threshold",
+    "public-facing candidate names and receipts conflict",
+    "all previously exposed GeoTIFF/ZIP files are quarantined for audit only",
+    "H70-A archived comparison covers only two registry rasters and has no cleared complete-inventory or surface-stage audit"
+  ],
+  "quarantine_directory": "quarantine/published-downloads-2026-10-20",
+  "review": "reports/literal-protocol-review.md"
+}
