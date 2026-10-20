@@ -47,4 +47,5 @@ def test_decision_is_explicit_on_the_landing_page():
     home = (ROOT / 'docs/index.html').read_text()
     assert 'Download: yes.' in home
     assert 'Submit a weekly slot: not recommended' in home
-    assert 'Download submission TIFF' in home
+    assert 'Download historical TIFF — DO NOT SUBMIT' in home
+    assert 'current forward-overlap protocol' in home

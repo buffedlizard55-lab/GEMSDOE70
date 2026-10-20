@@ -1,0 +1,104 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Current protocol review · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a>.</section><h1>Current protocol review — 2026-10-20</h1>
+<h2>Download for review: YES. Submit: NO. New TIFF generated: NO.</h2>
+<p>The latest prompt requires <strong>forward</strong> dot overlap at most 70%, not mutual overlap.
+The immutable Phase-4 audit has four counterexamples: <code>calib_r13lattice_00904.tif</code>
+(1.0), <code>r11_greedy_mp.tif</code> (0.8069262229776385), <code>r13_lattice_s5_00904.tif</code>
+(1.0), and <code>r14_union_tips10_lat6.tif</code> (0.7803686195357731).
+These are REGISTRY-MEASUREMENTS, not DTI scores. Dense lattices explain the
+failure but do not authorize changing the user's rule. This run logs a duplicate
+and stops before any new placement or model experiment. A hash-distinct TIFF is
+not necessarily unique under the requested overlap rule.</p>
+<p>The supplied prompt says “single method paragraph below” but supplies none.
+No lane is silently assigned. Historical mutual-rule evidence is preserved,
+not rewritten as though it had used the current protocol. The shared evaluator,
+writer, and uniqueness implementation are unchanged in this review. The release
+policy additionally enforces the user's literal gate on the recorded rows.</p>
+<h2>Why H33 performed well: evidence versus inference</h2>
+<p>The archived byte audit (<code>evidence/h33_audit.json</code>) shows removal of successive
+near-catalogue shells from a sparse predecessor, not a newly trained detector.
+The triangular-distance metric plausibly rewards sparse coverage and penalizes
+redundant emission. But neither that algebra nor a handful of historical submissions
+identifies the causal reason for a hidden-label result. Prior prose asserting that
+“most” of the result is geometry, that a particular proxy is the hidden truth, or
+that geometry is exhausted overstates the evidence. Those are hypotheses, not
+verified conclusions. Beating H33 remains possible, not demonstrated here.</p>
+<p>The prompt's historical scores and conflicting leaderboard claims lack a
+submission-page receipt in this review; none is ORGANIZER-CONFIRMED. No new
+leaderboard score or projection is reported. The actual task is fault prediction;
+a fault candidate is not evidence of a geothermal vent or a productive reservoir.</p>
+<h2>Ranked research backlog (not experiments or an assigned lane)</h2>
+<p>Expected improvement is qualitative and unvalidated. These combinations were not
+found among the reviewed method descriptions; novelty across every external repo
+is <strong>not</strong> established. They are not declared viable until data metadata and
+availability have been checked in the chosen lane.</p>
+<table>
+<thead>
+<tr>
+<th>Priority / cost</th>
+<th>Hypothesis and specific inputs</th>
+<th>Signature and missing-fault rationale</th>
+<th>Non-fault mimic / distinction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 / medium</td>
+<td>Cross-channel displaced marker matching: cached RTP and detrended elevation</td>
+<td>Match parallel marker profiles across a candidate discontinuity; consistent lateral displacement could locate an unmapped cross-fault</td>
+<td>Drainage capture or depositional truncation; tests signed displacement rather than edge strength or endpoint proximity</td>
+</tr>
+<tr>
+<td>2 / medium</td>
+<td>Terrain-conditioned radiometric residual: cached GeoDAWN K/Th and detrended elevation</td>
+<td>Remove lithology/terrain trends within training blocks, seek narrow residual gradients corroborated by RTP; alteration may reveal concealed conduits</td>
+<td>Primary lithology, soil moisture, flight-line leveling; residual anomaly rather than raw ratio concordance</td>
+</tr>
+<tr>
+<td>3 / high</td>
+<td>Opposed magnetic marker terminations: RTP, horizontal/vertical magnetic derivatives</td>
+<td>Pair interrupted magnetic bands with consistent offset and continuation; concealed displacement may have no mapped scarp</td>
+<td>Dike termination or remanence; paired marker reconstruction rather than generic analytic-signal ridge</td>
+</tr>
+</tbody>
+</table>
+<p>No new external data is required conceptually for these candidates, but cache
+restoration, exact band descriptions, units and provenance are prerequisites.
+These are proposals, not verified geological discoveries. Do not run them until
+a single lane is assigned and the literal uniqueness stop is resolved explicitly.
+No submission slot should be used without beating a preregistered compatible
+holdout best, per-feature leakage canaries, and complete surface/final audits.</p>
+<h2>Sources and access limitations</h2>
+<ul>
+<li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Official reference solution</a>:
+  README fetched this review and stored in <code>evidence/review-20261020/</code>.
+  It explicitly supports CPU training; the prompt's “GPU needed” claim is not a
+  universal requirement. GPU acceleration can still be desirable.</li>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Organizer problem description</a>,
+  <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">submission/data page</a>,
+  <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">rules PDF</a>: manual-review links,
+  not freshly verified in this review. Network host restrictions prevent direct access.</li>
+<li><a href="https://github.com/buffedlizard55-lab/GEMSDOE32">H33 repository</a>: owner research,
+  not an organizer receipt. Prior byte audit retained; no new causal validation.</li>
+</ul>
+<p>No DrivenData upload or authentication was attempted. Weekly cap is unverified;
+this review uses no slots. No exhaustive line-by-line scientific verification of
+all linked repositories is claimed.</p>
+<h2>Three review passes</h2>
+<ol>
+<li>Reviewed handoff, release policy, immutable audit and existing download inventory;
+   found the forward/mutual conflict and stopped modeling.</li>
+<li>Fixed release authorization: stale promotion flag no longer bypasses failed
+   canaries, verdict, scientific gates or literal registry checks. Added mutation tests.</li>
+<li>Rebuilt the site/README, checked tests and artifact format, and documented
+   what remains blocked. Historical TIFF stays downloadable for education only.</li>
+</ol></main>
+<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
+<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

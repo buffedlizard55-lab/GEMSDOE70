@@ -49,7 +49,7 @@ def frame(title, body):
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main">{nav}</nav><main id="main">{body}</main>
+<nav aria-label="Main">{nav}</nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a>.</section>{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
@@ -93,6 +93,9 @@ def main():
     receipt = load(f'docs/downloads/{name}.json', {})
     sources = load('registry/sources.json', [])
 
+    import markdown
+    (DOCS / 'protocol-review.html').write_text(frame('Current protocol review', markdown.markdown((DOCS / 'protocol-review.md').read_text(), extensions=['tables'])))
+
     DOCS.mkdir(parents=True, exist_ok=True)
     DOWN.mkdir(parents=True, exist_ok=True)
 
@@ -135,20 +138,25 @@ def main():
             shutil.copyfile(s, DOWN / dst)
 
     # --------------------------------------------------------------- decision box
-    promoted = bool(card.get('download_and_submit_ok'))
+    sys.path.insert(0, str(ROOT / 'src'))
+    from gems70.release import release_status
+    status = release_status(ROOT)
+    promoted = status['submit_recommended']
     tone = 'stop' if not promoted else 'ok'
     headline = ('Verified file · not promoted' if not promoted else 'Promoted candidate')
     decision = f'''<section class="{tone}" aria-labelledby="decision">
 <div class="eyebrow">SUBMISSION STATUS</div>
 <h1 id="decision">{esc(headline)}</h1>
-<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
-passes every shared-validator check, and its SHA-256 is recorded below.</p>
+<p><strong>Download: yes.</strong> Historical file for review only; format validation is not submission clearance.
+The current forward-overlap protocol flags this artifact as a duplicate.
+<strong>DO NOT SUBMIT under the current protocol.</strong>
+<a href="protocol-review.html">Review the stop decision</a>. Its SHA-256 is recorded below.</p>
 <p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
 <strong>{esc(card['verdict'])}</strong>: the pre-registered target-like gate (instrument B′) is
 negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
 not a validated improvement.</p>
 <div class="actions">
-<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download submission TIFF</a>
+<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download historical TIFF — DO NOT SUBMIT</a>
 <a class="button secondary" href="downloads/{esc(name)}.zip" download>Download one-TIFF ZIP</a>
 <a class="button secondary" href="submission.html">How to submit</a>
 </div>

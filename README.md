@@ -2,7 +2,11 @@
 
 ## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
-A unique, format-validated competition TIFF is published:
+**CURRENT PROTOCOL STOP:** The historical candidate exceeds forward overlap against four
+registry rasters. No new TIFF generated; no slot used. Missing single-method lane paragraph.
+See [current review](docs/protocol-review.md). Mutual overlap does not satisfy the current prompt.
+
+A historical, format-validated TIFF is published for review only:
 `docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `negative` on the pre-registered target-like gate. No weekly slot was used.
