@@ -54,7 +54,12 @@ def check_output(site: Path, baseurl: str = '/GEMSDOE70') -> dict:
     site = Path(site)
     if not site.is_dir() or site.is_symlink():
         raise ValueError('A real built site directory is required')
+    from .release import published_artifacts, digest
+    # The stopped-run blanket ban predates the explicitly inventoried review
+    # downloads. Permit only exact authorized bytes, never arbitrary TIFFs.
+    allowed = published_artifacts(Path(__file__).resolve().parents[2])
     paths = list(site.rglob('*'))
+    raster_count = 0
     violations = []
     for path in paths:
         rel = path.relative_to(site)
@@ -68,7 +73,11 @@ def check_output(site: Path, baseurl: str = '/GEMSDOE70') -> dict:
         if rel.parts[0] not in PUBLIC_ROOTS and not (theme_css or theme_dir):
             violations.append(f'{rel}: nonpublic root')
         if path.suffix.lower() in {'.tif', '.tiff', '.zip'}:
-            violations.append(f'{rel}: stopped-run raster/archive')
+            expected = allowed.get(rel.as_posix())
+            if not expected or not path.is_file() or path.is_symlink() or digest(path) != expected:
+                violations.append(f'{rel}: unregistered or hash-mismatched raster/archive')
+            else:
+                raster_count += 1
     if violations:
         raise ValueError('Unsafe Pages build: ' + '; '.join(violations))
     # Check the deployed tree, not the checkout where excluded evidence still
@@ -92,5 +101,5 @@ def check_output(site: Path, baseurl: str = '/GEMSDOE70') -> dict:
         if 'DO NOT SUBMIT' not in text and 'Do not submit this run.' not in text:
             raise ValueError('Missing negative banner: ' + page)
     return {'built_output_ok': True, 'files_checked': sum(p.is_file() for p in paths),
-            'raster_downloads': 0,
+            'raster_downloads': raster_count,
             'scope': 'Built-site publication only; not organizer acceptance or a scientific score.'}

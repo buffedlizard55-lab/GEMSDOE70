@@ -17,6 +17,12 @@ def main():
     delta = card['paired_b_prime_vs_h33']
     head = f'''# GEMSDOE70 — geothermal fault research
 
+> **CURRENT REVIEW: DO NOT SUBMIT.** The archived Phase-4 file fails the prompt's literal
+> one-way overlap gate (four witnesses in 62 archived rasters, maximum overlap 1.00).
+> Download is for review only. No new candidate was generated; no slot used.
+> Historical mutual-overlap clearance below is not clearance under the current prompt.
+> [Current review](reports/literal-protocol-review.md) · [Current run card](evidence/literal_protocol_review.json).
+
 ## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
 A unique, format-validated competition TIFF is published:
