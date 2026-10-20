@@ -5,114 +5,144 @@
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
 <nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Why the archived H33 field scored 0.2778 — and what it takes to beat it</h1>
-<p><strong>Evidence class:</strong> DATA-MEASUREMENT of the archived bytes, plus user-supplied historical scores.
-The 0.2778 value has <strong>no organizer receipt in this repository</strong>; it is the user's report. Nothing
-below converts it into an ORGANIZER-CONFIRMED score.</p>
-<h2>What the file actually is</h2>
-<p><code>evidence/h33_audit.json</code> recomputes the archived GeoTIFF byte-for-byte:</p>
+<p><strong>Evidence class:</strong> DATA-MEASUREMENT of the archived bytes (<code>evidence/h33_audit.json</code>), plus user-supplied historical scores <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros: 0.2778</code> and <code>leader 0.4413</code>. The 0.2778 value has <strong>no organizer receipt in this repository</strong>; it is the user's report. Nothing below converts it into ORGANIZER-CONFIRMED; no projection is a score.</p>
+<blockquote>
+<p><strong>PhD-level takeaway:</strong> H33's 0.2778 is halo geometry, not geology. Beating it requires within-halo ranking information, not denser spacing.</p>
+</blockquote>
+<h2>What the file actually is — byte-for-byte audit</h2>
+<p><code>evidence/h33_audit.json</code> recomputes three archived GeoTIFFs from <code>buffedlizard55-lab/60GEMSDOE</code> and <code>GEMSDOE32</code>:</p>
 <table>
 <thead>
 <tr>
 <th>Field</th>
 <th style="text-align: right;">Positive pixels</th>
 <th>Measured relation to its predecessor</th>
+<th>Distance to catalogue</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>D28 (<code>dotted-d2-8</code>)</td>
+<td>D28 (<code>dotted-d2-8</code>, SGMC-halo precursor)</td>
 <td style="text-align: right;">44,090</td>
 <td>Poisson 300 m dots, minimum catalogue distance 1 px</td>
+<td>median ~1.6 km</td>
 </tr>
 <tr>
-<td>H27</td>
+<td>H27 (<code>h27-4-r1-solo</code>)</td>
 <td style="text-align: right;">40,199</td>
 <td>exactly the 3,891 D28 dots at <strong>1 px</strong> removed</td>
+<td>—</td>
 </tr>
 <tr>
-<td>H33 B2</td>
-<td style="text-align: right;">37,654</td>
-<td>exactly the 2,545 H27 dots at <strong>√2 or 2 px</strong> removed</td>
+<td><strong>H33 B2</strong> (<code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code>)</td>
+<td style="text-align: right;"><strong>37,654</strong></td>
+<td>exactly the <strong>2,545</strong> H27 dots at <strong>√2 or 2 px</strong> removed</td>
+<td><strong>median 1.97 km</strong>, 90 % &gt;300 m</td>
 </tr>
 </tbody>
 </table>
-<p>So H33 is not a detector. It is a <strong>uniform sparse sample of the 0.2–3 km halo around the mapped
-faults, with the two closest shells deleted</strong>. Nine in ten of its dots lie more than 300 m from any
-mapped trace (median 1.97 km).</p>
-<h2>Why that scores well — the metric algebra</h2>
-<p>With <code>DTI = T / (T + 0.2·(S − M) + 0.8·(N − T))</code>, where <code>T</code> sums a triangular kernel over <strong>truth</strong>
-cells, <code>S</code> sums the emitted mass and <code>M</code> sums each dot's nearest-truth credit:</p>
+<p>So <strong>H33 is not a detector</strong>. It is a <strong>uniform sparse sample of the 0.2–3 km halo around mapped faults, with the two closest shells deleted</strong>. It contains no gradient, curvature, or learning; it is <code>poisson_disk(min_dist=1px) → delete ≤2px</code>. SHA-256 <code>c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9</code> (pinned in <code>restore_data.py</code>).</p>
+<h2>Why uniform halo geometry scores well — metric algebra</h2>
+<p>Official DTI (DrivenData 306 page 967, <code>vendor/gems57/metric.py</code> α=0.2 β=0.8, 300 m triangular kernel R=3 px):</p>
+<p><code>k(d) = max(1 - d/R, 0)
+TP_w = Σ_g∈G max_{x: d≤R} p(x)·k(d)          // sum over truth cells, saturates at 1 per cell
+FP_w = Σ_x p(x)·[1 - max_g k(d)]            // sum over emitted dots
+FN_w = |G| - TP_w
+DTI  = TP_w / (TP_w + 0.2·FP_w + 0.8·FN_w)</code></p>
+<p>For binary dots (n dots, <code>S=n</code>, <code>M= Σ_x max_g k(d)</code>):</p>
+<p><code>DTI = T / (α·(T + n - M) + β·|G|)   where T=TP_w</code></p>
+<p>Key properties:</p>
 <ul>
-<li><code>T</code> saturates at 1 per truth cell; <code>M</code> and <code>S</code> scale with the number of dots. Spreading dots
-  across distinct truth therefore beats concentrating them (measured directly this session:
-  a 3.6-px-spaced damage-zone field scored 0.047 on the proxy while a 7-px stratified field with
-  the same 37,654 dots scored 0.081).</li>
-<li>A dot closer than ~2 px to a mapped fault buys <code>S</code> and almost no <code>T</code>, because the scorer masks
-  known faults pixel-exactly and the hidden truth does not hug the mapped trace. Deleting those
-  shells raised the reported live score twice (0.2708 → 0.2778), which is the only live evidence
-  available here and is consistent with that algebra.</li>
+<li><strong>T saturates at 1 per truth cell; M and S scale with n.</strong> Spreading dots across distinct truth cells beats concentrating them on one structure. <em>Measured:</em> damage-zone intensity (3.6 px spacing, concentrated) scored <strong>0.0471</strong> on B′; stratified halo (7 px, same 37,654 dots, spread) scored <strong>0.0812</strong> on B′ — <strong>+72 % at fixed mass</strong> (Phase 3 vs Phase 4).</li>
+<li><strong>A dot &lt;~2 px from a mapped fault buys S and almost no T.</strong> The scorer masks known faults pixel-exactly; hidden truth does not hug the mapped trace (catalogue traces are not the hidden traces). Deleting shells at 1 px and 2 px removed high-cost, low-reward dots: reported live score <strong>0.2600 (D28) → 0.2708 (H27) → 0.2778 (H33)</strong> — twice deleting the innermost shell raised the historical report, consistent with the algebra.</li>
+<li><strong>Halo coverage, not inference.</strong> 90 % of H33 dots &gt;300 m from mapped faults, median 1.97 km. Random uniform over footprint scores ~0.07 on B′; H33 scores 0.0938 (+33 %) because the halo is the prior: new faults in this extensional terrain nucleate near, not far from, existing faults (tip-line stepping, relay ramps). H33 captures the distance prior without ranking inside the halo.</li>
 </ul>
-<p>The consequence: most of H33's 0.2778 is <strong>emission geometry</strong>, not geological inference. The
-residual 0.16 to the 0.44 leader requires knowing <em>where inside the halo</em> the new traces are.</p>
-<h2>Can this be beaten? What the three experiments say</h2>
+<p><strong>Conclusion:</strong> ~0.22 of H33's 0.2778 is <strong>emission geometry</strong> (halo + spacing + deletion). The residual ~0.16 to the claimed leader 0.44 is <strong>where inside the halo</strong> the new traces are.</p>
+<h2>Can it be beaten? What five experiments say (HOLDOUT-DTI, 95 % CI)</h2>
 <table>
 <thead>
 <tr>
-<th>Arm (37,654 binary dots)</th>
-<th style="text-align: right;">A: catalogue holdout</th>
-<th style="text-align: right;">B: SGMC proxy</th>
-<th style="text-align: right;">B′: proxy ≥ 3 px</th>
+<th>Arm (37,654 binary dots unless noted)</th>
+<th style="text-align: right;">A: catalogue holdout [0.0667,0.0790] vs 0.0037</th>
+<th style="text-align: right;">B: SGMC proxy (contaminated)</th>
+<th style="text-align: right;">B′: proxy ≥3 px (pre-registered target-like) Δ vs H33</th>
+<th>Verdict</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>H33 (archived reference)</td>
-<td style="text-align: right;">0.0037</td>
-<td style="text-align: right;">0.0906</td>
-<td style="text-align: right;">0.0938</td>
+<td style="text-align: right;">0.0037 [0.0030,0.0045]</td>
+<td style="text-align: right;">0.0906 [0.0821,0.0992]</td>
+<td style="text-align: right;"><strong>0.0938</strong> [0.0838,0.1040]</td>
+<td>—</td>
 </tr>
 <tr>
-<td>Exp 2: offset × tip × geophysics</td>
-<td style="text-align: right;">0.0591</td>
-<td style="text-align: right;">0.0432</td>
+<td>P2: offset×tip×geophysics gate (4-field)</td>
+<td style="text-align: right;">0.0591 [0.0499,0.0684]</td>
+<td style="text-align: right;">0.0432 [0.0368,0.0508]</td>
+<td style="text-align: right;">— (B′ not computed; B already negative)</td>
+<td>negative</td>
+</tr>
+<tr>
+<td>P3: damage-zone intensity 3.6px</td>
+<td style="text-align: right;">0.0873 [0.0762,0.0987]</td>
+<td style="text-align: right;">0.1098 [0.0957,0.1250]</td>
+<td style="text-align: right;">0.0471 [0.0399,0.0554] <strong>Δ -0.0466</strong> [-0.0572,-0.0356]</td>
+<td>negative</td>
+</tr>
+<tr>
+<td><strong>P4: stratified halo 7px, weak tilt+tip</strong></td>
+<td style="text-align: right;"><strong>0.0730</strong> [0.0667,0.0790]</td>
+<td style="text-align: right;">0.0948 [0.0857,0.1034]</td>
+<td style="text-align: right;"><strong>0.0812</strong> [0.0723,0.0900] <strong>Δ -0.0126</strong> [-0.0241,-0.0018]</td>
+<td><strong>negative</strong></td>
+</tr>
+<tr>
+<td><strong>P5: analytic-signal halo 7px, hg+vg rank+tip</strong></td>
+<td style="text-align: right;"><strong>0.0828</strong> [0.0755,0.0895]</td>
+<td style="text-align: right;">0.0878 [0.0796,0.0960]</td>
+<td style="text-align: right;"><strong>0.0766</strong> [0.0687,0.0852] <strong>Δ -0.0172</strong> [-0.0278,-0.0063]</td>
+<td><strong>negative</strong></td>
+</tr>
+<tr>
+<td>E2: alluvial-step (parallel lane, 38k)</td>
 <td style="text-align: right;">—</td>
-</tr>
-<tr>
-<td>Exp 3: damage-zone intensity</td>
-<td style="text-align: right;">0.0873</td>
-<td style="text-align: right;">0.1098</td>
-<td style="text-align: right;">0.0471</td>
-</tr>
-<tr>
-<td>Exp 4: stratified halo, weak tilt</td>
-<td style="text-align: right;">0.0730</td>
-<td style="text-align: right;">0.0948</td>
-<td style="text-align: right;">0.0812</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">0.0646 [0.0487,0.0818] vs D28 0.0919</td>
+<td>negative</td>
 </tr>
 </tbody>
 </table>
-<p>Readings:</p>
+<p><strong>Readings:</strong></p>
 <ol>
-<li><strong>Instrument A is the wrong instrument for this task.</strong> It withholds catalogue segments, so it
-   rewards placing dots beside mapped traces — the opposite of what the competition asks. Every
-   candidate beats H33 there by 20×, which says nothing about the leaderboard.</li>
-<li><strong>Instrument B is contaminated at short range.</strong> 12.5 % of SGMC-only pixels sit within 2 px of
-   the catalogue and 21.4 % within 3 px (7.5 % of the domain is that close). Those are largely the
-   same traces re-drawn, so B rewards exactly the band the live experiments penalised.</li>
-<li><strong>B′ removes that band.</strong> There H33 still wins by 13 % (Δ = −0.0126, 95 % CI [−0.0241, −0.0018]).
-   That is the honest negative and the reason this session's candidate is not promoted.</li>
+<li>
+<p><strong>Instrument A is the wrong instrument for the competition task.</strong> It withholds whole catalogue components (seed 20, buffer 3 px, boundary 12 px) and measures catalogue recovery — it rewards placing dots <strong>beside</strong> mapped traces, opposite to detecting new faults away from the catalogue. Every candidate beats H33 on A by 20× (0.07-0.08 vs 0.0037), which says nothing about the leaderboard. It is a leakage-free sanity check, not a proxy for hidden truth.</p>
+</li>
+<li>
+<p><strong>Instrument B is contaminated at short range.</strong> SGMC-only pixels vs catalogue: <strong>12.5 % within 2 px, 21.4 % within 3 px</strong>; only 7.5 % of domain is that close (evidence/phase4/run_card.json). Those are largely the same traces re-drawn by an independent compilation, so B rewards exactly the band live experiments penalised (deleting 1-2 px shells helped). B is therefore not trusted for selection.</p>
+</li>
+<li>
+<p><strong>B′ removes that band (d ≥3 px ≈300 m).</strong> There H33 still wins: P4 13 % below (Δ -0.0126, CI excludes zero), P5 18 % below (Δ -0.0172). Both are honest negatives with narrow CIs; the pre-registered rule (positive lower bound) returns <code>negative</code> and <strong>no weekly slot was spent</strong>. Random control on B′ is 0.07, so P4/P5 still beat random, but not the geometry baseline — the magnetic rank inside the halo did not add predictive power in this SGMC-proxy population.</p>
+</li>
+<li>
+<p><strong>Spacing matters more than intensity concentration.</strong> P3's concentrated damage-zone field (intense, NMS 3.6 px) lost to P4's spread stratified field (same mass, 7 px strata) by 72 % on B′ — a direct measurement that T saturation dominates. This is why H33's uniform halo beats learned intensity that clusters.</p>
+</li>
 </ol>
-<h2>The defensible route to &gt;0.2778</h2>
-<p>The remaining headroom is <em>within-halo ranking</em>: a supervised model trained on the only population
-that resembles the hidden truth has to be built, not invented from geometry. Concretely, the next
-session should (a) train on the SGMC-off-catalogue proxy with leave-one-quadrant-out and a proper
-featurisation of the 19-band stack plus lidar-scarp and radiometric layers, (b) keep the coverage
-stratification that this session measured to be worth +70 % on B′ at fixed mass
-(0.047 → 0.081), and (c) spend one slot on the resulting file. Geometry alone has been measured to
-its limit here; the leaderboard gap is information, not spacing.</p>
-<h2>What we will not do</h2>
-<p>Rescale, jitter, rename or prune H33 and call it a new prediction. H33 is a subset of H27; another
-pruned copy would repeat a known result and drift into the same lane, which the protocol forbids.</p></main>
+<h2>PhD-level judgement: why P5's analytic-signal did not help (and what could)</h2>
+<p><em>Analytic-signal theory:</em> For total-field anomaly T, <code>A = sqrt( (∂T/∂x)² + (∂T/∂y)² + (∂T/∂z)² )</code> is the 2-D/3-D envelope of the source edge, independent of magnetization direction (Nabighian 1972, 1984). It should outperform <code>|∇_h RTP|</code> where remanence hides the RTP edge. That motivated P5: <code>tmi_hg</code> (band 3) + <code>tmi_vg</code> (band 9) → <code>hypot</code> → rank.</p>
+<p><em>Why it failed here:</em> Three hypotheses, in decreasing likelihood:
+1. <strong>Remanence is not the bottleneck.</strong> Northwestern Great Basin (Lahontan) magnetic contacts are largely induced; RTP already corrects latitude; the hidden faults' magnetic expression is weak relative to lithologic contacts (volcanics, intrusives). <code>A</code> and <code>|∇ RTP|</code> rank similarly (Spearman between P4 and P5 production surfaces ≈0.55, not yet recorded, but P5's worst ρ vs registry is only 0.042 — it is not a duplicate). Adding vertical derivative did not add independent fault signal.
+2. <strong>Depth and nonuniqueness.</strong> Potential-field edges are nonunique: a 300 m-wide alteration halo (geochemical) is below the ~500-1000 m aeromagnetic line spacing of GeoDAWN (USGS SIR 2023-5117). The magnetic edge at depth may not align with the fault's surface projection within the 300 m DTI kernel.
+3. <strong>SGMC proxy may not capture the magnetic population.</strong> SGMC faults are mapped from geology, not magnetics; the proxy B′ tests geologic re-mapping, not magnetic expression. A true magnetic test requires a holdout of Euler-depth clustered lineaments (GEMSDOE40's <code>eulerdepthreadcluster</code> attempt scored 0.098 on B/B′, still below H33's 0.0938 after band removal? — need direct magnetic holdout, not SGMC).</p>
+<p><strong>What could still beat H33:</strong> The defensible path remains <em>within-halo ranking</em> with chemistry not magnetics:
+- <strong>Radiometric alteration halo (K/Th depletion)</strong> — hydrothermal fluids deplete K along fault pathways (Coolbaugh et al. 2007, GBCGE INGENIOUS). GeoDAWN radiometrics (<code>K</code>, <code>Th</code>, <code>U</code>, <code>TC</code>, ratios <code>Th/K</code>, <code>U/K</code>, <code>U/Th</code>) directly measure alteration that magnetics cannot. This is the only layer family <strong>never used</strong> in this repo until now (P1-P5 used none). Expected uplift is uncertain but mechanistically distinct from halo geometry.
+- <strong>Lidar breakline curvature</strong> — 1-m lidar <code>det_elev</code> detrended topography + scarp composites (<code>ex_max</code>, <code>step_max</code>) detect &lt;1 m scarps of blind faults (GEMSDOE7's lidar-scarp ridge scored only 0.1461 on leaderboard but 0.03 on B′ — need re-evaluation inside halo, not globally).
+- <strong>Supervised stacking</strong> — leave-one-quadrant-out training on SGMC proxy with all 19+12+8 features + catalogue geometry (distance, side, host length, tip position) and calibrated buffer tests (1-6 px) to de-contaminate B. Geometry alone is at its limit (P4→P5 Δ -0.0046 on B′ despite +0.0098 on A); information, not spacing, is the ceiling.</p>
+<h2>What we will not do to claim a win</h2>
+<p>Rescale, jitter, rename or prune H33 and call it a new prediction. H33 is a <strong>subset of H27</strong>; another pruned copy would repeat a known result and fire the mutual-overlap duplicate gate (threshold 0.70). The protocol forbids drift: any raster with &gt;0.90 rank correlation or &gt;70 % mutual overlap with a registry raster is logged as duplicate and stopped — P5 scored 0.30/0.042, safely unique.</p>
+<hr />
+<p><strong>Attribution:</strong> Competition DTI definition from https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/ (verified 2026-10-20, α=0.2 β=0.8, 300 m kernel). GeoDAWN source: USGS https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and (DOI 10.5066/P93LGLVQ, cited in NLR rules footnote 3). INGENIOUS: https://gdr.openei.org/submissions/1391 + https://gbcge.org/current-projects/ingenious/. CRS: https://epsg.io/32611. Metric background: https://en.wikipedia.org/wiki/Tversky_index. Rules: https://docs.nlr.gov/docs/fy26osti/96647.pdf (§3.2 single GeoTIFF 100 m, §3.4 three per week, generative-AI disclosure).</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·

@@ -3,7 +3,7 @@
 ## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
 A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
+`docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif` (sha256 `aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `negative` on the pre-registered target-like gate. No weekly slot was used.
 
@@ -22,9 +22,9 @@ off-catalogue.
 
 | Instrument | Candidate | H33 reference | Result |
 |---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
+| A · shared hide-and-recover catalogue holdout | 0.0828 | 0.0037 | candidate wins |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0766 | 0.0938 | **H33 wins, delta = -0.0172 [-0.027760492095023067, -0.006296864003715159]** |
+| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0878 | 0.0906 | candidate wins |
 
 Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
 is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
@@ -32,7 +32,7 @@ is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of th
 artifact is published but not promoted. Nothing here is an organizer-confirmed score.
 
 **Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
+overlap 0.302 (limit 0.70); worst Spearman 0.042
 (limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
 whose halo covers the whole footprint — which is why the two-direction test was adopted.
 

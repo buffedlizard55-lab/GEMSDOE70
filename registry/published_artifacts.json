@@ -6,19 +6,37 @@
       "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
       "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
       "bytes": 126097,
-      "note": "this session (P4), published candidate; run card evidence/phase4/run_card.json"
+      "note": "P4 coverage-stratified halo, published candidate; run card evidence/phase4/run_card.json; superseded by P5 but retained"
     },
     {
       "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.zip",
       "sha256": "d04ed7d8ee360ec61f1e716a0fe5ec758329946ecac70695cafe5d8a0daf6039",
       "bytes": 91298,
-      "note": "this session (P4), one-TIFF ZIP"
+      "note": "P4 one-TIFF ZIP"
     },
     {
       "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.json",
       "sha256": "17916fdcd0bfd92c97283b847e6e4ef163e06b9efe7a6429c52247d00ca89fe1",
       "bytes": 3457,
-      "note": "this session (P4), writer receipt"
+      "note": "P4 writer receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif",
+      "sha256": "aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4",
+      "bytes": 149414,
+      "note": "P5 analytic-signal halo, current primary; run card evidence/phase5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-analytic-halo-37654-20261020.zip",
+      "sha256": "bf61cacc2630c63411ce4c1e486b4ef26bd16b5e1ce73e2376df4cba1444a139",
+      "bytes": 116726,
+      "note": "P5 one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-analytic-halo-37654-20261020.json",
+      "sha256": "4e6867998a9470f21437ee472f32b9e3df0a24124d155b324187db4e18334604",
+      "bytes": 3431,
+      "note": "P5 writer receipt"
     },
     {
       "path": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
