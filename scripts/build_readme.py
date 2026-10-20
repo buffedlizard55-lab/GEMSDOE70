@@ -17,9 +17,16 @@ def main():
     delta = card['paired_b_prime_vs_h33']
     head = f'''# GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+> **CURRENT REVIEW: DO NOT SUBMIT — literal one-way protocol stop.** The archived Phase-4 and new Phase-5 (P5) files fail the prompt's literal
+> one-way overlap gate (forward overlap 1.00 vs dense sampling lattice; four witnesses in 62 archived rasters for P4, same for P5).
+> Download is for review only; no slot used. Historical mutual-overlap clearance (worst mutual {u['worst_dot_overlap']:.2f}) does **not** satisfy the current forward rule.
+> [Current review](docs/protocol-review.md) · [Current run card](evidence/literal_protocol_review.json).
 
-A unique, format-validated competition TIFF is published:
+## Submission status: **REVIEW ONLY — NOT PROMOTED (literal protocol stop)**
+
+**CURRENT PROTOCOL STOP:** Both candidates exceed forward overlap (P5 forward 1.00 vs `calib_r13lattice_00904.tif` and two other dense lattices). See [current review](docs/protocol-review.md). Mutual-overlap clearance (worst {u['worst_dot_overlap']:.2f}) does not satisfy the current prompt's forward-only gate.
+
+A format-validated TIFF is published for **review only** under the literal protocol (measurable under the corrected mutual rule):
 `docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used.
@@ -108,7 +115,24 @@ PROJECT_BRIEF.md is the source for this embedded copy.
                    f"(selector-review only; complete corrected uniqueness scan pending). "
                    f"Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. "
                    f"Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).\n")
-    (ROOT / 'README.md').write_text(head + e2_note + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
+    e3_note = ''
+    e3p = ROOT / 'evidence/run_card_e3_amended.json'
+    if e3p.is_file():
+        import json as _json3
+        _e3 = _json3.loads(e3p.read_text())
+        _d3 = _e3['holdout_dti']
+        e3_note = (f"\n## Parallel E3 scarp lane (PR #17) — selector must score it on B′ before choosing\n\n"
+                   f"DEM scarp-curvature ranking, {_e3['n_final_dots']:,} dots: catalogue HOLDOUT-DTI "
+                   f"{_d3['dti']:.4f} [{_d3['ci95'][0]:.4f}, {_d3['ci95'][1]:.4f}] "
+                   f"({_d3['withheld_positive_pixels']:,} withheld, seed-40) → promote-to-selector on "
+                   f"that instrument only; **B′ not yet scored**. File "
+                   f"`docs/downloads/{_e3['submission_name']}.tif` (sha256 `{_e3['raster_sha256']}`), "
+                   f"note ({len(_e3['submission_note'])} chars): `{_e3['submission_note']}`. "
+                   f"Evidence: `evidence/run_card_e3_amended.json` (erratum-completed; gated E2 "
+                   f"negative); frozen drivers renamed `scripts/run_experiment_e{{2,3}}_scarp.py` "
+                   f"at merge (byte-identical; canonical paths hold the PR #16 lane's drivers). "
+                   f"Site page: `docs/e3-candidate.html`. No slot used for any candidate.\n")
+    (ROOT / 'README.md').write_text(head + e2_note + e3_note + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
 
 
 if __name__ == '__main__':

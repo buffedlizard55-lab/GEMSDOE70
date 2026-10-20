@@ -94,3 +94,16 @@ def test_project_pages_mount_is_resolved_against_site(tmp_path):
     (tmp_path / 'index.html').write_text(
         'DO NOT SUBMIT <a href="/GEMSDOE70/docs/index.html">Current site</a>')
     assert check_output(tmp_path)['built_output_ok']
+
+
+def test_explicit_inventory_allows_only_hash_pinned_review_artifact(tmp_path):
+    import hashlib
+    safe_output(tmp_path)
+    rel = 'docs/review.tif'
+    raster = tmp_path / rel
+    raster.write_bytes(b'review fixture')
+    allowed = {rel: hashlib.sha256(raster.read_bytes()).hexdigest()}
+    assert check_output(tmp_path, allowed_artifacts=allowed)['raster_downloads'] == 1
+    raster.write_bytes(b'tampered')
+    with pytest.raises(ValueError, match='Unsafe Pages build'):
+        check_output(tmp_path, allowed_artifacts=allowed)

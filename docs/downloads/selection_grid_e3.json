@@ -1,0 +1,109 @@
+{
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "rows": [
+    {
+      "budget": 30000,
+      "exclusion_px": 0,
+      "dots_emitted_global": 30000,
+      "pooled_dotted_dti": 0.07924094323805392
+    },
+    {
+      "budget": 38000,
+      "exclusion_px": 0,
+      "dots_emitted_global": 38000,
+      "pooled_dotted_dti": 0.08423581440828856
+    },
+    {
+      "budget": 45000,
+      "exclusion_px": 0,
+      "dots_emitted_global": 45000,
+      "pooled_dotted_dti": 0.08709877902937127
+    },
+    {
+      "budget": 60000,
+      "exclusion_px": 0,
+      "dots_emitted_global": 60000,
+      "pooled_dotted_dti": 0.08910318889482423
+    },
+    {
+      "budget": 30000,
+      "exclusion_px": 1,
+      "dots_emitted_global": 30000,
+      "pooled_dotted_dti": 0.08157010670295226
+    },
+    {
+      "budget": 38000,
+      "exclusion_px": 1,
+      "dots_emitted_global": 38000,
+      "pooled_dotted_dti": 0.0858469095195212
+    },
+    {
+      "budget": 45000,
+      "exclusion_px": 1,
+      "dots_emitted_global": 45000,
+      "pooled_dotted_dti": 0.08924795945698451
+    },
+    {
+      "budget": 60000,
+      "exclusion_px": 1,
+      "dots_emitted_global": 60000,
+      "pooled_dotted_dti": 0.09015733361451309
+    },
+    {
+      "budget": 30000,
+      "exclusion_px": 2,
+      "dots_emitted_global": 30000,
+      "pooled_dotted_dti": 0.08338652263301623
+    },
+    {
+      "budget": 38000,
+      "exclusion_px": 2,
+      "dots_emitted_global": 38000,
+      "pooled_dotted_dti": 0.08824837010428078
+    },
+    {
+      "budget": 45000,
+      "exclusion_px": 2,
+      "dots_emitted_global": 45000,
+      "pooled_dotted_dti": 0.0913860695176431
+    },
+    {
+      "budget": 60000,
+      "exclusion_px": 2,
+      "dots_emitted_global": 60000,
+      "pooled_dotted_dti": 0.09160590226296686
+    },
+    {
+      "budget": 30000,
+      "exclusion_px": 3,
+      "dots_emitted_global": 30000,
+      "pooled_dotted_dti": 0.08427462001727519
+    },
+    {
+      "budget": 38000,
+      "exclusion_px": 3,
+      "dots_emitted_global": 38000,
+      "pooled_dotted_dti": 0.08975058526546015
+    },
+    {
+      "budget": 45000,
+      "exclusion_px": 3,
+      "dots_emitted_global": 45000,
+      "pooled_dotted_dti": 0.09251403113789312
+    },
+    {
+      "budget": 60000,
+      "exclusion_px": 3,
+      "dots_emitted_global": 60000,
+      "pooled_dotted_dti": 0.0943224265801671
+    }
+  ],
+  "selected": {
+    "budget": 60000,
+    "exclusion_px": 3,
+    "dots_emitted_global": 60000,
+    "pooled_dotted_dti": 0.0943224265801671
+  },
+  "rule": "max pooled dotted DTI; tie -> smaller budget, then smaller exclusion"
+}

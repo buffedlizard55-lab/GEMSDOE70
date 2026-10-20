@@ -77,3 +77,52 @@ def test_default_cli_never_authorizes_submission(tmp_path, monkeypatch):
     monkeypatch.setattr(cli, 'status', lambda: {'template_integrity_ok': True})
     monkeypatch.setattr(sys, 'argv', ['release_gate.py'])
     assert cli.main() == 2
+
+
+def promotion_fixture(tmp_path):
+    import shutil
+    for rel in ('evidence/phase4', 'evidence/phase2', 'docs/downloads'):
+        shutil.copytree(ROOT / rel, tmp_path / rel)
+    card_path = tmp_path / 'evidence/phase4/run_card.json'
+    card = json.loads(card_path.read_text())
+    card.update(download_and_submit_ok=True, verdict='promote',
+                gate_a_candidate_ge_h33=True,
+                gate_b_prime_candidate_gt_h33_significant=True)
+    card_path.write_text(json.dumps(card))
+    audit_path = tmp_path / 'evidence/phase4/uniqueness.json'
+    audit = json.loads(audit_path.read_text())
+    for row in audit['rows']:
+        row['my_dots_within_3px_of_theirs'] = .2
+        row['spearman_full_footprint'] = .1
+    audit_path.write_text(json.dumps(audit))
+    return card_path, audit_path
+
+
+@pytest.mark.parametrize('gate', ['gate_a_candidate_ge_h33',
+                                  'gate_b_prime_candidate_gt_h33_significant'])
+def test_stale_promotion_cannot_override_scientific_gate(tmp_path, gate):
+    card_path, _ = promotion_fixture(tmp_path)
+    assert release_status(tmp_path)['submit_recommended']
+    card = json.loads(card_path.read_text())
+    card[gate] = False
+    card_path.write_text(json.dumps(card))
+    assert not release_status(tmp_path)['submit_recommended']
+
+
+def test_stale_promotion_cannot_override_canary(tmp_path):
+    promotion_fixture(tmp_path)
+    (tmp_path / 'evidence/phase2/canaries.json').write_text(
+        json.dumps({'bad': {'auc': .99, 'suspected_leakage': True}}))
+    assert not release_status(tmp_path)['submit_recommended']
+
+
+@pytest.mark.parametrize('overlap', [.70001, None, float('nan'), '0.2', True])
+def test_literal_forward_rule_overrides_mutual_clearance(tmp_path, overlap):
+    _, audit_path = promotion_fixture(tmp_path)
+    audit = json.loads(audit_path.read_text())
+    audit['rows'][0]['my_dots_within_3px_of_theirs'] = overlap
+    audit_path.write_text(json.dumps(audit))
+    result = release_status(tmp_path)
+    assert result['download_ok']
+    assert not result['submit_recommended']
+    assert any('forward-overlap' in r for r in result['reasons'])
