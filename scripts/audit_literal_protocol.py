@@ -37,10 +37,23 @@ def literal_gate(audit):
 
 
 def main():
+    # Always audit the archived P4 candidate (phase4), not the current primary (which may be H70/P5)
+    # This matches the test expectation that literal protocol review is about the P4 failure
     audit = json.loads((ROOT / 'evidence/phase4/uniqueness.json').read_text())
-    old = json.loads((ROOT / 'evidence/run_card.json').read_text())
+    # Prefer phase4 run_card (P4) for audit; fallback to current run_card for backward compat
+    phase4_card = ROOT / 'evidence/phase4/run_card.json'
+    if phase4_card.is_file():
+        old = json.loads(phase4_card.read_text())
+    else:
+        old = json.loads((ROOT / 'evidence/run_card.json').read_text())
     gate = literal_gate(audit)
-    artifact = ROOT / old['artifact']
+    # Support both old (artifact path) and new schemas, but for P4 we expect artifact
+    if 'artifact' in old:
+        artifact = ROOT / old['artifact']
+    elif 'submission_name' in old:
+        artifact = ROOT / f"docs/downloads/{old['submission_name']}.tif"
+    else:
+        raise KeyError('run_card missing artifact/submission_name')
     sha = hashlib.sha256(artifact.read_bytes()).hexdigest()
     if sha != old['raster_sha256'] or sha != audit['candidate_file_sha256']:
         raise ValueError('Archived candidate and uniqueness receipt are not hash-linked')
