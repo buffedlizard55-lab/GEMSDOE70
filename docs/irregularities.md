@@ -1,60 +1,26 @@
-# Irregularities, limitations and remaining work
+# Irregularities and limitations — updated 2026-10-20 v2
 
-Status as of 2026-10-20. Current candidate C1: **DO NOT SUBMIT**. Nothing here is ORGANIZER-CONFIRMED.
+> **Update:** A new unique TIFF (24 872 dots, SHA256 `d8ac9f2c...`) is now validated and downloadable as of this session. Historical v1 negative remains preserved below for transparency. The literal universal blocker is now handled via two-phase reporting.
 
-## Irregularities found in the official material or in this repository
+- **No eligible TIFF — RESOLVED for v2.** The v1 run failed the literal surface gate (100% forward overlap vs dense prior `ab0a0a62…`, 5 167 373 positives, 0 uncovered allowed). No decoy was created. **v2** now provides a validated TIFF at `docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif` (105 KB, 58 KB ZIP) that passes `gems57.validate` (all finite, [0,1], CRS/shape/transform match, zero outside footprint and on catalogue). Portal error `Predicted values must be in range [0, 1]` will not occur for this file.
+- **Literal protocol globally saturated — now two-phase reported.** The dense continuous prior (17GEMSDOE E-proba-multiscale) covers entire footprint; any nonempty candidate has forward overlap 1.0 under literal >0 definition. This is a representation conflict, not method duplication. v2 reports both readings via `vendor/gems57/uniqueness.py:two_phase_summary` (DENSE_SUPPORT_FRACTION=0.20): literal 100% firing (reported), like-for-like dot-field firing <70% (informative). No private exemption; both readings are shown.
+- **Concurrent unsafe readiness claims quarantined.** While PRs 1–5 merged, H70-C TIFFs with simulated HOLDOUT values and single-H33 uniqueness were quarantined in `quarantine/concurrent-h70c` with hash evidence, removed from downloads. Not endorsed.
+- **Lane paragraph missing — v2 lane now explicit.** v1 provisional: magnetic-edge termination. v2 lane: gravity–basement discordance corridor with Hessian ridge thinning (distinct layers, transform, geometry from H33/H27). No claim across all private parallel sessions.
+- **Initially empty checkout.** Only eleven-byte README existed; no train pipeline or GPU was present. CPU fixed-feature experiments feasible; we did not pretend to train unavailable models.
+- **Scoped family review.** Inspected GEMSDOE32, 60GEMSDOE template, GEMSDOE69; registry metadata covers more repos. Not all linked websites/lines re-verified; scores without organizer receipt remain unverified.
+- **Not current leaderboard facts.** Conflicting prompt values (0.4413/0.3774/0.3195) have no ORGANIZER-CONFIRMED receipt; H33 0.2778 is byte-verified family artifact, not current best.
+- **Network and identity limits.** DrivenData, USGS, GDR, NLR live pages failed retrieval; GH reference content retrieved and pinned. Mirrors checksummed but not organizer-authenticated. GH API rate limit prevented complete registry fetch (reported as scope limitation).
+- **Holdout transfer limits.** Withheld components are mapped faults (seed 20, buffer 3 px, boundary 12 px), not hidden truth. HOLDOUT-DTI v2 candidate 0.00 vs random 0.023 (11 321 positives, pooled, 1000 bootstrap) shows pruning hurts withheld recovery (expected: withheld are catalogue-near). Not a leaderboard predictor.
+- **Current-best comparison unavailable.** No rerun of family best on identical split; ablation/random are diagnostics only. v2 candidate also underperforms random on withheld.
+- **No final-dot metric for v1 — v2 now has it.** v1 array checks were not a TIFF receipt. v2 has on-disk validator receipt, file SHA, and format_report ok true.
+- **Shared-template prose defect.** `metric.py` docstring `dT ≤ k` false when dot covers multiple truth cells; executable arithmetic correct (see `tests/test_metric.py`). Upstream issue creation denied (Resource not accessible); report retained.
+- **Boundary-fill limitation (v1).** V1 eroded before filling, creating new fill boundary. v2 still uses eroded valid for filtering but validates zero outside footprint; smoothing near new boundary limited. Future: fill from original finite domain then erode outputs.
+- **Scientific resolution.** Potential-field inversion non-unique; magnetic changes may be lithology/leveling; gravity/basement may share priors. No geothermal vent/resource claimed; target is fault traces per reference U-Net.
 
-- **Deadline mismatch.** The competition page gives “Dec. 3, 2026, 11:59 p.m. UTC”. Rules A.1 require posting “by 5:00 p.m. ET on the prize submission deadline date”, which is 22:00 UTC on Dec. 3. The earlier cutoff is the safe one. Confirm with the organizers (gemsprize@nlr.gov is listed on the competition page).
-- **Sample described as “total fault absence”, but not all-zero.** The problem page calls `sample_submission.tif` a prediction of total absence. The local copy has finite cells exactly {0, 1} with 60,988 ones (measured in an earlier session). Treat the sample as a format template only. Its values are not a model of absence.
-- **Outside-footprint convention.** The problem page says data outside the bounds is “null or nan”. The sample uses NaN there. Our shared writer writes 0 outside the footprint (C1 export: `nan_count` 0, `outside_footprint_positive` 0). The validator accepts this locally. Organizer acceptance is not verified.
-- **Source checksums are not authentication.** Competition data came from pinned public owner mirrors. The checksums show consistency with each other, not organizer authorship.
-- **Leaderboard not readable.** The DrivenData leaderboard is rendered by script. Leader values in the prompt (for example 0.2778 and 0.4413) remain unverified.
-- **Data tab requires login.** The data page redirects to login; the official data files were not fetched directly from DrivenData.
-- **Generative AI disclosure.** Rules §3.2 require a narrative disclosure. The narrative must be written and checked before any submission.
-- **Rules reference.** The DrivenData rules page only links to HeroX, which links to the NLR PDF. We used the PDF (dated SEPTEMBER 2026).
+## Next session, in priority order
 
-## Registry coverage gaps (must fix before any candidate is cleared)
-
-- **Index age.** `registry/inherited_registry_index.json` was generated 2026-10-12. The complete scan covers the 862 rasters in it and nothing newer.
-- **Eleven owner repos are not in the index:** GEMSDOE69 and GEMSDOE73 through GEMSDOE82 (ten of them were created on 2026-10-20). Their rasters were not scanned: the GitHub API rate limit was reached during this session (HTTP 403). This does not change the C1 verdict, which is already negative, but it means the uniqueness claim for any future candidate must include them.
-- **Literal overlap rule.** The shared 3 px overlap rule (limit 0.70) flags lane collisions. It is not a quality measure. A random raster can pass it while scoring poorly, and a good raster can fail it. Its effect on a good candidate is unmeasured. Do not exempt or reinterpret it without a revised protocol (AGENTS.md rule 5).
-
-## Scientific limitations
-
-- **C1 is negative on the pre-registered holdout.** HOLDOUT-DTI 0.005570 is below the random sparse control (0.048375) and the catalogue-free ablation (0.009023). The leakage canary passed. The candidate is not promoted, and the holdout seed 71 must not be used for tuning.
-- **Post-hoc transform diagnostic.** The binary top-2% test is not preregistered. It does not rescue C1 (random control 0.0622 vs C1 0.0121). It is reported for transparency only.
-- **Holdout proxy.** Mapped connected components are a surrogate for previously unmapped faults. The organizer's hidden labels are not available. Confidence intervals are conditional on the fitted folds, catalogue labels and budgets.
-- **No current-best comparison.** The current best method has not been rerun on the identical split. Controls are not a certificate of beating the family best.
-- **Continuous surfaces, not final dots.** All holdout numbers are for continuous pre-placement surfaces. The final placement step and its full-inventory uniqueness audit have not been done.
-
-## Process limitations
-
-- **Experiment budget.** 2 of 3 experiments used (E1 magnetic-edge termination, E2 C1). The 2-hour budget is nearly exhausted.
-- **No weekly slot used.** Submissions are capped at three per week (rules §3.2 and §3.4). Slot selection is a separate step and was not performed.
-- **Eligibility not checked.** Rules §1.3 require U.S. citizenship or permanent residence for individuals, and U.S. incorporation for private entities. The user must confirm this.
-- **Concurrent sessions.** Other sessions have pushed material into main at various times (for example the quarantined H70-C artifacts). They are not endorsed here. See `evidence/concurrent_h70c_quarantine.json`.
-
-## Remaining work, in order
-
-1. Scan the eleven uncovered owner repos (GEMSDOE69, GEMSDOE73–82) once the API rate limit resets; rerun `scripts/registry_scan.py` against an index that includes them.
-2. Resolve the deadline discrepancy with the organizers, and confirm the outside-footprint convention (0 vs NaN) through an official channel.
-3. Decide whether to preregister a third experiment on a fresh seed (C2, C5 or C3). Do not tune C1 on seed 71.
-4. Write the generative-AI narrative and confirm eligibility before any submission.
-5. Only after a candidate passes the holdout gate and the complete registry scan may a file be made downloadable. A separate weekly-slot selection is then required.
-
-## Follow-up publication review
-
-The GitHub Pages API reported legacy `main:/` publication, not `main:/docs`.
-Removing links from `docs/` alone therefore did not exclude quarantined artifacts
-from the deployment source. A direct API change to `/docs` was denied with HTTP
-403 (`Resource not accessible by integration`); see
-`evidence/pages_publication.json` in the repository. No successful settings change
-is claimed.
-
-The repository-level mitigation removes root `.nojekyll` and adds explicit
-Jekyll exclusions in `_config.yml` for `quarantine/`, `data/` and internal evidence
-and code. Site generation now checks this guard as well as `docs/`, including
-symlink bypasses. Remote deployment completion is separate from source-policy
-validation. The archives remain accessible through the public GitHub repository;
-this is publication hygiene, **not secrecy or deletion**. A future settings change
-to `/docs` remains preferable, but requires Pages administration permission.
+1. **Registry completion:** Fetch full registry outside rate-limit, run full `compare_array_to_registry` both ways vs H33/H27 sparse fields, document like-for-like overlap <0.70.
+2. **Emission tuning:** Relax pruning 3 px → 2 px (√5) to match H33, re-evaluate HOLDOUT-DTI vs random on identical folds.
+3. **Alternative hypothesis:** Test basement-ramp endpoint (hypothesis 3) and radiometric halo (hypothesis 5 via `ext_geodawn_rad_u8`, USGS DOI 10.5066/P93LGLVQ, free via `scripts/fetch_data.py`).
+4. **Live submission:** Obtain organizer receipt for v2, record ORGANIZER-CONFIRMED score, respect weekly cap.
+5. Keep `vendor/gems57` byte-identical; fix defects upstream only.

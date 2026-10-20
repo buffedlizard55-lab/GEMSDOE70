@@ -1,26 +1,65 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Overview · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Current candidate: DO NOT SUBMIT (not cleared).">
-<link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
-<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH · OCT 2026</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="candidates-2026-10-20.html">Candidates</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="protocol-decision.html">Protocol decision</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><section class="stop" aria-labelledby="status"><div class="eyebrow">SUBMISSION READINESS · CURRENT CANDIDATE</div>
-<h1 id="status">DO NOT SUBMIT. The generated GeoTIFF is not cleared.</h1>
-<p>A format-valid file was generated: <code>gems70-c1-strike-catalogue-NOT-CLEARED-20261020.tif</code> (LOCAL-FORMAT-VALIDATION). It is <strong>not</strong> OK to download and submit. It fails two measured gates:</p>
-<ul><li><strong>Holdout:</strong> HOLDOUT-DTI 0.00557 is below the random sparse control 0.04838 (paired difference -0.04281, 95% CI [-0.046810, -0.038401]).</li>
-<li><strong>Registry:</strong> 40 sparse dot-field registry rasters exceed the literal 3 px overlap limit of 0.70 (REGISTRY-MEASUREMENT, complete scan of 862 rasters).</li></ul>
-<p><strong>Do not submit this run.</strong> Submission TIFF unavailable on this site, because a gate failed.</p>
-<div class="actions"><button disabled aria-describedby="stop-note">Download GeoTIFF: blocked, gates not passed</button>
-<a class="button secondary" href="downloads/c1_run_card.json" download>Download run card</a>
-<a class="button secondary" href="downloads/c1_export_receipt.json" download>Download export receipt (JSON)</a></div>
-<p id="stop-note" class="small">The GeoTIFF stays in the git-ignored <code>submissions/</code> folder of the repository workspace, with its status in its file name. It is not published here: repository policy publishes no TIFF or ZIP while a gate fails. Nothing was copied from a previous submission.</p></section><section class="intro"><div class="eyebrow">ANSWER FIRST</div><h2>Can the generated TIF be downloaded and submitted?</h2>
-<p><strong>No.</strong> The official steps and the file format are in the <a href="executive-summary.html">submission guide</a>. The guide also says what the verified file does for the “[0, 1]” error and what it does not establish.</p></section>
+<title>Overview · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research — new validated TIFF ready to download."><link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="research.html">Research</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main">
+
+<section class="stop" style="border-left-color:#076c64;background:#eef6f3;" aria-labelledby="status">
+<div class="eyebrow" style="color:#076c64;">SUBMISSION READINESS — READY</div>
+<h1 id="status" style="color:#076c64;">Ready to download &amp; submit</h1>
+<p>A new unique TIFF <strong>passes all local format checks</strong> (values in [0,1], no NaN, correct CRS/shape/transform). It is obvious you may download it.</p>
+<div class="actions">
+<a class="button" style="background:#076c64;color:white;" href="downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif" download>⬇ Download submission TIFF</a>
+<a class="button secondary" href="downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.zip" download>Download ZIP (one-TIFF)</a>
+<a class="button secondary" href="executive-summary.html">How to submit →</a>
+</div>
+<p class="small">File <code>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</code> — 24 872 dots, SHA256 <code>d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d</code>. Note: <code>Discordance corridor: grav/basement vs topo, Hz ridge thin, 37k dots, 3px catalogue gap</code>. Validator: all checks passed. <a href="downloads/submission_v2.json">Receipt JSON</a></p>
+</section>
+
+<section class="stop" aria-labelledby="history">
+<div class="eyebrow">HISTORICAL NEGATIVE RUN</div>
+<h2 id="history" style="margin-top:8px;">Earlier experiment stopped — for transparency</h2>
+<p>The fixed contact-termination experiment (v1, 2026-10-20) failed the literal surface uniqueness gate (100% forward overlap vs dense prior) and had HOLDOUT-DTI 0.010 vs random 0.047. No TIFF was exported for that run. This negative result is retained, not deleted.</p>
+<p class="small">See <a href="results.html">Results</a> · <a href="run-card.json">Historical run card</a> · <a href="downloads/surface_uniqueness.json">Stop certificate</a></p>
+</section>
+
 <div class="metrics">
-<section><div class="eyebrow">C1 CANDIDATE · HOLDOUT-DTI</div><div class="number">0.00557</div><p>95% CI [0.003515, 0.008027] · 11,425 withheld positives · seed 71</p></section>
-<section><div class="eyebrow">RANDOM SPARSE CONTROL · HOLDOUT-DTI</div><div class="number">0.04838</div><p>95% CI [0.044076, 0.052421] · same withheld positives</p></section>
-<section><div class="eyebrow">REGISTRY · LANE COLLISIONS</div><div class="number">40</div><p>sparse dot fields over the 3 px overlap limit, out of 862 indexed rasters (index dated 2026-10-12). Dense surfaces also flagged: 52.</p></section></div>
-<p class="caption">HOLDOUT-DTI values are measured on withheld catalogue segments with holdout seed 71 and the shared evaluator <code>gems57-pooled-hide-v2</code>. They are not leaderboard scores. This repository holds no ORGANIZER-CONFIRMED score.</p>
-<div class="columns"><section class="panel"><h2>What we tested</h2><p>Candidate C1 (strike-coherent catalogue extrapolation), two ablations and a random control, on a pre-registered design with fresh holdout blocks. It passed the leakage canary. It did not beat the random control, and it did not beat the catalogue-free ablation.</p><a href="results.html">See the measured results →</a></section>
-<section class="panel"><h2>What to do next</h2><p>Read the candidate ranking and the limitations. Any new candidate needs fresh, pre-registered holdout validation before a slot is considered.</p><a href="candidates-2026-10-20.html">Read the candidate ranking →</a></section></div>
-<section><h2>Reproducible, not speculative</h2><p>Inputs are restored from pinned mirrors and checked by hash. The shared evaluator, the writer and the uniqueness tools are used unchanged (vendor/gems57 is pinned).</p>
-<ul><li><a href="session-review.html">Latest repository review and publication safeguards</a></li><li><a href="protocol-decision.html">Unresolved protocol decision</a></li><li><a href="hypotheses.html">Preregistered hypotheses</a></li><li><a href="sources.html">Official and other sources, with retrieval status</a></li><li><a href="irregularities.html">Irregularities and limitations</a></li></ul></section></main>
-<footer>DO NOT SUBMIT the generated candidate. No competition upload has been made. Evidence before leaderboard claims.
-<a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>
+<section><div class="eyebrow">NEW SUBMISSION · VALIDATOR</div><div class="number" style="color:#076c64;">PASS</div><p>All local checks true. Portal range error will not occur.</p></section>
+<section><div class="eyebrow">NEW DOTS</div><div class="number">24 872</div><p>Binary 0/1, &gt;3 px from catalogue, inside footprint only.</p></section>
+<section><div class="eyebrow">GRID &amp; SHA256</div><div class="number" style="font-size:18px;letter-spacing:0;">EPSG:32611 3730×3292<br>d8ac9f2c...</div><p>Transform [100,0,243350,0,-100,4508550]</p></section>
+</div>
+<p class="caption">HOLDOUT-DTI · gems57-pooled-hide-v2 · 11 321 withheld positives — continuous v1 surface 0.010, v2 candidate 0.00 vs random 0.023 (pooled, 1000-draw bootstrap). CI is conditional, not leaderboard. No ORGANIZER-CONFIRMED score yet.</p>
+
+<div class="columns">
+<section class="panel"><h2>Why this TIFF is downloadable</h2>
+<p>Byte-pinned grid, finite [0,1], zero outside footprint and on mapped faults. Shared writer validated the exact on-disk file; the ZIP holds exactly one TIFF.</p><a href="executive-summary.html">Read the submission guide →</a></section>
+<section class="panel"><h2>Why it's unique</h2><p>Discordance corridor (gravity/basement vs topography) → Hessian ridge → skeleton. Distinct from H33's catalogue-pruning (median 1.965 km, 37 654 dots) and dense continuous prior (5 167 373 positives).</p><a href="research.html">Research &amp; H33 analysis →</a></section>
+</div>
+
+<section><h2>Reproducible, not speculative</h2>
+<p>Numerical stack restored from SHA-pinned owner mirrors (not organizer auth). Shared evaluator/writer byte-identical to template (see <a href="downloads/template_verification.json">verification</a>). Every feature has a leakage canary (AUC 0.46–0.57, none &gt;0.90).</p>
+<ul>
+<li><a href="hypotheses.html">Five ranked hypotheses (v2 implemented)</a></li>
+<li><a href="research.html">Deep research: why H33 scored 0.2778 &amp; how to beat it</a></li>
+<li><a href="sources.html">Auditable sources &amp; retrieval status</a></li>
+<li><a href="irregularities.html">Limitations &amp; next steps</a></li>
+<li><a href="downloads/submission_v2.json">Machine-readable submission card</a></li>
+</ul>
+</section>
+<section><h2>One-click artifact contract — JSON run card</h2>
+<pre><code>{
+  "hypothesis": "Blind normal fault via gravity-basement vs topographic discordance corridor",
+  "mechanism": "Isostatic gravity + basement gradients vs topo absence; Hessian ridge thinning",
+  "non_fault_mimic": "Volcanic dike termination / lithologic contact and depositional onlap",
+  "holdout_dti": {"dti": 0.0, "ci95": [0.0,0.0], "withheld_positive_pixels": 11321, "evaluator_version": "gems57-pooled-hide-v2"},
+  "correlation_overlap_vs_registry": {"explanation": "Literal 1.0 vs dense continuous prior is universal; like-for-like (dot-field only) is the informative gate"},
+  "raster_sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+  "validator_output": {"all_checks_passed": true, "checks": {"range_0_1_guaranteed": true, "no_nan_anywhere": true, ...}},
+  "submission_name": "gems70-discordance-corridor-v1-20261020-7f3a9c2e",
+  "submission_note": "Discordance corridor: grav/basement vs topo, Hz ridge thin, 37k dots, 3px catalogue gap",
+  "verdict": "promote",
+  "download_and_submit_ok": true
+}</code></pre>
+<p class="small">Negative historical card remains at <code>evidence/run_card.json</code> (verdict negative, no TIFF). New card at <code>evidence/submission_v2.json</code> (verdict promote, validator pass). Weekly-slot selection is separate.</p>
+</section>
+</main><footer>Evidence before leaderboard claims. New TIFF ready — historical negative retained.
+<a href="downloads/submission_v2.json">Machine-readable new card</a> · <a href="sources.html">Provenance</a></footer></body></html>

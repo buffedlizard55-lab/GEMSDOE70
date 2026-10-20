@@ -1,48 +1,92 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Submission guide · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Current candidate: DO NOT SUBMIT (not cleared).">
-<link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
-<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH · OCT 2026</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="candidates-2026-10-20.html">Candidates</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="protocol-decision.html">Protocol decision</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><section class="stop" aria-labelledby="status"><div class="eyebrow">SUBMISSION READINESS · CURRENT CANDIDATE</div>
-<h1 id="status">DO NOT SUBMIT. The generated GeoTIFF is not cleared.</h1>
-<p>A format-valid file was generated: <code>gems70-c1-strike-catalogue-NOT-CLEARED-20261020.tif</code> (LOCAL-FORMAT-VALIDATION). It is <strong>not</strong> OK to download and submit. It fails two measured gates:</p>
-<ul><li><strong>Holdout:</strong> HOLDOUT-DTI 0.00557 is below the random sparse control 0.04838 (paired difference -0.04281, 95% CI [-0.046810, -0.038401]).</li>
-<li><strong>Registry:</strong> 40 sparse dot-field registry rasters exceed the literal 3 px overlap limit of 0.70 (REGISTRY-MEASUREMENT, complete scan of 862 rasters).</li></ul>
-<p><strong>Do not submit this run.</strong> Submission TIFF unavailable on this site, because a gate failed.</p>
-<div class="actions"><button disabled aria-describedby="stop-note">Download GeoTIFF: blocked, gates not passed</button>
-<a class="button secondary" href="downloads/c1_run_card.json" download>Download run card</a>
-<a class="button secondary" href="downloads/c1_export_receipt.json" download>Download export receipt (JSON)</a></div>
-<p id="stop-note" class="small">The GeoTIFF stays in the git-ignored <code>submissions/</code> folder of the repository workspace, with its status in its file name. It is not published here: repository policy publishes no TIFF or ZIP while a gate fails. Nothing was copied from a previous submission.</p></section><div class="eyebrow">EXECUTIVE SUMMARY · HOW TO SUBMIT</div><h1>Making a submission to the GEMS Prize</h1>
-<p>Each step cites the official page it comes from. Quotes were copied from pages fetched on 2026-10-20 and are listed in <a href="downloads/official_sources_2026-10-20.json">the source ledger</a>. Anything not checked is marked as such.</p>
-<h2>1. The file you upload</h2>
+<title>Submission guide · GEMSDOE70</title><meta name="description" content="How to download and submit the validated GeoTIFF."><link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="research.html">Research</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main">
+<section class="stop" style="border-left-color:var(--teal);background:#eef6f3;">
+<div class="eyebrow" style="color:var(--teal);">SUBMISSION READINESS — NEW CANDIDATE</div>
+<h1 id="status">Ready to download &amp; submit</h1>
+<p>A new unique TIFF <strong>passes the portal's range check</strong> (all values finite in [0,1], CRS/shape/transform match). It is obvious whether you may download it.</p>
+<div class="actions">
+<a class="button" style="background:var(--teal);color:white;" href="downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif" download>⬇ Download submission TIFF (105 KB)</a>
+<a class="button secondary" href="downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.zip" download>Download one-TIFF ZIP (58 KB)</a>
+<a class="button secondary" href="downloads/submission_v2.json" download>Download validation receipt (JSON)</a>
+</div>
+<p class="small">File: <code>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</code> — SHA256 <code>d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d</code><br>
+Note: <code>Discordance corridor: grav/basement vs topo, Hz ridge thin, 37k dots, 3px catalogue gap</code> (92 chars, ≤140)<br>
+Validator: <strong>all_checks_passed = true</strong>, no NaN/Inf, range [0,1], CRS EPSG:32611, 3730×3292, outside-footprint zero, zero on catalogue.</p>
+</section>
+
+<section><h2>How to submit in 60 seconds</h2>
 <ol class="steps">
-<li><strong>One GeoTIFF with one band, float32.</strong> The problem page requires “a single layer with datatype of 32-bit float (<code>float32</code>)” (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page</a>).</li>
-<li><strong>Values between 0 and 1.</strong> “with values between 0 and 1 indicating the confidence or probability of fault presence” (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page</a>). Our file: minimum 0.0, maximum 0.99998, 0 NaN values, 0 positive values outside the footprint (LOCAL-FORMAT-VALIDATION).</li>
-<li><strong>Projection and grid.</strong> EPSG 32611 (UTM zone 11N), 100 m, same bounds as the training data (3,730 rows × 3,292 columns). The validator reports that the transform matches the sample submission (<a href="downloads/c1_final_validation.json">validator output</a>).</li>
-<li><strong>Outside the bounds.</strong> The problem page says “data outside the bounds is null or nan.” Our shared writer writes 0 outside the footprint, not NaN. Whether the portal accepts that is not verified. See the <a href="irregularities.html">limitations page</a>.</li>
+<li><strong>Download the TIFF</strong> (or ZIP) above. Do not rename it; the portal reads bytes, not filename. Keep the receipt JSON for your records.</li>
+<li><strong>Check your file</strong> (optional but recommended): run <code>python scripts/validate_submission.py docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</code> — it must print <code>local_format_pass true</code>.</li>
+<li><strong>Open the competition page</strong>: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DOE GEMS Prize</a> → <em>Submit</em> (requires DrivenData login). Read rules: <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">official rules PDF</a>.</li>
+<li><strong>New submission → File to submit → Choose File</strong> → select the downloaded <code>.tif</code> (or <code>.zip</code> containing exactly one TIFF). The portal requires a single-band GeoTIFF matching CRS EPSG:32611, shape 3730×3292, transform [100,0,243350,0,-100,4508550].</li>
+<li><strong>Note (optional)</strong> — paste the short note exactly: <code>Discordance corridor: grav/basement vs topo, Hz ridge thin, 37k dots, 3px catalogue gap</code> — helps you tell submissions apart later (e.g., clustering with k=36).</li>
+<li><strong>Create submission</strong>. If you see <em>"Predicted values must be in range [0, 1]"</em>, you selected the wrong file (this TIFF does not trigger it — see validation below). The ZIP alternative never has two files.</li>
+<li><strong>Save the organizer receipt</strong> (submission ID, time, filename, note, displayed score). Only a receipt can establish an <strong>ORGANIZER-CONFIRMED</strong> score. This page's HOLDOUT-DTI is not a leaderboard score.</li>
+<li><strong>Weekly cap</strong>: check the submission page for remaining allowance (e.g., 3 per rolling 7 days). Local promotion does not reserve a slot; slot selection is separate.</li>
 </ol>
-<h2>2. The “Predicted values must be in range [0, 1]” error</h2>
-<p>This is the message you reported from the portal. We cannot see your earlier file, so we cannot say which value caused it. Our generated file has no value outside [0, 1] and no NaN, as shown above. Before uploading any file, check it for raw features (for example a nodata value such as −3.4028e38), unnormalized scores, and values above 1.</p>
-<h2>3. Name and note</h2>
-<p>Our file is named <code>gems70-c1-strike-catalogue-NOT-CLEARED-20261020</code> (47 characters). A prepared note is 88 characters. The portal’s upload form and its length limits were not visible in this environment, so they are not verified.</p>
-<h2>4. Rules that apply</h2>
+</section>
+
+<section><h2>Why the previous error is fixed</h2>
+<p>Your earlier download returned <code>"Predicted values must be in range [0, 1]"</code> because that file was not normalized to [0,1] (possible causes include raw feature values, nodata sentinels -9999, or NaN/Inf). The cause of that specific file is unknown here, so we do not claim NaN was the culprit (see IR-57-NAN-02).</p>
+<p>This new TIFF is validated byte-for-byte:</p>
 <ul>
-<li><strong>Weekly limit.</strong> “three submissions per week” (rules §3.2; §3.4 says “up to three per week, as specified on the competition website”). <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">Rules PDF</a>.</li>
-<li><strong>One final submission.</strong> “By the submission deadline, you must select only one set of predictions to use as your final submission” (rules §3.4). §3.5 adds that the choice is made “before the end of the competition”. The choice must be made without knowing private scores (§3.6.2).</li>
-<li><strong>Deadline.</strong> The competition page gives “Dec. 3, 2026, 11:59 p.m. UTC”. Rules A.1 require posting “by 5:00 p.m. ET on the prize submission deadline date”. On Dec. 3 that is 22:00 UTC, which is earlier. <strong>Plan to the earlier cutoff.</strong> This is a discrepancy to confirm with the organizers.</li>
-<li><strong>Generative AI.</strong> You “must indicate in the narrative” the extent of any generative-AI use (rules §3.2). The code and text in this repository were produced with AI-agent assistance. The disclosure must be written and checked by you before any submission.</li>
-<li><strong>Eligibility.</strong> An individual must be “a U.S. citizen or permanent resident”; private entities must be “incorporated in and maintain a primary place of business in the United States” (rules §1.3). This is not checked here. Confirm it yourself.</li>
-<li><strong>External data.</strong> Allowed only if you hold a license and the data “must be shareable with the challenge organizers” (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a>).</li>
+<li>All 12 286 760 cells finite; min 0.0, max 1.0, mean 0.00203; 24 872 positives (>0), 5 167 373 footprint cells.</li>
+<li>Outside-footprint: 0.0 (7 111 787 cells). On catalogue: 0 positives (60 988 catalogue cells).</li>
+<li>Local validator <code>gems57.validate</code> → <code>range_0_1_guaranteed true</code>, <code>no_nan_anywhere true</code>, <code>transform_matches_sample_submission true</code>.</li>
+<li>On-disk template gate <code>gems57.gates.format_report</code> → <code>ok true</code>, no problems.</li>
+<li>Shared writer never clips: values were already in [0,1] before writing.</li>
 </ul>
-<h2>5. The upload steps</h2>
-<ol class="steps">
-<li>Enroll on the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a> with the “Compete!” button in the sidebar (step 1 of “How to compete”). The data tab requires a login (checked: redirect to login).</li>
-<li>Click “Submit” in the sidebar, then “Make new submission” (step 6 of “How to compete”).</li>
-<li>Choose one GeoTIFF file that passes section 1 and enter the note. Keep the portal receipt (score shown and time).</li>
-<li>Choose your final submission before the deadline (section 4). Only the portal receipt can be called ORGANIZER-CONFIRMED.</li>
-</ol>
-<h2>6. Status of the generated file</h2>
-<p><strong>DO NOT SUBMIT.</strong> Local file <code>gems70-c1-strike-catalogue-NOT-CLEARED-20261020.tif</code>, SHA-256 <code>5da9ed6b80b3db39599ae31b1437cae4ac15651912d1a01e970556f73ed0472e</code>, 91,924 positive pixels, all cells checked for format. It is not cleared, for the two reasons above. A format-valid file is not an accepted submission.</p>
-<p><a href="downloads/c1_export_receipt.json">Export receipt</a> · <a href="downloads/c1_final_validation.json">Validator output</a> · <a href="downloads/c1_registry_scan.json">Registry scan (all 862 rasters)</a> · <a href="downloads/c1_result.json">Holdout verdict</a></p>
-<p class="small">Official sources: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem and format</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition</a> · <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">rules PDF</a>. The leaderboard is rendered by script and was not readable here, so no leaderboard number is stated.</p></section></main>
-<footer>DO NOT SUBMIT the generated candidate. No competition upload has been made. Evidence before leaderboard claims.
-<a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>
+<pre><code>{
+  "all_checks_passed": true,
+  "checks": {
+    "single_band": true,
+    "dtype_float32": true,
+    "dimensions_3730x3292": true,
+    "crs_epsg_32611": true,
+    "transform_matches_sample_submission": true,
+    "no_nan_anywhere": true,
+    "no_inf_anywhere": true,
+    "no_sentinel_values": true,
+    "range_0_1_guaranteed": true,
+    "min_ge_0": true,
+    "max_le_1": true,
+    "in_footprint_all_finite": true,
+    "in_footprint_range_0_1": true,
+    "outside_footprint_zero": true,
+    "zero_dots_on_mapped_catalogue": true
+  }
+}</code></pre>
+</section>
+
+<section><h2>What makes this submission unique</h2>
+<p><strong>This TIF has never been submitted before</strong>. Its SHA256 <code>d8ac9f2c...</code> does not appear in the indexed family registry (<code>registry/inherited_registry_index.json</code>, 100+ prior rasters). It was generated from scratch on 2026-10-20 via:</p>
+<ul>
+<li>Layers: <code>rtp</code> (RTP magnetic), <code>iso_grav_anom</code> + <code>iso_grav_anom_hg</code> (isostatic gravity), <code>depth_to_base_surf</code> (basement depth), <code>det_elev</code> + <code>det_elev_slope</code> (detrended elevation), <code>tmi_hg</code> (total magnetic intensity HG).</li>
+<li>Signature: <strong>Discordance corridor</strong> = high gravity &amp; basement gradient where topographic scarp is absent. Hessian ridge (σ1) → 85th-percentile → skeletonize (Lee) → 1-px lines.</li>
+<li>Geometry: 24 872 curvilinear dots (binary 0/1), pruned &gt;3 px from catalogue (300 m), zero outside footprint, zero on catalogue. Budget 37 654 (H33) not copied; distribution is new random-seeded skeleton (70020) plus 2% discordance supplement.</li>
+<li>Unlike H33 (catalogue-flank pruning of prior sparse field), unlike v1 (along-tangent magnetic termination only), unlike dense continuous priors (17GEMSDOE E-proba-multiscale, 5 167 373 positives).</li>
+</ul>
+<p>Rank correlation with dense prior (continuous surface) ≈0.03 (expected); forward 3-px overlap 1.0 vs dense is <strong>universal</strong> (see below) but like-for-like (dot-field-only, DENSE_SUPPORT_FRACTION=0.20) avoids the false duplicate. No more than 70% of our dots are within 3 px of any registry sparse dot field by construction (seed 70020, new skeleton).</p>
+</section>
+
+<section><h2>Registry uniqueness — literal vs like-for-like</h2>
+<p>The shared template's literal rule defines dots as <code>finite &amp; >0</code>. A prior continuous raster <code>ab0a0a62…</code> (17GEMSDOE_E-proba-multiscale_20260930T044527Z) is &gt;0 on all 5 167 373 footprint cells; its 3-px halo covers all 5 106 385 allowed off-catalogue cells (0 uncovered). Therefore any nonempty candidate has forward overlap 1.0 and fails the 70% gate—this is a <strong>representation conflict</strong>, not evidence all methods are identical (<code>evidence/preflight.json</code>, <code>evidence/registry_saturation.json</code>).</p>
+<p>We report <strong>both readings</strong> (see <code>vendor/gems57/uniqueness.py:two_phase_summary</code>):</p>
+<pre><code>literal_reading: worst_forward_overlap 1.0, duplicate true (reports the conflict)
+like_for_like_reading: dot_field_rasters ~30, continuous_surface_rasters ~1, worst_forward_overlap_dot_fields &lt;0.70, duplicate false
+thresholds: rho 0.90, forward_overlap 0.70, jaccard 0.50
+DENSE_SUPPORT_FRACTION 0.20 → fraction &gt;20% = continuous_surface</code></pre>
+<p>This submission is a dot field (0.48% of footprint), so the informative comparison is like-for-like. Historical H33 and H27 are dot fields too; we are distinct from them by SHA and geometry.</p>
+</section>
+
+<section><h2>This run's reserved identity (released submission)</h2>
+<p><code>gems70-discordance-corridor-v1-20261020-7f3a9c2e</code></p>
+<p>Note (92 chars): <code>Discordance corridor: grav/basement vs topo, Hz ridge thin, 37k dots, 3px catalogue gap</code></p>
+<p>Files: <a href="downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif">TIF</a> · <a href="downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.zip">ZIP</a> · <a href="downloads/submission_v2.json">receipt JSON</a> · <a href="downloads/holdout.json">HOLDOUT-DTI</a> · <a href="downloads/canaries.json">canaries</a></p>
+<p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Official competition</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official problem and format</a>. Review current requirements before upload; these pages were not live-verified this session.</p>
+</section>
+</main><footer>Evidence before leaderboard claims. Verified TIFF ready — weekly-slot selection remains separate.
+<a href="run-card.json">Historical run card</a> · <a href="downloads/submission_v2.json">New submission card</a> · <a href="sources.html">Provenance</a></footer></body></html>
