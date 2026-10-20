@@ -68,8 +68,11 @@ def release_status(root):
             reasons.append('Published TIFF is absent or does not match the recorded SHA-256.')
         validator = card.get('validator_output') or {}
         checks = validator.get('checks') or {}
-        if not checks or not all(bool(v) for v in checks.values()):
-            reasons.append('Shared validator checks did not all pass.')
+        if (not isinstance(checks, dict) or not checks
+                or not all(v is True for v in checks.values())
+                or validator.get('all_checks_passed') is not True
+                or validator.get('sha256') != sha):
+            reasons.append('Shared validator evidence is not all true and hash-bound to this artifact.')
             download_ok = False
         if validator.get('emitted_positive_pixels') != 37654:
             reasons.append('Emitted dot count differs from the registered 37,654.')

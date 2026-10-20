@@ -134,3 +134,41 @@ def test_current_pages_have_unambiguous_review_only_banner():
     assert 'http-equiv="refresh"' not in executive
     assert 'live submission-page cap' in executive
     assert 'Download archived TIFF' in executive
+
+
+@pytest.mark.parametrize('damage', ['truthy_string', 'validator_hash', 'validator_summary'])
+def test_format_receipt_must_be_literal_true_and_hash_bound(tmp_path, damage):
+    from test_release_gate import promotion_fixture
+    path, _ = promotion_fixture(tmp_path)
+    card = json.loads(path.read_text())
+    if damage == 'truthy_string':
+        card['validator_output']['checks']['range_0_1_guaranteed'] = 'False'
+    elif damage == 'validator_hash':
+        card['validator_output']['sha256'] = '0' * 64
+    else:
+        card['validator_output']['all_checks_passed'] = False
+    path.write_text(json.dumps(card))
+    result = release_status(tmp_path)
+    assert not result['download_ok'] and not result['submit_recommended']
+
+
+def test_scarp_e3_download_does_not_imply_current_uniqueness():
+    from gems70.release_e3 import release_status_e3
+    result = release_status_e3(ROOT)
+    assert result['download_candidate_ok']  # frozen historical checks unchanged
+    assert result['literal_lane_status']['stop_required']
+    assert not result['literal_lane_status']['protocol_unique']
+    assert not result['slot_authorized'] and not result['download_and_submit_ok']
+
+
+def test_generator_refuses_witness_drift_before_writing_receipts(tmp_path, monkeypatch):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('review_protocol_cli', ROOT / 'scripts/review_literal_protocol.py')
+    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+    monkeypatch.setattr(mod, 'ROOT', tmp_path)
+    witness = tmp_path / mod.CACHE_PATH
+    witness.parent.mkdir(parents=True)
+    witness.write_bytes(b'corrupted witness')
+    with pytest.raises(ValueError, match='SHA-256 mismatch'):
+        mod.run()
+    assert not (tmp_path / 'evidence/review/run_card.json').exists()
