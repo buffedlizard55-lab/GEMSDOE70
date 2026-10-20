@@ -15,6 +15,7 @@ instead of an unsafe download.
 - [H33 forensic analysis](docs/h33-analysis.md) · [Four preregistered hypotheses](docs/hypotheses.md)
 - [Latest repository review / Pages safeguards](docs/session-review.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
+- [Follow-up review and release-safety fixes](reports/review-followup-2026-10-20.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
 ## Latest review: publication boundary
@@ -111,6 +112,15 @@ only H33. Its source, documents and TIFFs are preserved in
 `quarantine/concurrent-h70c` with hash evidence, but removed from site downloads.
 Those historical READY / score claims are withdrawn, not endorsed as measurements.
 See [the quarantine receipt](evidence/concurrent_h70c_quarantine.json).
+
+## Follow-up publication boundary
+
+Pages is configured for the repository root, not only `docs/`. The root
+`.nojekyll` bypass has been removed and `_config.yml` excludes quarantine/data
+and internal directories. Site builds now check both the root policy and docs,
+including symlink bypasses. An API change to `/docs` was denied (403); no
+settings change is claimed. GitHub archives remain public, not redacted.
+See [follow-up review](reports/followup-publication-review-20261020.md).
 
 ## Own the outcome
 

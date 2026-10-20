@@ -102,3 +102,36 @@ Deployment requires a successful main Pages build. See the PR/checks for actual
 build and merge receipts. Keep the experimental preregistration/source pins and
 scientific receipts unchanged. Resolve the protocol/lane/current-best blockers
 before any new candidate, rather than manufacturing a download.
+
+## Follow-up review on arena/75897427-gemsdoe70
+
+No new scientific experiment or eligible TIFF; the duplicate stop still applies.
+Reproduced `scripts/audit.py` from the content-addressed registry witness: universal
+support and minimum overlap 1.0 confirmed, with no change to committed evidence.
+Hardened negative-release CLI assertions and invalid/nonfinite canary diagnostics;
+shared template and frozen experiment sources remain unchanged. See
+`reports/review-followup-2026-10-20.md` for the three-pass review and limitations.
+
+Local verification: `.venv/bin/python -m pytest -q` — **100 passed**, three existing
+Rasterio/Affine pending-deprecation warnings. The expected-negative gate exits zero;
+the default gate and build-submission command exit two intentionally. Neither is
+submission authorization. GitHub Pages configuration was verified as enabled from
+main at `/`; deployment of this branch depends on merge and the Pages build.
+
+## Follow-up source-boundary review
+
+Pages API reports `main:/`, and updating it to `/docs` is denied (403 integration
+permission). Removed root `.nojekyll`, added Jekyll `_config.yml` exclusions, and
+added a root-tree guard plus symlink-bypass tests. Do not restore root `.nojekyll`:
+it bypasses those exclusions. The public GitHub archives are still public; this is
+not redaction. `scripts/check_pages.py` is read-only unless `--configure` is passed.
+See reports/followup-publication-review-20261020.md. No new scientific run or slot.
+
+Integrated concurrent main `37b37b9` after PR #7's first merge was rejected.
+Preserved root-Pages exclusions and all publication-boundary tests. Combined final
+suite: **117 passed**, three existing warnings; no additional scientific run.
+
+PR #8 integration: merged concurrent main f1197da into the assigned branch after
+the initial merge was rejected. Retained both parallel reports and release/source
+guards; added real built-output verification. Combined suite: 129 passed, three
+existing warnings. Scientific evidence and shared template remain unchanged.

@@ -8,7 +8,7 @@ import sys
 import markdown
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
-from gems70.release import release_status, assert_no_public_rasters
+from gems70.release import release_status, assert_no_public_rasters, assert_root_pages_guard
 from gems70.pages_policy import check_source
 DOCS=ROOT/'docs'
 
@@ -31,6 +31,7 @@ def frame(title,body):
 
 def main():
     check_source(ROOT)
+    assert_root_pages_guard(ROOT)
     assert_no_public_rasters(ROOT)
     card=json.loads((ROOT/'evidence/run_card.json').read_text())
     hold=json.loads((ROOT/'evidence/holdout.json').read_text())

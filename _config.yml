@@ -4,6 +4,8 @@
     ".github",
     ".venv",
     "AGENTS.md",
+    "Gemfile",
+    "Gemfile.lock",
     "HANDOFF.md",
     "LICENSE",
     "PROJECT_BRIEF.md",
