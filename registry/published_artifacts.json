@@ -187,6 +187,24 @@
       "sha256": "5c23877dc4c9343fee9de700b21b96f93495b7c012f7b6f73e8b01aefb8f4ebe",
       "bytes": 151585,
       "note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif",
+      "sha256": "9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771",
+      "bytes": 152601,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker, 37,654 dots), scientific gates PASS (B-prime 0.1100 vs H33 0.0938, paired delta +0.0162 [+0.0045, +0.0270]; A 0.0710 vs H33 0.0037; mutual uniqueness ok), review-only under literal forward rule; card evidence/e6/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.zip",
+      "sha256": "f77fee7df72848478d5a7b82b44f1999d20aeb265939f5060478b02f050bfb88",
+      "bytes": 120996,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker), one-TIFF ZIP; card evidence/e6/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.json",
+      "sha256": "37c2101497baeec72dcc6cea815f0f76b29b3e6445078b67e000241c2d9f66b3",
+      "bytes": 3445,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker), shared writer receipt; card evidence/e6/run_card.json"
     }
   ]
 }

@@ -93,7 +93,36 @@ catalogue as a proxy for newly mapped faults. Every number is labelled, and no p
 presented as a leaderboard score.</p>
 <ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
 <li><a href="results.html">All three experiments, ablations and canaries</a></li>
-<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section class="stop" aria-labelledby="s3">
+<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section class="panel" style="border-left:4px solid #076c64">
+<div class="eyebrow">NEW EXPERIMENT E6 · MULTI-MODAL EXTENDED-DOMAIN LOQO RANKER (37,654 DOTS)</div>
+<h2>New candidate E6: beats H33 on both Instrument A and Instrument B′ (<code>download_ok = true</code>, <code>scientific_verdict = promote</code>; <code>submit_recommended = false</code> under literal forward rule — DO NOT SUBMIT without selector exemption)</h2>
+<p>Preregistered in <code>docs/preregistration-e6.md</code>: diagnoses why P4 (<code>0.0812</code>) and E5 (<code>0.0886</code>)
+trailed H33 (<code>0.0938</code>) on Instrument B′ — <strong>35.89% of all SGMC B′ off-catalogue fault pixels lie at
+<em>d</em><sub>cat</sub> &gt; 32 px</strong>, which P4 and E5 hard-truncated to zero, and E5 omitted the external
+LiDAR scarp, 10 m DEM lineament/curvature, GeoDAWN radiometric, and 100 m scarp-curvature channels.
+Training a 4-fold Leave-One-Quadrant-Out HGB across <strong>28 multi-modal features in <em>d</em><sub>cat</sub> &isin; [3.0, 96.0] px</strong>
+with 7&times;7 regional coverage stratification (37,654 binary dots; worst single-feature canary AUC
+0.7903 &le; 0.90) achieves:</p>
+<ul>
+<li><strong>Instrument B′ (PROXY-DTI, <em>d</em> &ge; 3 px, 59,937 positives):</strong> <strong>0.1100</strong> [0.1058, 0.1133]
+vs H33 <strong>0.0938</strong> [0.0839, 0.1044] — <strong>paired &Delta; = +0.0162, 95% CI [0.0045, 0.0270]
+(strictly above zero; <code>gate_b_prime_candidate_gt_h33_significant = true</code>)</strong>, beating H33 (+17.3%), E5 (+24.0%), and P4 (+35.5%).</li>
+<li><strong>Instrument A (HOLDOUT-DTI, 11,321 withheld catalogue pixels):</strong> <strong>0.0710</strong> [0.0637, 0.0781]
+vs H33 <strong>0.0037</strong> (<code>gate_a_candidate_ge_h33 = true</code>).</li>
+<li><strong>Uniqueness (62 registry + 11 sibling rasters):</strong> Passes amended mutual-overlap uniqueness
+(worst mutual overlap <strong>0.2960 &le; 0.70</strong>, worst non-lattice forward overlap
+<strong>0.3526 &le; 0.70</strong>, worst Spearman &rho;
+<strong>0.0133 &le; 0.90</strong>; vs 11 sibling repo TIFFs worst mutual/forward = 0.3508).
+Blocked from automatic slot upload ONLY by the literal one-way forward-overlap gate (1.00 against dense binary lattice witness <code>calib_r13lattice_00904.tif</code>).</li>
+</ul>
+<div class="actions">
+<a class="button secondary" href="downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif" download>Download E6 TIFF (format-validated, scientific gates PASS; review-only under literal rule — DO NOT SUBMIT)</a>
+<a class="button secondary" href="downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.zip" download>Download E6 one-TIFF ZIP</a>
+<a class="button secondary" href="downloads/e6_run_card.json" download>E6 run card</a>
+<a class="button secondary" href="downloads/e6_cross_lane_bprime.json" download>Cross-lane B′ audit</a>
+</div>
+<p class="small">Name: <code>gems70-e6-multimodal-extdomain-loqo-37654-20261020</code> · SHA-256: <code>9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771</code> · Note (122/140):
+<code>E6 LOQO multi-modal HGB (LiDAR+10mDEM+GeoDAWN+scarp+19band, d in 3-96px, 7x7 strat, 37654 dots); beats H33 on B&#x27; (+0.0162)</code>.</p></section><section class="stop" aria-labelledby="s3">
 <div class="eyebrow">SESSION 3 · SUPERVISED PROXY RANKING · DECISION</div>
 <h2 id="s3">Session 3 files: download for review — do NOT submit</h2>
 <p>Both files pass the shared validator (single band, float32, 3730 × 3292, EPSG:32611, values

@@ -130,6 +130,14 @@ authenticated submission page were not accessible within this session's outbound
 cap, eligibility and organizer acceptance remain unverified. GPU is preferred, not required by the
 organizer reference. `scripts/prepare_data.py` advertised in the historical prompt is absent.
 
+
+## E6 lane — multi-modal extended-domain LOQO ranker (2026-10-20, `arena/effcd5f7-gemsdoe70`), `scientific_verdict = promote` (`download_ok = true`, `submit_recommended = false` under literal forward rule — DO NOT SUBMIT without selector exemption)
+
+Diagnoses why P4 (`0.0812`) and E5 (`0.0886`) trailed H33 (`0.0938`) on Instrument B′: **35.89% of all SGMC B′ off-catalogue fault pixels lie at `d_cat > 32 px`** (`evidence/e6/sgmc_buffer_audit.json`), which P4 and E5 truncated to zero, and E5 omitted the external LiDAR scarp, 10 m DEM lineament/curvature, GeoDAWN radiometric, and 100 m scarp-curvature channels (`HANDOFF.md` Next Steps 1–2). Training a 4-fold Leave-One-Quadrant-Out HGB across **28 multi-modal features in `d_cat in [3.0, 96.0] px`** with 7×7 regional coverage stratification (`37,654` binary dots; preregistered in `docs/preregistration-e6.md`, driver `scripts/run_experiment_e6.py`) achieves:
+- **Instrument B′ (`PROXY-DTI`, `d >= 3 px`, 59,937 positives):** **`0.1100`** `[0.1058, 0.1133]` vs H33 **`0.0938`** — **paired Δ `+0.0162`, 95% CI `[+0.0045, 0.0270]` (strictly positive; `gate_b_prime_candidate_gt_h33_significant = true`)**, beating H33 (+17.3%), E5 (+24.0%), and P4 (+35.5%).
+- **Instrument A (`HOLDOUT-DTI`, 11,321 withheld catalogue pixels):** **`0.0710`** `[0.0637, 0.0781]` vs H33 **`0.0037`** (`gate_a_candidate_ge_h33 = true`).
+- **Uniqueness:** Passes amended mutual-overlap uniqueness across all 62 registry rasters (worst mutual `0.2960 <= 0.70`, worst non-lattice forward `0.3526 <= 0.70`, worst Spearman `0.0133 <= 0.90`) and all 11 sibling repository TIFFs (`worst_mutual = 0.3508`). Blocked from automatic slot upload ONLY by literal one-way forward overlap (`1.00 > 0.70`) against the dense binary lattice witness `calib_r13lattice_00904.tif`.
+- **Artifact:** `docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif` (sha256 `9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771`), evidence in `evidence/e6/` (including 62-raster E2 re-audit `e2_uniqueness_62rasters.json` and 7-lane B′ audit `cross_lane_bprime.json`). No weekly slot used.
 ## Session 3 (branch arena/a0382202): supervised proxy ranking — **download for review, do NOT submit**
 
 | File | Download | Submit | Why |
@@ -858,12 +866,3 @@ Do not stop after the first pass. Each pass must build on the previous one. Befo
 Go ahead and create a pull request and then merge the pull request onto the main. Make suggestions for what work still needs to be done and any limitations that is in the way of a successful project.  It should be worked on in this next session or the next session.  Work line by line verify everything no hallucinations.
 
 </details>
-
-## Session-2 lane (arena/9a895360): fusion TIFF — **DO NOT SUBMIT**
-
-Unique file `docs/downloads/gems70-fusion-dotted-37654-20261020.tif` (inventoried; card
-`evidence/s2_run_card.json`; findings `docs/s2-findings.md`). Best measured ranking of this
-lane (HOLDOUT-DTI 0.09161, seed-703 untouched blocks) but it failed the preregistered
-promotion gate (paired CIs vs its two parent detectors cross zero) and the uniqueness gate
-(0.896 of dots within 3 px of GEMSDOE49's own dots). Download for review only; no slot used,
-consistent with the all-lanes decision at the top of this README.
