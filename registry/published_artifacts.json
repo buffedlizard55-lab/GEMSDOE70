@@ -85,6 +85,24 @@
       "sha256": "b3c8bbfde2d4117f6683181ea81544c670816852e27e0c69c91e1d1e72721621",
       "bytes": 3459,
       "note": "H70-A conductive breach, 37654 dots; run card evidence/h70/run_card.json (negative but unique, added during merge)"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+      "sha256": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a",
+      "bytes": 259128,
+      "note": "P5 LOQO magnetic-cover continuous research map; validated but negative on both holdouts and literal forward support. NOT a cleared competition submission; evidence/p5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.zip",
+      "sha256": "b481194c9ec5cb06611e1a257d1d99ba95e9e72c23583c3a4e546b99cda531db",
+      "bytes": 211493,
+      "note": "P5 LOQO magnetic-cover continuous research map; validated but negative on both holdouts and literal forward support. NOT a cleared competition submission; evidence/p5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.json",
+      "sha256": "3d5af89192d0829d2f9529b0bc32a346e8e875f758a780513fce69153021267f",
+      "bytes": 3664,
+      "note": "P5 LOQO magnetic-cover continuous research map; validated but negative on both holdouts and literal forward support. NOT a cleared competition submission; evidence/p5/run_card.json"
     }
   ]
 }

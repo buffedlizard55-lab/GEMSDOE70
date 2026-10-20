@@ -1,0 +1,42 @@
+{
+  "evidence_class": "AUDIT-METADATA-CORRECTION",
+  "what": "Immutable TIFF re-read, current-registry re-scan and descriptive metadata repair only",
+  "original": {
+    "source_sha256": "f67b4fb7091db30e21e547e399618c91b88ffe9497b9d152cbb31ba348b1d873",
+    "rasters_checked": 66,
+    "worst_rho": 0.023162112298445472,
+    "artifact_sha256": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a",
+    "training_metadata": [
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "new": {
+    "source_sha256": "0625d530083df47b2873f1bb8390a1d9d49becb945648ed0d1cf2a363d489887",
+    "rasters_checked": 68,
+    "worst_rho": 0.023162112298445472,
+    "worst_rho_submission": "h60_officialstack_50k.tif",
+    "train_region_pixels": [
+      3785175,
+      3522961,
+      3539692,
+      3800035
+    ],
+    "production_train_region_pixels": 4882621,
+    "artifact_sha256": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a"
+  },
+  "no_retraining": true,
+  "no_rescoring": true,
+  "test_scores_unchanged": true,
+  "literal_positive_support_duplicate": true,
+  "weekly_slots_used": 0,
+  "integration_relocation": {
+    "old_path": "scripts/run_experiment_p5.py",
+    "old_sha256": "0625d530083df47b2873f1bb8390a1d9d49becb945648ed0d1cf2a363d489887",
+    "new_path": "scripts/run_experiment_p5_cover.py",
+    "new_sha256": "56de0c7562193651ec368d0089edbd7d26650602a31a8ed53a37bad9787c5cc4",
+    "reason": "Main advanced concurrently with a separate analytic-signal P5 lane. File path collision resolved without regenerating the TIFF or scores."
+  }
+}

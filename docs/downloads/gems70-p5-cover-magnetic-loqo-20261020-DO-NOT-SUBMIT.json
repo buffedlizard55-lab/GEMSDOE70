@@ -1,0 +1,124 @@
+{
+  "file": "gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+  "sha256": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a",
+  "bytes": 259128,
+  "submission_name": "gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT",
+  "note": "P5 magnetic width and cover, SGMC LOQO proxy; continuous review map. Literal dot overlap blocks promotion; DO NOT SUBMIT",
+  "note_chars": 120,
+  "validator": {
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+    "bytes": 259128,
+    "sha256": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 0.9899818301200867,
+    "mean": 0.002197776222601533,
+    "emitted_positive_pixels": 54512,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 54512,
+    "footprint_fraction": 0.010549267490463723
+  },
+  "template_report": {
+    "path": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+    "bytes": 259128,
+    "sha256": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 0.9899818301200867,
+    "mean": 0.002197776222601533,
+    "n_nonzero": 54512,
+    "mass": 26986.84528032689,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "zip_file": "gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.zip",
+  "zip_sha256": "b481194c9ec5cb06611e1a257d1d99ba95e9e72c23583c3a4e546b99cda531db",
+  "approved_for_weekly_slot": false,
+  "promoted": false,
+  "submission_slots_used": 0,
+  "status": "locally validated within separately recorded inventory scope; not organizer acceptance or slot approval",
+  "metadata": {
+    "class": "format-validated continuous research TIFF; NOT a cleared dot submission",
+    "literal_forward_dot_stop": true,
+    "evidence": "evidence/p5/run_card.json"
+  }
+}
