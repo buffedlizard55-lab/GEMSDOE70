@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-10-20T19:41:27.304341+00:00",
+  "experiment_count": 1,
+  "maximum_experiments": 3,
+  "maximum_seconds": 7200,
+  "preregistration_sha256": "67ec79dd48e1b8af3e3fa314f11916b829a878c4b154b5d910b6f6884188a671",
+  "source_sha256": {
+    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
+    "scripts/run_experiment.py": "80afcb2d3ea851344e99bd7cca262e7fe9410c0b91534cb06b012623c1d572b5"
+  }
+}

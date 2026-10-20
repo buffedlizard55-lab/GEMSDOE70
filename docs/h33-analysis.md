@@ -18,7 +18,7 @@ So H33 is not a detector. It is a **uniform sparse sample of the 0.2–3 km halo
 faults, with the two closest shells deleted**. Nine in ten of its dots lie more than 300 m from any
 mapped trace (median 1.97 km).
 
-## Why that scores well — the metric algebra
+## Why that might score well — a metric-based hypothesis
 
 With `DTI = T / (T + 0.2·(S − M) + 0.8·(N − T))`, where `T` sums a triangular kernel over **truth**
 cells, `S` sums the emitted mass and `M` sums each dot's nearest-truth credit:
@@ -27,13 +27,14 @@ cells, `S` sums the emitted mass and `M` sums each dot's nearest-truth credit:
   across distinct truth therefore beats concentrating them (measured directly this session:
   a 3.6-px-spaced damage-zone field scored 0.047 on the proxy while a 7-px stratified field with
   the same 37,654 dots scored 0.081).
-* A dot closer than ~2 px to a mapped fault buys `S` and almost no `T`, because the scorer masks
-  known faults pixel-exactly and the hidden truth does not hug the mapped trace. Deleting those
+* A dot closer than ~2 px to a mapped fault buys `S` and almost no `T`, under the hypothesis that masking known faults reduces nearby useful credit;
+  the hidden-truth spatial distribution is not available for verification. Deleting those
   shells raised the reported live score twice (0.2708 → 0.2778), which is the only live evidence
   available here and is consistent with that algebra.
 
-The consequence: most of H33's 0.2778 is **emission geometry**, not geological inference. The
-residual 0.16 to the 0.44 leader requires knowing *where inside the halo* the new traces are.
+The audit establishes the emission geometry, not its causal contribution to the reported
+result. Neither the hidden-label distribution nor the fraction of performance attributable
+to geometry is identified by these experiments.
 
 ## Can this be beaten? What the three experiments say
 
@@ -62,8 +63,8 @@ that resembles the hidden truth has to be built, not invented from geometry. Con
 session should (a) train on the SGMC-off-catalogue proxy with leave-one-quadrant-out and a proper
 featurisation of the 19-band stack plus lidar-scarp and radiometric layers, (b) keep the coverage
 stratification that this session measured to be worth +70 % on B′ at fixed mass
-(0.047 → 0.081), and (c) spend one slot on the resulting file. Geometry alone has been measured to
-its limit here; the leaderboard gap is information, not spacing.
+(0.047 → 0.081), and (c) spend one slot on the resulting file. These experiments do not establish a limit on geometry-based methods or identify the
+source of any leaderboard gap. No slot is authorized by this suggestion.
 
 ## What we will not do
 

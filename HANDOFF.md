@@ -80,6 +80,15 @@ before any slot consideration. Evidence: `evidence/e2/`, `evidence/e3/`,
 ## Integration note (PR #16 second merge, 2026-10-20)
 PR #18 (H2 stepover-relay, negative; HOLDOUT-DTI 0.023034, lane stop fired) landed during PR #16 CI and replaced `evidence/run_card.json`, builders and 4 test files with its fail-closed system. Integration preserved: H2 card moved byte-identical to `evidence/history/h2_stepover_negative/run_card.json`; H2 diagnostic TIFF registered in `registry/published_artifacts.json`; Phase-4 canonical card restored from `fefc857` blob (sha256 `9cd64b1e...`); session-2 builders/tests retained so P4 + discordance + E2 artifacts stay coherent. `make_run_card.py` stale-schema fix (pre-existing red Verify on main) retained. All verdicts negative; slots used 0.
 
+## Latest protocol review (arena/4aea4e21-gemsdoe70)
+Current prompt's literal forward-overlap rule conflicts with the prior mutual
+amendment. P4 has four duplicate witnesses; no new experiment/TIFF generated.
+Historical artifact remains downloadable FOR REVIEW ONLY. Release policy now
+prevents stale promotion flags bypassing scientific, leakage, and literal overlap
+gates. See docs/protocol-review.md and evidence/review-20261020/run_card.json.
+Do not resume the earlier next-session plan without a named lane and resolution
+of the explicit stop. Official reference README confirms CPU training support.
+
 ## Current literal-protocol review (2026-10-20, arena/00dc63c0-gemsdoe70)
 
 Read `reports/literal-protocol-review.md` and `evidence/literal_protocol_review.json`
@@ -89,3 +98,13 @@ no weekly slot. Frozen scientific receipts are preserved, not reclassified as ne
 Site-wide warnings and the README opening supersede old uniqueness claims for this prompt.
 Reproduce: `.venv/bin/python scripts/audit_literal_protocol.py`, rebuild site/readme, pytest.
 Resolve the protocol contradiction and explicit lane assignment before the supervised next step.
+
+## Parallel-session E3 scarp lane (PR #17)
+
+Independent lane, three frozen experiments: E1 contact-termination (negative, archived), gated
+joint scarp×strain×cover (negative), scarp-curvature alone (PROMOTE-to-selector on catalogue
+HOLDOUT-DTI 0.0943 [0.0782, 0.1109], seed-40/11,437 withheld). Candidate
+`docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif` (sha256 in
+`evidence/run_card_e3_amended.json`). **Not yet scored on instrument B′** — selector's next step.
+Frozen drivers live at `scripts/run_experiment_e2_scarp.py` / `run_experiment_e3_scarp.py`
+(byte-identical rename; PR #16 owns canonical paths). Do not rerun.
