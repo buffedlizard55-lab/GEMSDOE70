@@ -108,3 +108,15 @@ See reports/followup-publication-review-20261020.md. No new scientific run or sl
 Integrated concurrent main `37b37b9` after PR #7's first merge was rejected.
 Preserved root-Pages exclusions and all publication-boundary tests. Combined final
 suite: **117 passed**, three existing warnings; no additional scientific run.
+
+## Release-evidence edge-case review on arena/fd9c8ead-gemsdoe70
+
+Reproduced the immutable registry witness audit; universal literal overlap remains
+1.0 and the existing stopped-run preflight receipt is unchanged. No new science,
+TIFF, placement, training, or slot. Fixed oversized-integer AUC diagnostic overflow
+and required literal boolean current-best verification in the local publication
+wrapper, not the shared template. Added seven regression cases; full suite is
+124 passed with three existing warnings. Site/README rebuilds and expected-negative
+release gate pass. See reports/release-evidence-review-20261020.md for all three
+passes, evidence boundaries and ordered next steps. PR #8 is another session's
+open publication-policy review, not this session's submission or authorization.
