@@ -1,0 +1,58 @@
+{
+  "evidence_class": "HOLDOUT-DTI",
+  "seed": 71,
+  "fresh_blocks_not_seed20": true,
+  "receipts": [
+    {
+      "fold": "NW",
+      "seed": 71,
+      "held_components": 137,
+      "withheld_positive_pixels": 1931,
+      "eligible_components": 598,
+      "boundary_buffer_px": 12,
+      "feature_buffer_px": 3,
+      "nearest_visible_to_truth_px": 3.1622776601683795,
+      "split_version": "buffered-whole-components-loqo-v2",
+      "evaluation_region_label_blind": true
+    },
+    {
+      "fold": "NE",
+      "seed": 71,
+      "held_components": 133,
+      "withheld_positive_pixels": 2364,
+      "eligible_components": 628,
+      "boundary_buffer_px": 12,
+      "feature_buffer_px": 3,
+      "nearest_visible_to_truth_px": 3.1622776601683795,
+      "split_version": "buffered-whole-components-loqo-v2",
+      "evaluation_region_label_blind": true
+    },
+    {
+      "fold": "SW",
+      "seed": 71,
+      "held_components": 199,
+      "withheld_positive_pixels": 3845,
+      "eligible_components": 983,
+      "boundary_buffer_px": 12,
+      "feature_buffer_px": 3,
+      "nearest_visible_to_truth_px": 3.1622776601683795,
+      "split_version": "buffered-whole-components-loqo-v2",
+      "evaluation_region_label_blind": true
+    },
+    {
+      "fold": "SE",
+      "seed": 71,
+      "held_components": 140,
+      "withheld_positive_pixels": 3285,
+      "eligible_components": 648,
+      "boundary_buffer_px": 12,
+      "feature_buffer_px": 3,
+      "nearest_visible_to_truth_px": 3.1622776601683795,
+      "split_version": "buffered-whole-components-loqo-v2",
+      "evaluation_region_label_blind": true
+    }
+  ],
+  "total_withheld_positive_pixels": 11425,
+  "visible_catalogue_pixels": 48557,
+  "catalogue_features_from": "visible traces only (holdout-visible mask)"
+}

@@ -1,0 +1,22 @@
+{
+  "evidence_class": "LOCAL-FORMAT-VALIDATION-NOT-ORGANIZER-ACCEPTANCE",
+  "file": "submissions/gems70-c1-strike-catalogue-NOT-CLEARED-20261020.tif",
+  "name": "gems70-c1-strike-catalogue-NOT-CLEARED-20261020",
+  "note": "C1 strike-coherent catalogue extrapolation. Holdout below random control. Do not submit.",
+  "note_chars": 88,
+  "name_chars": 47,
+  "sha256": "5da9ed6b80b3db39599ae31b1437cae4ac15651912d1a01e970556f73ed0472e",
+  "bytes": 550651,
+  "zip_file": "gems70-c1-strike-catalogue-NOT-CLEARED-20261020.zip",
+  "zip_sha256": "60992d71d551afb97f74c5a34ef39fb859fc8714056d3dbfc4e19edc36811122",
+  "positive_pixels": 91924,
+  "catalogue_positive_pixels": 0,
+  "outside_footprint_positive": 0,
+  "min": 0.0,
+  "max": 0.9999781847000122,
+  "nan_count": 0,
+  "download_and_submit_ok": false,
+  "reason": "Holdout gate failed: C1 HOLDOUT-DTI is below the random sparse control (see evidence/c1_result.json).",
+  "local_format_pass": true,
+  "validator_errors": null
+}

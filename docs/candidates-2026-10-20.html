@@ -1,0 +1,117 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Candidates · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Current candidate: DO NOT SUBMIT (not cleared).">
+<link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH · OCT 2026</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="candidates-2026-10-20.html">Candidates</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="protocol-decision.html">Protocol decision</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Candidate hypotheses — session 2026-10-20 (pre-registered before validation)</h1>
+<p>Status labels: these are <strong>geological hypotheses and holdout-validation targets</strong>, not
+discoveries and not scores. Every number in this file is either a HOLDOUT-DTI measurement
+(evaluator <code>gems57-pooled-hide-v2</code>, withheld positives, 95% CI) or a planning estimate
+labelled as such. No ORGANIZER-CONFIRMED value exists in this repository.</p>
+<h2>Scope rules applied to all candidates</h2>
+<ul>
+<li><strong>Layers:</strong> only bands of <code>data/bridge</code>-pinned <code>training_features.tif</code> (19 float32 bands,
+  nodata -3.4028e38, EPSG:32611, 100 m; band names in <code>evidence/feature_metadata.json</code>), and
+  the existing catalogue <code>existing_faults.tif</code> (mapped USGS/INGENIOUS traces, <code>catalogue</code> mask).</li>
+<li><strong>Catalogue use:</strong> a catalogue-derived feature may use only <em>visible</em> traces in holdout
+  (<code>buffered_component_draw</code> <code>visible</code> mask). Final submission may use the full catalogue,
+  since the catalogue is training data under the rules (Official Rules §3.3, "training labels").</li>
+<li><strong>Scoring:</strong> shared <code>evaluate_holdout.py</code>, <code>holdout.py</code> and <code>metric.py</code> (pinned, unmodified).
+  DTI alpha 0.2, beta 0.8, 300 m triangular kernel; pooled; paired 20 km cluster bootstrap.</li>
+<li><strong>Canary:</strong> every feature tested alone, AUC &gt; 0.90 = suspected leakage (stop).</li>
+</ul>
+<h2>Candidate ranking (qualitative expected DTI gain × implementation cost)</h2>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>ID</th>
+<th>Layers</th>
+<th>Physical signature</th>
+<th>Why a catalogue omission is plausible</th>
+<th>Named non-fault mimic</th>
+<th>Overlap risk vs. registry</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>C1 strike-coherent catalogue extrapolation</strong></td>
+<td>visible traces (structure tensor), <code>rtp</code> gradient direction, <code>rtp</code> gradient magnitude</td>
+<td>Magnetic edges whose orientation matches the local strike of visible traces, within ~2 km of them</td>
+<td>Faults in Basin-and-Range systems are echelon/parallel; unmapped segments continue visible strike</td>
+<td>Dike swarms and lithologic contacts parallel to the fault system</td>
+<td><strong>High</strong> (catalogue-proximity dots are common in the registry)</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>2</td>
+<td>C2 magnetic phase jump across along-strike discontinuity (prior queue H2)</td>
+<td><code>rtp</code>, <code>mag_anom</code>, <code>iso_grav_anom</code></td>
+<td>Signed magnetic normal-profile discontinuity conditioned on a gravity boundary</td>
+<td>A displaced magnetic contact under cover</td>
+<td>Remanence change inside a volcanic flow</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>3</td>
+<td>C5 basement-ramp endpoint (prior queue H3)</td>
+<td><code>depth_to_base_surf</code>, <code>iso_grav_anom</code>, <code>det_elev</code></td>
+<td>Along-strike end of a basement-depth ramp supported by gravity</td>
+<td>Blind basin-bounding faults can displace basement without a scarp</td>
+<td>Onlap or paleovalley margin</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>4</td>
+<td>C3 potassium depletion along visible strike (GeoDAWN radiometrics)</td>
+<td><code>ext_geodawn_rad</code> K, Th, TC (if present in cache)</td>
+<td>K/TC depletion in fault-zone alteration</td>
+<td>Alteration halos can precede surface expression</td>
+<td>Lithologic K-enrichment (granite, rhyolite)</td>
+<td>Medium</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>5</td>
+<td>C4 geodetic shear-strain coherence (<code>geod_shearrate</code>, <code>geod_2ndinv</code>)</td>
+<td>geodetic strain layers</td>
+<td>Active shear localisation</td>
+<td>Concealed active faults may carry shear</td>
+<td>Interpolation of sparse GPS velocity; groundwater subsidence</td>
+<td>Low</td>
+<td>Low, but <strong>resolution too coarse</strong> for 300 m traces</td>
+</tr>
+</tbody>
+</table>
+<p>Notes:
+- Prior queue items (C2, C5) were already preregistered in <code>docs/hypotheses.md</code>; they are
+  listed here only for the ranking. Only <strong>C1</strong> is validated in this session.
+- C4 uses coarse fields (GPS/InSAR interpolation scale). It is ranked last because its
+  resolution is probably larger than the 300 m scoring kernel.</p>
+<h2>Validated in this session: C1 (pre-registered parameters)</h2>
+<p>Structure tensor of visible traces: <code>T = gaussian(visible, sigma=3 px)</code>; gradient <code>(gy, gx)</code>;
+<code>J = gaussian([gx², gy², gx·gy], sigma=10 px)</code>; trace-normal direction
+<code>theta_n = 0.5·atan2(2·Jxy, Jxx−Jyy)</code>; coherence <code>coh = sqrt((Jxx−Jyy)²+4·Jxy²)/(Jxx+Jyy+eps)</code>.</p>
+<p>Magnetic evidence: <code>M = |∇ gaussian(rtp, 1.5 px)|</code>; magnetic gradient direction <code>phi_m</code>.</p>
+<p>Alignment <code>A = |cos(phi_m − theta_n)|</code> (magnetic gradient parallel to trace normal ⇒ edge
+parallel to strike).</p>
+<p>Catalogue proximity <code>W = exp(−d_visible / 20 px)</code> (2 km decay).</p>
+<p>Candidate field (before output transform) <code>F = rank(W)·A·rank(M)·coh</code>, then
+<code>surface = upper_surface(rank(F), valid, cutoff=0.98)</code> (same output transform as the stopped run,
+so results are comparable).</p>
+<p><strong>Arms:</strong> <code>candidate</code> (C1); <code>ablation_no_catalogue</code> (A·rank(M)·coh, <em>no visible catalogue at all</em>);
+<code>ablation_no_alignment</code> (rank(W)·rank(M)·coh); <code>random_control</code> (same positive count, seed fixed).</p>
+<p><strong>Holdout blocks:</strong> <code>buffered_component_draw(seed=71, buffer_px=3, boundary_px=12)</code> — a
+<strong>fresh seed</strong>, not the seed-20 blocks already reported in <code>evidence/holdout.json</code>.</p>
+<p><strong>Pass criteria (pre-registered):</strong>
+1. No canary AUC &gt; 0.90 (feature alone).
+2. Candidate HOLDOUT-DTI &gt; <code>ablation_no_catalogue</code> (otherwise the catalogue is not contributing).
+3. Candidate HOLDOUT-DTI &gt; <code>random_control</code> (paired CI of difference excludes 0 for "beats").
+4. Registry uniqueness gate computed against the <strong>complete</strong> indexed registry (862 rasters)
+   before any submission file is declared downloadable.</p>
+<p>Failure on (1)–(3) is a negative result and will be recorded as such.</p></main>
+<footer>DO NOT SUBMIT the generated candidate. No competition upload has been made. Evidence before leaderboard claims.
+<a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>

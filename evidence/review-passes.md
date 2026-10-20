@@ -85,3 +85,27 @@ canonical site remains negative. No additional scientific experiment was run.
 Final post-quarantine local suite: **69 tests passed**, with three upstream
 Rasterio/Affine pending-deprecation warnings. The added test verifies archival
 artifact byte hashes and absence of any TIFF/ZIP in the published docs tree.
+
+# Review passes — C1 session, 2026-10-20
+
+## Pass 1 — implement and verify
+- Built C1 export, holdout, canaries, registry scan (862/862), post-hoc binary diagnostic, validator and receipt.
+- Rewrote `scripts/build_site.py` and `scripts/build_readme.py`. First draft used invented keys and URLs; caught and replaced.
+- Verified official claims by re-fetching the competition page, problem page, rules PDF and HeroX mirror. Quotes in
+  `evidence/official_sources_2026-10-20.json`. Result: deadline discrepancy and rules §3.4–3.5 wording confirmed.
+- Tests: 73 pass (`.venv/bin/python -m pytest -q`).
+
+## Pass 2 — bugs and edge cases
+- Found and fixed: wrong rules-PDF host in the first draft; stale irregularity text ("pages failed retrieval", "no weekly cap").
+- Found and fixed: contract test required "Do not submit this run." and "Submission TIFF unavailable"; the status block now includes both.
+- Found: 11 owner repos (GEMSDOE69, GEMSDOE73–82) are absent from the registry index; ten were created on 2026-10-20. Not scanned:
+  GitHub API rate limit (HTTP 403). Recorded as a blocking gap for any future candidate; does not change the negative verdict.
+- Found: sample raster described as total absence contains 60,988 ones (earlier session). Recorded.
+- Checked: no `.tif` or `.zip` in docs/; all internal links resolve; `assert_no_public_rasters` passes.
+
+## Pass 3 — re-check against the request
+- Submission path, [0,1] check and "do not submit" answer appear first on the site (`docs/index.html`, `docs/executive-summary.html`). Met.
+- Unique TIF generated and kept out of public downloads. Met for generation; uniqueness NOT established (lane collisions, registry gap).
+- Hypotheses, validation on spatially blocked holdout, one new candidate tested (C1). Met. Negative.
+- Not met: weekly-slot selection (out of scope, no slot used); leaderboard value not readable; eligibility and generative-AI disclosure left for the user.
+- Budget: 2 of 3 experiments, about 1h50m of 2h. The third experiment was not run.

@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Repository review · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Current candidate: DO NOT SUBMIT (not cleared).">
+<link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH · OCT 2026</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="candidates-2026-10-20.html">Candidates</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="protocol-decision.html">Protocol decision</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Repository review — 20 October 2026</h1>
+<h2>Decision: DO NOT SUBMIT</h2>
+<p><strong>There is no eligible new TIFF to download.</strong> The mandatory duplicate-and-stop protocol still prevents a nonempty candidate from qualifying. Generating an all-zero file, perturbing an archived submission, or publishing the quarantined H70-C file would not meet the request. The requested new submission remains <strong>unfulfilled</strong>, not silently substituted with a software-test raster.</p>
+<p>This session performed a repository/publication review, not a new scientific experiment. The measured run card remains unchanged. No competition upload or weekly slot was used.</p>
+<h2>Review findings and evidence</h2>
+<table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Verification</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A registered continuous raster has positive support throughout the footprint.</td>
+<td>Re-ran <code>scripts/audit.py</code>: restored the content-addressed witness, verified its SHA-256 and sample alignment, reproduced the universal-overlap proof. <a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/registry/witness.json">Witness specification</a>, <a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/evidence/preflight.json">audit receipt</a>.</td>
+<td>Remain stopped. This is a representation conflict, not proof that every geological method is identical. One witness proves failure; it does not certify a complete registry scan.</td>
+</tr>
+<tr>
+<td>GitHub Pages was configured for <code>main:/</code>, not <code>/docs</code>. Root <code>.nojekyll</code> made the repository a static publication source, including archived data/quarantine paths regardless of whether links advertised them.</td>
+<td>GitHub Pages API returned legacy build, branch <code>main</code>, path <code>/</code>. <a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/evidence/pages-before-review.json">Before-setting receipt</a>. This establishes exposure risk; the restricted network did not allow a live direct-URL fetch.</td>
+<td>Remove the root <code>.nojekyll</code> bypass; exclude all nonpublic root content with <code>_config.yml</code>. Add an audited public-root policy and a CI build of the actual legacy source. Preserve quarantine bytes in Git for forensic review, not as Pages downloads.</td>
+</tr>
+<tr>
+<td>Directly changing the Pages source was denied.</td>
+<td>GitHub API returned HTTP 403, <code>Resource not accessible by integration</code>. <a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/evidence/pages-settings-attempt.json">Operation receipt</a>.</td>
+<td>Use the existing legacy-root source with Jekyll exclusions; do not claim the settings were changed. The source change is not an authentication failure or a reason to request credentials. Publication changes require merge and a successful Pages build.</td>
+</tr>
+<tr>
+<td>Existing publication tests checked <code>docs/</code> or advertised links, not the deployed repository-root boundary.</td>
+<td>Inspected <code>tests/test_site.py</code>, <code>tests/test_contract.py</code>, and Pages source settings.</td>
+<td>Add tests for unlinked TIFF/ZIP paths, archived text at nonpublic roots, case-insensitive extensions, symlinks, missing banners, and unclassified new root content. A separate CI check inspects the real Jekyll output.</td>
+</tr>
+<tr>
+<td>H70-C generation source includes simulated holdout and placeholder claims.</td>
+<td>Existing SHA-bound quarantine receipt and source text; software tests recheck archival bytes.</td>
+<td>Never execute that source or promote its artifacts. File validity alone cannot repair fabricated scientific evidence.</td>
+</tr>
+<tr>
+<td>The historical H33 result is not tied to an organizer submission receipt here.</td>
+<td>Existing byte-level H33 audit and <a href="h33-analysis.html">forensic analysis</a>.</td>
+<td>Retain the pruning/coverage-efficiency explanation, not a causal claim or promised score.</td>
+</tr>
+</tbody>
+</table>
+<h2>Scientific conclusion</h2>
+<p>H33 is an archived sparse field with catalogue-flank points removed, not evidence of a newly trained geological detector. Under distance-weighted Tversky scoring, deleting prediction mass can help <strong>if lost truth coverage is sufficiently small</strong>. Hidden labels are unavailable, so neither the reason for its reported historical score nor an improvement beyond it is established.</p>
+<p>The existing magnetic-edge-termination candidate remains a negative: <strong>HOLDOUT-DTI 0.010193, 95% CI [0.006062, 0.015042], evaluator <code>gems57-pooled-hide-v2</code>, 11,321 withheld positive pixels</strong>. This is an inherited measured continuous surface result, not recomputed science in this review, final-dot performance, or a leaderboard score. It did not establish an improvement over the current holdout best. <a href="downloads/holdout.json">Full receipt</a>.</p>
+<p>The <a href="hypotheses.html">four ranked preregistered hypotheses</a> already name layers, physical signatures, possible catalogue omissions, non-fault mimics and implementation cost. They remain hypotheses, not confirmed discoveries. This review does <strong>not</strong> claim a fresh set of previously untried methods or run additional hypotheses after a duplicate stop. Uninspected parallel sessions preclude a global novelty claim. The original experiment's preregistration, source pins and results are frozen.</p>
+<h2>Three review passes</h2>
+<ol>
+<li><strong>Inventory and reproduction:</strong> read the retained brief, handoff, scientific receipts and publication code; installed locked dependencies; ran the existing software suite and independently reproduced the blocking witness audit.</li>
+<li><strong>Defect correction:</strong> addressed the root-Pages exposure gap without altering shared scientific tools, quarantined bytes, prediction arrays, thresholds, or the stopped run. Regression coverage now checks actual publication boundaries rather than only download links.</li>
+<li><strong>Compliance and verification:</strong> rebuilt the evidence site/README deterministically and reran the complete software suite and release gate. The first real Jekyll-output check caught GitHub's automatically injected <code>assets/css/style.css</code>; the policy now permits only that exact generated stylesheet and its directories, not arbitrary repository assets. A regression test rejects any additional archived asset. Final combined local suite: <strong>139 software tests passed</strong>, with three existing Rasterio/Affine pending-deprecation warnings. These are software checks, not scientific scores. Verification/deployment outcomes are recorded in <a href="https://github.com/buffedlizard55-lab/GEMSDOE70/pull/8">PR #8</a> and GitHub checks; this document does not assume a future CI or deployment success.</li>
+</ol>
+<h2>Concurrent-main integration</h2>
+<p>The first merge attempt was rejected because parallel PRs #6 and #7 had advanced main. Merged <code>f1197da</code> into the assigned session branch without switching branches. Preserved both reviews, their root-tree/symlink guards, stricter release diagnostics and tests. The Pages output audit complements those source checks; it does not replace or weaken them. The combined suite count above includes all preserved tests. A second integration retained PRs #9–#11 from main <code>7a2d2ae</code>, including the unresolved protocol memo and additional malformed-evidence diagnostics. Corrected its checkout-only evidence/handoff links to GitHub URLs, and added actual built-output link checks so excluded repository files cannot masquerade as working site links. The real build also revealed automatic Markdown rendering of historical source pages. Excluded <code>docs/*.md</code> from Jekyll so prebuilt HTML is the only page authority (avoiding Markdown/HTML output collisions), while keeping source Markdown in GitHub for audit. Updated internal memo links to the HTML counterparts. No scientific receipt or shared template changed.</p>
+<h2>Required next work, in order</h2>
+<ol>
+<li>Resolve the continuous-surface versus dot-support ambiguity <strong>in the shared protocol</strong>, with an explicit version and consistent treatment across all lanes. Do not silently exclude the dense witness or raise thresholds.</li>
+<li>Obtain the missing assigned method paragraph. Confirm official input identity, current format/rules, outside-footprint encoding and remaining submission allowance. Restricted access is not evidence of a login redirect.</li>
+<li>Rebuild a visible-only incumbent on comparable, untouched holdout blocks. A frozen full-catalogue submission is not a leakage-safe incumbent. Do not tune the stopped candidate on its disclosed holdout.</li>
+<li>Preregister a genuinely distinct method, canary every feature, and test within the experiment/time budget. Conduct a complete surface audit before placement, then a complete final-dot audit.</li>
+<li>Only after scientific clearance, use the pinned shared writer, reopen exact TIFF bytes, validate finite/range/grid constraints, bind the file SHA-256 to its receipts, and expose a one-click download. A separate selector must authorize use of a weekly slot.</li>
+</ol>
+<h2>Official and reproducible references</h2>
+<ul>
+<li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Organizer reference solution</a>: accessible official code; fault detection is the direct task, not verified geothermal-vent discovery.</li>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Organizer problem description</a>, <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data</a> and <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>: manual-review targets, not live-verified receipts in this network.</li>
+<li><a href="https://docs.github.com/en/rest/pages/pages#update-information-about-a-github-pages-site">GitHub Pages API</a>: official manual-review reference for the denied settings operation.</li>
+<li><a href="https://jekyllrb.com/docs/configuration/options/">Jekyll configuration</a>: official manual-review reference for exclusions. The actual publication behavior must be verified by building, not by citing this link alone.</li>
+<li><a href="https://github.com/actions/jekyll-build-pages/tree/44a6e6beabd48582f863aeeb6cb2151cc1716697">GitHub's Pages build action, pinned source</a>: inspected action definition; the CI publication test uses this action.</li>
+</ul>
+<p>GitHub-hosted source/data access is available; other research/data hosts are restricted in this environment. No organizer account session, artifact-bound score receipt, current weekly allowance, or permission to change Pages settings is established. No GPU is needed for these audits. The site is a static evidence workbench, not an in-browser trainer. Quarantine exclusion is a publication safeguard, <strong>not secrecy</strong>: archived bytes remain accessible in the public GitHub repository for audit.</p></main>
+<footer>DO NOT SUBMIT the generated candidate. No competition upload has been made. Evidence before leaderboard claims.
+<a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>
