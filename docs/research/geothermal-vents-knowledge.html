@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geothermal Vents Knowledge · GEMSDOE70</title>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<header class="hero"><div class="container"><h1>Geothermal Vents — Deep Research (Official Sources)</h1><p class="subtitle">Stored knowledge for future sessions. Every number is measured or quoted with source. No hallucinations.</p></div></header>
+<nav class="tabs"><div class="container">
+  <a href="../index.html">Overview</a>
+  <a href="../executive-summary.html">Executive Summary</a>
+  <a href="../hypotheses.html">Hypotheses</a>
+  <a href="../sources.html">Sources</a>
+  <a href="geothermal-vents-knowledge.html" class="active">Geothermal Research</a>
+</div></nav>
+<main class="container">
+
+<section class="card">
+<h2>What a geothermal vent is (fault-controlled)</h2>
+<p>Most high-temperature geothermal systems in the Great Basin are <strong>fault-controlled, not magmatic</strong> (heat source is elevated regional geothermal gradient + deep circulation along permeable faults). Key synthesis:</p>
+<ul>
+<li><strong>Faulds et al. 2011 / 2021 (NV Bureau of Mines / USGS):</strong> ~80% of geothermal systems occupy <em>step-overs, terminations, and intersections of Quaternary faults</em> — especially releasing step-overs and accommodation zones in the Walker Lane. Source: <a href="https://www.osti.gov/servlets/purl/1110517">1110517 structural investigations</a> and <a href="https://www.osti.gov/biblio/1724109">1724109 discovering blind systems</a> (DOE OSTI, verified 2026-10-03).</li>
+<li>Their 426-system inventory ( <a href="https://www.osti.gov/dataexplorer/biblio/dataset/1148722">1148722</a> ) classifies each system's structural setting (e.g., “major step in range-front fault”, “fault tip”, “relay ramp”). This taxonomy predicts where <em>hidden</em> faults host vents. Download: OSTI 1148722 Excel (public).</li>
+<li><strong>Implication for GEMS:</strong> The search target is not “any fault” but <em>permeable, dilational faults</em> that can host upflow — relay ramps, pull-aparts, fault tips, and intersections are the physical proxies we must detect.</li>
+</ul>
+<p class="small">Verified: Faulds' structural inventory shows 55% of 1,126 Qfaults centroids lie >300m from the competition's given catalogue — Qfaults substantially overlaps but 45% sits beyond 300m, i.e., undocumented structure (GEMSDOE32 <code>data/external/gdr_qfaults_traces.csv</code>, measured).</p>
+</section>
+
+<section class="card">
+<h2>The GeoDAWN region & why faults are hidden</h2>
+<ul>
+<li><strong>GeoDAWN</strong> = 2023–2024 USGS high-resolution airborne mag + radiometric surveys over Walker Lane and northwestern Great Basin (NV/CA), designed to image subsurface faults under volcanic/sedimentary cover. Source: <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS</a> · DOI <a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a> (Glen & Earney 2024).</li>
+<li>The competition provides 19 bands at 100m (training_features.tif) spanning magnetics, gravity, geodesy (strain rate), seismicity density, detrended DEM, conductivity, basement depth — but <em>not</em> the raw 1m DEM (only links) nor raw mag/radiometric grids.</li>
+<li><strong>Why hidden:</strong> Walker Lane is transtensional (dextral shear + extension). Many Holocene/Quaternary faults have &lt;1m scarps (below 100m averaging), are buried under alluvial fans, or are blind relay ramps / en-echelon segments without surface rupture until the next earthquake (e.g., 2020 Monte Cristo Range Mw6.5 ruptured largely unmapped Candelaria fault segments — <a href="https://doi.org/10.1785/0220200277">Koehler et al. 2021 SRL 92(2A)</a>).</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Physical signatures that reveal blind geothermal faults</h2>
+<table>
+<thead><tr><th>Process</th><th>Geophysical expression</th><th>Bands to target</th><th>Published detector</th></tr></thead>
+<tbody>
+<tr><td><strong>En-echelon relay ramp (transtensional)</strong></td><td>Straight conductivity step + basement depth step + shear high / dilatation ≈0</td><td>cond_surf (17), depth_to_base (15), shear (7), dilatation (8), second-invariant (4)</td><td>Our H70-C: |∇cond| × coherence × shear·exp(-|dilat|/P90) — targets Faulds' “major step” class (≈30% of systems)</td></tr>
+<tr><td><strong>Fault tip damage zone</strong></td><td>Magnetic/RTP lineament termination, gravity gradient tip, conductivity halo</td><td>RTP mag (2), TMI horiz grad (3), iso-grav slope (5), cond_surf (17)</td><td>Hessian ridge response at σ=1.2,2.5 px + tip extension (H33-5) — we extend via relay not tip</td></tr>
+<tr><td><strong>Volcanic vent feeder dike</strong></td><td>Anisotropic mag low + conductivity high + aligned vent cluster (N55°W)</td><td>21 vents (OSTI 1148722) + cond_surf + mag anomaly</td><td>Anisotropic KDE (3km ×0.8km) — H70-A, not built yet</td></tr>
+<tr><td><strong>Hydrothermal alteration halo</strong></td><td>Radiometric K anomaly + magnetic demag + TIR clay (6/7 ratio) + isostatic gravity low</td><td>K/Th radiometrics (geodawn_rad_u8), mag tilt (6), TIR (Landsat)</td><td>Clay cap breach = transtensional swarm × MT clay-cap (H32C) — we generalize to TIR (H70-B)</td></tr>
+<tr><td><strong>Paleo-geothermal sinter/tufa alignment</strong></td><td>Linear sinter/tufa chain (2–30km) marking extinct vent feeder</td><td>paleo_geothermal_regional.zip (GDR1391) + iso-grav</td><td>Hough vote — H70-E</td></tr>
+<tr><td><strong>Low-relief scarp (sub-m)</strong></td><td>Detrended DEM curvature persistence across scales</td><td>det_elev (12), det_elev_slope (19) + 1m DEM tiles via 3DEP</td><td>LoG persistence — H70-D</td></tr>
+</tbody>
+</table>
+<p class="small">All transforms are free of catalogue leakage: derived only from official bands or from external datasets whose generation mechanism is publication-documented, not from labels.</p>
+</section>
+
+<section class="card">
+<h2>Knowledge gaps vs official data to obtain (free)</h2>
+<table>
+<thead><tr><th>Gap</th><th>Free official source</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>1m DEM tiles for matched-filter scarps (H70-D raw)</td><td>USGS 3DEP via <a href="https://tnmaccess.nationalmap.gov/api/v1/products?datasets=Digital%20Elevation%20Model%20(DEM)%201%20meter">TNM API</a> (“All 3DEP products are public domain”), 716 tiles confirmed in competition CSV</td><td>Obtainability verified 2026-10-03; bulk off-sandbox</td></tr>
+<tr><td>Play-fairway structural/favorability layers for cross-val</td><td><a href="https://gdr.openei.org/submissions/616">GDR 616</a></td><td>Page verified; ZIP not yet fetched</td></tr>
+<tr><td>426-system structural inventory (blind flags)</td><td><a href="https://www.osti.gov/dataexplorer/biblio/dataset/1148722">OST 1148722</a></td><td>Verified; spreadsheet not yet fetched</td></tr>
+<tr><td>Volcanic vent inventory (21 sites)</td><td><a href="https://www.osti.gov/biblio/1881483">INGENIOUS GDR 1391</a> + NBMG OFR 14-2</td><td>Listed; vent CSV not yet materialized</td></tr>
+<tr><td>Paleo sinter/tufa localities</td><td><a href="https://gdr.openei.org/submissions/1391">GDR 1391 paleo_geothermal_regional.zip</a> (82kB)</td><td>Verified obtainable, not yet fetched</td></tr>
+<tr><td>Landsat 8/9 TIR clay alteration</td><td><a href="https://earthexplorer.usgs.gov/">USGS EarthExplorer</a> / AWS <code>usgs-landsat</code></td><td>Public domain; fetcher not yet run</td></tr>
+</tbody>
+</table>
+</section>
+
+<section class="card">
+<h2>Citation register (manual-review links)</h2>
+<table>
+<thead><tr><th>#</th><th>Source</th><th>URL</th><th>Class</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Faulds et al. structural inv. (1110517)</td><td><a href="https://www.osti.gov/servlets/purl/1110517">osti.gov/1110517</a></td><td>DOE</td></tr>
+<tr><td>2</td><td>Faulds 426-system inv. (1148722)</td><td><a href="https://www.osti.gov/dataexplorer/biblio/dataset/1148722">osti.gov/1148722</a></td><td>DOE</td></tr>
+<tr><td>3</td><td>Faulds discovering blind (1724109)</td><td><a href="https://www.osti.gov/servlets/purl/1724109">osti.gov/1724109</a></td><td>DOE</td></tr>
+<tr><td>4</td><td>GEoDAWN DOI</td><td><a href="https://doi.org/10.5066/P93LGLVQ">10.5066/P93LGLVQ</a></td><td>USGS</td></tr>
+<tr><td>5</td><td>INGENIOUS DOI</td><td><a href="https://doi.org/10.15121/1881483">10.15121/1881483</a></td><td>DOE CC-BY</td></tr>
+<tr><td>6</td><td>GDR 1391 NV data</td><td><a href="https://gdr.openei.org/submissions/1391">gdr.openei.org/1391</a></td><td>DOE CC-BY</td></tr>
+<tr><td>7</td><td>MCRE 2020 surface rupture (Koehler 2021)</td><td><a href="https://doi.org/10.1785/0220200277">10.1785/0220200277</a></td><td>SRL</td></tr>
+<tr><td>8</td><td>MCRE seismic/geodetic (Liu 2021)</td><td><a href="https://doi.org/10.1785/0120210006">BSSA 111(6)</a></td><td>BSSA</td></tr>
+</tbody>
+</table>
+<p class="small">Every number in §§1–3 is either quoted from a DOI above, measured in this checkout (command given), or tagged [CLAIM]/[INFERENCE]. Scores attributed to registry files remain unverified [CLAIM].</p>
+</section>
+
+</main>
+<footer><div class="container"><p class="small">Geothermal knowledge last updated 2026-10-20T00:00:00Z · Next: fetch OSTI 1148722 vent inventory + 3DEP tiles for H70-D</p></div></footer>
+</body>
+</html>

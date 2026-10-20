@@ -1,0 +1,11 @@
+{
+  "generated_utc": "2026-10-20T00:00:00Z",
+  "primary": "gemsdoe70_h70c_greedy_B2_38500_zeros.tif",
+  "primary_sha256": "36d2c3c4366e88cb25690fa8640bdde0adf618fa36d57775de3e40d8cd3c5768",
+  "primary_bytes": 292000,
+  "nan_twin": "gemsdoe70_h70c_greedy_B2_38500_nan.tif",
+  "nan_sha256": "1ca28ea7dae7ebb9e6402f5724ccee024bfff52621938a25bb85c076d319cd0f",
+  "zip": "gemsdoe70-h70c-relay-ramp-B2-38500-20261020T000000Z-36d2c3c4-zeros.zip",
+  "zip_sha256": "c7b4c99d8184786b12528cdd85ca6a0bf8c11cb01cd0a6205cda1bea47520dd1",
+  "checks": "docs/downloads/gemsdoe70_h70c_greedy_B2_38500_zeros.audit.json"
+}

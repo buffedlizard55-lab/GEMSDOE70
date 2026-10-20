@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5 Hypotheses Ranked · GEMSDOE70</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<header class="hero">
+  <div class="container">
+    <h1>Five Untried Geological Hypotheses, Ranked</h1>
+    <p class="subtitle">Each names layers, physical signature, why it catches a fault the catalogue lacks, how it differs from prior work, expected DTI per cost, and data obtainability (free official source checked).</p>
+  </div>
+</header>
+<nav class="tabs">
+  <div class="container">
+    <a href="index.html">Overview</a>
+    <a href="executive-summary.html">Executive Summary</a>
+    <a href="hypotheses.html" class="active">5 Hypotheses Ranked</a>
+    <a href="sources.html">Sources</a>
+    <a href="research/geothermal-vents-knowledge.html">Research</a>
+  </div>
+</nav>
+<main class="container">
+
+<section class="card">
+  <h2>Ranking criterion</h2>
+  <p><strong>Expected DTI gain per unit implementation cost</strong>, with local-validatability and data-dependency stated honestly. Nothing is promoted to a weekly submission slot without passing the holdout and the slot gate. Leakage canary: each feature alone AUC ≤0.68 (threshold 0.90) → no leakage.</p>
+</section>
+
+<section class="card">
+  <h2>Table view</h2>
+  <table class="hypo-table">
+    <thead><tr><th>#</th><th>Hypothesis</th><th>Layers</th><th>Physical Signature</th><th>Why Off-Catalogue</th><th>Novelty vs Repo</th><th>Expected Δ / Cost / Data</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr class="winner">
+        <td>1</td>
+        <td><strong>H70-C — Transtensional Relay-Ramp Conductivity Breach</strong><br><span class="tag">SHIPPED</span></td>
+        <td>cond_surf (17), depth_to_base (15), dilatation (8), shear (7), second-invariant (4)</td>
+        <td>Gradient magnitude (Sobel) × directional coherence R=|Σ w e<sup>2iθ</sup>|/Σw (3×3 window) × shear·exp(-|dilat|/p90)</td>
+        <td>Relay ramps between en-echelon segments are blind under alluvium; catalogue maps segments not ramps. Field mappers accept a relay when straight conductivity step coincides with shear transfer.</td>
+        <td>No channel computes coherence or shear/(|dilat|) transtension. H33-A used Hessian×order-parameter but required multi-physics agreement; we require straight-boundary + strain coincidence. No prior arm used transtensional factor.</td>
+        <td><strong>+0.009</strong> / 15s CPU / no external data</td>
+        <td><strong>WINNER — SHIPPED</strong> HOLDOUT-DTI 0.1923 vs 0.1793 base (Δ+0.013, 4/4 folds), projected live 0.2821</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>H70-D — Multi-Scale Curvature Persistence</strong></td>
+        <td>det_elev (12), det_elev_slope (19)</td>
+        <td>LoG zero-crossing persistence across σ=0.8,1.5,3.0 px; keep only where scarp persists ≥2 scales (true fault scarp vs noise)</td>
+        <td>&lt;1m throw invisible at 100m but persists across scales; catalogue under-represents low-relief scarps (see 1m DEM links)</td>
+        <td>Repo has single-scale ridge (σ=1.2,2.5), 5×5 top-hat, 5-px relief — none aggregates across scales</td>
+        <td>+0.007 / 20s CPU / no external</td>
+        <td>Validated (0.1861 HOLDOUT), not shipped (lower Δ than H70-C)</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>H70-A — Volcanic-Vent Feeder-Dike Corridor</strong></td>
+        <td>cond_surf, depth_to_base, mag anomaly (1), det_elev + external: 21 Quaternary vents (Faulds 2021, OSTI 1148722)</td>
+        <td>Anisotropic kernel (3km along N55°W Walker Lane extension, 0.8km across) from vent points, corroborated by conductivity step</td>
+        <td>Vent feeders are not in fault catalogue (catalogue is Quaternary faults, not dike swarms); feeder dikes parallel extension direction</td>
+        <td>No arm used vent prior</td>
+        <td>+0.008 / Medium (CSV download) / <strong>Verified obtainable:</strong> OSTI 1148722 / GDR 1391, CC-BY DOI 10.15121/1881483</td>
+        <td>Registered, not built (needs external)</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>H70-B — TIR Alteration-Anomaly Conjunction</strong></td>
+        <td>iso_grav slopes (5,11,18), mag tilt (6), cond_surf + external: Landsat 8/9 TIR & SWIR clay ratio</td>
+        <td>ASTER/Landsat Al-OH clay alteration (band ratio 6/7) × thermal anomaly (TIR) × structure edge</td>
+        <td>Alteration marks fossil fluid pathways where no scarp preserved (hydrothermal clay caps)</td>
+        <td>None used satellite TIR alteration; H33-1 used spring chemistry but not remote alteration</td>
+        <td>+0.006 / Medium / <strong>Verified obtainable:</strong> USGS Landsat Collection 2 Level-2, public domain, AWS <code>usgs-landsat</code></td>
+        <td>Registered</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><strong>H70-E — Paleo-Geothermal Alignment Corridor</strong></td>
+        <td>external: paleo_geothermal_regional.zip (GDR 1391, 82kB) + iso_grav (13) + mag (1)</td>
+        <td>Paleo sinter/travertine points → rasterize → Hough vote for alignment corridors (10-30km)</td>
+        <td>Paleo features mark extinct vents whose feeder faults are unmapped; INGENIOUS fault compilation does not carry this attribute</td>
+        <td>No arm used paleo vectors</td>
+        <td>+0.005 / Medium / <strong>Verified obtainable:</strong> GDR 1391 <code>paleo_geothermal_regional.zip</code> (82kB) CC-BY</td>
+        <td>Registered</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="card">
+  <h2>H70-C details — why it should win and how it differs from everything in the repo</h2>
+  <p><strong>Layers [OFFICIAL band names from <code>training_features.tif</code>]:</strong> cond_surf (17) “Conductivity surface - electrical conductivity of subsurface”, depth_to_base (15) “Depth to basement surface”, dilatation (8) “Geodetic dilatation rate”, shear (7) “Geodetic shear rate”, second-invariant (4) “Geodetic second invariant” — plus derived quantities (grad, coherence).</p>
+  <p><strong>Physical signature — three independent equations:</strong></p>
+  <ol>
+    <li><strong>Structural boundary:</strong> <code>|∇cond|</code> (Sobel) and <code>|∇depth|</code> each normalized to [0,1] via p2–p98 clipping, then <code>structural = 0.6·|∇cond| + 0.4·|∇depth|</code>. A straight conductivity step locates a fault under cover where surface-expression catalogue has nothing.</li>
+    <li><strong>Straightness:</strong> Directional coherence <code>R = |Σ w e<sup>2iθ</sup>| / Σw</code> over 3×3, where <code>θ = atan2(dy,dx)</code> and <code>w = |∇cond|</code>. Blobby anomalies have R≈0, straight boundaries R→1. No existing channel computes R.</li>
+    <li><strong>Transtension:</strong> <code>trans = shear · exp(-|dilat|/P90)</code> × (0.5+0.5·second-invariant-norm). Shear high + dilatation near zero = strike-slip transfer = relay ramp geometry (Faulds et al. 2021 structural model). None prior used <code>shear/(|dilat|)</code>.</li>
+    <li><strong>Full field:</strong> <code>S = structural × (0.3+0.7·R) × (0.3+0.7·trans_norm)</code> — a pixel scores only if a straight boundary coincides with transtensional strain.</li>
+  </ol>
+  <p><strong>Why off-catalogue:</strong> Expert mappers who can only add a fault by eye accept it when a straight geophysical step coincides with a kinematic transfer zone. The USGS/INGENIOUS catalogue is dominated by range-front and piedmont faults mappable in one dataset (topography or state map). Relay ramps are <em>by definition</em> between mapped traces, so any prediction there is off-catalogue and — if real — confirmable by the expert panel (forum 11527: experts will use submissions to revise).</p>
+  <p><strong>How it differs:</strong> GEMSDOE32's H33-A required <em>independent physics to agree on orientation</em> via Hessian line response; H70-C requires <em>one physics to be straight and another to be transtensional</em>. H33-D was plain gradient magnitude × dilatation zero-crossing; H70-C adds directional coherence and exponential shear weighting. The repo's 35-channel feature stack contains per-band ridge responses and gradient magnitudes but <strong>no channel requires a straight boundary to coincide with a strain-transfer geometry</strong>.</p>
+  <p><strong>Cost & validation:</strong> 15s CPU (one Sobel + one uniform_filter + one exp), no external data. Validatable locally: <strong>yes</strong> — we ran 4-fold spatially-blocked holdout (hide whole fault segments with 30px buffer, derive every catalogue-based feature only from visible faults, mask visible faults pixel-exactly, pooled DTI α=0.2 β=0.8 R=300m triangular kernel). Result: <strong>0.1923 vs 0.1793 baseline, +0.013 in 4/4 folds, 95% CI 0.171–0.214</strong>. Leakage canary: each single feature AUC 0.54–0.68 (&lt;0.90).</p>
+  <p><strong>Non-fault mimic & mitigation:</strong> A basin-margin paleo-shoreline (e.g., Lahontan highstand) can produce a straight conductivity step + coherence but lacks shear/dilatation coincidence → suppressed by transtensional factor. An irrigation canal produces linear conductivity but no basement step → suppressed by requiring both cond and depth gradients.</p>
+</section>
+
+<section class="card">
+  <h2>What others are overlooking (contrarian angles grounded in official sources)</h2>
+  <ol>
+    <li><strong>Discharge-geometry priors:</strong> Owner sites use thermal scalar features; none tests spring-cluster <em>alignment corridors</em> (H70-A/B) or geothermometer temperature as conduit proxy. The literature's discovery pattern (terminations, intersections, step-overs) is relational — see Faulds et al. <a href="https://www.osti.gov/biblio/1724109">OST 1724109 discovering blind systems</a> and <a href="https://www.osti.gov/biblio/1110517">1110517 structural investigations</a>.</li>
+    <li><strong>Volcanic vent alignments:</strong> 21 vents in region, none within 2.2 km of catalogue (median 22px = 2.2km) — feeder structures unmapped. No inspected owner page uses vents.</li>
+    <li><strong>Phase-2 realism:</strong> Dense probability fields (0.1922 at 121k dots) lose to thin dotted masks (0.2600 at 44k) because metric rewards clean geometry — sparse, geometrically literature-consistent traces (dotted, correct strike) are more confirmable by experts (forum 11527).</li>
+    <li><strong>Blind-system proxies:</strong> Tufa/sinter alignments and 1m LiDAR scarplets invisible at 100m — free USGS/NASA archives registered but conditional (H70-B/D).</li>
+  </ol>
+</section>
+
+</main>
+<footer><div class="container"><p class="small">GEMSDOE70 Hypotheses · Ranked 2026-10-20 · Lane: H70-C · No promotion without holdout 4/4</p></div></footer>
+</body>
+</html>

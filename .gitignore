@@ -1,10 +1,12 @@
-.cache/
-.venv/
 __pycache__/
-.pytest_cache/
 *.pyc
+.venv/
+.cache/
+.pytest_cache/
 build/
 dist/
 submissions/
 data/external/
 data/training_features.tif
+data/*.tif
+data/**/*.tif.part-*
