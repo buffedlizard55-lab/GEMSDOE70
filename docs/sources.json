@@ -13,41 +13,45 @@
     "id": "competition-problem",
     "authority": "organizer",
     "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-    "status": "verified-content-fetched-2026-10-20",
-    "claim": "Problem description fetched 2026-10-20: DW-Tversky alpha 0.2 beta 0.8, 300m triangular kernel; GeoTIFF float32 EPSG:32611 100m values in [0,1]; two-round prize structure with private new-fault test set then expanded labels.",
-    "limit": "Fetched text does not state known-fault masking in scoring or whether expanded labels include the known catalogue; data page still requires login."
+    "status": "verified-content",
+    "claim": "Official problem description: single GeoTIFF, pixel probabilities in [0,1]; EPSG:32611; 100 m; same bounds; outside bounds null or NaN; single float32 layer; metric alpha 0.2, beta 0.8, 300 m triangular kernel; private initial round then expanded final round; one submission must be chosen.",
+    "limit": "Text verified on the page. Organizer sample and the platform validator were not run here. Note the page says the sample predicts total fault absence; the local sample raster contains 60,988 positive pixels (see docs/irregularities.md).",
+    "retrieved": "2026-10-20 (session fetch_page)"
   },
   {
     "id": "competition-data",
     "authority": "organizer",
     "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
-    "status": "not-retrieved-this-session",
-    "claim": "Official training-data download location supplied in the prompt and organizer reference README.",
-    "limit": "No organizer session or authenticated checksum receipt available here."
+    "status": "login-redirect-verified",
+    "claim": "The data page redirects to the DrivenData login page; the training data cannot be downloaded without an organizer account.",
+    "limit": "Login redirect was observed this session. Data are restored from pinned owner mirrors, not from the organizer.",
+    "retrieved": "2026-10-20 (session fetch_page)"
   },
   {
     "id": "leaderboard",
     "authority": "organizer",
     "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-    "status": "verified-read-2026-10-20",
-    "claim": "Public leaderboard read 2026-10-20: #1 0.4413 (xiaofanhu); see evidence/leaderboard_read.json.",
-    "limit": "Public split only, moving target; no GEMSDOE70 organizer receipt. Family 0.2778 remains user-reported."
+    "status": "js-rendered-unverified",
+    "claim": "The leaderboard HTML returns only a Loading placeholder; numeric leaderboard values cannot be verified from this environment.",
+    "limit": "Any leaderboard number in a prompt, README or site is UNVERIFIED unless copied from a submission-page receipt.",
+    "retrieved": "2026-10-20 (session fetch_page)"
   },
   {
     "id": "competition-report",
     "authority": "official source requested by user",
     "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
-    "status": "not-retrieved-this-session",
-    "claim": "Requested challenge report for manual review.",
-    "limit": "Contents not reviewed; no scientific assertion is attributed to this PDF."
+    "status": "verified-content",
+    "claim": "NLR Official Rules (Sept 2026): one GeoTIFF with a single raster layer at 100 m (s3.2); up to three submissions per week (s3.2 and s3.4); one final selected submission per entity (s3.4); generative-AI use must be disclosed in the narrative (s3.2); eligibility in s1.3 includes U.S. citizen/permanent resident individuals and U.S.-incorporated private entities.",
+    "limit": "Rules PDF was retrieved via docs.nlr.gov after redirect from www.nlr.gov. Eligibility of any individual or team must be confirmed by that person; it is not checked here.",
+    "retrieved": "2026-10-20 (session fetch_page)"
   },
   {
     "id": "geodawn",
     "authority": "USGS",
     "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
     "status": "not-retrieved-this-session",
-    "claim": "Official GeoDAWN data source requested by user.",
-    "limit": "Obtainability of new downloads not established here; no new external layer is required by the experiment."
+    "claim": "GeoDAWN source named by the problem page and rules (DOI 10.5066/P93LGLVQ, cited in the NLR rules footnote 3).",
+    "limit": "Not fetched in this session."
   },
   {
     "id": "ingenious",
@@ -91,5 +95,15 @@
     "status": "reviewed-content",
     "claim": "Latest inherited handoff says negative and do not submit, with a literal-overlap blocker.",
     "limit": "Not a handoff originally present in this empty repository."
+  },
+  {
+    "id": "competition-rules-pdf",
+    "authority": "organizer (DOE/NLR rules document)",
+    "url": "https://www.nlr.gov/docs/fy26osti/96647.pdf",
+    "retrieved_via": "fetch_page 2026-10-20 (redirects to docs.nlr.gov); document dated SEPTEMBER 2026",
+    "status": "verified-content",
+    "claim": "Eligibility (\u00a71.3), up to three submissions per week and one final selection (\u00a73.2, \u00a73.4, \u00a73.5), 5:00 p.m. ET deadline-date cutoff (A.1), generative-AI narrative disclosure (\u00a73.2).",
+    "evidence": "evidence/official_sources_2026-10-20.json",
+    "limit": "Confirms rule text only. Not a portal receipt; the deadline timestamp conflicts with the competition page and is flagged."
   }
 ]

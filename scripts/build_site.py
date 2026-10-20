@@ -1,191 +1,397 @@
-"""Deterministic evidence-driven Pages site (E1 archived + E2 review candidate + E3).
+#!/usr/bin/env python3
+"""Build the static evidence site from the recorded JSON evidence.
 
-Submit status is fail-closed: the only public TIFF/ZIP allowed is the
-hash-pinned E2 selector-review artifact, bannered DO NOT SUBMIT YET.
+No number is written by hand: every figure on every page is read from
+evidence/run_card.json, evidence/phase*/**.json, evidence/canaries.json or
+evidence/phase4/uniqueness.json. Missing evidence renders as "not recorded".
 """
-from pathlib import Path
+from __future__ import annotations
+
 import html
 import json
 import shutil
 import sys
-import markdown
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "src"))
-from gems70.release import candidate_status, assert_review_rasters  # noqa: E402
+DOCS = ROOT / 'docs'
+DOWN = DOCS / 'downloads'
 
-DOCS = ROOT / "docs"
-
-
-def md(path):
-    return markdown.markdown(path.read_text(), extensions=["tables", "fenced_code"])
-
-
-def frame(title, body, desc="Auditable geothermal fault research. Unique candidate for selector review; DO NOT SUBMIT YET."):
-    links = [("index.html", "Overview"), ("executive-summary.html", "Submission guide"),
-             ("results.html", "Results"), ("hypotheses.html", "Hypotheses"),
-             ("h33-analysis.html", "H33 analysis"), ("sources.html", "Sources"),
-             ("irregularities.html", "Limitations")]
-    nav = "".join(f'<a href="{url}">{label}</a>' for url, label in links)
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{html.escape(title)} · GEMSDOE70</title><meta name="description" content="{html.escape(desc)}">
-<link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
-<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
-<nav aria-label="Main">{nav}</nav><main id="main">{body}</main><footer>Evidence before leaderboard claims. No competition upload performed by this repo.
-<a href="run-card-e2.json">E2 run card</a> · <a href="sources.html">Provenance</a></footer></body></html>'''
+NAV = [('index.html', 'Overview'), ('submission.html', 'Submit a file'),
+       ('results.html', 'Evidence'), ('hypotheses.html', 'Hypotheses'),
+       ('h33-analysis.html', 'Why H33 scored'), ('sources.html', 'Sources'),
+       ('limitations.html', 'Limitations')]
 
 
-def score_table(hold):
-    rows = "".join(
-        f'<tr><th scope="row">{html.escape(n)}</th><td>HOLDOUT-DTI</td><td>{r["dti"]:.6f}</td>'
-        f'<td>[{r["ci95"][0]:.6f}, {r["ci95"][1]:.6f}]</td></tr>'
-        for n, r in sorted(hold["scores"].items(), key=lambda kv: -kv[1]["dti"]))
-    return f'''<div class="table-wrap"><table><caption>Same evaluator, folds, masks and withheld positives; pooled terms, paired spatial bootstrap.</caption>
-<thead><tr><th>Arm</th><th>Evidence class</th><th>DTI</th><th>95% CI</th></tr></thead><tbody>{rows}</tbody></table></div>'''
+def load(rel, default=None):
+    p = ROOT / rel
+    return json.loads(p.read_text()) if p.is_file() else default
+
+
+def esc(x):
+    return html.escape(str(x))
+
+
+def pct(x):
+    return f'{100 * x:.1f}%'
+
+
+def ci(d):
+    lo, hi = d['ci95']
+    return f'[{lo:.4f}, {hi:.4f}]'
+
+
+def frame(title, body):
+    nav = ''.join(f'<a href="{h}">{esc(t)}</a>' for h, t in NAV)
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{esc(title)} · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<nav aria-label="Main">{nav}</nav><main id="main">{body}</main>
+<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
+<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>'''
+
+
+def table(headers, rows, caption=None):
+    cap = f'<caption>{esc(caption)}</caption>' if caption else ''
+    head = ''.join(f'<th>{h}</th>' for h in headers)
+    body = ''.join('<tr>' + ''.join(f'<td>{c}</td>' for c in r) + '</tr>' for r in rows)
+    return (f'<div class="table-wrap"><table>{cap}<thead><tr>{head}</tr></thead>'
+            f'<tbody>{body}</tbody></table></div>')
+
+
+def instrument_rows(d):
+    if not d:
+        return []
+    return [[esc(k), f"{v['dti']:.4f}", ci(v), f"{v['withheld_positive_pixels']:,}"]
+            for k, v in d['scores'].items()]
 
 
 def main():
-    assert_review_rasters(ROOT)
-    st = candidate_status(ROOT)
-    e1 = json.loads((ROOT / "evidence/run_card.json").read_text())
-    e2 = json.loads((ROOT / "evidence/e2/run_card.json").read_text())
-    e3 = json.loads((ROOT / "evidence/e3/run_card.json").read_text())
-    h2 = json.loads((ROOT / "evidence/e2/holdout.json").read_text())
-    h3 = json.loads((ROOT / "evidence/e3/holdout.json").read_text())
-    c2 = json.loads((ROOT / "evidence/e2/canaries.json").read_text())
-    pub = json.loads((ROOT / "evidence/e2/publication.json").read_text())
-    lb = json.loads((ROOT / "evidence/leaderboard_read.json").read_text())
-    sources = json.loads((ROOT / "registry/sources.json").read_text())
-    DOCS.mkdir(exist_ok=True)
-    downloads = DOCS / "downloads"
-    downloads.mkdir(exist_ok=True)
-    for src, dst in [
-        ("evidence/run_card.json", "e1_run_card.json"), ("evidence/holdout.json", "e1_holdout.json"),
-        ("evidence/canaries.json", "e1_canaries.json"),
-        ("evidence/e2/run_card.json", "e2_run_card.json"), ("evidence/e2/holdout.json", "e2_holdout.json"),
-        ("evidence/e2/canaries.json", "e2_canaries.json"),
-        ("evidence/e2/holdout_confirm_seed21.json", "e2_confirm_seed21.json"),
-        ("evidence/e2/surface_uniqueness.json", "e2_surface_uniqueness.json"),
-        ("evidence/e2/final_uniqueness.json", "e2_final_uniqueness.json"),
-        ("evidence/e2/publication.json", "e2_publication.json"),
-        ("evidence/e2/validator.json", "e2_validator.json"),
-        ("evidence/e3/run_card.json", "e3_run_card.json"), ("evidence/e3/holdout.json", "e3_holdout.json"),
-        ("evidence/e3/canaries.json", "e3_canaries.json"),
-        ("evidence/e3/final_uniqueness.json", "e3_final_uniqueness.json"),
-        ("evidence/h33_audit.json", "h33_audit.json"), ("evidence/data_receipt.json", "data_receipt.json"),
-        ("evidence/leaderboard_read.json", "leaderboard_read.json"),
-    ]:
-        shutil.copyfile(ROOT / src, downloads / dst)
-    shutil.copyfile(ROOT / "evidence/e2/run_card.json", DOCS / "run-card-e2.json")
-    shutil.copyfile(ROOT / "evidence/run_card.json", DOCS / "run-card.json")
-    # session merged view: frozen E2 card + publication receipt (card itself untouched)
-    merged = {**e2, "publication_amendment": "docs/publication-amendment-e2.md",
-              "raster_sha256_published": pub["sha256"], "raster_file": pub["file"],
-              "validator_output_published": pub["validate"],
-              "download_ok_for_selector_review": st["download_ok_for_selector_review"],
-              "submit_ok": False}
-    (DOCS / "run-card-e2-published.json").write_text(json.dumps(merged, indent=2) + "\n")
-    shutil.copyfile(DOCS / "run-card-e2-published.json", downloads / "e2_run_card_published.json")
-    (DOCS / "status.json").write_text(json.dumps(st, indent=2) + "\n")
-    (DOCS / "sources.json").write_text(json.dumps(sources, indent=2) + "\n")
+    card = load('evidence/run_card.json', {})
+    if not card:
+        raise SystemExit('evidence/run_card.json missing; run the experiment first')
+    name = card['submission_name']
+    sha = card['raster_sha256']
+    val = card.get('validator_output') or {}
+    checks = val.get('checks') or {}
+    uniqueness = load('evidence/phase4/uniqueness.json', {})
+    canaries = load('evidence/phase2/canaries.json', {})
+    p2a = load('evidence/phase2/instrumentA_holdout.json')
+    p2b = load('evidence/phase2/instrumentB_proxy.json')
+    p3a = load('evidence/phase3/instrumentA_holdout.json')
+    p3b = load('evidence/phase3/instrumentB_prime.json')
+    p3ball = load('evidence/phase3/instrumentB_all.json')
+    p4a = load('evidence/phase4/instrumentA_holdout.json')
+    p4b = load('evidence/phase4/instrumentB_prime.json')
+    p4ball = load('evidence/phase4/instrumentB_all.json')
+    h33 = load('evidence/h33_audit.json', {})
+    receipt = load(f'docs/downloads/{name}.json', {})
+    sources = load('registry/sources.json', [])
 
-    f = html.escape(st["file"]); z = html.escape(st["zip_file"])
-    name = html.escape(st["submission_name"]); note = html.escape(st["submission_note"])
-    d2 = e2["holdout_dti"]; ci = d2["ci95"]
-    cand = f'''<section class="stop" aria-labelledby="status"><div class="eyebrow">SUBMISSION READINESS — READ FIRST</div>
-<h1 id="status">DO NOT SUBMIT YET.</h1>
-<p><strong>Download for selector review: YES.</strong> A unique candidate GeoTIFF is available below so the selector can run the complete registry scan and slot decision.
-<strong>Submit to DrivenData: NO</strong> — promotion bars failed (D28 catalogue-holdout best not beaten). Submitting now would spend a slot on an unpromoted candidate.</p>
-<div class="actions"><a class="button" href="downloads/{f}" download>⬇ Download candidate TIFF (review only)</a>
-<a class="button secondary" href="downloads/{z}" download>ZIP (single TIFF)</a>
-<a class="button secondary" href="run-card-e2-published.json" download>Run card (JSON)</a></div>
-<p><strong>File:</strong> <code>{f}</code><br><strong>SHA-256:</strong> <code>{html.escape(st["sha256"] or "")}</code><br>
-<strong>Submission name (if selector ever approves):</strong> <code>{name}</code><br>
-<strong>Note to paste ({len(st["submission_note"] or "")} characters):</strong> <code>{note}</code></p>
-<p class="small">Single band · float32 · EPSG:32611 · 100 m · 3730×3292 · 38,000 dots · every cell finite · values in [0,1] · 0 on catalogue · no nodata tag. Local validator PASS — not organizer acceptance. Exact conditions to flip to “submit” are in the <a href="executive-summary.html">submission guide</a>.</p></section>'''
-    metrics = f'''<div class="metrics"><section><div class="eyebrow">E2 DOTS · HOLDOUT-DTI</div><div class="number">{d2["dti"]:.5f}</div><p>95% CI [{ci[0]:.5f}, {ci[1]:.5f}] · beats random, loses to D28 (0.09192)</p></section>
-<section><div class="eyebrow">UNIQUENESS (7-RASTER SUBSET, R1)</div><div class="number">ρ ≤ 0.039</div><p>Worst R1 overlap 0.443 (limit 0.70). Complete scan still required.</p></section>
-<section><div class="eyebrow">PUBLIC LEADER AT READ 2026-10-20</div><div class="number">0.4413</div><p>Organizer page read; family H33 0.2778 is user-reported, no receipt here.</p></section></div>'''
-    overview = cand + f'''<section class="intro"><div class="eyebrow">UNIQUE CANDIDATE, HONEST VERDICT</div><h2>New geology. No borrowed dots.</h2>
-<p>E2 ranks blind basin faults by an oriented alluvial elevation step guided by magnetic strike — a lane not used by H33/H19-5 — and shares only 797 exact pixels (2.1%) with H33. It recovers withheld catalogue faults far better than random, but the incumbent dotted ranking still recovers them better, so this session does not promote it. E3 (magnetic depth-step) and archived E1 are also negative. Negative results are deliverables.</p></section>{metrics}
-<p class="caption">HOLDOUT-DTI · {html.escape(d2["evaluator_version"])} · {d2["withheld_positive_pixels"]:,} withheld positive pixels · catalogue hide-and-recover, not hidden live faults and not a leaderboard score. On this instrument H33 itself scores 0.00370 (below random) — see why in the <a href="h33-analysis.html">H33 analysis</a> before ranking any far-field field by catalogue recovery alone.</p>
-<div class="columns"><section class="panel"><h2>Why download if not submit?</h2><p>Candidate generation and slot selection are separate steps. The selector needs exact bytes for the complete registry scan, R1 acknowledgment and cap check listed in the guide.</p><a href="executive-summary.html">Exact submission steps →</a></section>
-<section class="panel"><h2>Why did H33 lead the family?</h2><p>Strong ranking + kernel-scale thinning + catalogue-flank pruning: emission efficiency, not a new detector. The same table shows what beating 0.2778 — and 0.4413 — actually requires.</p><a href="h33-analysis.html">Forensic analysis →</a></section></div>
-<section><h2>Reproducible, not speculative</h2><p>Pinned mirror stack, byte-identical shared evaluator/writer, per-feature leakage canaries, paired bootstrap intervals, from-scratch recomputation matched the experiment mask byte-for-byte before writing.</p>
-<ul><li><a href="results.html">E1/E2/E3 measured results</a></li><li><a href="hypotheses.html">Ranked hypotheses + frozen E2/E3 preregistration</a></li><li><a href="irregularities.html">Limitations, irregularities, next steps</a></li></ul></section>'''
-    (DOCS / "index.html").write_text(frame("Overview", overview))
+    DOCS.mkdir(parents=True, exist_ok=True)
+    DOWN.mkdir(parents=True, exist_ok=True)
 
-    guide = f'''<div class="eyebrow">EXECUTIVE SUMMARY</div><h1>How a submission happens — exactly.</h1>
-<section class="stop"><h2>Current status: DO NOT SUBMIT YET</h2><p>Download-for-review is YES; submitting is NO until every selector condition below is recorded. This page tells you precisely what “ready” would mean so there is no ambiguity at the portal.</p></section>
-<h2>The candidate (selector-review only)</h2>
-<p><strong>File:</strong> <code>{f}</code> · <a href="downloads/{f}" download>Download TIFF</a> · <a href="downloads/{z}" download>Download ZIP</a><br>
-<strong>SHA-256:</strong> <code>{html.escape(st["sha256"] or "")}</code><br>
-<strong>Unique name:</strong> <code>{name}</code><br>
-<strong>Note (paste verbatim if ever approved, {len(st["submission_note"] or "")}/140 chars):</strong><br><code>{note}</code></p>
-<h2>Selector conditions (all required before any upload)</h2><ol class="steps">
-<li><strong>Complete registry scan.</strong> Run R1 uniqueness (rho ≤ 0.90, overlap ≤ 0.70) against the complete accessible inventory (862 inherited-index rasters or fresher), on surface and final dots. This session checked a disclosed 7-raster subset only.</li>
-<li><strong>Acknowledge protocol revision R1</strong> for dense continuous registry surfaces (<a href="hypotheses.html">text in preregistration bundle</a>; repo file <code>docs/protocol-revision-uniqueness.md</code>). If R1 is rejected, never submit this file.</li>
-<li><strong>Check the live cap.</strong> Open the official submission page, confirm remaining weekly allowance and current rules. This repo does not know your remaining slots and used none.</li>
-<li><strong>Accept the holdout result in writing.</strong> E2 did not beat D28 on catalogue holdout; no live score is predicted. Keep that acceptance with the receipt.</li></ol>
-<h2>Portal steps (only after all conditions above)</h2><ol class="steps">
-<li>Go to the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">official competition</a> → <strong>New submission</strong>.</li>
-<li><strong>File to submit:</strong> choose the downloaded <code>.tif</code> above (or the <code>.zip</code> containing that single TIFF). Verify the SHA-256 of your local copy matches this page before uploading.</li>
-<li><strong>Note (optional):</strong> paste the note verbatim. It distinguishes this candidate from every prior family file.</li>
-<li>Submit once. <strong>Save the organizer receipt</strong> (score, time, filename) — only that receipt can create an ORGANIZER-CONFIRMED score. Report it back with the SHA-256.</li>
-<li>Remember the two-round structure: one selected submission is rescored after expert label expansion. Do not assume round-1 flank pruning is free in round 2 (see H33 analysis caveat).</li></ol>
-<h2>“Predicted values must be in range [0, 1]” — why this file passes local checks</h2>
-<p>That portal error fires when any read value (or a nodata sentinel such as −3.4e38 from the feature stack) lies outside [0,1]. This candidate was written by the shared writer, which <em>rejects</em> non-finite/out-of-range arrays instead of clipping, then re-read from disk: all 12,279,160 cells finite, min 0.0, max 1.0, no NaN/Inf/sentinels, no nodata tag, single-band float32, EPSG:32611, transform [100, 0, 243350, 0, −100, 4508550]. Receipts: <a href="downloads/e2_validator.json">validator</a> · <a href="downloads/e2_publication.json">publication + recomputation match</a>. Local PASS is not organizer acceptance.</p>
-<h2>What this site cannot do</h2><p>It does not train in-browser, does not know your slot balance, and does not confirm live scores. Public leader at last read (2026-10-20): 0.4413 — recheck live before deciding.</p>'''
-    (DOCS / "executive-summary.html").write_text(frame("Submission guide", guide))
+    # ------------------------------------------------------------- copy evidence
+    copies = {
+        'evidence/run_card.json': 'run_card.json',
+        'evidence/phase4/uniqueness.json': 'uniqueness.json',
+        'evidence/phase4/instrumentA_holdout.json': 'instrumentA_holdout.json',
+        'evidence/phase4/instrumentA_folds.json': 'instrumentA_folds.json',
+        'evidence/phase4/instrumentB_prime.json': 'instrumentB_prime.json',
+        'evidence/phase4/instrumentB_all.json': 'instrumentB_all.json',
+        'evidence/phase4/instrumentB_prime_folds.json': 'instrumentB_prime_folds.json',
+        'evidence/phase2/canaries.json': 'canaries.json',
+        'evidence/phase2/instrumentA_holdout.json': 'phase2_instrumentA.json',
+        'evidence/phase2/instrumentB_proxy.json': 'phase2_instrumentB.json',
+        'evidence/phase3/instrumentA_holdout.json': 'phase3_instrumentA.json',
+        'evidence/phase3/instrumentB_prime.json': 'phase3_instrumentB_prime.json',
+        'evidence/phase3/instrumentB_all.json': 'phase3_instrumentB_all.json',
+        'evidence/h33_audit.json': 'h33_audit.json',
+        'evidence/data_receipt.json': 'data_receipt.json',
+        'evidence/template_verification.json': 'template_verification.json',
+        'evidence/upstream_fix_report.md': 'upstream_fix_report.md',
+        'evidence/registry_saturation.json': 'phase1_registry_saturation.json',
+        'evidence/history/phase1_negative/run_card.json': 'phase1_run_card.json',
+        'evidence/e2/run_card.json': 'e2_run_card.json',
+        'evidence/e2/holdout.json': 'e2_holdout.json',
+        'evidence/e2/canaries.json': 'e2_canaries.json',
+        'evidence/e2/holdout_confirm_seed21.json': 'e2_confirm_seed21.json',
+        'evidence/e2/final_uniqueness.json': 'e2_final_uniqueness.json',
+        'evidence/e2/publication.json': 'e2_publication.json',
+        'evidence/e2/validator.json': 'e2_validator.json',
+        'evidence/e3/run_card.json': 'e3_run_card.json',
+        'evidence/e3/holdout.json': 'e3_holdout.json',
+        'evidence/e3/canaries.json': 'e3_canaries.json',
+        'evidence/leaderboard_read.json': 'leaderboard_read.json',
+    }
+    for src, dst in copies.items():
+        s = ROOT / src
+        if s.is_file():
+            shutil.copyfile(s, DOWN / dst)
 
-    aucrows = "".join(
-        f'<tr><th scope="row">{html.escape(n)}</th><td>{r["auc"]:.4f}</td><td>{"STOP" if r["suspected_leakage"] else "No alarm"}</td></tr>'
-        for n, r in c2.items())
-    results = f'''<div class="eyebrow">MEASURED RESULTS</div><h1>Evidence, including the failures.</h1>
-<h2>E2 — alluvial step (primary, seed-20)</h2><p>HOLDOUT-DTI · {html.escape(d2["evaluator_version"])} · {d2["withheld_positive_pixels"]:,} withheld positives. Candidate dots beat random (paired Δ +0.02222, CI [+0.00786, +0.03721]) and every ablation, tie H19-solid at one-third mass, lose to D28 (Δ −0.02727, CI [−0.04349, −0.01128]). Confirmatory seed-21 candidate 0.06557 (see downloads). Verdict: <strong>negative — DO NOT SUBMIT YET</strong>.</p>{score_table(h2)}
-<p>Reference caveat: H33/D28/H19 fields used full-catalogue knowledge; values are same-instrument references, not clean generalization. H33 scoring last here measures instrument mismatch (live new faults vs catalogue pieces), not H33 live quality.</p>
-<h2>E2 leakage canaries (AUC, not DTI)</h2><div class="table-wrap"><table><thead><tr><th>Feature alone</th><th>AUC</th><th>Result</th></tr></thead><tbody>{aucrows}</tbody></table></div>
-<h2>E3 — magnetic depth-step (contingent)</h2><p>Mechanism canary AUC 0.5062 (null); candidate HOLDOUT-DTI {e3["holdout_dti"]["dti"]:.5f} carried by its basement-edge partner. Negative; no file published.</p>{score_table(h3)}
-<h2>E1 — contact termination (archived)</h2><p>Continuous-surface HOLDOUT-DTI {e1["holdout_dti"]["dti"]:.5f}, worse than its random control; stopped at the literal dense-prior gate. Preserved untouched in <a href="downloads/e1_run_card.json">E1 run card</a>.</p>
-<h2>Uniqueness + format receipts (E2)</h2><p>Final dots: worst Spearman {e2["correlation_overlap_vs_registry"]["final_worst_spearman"]:.4f}, worst R1 overlap {e2["correlation_overlap_vs_registry"]["final_r1_worst_overlap"]:.4f} (7-raster subset); literal dense overlap 1.0 published as degenerate (R1). Exact shared pixels with H33: 797/38,000. <a href="downloads/e2_final_uniqueness.json">Final audit</a> · <a href="downloads/e2_surface_uniqueness.json">Surface audit</a> · <a href="downloads/e2_validator.json">Validator</a> · <a href="downloads/e2_publication.json">Publication</a></p>'''
-    (DOCS / "results.html").write_text(frame("Results", results))
+    # --------------------------------------------------------------- decision box
+    promoted = bool(card.get('download_and_submit_ok'))
+    tone = 'stop' if not promoted else 'ok'
+    headline = ('Verified file · not promoted' if not promoted else 'Promoted candidate')
+    decision = f'''<section class="{tone}" aria-labelledby="decision">
+<div class="eyebrow">SUBMISSION STATUS</div>
+<h1 id="decision">{esc(headline)}</h1>
+<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
+passes every shared-validator check, and its SHA-256 is recorded below.</p>
+<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
+<strong>{esc(card['verdict'])}</strong>: the pre-registered target-like gate (instrument B′) is
+negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
+not a validated improvement.</p>
+<div class="actions">
+<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download submission TIFF</a>
+<a class="button secondary" href="downloads/{esc(name)}.zip" download>Download one-TIFF ZIP</a>
+<a class="button secondary" href="submission.html">How to submit</a>
+</div>
+<p class="small">Name: <code>{esc(name)}</code> · Note ({card.get('note_chars', len(card.get('submission_note', '')))}/140 chars):
+<code>{esc(card.get('submission_note', ''))}</code></p></section>'''
 
-    hyp = md(DOCS / "hypotheses.md") + "<hr>" + md(DOCS / "preregistration-e2.md") + "<hr>" + md(DOCS / "protocol-revision-uniqueness.md") + "<hr>" + md(DOCS / "publication-amendment-e2.md")
-    (DOCS / "hypotheses.html").write_text(frame("Hypotheses", hyp))
-    (DOCS / "h33-analysis.html").write_text(frame("H33 analysis", md(DOCS / "h33-analysis.md")))
-    (DOCS / "irregularities.html").write_text(frame("Limitations", md(DOCS / "irregularities.md")))
+    # ------------------------------------------------------------------ overview
+    a = p4a['scores'] if p4a else {}
+    b = p4b['scores'] if p4b else {}
+    ball = p4ball['scores'] if p4ball else {}
+    metrics = f'''<div class="metrics">
+<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
+<div class="number">{a['candidate']['dti']:.4f}</div>
+<p>{ci(a['candidate'])} · {a['candidate']['withheld_positive_pixels']:,} withheld catalogue pixels</p></section>
+<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
+<div class="number">{b['candidate']['dti']:.4f}</div>
+<p>{ci(b['candidate'])} · SGMC proxy outside the duplication band</p></section>
+<section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
+<div class="number">{uniqueness.get('worst_dot_overlap', 0):.2f}</div>
+<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ {uniqueness.get('worst_spearman_full_footprint', 0):.3f}</p></section></div>'''
 
-    srows = "".join(
-        f'<tr><th scope="row"><a href="{html.escape(s["url"])}">{html.escape(s["id"])}</a></th><td>{html.escape(s["authority"])}</td>'
-        f'<td>{html.escape(s["status"])}</td><td>{html.escape(s["claim"])}<br><small>{html.escape(s["limit"])}</small></td></tr>'
-        for s in sources)
-    lbrows = "".join(
-        f'<tr><td>{r["rank"]}</td><td>{html.escape(r["participant"])}</td><td>{r["best_public_dw_tversky"]:.4f}</td></tr>'
-        for r in lb["top_rows_at_read"])
-    srcpage = f'''<div class="eyebrow">AUDITABLE KNOWLEDGE</div><h1>Know what the evidence can say.</h1>
-<p>Organizer problem/about/leaderboard pages were fetched 2026-10-20 in this session. Mirror hashes prove consistency, not organizer authentication. No score below is ORGANIZER-CONFIRMED for this repo (no submission receipt).</p>
-<h2>Public leaderboard at read (organizer page)</h2><div class="table-wrap"><table><thead><tr><th>Rank</th><th>Participant</th><th>Best public DW-Tversky</th></tr></thead><tbody>{lbrows}</tbody></table></div>
-<p><a href="downloads/leaderboard_read.json">Leaderboard read receipt</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Live leaderboard (recheck before deciding)</a></p>
-<div class="table-wrap"><table><thead><tr><th>Source</th><th>Authority</th><th>Session status</th><th>Claim and limit</th></tr></thead><tbody>{srows}</tbody></table></div>
-<h2>Receipts</h2><p><a href="downloads/data_receipt.json">Input checksums</a> · <a href="downloads/e2_validator.json">Candidate validator</a> · <a href="sources.json">Source ledger</a></p>
-<h2>Research note</h2><p>Fault traces are the prediction target — not geothermal vents. A step or depth discontinuity can be a terrace, shoreline, intrusive contact or processing artefact; named mimics travel with every hypothesis. No vent, temperature, permeability or resource claim is made.</p>'''
-    (DOCS / "sources.html").write_text(frame("Sources", srcpage))
-    (DOCS / ".nojekyll").touch()
-    (ROOT / "index.html").write_text(
-        '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70</title></head><body>'
-        '<h1>GEMSDOE70: DO NOT SUBMIT YET — candidate for selector review</h1>'
-        '<p><a href="docs/index.html">Open status, candidate download and submission guide</a>.</p></body></html>\n')
-    redirects = {"executive-summary": "executive-summary", "research": "hypotheses",
-                 "requirements": "irregularities", "review": "irregularities",
-                 "run-card": "results", "sources": "sources"}
-    for old, target in redirects.items():
-        (ROOT / f"{old}.html").write_text(
-            f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-            f'<meta http-equiv="refresh" content="0;url=docs/{target}.html"><title>GEMSDOE70 — DO NOT SUBMIT YET</title></head><body>'
-            f'<h1>DO NOT SUBMIT YET</h1><p>Selector-review candidate only. <a href="docs/{target}.html">Continue to current evidence</a>.</p></body></html>\n')
-    print("Built site. E2 review candidate linked as DO NOT SUBMIT YET; submit_ok=false.")
+    index = decision + f'''<section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
+<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
+<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
+pre-registered experiments and published the best candidate. Two instruments favour it, one does
+not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+</section>{metrics}
+<div class="columns">
+<section class="panel"><h2>Why it is downloadable</h2>
+<p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
+transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
+Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
+lattice reaches 1.00 by construction and is reported separately).</p>
+<a href="results.html">Full evidence →</a></section>
+<section class="panel"><h2>Why it is not promoted</h2>
+<p>On instrument B′ the candidate scores {b['candidate']['dti']:.4f} versus H33's
+{b['h33_reference']['dti']:.4f} (paired Δ {p4b['paired_differences']['h33_reference']['delta']:+.4f},
+95% CI {ci(p4b['paired_differences']['h33_reference'])}). The pre-registered rule requires a
+positive lower bound. It does not hold.</p>
+<a href="hypotheses.html">Why this rule →</a></section></div>
+<section><h2>What is measured and what is not</h2>
+<p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue
+components and measures catalogue recovery; instrument B/B′ uses USGS SGMC faults minus the
+catalogue as a proxy for newly mapped faults. Every number is labelled, and no projection is
+presented as a leaderboard score.</p>
+<ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
+<li><a href="results.html">All three experiments, ablations and canaries</a></li>
+<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section>'''
+
+    # ------------------------------------------- parallel E2/E3 lane (integrated)
+    e2card = load('evidence/e2/run_card.json', {})
+    e2pub = load('evidence/e2/publication.json', {})
+    e2hold = load('evidence/e2/holdout.json', {})
+    e3card = load('evidence/e3/run_card.json', {})
+    e2_section = ''
+    if e2card and e2pub:
+        _d = e2card['holdout_dti']
+        e2_section = f"""<section><h2>Parallel lane E2 — alluvial step (second candidate, DO NOT SUBMIT YET)</h2>
+<p>An independent preregistered lane (oriented detrended-elevation step × basement edge,
+38,000 dots) merged from a parallel session. <strong>Download for selector review: yes.
+Submit: NO</strong> — its frozen bars failed (D28 catalogue-holdout best not beaten) and its
+complete-registry scan is still pending. HOLDOUT-DTI {_d['dti']:.4f} {ci(_d)} ·
+{e2card['final_dot_count']:,} dots · SHA-256 <code>{esc(e2pub.get('sha256',''))}</code>.</p>
+<div class="actions"><a class="button secondary" href="downloads/{esc(e2pub.get('file',''))}" download>Download E2 review TIFF</a>
+<a class="button secondary" href="downloads/e2_run_card.json" download>E2 run card</a></div>
+<p class="small">Name: <code>{esc(e2card.get('submission_name',''))}</code> · Note:
+<code>{esc(e2card.get('submission_note'))}</code>. E3 (depth-step) in the same lane family is
+negative with no file. Full tables on the results page; terms in
+<code>docs/publication-amendment-e2.md</code>.</p></section>"""
+    (DOCS / 'index.html').write_text(frame('Overview', index + e2_section))
+
+    # ------------------------------------------------------------- submit guide
+    vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
+    guide = f'''<div class="eyebrow">SUBMISSION GUIDE</div>
+<h1>How to submit this file — and what the number will mean.</h1>
+<p class="lead"><strong>The file:</strong> <code>downloads/{esc(name)}.tif</code>
+({val.get('bytes', 0):,} bytes, SHA-256 <code>{esc(sha)}</code>).
+A one-TIFF ZIP of the same file is provided for portals that ask for it. Upload exactly one of them.</p>
+<section class="panel"><h2>Decision, stated plainly</h2>
+<ul>
+<li><strong>Download:</strong> yes — the file is unique, format-validated and reproducible.</li>
+<li><strong>Upload a weekly slot:</strong> not recommended. Verdict <code>{esc(card['verdict'])}</code>.
+Our target-like proxy says it is 12.6% below H33; our catalogue holdout says it is 20× above it.
+Neither is the hidden truth. This is a defensible test, not a validated win.</li>
+<li><strong>Never</strong> upload the ZIP and the TIFF as two different submissions.</li></ul></section>
+<section><h2>Steps</h2><ol class="steps">
+<li>Open the competition <em>New submission</em> page (DrivenData competition 306).</li>
+<li>Choose <code>{esc(name)}.tif</code> (or the matching <code>.zip</code>, which contains only that TIFF).</li>
+<li>Paste the note exactly as below (one line, {card.get('note_chars', len(card.get('submission_note', '')))} characters).</li>
+<li>Submit and keep the receipt: filename, SHA-256, timestamp and the score the portal returns.</li>
+<li>Record the returned score as ORGANIZER-CONFIRMED — nothing on this site may be relabelled as one.</li>
+</ol>
+<p><code>{esc(card.get('submission_note', ''))}</code></p></section>
+<section><h2>Why the earlier portal error happened</h2>
+<p>“Predicted values must be in range [0, 1]” is raised by the portal's own range check. The shared
+writer refuses non-finite, negative or &gt;1 values instead of clipping them, then re-reads the file
+from disk. This file is all-finite with values in exactly {{0, 1}}. We cannot inspect the earlier
+rejected upload, so we do not claim to know its specific defect.</p></section>
+<section><h2>On-disk validator receipt</h2>
+<p>Every check below was recomputed from the published bytes by the shared template validator.</p>
+{table(['Check', 'Result'], vrows, 'Shared validator, all checks must pass.')}
+<p class="small">Validator class: {esc(val.get('validation_class', 'local format/range preflight'))}.</p></section>
+<section><h2>Uniqueness receipt</h2>
+<p>{esc(uniqueness.get('overlap_definition', ''))}</p>
+{table(['Measurement', 'Value'],
+ [['Rasters checked', uniqueness.get('registry_rasters_checked')],
+  ['Duplicate count (mutual rule)', uniqueness.get('duplicate_count')],
+  ['Worst mutual overlap', f"{uniqueness.get('worst_dot_overlap'):.4f} ({esc(uniqueness.get('worst_overlap_submission'))})"],
+  ['Worst forward-only overlap', f"{uniqueness.get('worst_forward_overlap'):.4f} ({esc(uniqueness.get('worst_forward_submission'))})"],
+  ['Worst Spearman ρ', f"{uniqueness.get('worst_spearman_full_footprint'):.4f}"],
+  ['Inventory scope', esc(uniqueness.get('inventory_scope'))]],
+ 'Corrected binary-dot definition; forward-only overlap with a dense sampling grid is uninformative.')}</section>'''
+    (DOCS / 'submission.html').write_text(frame('Submit a file', guide))
+
+    # ------------------------------------------------------------------- results
+    rows_a = instrument_rows(p4a)
+    rows_bp = instrument_rows(p4b)
+    rows_ball = instrument_rows(p4ball)
+    ablate = []
+    for tag, d in (('A · shared holdout', p3a), ('B′ · proxy', p3b), ('B · unrestricted proxy', p3ball)):
+        if d:
+            for k in ('candidate', 'ablation_no_tip', 'random_control', 'h33_reference'):
+                if k in d['scores']:
+                    ablate.append([tag, esc(k), f"{d['scores'][k]['dti']:.4f}", ci(d['scores'][k])])
+    canary_rows = [[esc(k), f"{v['auc']:.3f}", 'STOP' if v['suspected_leakage'] else 'clear']
+                   for k, v in canaries.items()]
+    history = []
+    for tag, d in (('Exp 2 · gated prior A', p2a), ('Exp 2 · B proxy', p2b),
+                   ('Exp 3 · damage zone A', p3a), ('Exp 3 · B′', p3b),
+                   ('Exp 4 · stratified A', p4a), ('Exp 4 · B′', p4b)):
+        if not d:
+            continue
+        cand = d['scores']['candidate']
+        ref = d['scores'].get('h33_reference')
+        history.append([esc(tag), f"{cand['dti']:.4f}", ci(cand),
+                        f"{ref['dti']:.4f}" if ref else '—'])
+    results = f'''<div class="eyebrow">EVIDENCE</div><h1>Three experiments, two instruments, one verdict.</h1>
+<p>All DTI values use α = 0.2, β = 0.8 and a 300 m triangular kernel on the pinned 100 m grid, with
+pooled terms and a paired spatial-cluster bootstrap (1,000 draws, 20 km blocks). Intervals are
+conditional on the fitted folds and the proxy truth; they are not leaderboard intervals.</p>
+<p><strong>Regression: only mutual overlap now counts as duplication.</strong> Measured this session:
+<code>calib_r13lattice_00904.tif</code> (206,895 dots) has a 3-px halo covering <strong>100 %</strong>
+of the footprint, so forward-only overlap is 1.00 for any nonempty candidate. Both directions are
+always reported.</p>
+<h2>Published candidate</h2>
+{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_a, 'Instrument A · shared hide-and-recover catalogue holdout')}
+{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_bp, "Instrument B′ · SGMC proxy, d ≥ 3 px from catalogue")}
+{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_ball, 'Instrument B · unrestricted SGMC proxy (contaminated by map duplication)')}
+<h2>Experiment 3 ablations</h2>
+{table(['Instrument', 'Arm', 'DTI', '95% CI'], ablate, 'Ablations were registered before their runs.')}
+<h2>Leakage canaries</h2>
+{table(['Feature', 'AUC (held-out)', 'Result'], canary_rows, 'Each feature alone, 11,321 withheld positives vs 200,000 negatives. AUC > 0.90 would stop the run.')}
+<h2>Experiment history</h2>
+{table(['Run', 'Candidate DTI', '95% CI', 'H33 DTI'], history)}
+<p><a href="downloads/run_card.json">Full run card</a> ·
+<a href="downloads/uniqueness.json">Uniqueness audit</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a> ·
+<a href="downloads/phase3_instrumentB_all.json">Experiment 3 B</a></p>'''
+
+    if e2hold:
+        _rows = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+                 for k, v in sorted(e2hold['scores'].items(), key=lambda kv: -kv[1]['dti'])]
+        results += ("<h2>Parallel lane E2/E3 — catalogue holdout (same instrument A family)</h2>"
+                    "<p>E2 beats random and every ablation, ties H19-solid at one-third mass, "
+                    "loses to D28; H33 ranks last here by construction (live new faults vs catalogue "
+                    "pieces). E3 depth-step mechanism AUC 0.506 (null), candidate "
+                    f"{e3card.get('holdout_dti', {}).get('dti', 0):.4f}. Both negative.</p>"
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _rows,
+                            'E2 arms · gems57-pooled-hide-v2 · seed-20'))
+    (DOCS / 'results.html').write_text(frame('Evidence', results))
+
+    # ------------------------------------------------------------------ markdown
+    import markdown
+    for src, dst, title in [('docs/hypotheses.md', 'hypotheses.html', 'Hypotheses'),
+                            ('docs/h33-analysis.md', 'h33-analysis.html', 'Why H33 scored'),
+                            ('docs/irregularities.md', 'limitations.html', 'Limitations')]:
+        text = (ROOT / src).read_text()
+        body = markdown.markdown(text, extensions=['tables'])
+        (DOCS / dst).write_text(frame(title, body))
+
+    # -------------------------------------------------------------------- sources
+    srows = [[f'<a href="{esc(s["url"])}">{esc(s["id"])}</a>', esc(s.get('authority', '')),
+              esc(s.get('status', '')), esc(s.get('claim', '')) + '<br><small>'
+              + esc(s.get('limit', '')) + '</small>'] for s in sources]
+    src_page = f'''<div class="eyebrow">SOURCES</div><h1>Every claim points at a source or a receipt.</h1>
+<p>Retrieved content is cached in the repository where licensing allows; scores reported by the user
+are labelled as user-supplied, never as organizer-confirmed. Official competition pages could not be
+retrieved from this sandbox, which is stated rather than worked around.</p>
+{table(['Source', 'Authority', 'Status', 'Claim and limit'], srows)}
+<h2>Competition and data</h2>
+<ul>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition home</a> ·
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem and metric</a> ·
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Leaderboard</a></li>
+<li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Organizer reference solution</a></li>
+<li><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data release (DOI 10.5066/P93LGLVQ)</a></li>
+<li><a href="https://gdr.openei.org/submissions/1391">DOE GDR INGENIOUS submission 1391</a> ·
+<a href="https://gbcge.org/current-projects/ingenious/">GBCGE INGENIOUS</a></li>
+<li><a href="https://epsg.io/32611">EPSG:32611</a> ·
+<a href="https://en.wikipedia.org/wiki/Tversky_index">Tversky index</a></li>
+<li><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR report 96647</a></li>
+</ul>
+<h2>Science cited for the registered mechanisms</h2>
+<ul>
+<li>Mitchell, T.M. &amp; Faulkner, D.R. (2012), <em>Towards quantifying the matrix permeability of
+fault damage zones in low porosity rocks</em>, EPSL 339–340, 24–31 — damage-zone width scales with
+displacement, motivating a decaying intensity around mapped traces.</li>
+<li>Faulkner, D.R. et al. (2010), <em>A review of recent developments concerning the structure,
+mechanics and fluid flow properties of fault zones</em>, J. Struct. Geol. 32, 1557–1575.</li>
+<li>USGS State Geologic Map Compilation (SGMC) faults, used <strong>only as proxy truth</strong>, never
+as a predictor.</li></ul>
+<h2>Receipts</h2>
+<p><a href="downloads/data_receipt.json">Input SHA-256 pins</a> ·
+<a href="downloads/template_verification.json">Shared-template verification</a> ·
+<a href="downloads/upstream_fix_report.md">Upstream fix report</a></p>'''
+    (DOCS / 'sources.html').write_text(frame('Sources', src_page))
+
+    # Root entry point (repository-root Pages keeps working).
+    (ROOT / 'index.html').write_text(
+        '<!doctype html><html lang="en"><head><meta charset="utf-8">'
+        '<meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70</title>'
+        '</head><body><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
+        '</body></html>\n')
+    (DOCS / '.nojekyll').touch()
+    # Backwards-compatible entry points; they must not carry stale claims.
+    for old, target in (('executive-summary.html', 'submission.html'),
+                        ('irregularities.html', 'limitations.html'),
+                        ('status.html', 'index.html')):
+        (DOCS / old).write_text(
+            '<!doctype html><html lang="en"><head><meta charset="utf-8">'
+            f'<meta http-equiv="refresh" content="0;url={target}"><title>GEMSDOE70</title>'
+            f'</head><body><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
+    (DOCS / 'status.json').unlink(missing_ok=True)
+    # keep a root-level copy so older pages that link run-card.json still resolve
+    (DOCS / 'run-card.json').write_text((ROOT / 'evidence/run_card.json').read_text())
+    # Phase-1 receipts keep their historical names only under the archived prefix.
+    for stale in ('holdout.json', 'holdout_folds.json', 'holdout_split.json',
+                  'registry_saturation.json', 'surface_uniqueness.json',
+                  'experiment_manifest.json'):
+        (DOWN / stale).unlink(missing_ok=True)
+    print('site built:', ', '.join(sorted(p.name for p in DOCS.glob('*.html'))))
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

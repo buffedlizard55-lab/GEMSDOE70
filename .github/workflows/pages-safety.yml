@@ -1,0 +1,24 @@
+name: Verify actual Pages publication boundary
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pages-safety:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify root exclusions are active
+        run: python scripts/audit_pages.py
+      # Build exactly the legacy root source configured in the Pages API.
+      - uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1
+        with:
+          source: ./
+          destination: ./_site
+      - name: Inspect direct-URL output as well as advertised links
+        run: python scripts/audit_pages.py --site _site

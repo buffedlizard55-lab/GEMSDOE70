@@ -1,37 +1,78 @@
-# Handoff — 2026-10-20 (E2/E3 session)
+# Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
 
-Read README.md, PROJECT_BRIEF.md, AGENTS.md, docs/preregistration-e2.md first.
+Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
 
-**DO NOT SUBMIT YET. Unique candidate exists for selector review; verdict negative.**
+## State
 
-Candidate: `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif`
-SHA-256 `91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c`, 38,000 dots,
-name `GEMSDOE70-E2-alluvial-step-38000`. Local validator PASS (all-finite [0,1],
-EPSG:32611 3730x3292, 0 on catalogue). No slot used; no organizer score exists.
+* **Artifact published:** `docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif`
+  (126,097 bytes, sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`),
+  plus a one-TIFF ZIP and the writer receipt.
+* **Verdict: negative.** `download_ok = true`, `submit_recommended = false`.
+  The pre-registered target-like gate (instrument B′) is 12.6 % below the H33 reference with a
+  95 % CI excluding zero. Instrument A and the unrestricted proxy favour the candidate.
+* **No weekly slot used. No organizer-confirmed score exists in this repository.**
 
-Two preregistered experiments ran (budget used: 2 of max 3 this session; ~2 min compute each):
-E2 alluvial step HOLDOUT-DTI 0.06465 [0.04869,0.08181] (11,321 withheld, gems57-pooled-hide-v2)
-beats random/ablations, loses to D28 0.09192 → promotion bars failed. E3 depth-step null
-(AUC 0.506) → negative. E1 archived negative unchanged. Do not rerun/tune any of them
-(manifests refuse; folds are reported).
+## What was done
 
-Uniqueness: 7-raster subset under explicit revision R1 (docs/protocol-revision-uniqueness.md).
-Final dots worst rho 0.039, worst R1 overlap 0.443; literal dense overlap 1.0 published as
-degenerate. Complete 862-raster scan + R1 acknowledgment + weekly-cap check + written
-acceptance are selector prerequisites (docs/publication-amendment-e2.md, submission guide).
-Upstream _dots issue filing denied by integration; report in evidence/, not claimed filed.
+1. **Two defects in the shared uniqueness tool were found and fixed** (reported, hashes in
+   `registry/template_pin.json` with `all_identical: false`, full text in
+   `evidence/upstream_fix_report.md`):
+   * dots are binary (`|value − 1| < 1e-6`), not every positive value;
+   * duplication requires **mutual** overlap; forward-only overlap fires at 1.00 on three archived
+     dense lattices whose 3-px halos cover the whole footprint.
+2. **Three preregistered experiments.**
+   * Exp 2 (geophysically gated continuation prior): A 0.0591, B 0.0432 — the four-field
+     geophysical gate hurt and was removed.
+   * Exp 3 (damage-zone intensity): A 0.0873, B 0.1098, B′ 0.0471 — concentration wasted mass
+     because `T` saturates per truth cell while `S` scales per dot.
+   * Exp 4 (coverage-stratified halo, weak tilt): A 0.0730, B 0.0948, B′ 0.0812 — best balance;
+     this is the published artifact.
+3. The site was rebuilt to read every number from JSON receipts and to state the download/submit
+   decision explicitly on the landing page.
 
-Key calibration: on this catalogue instrument H33 (user-reported live 0.2778) scores 0.00370,
-below random. Catalogue holdout must not rank far-field fields for live value either way.
-Public leader read 2026-10-20: 0.4413 (evidence/leaderboard_read.json). Two-round label
-composition and known-fault masking remain unverified — see H33 addendum before any slot.
+## Do not
 
-Next session priorities: (1) selector completes full R1 scan or rejects candidate in writing;
-(2) resolve masking/final-round ambiguity from organizer text/forum before spending;
-(3) new ranking must raise top-mass credit density (beat D28 on catalogue recovery AND retain
-far-field placement) — do not chase holdout with catalogue-hugging supervised fits;
-(4) ComCat microseismicity lane needs an out-of-sandbox fetch (named in preregistration).
+* Do not relabel the artifact as promoted, and do not edit the card's gates.
+* Do not describe 0.2778 or 0.44 as organizer-confirmed; both are user-supplied.
+* Do not remove the two uniqueness fixes without replacing them upstream in the shared template.
+* Do not publish any TIFF/ZIP other than the three files named by the run card —
+  `release.assert_no_public_rasters` enforces this.
 
-Commands: venv + requirements.lock; bash scripts/download_competition_data.sh;
-.venv/bin/python scripts/build_site.py; scripts/build_readme.py; pytest -q;
-scripts/validate_submission.py <candidate.tif>.
+## Next session, in order
+
+1. Supervised within-halo ranking on the SGMC off-catalogue proxy with leave-one-quadrant-out.
+   Features: 19-band stack, `lidar_scarp_features_u8` (12 bands), `geodawn_rad_u8` (K/Th/U/TC and
+   ratios), catalogue geometry (distance, side, host length, tip position), and the measured
+   coverage stratification (7×7 strata, 5-px NMS) which was worth +70 % on B′ at fixed mass.
+2. Quantify SGMC duplication against QFaults (buffer tests 1–6 px) so instrument B/B′ can be
+   improved or replaced by a genuinely independent additional-fault set.
+3. Upstream the two uniqueness fixes to the template repository and run its suite.
+4. Only then spend a slot, and record the returned score as ORGANIZER-CONFIRMED.
+
+## Reproduce
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_experiment_v4.py
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+.venv/bin/python -m pytest -q          # 118 passed at handoff
+```
+
+Large inputs and the registry clone stay outside Git (`.cache/`, `/tmp`). Published evidence is
+JSON plus the 126 KB artifact.
+
+## Parallel E2/E3 lane integrated 2026-10-20 (branch arena/ef718aa0-gemsdoe70, PR #16)
+
+Independent preregistered lane merged after session 2: E2 alluvial-step candidate
+`gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif`
+(sha256 `91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c`, 38,000 dots,
+registered in `registry/published_artifacts.json`). Verdict **negative**; download-for-selector-review
+only, submit NO. Catalogue HOLDOUT-DTI 0.06465 [0.04869,0.08181] (11,321 withheld) beats random,
+loses to D28 0.09192; independently replicates Instrument-A H33 = 0.0037. E3 depth-step null.
+Uniqueness for E2 was measured pre-fix under disclosed R1 on a 7-raster subset
+(rho <= 0.039, R1 overlap <= 0.443) — rerun under the corrected mutual rule + complete scan
+before any slot consideration. Evidence: `evidence/e2/`, `evidence/e3/`,
+`docs/preregistration-e2.md`, `docs/publication-amendment-e2.md`. Organizer pages fetched
+2026-10-20: public leader 0.4413 (`evidence/leaderboard_read.json`). No slot used.

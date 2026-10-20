@@ -1,24 +1,72 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Overview · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Unique candidate for selector review; DO NOT SUBMIT YET.">
-<link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
-<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><section class="stop" aria-labelledby="status"><div class="eyebrow">SUBMISSION READINESS — READ FIRST</div>
-<h1 id="status">DO NOT SUBMIT YET.</h1>
-<p><strong>Download for selector review: YES.</strong> A unique candidate GeoTIFF is available below so the selector can run the complete registry scan and slot decision.
-<strong>Submit to DrivenData: NO</strong> — promotion bars failed (D28 catalogue-holdout best not beaten). Submitting now would spend a slot on an unpromoted candidate.</p>
-<div class="actions"><a class="button" href="downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif" download>⬇ Download candidate TIFF (review only)</a>
-<a class="button secondary" href="downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.zip" download>ZIP (single TIFF)</a>
-<a class="button secondary" href="run-card-e2-published.json" download>Run card (JSON)</a></div>
-<p><strong>File:</strong> <code>gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif</code><br><strong>SHA-256:</strong> <code>91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c</code><br>
-<strong>Submission name (if selector ever approves):</strong> <code>GEMSDOE70-E2-alluvial-step-38000</code><br>
-<strong>Note to paste (101 characters):</strong> <code>E2 oriented elev step x basement edge, 38k dots d&gt;2px; HOLDOUT-DTI in run card; selector scan pending</code></p>
-<p class="small">Single band · float32 · EPSG:32611 · 100 m · 3730×3292 · 38,000 dots · every cell finite · values in [0,1] · 0 on catalogue · no nodata tag. Local validator PASS — not organizer acceptance. Exact conditions to flip to “submit” are in the <a href="executive-summary.html">submission guide</a>.</p></section><section class="intro"><div class="eyebrow">UNIQUE CANDIDATE, HONEST VERDICT</div><h2>New geology. No borrowed dots.</h2>
-<p>E2 ranks blind basin faults by an oriented alluvial elevation step guided by magnetic strike — a lane not used by H33/H19-5 — and shares only 797 exact pixels (2.1%) with H33. It recovers withheld catalogue faults far better than random, but the incumbent dotted ranking still recovers them better, so this session does not promote it. E3 (magnetic depth-step) and archived E1 are also negative. Negative results are deliverables.</p></section><div class="metrics"><section><div class="eyebrow">E2 DOTS · HOLDOUT-DTI</div><div class="number">0.06465</div><p>95% CI [0.04869, 0.08181] · beats random, loses to D28 (0.09192)</p></section>
-<section><div class="eyebrow">UNIQUENESS (7-RASTER SUBSET, R1)</div><div class="number">ρ ≤ 0.039</div><p>Worst R1 overlap 0.443 (limit 0.70). Complete scan still required.</p></section>
-<section><div class="eyebrow">PUBLIC LEADER AT READ 2026-10-20</div><div class="number">0.4413</div><p>Organizer page read; family H33 0.2778 is user-reported, no receipt here.</p></section></div>
-<p class="caption">HOLDOUT-DTI · gems57-pooled-hide-v2 · 11,321 withheld positive pixels · catalogue hide-and-recover, not hidden live faults and not a leaderboard score. On this instrument H33 itself scores 0.00370 (below random) — see why in the <a href="h33-analysis.html">H33 analysis</a> before ranking any far-field field by catalogue recovery alone.</p>
-<div class="columns"><section class="panel"><h2>Why download if not submit?</h2><p>Candidate generation and slot selection are separate steps. The selector needs exact bytes for the complete registry scan, R1 acknowledgment and cap check listed in the guide.</p><a href="executive-summary.html">Exact submission steps →</a></section>
-<section class="panel"><h2>Why did H33 lead the family?</h2><p>Strong ranking + kernel-scale thinning + catalogue-flank pruning: emission efficiency, not a new detector. The same table shows what beating 0.2778 — and 0.4413 — actually requires.</p><a href="h33-analysis.html">Forensic analysis →</a></section></div>
-<section><h2>Reproducible, not speculative</h2><p>Pinned mirror stack, byte-identical shared evaluator/writer, per-feature leakage canaries, paired bootstrap intervals, from-scratch recomputation matched the experiment mask byte-for-byte before writing.</p>
-<ul><li><a href="results.html">E1/E2/E3 measured results</a></li><li><a href="hypotheses.html">Ranked hypotheses + frozen E2/E3 preregistration</a></li><li><a href="irregularities.html">Limitations, irregularities, next steps</a></li></ul></section></main><footer>Evidence before leaderboard claims. No competition upload performed by this repo.
-<a href="run-card-e2.json">E2 run card</a> · <a href="sources.html">Provenance</a></footer></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Overview · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop" aria-labelledby="decision">
+<div class="eyebrow">SUBMISSION STATUS</div>
+<h1 id="decision">Verified file · not promoted</h1>
+<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
+passes every shared-validator check, and its SHA-256 is recorded below.</p>
+<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
+<strong>negative</strong>: the pre-registered target-like gate (instrument B′) is
+negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
+not a validated improvement.</p>
+<div class="actions">
+<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download>Download submission TIFF</a>
+<a class="button secondary" href="downloads/gems70-p4-stratified-halo-37654-20261020.zip" download>Download one-TIFF ZIP</a>
+<a class="button secondary" href="submission.html">How to submit</a>
+</div>
+<p class="small">Name: <code>gems70-p4-stratified-halo-37654-20261020</code> · Note (108/140 chars):
+<code>P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
+<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
+<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
+pre-registered experiments and published the best candidate. Two instruments favour it, one does
+not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+</section><div class="metrics">
+<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
+<div class="number">0.0730</div>
+<p>[0.0667, 0.0790] · 11,321 withheld catalogue pixels</p></section>
+<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
+<div class="number">0.0812</div>
+<p>[0.0723, 0.0900] · SGMC proxy outside the duplication band</p></section>
+<section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
+<div class="number">0.31</div>
+<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ 0.050</p></section></div>
+<div class="columns">
+<section class="panel"><h2>Why it is downloadable</h2>
+<p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
+transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
+Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
+lattice reaches 1.00 by construction and is reported separately).</p>
+<a href="results.html">Full evidence →</a></section>
+<section class="panel"><h2>Why it is not promoted</h2>
+<p>On instrument B′ the candidate scores 0.0812 versus H33's
+0.0938 (paired Δ -0.0126,
+95% CI [-0.0241, -0.0018]). The pre-registered rule requires a
+positive lower bound. It does not hold.</p>
+<a href="hypotheses.html">Why this rule →</a></section></div>
+<section><h2>What is measured and what is not</h2>
+<p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue
+components and measures catalogue recovery; instrument B/B′ uses USGS SGMC faults minus the
+catalogue as a proxy for newly mapped faults. Every number is labelled, and no projection is
+presented as a leaderboard score.</p>
+<ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
+<li><a href="results.html">All three experiments, ablations and canaries</a></li>
+<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section><h2>Parallel lane E2 — alluvial step (second candidate, DO NOT SUBMIT YET)</h2>
+<p>An independent preregistered lane (oriented detrended-elevation step × basement edge,
+38,000 dots) merged from a parallel session. <strong>Download for selector review: yes.
+Submit: NO</strong> — its frozen bars failed (D28 catalogue-holdout best not beaten) and its
+complete-registry scan is still pending. HOLDOUT-DTI 0.0646 [0.0487, 0.0818] ·
+38,000 dots · SHA-256 <code>91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c</code>.</p>
+<div class="actions"><a class="button secondary" href="downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif" download>Download E2 review TIFF</a>
+<a class="button secondary" href="downloads/e2_run_card.json" download>E2 run card</a></div>
+<p class="small">Name: <code>GEMSDOE70-E2-alluvial-step-38000</code> · Note:
+<code>E2 oriented elev step x basement edge, 38k dots d&gt;2px; HOLDOUT-DTI in run card; selector scan pending</code>. E3 (depth-step) in the same lane family is
+negative with no file. Full tables on the results page; terms in
+<code>docs/publication-amendment-e2.md</code>.</p></section></main>
+<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
+<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

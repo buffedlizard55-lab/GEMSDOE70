@@ -1,89 +1,85 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **DO NOT SUBMIT YET — unique candidate available for selector review**
+## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
-**Download for selector review: YES. Submit to DrivenData: NO.** A unique,
-format-validated candidate GeoTIFF (new alluvial-step ranking, not a copy of
-any prior submission) is published for the separate selector step. Its frozen
-promotion bars failed — D28 catalogue-holdout best was not beaten — so no
-weekly slot may be spent on it until every selector condition in the guide is
-recorded. **No weekly slot was used. No score is claimed.**
+A unique, format-validated competition TIFF is published:
+`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
+**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
+`negative` on the pre-registered target-like gate. No weekly slot was used.
 
-- **Candidate:** [`docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif`](docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif) · SHA-256 `91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c`
-- **Name (if selector ever approves):** `GEMSDOE70-E2-alluvial-step-38000` · **Note:** `E2 oriented elev step x basement edge, 38k dots d>2px; HOLDOUT-DTI in run card; selector scan pending`
-- [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission guide](docs/executive-summary.html)
-- [E2 run card](evidence/e2/run_card.json) · [E2 holdout](evidence/e2/holdout.json) · [Validator](evidence/e2/validator.json)
-- [Preregistration (5 ranked hypotheses, frozen E2/E3)](docs/preregistration-e2.md) · [H33 forensic analysis](docs/h33-analysis.md)
-- [Limitations / irregularities](docs/irregularities.md) · [Session handoff](HANDOFF.md)
+- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
+- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
+- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
+- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## What was measured (2026-10-20 session)
+## What was measured this session
 
-Two preregistered CPU experiments on the SHA-pinned mirror stack, shared
-evaluator `gems57-pooled-hide-v2` (alpha 0.2, beta 0.8, 300 m kernel),
-whole-component hide-and-recover, per-feature leakage canaries (all AUC ≤ 0.58,
-no alarm), paired 20 km bootstrap. Vendor template byte-identical.
+Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
+alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
+bootstrap. Exactly 37,654 binary dots are emitted, all
+off-catalogue.
 
-- **E2 alluvial step** (oriented detrended-elevation step × basement edge,
-  38,000 thinned dots): **HOLDOUT-DTI 0.06465**, 95% CI
-  [0.04869, 0.08181], 11,321
-  withheld positives. Beats random (0.04243) and every ablation; ties H19-solid
-  at one-third mass; **loses to D28 reference (0.09192)** → negative.
-  Uniqueness (7-raster subset, revision R1): worst Spearman 0.039, worst R1
-  overlap 0.443; only 797/38,000 pixels coincide exactly with H33.
-- **E3 magnetic depth-step:** mechanism AUC 0.506 (null); candidate 0.05054
-  carried by its partner feature → negative, no file.
-- **E1 contact termination (archived):** 0.01019, worse than random → negative.
+| Instrument | Candidate | H33 reference | Result |
+|---|---:|---:|---|
+| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
+| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
 
-**Why H33 (user-reported 0.2778) led the family, and what beating it takes:**
-strong H19-5 ranking + kernel-scale thinning + catalogue-flank pruning
-(emission efficiency). Measured here on one instrument, that same H33 field
-scores HOLDOUT-DTI 0.00370 — *last, below random* — because catalogue
-hide-and-recover cannot reward far-field new faults. Never convert catalogue
-holdout into a live projection in either direction. Public leader at organizer
-page read 2026-10-20: **0.4413** (`evidence/leaderboard_read.json`). The 0.2778
-value has no organizer receipt in this repo and is never labelled
-ORGANIZER-CONFIRMED. Full derivation: `docs/h33-analysis.md`.
+Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
+is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
+21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
+artifact is published but not promoted. Nothing here is an organizer-confirmed score.
 
-The candidate TIFF is all-finite in [0,1] (min 0, max 1, no nodata tag),
-single-band float32, EPSG:32611, 3730×3292 — the local fix for the portal
-error “Predicted values must be in range [0, 1]”. Local validation is not
-organizer acceptance. Publication terms: `docs/publication-amendment-e2.md`;
-dense-surface uniqueness revision: `docs/protocol-revision-uniqueness.md`.
+**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
+overlap 0.312 (limit 0.70); worst Spearman 0.050
+(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
+whose halo covers the whole footprint — which is why the two-direction test was adopted.
+
+## Two fixes to the shared tool (reported, not silently forked)
+
+1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
+   registry surface blocks every candidate.
+2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
+   halos cover 100 % of the footprint would otherwise block every candidate.
+
+Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
+`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
 
 ## Reproduce
 
 ```bash
-python -m venv .venv
-.venv/bin/pip install -r requirements.lock
-bash scripts/download_competition_data.sh  # pinned public owner mirrors, not DrivenData auth
-.venv/bin/python scripts/build_site.py
-.venv/bin/python scripts/build_readme.py
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
-.venv/bin/python scripts/validate_submission.py docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif
 ```
 
-Experiment scripts refuse reruns (manifests in `evidence/e2|e3/`). Do not
-delete manifests to tune on reported folds. `scripts/publish_e2_candidate.py`
-recomputes the candidate from scratch and aborts on any mismatch.
+`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
+(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
+`evidence/history/phase1_negative/`.
 
-## Own the outcome
+## Next session
 
-Maximize P(Win) never licenses hiding negatives, overstating verification, or
-spending unvalidated slots. This session's win condition was honest evidence:
-a unique candidate with measured limits, an obvious submit status, and a
-selector checklist — not a manufactured green light.
+Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
+(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
+approach has been measured to its limit — see `docs/irregularities.md`.
 
 ## Complete retained project prompt
 
-Historical statements below are user-supplied requirements/claims, not verified
-current results. No leaderboard value below becomes ORGANIZER-CONFIRMED by being
-copied into this README. The dedicated PROJECT_BRIEF.md is the source for this
-embedded copy (formatting whitespace normalized from the supplied message).
+Historical statements below are user-supplied requirements and claims, not verified results. No
+leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
+PROJECT_BRIEF.md is the source for this embedded copy.
 
 <details>
 <summary>Read the complete supplied project brief before every session</summary>
 
+
+## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET
+
+Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818] (beats random, loses to D28 0.0919) → negative. File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` (selector-review only; complete corrected uniqueness scan pending). Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).
 # User project prompt — retained as supplied
 
 Read this at the beginning of every session. Scores and access statements below are user-supplied claims, not current verified facts. Execution status and verified evidence belong in README.md and evidence/, not by silently rewriting this historical brief.
