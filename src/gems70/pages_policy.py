@@ -89,7 +89,10 @@ def check_output(site: Path, baseurl: str = '/GEMSDOE70',
                 link = link[len(baseurl.rstrip('/')):]
             target = ((site / link.lstrip('/')) if link.startswith('/')
                       else (page.parent / link)).resolve()
-            if not target.is_relative_to(site.resolve()) or not target.exists():
+            exists = target.exists() or (
+                target.suffix.lower() == '.md' and target.with_suffix('.html').exists()
+            )
+            if not target.is_relative_to(site.resolve()) or not exists:
                 raise ValueError(f'Broken built-site link: {page.relative_to(site)} -> {link}')
     for page in ['index.html', 'docs/index.html', 'docs/executive-summary.html']:
         p = site / page
