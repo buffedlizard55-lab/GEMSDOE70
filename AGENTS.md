@@ -19,9 +19,16 @@
 - E2/E3 evidence and cards (`evidence/e2|e3/`) are frozen like Phase 1-4. The E2 review TIFF is inventoried but never promoted; `release.candidate_status().submit_ok` stays False until selector gates in `docs/publication-amendment-e2.md` are recorded.
 - E2 uniqueness numbers predate the mutual-overlap fix (R1 subset audit). Re-audit E2 under the corrected rule before comparing uniqueness across lanes.
 
+## Current prompt override (2026-10-20, review on arena/4aea4e21-gemsdoe70)
+The latest explicit user protocol requires FORWARD overlap > 0.70 to stop.
+Earlier mutual-overlap language above describes historical evidence only, not
+permission to relax this instruction. Preserve frozen audits. Release authorization
+must apply the stricter current rule. See docs/protocol-review.md; no method
+paragraph was supplied, no new modeling is authorized by this review.
+
 ## Parallel-session E3 scarp lane (PR #17)
 
-- Candidate `gems70e3-scarpcurv-60k-ex3-20261020-zeros` published; promoted to selector on
-  catalogue HOLDOUT-DTI only; lacks a B′ score. Frozen drivers `scripts/run_experiment_e2_scarp.py`,
-  `scripts/run_experiment_e3_scarp.py`, `scripts/complete_e3_release.py` are one-shot; do not rerun.
-- `src/gems70/release_e3.py` guards the E3 hash binding; slot decisions remain selector-only.
+Candidate `gems70e3-scarpcurv-60k-ex3-20261020-zeros` published; catalogue-holdout promotion only;
+B′ unscored. Frozen one-shot drivers: `scripts/run_experiment_e2_scarp.py`,
+`scripts/run_experiment_e3_scarp.py`, `scripts/complete_e3_release.py` — do not rerun.
+`src/gems70/release_e3.py` guards its hash binding (RENAMED_AT_MERGE resolves frozen pins).

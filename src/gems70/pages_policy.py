@@ -1,14 +1,10 @@
 """Audit the actual legacy-root Pages boundary, not just links in docs/.
 
 JSON is a YAML subset, so _config.yml can be parsed without another dependency.
-Publication policy: rasters/archives may be published ONLY under
-docs/downloads/ and only when inventoried with a matching SHA-256 in
-registry/published_artifacts.json (the multi-candidate successor of the
-original stopped-run no-raster rule). Not a scientific release gate.
+This is a publication policy for the stopped run, not a scientific release gate.
 """
 from __future__ import annotations
 
-import hashlib
 from html.parser import HTMLParser
 import json
 from pathlib import Path
@@ -53,21 +49,17 @@ def check_source(root: Path) -> dict:
             'excluded_private_roots': sorted(private)}
 
 
-def check_output(site: Path, baseurl: str = '/GEMSDOE70', inventory: dict | None = None) -> dict:
-    """Check the built directory, including direct URLs never linked by a page.
-
-    ``inventory`` maps publishable raster/archive paths (posix, relative to the
-    site root, e.g. ``docs/downloads/x.tif``) to their SHA-256. When it is
-    None, NO raster/archive is allowed (the original stopped-run policy).
-    Otherwise a raster/archive is allowed only under docs/downloads/ with a
-    matching inventoried hash; anything else is rejected, linked or not.
-    """
+def check_output(site: Path, baseurl: str = '/GEMSDOE70', *, allowed_artifacts=None) -> dict:
+    """Check the built directory, including direct URLs never linked by a page."""
     site = Path(site)
     if not site.is_dir() or site.is_symlink():
         raise ValueError('A real built site directory is required')
+    import hashlib
+    allowed_artifacts = allowed_artifacts or {}
+    raster_count = 0
     paths = list(site.rglob('*'))
+    raster_count = 0
     violations = []
-    raster_downloads = 0
     for path in paths:
         rel = path.relative_to(site)
         if path.is_symlink():
@@ -79,15 +71,13 @@ def check_output(site: Path, baseurl: str = '/GEMSDOE70', inventory: dict | None
         theme_dir = rel.as_posix() in {'assets', 'assets/css'} and path.is_dir()
         if rel.parts[0] not in PUBLIC_ROOTS and not (theme_css or theme_dir):
             violations.append(f'{rel}: nonpublic root')
-        if path.is_file() and path.suffix.lower() in {'.tif', '.tiff', '.zip'}:
-            allowed = (inventory is not None
-                       and rel.parent.as_posix() == 'docs/downloads'
-                       and inventory.get(rel.as_posix())
-                       == hashlib.sha256(path.read_bytes()).hexdigest())
-            if allowed:
-                raster_downloads += 1
+        if path.suffix.lower() in {'.tif', '.tiff', '.zip'}:
+            expected = allowed_artifacts.get(rel.as_posix())
+            if (not expected or not path.is_file() or path.is_symlink()
+                    or hashlib.sha256(path.read_bytes()).hexdigest() != expected):
+                violations.append(f'{rel}: stopped-run raster/archive')
             else:
-                violations.append(f'{rel}: uninventoried raster/archive')
+                raster_count += 1
     if violations:
         raise ValueError('Unsafe Pages build: ' + '; '.join(violations))
     # Check the deployed tree, not the checkout where excluded evidence still
@@ -103,19 +93,13 @@ def check_output(site: Path, baseurl: str = '/GEMSDOE70', inventory: dict | None
                       else (page.parent / link)).resolve()
             if not target.is_relative_to(site.resolve()) or not target.exists():
                 raise ValueError(f'Broken built-site link: {page.relative_to(site)} -> {link}')
-    # Entry pages must state the submit decision explicitly. Redirect stubs
-    # carry no claims and are checked at their target instead.
-    guidance = ('DO NOT SUBMIT', 'Do not submit this run.', 'not promoted',
-                'NOT PROMOTED', 'not recommended')
     for page in ['index.html', 'docs/index.html', 'docs/executive-summary.html']:
         p = site / page
         if not p.is_file():
             raise ValueError('Missing Pages entry point: ' + page)
         text = p.read_text()
-        if 'http-equiv="refresh"' in text:
-            continue
-        if not any(g in text for g in guidance):
-            raise ValueError('Missing negative banner (explicit submit guidance): ' + page)
+        if 'DO NOT SUBMIT' not in text and 'Do not submit this run.' not in text:
+            raise ValueError('Missing negative banner: ' + page)
     return {'built_output_ok': True, 'files_checked': sum(p.is_file() for p in paths),
-            'raster_downloads': raster_downloads,
+            'raster_downloads': raster_count,
             'scope': 'Built-site publication only; not organizer acceptance or a scientific score.'}

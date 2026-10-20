@@ -18,6 +18,7 @@ DOCS = ROOT / 'docs'
 DOWN = DOCS / 'downloads'
 
 NAV = [('index.html', 'Overview'), ('submission.html', 'Submit a file'),
+       ('e3-candidate.html', 'E3 scarp candidate'),
        ('results.html', 'Evidence'), ('hypotheses.html', 'Hypotheses'),
        ('h33-analysis.html', 'Why H33 scored'), ('sources.html', 'Sources'),
        ('limitations.html', 'Limitations')]
@@ -42,6 +43,14 @@ def ci(d):
 
 
 def frame(title, body):
+    review = load('evidence/literal_protocol_review.json', {})
+    if review.get('correlation_overlap_vs_registry', {}).get('stop'):
+        body = ('''<section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
+<p>Download for review only. The archived Phase-4 TIFF fails the requested one-way
+3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
+are not clearance under the current prompt. No new TIFF was generated in this review.</p>
+<p><a href="protocol-review.html">Current protocol review and next steps</a> · <a href="research-review.html">Research and source review</a> ·
+<a href="literal-protocol-review.json">Current JSON run card</a></p></section>''' + body)
     nav = ''.join(f'<a href="{h}">{esc(t)}</a>' for h, t in NAV)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -49,7 +58,7 @@ def frame(title, body):
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main">{nav}</nav><main id="main">{body}</main>
+<nav aria-label="Main">{nav}</nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a>.</section>{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
@@ -75,6 +84,12 @@ def main():
     card = load('evidence/run_card.json', {})
     if not card:
         raise SystemExit('evidence/run_card.json missing; run the experiment first')
+    review = load('evidence/literal_protocol_review.json', {})
+    if review:
+        (DOCS / 'literal-protocol-review.json').write_text(json.dumps(review, indent=2) + '\n')
+        import markdown
+        text = (ROOT / 'reports/literal-protocol-review.md').read_text()
+        (DOCS / 'protocol-review.html').write_text(frame('Current protocol review', markdown.markdown(text, extensions=['tables'])))
     name = card['submission_name']
     sha = card['raster_sha256']
     val = card.get('validator_output') or {}
@@ -92,6 +107,9 @@ def main():
     h33 = load('evidence/h33_audit.json', {})
     receipt = load(f'docs/downloads/{name}.json', {})
     sources = load('registry/sources.json', [])
+
+    import markdown
+    (DOCS / 'research-review.html').write_text(frame('Current research review', markdown.markdown((DOCS / 'protocol-review.md').read_text(), extensions=['tables'])))
 
     DOCS.mkdir(parents=True, exist_ok=True)
     DOWN.mkdir(parents=True, exist_ok=True)
@@ -114,7 +132,7 @@ def main():
         'evidence/h33_audit.json': 'h33_audit.json',
         'evidence/data_receipt.json': 'data_receipt.json',
         'evidence/template_verification.json': 'template_verification.json',
-        'evidence/upstream_fix_report.md': 'upstream_fix_report.md',
+        'evidence/upstream_fix_report.md': 'upstream_fix_report.txt',
         'evidence/registry_saturation.json': 'phase1_registry_saturation.json',
         'evidence/history/phase1_negative/run_card.json': 'phase1_run_card.json',
         'evidence/run_card_e3_amended.json': 'run_card_e3_amended.json',
@@ -144,20 +162,27 @@ def main():
             shutil.copyfile(s, DOWN / dst)
 
     # --------------------------------------------------------------- decision box
-    promoted = bool(card.get('download_and_submit_ok'))
+    sys.path.insert(0, str(ROOT / 'src'))
+    from gems70.release import release_status
+    status = release_status(ROOT)
+    promoted = status['submit_recommended']
     tone = 'stop' if not promoted else 'ok'
     headline = ('Verified file · not promoted' if not promoted else 'Promoted candidate')
     decision = f'''<section class="{tone}" aria-labelledby="decision">
 <div class="eyebrow">SUBMISSION STATUS</div>
 <h1 id="decision">{esc(headline)}</h1>
-<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
-passes every shared-validator check, and its SHA-256 is recorded below.</p>
+<p><strong>Competition submission: NO — not recommended.</strong></p>
+<p>Registry scope is not every private or uncommitted raster.</p>
+<p><strong>Download: yes — format-validated for review.</strong> Historical file for review only; format validation is not submission clearance.
+The current forward-overlap protocol flags this artifact as a duplicate.
+<strong>DO NOT SUBMIT under the current protocol.</strong>
+<a href="protocol-review.html">Review the stop decision</a>. Its SHA-256 is recorded below.</p>
 <p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
 <strong>{esc(card['verdict'])}</strong>: the pre-registered target-like gate (instrument B′) is
 negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
 not a validated improvement.</p>
 <div class="actions">
-<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download submission TIFF</a>
+<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download historical TIFF — DO NOT SUBMIT</a>
 <a class="button secondary" href="downloads/{esc(name)}.zip" download>Download one-TIFF ZIP</a>
 <a class="button secondary" href="submission.html">How to submit</a>
 </div>
@@ -350,7 +375,7 @@ always reported.</p>
         e3rows = instrument_rows(e3h) if e3h else []
         e3checks = [[esc(k), 'pass' if v else 'FAIL']
                     for k, v in (e3v.get('checks') or {}).items()]
-        e3page = f'''<div class="eyebrow">PARALLEL-SESSION CANDIDATE E3 (SCARP LANE)</div>
+        e3page = f"""<div class="eyebrow">PARALLEL-SESSION CANDIDATE E3 (SCARP LANE)</div>
 <h1>Scarp-curvature candidate — score it on B′ before choosing.</h1>
 <p class="lead"><strong>Download: yes.</strong> <code>downloads/{esc(e3name)}.tif</code>
 ({e3['n_final_dots']:,} dots, SHA-256 <code>{esc(e3['raster_sha256'])}</code>).
@@ -377,7 +402,7 @@ Full inventory (862) scan remains a selector step. Literal readings are in the r
 {table(['Check', 'Result'], e3checks, 'Shared validator on the published E3 bytes.')}
 <p><a href="downloads/holdout_e3.json">Holdout</a> ·
 <a href="downloads/final_uniqueness_e3.json">Uniqueness</a> ·
-<a href="downloads/validator_e3.json">Writer receipt</a></p>'''
+<a href="downloads/validator_e3.json">Writer receipt</a></p>"""
         (DOCS / 'e3-candidate.html').write_text(frame('E3 scarp candidate', e3page))
 
     # ------------------------------------------------------------------ markdown
@@ -423,15 +448,14 @@ as a predictor.</li></ul>
 <h2>Receipts</h2>
 <p><a href="downloads/data_receipt.json">Input SHA-256 pins</a> ·
 <a href="downloads/template_verification.json">Shared-template verification</a> ·
-<a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/evidence/upstream_fix_report.md">Upstream fix report</a>
-(github-pages renders published .md copies to .html, so this receipt links to the repository source)</p>'''
+<a href="downloads/upstream_fix_report.txt">Upstream fix report</a></p>'''
     (DOCS / 'sources.html').write_text(frame('Sources', src_page))
 
     # Root entry point (repository-root Pages keeps working).
     (ROOT / 'index.html').write_text(
         '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         '<meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70</title>'
-        '</head><body><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
+        '</head><body><p>DO NOT SUBMIT.</p><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
         '</body></html>\n')
     (DOCS / '.nojekyll').touch()
     # Backwards-compatible entry points; they must not carry stale claims.
@@ -441,7 +465,7 @@ as a predictor.</li></ul>
         (DOCS / old).write_text(
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<meta http-equiv="refresh" content="0;url={target}"><title>GEMSDOE70</title>'
-            f'</head><body><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
+            f'</head><body><p>DO NOT SUBMIT.</p><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
     (DOCS / 'status.json').unlink(missing_ok=True)
     # keep a root-level copy so older pages that link run-card.json still resolve
     (DOCS / 'run-card.json').write_text((ROOT / 'evidence/run_card.json').read_text())

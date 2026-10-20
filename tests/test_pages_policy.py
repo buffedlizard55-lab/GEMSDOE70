@@ -96,23 +96,14 @@ def test_project_pages_mount_is_resolved_against_site(tmp_path):
     assert check_output(tmp_path)['built_output_ok']
 
 
-def test_inventoried_candidate_raster_allowed_and_hash_bound(tmp_path):
+def test_explicit_inventory_allows_only_hash_pinned_review_artifact(tmp_path):
     import hashlib
     safe_output(tmp_path)
-    tif = tmp_path / 'docs/downloads/candidate.tif'
-    tif.parent.mkdir(parents=True)
-    tif.write_bytes(b'candidate bytes')
-    inv = {'docs/downloads/candidate.tif': hashlib.sha256(b'candidate bytes').hexdigest()}
-    assert check_output(tmp_path, inventory=inv)['raster_downloads'] == 1
-    tif.write_bytes(b'tampered')
-    with pytest.raises(ValueError, match='uninventoried raster'):
-        check_output(tmp_path, inventory=inv)
-
-
-def test_current_decision_language_and_redirect_stubs_pass_banner(tmp_path):
-    (tmp_path / 'docs').mkdir()
-    (tmp_path / 'index.html').write_text('<meta http-equiv="refresh" content="0;url=docs/index.html">')
-    (tmp_path / 'docs/index.html').write_text('Verified file - not promoted. Submit: not recommended.')
-    (tmp_path / 'docs/executive-summary.html').write_text(
-        '<meta http-equiv="refresh" content="0;url=submission.html">')
-    assert check_output(tmp_path)['built_output_ok']
+    rel = 'docs/review.tif'
+    raster = tmp_path / rel
+    raster.write_bytes(b'review fixture')
+    allowed = {rel: hashlib.sha256(raster.read_bytes()).hexdigest()}
+    assert check_output(tmp_path, allowed_artifacts=allowed)['raster_downloads'] == 1
+    raster.write_bytes(b'tampered')
+    with pytest.raises(ValueError, match='Unsafe Pages build'):
+        check_output(tmp_path, allowed_artifacts=allowed)

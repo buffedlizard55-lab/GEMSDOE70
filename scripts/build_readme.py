@@ -17,9 +17,19 @@ def main():
     delta = card['paired_b_prime_vs_h33']
     head = f'''# GEMSDOE70 — geothermal fault research
 
+> **CURRENT REVIEW: DO NOT SUBMIT.** The archived Phase-4 file fails the prompt's literal
+> one-way overlap gate (four witnesses in 62 archived rasters, maximum overlap 1.00).
+> Download is for review only. No new candidate was generated; no slot used.
+> Historical mutual-overlap clearance below is not clearance under the current prompt.
+> [Current review](reports/literal-protocol-review.md) · [Current run card](evidence/literal_protocol_review.json).
+
 ## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
-A unique, format-validated competition TIFF is published:
+**CURRENT PROTOCOL STOP:** The historical candidate exceeds forward overlap against four
+registry rasters. No new TIFF generated; no slot used. Missing single-method lane paragraph.
+See [current review](docs/protocol-review.md). Mutual overlap does not satisfy the current prompt.
+
+A historical, format-validated TIFF is published for review only:
 `docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used.

@@ -17,13 +17,9 @@ def main():
     try:
         report = check_source(ROOT)
         if args.site is not None:
-            inv_path = ROOT / 'registry/published_artifacts.json'
-            inventory = None
-            if inv_path.is_file():
-                inv = json.loads(inv_path.read_text())
-                inventory = {r['path']: r['sha256'] for r in inv.get('artifacts', [])
-                             if r['path'].lower().endswith(('.tif', '.tiff', '.zip'))}
-            report.update(check_output(args.site, inventory=inventory))
+            inventory = json.loads((ROOT / 'registry/published_artifacts.json').read_text())
+            allowed = {r['path']: r['sha256'] for r in inventory['artifacts']}
+            report.update(check_output(args.site, allowed_artifacts=allowed))
     except (OSError, ValueError, TypeError) as exc:
         print(json.dumps({'ok': False, 'error': str(exc)}))
         # Surface diagnostics via the Checks API even when log-download hosts
