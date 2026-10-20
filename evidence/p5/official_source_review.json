@@ -1,0 +1,73 @@
+{
+  "evidence_class": "SOURCE-CONTENT-READ / NOT-A-SUBMISSION-RECEIPT",
+  "read_date_utc": "2026-10-20",
+  "method": "Public page/PDF text retrieval; no authenticated DrivenData session and no binary download from non-allowlisted official hosts",
+  "verified_readings": [
+    {
+      "source": "DrivenData GEMS problem and metric",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "claims": [
+        "Target: structures indicative of geothermal resources, namely faults. New faults not contained in the public USGS database were expert-labeled for initial test; expanded expert labels rescore final round.",
+        "Input GeoTIFF is UTM zone 11N / EPSG:32611 at 100 m resolution. Metric is distance-weighted Tversky with 300 m triangular support, alpha 0.2 and beta 0.8.",
+        "Submission: one float32 layer with pixel-wise confidence in [0,1], matching bounds; page says outside bounds null or NaN."
+      ],
+      "irregularity": "Owner-mirrored sample has 60,988 ones (not all-zero absence despite page wording); our all-finite zero-outside policy is locally accepted by the shared validator but portal acceptance has NOT been verified."
+    },
+    {
+      "source": "Official GEMS Prize Rules, September 2026, sections 3.3–3.5",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "claims": [
+        "Competition training features are a multiband 100 m GeoTIFF and existing fault pixels form training labels.",
+        "Competitors submit all-fault 100 m GeoTIFF predictions; up to three submissions per week, and select only one final set before the deadline.",
+        "Leaderboard is public test only; private test and expanded label set determine prize rounds."
+      ],
+      "irregularity": "The PDF and live competition page should both be rechecked by the human selector before a slot; no authenticated weekly balance was read."
+    },
+    {
+      "source": "USGS GeoDAWN data release",
+      "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "claims": [
+        "Airborne magnetic and radiometric surveys were acquired to support geothermal and geologic mapping; data release marked CC0 1.0 Universal.",
+        "Area 1 and Area 2 had different flight-line spacing and nominal clearance; actual flight height may deviate in steep terrain and must be considered during interpretation."
+      ],
+      "use_limit": "Survey metadata support a flight-line/terrain-clearance non-fault mimic; they do not verify any specific P5 predicted trace."
+    },
+    {
+      "source": "USGS magnetic interpretation",
+      "url": "https://pubs.usgs.gov/of/2002/0098/intro.htm",
+      "claims": [
+        "Analytic-signal amplitude can peak over isolated magnetic contacts under stated assumptions; gradients are more susceptible to noise than horizontal gradients."
+      ],
+      "use_limit": "A magnetic edge is not proof of fault displacement, permeability or temperature."
+    },
+    {
+      "source": "USGS SGMC compilation landing page",
+      "url": "https://www.usgs.gov/data/state-geologic-map-compilation-sgmc-geodatabase-conterminous-united-states",
+      "claims": [
+        "USGS identifies SGMC as a state geologic map compilation and recommends a newer 2026 GeMS-schema release."
+      ],
+      "use_limit": "Owner-derived, pinned 100 m SGMC raster is an imperfect independent-map PROXY response. Neither its current official release identity nor its ability to predict the hidden label distribution is authenticated here."
+    },
+    {
+      "source": "DOE GDR INGENIOUS compilation",
+      "url": "https://gdr.openei.org/submissions/1391",
+      "claims": [
+        "Repository lists Quaternary faults, geothermal and geophysical layers; landing page marked CC BY 4.0."
+      ],
+      "use_limit": "A listing or public URL is not proof the derived owner-mirror raster matches current official files or the hidden test."
+    },
+    {
+      "source": "Public DrivenData leaderboard, page read",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "claims": [
+        "Public best displayed 0.4413 for participant xiaofanhu when read; it is a public-leaderboard snapshot, not a file-specific submission receipt or a P5 score."
+      ],
+      "use_limit": "Public leaderboard is mutable; the 0.2778 H33 family claim remains USER-REPORTED until tied to an authenticated receipt."
+    }
+  ],
+  "access_irregularities": [
+    "Organizer data tab redirected to /accounts/login/; no DrivenData authentication available.",
+    "Bash internet allowlist excludes official DrivenData/USGS/GDR binary hosts; page-reader text and GitHub owner mirrors are not the same as an official binary download.",
+    "The user supplied no identifiable assigned lane paragraph. P5 declares a provisional single lane but does not claim a fully assigned competition slot."
+  ]
+}

@@ -188,6 +188,55 @@ def assert_no_public_rasters(root):
         raise ValueError('Unauthorised TIFF/ZIP in the publication tree: ' + ', '.join(bad))
 
 
+def p5_status(root):
+    """Fail-closed download permission for the *new* P5 research map.
+
+    This only authorizes a hash-verified REVIEW download. It never promotes a
+    raster: P5 failed both paired holdout bars and the literal forward-dot
+    witness. The frozen Phase-4 release_status and old review are untouched.
+    """
+    root = Path(root)
+    card = _load(root, 'evidence/p5/run_card.json') or {}
+    receipt_path = root / 'docs/downloads' / (card.get('submission_name', '') + '.json')
+    receipt = _load(root, receipt_path.relative_to(root)) if receipt_path.is_file() else {}
+    receipt = receipt or {}
+    name = card.get('submission_name', '')
+    tif = root / 'docs/downloads' / (name + '.tif')
+    zip_file = tif.with_suffix('.zip')
+    inv = _load(root, 'registry/published_artifacts.json') or {}
+    pins = {r.get('path'): r.get('sha256') for r in inv.get('artifacts', []) if isinstance(r, dict)}
+    checks = (card.get('validator_output') or {}).get('checks') or {}
+    forward = (card.get('correlation_overlap_vs_registry') or {}).get('forward_overlap_positive_support_lattice')
+    research_only = (card.get('verdict') == 'negative'
+                     and card.get('submit_recommended') is False
+                     and card.get('download_and_submit_ok') is False
+                     and forward == 1.0
+                     and (card.get('correlation_overlap_vs_registry') or {}).get('literal_3px_forward_gate_passes') is False
+                     and (card.get('gate_results') or {}).get('literal_dot_overlap_gate_passed') is False)
+    valid = (bool(name and 'DO-NOT-SUBMIT' in name and tif.is_file() and zip_file.is_file())
+             and research_only and card.get('note_chars') == len(card.get('submission_note', ''))
+             and len(card.get('submission_note', '')) <= 140
+             and isinstance(checks, dict) and bool(checks)
+             and all(v is True for v in checks.values())
+             and (card.get('validator_output') or {}).get('all_checks_passed') is True)
+    if valid:
+        try:
+            valid = (digest(tif) == card.get('raster_sha256')
+                     == (card.get('validator_output') or {}).get('sha256')
+                     == receipt.get('sha256') == pins.get(tif.relative_to(root).as_posix())
+                     and digest(zip_file) == receipt.get('zip_sha256')
+                     == pins.get(zip_file.relative_to(root).as_posix()))
+        except (OSError, ValueError):
+            valid = False
+    return dict(download_ok_for_review=bool(valid), submit_recommended=False,
+                download_and_submit_ok=False, verdict='negative',
+                tif=tif.relative_to(root).as_posix() if name else None,
+                zip_file=zip_file.relative_to(root).as_posix() if name else None,
+                sha256=card.get('raster_sha256'),
+                reason=('Format/hash verified; failed scientific holdouts and the literal forward-dot gate. '
+                        'No organizer acceptance; DO NOT SUBMIT.'))
+
+
 def candidate_status(root):
     """Parallel E2-lane status (selector-review only; never a submit approval).
 

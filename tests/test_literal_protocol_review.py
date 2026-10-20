@@ -83,7 +83,9 @@ def test_fresh_review_binds_every_archived_final_file_and_does_not_claim_univers
     assert review['minimum_forward_overlap_at_fixed_budget'] > .70
     inv = json.loads((ROOT / 'registry/published_artifacts.json').read_text())
     expected = {r['path'] for r in inv['artifacts'] if r['path'].endswith('.tif')}
-    assert {r['artifact'] for r in review['archived_artifacts']} == expected
+    frozen = {r['artifact'] for r in review['archived_artifacts']}
+    assert len(frozen) >= 6 and frozen < expected  # P5-cover is a *later* separate review.
+    assert expected - frozen == {'docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif'}
     for row in review['archived_artifacts']:
         assert digest(ROOT / row['artifact']) == row['raster_sha256']
         assert literal_lane_status(row['shared_measurements'])['stop_required']

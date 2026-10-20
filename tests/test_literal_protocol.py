@@ -46,7 +46,9 @@ def test_generated_pages_show_current_stop():
     for name in ('index.html', 'submission.html', 'results.html', 'protocol-review.html'):
         text = (ROOT / 'docs' / name).read_text()
         assert 'DO NOT SUBMIT — literal protocol stop' in text
-    assert 'CURRENT REVIEW: DO NOT SUBMIT' in (ROOT / 'README.md').read_text()
+    readme = (ROOT / 'README.md').read_text()
+    assert 'NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**' in readme
+    assert 'PRIOR REVIEW (' in readme and 'archived dot files): DO NOT SUBMIT' in readme
 
 
 def test_release_api_enforces_current_stop():

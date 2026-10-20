@@ -1,0 +1,10 @@
+{
+  "evidence_class": "EXPERIMENT-FROZEN",
+  "preregistration_sha256": "bf19b11a73ff82531495efec7fc3c69a102b78e46fff91116e7a43939447a8f8",
+  "experiments_attempted": 1,
+  "max_experiments": 3,
+  "max_seconds": 7200,
+  "fixed_source_sha256": {
+    "src/gems70/phase5.py": "7e3670bc712a56ea39142e8a349ba753f10ecf86b845b713f8853075033d5cf3"
+  }
+}

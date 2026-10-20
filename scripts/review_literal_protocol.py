@@ -89,11 +89,24 @@ def run(fetch=False, verify=False):
     if lower_bound <= .70:
         raise ValueError('fixed-mass blockage not established; do not force a stop')
     inventory = json.loads((ROOT / 'registry/published_artifacts.json').read_text())
+    # This is a *frozen historical review*. A later, separately documented
+    # research artifact must never rewrite its six archived measurements or
+    # change "new_rasters_generated: 0" to a false statement about that run.
+    # Verify the exact historical six SHA pins still occur in the live inventory,
+    # then ignore later entries here; their own run cards must audit them.
+    out = ROOT / 'evidence/review'
+    old = out / 'literal_protocol_audit.json'
+    reviewed = ({r['artifact']: r['raster_sha256'] for r in json.loads(old.read_text())['archived_artifacts']}
+                if old.is_file() else None)
+    rows = [item for item in inventory['artifacts'] if item['path'].endswith('.tif')]
+    if reviewed is not None:
+        now = {r['path']: r['sha256'] for r in rows if r['path'] in reviewed}
+        if now != reviewed:
+            raise ValueError('historical review roster missing or changed in the publication inventory')
+        rows = [r for r in rows if r['path'] in reviewed]
     index = [{'repo': REPO, 'submission': WITNESS_PATH, 'file': str(path), 'sha256': WITNESS_SHA}]
     results = []
-    for item in inventory['artifacts']:
-        if not item['path'].endswith('.tif'):
-            continue
+    for item in rows:
         tif = ROOT / item['path']
         if digest(tif) != item['sha256']:
             raise ValueError('archived artifact SHA-256 mismatch: ' + item['path'])

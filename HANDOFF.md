@@ -1,4 +1,42 @@
-# Current handoff — literal protocol review, arena/9d9f624f-gemsdoe70
+# Handoff — 2026-10-20 · P5 research negative · branch arena/90160b2d-gemsdoe70
+
+**Top priority: new TIFF exists but DO NOT SUBMIT.** Download-for-review file:
+`docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif`;
+SHA-256 `30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a`.
+Single-band float32, EPSG:32611, 3730×3292, sample transform, finite [0,1], zero on
+known faults/outside; one-TIFF ZIP hash-pinned. `p5_status` authorizes a **review download
+only**. `submit_recommended=false`; weekly slots used=0. A format pass is not portal acceptance.
+
+The previously missing assigned lane remains an irregularity. We preregistered one provisional
+magnetic-analytic-width lane and ran one LOQO supervised experiment; no H33/P4 dots were copied.
+Catalogue HOLDOUT-DTI (`gems57-pooled-hide-v2`, 11,321 withheld) 0.01226 [0.00753, 0.01765]
+versus regenerated visible-only P4 0.07304; SGMC-proxy HOLDOUT-DTI
+(same evaluator, 59,937 proxy positives) 0.02542 [0.01853, 0.03363] versus
+H33 0.09377. Paired differences both negative with 95% CIs below 0. This does not predict an
+organizer score. Max feature-alone AUC or inverse AUC 0.751 (<.90 leakage canary).
+
+The literal gate remains decisive: hash-pinned binary lattice has a 3px halo covering
+**all 4,989,581 feature-valid pixels** after 12px erosion; P5 final positive support has
+forward overlap 1.00 with it. Shared binary-dot count zero is NOT a loophole; no discrete
+dots were placed. The refreshed 70-raster archived/local scan max Spearman is 0.0232 but a low
+rho cannot waive positive-support overlap. No private/organizer registry completeness claim.
+Read `docs/preregistration-p5.md`, `evidence/p5/run_card.json`,
+`reports/p5-scientific-review.md` and source receipt before attempting further work.
+
+The earlier archive protocol review below is frozen and *was* accurate at its own time;
+P5 is a separate, later research result. Only a separately authorized selector can choose
+a future cleared file for a live weekly slot. Next: resolve assigned lane + forward-overlap
+conflict, train/evaluate geometry-preserving within-halo ranking at matched dot budget on an
+untouched outer split, corroborate proxy labels and data rights, then assess live page balance.
+Do not tune or submit the negative P5-cover file. Concurrent integration preserved two
+stronger but still negative and literal-duplicate lanes: E5 supervised LOQO
+(`evidence/e5/`, SGMC proxy B′ 0.0886) and P5 analytic dot halo
+(`evidence/phase5/`, SGMC proxy B′ 0.0766); neither is an organizer score or slot
+approval. The P5-cover run remains a separate immutable continuous research TIFF.
+
+---
+
+# Prior handoff — literal protocol review, arena/9d9f624f-gemsdoe70
 
 This note supersedes older submission-approval language below, not the frozen scientific evidence.
 

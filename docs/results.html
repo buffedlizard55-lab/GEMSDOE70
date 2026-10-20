@@ -4,21 +4,36 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
 <aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
-<strong>DO NOT SUBMIT — literal protocol stop.</strong> Archived TIFFs are downloadable for review only.
-The current literal forward-overlap gate fails. <a href="protocol-review.html">Current audit</a> ·
-<a href="downloads/review_run_card.json">Current negative run card</a>.
-Historical receipts below are not current submission approval.</aside><div class="eyebrow">EVIDENCE</div><h1>Three experiments, two instruments, one verdict.</h1>
+<strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
+are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
+rule; neither a local validator nor distinct bytes authorize a slot.
+<a href="p5.html">P5-cover negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
+<a href="downloads/p5_run_card.json">New P5 run card</a> ·
+<a href="downloads/review_run_card.json">Prior review card</a>.</aside><section class="panel"><div class="eyebrow">NEW · P5 RESEARCH NEGATIVE</div>
+<h2>Cross-fitted magnetic-cover ranking did not beat the mapped-halo baselines.</h2>
+<p>Catalogue HOLDOUT-DTI (gems57-pooled-hide-v2; 11,321
+withheld positives): candidate 0.0123 [0.0075, 0.0177] vs visible-only P4
+0.0730; paired Δ -0.0608
+[-0.0687, -0.0522]. SGMC proxy HOLDOUT-DTI (gems57-pooled-hide-v2;
+59,937 proxy positives): candidate 0.0254
+[0.0185, 0.0336] vs frozen H33 0.0938;
+paired Δ -0.0683 [-0.0819, -0.0545]. These are not organizer-confirmed scores.</p>
+<p>Worst Spearman ρ 0.0232
+across 70 archived/local TIFFs;
+positive-support forward overlap 1.00 vs the lattice, therefore <strong>DO NOT SUBMIT.</strong></p>
+<a href="p5.html">Full P5 reproducibility, feature canaries and downloadable research file →</a></section><div class="eyebrow">ARCHIVED EVIDENCE</div><h1>Other experiments, separate instruments and their negative verdicts.</h1>
 <p>All DTI values use α = 0.2, β = 0.8 and a 300 m triangular kernel on the pinned 100 m grid, with
 pooled terms and a paired spatial-cluster bootstrap (1,000 draws, 20 km blocks). Intervals are
 conditional on the fitted folds and the proxy truth; they are not leaderboard intervals.</p>
 <p><strong>Historical results, not a current uniqueness pass.</strong> Fresh measurement:
-<code>calib_r13lattice_00904.tif</code> has halo coverage 99.871327%, not 100%. All four
-archived final TIFFs have forward overlap 1.00. The literal policy therefore stops the lane.</p>
+<code>calib_r13lattice_00904.tif</code> has halo coverage 99.871327%, not 100%. The
+8 frozen prior dot TIFFs have forward overlap 1.00.
+The literal policy stops dot placement.</p>
 <p>Evaluator for catalogue HOLDOUT-DTI: gems57-pooled-hide-v2. SGMC tables below are separately
 labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed scores.</p>
-<h2>Published candidate</h2>
+<h2>Concurrent analytic-halo P5 candidate (historical negative)</h2>
 <div class="table-wrap"><table><caption>Instrument A · shared hide-and-recover catalogue holdout</caption><thead><tr><th>Arm</th><th>DTI</th><th>95% CI</th><th>Positives</th></tr></thead><tbody><tr><td>candidate</td><td>0.0828</td><td>[0.0755, 0.0895]</td><td>11,321</td></tr><tr><td>random_control</td><td>0.0433</td><td>[0.0383, 0.0482]</td><td>11,321</td></tr><tr><td>h33_reference</td><td>0.0037</td><td>[0.0030, 0.0044]</td><td>11,321</td></tr></tbody></table></div>
 <div class="table-wrap"><table><caption>Instrument B′ · SGMC proxy, d ≥ 3 px from catalogue</caption><thead><tr><th>Arm</th><th>DTI</th><th>95% CI</th><th>Positives</th></tr></thead><tbody><tr><td>candidate</td><td>0.0766</td><td>[0.0687, 0.0852]</td><td>59,937</td></tr><tr><td>random_control</td><td>0.0722</td><td>[0.0684, 0.0756]</td><td>59,937</td></tr><tr><td>h33_reference</td><td>0.0938</td><td>[0.0839, 0.1039]</td><td>59,937</td></tr></tbody></table></div>
 <div class="table-wrap"><table><caption>SGMC PROXY-DTI B · unrestricted (possible map duplication)</caption><thead><tr><th>Arm</th><th>DTI</th><th>95% CI</th><th>Positives</th></tr></thead><tbody><tr><td>candidate</td><td>0.0878</td><td>[0.0796, 0.0960]</td><td>74,740</td></tr><tr><td>random_control</td><td>0.0723</td><td>[0.0690, 0.0753]</td><td>74,740</td></tr><tr><td>h33_reference</td><td>0.0906</td><td>[0.0826, 0.0988]</td><td>74,740</td></tr></tbody></table></div>
@@ -27,13 +42,15 @@ labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed score
 <h2>Leakage canaries</h2>
 <div class="table-wrap"><table><caption>Each feature alone, 11,321 withheld positives vs 200,000 negatives. AUC &gt; 0.90 would stop the run.</caption><thead><tr><th>Feature</th><th>AUC (held-out)</th><th>Result</th></tr></thead><tbody><tr><td>rtp</td><td>0.518</td><td>clear</td></tr><tr><td>geod_dilaterate</td><td>0.516</td><td>clear</td></tr><tr><td>geod_2ndinv</td><td>0.566</td><td>clear</td></tr><tr><td>tc</td><td>0.471</td><td>clear</td></tr><tr><td>iso_grav_anom</td><td>0.460</td><td>clear</td></tr><tr><td>det_elev_slope</td><td>0.564</td><td>clear</td></tr><tr><td>depth_to_base_surf</td><td>0.524</td><td>clear</td></tr><tr><td>strain</td><td>0.541</td><td>clear</td></tr><tr><td>gravity_edge</td><td>0.527</td><td>clear</td></tr><tr><td>magnetic_tilt</td><td>0.471</td><td>clear</td></tr><tr><td>relief</td><td>0.564</td><td>clear</td></tr></tbody></table></div>
 <h2>Experiment history</h2>
-<div class="table-wrap"><table><thead><tr><th>Run</th><th>Candidate DTI</th><th>95% CI</th><th>H33 DTI</th></tr></thead><tbody><tr><td>Exp 2 · gated prior A</td><td>0.0591</td><td>[0.0499, 0.0684]</td><td>0.0037</td></tr><tr><td>Exp 2 · B proxy</td><td>0.0432</td><td>[0.0368, 0.0508]</td><td>0.0906</td></tr><tr><td>Exp 3 · damage zone A</td><td>0.0873</td><td>[0.0762, 0.0987]</td><td>0.0037</td></tr><tr><td>Exp 3 · B′</td><td>0.0471</td><td>[0.0399, 0.0554]</td><td>0.0938</td></tr><tr><td>Exp 4 · stratified A</td><td>0.0828</td><td>[0.0755, 0.0895]</td><td>0.0037</td></tr><tr><td>Exp 4 · B′</td><td>0.0766</td><td>[0.0687, 0.0852]</td><td>0.0938</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>Run</th><th>Candidate DTI</th><th>95% CI</th><th>H33 DTI</th></tr></thead><tbody><tr><td>Exp 2 · gated prior A</td><td>0.0591</td><td>[0.0499, 0.0684]</td><td>0.0037</td></tr><tr><td>Exp 2 · B proxy</td><td>0.0432</td><td>[0.0368, 0.0508]</td><td>0.0906</td></tr><tr><td>Exp 3 · damage zone A</td><td>0.0873</td><td>[0.0762, 0.0987]</td><td>0.0037</td></tr><tr><td>Exp 3 · B′</td><td>0.0471</td><td>[0.0399, 0.0554]</td><td>0.0938</td></tr><tr><td>Canonical analytic P5 · A</td><td>0.0828</td><td>[0.0755, 0.0895]</td><td>0.0037</td></tr><tr><td>Canonical analytic P5 · B′</td><td>0.0766</td><td>[0.0687, 0.0852]</td><td>0.0938</td></tr></tbody></table></div>
 <p><a href="downloads/run_card.json">Full run card</a> ·
 <a href="downloads/uniqueness.json">Uniqueness audit</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a> ·
 <a href="downloads/phase3_instrumentB_all.json">Experiment 3 B</a></p><h2>Parallel lane E2/E3 — catalogue holdout (same instrument A family)</h2><p>E2 beats random and every ablation, ties H19-solid at one-third mass, loses to D28; H33 ranks last here by construction (live new faults vs catalogue pieces). E3 depth-step mechanism AUC 0.506 (null), candidate 0.0505. Both negative.</p><div class="table-wrap"><table><caption>E2 arms · gems57-pooled-hide-v2 · seed-20</caption><thead><tr><th>Arm</th><th>DTI</th><th>95% CI</th><th>Positives</th></tr></thead><tbody><tr><td>d28_ref</td><td>0.0919</td><td>[0.0789, 0.1047]</td><td>11321</td></tr><tr><td>h19solid_ref</td><td>0.0655</td><td>[0.0559, 0.0756]</td><td>11321</td></tr><tr><td>candidate_dots</td><td>0.0646</td><td>[0.0487, 0.0818]</td><td>11321</td></tr><tr><td>random_dots</td><td>0.0424</td><td>[0.0370, 0.0474]</td><td>11321</td></tr><tr><td>step_oriented_dots</td><td>0.0405</td><td>[0.0304, 0.0498]</td><td>11321</td></tr><tr><td>step_max_dots</td><td>0.0349</td><td>[0.0256, 0.0446]</td><td>11321</td></tr><tr><td>basement_edge_dots</td><td>0.0298</td><td>[0.0156, 0.0461]</td><td>11321</td></tr><tr><td>candidate_surface</td><td>0.0125</td><td>[0.0076, 0.0185]</td><td>11321</td></tr><tr><td>h33_ref</td><td>0.0037</td><td>[0.0030, 0.0044]</td><td>11321</td></tr></tbody></table></div><h2>Lane E5 — supervised within-halo ranking (preregistered, negative)</h2><p>SGMC-proxy LOQO ranker, OOF AUC by quadrant {&quot;0&quot;: 0.6889014562867857, &quot;1&quot;: 0.751954844557529, &quot;2&quot;: 0.7806340397160824, &quot;3&quot;: 0.7040324511066424}; worst canary AUC 0.755. B′ paired Δ vs H33 -0.0051 [-0.0161, 0.0053] — gate fails, verdict <code>negative</code>, no slot used.</p><div class="table-wrap"><table><caption>E5 instrument A · HOLDOUT-DTI · gems57-pooled-hide-v2</caption><thead><tr><th>Arm</th><th>DTI</th><th>95% CI</th><th>Positives</th></tr></thead><tbody><tr><td>candidate</td><td>0.0815</td><td>[0.0753, 0.0879]</td><td>11321</td></tr><tr><td>random_control</td><td>0.0455</td><td>[0.0405, 0.0507]</td><td>11321</td></tr><tr><td>h33_reference</td><td>0.0037</td><td>[0.0030, 0.0045]</td><td>11321</td></tr></tbody></table></div><div class="table-wrap"><table><caption>E5 instrument B′ · PROXY-DTI · SGMC proxy d ≥ 3 px</caption><thead><tr><th>Arm</th><th>DTI</th><th>95% CI</th><th>Positives</th></tr></thead><tbody><tr><td>h33_reference</td><td>0.0938</td><td>[0.0838, 0.1040]</td><td>59937</td></tr><tr><td>candidate</td><td>0.0886</td><td>[0.0794, 0.0980]</td><td>59937</td></tr><tr><td>random_control</td><td>0.0728</td><td>[0.0688, 0.0764]</td><td>59937</td></tr></tbody></table></div></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/phase4_run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/p5_run_card.json">New P5 negative card</a> ·
+<a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·
+<a href="downloads/archived_p4_run_card.json">Archived P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

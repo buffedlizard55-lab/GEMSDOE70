@@ -1,0 +1,119 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>New P5-cover research TIFF · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
+<strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
+are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
+rule; neither a local validator nor distinct bytes authorize a slot.
+<a href="p5.html">P5-cover negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
+<a href="downloads/p5_run_card.json">New P5 run card</a> ·
+<a href="downloads/review_run_card.json">Prior review card</a>.</aside><section class="stop" aria-labelledby="p5-decision">
+<div class="eyebrow">NEW P5-COVER EXPERIMENT · RESEARCH FILE ONLY</div>
+<h1 id="p5-decision">New P5-cover TIFF: download for review. DO NOT SUBMIT.</h1>
+<p><strong>Download: yes — for research only.</strong> This newly generated continuous GeoTIFF
+is distinct in bytes from the checked archive, all-finite within [0,1], single-band float32,
+and aligned to the pinned sample. <strong>Competition upload / weekly slot: NO.</strong>
+It failed the pre-registered spatial holdout and the literal forward-overlap stop;
+it has no organizer receipt. Do not treat a format pass as submission approval.</p>
+<p>Catalogue HOLDOUT-DTI (gems57-pooled-hide-v2, 11,321
+withheld positives): <strong>0.0123 [0.0075, 0.0177]</strong> vs visible-only P4
+0.0730.
+SGMC-proxy HOLDOUT-DTI (gems57-pooled-hide-v2, 59,937
+proxy positives): <strong>0.0254 [0.0185, 0.0336]</strong> vs H33
+0.0938; paired difference
+-0.0683 [-0.0819, -0.0545]. Neither is a competition score.</p>
+<p>The binary-dot checker counts 0
+exact-one dots in a continuous map; this is <em>not</em> a loophole. Its
+54,512 positive cells have
+1.00
+forward 3-pixel overlap against the pinned lattice (limit 0.70). The witness covers
+4,989,581 / 4,989,581
+feature-valid interior cells. No discrete final dots were placed.</p>
+<div class="actions">
+<a class="button secondary" href="downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif" download>Download NEW P5-cover research TIFF — DO NOT SUBMIT</a>
+<a class="button secondary" href="downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.zip" download>One-TIFF ZIP — review only</a>
+<a class="button" href="p5.html">Read P5 evidence and limits</a>
+</div>
+<p class="small">Name: <code>gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT</code> · Note (120/140 characters,
+<strong>not an upload instruction</strong>): <code>P5 magnetic width and cover, SGMC LOQO proxy; continuous review map. Literal dot overlap blocks promotion; DO NOT SUBMIT</code> ·
+SHA-256 <code>30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a</code>.</p></section><div class="eyebrow">REPRODUCIBLE SCIENTIFIC RESEARCH · NEGATIVE</div>
+<h2>What the new model tested — and why we stopped.</h2>
+<p>The pre-registered provisional lane is <em>cover-conditioned magnetic analytic-signal width
+within the visible-fault halo</em>. The 19-band owner-mirrored stack supplied horizontal and vertical
+magnetic gradients, gravity anomaly and basement depth. The SGMC fault raster was used only as
+proxy <strong>training labels</strong>, never as a final predictor or export mask. Four spatial quadrants
+were held out in turn. For catalogue recovery, whole connected components were hidden with a
+3-pixel feature buffer and visible faults were masked pixel-exactly by the shared evaluator.</p>
+<p>Physical hypothesis: a covered fault can juxtapose magnetized lithologies under basin fill;
+magnetic edge width might preferentially rank blind structures. <strong>Counterexample:</strong> a
+buried volcanic dike or remanence boundary, or airborne survey leveling, can generate a similar
+magnetic signature without fault displacement. None of these pixels proves a geothermal vent.</p>
+<div class="table-wrap"><table><caption>gems57-pooled-hide-v2; pooled α=.2, β=.8, 300 m triangular kernel; paired 20 km spatial-cluster 95% CI.</caption><thead><tr><th>Instrument / comparison</th><th>HOLDOUT-DTI</th><th>95% CI</th><th>Withheld positives</th></tr></thead><tbody><tr><td>A · P5 continuous</td><td>0.0123</td><td>[0.0075, 0.0177]</td><td>11,321</td></tr><tr><td>A · P4 regenerated from visible faults</td><td>0.0730</td><td>[0.0663, 0.0792]</td><td>11,321</td></tr><tr><td>B′ · P5 SGMC-proxy LOQO</td><td>0.0254</td><td>[0.0185, 0.0336]</td><td>59,937</td></tr><tr><td>B′ · archived H33 on same proxy</td><td>0.0938</td><td>[0.0841, 0.1043]</td><td>59,937</td></tr></tbody></table></div>
+<p>The paired A delta versus regenerated P4 is -0.0608 [-0.0687, -0.0522].
+The paired B′ delta versus H33 is -0.0683 [-0.0819, -0.0545].
+Both intervals are below zero. The B′ truth is an imperfect *SGMC off-catalogue proxy*, not
+new faults confirmed by DrivenData. There is <strong>no organizer-confirmed score</strong> for this file,
+and no evidence it beats the reported H33 0.2778 or the public 0.4413 leader.</p>
+<p><strong>Interpretation caveat:</strong> P5 has approximately
+26,987 summed probability mass
+across 54,512 positive pixels,
+versus P4/H33's 37,654 binary full-mass dots. This one negative jointly tests geological ranking,
+proxy training <em>and</em> continuous emission; it does not isolate which caused the loss.
+A mass/spacing-matched future comparison is required, but only after the literal gate is resolved.</p>
+<h2>Literal overlap and artifact identity</h2>
+<p>The archived binary lattice <code>calib_r13lattice_00904.tif</code>
+(sha256 <code>b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2</code>) covers every one of the
+4,989,581 erosion-valid cells within 3 pixels.
+The P5 map has 54,512 positive
+continuous pixels with forward positive-support overlap
+1.00;
+<strong>this exceeds the 0.70 literal stop rule.</strong> It has no exact-one binary dots,
+which is NOT a clearance or license to treat positive cells as invisible.
+No final discrete dots were placed. Its max Spearman is
+0.0232
+across 70 archived/local TIFFs; this
+is not an exhaustive organizer registry.</p>
+<p><strong>Filename:</strong> <code>gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif</code> ·
+<strong>SHA-256:</strong> <code>30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a</code> ·
+<strong>Note (not to upload):</strong> <code>P5 magnetic width and cover, SGMC LOQO proxy; continuous review map. Literal dot overlap blocks promotion; DO NOT SUBMIT</code></p>
+<h2>Independent on-disk checks</h2>
+<div class="table-wrap"><table><thead><tr><th>Local validator check</th><th>Result</th></tr></thead><tbody><tr><td>single_band</td><td>pass</td></tr><tr><td>dtype_float32</td><td>pass</td></tr><tr><td>dimensions_3730x3292</td><td>pass</td></tr><tr><td>crs_epsg_32611</td><td>pass</td></tr><tr><td>transform_matches_sample_submission</td><td>pass</td></tr><tr><td>no_nan_anywhere</td><td>pass</td></tr><tr><td>no_inf_anywhere</td><td>pass</td></tr><tr><td>no_sentinel_values</td><td>pass</td></tr><tr><td>range_0_1_guaranteed</td><td>pass</td></tr><tr><td>min_ge_0</td><td>pass</td></tr><tr><td>max_le_1</td><td>pass</td></tr><tr><td>in_footprint_all_finite</td><td>pass</td></tr><tr><td>in_footprint_range_0_1</td><td>pass</td></tr><tr><td>outside_footprint_zero</td><td>pass</td></tr><tr><td>zero_dots_on_mapped_catalogue</td><td>pass</td></tr></tbody></table></div>
+<p>Values are finite everywhere (so no NaN inside the footprint), within [0,1], and
+single-band float32 on the sample CRS/shape/transform; known-fault and outside-footprint
+cells are zero. The previous user's portal range error cannot be diagnosed without the rejected
+bytes, and local validation is not organizer acceptance. The competition page says outside
+bounds null/NaN, whereas the pinned sample and this conservative output use all-finite zeros;
+that convention remains an <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official-format ambiguity</a>.</p>
+<h2>Feature-alone leakage canaries</h2>
+<p>Each raw and derived feature was scored alone on 11,321 withheld
+catalogue positives vs 200,000 negatives. AUC or inverse AUC above 0.90 would stop the run.
+No canary exceeded the threshold; lack of leakage is <em>not</em> evidence of fault-prediction skill.</p>
+<div class="table-wrap"><table><thead><tr><th>Feature</th><th>AUC</th><th>Status</th></tr></thead><tbody><tr><td>log_abs_tmi_hg</td><td>0.5280</td><td>clear</td></tr><tr><td>log_abs_tmi_vg</td><td>0.5162</td><td>clear</td></tr><tr><td>log_analytic_amplitude</td><td>0.5280</td><td>clear</td></tr><tr><td>log_basement_depth</td><td>0.5245</td><td>clear</td></tr><tr><td>log_gravity_gradient</td><td>0.5270</td><td>clear</td></tr><tr><td>magnetic_width_ratio</td><td>0.4933</td><td>clear</td></tr><tr><td>raw_depth_to_base_surf</td><td>0.5245</td><td>clear</td></tr><tr><td>raw_iso_grav_anom</td><td>0.4598</td><td>clear</td></tr><tr><td>raw_tmi_hg</td><td>0.5280</td><td>clear</td></tr><tr><td>raw_tmi_vg</td><td>0.4870</td><td>clear</td></tr><tr><td>visible_distance_clipped</td><td>0.2491</td><td>clear</td></tr></tbody></table></div>
+<h2>Read and verify the sources yourself</h2>
+<p>These links were read as public text on 2026-10-20. Owner mirrors and their SHA pins verify
+byte consistency, not official-origin identity. Specific claims and limits are recorded in
+<a href="downloads/p5_sources.json">the source receipt</a>.</p>
+<div class="table-wrap"><table><thead><tr><th>Official source</th><th>Verified reading / limit</th></tr></thead><tbody><tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">DrivenData GEMS problem and metric</a></td><td>Target: structures indicative of geothermal resources, namely faults. New faults not contained in the public USGS database were expert-labeled for initial test; expanded expert labels rescore final round.<br>Input GeoTIFF is UTM zone 11N / EPSG:32611 at 100 m resolution. Metric is distance-weighted Tversky with 300 m triangular support, alpha 0.2 and beta 0.8.<br>Submission: one float32 layer with pixel-wise confidence in [0,1], matching bounds; page says outside bounds null or NaN.<br><strong>Limit:</strong> Owner-mirrored sample has 60,988 ones (not all-zero absence despite page wording); our all-finite zero-outside policy is locally accepted by the shared validator but portal acceptance has NOT been verified.</td></tr><tr><td><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Official GEMS Prize Rules, September 2026, sections 3.3–3.5</a></td><td>Competition training features are a multiband 100 m GeoTIFF and existing fault pixels form training labels.<br>Competitors submit all-fault 100 m GeoTIFF predictions; up to three submissions per week, and select only one final set before the deadline.<br>Leaderboard is public test only; private test and expanded label set determine prize rounds.<br><strong>Limit:</strong> The PDF and live competition page should both be rechecked by the human selector before a slot; no authenticated weekly balance was read.</td></tr><tr><td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data release</a></td><td>Airborne magnetic and radiometric surveys were acquired to support geothermal and geologic mapping; data release marked CC0 1.0 Universal.<br>Area 1 and Area 2 had different flight-line spacing and nominal clearance; actual flight height may deviate in steep terrain and must be considered during interpretation.<br><strong>Limit:</strong> Survey metadata support a flight-line/terrain-clearance non-fault mimic; they do not verify any specific P5 predicted trace.</td></tr><tr><td><a href="https://pubs.usgs.gov/of/2002/0098/intro.htm">USGS magnetic interpretation</a></td><td>Analytic-signal amplitude can peak over isolated magnetic contacts under stated assumptions; gradients are more susceptible to noise than horizontal gradients.<br><strong>Limit:</strong> A magnetic edge is not proof of fault displacement, permeability or temperature.</td></tr><tr><td><a href="https://www.usgs.gov/data/state-geologic-map-compilation-sgmc-geodatabase-conterminous-united-states">USGS SGMC compilation landing page</a></td><td>USGS identifies SGMC as a state geologic map compilation and recommends a newer 2026 GeMS-schema release.<br><strong>Limit:</strong> Owner-derived, pinned 100 m SGMC raster is an imperfect independent-map PROXY response. Neither its current official release identity nor its ability to predict the hidden label distribution is authenticated here.</td></tr><tr><td><a href="https://gdr.openei.org/submissions/1391">DOE GDR INGENIOUS compilation</a></td><td>Repository lists Quaternary faults, geothermal and geophysical layers; landing page marked CC BY 4.0.<br><strong>Limit:</strong> A listing or public URL is not proof the derived owner-mirror raster matches current official files or the hidden test.</td></tr><tr><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Public DrivenData leaderboard, page read</a></td><td>Public best displayed 0.4413 for participant xiaofanhu when read; it is a public-leaderboard snapshot, not a file-specific submission receipt or a P5 score.<br><strong>Limit:</strong> Public leaderboard is mutable; the 0.2778 H33 family claim remains USER-REPORTED until tied to an authenticated receipt.</td></tr></tbody></table></div>
+<p><a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/docs/preregistration-p5.md">Frozen preregistration</a>
+· <a href="downloads/p5_run_card.json">P5 run card</a>
+· <a href="downloads/p5_instrument_a.json">Catalogue holdout</a>
+· <a href="downloads/p5_instrument_b_prime.json">SGMC proxy holdout</a>
+· <a href="downloads/p5_literal_blocker.json">Lattice witness</a>
+· <a href="downloads/p5_surface_registry.json">70-raster rank audit</a>
+· <a href="downloads/p5_reporting_amendment.json">Metadata-only correction</a>.</p>
+<p>Reproduce on a fresh checkout: install <code>requirements.lock</code>, run
+<code>scripts/restore_data.py</code>, clone the pinned owner registry for 60GEMSDOE in
+<code>/tmp/60GEMSDOE</code>, then run <code>scripts/run_experiment_p5_cover.py</code>.
+The shared writer refuses to overwrite existing outputs; use a clean sandbox for full
+reproduction. <code>scripts/verify_p5_artifact.py</code> re-audits the immutable file
+without refitting. Data tab requires a DrivenData login; no GPU was required here.</p></main>
+<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
+<a href="downloads/p5_run_card.json">New P5 negative card</a> ·
+<a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·
+<a href="downloads/archived_p4_run_card.json">Archived P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

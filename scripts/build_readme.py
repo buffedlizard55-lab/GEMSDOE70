@@ -1,21 +1,89 @@
 """Embed the retained brief behind the current, literal-policy review decision."""
 from pathlib import Path
 import json
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'src'))
+from gems70.release import p5_status
 
 
 def main():
     audit = json.loads((ROOT / 'evidence/review/literal_protocol_audit.json').read_text())
     card = json.loads((ROOT / 'evidence/review/run_card.json').read_text())
+    p5 = json.loads((ROOT / 'evidence/p5/run_card.json').read_text())
+    state = p5_status(ROOT)
+    if not state['download_ok_for_review'] or state['submit_recommended']:
+        raise ValueError('P5 review file is absent, modified or not a negative research artifact')
+    a = p5['holdout_dti']['instrument_a']
+    b = p5['holdout_dti']['instrument_b_prime_proxy']
+    da = p5['holdout_dti']['paired_vs_visible_p4']
+    db = p5['holdout_dti']['paired_vs_h33']
     head = f'''# GEMSDOE70 — geothermal fault research
 
-## CURRENT REVIEW: DO NOT SUBMIT — literal lane stop
+## NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
 
-**Download: yes, existing archived TIFFs for review only. Submit: NO.**
-No new protocol-compliant TIFF was generated in this review; no new geological experiment or
-weekly slot was used. This does **not** fulfill the requested new-submission deliverable.
-The current negative run card is [here](evidence/review/run_card.json).
+A newly generated, format-validated **continuous** GeoTIFF is available:
+[Download P5 TIFF — DO NOT SUBMIT](docs/downloads/{p5['submission_name']}.tif) ·
+[One-TIFF ZIP for review](docs/downloads/{p5['submission_name']}.zip) ·
+[P5 evidence page](docs/p5.html) · [P5 run card](evidence/p5/run_card.json).
+SHA-256 `{p5['raster_sha256']}`. Name `{p5['submission_name']}`;
+note ({p5['note_chars']}/140): `{p5['submission_note']}` (**not an upload instruction**).
+
+**Download for review: yes. Contest upload / weekly slot: NO.**
+HOLDOUT-DTI A (`{a['evaluator_version']}`, {a['withheld_positive_pixels']:,} withheld
+catalogue pixels) = {a['dti']:.4f} {a['ci95']}; paired vs regenerated visible-only P4
+Δ {da['delta']:+.4f} {da['ci95']}. SGMC proxy HOLDOUT-DTI B′
+(`{b['evaluator_version']}`, {b['withheld_positive_pixels']:,} proxy positives)
+= {b['dti']:.4f} {b['ci95']}; paired vs frozen H33 Δ {db['delta']:+.4f}
+{db['ci95']}. Both 95% intervals for improvement are below zero; these are **not**
+organizer-confirmed scores. Leakage canaries clear (all features below AUC 0.90).
+The new continuous surface has ~{p5['validator_output']['mean']*p5['validator_output']['n_finite']:,.0f}
+summed probability mass versus 37,654 full-mass H33/P4 dots; this is a **joint test** of
+ranking, proxy training and emission, not an isolated causal feature comparison.
+
+The literal 3-px **forward** overlap gate blocks any proposed dot placement in the
+4,989,581-pixel feature-valid interior: a hash-pinned archived lattice covers every
+cell of that domain. The continuous P5 map has no exact-one binary dots, but its
+**positive support has 1.00 forward overlap** with the same lattice; that is not a
+loophole or a protocol-unique submission. Distinct bytes/low rank correlation
+(ρ ≤ {p5['correlation_overlap_vs_registry']['worst_spearman_full_footprint']:.4f} vs
+{p5['correlation_overlap_vs_registry']['rasters_checked']} checked rasters) do not
+clear the other gate. No weekly slot was used; no organizer submission receipt exists.
+
+- [Executive summary / exact future submission workflow](docs/executive-summary.html)
+- [Four ranked preregistered hypotheses](docs/preregistration-p5.md) ·
+  [Official-source claim/limit table](evidence/p5/official_source_review.json)
+- [H33 analysis](docs/h33-analysis.md) ·
+  [Literal overlap witness](evidence/p5/literal_blocker.json)
+- **Session start:** read this README, the complete retained brief below, AGENTS.md and HANDOFF.md.
+
+### Reproduce or verify P5 (CPU; no slot, no automatic promotion)
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py
+# owner archive provides the pinned SGMC proxy + 62 registry rasters:
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/verify_p5_artifact.py   # re-check unchanged TIFF without refitting
+# Run scripts/run_experiment_p5_cover.py only on a clean checkout; writer refuses to overwrite.
+.venv/bin/python -m pytest -q
+```
+
+Input mirrors are SHA-pinned owner copies, **not** organizer-authenticated; the competition
+data page requires a login. USGS magnetic edges can also represent dikes, remanence changes
+or survey artifacts, not fault/vent proof. The reported H33 0.2778 has no authenticated
+file-specific receipt here. Public-leaderboard 0.4413 was read on 2026-10-20,
+not copied from a P5 submission. See [official problem](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/),
+[USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and),
+[DOE rules](https://docs.nlr.gov/docs/fy26osti/96647.pdf).
+
+## PRIOR REVIEW ({len(audit['archived_artifacts'])} archived dot files): DO NOT SUBMIT — literal lane stop
+
+**Download: yes, {len(audit['archived_artifacts'])} older archived TIFFs for review only. Submit: NO.**
+That *prior* review generated no new protocol-compliant TIFF, geological experiment or slot.
+P5 above is a later, separate research-only negative, not a promoted competition submission.
+The frozen prior-review negative run card is [here](evidence/review/run_card.json).
 
 - [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/)
 - [Executive summary / exact submission workflow](docs/executive-summary.html)
@@ -30,7 +98,7 @@ The current negative run card is [here](evidence/review/run_card.json).
 
 The previous mutual-overlap gate weakened the prompt's **forward**-overlap rule without approval.
 Current policy applies the literal rule to shared-tool measurements; it does not change the
-metric, writer or frozen historical evidence. All seven published final TIFFs have measured forward
+metric, writer or frozen historical evidence. The {len(audit['archived_artifacts'])} historically reviewed dot TIFFs have measured forward
 overlap **1.0** against the pinned binary lattice, exceeding **0.70**. They are duplicates under
 the prompt's rule, even though their bytes differ. Small rank correlation does not cancel overlap.
 
@@ -40,20 +108,22 @@ handoff's fixed **37,654-dot mass**, even the minimum possible overlap is
 **{audit['minimum_forward_overlap_at_fixed_budget']:.9f}**, still a stop. This does not prove
 impossibility at every smaller mass. We did not optimize a boundary-only loophole.
 
-All seven existing TIFFs pass shared local format checks (single-band float32, finite [0,1],
+All {len(audit['archived_artifacts'])} reviewed dot TIFFs pass shared local format checks (single-band float32, finite [0,1],
 CRS/shape/transform matching the pinned sample); that is not portal acceptance or uniqueness.
 The previous canonical P4 card and historical receipts remain frozen and superseded for current
 policy by `evidence/review/run_card.json`.
 
 ## Scientific outcome and next session
 
-No new HOLDOUT-DTI or ORGANIZER-CONFIRMED score exists from this review. The historical P4
-HOLDOUT-DTI is 0.07304 [0.06674, 0.07899], evaluator `gems57-pooled-hide-v2`, 11,321 withheld
+At the time of that prior review, no new HOLDOUT-DTI or ORGANIZER-CONFIRMED score existed;
+P5 HOLDOUT-DTI is newly measured above. The historical P4 HOLDOUT-DTI is 0.07304 [0.06674, 0.07899], evaluator `gems57-pooled-hide-v2`, 11,321 withheld
 catalogue positives. Its SGMC proxy gate was already negative. H33's reported 0.2778 and the
 conflicting leader values in the brief lack authenticated submission-page receipts here.
 
-The prior handoff's supervised within-halo ranking remains deferred. Four ranked, specific
-hypotheses and their non-fault mimics are in the review. Resolve the literal-gate conflict by a
+The prior handoff's supervised within-halo ranking was deferred in this archived review;
+the new P5 test above executed one narrow magnetic-cover version and measured a negative.
+Four earlier ranked hypotheses and their non-fault mimics are in the historical review.
+Resolve the literal-gate conflict by a
 separately authorized protocol, then validate one candidate using nested spatial splits, canaries,
 a matched current-best baseline and the shared evaluator/writer. Do not silently reintroduce a
 mutual-overlap exemption, and do not spend a weekly slot before an independent selector decision.
