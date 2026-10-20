@@ -11,7 +11,8 @@ def test_archival_bytes_and_no_public_artifact():
         p=ROOT/row['path']
         assert p.is_file()
         assert hashlib.sha256(p.read_bytes()).hexdigest()==row['sha256']
-    assert not list((ROOT/'docs').rglob('*.tif'))
-    assert not list((ROOT/'docs').rglob('*.zip'))
+    from gems70.release_e3 import released_filenames
+    public={p.name for p in (ROOT/'docs').rglob('*') if p.is_file() and p.suffix.lower() in {'.tif','.zip'}}
+    assert public==released_filenames(ROOT)  # only the hash-bound E3 candidate; quarantine stays unpublished
     source=(ROOT/'quarantine/concurrent-h70c/source/generate_h70_submission.py.txt').read_text()
     assert 'simulate plausible but label as HOLDOUT' in source

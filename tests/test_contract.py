@@ -68,12 +68,16 @@ def test_constant_ranks_do_not_manufacture_edges():
 
 
 def test_negative_gate_and_no_public_files(tmp_path):
+    # E1 historical gate stays negative forever; E3 has its own contract.
     assert release_status(ROOT)['download_and_submit_ok'] is False
     assert release_status(tmp_path)['download_and_submit_ok'] is False
     (tmp_path/'docs/downloads').mkdir(parents=True)
     (tmp_path/'docs/downloads/stale.tif').write_bytes(b'not-a-tiff')
     with pytest.raises(ValueError,match='must not publish'):assert_no_public_rasters(tmp_path)
-    assert_no_public_rasters(ROOT)
+    from gems70.release_e3 import assert_publication_e3, release_status_e3
+    assert release_status_e3(ROOT)['download_candidate_ok'] is True
+    assert release_status_e3(ROOT)['download_and_submit_ok'] is False  # slot is separate
+    assert_publication_e3(ROOT)
 
 
 class Links(HTMLParser):
@@ -88,10 +92,12 @@ def test_pages_links_and_negative_banner():
         text=p.read_text();parser=Links();parser.feed(text)
         for link in parser.links:assert (p.parent/link.split('#')[0].split('?')[0]).is_file(),(p,link)
     home=(ROOT/'docs/index.html').read_text()
-    assert 'Do not submit this run.' in home
-    assert 'Submission TIFF unavailable' in home
+    assert 'OK to download this candidate TIF' in home
+    assert 'Download submission TIF' in home
     assert 'download>Download run card' in home
-    assert 'href="downloads/' not in home or '.tif"' not in home
+    card=json.loads((ROOT/'evidence/run_card_e3_amended.json').read_text())
+    assert f'downloads/{card["submission_name"]}.tif' in home
+    assert card['raster_sha256'] in home
 
 
 def test_full_brief_embedded_in_readme():

@@ -13,9 +13,9 @@
     "id": "competition-problem",
     "authority": "organizer",
     "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-    "status": "not-retrieved-this-session",
-    "claim": "Manual review target for metric, submission format, footprint and rules.",
-    "limit": "Network access failed; do not describe this as a verified login redirect."
+    "status": "verified-content-2026-10-20",
+    "claim": "Official problem/metric/format verified by retrieval: DTI alpha 0.2 beta 0.8, triangular R=300m; single-band float32 [0,1], EPSG:32611, 100m; test faults expert-mapped, absent from public USGS database.",
+    "limit": "Page text retrieved 2026-10-20; re-check current rules/cap on the submission page before any upload."
   },
   {
     "id": "competition-data",
@@ -29,9 +29,9 @@
     "id": "leaderboard",
     "authority": "organizer",
     "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-    "status": "not-retrieved-this-session",
-    "claim": "Manual review target for current standings.",
-    "limit": "Conflicting user-reported leaders are not resolved or represented as organizer-confirmed."
+    "status": "js-rendered-unverified-2026-10-20",
+    "claim": "Leaderboard page shell retrieved; standings load via JavaScript and were not verified.",
+    "limit": "User-reported leaders 0.3195/0.3774/0.4413 conflict and remain unverified; none is ORGANIZER-CONFIRMED here."
   },
   {
     "id": "competition-report",
@@ -91,5 +91,22 @@
     "status": "reviewed-content",
     "claim": "Latest inherited handoff says negative and do not submit, with a literal-overlap blocker.",
     "limit": "Not a handoff originally present in this empty repository."
+  },
+  {
+    "id": "competition-about",
+    "authority": "organizer",
+    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/",
+    "status": "verified-content-2026-10-20",
+    "claim": "Sponsor/data/task background: DOE Geothermal, USGS GeoDAWN + 3DEP lidar context; faults as fluid conduits (target remains fault traces, not vents).",
+    "limit": "Background only; no format/score authority."
+  },
+  {
+    "id": "e3-candidate",
+    "authority": "this repository (not organizer)",
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE70",
+    "status": "holdout-validated-candidate",
+    "claim": "E3 scarp-curvature candidate TIF with HOLDOUT-DTI evidence, validator receipt and 63-raster uniqueness audit.",
+    "evidence": "evidence/run_card_e3_amended.json; evidence/validator_e3.json; evidence/final_uniqueness_e3.json",
+    "limit": "No organizer receipt or score; selector full-registry scan outstanding."
   }
 ]

@@ -58,8 +58,8 @@ def test_auth_failure_is_closed(monkeypatch):
 
 
 def test_real_root_publication_guard():
-    from gems70.release import assert_root_pages_guard
-    assert_root_pages_guard(ROOT)
+    from gems70.release_e3 import assert_root_guard_e3
+    assert_root_guard_e3(ROOT)
 
 
 @pytest.mark.parametrize('bypass', ['nojekyll', 'root_tiff', 'symlink', 'unexcluded'])

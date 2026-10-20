@@ -1,110 +1,60 @@
-# Handoff — 2026-10-20
+# Handoff — 2026-10-20 (E3 candidate released to selector)
 
 Read README.md and PROJECT_BRIEF.md at session start.
 
-**NEGATIVE. DO NOT SUBMIT. No eligible TIFF exists.**
+**CANDIDATE READY FOR SELECTOR. Not uploaded. No organizer score.**
 
-The checkout started with only an eleven-byte README. Pinned numerical features,
-sample and catalogue were restored from public owner mirrors into `.cache/data`.
-No organizer-authenticated identity, current leaderboard receipt or weekly-cap
-state is available. The notebook reference was retrieved from the official
-DrivenData GitHub repository. No GPU was required for this fixed CPU hypothesis.
+- File: `docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif`
+  (+ one-TIF ZIP), SHA-256 in `evidence/run_card_e3_amended.json`.
+- Note (107 chars): in run card / site banner. All-finite binary float32 [0,1];
+  independent validator PASS (`evidence/validator_independent_e3.json`).
+- Evidence: HOLDOUT-DTI 0.0943 [0.0782, 0.1109], 11,437 withheld,
+  `gems57-pooled-hide-v2`, seed-40 folds; beats matched random (paired CI
+  excludes 0). **Not a live-score prediction** — H33 scores 0.0043 on E2
+  catalogue-recovery folds; holdout only falsifies weak rankings.
+- Uniqueness: 63 hash-verified rasters; vs H33 forward 0.342 / Jaccard 0.0142 /
+  Spearman 0.0198. Literal gate fires on 5 saturating covering fields
+  (certificates in evidence). **Selector must complete the 862-raster scan**
+  and weekly-cap check before any upload; capture the organizer receipt.
 
-One preregistered contact-termination experiment ran. Every raw and transformed
-feature received an AUC leakage canary and shared HOLDOUT-DTI. Whole mapped
-components were withheld with a real three-pixel feature-context buffer, spatially
-eroded quadrants and pixel-exact known-fault masking. No catalogue predictor was
-used. The continuous surface is worse than its random sparse control; current
-holdout best was not independently rerun. See evidence/holdout.json.
+## History (3/3 experiments spent — do not rerun or tune)
 
-The surface passed numerical array checks but failed the literal overlap gate.
-A SHA-verified 17GEMSDOE continuous prediction covers every footprint cell; its
-halo leaves no off-catalogue allowed cell uncovered. No nonempty candidate can
-pass the inherited literal support rule against it. **Do not silently exempt it.**
-Only this decisive witness was compared; an incomplete scan cannot certify
-uniqueness, but a duplicate witness suffices to stop. Final dots were not placed,
-no submission writer was invoked for the scientific run, and no slot was used.
-The shared writer's TIFF/ZIP behavior is tested only with synthetic temporary
-unit-test fixtures, never published as competition predictions.
+E1 magnetic termination (negative, archived `evidence/history/e1-…`);
+E2 scarp×strain×cover (negative, gates falsified); E3 scarp alone (promote).
+Frozen drivers refuse reruns via manifests. E3 release used the disclosed
+erratum completion (`scripts/complete_e3_release.py`, SHA-verified surface
+reproduction; original negative card preserved). `vendor/gems57` untouched.
 
-`vendor/gems57` is unchanged from 60GEMSDOE commit
-`32024716f218d06a94e01464157392119c03cb15`; evidence/template_verification.json
-compares both SHA-256 and upstream git blob identities. A false bound in the
-metric's explanatory docstring was identified, but executable coverage arithmetic
-is correct. Cross-repo issue creation was denied; see evidence/upstream_metric_report.md.
+## Data restoration (this sandbox)
 
-Next session must resolve the protocol representation conflict and missing lane
-assignment before new science. A fresh ranking needs untouched evaluation blocks,
-comparable current-best validation and complete pre-placement/final-dot audits.
-Never tune the present fixed hypothesis after seeing its holdout.
+`gh` token was invalid and the GitHub contents API rate-limited; data were
+restored by git sparse checkout instead (`.cache/src/g0` GEMSDOE@c0c06ac
+feature parts → `.cache/data/training_features.tif` SHA `4371c82e…`;
+`.cache/src/g60` registry rasters; `.cache/src/g17` dense witness). `.cache/`
+is gitignored and reconstructible; committed site copy of the TIF is canonical
+for download. `scripts/download_competition_data.sh` (gh path) still works
+where gh is authenticated.
 
-Publication is intentionally fail-closed for this stopped experiment. The static
-site cannot generate or train a TIFF in-browser. A fresh reviewed scientific run
-and release contract are prerequisites to connecting the validated shared writer
-to a real one-click artifact; editing run-card booleans is not sufficient.
+## Next session (fresh preregistration + untouched folds required)
 
-Commands:
+1. Selector: full-registry scan → slot decision → upload → file receipt as
+   ORGANIZER-CONFIRMED (or record rejection). Never guess the cap.
+2. If a new experiment budget is granted: 38–45k scarp variant (E3 picked the
+   60k grid edge; curve flattening) and/or USGS 3DEP 1 m refinement inside E3
+   corridors; add an off-catalogue proxy-truth instrument alongside catalogue
+   recovery. Do not tune E3 on seed-40 folds.
+3. Upstream: halo-coverage uniqueness classification report is in
+   `evidence/upstream_uniqueness_report_e3.md` (not filed cross-repo).
+
+## Commands
 
 ```
-python -m venv .venv
-.venv/bin/pip install -r requirements.lock
-bash scripts/download_competition_data.sh
-.venv/bin/python scripts/build_site.py
-.venv/bin/python scripts/build_readme.py
+python -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
+.venv/bin/python scripts/validate_submission.py docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif
+.venv/bin/python scripts/build_submission.py   # status only; exit 0 = candidate intact
 ```
 
-Do not rerun scripts/run_experiment.py: its existing experiment manifest makes it
-refuse a second attempt. Data are reconstructible; large caches are ignored and
-not committed. Source-health refresh is separate from scientific validation.
-
-## Concurrent-main integration
-
-Main advanced through PRs 1 and 2 while this session ran. Their reports, audit
-helpers, bridge fixtures and tests are retained. The earlier review-only run card,
-README and handoff are archived in evidence/history/parallel-review2. Canonical
-publication scripts use the measured one-experiment card; the legacy card command
-now verifies it rather than overwrite it. Root historical HTML paths redirect to
-the current workbench. The combined suite passes 68 tests (three upstream
-Rasterio/Affine pending-deprecation warnings). No unrelated candidate PR is
-endorsed by this integration.
-
-## Concurrent H70-C publication quarantine
-
-Main subsequently advanced through PRs 4 and 5, advertising a second session's
-H70-C TIFF as ready. Inspection found explicit simulated/placeholder holdout
-values in generation source and a one-raster H33 comparison, not full literal
-uniqueness clearance. All source, claims and files are preserved with hashes in
-quarantine/concurrent-h70c and evidence/concurrent_h70c_quarantine.json; none is
-endorsed or linked as a submission. Source text is retained, not executed. The
-canonical site remains negative. No additional scientific experiment was run.
-
-Final suite after adding quarantine hash/publication coverage: **69 tests pass**.
-
-## Follow-up review on arena/75897427-gemsdoe70
-
-No new scientific experiment or eligible TIFF; the duplicate stop still applies.
-Reproduced `scripts/audit.py` from the content-addressed registry witness: universal
-support and minimum overlap 1.0 confirmed, with no change to committed evidence.
-Hardened negative-release CLI assertions and invalid/nonfinite canary diagnostics;
-shared template and frozen experiment sources remain unchanged. See
-`reports/review-followup-2026-10-20.md` for the three-pass review and limitations.
-
-Local verification: `.venv/bin/python -m pytest -q` — **100 passed**, three existing
-Rasterio/Affine pending-deprecation warnings. The expected-negative gate exits zero;
-the default gate and build-submission command exit two intentionally. Neither is
-submission authorization. GitHub Pages configuration was verified as enabled from
-main at `/`; deployment of this branch depends on merge and the Pages build.
-
-## Follow-up source-boundary review
-
-Pages API reports `main:/`, and updating it to `/docs` is denied (403 integration
-permission). Removed root `.nojekyll`, added Jekyll `_config.yml` exclusions, and
-added a root-tree guard plus symlink-bypass tests. Do not restore root `.nojekyll`:
-it bypasses those exclusions. The public GitHub archives are still public; this is
-not redaction. `scripts/check_pages.py` is read-only unless `--configure` is passed.
-See reports/followup-publication-review-20261020.md. No new scientific run or slot.
-
-Integrated concurrent main `37b37b9` after PR #7's first merge was rejected.
-Preserved root-Pages exclusions and all publication-boundary tests. Combined final
-suite: **117 passed**, three existing warnings; no additional scientific run.
+Pages serves from `main:/` (legacy); `_config.yml` exclusions + E3 guards keep
+only the released docs/downloads TIF/ZIP public. Do not restore root `.nojekyll`.

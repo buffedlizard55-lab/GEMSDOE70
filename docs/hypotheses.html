@@ -1,8 +1,265 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hypotheses · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Negative result; no competition-ready TIFF.">
+<title>Hypotheses · GEMSDOE70</title><meta name="description" content="Unique candidate GeoTIFF ready to download. Holdout-validated DEM scarp-curvature faults; selector review before upload.">
 <link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Preregistered hypotheses — 2026-10-20</h1>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Preregistered experiment E3 — 2026-10-20 (experiment 3 of max 3, final)</h1>
+<p>Written before the E3 run, after E2 completed as a <strong>negative</strong> deliverable.
+E3 is a new fixed hypothesis informed by E2 ablations, validated on untouched
+folds. It does not retune E2 on E2 folds. No weekly slot is used.</p>
+<h2>What E2 measured (all HOLDOUT-DTI, <code>gems57-pooled-hide-v2</code>, seed 30)</h2>
+<p>11,342 withheld positive pixels. Dotted primary endpoint (45k, exclusion &gt;3 px):</p>
+<ul>
+<li>Joint scarp×strain×cover: 0.0598, 95% CI [0.0437, 0.0762] — <strong>falsified</strong>:
+  paired Δ vs matched random +0.0073 [−0.0079, +0.0240] (includes 0) and
+  significantly worse than scarp alone (Δ −0.0197 [−0.0340, −0.0058]).</li>
+<li><strong>Scarp alone: 0.0794 [0.0651, 0.0953]</strong> vs random dotted 0.0525
+  [0.0470, 0.0578] and band-19 slope 0.0309. Scarp canary AUC 0.6006 (no
+  leakage; all E2 canaries ≤0.61). Cover gate direction was wrong (shallow
+  AUC 0.468; shallow-alone DTI worst); strain gate also diluted
+  (continuous: scarp 0.0321 &gt; scarp×strain 0.0241 &gt; joint 0.0121).
+  Coherence weighting helped (joint &gt; joint-nocoh, paired CI excludes 0).</li>
+<li>Archived H33 reference on the same folds: 0.0043 [0.0035, 0.0052]. Its dots
+  were pruned using the full catalogue (including withheld traces) and target
+  off-catalogue faults, so catalogue-recovery holdout actively penalises the
+  live champion design. <strong>Holdout is therefore a falsification instrument for
+  ranking signal, not a live-score predictor.</strong> No E3 live score (including
+  any "&gt;0.2778" claim) is asserted; 0.2778 remains user/family-reported, not
+  ORGANIZER-CONFIRMED here.</li>
+</ul>
+<h2>E3 fixed hypothesis</h2>
+<p><strong>DEM scarp curvature alone</strong>: the exact E2 scarp field
+(<code>sqrt(rank(slope)·rank(|profile-curvature|)) · (0.25+0.75·coherence)</code>,
+ranked; detrended elevation band 12 only, catalogue-independent), with the
+same rank-ordered 2.8 px dotted emission. Layers beyond band 12 enter only as
+controls (band-19 slope; E2 joint as gating-harm control). Named mimic
+unchanged: shoreline/terrace riser, road cut. Difference from family lidar
+lanes: 100 m official-stack detrended DEM curvature+coherence (not 1 m DEM
+unsigned step ridges), no catalogue halo, no Hessian multi-layer consensus.</p>
+<ul>
+<li><strong>Folds</strong>: <code>buffered_component_draw</code> seed <strong>40</strong> (untouched; E1=20, E2=30),
+  same buffers/evaluator; bootstrap seed 70040. Feature-alone AUC canaries on
+  seed-40 folds first; &gt;0.90 stops.</li>
+<li><strong>Selection</strong>: budgets {30k, 38k, 45k, 60k} × exclusions {&gt;0, &gt;1, &gt;2, &gt;3 px}
+  (60k added because E2 DTI was still rising at the 45k cap — disclosed
+  range extension; live-prevalence caveat in the run card). Pick max pooled
+  dotted DTI (tie → smaller budget/exclusion); report all 16 cells.
+  Exclusion-trend caveat: the 3 px feature collar structurally favours larger
+  exclusions on this instrument.</li>
+<li><strong>Comparators at the selected cell</strong>: matched random dotted (seed 70040),
+  band-19-slope dotted, E2-joint dotted. <strong>Promotion gates (all required)</strong>:
+  canaries pass; scarp beats random with paired 95% CI excluding 0; scarp
+  point estimate beats slope and joint controls; saturation-adjusted
+  uniqueness passes (below) on surface and final dots; shared-writer TIFF
+  validates on disk. Else verdict negative, no published TIFF.</li>
+</ul>
+<h2>Uniqueness: saturation-adjusted like-for-like rule (disclosed)</h2>
+<p>E2 final dots vs champion H33: forward overlap 0.293, Jaccard 0.0104,
+Spearman 0.0127 — distinct. Literal forward-overlap firings came only from
+covering fields whose 3 px halos saturate the allowed domain (vendor
+<code>saturation_certificate</code>, <code>evidence/saturation_certificates_e2.json</code>):
+lattice-s5 halo covers 99.87% of allowed cells, r14 union 76.21%, r11 greedy
+73.66%, dense proba 100% — while H33 covers 15.19%. When halo coverage ≥0.70,
+<em>any</em> allowed dot set has expected forward overlap ≥0.70 by construction, so
+the test cannot detect duplication (E2 lattice Jaccard was 0.0075 despite
+overlap 1.0). E3 therefore gates as follows, reporting <strong>all</strong> readings:</p>
+<ul>
+<li>Spearman ≤0.90 vs all 63 hash-verified registry rasters (surface + dots);</li>
+<li>Jaccard ≤0.50 vs all dot fields;</li>
+<li>forward 3 px overlap ≤0.70 vs every <strong>non-saturating</strong> dot field
+  (halo coverage of allowed &lt;0.70 by vendor certificate);</li>
+<li>saturating fields are named individually with certificates; for them only
+  Spearman + Jaccard gate (reverse overlap diagnostic).</li>
+</ul>
+<p>The inherited literal gate still fires on saturating fields; that conflict is
+reported, not hidden, and final slot use remains a selector decision
+(including the outstanding full 862-raster inventory scan). An upstream
+template report proposing halo-coverage classification is filed in
+<code>evidence/upstream_uniqueness_report_e3.md</code>; <code>vendor/gems57</code> is not forked.</p>
+<h2>Budget and limits</h2>
+<p>E3 exhausts the 3-experiment budget. DEM scarps are not verified slip;
+holdout transfer to expert-mapped hidden faults is unproven (H33 lesson
+above). Mirror data are hash-pinned, not organizer-authenticated. Promotion
+means "downloadable candidate for selector review", never slot authorization
+or an organizer score.</p><hr><h1>Preregistered hypotheses E2 — 2026-10-20 (experiment 2 of max 3)</h1>
+<p>Written <strong>before</strong> the E2 experiment. Geological hypotheses, not discoveries or
+predicted scores. E1 (magnetic-edge termination, HOLDOUT-DTI 0.01019, worse than
+its random control 0.04717) is archived in
+<code>evidence/history/e1-contact-termination-20261020/</code> and is <strong>not</strong> retuned here.
+No weekly slot is used by this session; slot selection is a separate step.</p>
+<h2>Lane</h2>
+<p>The supplied prompt contains no identifiable single method paragraph assigning
+a lane (same irregularity as E1). Provisional narrow E2 lane, declared here
+before any E2 result: <strong>signed DEM scarp curvature gated by geodetic strain
+partitioning and shallow basement cover, with rank-ordered minimum-distance
+dotted emission</strong>. Only the first-ranked hypothesis below is tested as E2.</p>
+<h2>Why the archived champion scored (evidence summary)</h2>
+<p>Full forensic receipt: <code>docs/h33-analysis.md</code> + <code>evidence/h33_audit.json</code>
+(DATA-MEASUREMENT; the 0.2778 value itself is user/family-reported, <strong>not</strong>
+ORGANIZER-CONFIRMED in this session — no submission-page receipt). Measured:
+H33 (37,654 binary dots) = H27 minus every dot within 2 px of the catalogue;
+nearest dot √5 px (≈224 m) from the catalogue; median distance ≈1.97 km.
+Under the official distance-weighted Tversky definition (verified 2026-10-20
+against the organizer problem page: α=0.2, β=0.8, triangular kernel R=300 m),
+sparse dotting preserves kernel coverage <code>T</code> while cutting emitted mass
+<code>S−M</code>, and flank pruning removes near-pure false-positive mass next to masked
+known faults. That emission-efficiency mechanism is conditional algebra, not
+causal proof about hidden faults. Beating it therefore requires a <strong>better
+ranking and/or better emission</strong>, not a renamed/pruned copy (forbidden, and
+checked by the uniqueness gates below).</p>
+<h2>Five untried candidate hypotheses (this repo)</h2>
+<p>"Untried" = not run in GEMSDOE70 (E1 tested only magnetic termination).
+Novelty is relative to inspected GEMSDOE70 + vendored <code>gems57</code> template code,
+not an exhaustive claim over private parallel sessions. All five use only the
+SHA-pinned cached 19-band stack (bands below) — <strong>no new external data is
+required</strong>, so no obtainability blocker applies. Mirrors are integrity-pinned,
+not organizer-authenticated (see Limitations).</p>
+<table>
+<thead>
+<tr>
+<th>Rank (expected DTI gain ÷ cost)</th>
+<th>Hypothesis / layers (1-indexed bands)</th>
+<th>Physical signature</th>
+<th>Why a catalogue omission is plausible</th>
+<th>Named non-fault mimic</th>
+<th>Difference from implemented work</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1st — TEST AS E2</td>
+<td><strong>Scarp–strain–cover</strong>: detrended elevation (12), geodetic 2nd invariant (4), shear rate (7), dilatation rate (8), depth to basement (15); band 19 slope as control arm</td>
+<td>Strike-coherent profile-curvature scarp step in detrended DEM, weighted by structure-tensor coherence, inside actively straining corridors with shallow-to-moderate cover (scarp preserved)</td>
+<td>Low-relief alluvial scarps missed by legacy field/air-photo mapping remain as curvature steps; strain gate rejects inactive geomorphic scarps</td>
+<td>Lake-shoreline / fluvial terrace riser; road cut</td>
+<td>E1 used only RTP/gravity/basement (no DEM, no geodesy). Template anatomy fits catalogue halos, not DEM curvature × strain. Family lidar lanes used unsigned 1 m step ridges without strain/cover interaction; H33 lineage used unsigned multi-layer Hessian consensus + fixed stride. E2 uses signed-geometry curvature + coherence, geodetic gating, cover interaction, rank-ordered min-distance emission</td>
+<td>Low–medium; cached stack, CPU</td>
+</tr>
+<tr>
+<td>2nd</td>
+<td>Tip process-zone with displacement–length deficit: catalogue geometry (visible only) + detrended elevation (12) confirmation</td>
+<td>Along-strike tapered extensions at tips of long faults whose length implies unmapped continuation; DEM scarp required</td>
+<td>Mapping stops where scarp fades under alluvium; fault continues blind</td>
+<td>Drainage lineament beyond a tip</td>
+<td>Template fits whole-trace halos; prior tip/stepover analog matching scored well in family reports but overlaps E2 uniqueness risk and rewards continuations the detached holdout discounts</td>
+<td>Low; high registry-overlap risk</td>
+</tr>
+<tr>
+<td>3rd</td>
+<td>Tilt-phase offset: tilt/total curvature (6), TMI gradients (3, 9), gravity HG (18)</td>
+<td>Amplitude-normalised magnetic tilt zero-crossing laterally offset where crossed by a gravity lineament (faulted contact)</td>
+<td>Buried contact offset with no DEM scarp</td>
+<td>Remanence boundary in a volcanic flow</td>
+<td>E1 used depth-biased unsigned RTP gradient <em>amplitude</em> change; Euler-cluster lanes used point solutions, not phase-continuity breaks</td>
+<td>Medium; potential-field blur vs 300 m kernel (E1 canary AUCs 0.52–0.54 warn weak)</td>
+</tr>
+<tr>
+<td>4th</td>
+<td>Conductive breach: conductivity (17), depth to basement (15), RTP (2)</td>
+<td>Narrow conductor <em>cross-cutting</em> basement contours (fluid/alteration pathway) vs basin-parallel stratigraphic conductor</td>
+<td>Geothermal upflow fault under cover, no rupture</td>
+<td>Saline groundwater / playa conductor</td>
+<td>Family conductivity products used co-located ridge agreement, not a cross-cutting-angle test</td>
+<td>Medium; conductivity resolution likely km-scale</td>
+</tr>
+<tr>
+<td>5th</td>
+<td>Seismicity-aligned lineament: earthquake distance (10), intensity (16) + DEM curvature (12)</td>
+<td>DEM lineaments collinear with directional seismicity fabric (active blind structure)</td>
+<td>Seismogenic fault without Quaternary scarp, absent from Qfaults</td>
+<td>Volcanic / geothermal-field swarm without through-going fault</td>
+<td>No inspected lane uses the earthquake bands as primary gate</td>
+<td>Low; 100 km kernels likely too smooth for 300 m localisation</td>
+</tr>
+</tbody>
+</table>
+<h2>Fixed E2 experiment (no post-hoc tuning)</h2>
+<ul>
+<li><strong>Grid/footprint/catalogue</strong>: vendored <code>gems57.grid.load_grid</code> on
+  <code>.cache/data</code> (EPSG:32611, 3730×3292, 100 m). Features from
+  <code>.cache/data/training_features.tif</code> SHA-256
+  <code>4371c82e…23bc5</code> (re-verified this session). Nodata sentinel ≤ −1e30 and
+  non-finite → invalid; sentinels never emitted.</li>
+<li><strong>Valid/fill (fixes the E1 boundary-fill limitation)</strong>: valid = footprint ∩
+  finite(all used bands). Nearest-finite fill is computed from the <em>original</em>
+  finite domain, filters run on the filled field, and only then is output
+  support eroded by 12 px. Ranks use average ties over eroded valid only.</li>
+<li><strong>DEM scarp</strong> (catalogue-independent): Gaussian σ=1 detrended elevation →
+  gradient slope; profile curvature along the gradient from the Hessian;
+  structure-tensor coherence (σ=2 tensor smoothing).
+  <code>scarp = sqrt(rank(slope)·rank(|profcurv|)) · (0.25+0.75·coherence)</code>, ranked.</li>
+<li><strong>Strain corridor</strong>: ranks of σ=5-smoothed 2nd invariant, shear rate and
+  |dilatation rate|; geometric mean, ranked. <strong>Cover</strong>: <code>shallow = 1 −
+  rank(σ=3 depth-to-basement)</code>.</li>
+<li><strong>Joint ranking</strong>: <code>rank( scarp^0.60 · strain^0.20 · shallow^0.20 )</code> (ranks
+  floored at 1e-6). Fixed ablations: no-strain (0.75/0.25 scarp/shallow),
+  no-cover (0.75/0.25 scarp/strain), no-coherence scarp. Control arms: every
+  raw band above + band-19 slope, each derived feature alone, and a seeded
+  random dotted control with identical budget/exclusion/spacing.</li>
+<li><strong>Leakage canary first</strong>: every raw and derived feature alone gets holdout
+  AUC; any max(AUC, 1−AUC) &gt; 0.90 stops the run as suspected leakage.</li>
+<li><strong>Holdout (shared tools, untouched seed)</strong>: <code>buffered_component_draw</code>
+  seed <strong>30</strong> (E1 used 20), whole components, 3 px feature collar, 12 px
+  boundary erosion; catalogue-derived masks/distances from <em>visible</em> faults
+  only; visible faults masked pixel-exactly; pooled DTI via
+  <code>evaluate_holdout</code> (<code>gems57-pooled-hide-v2</code>, α=0.2, β=0.8, R=300 m), 1000-draw
+  paired 20 km-cluster bootstrap (seed 70030). Primary endpoint is <strong>dotted</strong>
+  HOLDOUT-DTI; continuous top-2% DTI is reported only for E1 continuity.
+  The archived H33 dot field is scored on the same folds as a <em>reference arm
+  with declared catalogue-leakage caveat</em> (its pruning used the full
+  catalogue including withheld traces), never as the promotion bar.</li>
+<li><strong>Emission (fixed rule)</strong>: candidates ordered by joint rank descending;
+  accept greedily with minimum separation 2.8 px; allowed = eroded valid,
+  off-catalogue, distance-to-catalogue &gt; exclusion. Selection grid budgets
+  {20k, 30k, 38k, 45k} × exclusions {&gt;0, &gt;1, &gt;2, &gt;3 px} scored on the holdout;
+  pick max pooled dotted DTI (tie → smaller budget, then smaller exclusion).
+  All 16 cells are reported. Final dots re-emit the selected cell against the
+  <em>full</em> catalogue. Values are binary float32 {0,1}, 0 outside footprint and
+  on the catalogue (all-finite zeros export; shared writer rejects any
+  non-finite/out-of-[0,1] value without repair).</li>
+<li><strong>Uniqueness (shared <code>uniqueness</code> two-phase summary, both readings
+  reported)</strong>: Spearman rank correlation on the surface and on final dots vs
+  every locally hash-verified registry raster (62 rasters from pinned
+  60GEMSDOE <code>3202471…</code> + 17GEMSDOE dense witness <code>ab0a0a62…</code>); 3 px dot
+  overlap gated like-for-like on dot fields (support ≤20% footprint) with the
+  inherited thresholds (ρ&gt;0.90 or overlap&gt;0.70 = duplicate → stop). The
+  literal reading (dense continuous surfaces count every positive pixel as a
+  dot, saturated by construction) is reported for completeness, not used as
+  the dot gate — this is the shared template's own <code>two_phase_summary</code>
+  distinction, disclosed here, not a private fork. Checked on the surface
+  before placement and again on final dots. The inherited full inventory
+  lists 862 unique grid rasters; only the 63 locally present bytes are
+  checked here, so full-inventory certification remains a selector step.</li>
+<li><strong>Promotion gates (all required, else verdict negative)</strong>: canaries pass;
+  selected joint dotted DTI beats the matched random control with paired 95%
+  CI excluding 0; beats every single-feature dotted arm point estimate;
+  uniqueness like-for-like passes pre- and post-placement; shared-writer TIFF
+  validates on disk (no NaN in footprint, values in [0,1], CRS/shape/transform
+  match sample, zero on catalogue/outside footprint). Promotion means
+  "downloadable candidate for selector review", never slot authorization or
+  an organizer score. Every number is labelled HOLDOUT-DTI (evaluator,
+  withheld positives, CI) unless copied from an organizer receipt (none here).</li>
+<li><strong>Budget</strong>: E2 is experiment 2 of ≤3, ≤2 h compute. No competition upload.</li>
+</ul>
+<h2>Scientific limits</h2>
+<p>DEM curvature steps are not verified fault slip; terraces, shorelines and
+cultural features mimic scarps. Geodetic strain is a smooth corridor prior,
+not trace localisation. Depth-to-basement is an inversion product that may
+share priors with gravity/magnetics. Holdout recovery of withheld <em>catalogue</em>
+components is a surrogate for expert-mapped hidden faults, not the hidden
+truth. No geothermal vent, temperature, permeability or resource is claimed;
+the competition target is fault traces (organizer problem page, verified
+2026-10-20). Official manual-review links: problem/metric/format
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/</a>,
+about <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/</a>,
+data <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">https://www.drivendata.org/competitions/306/competition-doe-gems/data/</a>,
+leaderboard <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/</a>
+(JS-rendered; standings unverified here), reference solution
+<a href="https://github.com/drivendataorg/gems-prize-reference-solution">https://github.com/drivendataorg/gems-prize-reference-solution</a>, GeoDAWN
+<a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and</a>,
+INGENIOUS <a href="https://gbcge.org/current-projects/ingenious/">https://gbcge.org/current-projects/ingenious/</a> and GDR 1391
+<a href="https://gdr.openei.org/submissions/1391">https://gdr.openei.org/submissions/1391</a>, EPSG:32611 <a href="https://epsg.io/32611">https://epsg.io/32611</a>,
+challenge report <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">https://docs.nlr.gov/docs/fy26osti/96647.pdf</a>.</p><hr><h1>Preregistered hypotheses — 2026-10-20</h1>
 <p>Written before the experiment. These are geological hypotheses, <strong>not established discoveries or predicted scores</strong>. This checkout originally had no implementation. Novelty is relative to that checkout and inspected GEMSDOE32/60/69 code, not an exhaustive claim across private parallel sessions.</p>
 <h2>Lane irregularity</h2>
 <p>The prompt refers to a single method paragraph, but supplies none identifiable as a lane assignment. Provisional narrow lane: <strong>magnetic-edge termination at a gravity-supported basement boundary</strong>. Only the first hypothesis will be tested. The others are research queue items, not extra experiments. Do not silently borrow H33's predictions or reinterpret the literal overlap rule.</p>
@@ -75,5 +332,5 @@
 <li>At most one scientific experiment planned; never more than three or two hours. No competition upload or weekly slot.</li>
 </ul>
 <h2>Scientific limits</h2>
-<p>Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p></main><footer>Evidence before leaderboard claims. No competition upload performed.
+<p>Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p></main><footer>Evidence before leaderboard claims. No competition upload performed by this project.
 <a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>

@@ -20,7 +20,7 @@ def test_site_rebuild_has_no_tiff_download_or_broken_local_link():
     main()
     for p in ROOT.glob('*.html'):
         text=p.read_text()
-        assert 'DO NOT SUBMIT' in text
+        assert 'Candidate TIF ready' in text
         assert '<html lang="en">' in text
         parser=Links();parser.feed(text)
         for link in parser.links:
@@ -32,6 +32,12 @@ def test_site_rebuild_has_no_tiff_download_or_broken_local_link():
 
 
 def test_no_scientific_artifact_is_published():
-    for parent in ['docs','assets','evidence']:
+    for parent in ['assets','evidence']:
         for suffix in ['*.tif','*.zip']:
             assert not list((ROOT/parent).rglob(suffix))
+    import sys as _sys
+    _sys.path.insert(0,str(ROOT/'src'))
+    from gems70.release_e3 import released_filenames
+    public={p.name for p in (ROOT/'docs').rglob('*') if p.is_file() and p.suffix.lower() in {'.tif','.zip'}}
+    assert public==released_filenames(ROOT)
+    assert len(public)==2

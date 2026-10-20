@@ -1,6 +1,6 @@
 {
   "exclude": [
-    "quarantine", "data", "evidence", "vendor", "src", "scripts", "tests",
+    "quarantine", "data", "submissions", "evidence", "vendor", "src", "scripts", "tests",
     "registry", "reports", "README.md", "PROJECT_BRIEF.md", "PROMPT.md",
     "AGENTS.md", "HANDOFF.md", "LICENSE", "pyproject.toml",
     "requirements.txt", "requirements.lock", "Gemfile", "Gemfile.lock"

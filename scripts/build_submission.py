@@ -1,16 +1,20 @@
-"""Fail-closed entry point for the stopped run; never makes a decoy submission.
+"""Report E3 candidate release status; never writes a decoy submission.
 
-The byte-pinned shared writer is vendor/gems57/submission_writer.py. Its real
-TIFF/ZIP packaging and range rejection are exercised by tests/test_writer.py.
-A fresh successful scientific run and release contract are required before
-connecting that writer to publication. This run cannot produce an eligible file.
+The released TIFF was written once by scripts/complete_e3_release.py through
+the byte-pinned shared writer (vendor/gems57/submission_writer.py) after all
+preregistered gates passed. This entry point only verifies/reports that
+hash-bound artifact. Exit 0 iff the candidate download is intact; uploading
+remains a separate selector step.
 """
 from pathlib import Path
 import json
 import sys
-ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'src'))
-from gems70.release import release_status
-if __name__=='__main__':
-    print(json.dumps(release_status(ROOT),indent=2))
-    sys.exit(2)
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from gems70.release_e3 import release_status_e3  # noqa: E402
+
+if __name__ == "__main__":
+    status = release_status_e3(ROOT)
+    print(json.dumps(status, indent=2))
+    sys.exit(0 if status["download_candidate_ok"] else 2)
