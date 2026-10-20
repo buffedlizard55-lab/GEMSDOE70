@@ -175,6 +175,24 @@
       "sha256": "6c0c4979f038a3308a30266b3c59aead9374fff7d1e0b675845bebee32543a7a",
       "bytes": 3569,
       "note": "session 3 E2 marginal-matched ranking; verdict negative; DO NOT SUBMIT; card evidence/s3/e2/run_card.json (writer receipt)"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif",
+      "sha256": "9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771",
+      "bytes": 152601,
+      "note": "E6 multi-modal extended-domain LOQO lane (37654 dots, beats H33 on A and B-prime, mutual-unique; review-only under literal forward rule); card evidence/e6/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.zip",
+      "sha256": "f77fee7df72848478d5a7b82b44f1999d20aeb265939f5060478b02f050bfb88",
+      "bytes": 120996,
+      "note": "E6 lane, one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.json",
+      "sha256": "37c2101497baeec72dcc6cea815f0f76b29b3e6445078b67e000241c2d9f66b3",
+      "bytes": 3445,
+      "note": "E6 lane, writer receipt"
     }
   ]
 }

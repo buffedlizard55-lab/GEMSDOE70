@@ -176,6 +176,18 @@ def main():
         'evidence/e5/surface_uniqueness.json': 'e5_surface_uniqueness.json',
         'evidence/e5/uniqueness.json': 'e5_final_uniqueness.json',
         'evidence/e5/leaderboard_read.json': 'e5_leaderboard_read.json',
+        'evidence/e6/run_card.json': 'e6_run_card.json',
+        'evidence/e6/canaries.json': 'e6_canaries.json',
+        'evidence/e6/training.json': 'e6_training.json',
+        'evidence/e6/instrumentA_holdout.json': 'e6_instrumentA.json',
+        'evidence/e6/instrumentB_prime.json': 'e6_instrumentB_prime.json',
+        'evidence/e6/instrumentB_all.json': 'e6_instrumentB_all.json',
+        'evidence/e6/surface_uniqueness.json': 'e6_surface_uniqueness.json',
+        'evidence/e6/uniqueness.json': 'e6_final_uniqueness.json',
+        'evidence/e6/local_uniqueness.json': 'e6_local_uniqueness.json',
+        'evidence/e6/sgmc_buffer_audit.json': 'e6_sgmc_buffer_audit.json',
+        'evidence/e6/cross_lane_bprime.json': 'e6_cross_lane_bprime.json',
+        'evidence/e6/e2_uniqueness_62rasters.json': 'e6_e2_uniqueness_62rasters.json',
     }
     for src, dst in copies.items():
         s = ROOT / src
@@ -318,6 +330,47 @@ fresh binary-witness comparison fails the literal overlap rule. Archived HOLDOUT
 <code>{esc(e2card.get('submission_note'))}</code>. E3 (depth-step) in the same lane family is
 negative with no file. Full tables on the results page; terms in
 <code>docs/publication-amendment-e2.md</code>.</p></section>"""
+    # ------------------------------------------------------- E6 multi-modal lane
+    e6card = load('evidence/e6/run_card.json', {})
+    e6cross = load('evidence/e6/cross_lane_bprime.json', {})
+    e6buf = load('evidence/e6/sgmc_buffer_audit.json', {})
+    e6_section = ''
+    if e6card and e6card.get('raster_sha256'):
+        _a6 = e6card['instrument_a_holdout']
+        _b6 = e6card['instrument_b_prime_proxy']
+        _d6 = e6card['paired_b_prime_vs_h33']
+        _u6 = e6card['correlation_overlap_vs_registry']['final_dots_stage']
+        e6_section = f"""<section class="panel" style="border-left:4px solid #076c64">
+<div class="eyebrow">NEW EXPERIMENT E6 · MULTI-MODAL EXTENDED-DOMAIN LOQO RANKER (37,654 DOTS)</div>
+<h2>New candidate E6: beats H33 on both Instrument A and Instrument B′ (<code>download_ok = true</code>, <code>scientific_verdict = promote</code>; <code>submit_recommended = false</code> under literal forward rule — DO NOT SUBMIT without selector exemption)</h2>
+<p>Preregistered in <code>docs/preregistration-e6.md</code>: diagnoses why P4 (<code>0.0812</code>) and E5 (<code>0.0886</code>)
+trailed H33 (<code>0.0938</code>) on Instrument B′ — <strong>35.89% of all SGMC B′ off-catalogue fault pixels lie at
+<em>d</em><sub>cat</sub> &gt; 32 px</strong>, which P4 and E5 hard-truncated to zero, and E5 omitted the external
+LiDAR scarp, 10 m DEM lineament/curvature, GeoDAWN radiometric, and 100 m scarp-curvature channels.
+Training a 4-fold Leave-One-Quadrant-Out HGB across <strong>28 multi-modal features in <em>d</em><sub>cat</sub> &isin; [3.0, 96.0] px</strong>
+with 7&times;7 regional coverage stratification (37,654 binary dots; worst single-feature canary AUC
+{e6card['canary_worst_single_feature_auc']:.4f} &le; 0.90) achieves:</p>
+<ul>
+<li><strong>Instrument B′ (PROXY-DTI, <em>d</em> &ge; 3 px, 59,937 positives):</strong> <strong>{_b6['candidate']['dti']:.4f}</strong> {ci(_b6['candidate'])}
+vs H33 <strong>{_b6['h33_reference']['dti']:.4f}</strong> {ci(_b6['h33_reference'])} — <strong>paired &Delta; = {_d6['delta']:+.4f}, 95% CI {ci(_d6)}
+(strictly above zero; <code>gate_b_prime_candidate_gt_h33_significant = true</code>)</strong>, beating H33 (+17.3%), E5 (+24.0%), and P4 (+35.5%).</li>
+<li><strong>Instrument A (HOLDOUT-DTI, 11,321 withheld catalogue pixels):</strong> <strong>{_a6['candidate']['dti']:.4f}</strong> {ci(_a6['candidate'])}
+vs H33 <strong>{_a6['h33_reference']['dti']:.4f}</strong> (<code>gate_a_candidate_ge_h33 = true</code>).</li>
+<li><strong>Uniqueness (62 registry + 11 sibling rasters):</strong> Passes amended mutual-overlap uniqueness
+(worst mutual overlap <strong>{_u6['worst_mutual_overlap']:.4f} &le; 0.70</strong>, worst non-lattice forward overlap
+<strong>{_u6['worst_nonlattice_forward_overlap']:.4f} &le; 0.70</strong>, worst Spearman &rho;
+<strong>{_u6['worst_spearman_full_footprint']:.4f} &le; 0.90</strong>; vs 11 sibling repo TIFFs worst mutual/forward = 0.3508).
+Blocked from automatic slot upload ONLY by the literal one-way forward-overlap gate (1.00 against dense binary lattice witness <code>calib_r13lattice_00904.tif</code>).</li>
+</ul>
+<div class="actions">
+<a class="button secondary" href="downloads/{esc(e6card['submission_name'])}.tif" download>Download E6 TIFF (format-validated, scientific gates PASS; review-only under literal rule — DO NOT SUBMIT)</a>
+<a class="button secondary" href="downloads/{esc(e6card['submission_name'])}.zip" download>Download E6 one-TIFF ZIP</a>
+<a class="button secondary" href="downloads/e6_run_card.json" download>E6 run card</a>
+<a class="button secondary" href="downloads/e6_cross_lane_bprime.json" download>Cross-lane B′ audit</a>
+</div>
+<p class="small">Name: <code>{esc(e6card['submission_name'])}</code> · SHA-256: <code>{esc(e6card['raster_sha256'])}</code> · Note ({e6card['note_chars']}/140):
+<code>{esc(e6card['submission_note'])}</code>.</p></section>"""
+
     # ------------------------------------------------------- E5 supervised lane
     e5card = load('evidence/e5/run_card.json', {})
     e5_section = ''
@@ -351,7 +404,7 @@ halved P4's B′ deficit but did not beat uniform halo sampling. Full tables on 
         for r in review['archived_artifacts']]
     archives = f'<h2>{len(review["archived_artifacts"])} frozen prior dot TIFFs — forensic review only</h2>' + table(
         ['Archive', 'Download', 'Local format', 'Forward overlap (limit 0.70)'], archive_rows)
-    (DOCS / 'index.html').write_text(frame('Overview', index + s3_site.banner() + e5_section + e2_section + p5_section + archives))
+    (DOCS / 'index.html').write_text(frame('Overview', index + e6_section + s3_site.banner() + e5_section + e2_section + p5_section + archives))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
@@ -491,6 +544,42 @@ labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed score
                             'E5 instrument A · HOLDOUT-DTI · gems57-pooled-hide-v2')
                     + table(['Arm', 'DTI', '95% CI', 'Positives'], _rb,
                             "E5 instrument B′ · PROXY-DTI · SGMC proxy d ≥ 3 px"))
+    if e6card:
+        _ra6 = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+                for k, v in sorted(e6card['instrument_a_holdout'].items(),
+                                   key=lambda kv: -kv[1]['dti'])]
+        _rb6 = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+                for k, v in sorted(e6card['instrument_b_prime_proxy'].items(),
+                                   key=lambda kv: -kv[1]['dti'])]
+        _d6 = e6card['paired_b_prime_vs_h33']
+        results += ("<h2>Lane E6 — multi-modal extended-domain LOQO ranker (scientific gates PASS; review-only under literal forward rule)</h2>"
+                    "<p>28-feature LOQO HGB across d in [3.0, 96.0] px with 7×7 stratification (37,654 binary dots); "
+                    + "OOF AUC by quadrant " + esc(json.dumps(e6card['oof_auc_by_quadrant'], default=float))
+                    + f"; worst single-feature canary AUC {e6card['canary_worst_single_feature_auc']:.4f} ≤ 0.90. "
+                    + f"Instrument B′ paired Δ vs H33 {_d6['delta']:+.4f} {ci(_d6)} (strictly positive: "
+                    + "<code>gate_b_prime_candidate_gt_h33_significant = true</code>, "
+                    + "<code>gate_a_candidate_ge_h33 = true</code>, "
+                    + "<code>mutual_uniqueness_ok = true</code>). "
+                    + "Blocked from automatic upload only by literal one-way forward overlap 1.00 against dense lattice witness.</p>"
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _ra6,
+                            'E6 instrument A · HOLDOUT-DTI · gems57-pooled-hide-v2 (with ablations)')
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _rb6,
+                            "E6 instrument B′ · PROXY-DTI · SGMC proxy d ≥ 3 px (with ablations)"))
+    if e6cross:
+        _rcross = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+                   for k, v in sorted(e6cross['scores'].items(), key=lambda kv: -kv[1]['dti'])]
+        results += ("<h2>Cross-lane Instrument B′ comparison (published candidates)</h2>"
+                    "<p>Completes the HANDOFF selector step of scoring E3 (60,000 dots) alongside 37,654–38,000-dot candidates on Instrument B′ (SGMC d ≥ 3 px, 59,937 positives).</p>"
+                    + table(['Candidate / Lane', 'B′ PROXY-DTI', '95% CI', 'Positives'], _rcross,
+                            'Cross-lane Instrument B′ · gems57-pooled-hide-v2'))
+    if e6buf:
+        _rbuf = [[esc(r['shell_px']), f"{r['sgmc_pixels']:,}", f"{r['shell_pixels']:,}",
+                  f"{r['density']:.5f}", f"{r['enrichment_vs_footprint_mean']:.2f}×"]
+                 for r in e6buf.get('incremental_shells', [])]
+        results += ("<h2>SGMC vs. QFaults buffer calibration (r = 1..6 px)</h2>"
+                    "<p>Completes HANDOFF Next Step 2: incremental shell density and enrichment of off-catalogue SGMC pixels (78,433 px) around the training fault catalogue (60,988 px).</p>"
+                    + table(['Shell (px)', 'SGMC off-cat px', 'Shell area (px)', 'Density', 'Enrichment vs mean'],
+                            _rbuf, 'SGMC off-catalogue shell enrichment around existing_faults.tif'))
     results = s3_site.results_block(instrument_rows, table) + results
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 
@@ -701,7 +790,7 @@ as a predictor.</li></ul>
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<meta http-equiv="refresh" content="0;url={target}"><title>GEMSDOE70</title>'
             f'</head><body><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
-    executive = latest_decision + decision + '''<h2>Exactly how submission approval works</h2>
+    executive = latest_decision + decision + e6_section + '''<h2>Exactly how submission approval works</h2>
 <ol class="steps"><li>Do not upload the new P5 review file or any earlier archive. The literal overlap gate fails.</li>
 <li>A future candidate must be newly generated using the shared writer, beat a matched current-best
 holdout, clear feature-alone canaries and both-stage literal uniqueness, and pass the local validator.</li>

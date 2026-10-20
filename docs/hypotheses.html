@@ -397,7 +397,20 @@ scores). Any new idea therefore needs an instrument that tracks the board before
 <td>in hand (USGS DOI 10.5066/P93LGLVQ)</td>
 </tr>
 </tbody>
-</table></main>
+</table>
+<hr />
+<h1>Experiment E6 (<code>arena/effcd5f7-gemsdoe70</code>) — 28-feature Multi-Modal Extended-Domain LOQO + 7×7 Stratification</h1>
+<p>Full preregistration in <code>docs/preregistration-e6.md</code>; reproducible driver in <code>scripts/run_experiment_e6.py</code>; receipts in <code>evidence/e6/</code>.</p>
+<ul>
+<li><strong>Hypothesis (<code>H-E6-1</code>):</strong> Extending the off-catalogue domain from $d \in [2.4, 32]\text{ px}$ to $d \in [3.0, 96.0]\text{ px}$ (capturing the <code>35.89%</code> of <code>SGMC B′</code> positives at $d &gt; 32\text{ px}$ missed by <code>P4</code> and <code>E5</code>) and training a 4-fold Leave-One-Quadrant-Out <code>HistGradientBoostingClassifier</code> on <strong>28 multi-modal features</strong> (100 m DEM gradient-directional scarp curvature/coherence, 8 core 19-band channels, 5 1 m LiDAR scarp channels, 5 GeoDAWN radiometric channels, 4 10 m DEM lineament/curvature channels, and 3 catalogue geometry channels) with <strong>7×7 regional coverage stratification</strong> (<code>block = 7 px</code>, <code>nms = 5.0 px</code>, <code>37,654</code> binary dots) will beat <code>H33</code> on <code>Instrument B′</code> with a 95% spatial-cluster bootstrap CI strictly above zero while also beating <code>H33</code> on <code>Instrument A</code> and bounding regional terrain concentration via 7×7 stratification.</li>
+<li><strong>Measured results (<code>37,654</code> binary dots):</strong></li>
+<li><strong><code>candidate</code> (<code>E6</code>, $d \in [3, 96]$, 28-feat, 7×7 strat):</strong> <code>Instrument A = 0.0710 [0.0637, 0.0781]</code>, <strong><code>Instrument B′ = 0.1100 [0.1058, 0.1133]</code></strong> (paired $\Delta$ vs <code>H33</code> = <strong><code>+0.0162</code> <code>[+0.0045, +0.0270]</code></strong>; <code>gate_a = true</code>, <code>gate_b_prime = true</code>).</li>
+<li><code>ablation_truncated_d32</code> ($d \in [2.4, 32]$, 28-feat, 7×7 strat): <code>Instrument A = 0.0843</code>, <code>Instrument B′ = 0.0879 [0.0779, 0.0977]</code> (paired $\Delta$ vs <code>E6</code> = <code>+0.0221 [0.0124, 0.0324]</code>).</li>
+<li><code>ablation_no_external</code> ($d \in [3, 96]$, 11-feat 19-band/geom, 7×7 strat): <code>Instrument A = 0.0711</code>, <code>Instrument B′ = 0.0945 [0.0868, 0.1011]</code> (paired $\Delta$ vs <code>E6</code> = <code>+0.0155 [0.0092, 0.0231]</code>).</li>
+<li><code>ablation_unstratified_sep28</code> ($d \in [3, 96]$, 28-feat, greedy <code>sep=2.8 px</code>): <code>Instrument A = 0.0564</code>, <code>Instrument B′ = 0.0946 [0.0721, 0.1201]</code>.</li>
+<li><code>random_control</code>: <code>Instrument A = 0.0457</code>, <code>Instrument B′ = 0.0751 [0.0717, 0.0784]</code>.</li>
+<li><code>h33_reference</code>: <code>Instrument A = 0.0037</code>, <code>Instrument B′ = 0.0938 [0.0839, 0.1044]</code>.</li>
+</ul></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/p5_run_card.json">New P5 negative card</a> ·
 <a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·
