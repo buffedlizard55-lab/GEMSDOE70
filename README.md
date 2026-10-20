@@ -67,6 +67,14 @@ approval or organizer acceptance. The shared writer rejects invalid values
 without clipping. Its all-finite outside-footprint convention must be reconciled
 with official null/NaN guidance before claiming a submit-ready artifact.
 
+### Concurrent prior review preserved
+
+A separate review reached main while this PR was open. Its original dated
+[review](docs/review-2026-10-20.md) is preserved with a supersession note. Its
+next-step request to restore shared tools is now addressed; lane, protocol,
+scientific-validation and organizer-authentication blockers remain. A public
+leaderboard observation is not a submission-page-confirmed artifact score.
+
 ### Limits and next actions
 
 See the [completion matrix](reports/requirements.md). There is no fitted model,

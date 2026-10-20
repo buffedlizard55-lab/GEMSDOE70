@@ -12,7 +12,7 @@ competition submission. No competition slot was used.
 
 | ID | Finding | Evidence / action |
 |---|---|---|
-| IR70-01 | Initial repository contained only an 11-byte README; the full ready-to-train pipeline and named download/prepare scripts in the brief did not exist. There were no previous-session tasks on this branch to resume. | Initial `git ls-tree`, base commit `a9bfaa70f1b985f09dc2e79606444ad99a5d449a`. Do not claim data placement is the only blocker. |
+| IR70-01 | Initial repository contained only an 11-byte README; the full ready-to-train pipeline and named download/prepare scripts in the brief did not exist. There were no previous-session tasks on the initial branch snapshot to resume; a concurrent review later reached main and has been preserved. | Initial `git ls-tree`, base commit `a9bfaa70f1b985f09dc2e79606444ad99a5d449a`. Do not claim data placement is the only blocker. |
 | IR70-02 | Required lane method paragraph is absent from the supplied prompt. | Preserved prompt in PROMPT.md and README. No neighboring lane was silently adopted. Research hypotheses are conditional suggestions, not experiments. |
 | IR70-03 | Literal forward-overlap rule rejects every nonempty in-footprint candidate because one registry member has strictly positive support everywhere in the sample footprint. | Fresh `evidence/preflight.json`, independently hash-verified witness; not just the neighboring repo's old verdict. Stop before surface placement or final dots. |
 | IR70-04 | The inherited registry is not a current exhaustive competition registry. | `registry/inherited_registry_index.json` is a historical owner-repo inventory. Only one witness is fetched for this proof; no complete-scan clearance claimed. A single verified witness suffices for a negative existential test. |
@@ -76,6 +76,16 @@ link checks, and CI. A temporary test TIFF is not a scientific submission and is
 not retained or published. The site never exposes input rasters as predictions.
 No success is claimed for unmet generation, training, holdout or novelty tasks.
 PR, merge, tests and Pages publication receipts are recorded separately.
+
+## Concurrent upstream review integrated
+
+The first merge attempt for PR #2 failed because main advanced to `4b63eba`,
+merging a separate review in PR #1. That work was merged into the assigned
+branch (no branch switch). Its dated `docs/review-2026-10-20.md` is preserved
+with a historical/supersession banner. Its request to restore the shared tools
+is now addressed; the missing lane and scientific validation blockers remain.
+Its public-leaderboard “ORGANIZER-CONFIRMED” wording is explicitly corrected
+as not meeting the artifact-bound submission-page-receipt requirement.
 
 ## Next steps, in order
 

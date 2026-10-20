@@ -19,7 +19,7 @@ competition submission. No competition slot was used.</p>
 <tbody>
 <tr>
 <td>IR70-01</td>
-<td>Initial repository contained only an 11-byte README; the full ready-to-train pipeline and named download/prepare scripts in the brief did not exist. There were no previous-session tasks on this branch to resume.</td>
+<td>Initial repository contained only an 11-byte README; the full ready-to-train pipeline and named download/prepare scripts in the brief did not exist. There were no previous-session tasks on the initial branch snapshot to resume; a concurrent review later reached main and has been preserved.</td>
 <td>Initial <code>git ls-tree</code>, base commit <code>a9bfaa70f1b985f09dc2e79606444ad99a5d449a</code>. Do not claim data placement is the only blocker.</td>
 </tr>
 <tr>
@@ -129,6 +129,14 @@ link checks, and CI. A temporary test TIFF is not a scientific submission and is
 not retained or published. The site never exposes input rasters as predictions.
 No success is claimed for unmet generation, training, holdout or novelty tasks.
 PR, merge, tests and Pages publication receipts are recorded separately.</p>
+<h2>Concurrent upstream review integrated</h2>
+<p>The first merge attempt for PR #2 failed because main advanced to <code>4b63eba</code>,
+merging a separate review in PR #1. That work was merged into the assigned
+branch (no branch switch). Its dated <code>docs/review-2026-10-20.md</code> is preserved
+with a historical/supersession banner. Its request to restore the shared tools
+is now addressed; the missing lane and scientific validation blockers remain.
+Its public-leaderboard “ORGANIZER-CONFIRMED” wording is explicitly corrected
+as not meeting the artifact-bound submission-page-receipt requirement.</p>
 <h2>Next steps, in order</h2>
 <ol>
 <li>Explicitly resolve the registry definition/literal overlap contradiction and

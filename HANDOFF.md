@@ -31,6 +31,13 @@ scientific budget is still unused. The local audit succeeds with exit 0 when it
 reproduces a negative; `release_gate.py` without `--expect-negative` exits 2 and
 NEVER authorizes a release.
 
+## Concurrent review
+
+PR #1 reached main while this work was open. Its dated review in
+`docs/review-2026-10-20.md` is preserved as historical, with corrected evidence
+classification and a link to the current report. Shared-tool restoration is
+now complete; the scientific and protocol blockers still stand.
+
 ## Resume priorities
 
 1. Explicit protocol resolution and a real method-lane paragraph are required.
