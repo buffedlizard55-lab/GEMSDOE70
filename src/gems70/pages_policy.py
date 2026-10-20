@@ -5,8 +5,24 @@ This is a publication policy for the stopped run, not a scientific release gate.
 """
 from __future__ import annotations
 
+from html.parser import HTMLParser
 import json
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
+
+
+class LocalLinks(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.paths = []
+
+    def handle_starttag(self, tag, attrs):
+        for key, value in attrs:
+            if key not in {'href', 'src'} or not value:
+                continue
+            url = urlsplit(value)
+            if not url.scheme and not url.netloc and url.path:
+                self.paths.append(unquote(url.path))
 
 PUBLIC_ROOTS = frozenset({
     'docs', 'index.html', 'executive-summary.html', 'requirements.html',
@@ -55,6 +71,17 @@ def check_output(site: Path) -> dict:
             violations.append(f'{rel}: stopped-run raster/archive')
     if violations:
         raise ValueError('Unsafe Pages build: ' + '; '.join(violations))
+    # Check the deployed tree, not the checkout where excluded evidence still
+    # exists. A source-relative evidence link may otherwise pass local tests
+    # yet become a 404 after quarantine exclusions take effect.
+    for page in site.rglob('*.html'):
+        links = LocalLinks()
+        links.feed(page.read_text())
+        for link in links.paths:
+            target = ((site / link.lstrip('/')) if link.startswith('/')
+                      else (page.parent / link)).resolve()
+            if not target.is_relative_to(site.resolve()) or not target.exists():
+                raise ValueError(f'Broken built-site link: {page.relative_to(site)} -> {link}')
     for page in ['index.html', 'docs/index.html', 'docs/executive-summary.html']:
         p = site / page
         if not p.is_file():

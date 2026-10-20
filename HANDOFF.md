@@ -135,3 +135,20 @@ PR #8 integration: merged concurrent main f1197da into the assigned branch after
 the initial merge was rejected. Retained both parallel reports and release/source
 guards; added real built-output verification. Combined suite: 129 passed, three
 existing warnings. Scientific evidence and shared template remain unchanged.
+
+## Release-evidence edge-case review on arena/fd9c8ead-gemsdoe70
+
+Reproduced the immutable registry witness audit; universal literal overlap remains
+1.0 and the existing stopped-run preflight receipt is unchanged. No new science,
+TIFF, placement, training, or slot. Fixed oversized-integer AUC diagnostic overflow
+and required literal boolean current-best verification in the local publication
+wrapper, not the shared template. Added seven regression cases; full suite is
+124 passed with three existing warnings. Site/README rebuilds and expected-negative
+release gate pass. See reports/release-evidence-review-20261020.md for all three
+passes, evidence boundaries and ordered next steps. PR #8 is another session's
+open publication-policy review, not this session's submission or authorization.
+
+PR #8 second integration retained concurrent main 7a2d2ae (PRs #9–#11),
+including the unresolved protocol memo and evidence edge-case diagnostics. Fixed
+checkout-only memo links for the excluded Pages roots and added built-output link
+checks. Combined suite: 138 passed, three existing warnings. No new science.

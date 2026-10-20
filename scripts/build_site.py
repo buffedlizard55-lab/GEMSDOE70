@@ -19,7 +19,7 @@ def md(path):
 
 def frame(title,body):
     links=[('index.html','Overview'),('executive-summary.html','Submission guide'),('results.html','Results'),
-           ('hypotheses.html','Hypotheses'),('h33-analysis.html','H33 analysis'),('sources.html','Sources'),('irregularities.html','Limitations')]
+           ('hypotheses.html','Hypotheses'),('h33-analysis.html','H33 analysis'),('protocol-decision.html','Protocol decision'),('sources.html','Sources'),('irregularities.html','Limitations')]
     nav=''.join(f'<a href="{url}">{label}</a>' for url,label in links)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{html.escape(title)} · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Negative result; no competition-ready TIFF.">
@@ -65,7 +65,7 @@ def main():
 <section><h2>Reproducible, not speculative</h2><p>The numerical stack was restored from pinned mirrors. The shared evaluator and writer remain byte-identical to the template. Every raw input and derived feature received a leakage canary.</p>
 <ul><li><a href="session-review.html">Latest repository review and publication safeguards</a></li><li><a href="hypotheses.html">Four preregistered geological hypotheses</a></li><li><a href="sources.html">Auditable sources and retrieval status</a></li><li><a href="irregularities.html">Limitations and next-session priorities</a></li></ul></section>'''
     (DOCS/'index.html').write_text(frame('Overview',overview))
-    guide=status+'''<section><h2>How a future eligible submission works</h2><p><strong>Do not use this negative run.</strong> The workflow below applies only after a fresh candidate passes every scientific and publication gate. This static website reports precomputed evidence; it does not train a model in your browser.</p>
+    guide=status+'''<section><h2>How a future eligible submission works</h2><p><strong>Do not use this negative run.</strong> The <a href="protocol-decision.html">unresolved protocol decision</a> explains why a new, nonempty submission cannot pass the current literal uniqueness test. The workflow below applies only after a fresh candidate passes every scientific and publication gate. This static website reports precomputed evidence; it does not train a model in your browser.</p>
 <ol class="steps"><li><strong>Check the readiness banner.</strong> Only a released artifact may receive a TIFF download link. A valid format alone does not mean it is unique or worth a competition slot.</li>
 <li><strong>Verify scientific clearance.</strong> Feature canaries, same-split current-best improvement, a complete pre-placement surface audit and final-dot audit must pass. The present experiment fails and stops before the last step.</li>
 <li><strong>Package with the shared writer.</strong> A single-band float32 GeoTIFF must match the sample CRS, shape and geotransform. The writer rejects non-finite/out-of-range values rather than silently clipping them; this project also sets outside-footprint values to zero.</li>
@@ -92,7 +92,8 @@ def main():
 <p><a href="downloads/surface_uniqueness.json">Surface audit</a> · <a href="downloads/registry_saturation.json">Universal-blocker certificate</a> · <a href="downloads/holdout.json">Full holdout / paired intervals</a> · <a href="downloads/canaries.json">Canaries</a> · <a href="run-card.json">Run card</a></p>
 <h2>Validator status: NOT WRITTEN</h2><p>The in-memory surface is finite, in range, correctly shaped, zero outside the footprint and zero on mapped faults. There is no TIFF validator receipt, file SHA-256, or final-dot audit because export and placement were stopped. Surface decoded-array SHA-256 is not a file hash.</p>'''
     (DOCS/'results.html').write_text(frame('Results',results))
-    for name,title in [('hypotheses','Hypotheses'),('h33-analysis','H33 analysis'),('irregularities','Limitations'),('session-review','Repository review')]:
+    for name,title in [('hypotheses','Hypotheses'),('h33-analysis','H33 analysis'),
+                       ('protocol-decision','Protocol decision'),('irregularities','Limitations'),('session-review','Repository review')]:
         (DOCS/f'{name}.html').write_text(frame(title,md(DOCS/f'{name}.md')))
     sourcerows=''.join(f'<tr><th scope="row"><a href="{html.escape(s["url"])}">{html.escape(s["id"])}</a></th><td>{html.escape(s["authority"])}</td><td>{html.escape(s["status"])}</td><td>{html.escape(s["claim"])}<br><small>{html.escape(s["limit"])}</small></td></tr>' for s in sources)
     srcpage=f'''<div class="eyebrow">AUDITABLE KNOWLEDGE</div><h1>Know what the evidence can say.</h1><p>GitHub reference content was retrieved. Official sites outside this environment's network allowlist were not verified live. A working HTTP endpoint does not verify a scientific claim, a license, or a competition result.</p>

@@ -77,3 +77,13 @@ def test_github_generated_theme_css_only_is_allowed(tmp_path):
     (tmp_path / 'assets/archived.html').write_text('unsafe private page')
     with pytest.raises(ValueError, match='nonpublic root'):
         check_output(tmp_path)
+
+
+def test_link_to_checkout_only_evidence_is_rejected_in_built_output(tmp_path):
+    safe_output(tmp_path)
+    page = tmp_path / 'docs/index.html'
+    page.write_text('DO NOT SUBMIT <a href="../evidence/preflight.json">Evidence</a>')
+    with pytest.raises(ValueError, match='Broken built-site link'):
+        check_output(tmp_path)
+    page.write_text('DO NOT SUBMIT <a href="https://github.com/example/evidence.json">Evidence</a>')
+    assert check_output(tmp_path)['built_output_ok']
