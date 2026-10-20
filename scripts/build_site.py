@@ -281,7 +281,19 @@ complete-registry scan is still pending. HOLDOUT-DTI {_d['dti']:.4f} {ci(_d)} ·
 <code>{esc(e2card.get('submission_note'))}</code>. E3 (depth-step) in the same lane family is
 negative with no file. Full tables on the results page; terms in
 <code>docs/publication-amendment-e2.md</code>.</p></section>"""
-    (DOCS / 'index.html').write_text(frame('Overview', index + e2_section))
+    # Parallel P5 lane (analytic-signal halo, this branch)
+    p5card = load('evidence/phase5/run_card.json', {})
+    p5_section = ''
+    if p5card and p5card.get('submission_name') == 'gems70-p5-analytic-halo-37654-20261020':
+        pa = p5card['instrument_a_holdout']['candidate']
+        pb = p5card['instrument_b_prime_proxy']['candidate']
+        p5_section = f"""<section><h2>Parallel lane P5 — analytic-signal halo (this branch, DO NOT SUBMIT)</h2>
+<p>New this session: analytic-signal amplitude <code>hypot(tmi_hg, tmi_vg)</code> rank inside the 7×7 stratified halo (2.4–32 px), 37,654 dots off-catalogue, 5-px NMS. <strong>HOLDOUT-DTI A {pa['dti']:.4f} {ci(pa)} vs H33 0.0037 win; B′ {pb['dti']:.4f} {ci(pb)} vs 0.0938 H33 win Δ {p5card['paired_b_prime_vs_h33']['delta']:+.4f} {p5card['paired_b_prime_vs_h33']['ci95']}</strong> — negative on the pre-registered B′ gate, no slot. Uniqueness: 62 rasters, worst mutual 0.30 (limit 0.70), worst Spearman 0.042; forward 1.00 vs dense lattice (literal duplicate, review only).</p>
+<div class="actions"><a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.tif" download>Download P5 review TIFF</a>
+<a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.zip" download>Download P5 ZIP</a>
+<a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.json" download>P5 receipt</a></div>
+<p class="small">Name: <code>gems70-p5-analytic-halo-37654-20261020</code> · Note (93/140): <code>{esc(p5card.get('submission_note',''))}</code> · SHA-256 <code>{esc(p5card.get('raster_sha256',''))}</code> · Evidence <code>evidence/phase5/</code> · Hypotheses <code>docs/hypotheses.md</code> now ranks 5 candidates (H-2 tested, H-3 radiometric already fetched, H-4 lidar scarp, H-5 conductive breach, H-6 basement curvature).</p></section>"""
+    (DOCS / 'index.html').write_text(frame('Overview', index + e2_section + p5_section))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
