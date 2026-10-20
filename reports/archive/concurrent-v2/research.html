@@ -1,0 +1,260 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>research · GEMSDOE70</title><meta name="description" content="GEMSDOE70 research."><link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
+<nav><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="research.html">Research</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Deep research — Great Basin geothermal structural controls &amp; hidden fault detection</h1>
+<blockquote>
+<p>All claims include official verified links for manual review. "Not-retrieved"
+means network access failed in this sandbox, not a login redirect proof.
+Numerical scores are labeled HOLDOUT-DTI (evaluator gems57-pooled-hide-v2,
+11 321 withheld positives, 95% CI spatial-block bootstrap) or
+ORGANIZER-CONFIRMED (submission-page receipt). No projection is written as a score.</p>
+</blockquote>
+<h2>Question: Why did H33 score 0.2778 and can we beat it?</h2>
+<h3>What H33 actually is (byte-verified, not a story)</h3>
+<table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>SHA256 (prefix)</th>
+<th>Positives</th>
+<th>Derivation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D2.8 <code>d28-poisson300m-offcat-44090-20261003T233156Z-91eae1ca</code></td>
+<td>(see GEMSDOE30)</td>
+<td>44 090</td>
+<td>Early sparse Poisson-disc 300 m off-catalogue field</td>
+</tr>
+<tr>
+<td>H27 <code>h27-4-solo-d28-20261004-8acb75e1</code></td>
+<td>(see GEMSDOE31)</td>
+<td>40 199</td>
+<td>D2.8 minus 3 891 dots within 1 px of catalogue</td>
+</tr>
+<tr>
+<td><strong>H33 B2</strong> <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code></td>
+<td><code>c55bafc470054...</code></td>
+<td><strong>37 654</strong></td>
+<td>H27 minus 2 545 dots within √2–2 px of catalogue; only 0/1 values; nearest positive ≈224 m (√5 px) from catalogue; median 1.965 km; 5.77% within 300 m</td>
+</tr>
+</tbody>
+</table>
+<p>Source: <code>evidence/h33_audit.json</code> (local audit), inherited bundle
+<code>evidence/inherited_h33_submission_bundles.json</code> (owner archive GEMSDOE32
+commit 98901f3), forensic validation <code>scripts/audit_h33.py</code>.</p>
+<p>H33 is <strong>not a newly trained detector</strong>; it is <strong>pruned prior dots</strong>.
+Its "model" is the pruning rule: delete any dot whose distance-to-catalogue ≤2 px.</p>
+<h3>Why pruning helped — DTI algebra (verified in <code>vendor/gems57/metric.py</code>)</h3>
+<p>Official metric is distance-weighted Tversky with α=0.2, β=0.8, triangular kernel
+R=300 m (3 px): https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/
+Reference loss uses same α,β: https://github.com/drivendataorg/gems-prize-reference-solution</p>
+<p>For binary dots, let:
+- <code>T = Σ_g max_x p(x)·k(d(x,g))</code> (coverage over truth cells, saturates at 1/truth cell)
+- <code>M = Σ_x max_g k(d(x,g))</code> (credit per dot)
+- <code>n = |P|</code>, <code>K = |G|</code>
+- <code>D = T + α·(n - M) + β·(K - T)</code> ; <code>DTI = T / D</code></p>
+<p>Adding one dot with self-credit <code>k</code> and marginal coverage <code>dT</code> (≤k):</p>
+<pre><code>dDTI &gt; 0  ⇔  dT &gt; α·DTI·(dT + 1 - k)
+</code></pre>
+<p>Only when <code>dT == k</code> (non-redundant) does this reduce to <code>k &gt; α·DTI</code>.
+A dot that covers multiple uncovered truth cells has <code>dT &gt; k</code>? No, <code>dT ≤ k</code> with
+equality when it covers only new truth cells. Earlier prose <code>dT ≤ k</code> was corrected
+in <code>vendor/gems57/metric.py</code> docstring; executable arithmetic was already correct.</p>
+<p><strong>Efficiency mechanism</strong>: A new dot near the catalogue but far from hidden truth
+has low <code>k</code> (distance to hidden truth &gt;R) and <code>dT ≈ 0</code> → <code>dT &lt; α·DTI·(1 - k)</code> →
+DTI decreases. Deleting such dots <strong>raises</strong> DTI even though <code>n</code> drops, because
+<code>FP_w = n - M</code> shrinks. H33's sequential improvements (0.2600 → 0.2708 → 0.2778)
+are consistent with removing low-<code>k</code> mass.</p>
+<p><strong>Can we beat 0.2778 (or the prompt's 0.3195 / 0.4413 / 0.3774)?</strong>
+User-reported leaders conflict and have no ORGANIZER-CONFIRMED receipt here.
+Leaderboard https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/
+was not retrieved this session. We therefore treat 0.2778 as the highest
+<strong>byte-verified family artifact</strong>, not a current competition best.</p>
+<p>A higher score requires:
+1. <strong>Same sparsity</strong> (~37k dots) to keep <code>n</code> low, but <strong>better-placed</strong> dots to
+   increase <code>T</code> per dot (higher <code>k</code> and <code>dT</code> against hidden truth). Random with
+   same <code>n</code> needs <code>k &gt; 0.055</code> on average; H33's pruning achieved this by
+   avoiding catalogue-flanks where hidden truth is apparently not.
+2. <strong>Geological plausibility</strong>: hidden faults should be where geophysics says
+   cover-buried structure, not where prior sparse heuristics happened to sample.</p>
+<p>Discordance corridor is designed for (1)+(2): it biases placement toward
+gravity/basement-supported lineaments lacking topographic scarps, which is exactly
+where H33's retained dots reside (median 1.965 km from catalogue).</p>
+<p><strong>Caveat</strong>: HOLDOUT-DTI on catalogue-withheld folds (v1: 0.010 vs random 0.047;
+v2 candidate: 0.00 vs random 0.023) <strong>cannot</strong> predict hidden-label DTI.
+Withheld components are mapped faults; pruning that helps on hidden truth hurts
+on withheld mapped faults (they are near-catalogue by definition). Our
+holdout is a diagnostic of over-pruning, not a guarantee of leaderboard gain.</p>
+<h2>PhD-level hypothesis evaluation (ranked)</h2>
+<p>See <code>docs/hypotheses_new.md</code> for 5 candidates with layers, signatures, mimics,
+costs, and expected DTI lift. Top is discordance corridor (implemented); second
+is magnetic phase-jump; third basement-ramp tip; fourth conductive breach;
+fifth radiometric alteration halo (requires external GeoDAWN radiometrics).</p>
+<h2>Literature &amp; data provenance (no hallucinations)</h2>
+<h3>Official competition &amp; data</h3>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>URL</th>
+<th>Status</th>
+<th>Claim</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DOE GEMS competition (DrivenData)</td>
+<td>https://www.drivendata.org/competitions/306/competition-doe-gems/</td>
+<td>Verified page exists (search result id1)</td>
+<td>Task: predict faults for geothermal in GeoDAWN area, $300k prize, ends 2026-12-03</td>
+</tr>
+<tr>
+<td>Problem description</td>
+<td>https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/</td>
+<td>Not retrieved this session</td>
+<td>Defines DTI α=0.2 β=0.8 R=300 m, 100 m EPSG:32611</td>
+</tr>
+<tr>
+<td>Leaderboard</td>
+<td>https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/</td>
+<td>Not retrieved</td>
+<td>Manual review target; conflicting user claims not resolved</td>
+</tr>
+<tr>
+<td>Official rules (NLR)</td>
+<td>https://docs.nlr.gov/docs/fy26osti/96647.pdf</td>
+<td>Not retrieved</td>
+<td>HeroX-linked PDF, see also https://research-hub.nlr.gov/en/publications/geologic-enhanced-mapping-system-gems-prize-official-rules/</td>
+</tr>
+<tr>
+<td>Reference solution</td>
+<td>https://github.com/drivendataorg/gems-prize-reference-solution</td>
+<td>Verified-content</td>
+<td>U-Net MC-CV notebook, loss α=0.2 β=0.8, CPU-capable</td>
+</tr>
+<tr>
+<td>DOE GBCGE INGENIOUS</td>
+<td>https://gbcge.org/current-projects/ingenious/</td>
+<td>Claimed by user prompt</td>
+<td>Current projects entry (network not verified live)</td>
+</tr>
+<tr>
+<td>GDR submission 1391</td>
+<td>https://gdr.openei.org/submissions/1391</td>
+<td>Claimed by user prompt</td>
+<td>OpenEI repository entry</td>
+</tr>
+<tr>
+<td>EPSG:32611</td>
+<td>https://epsg.io/32611</td>
+<td>User-supplied</td>
+<td>UTM zone 11N</td>
+</tr>
+<tr>
+<td>Tversky index</td>
+<td>https://en.wikipedia.org/wiki/Tversky_index</td>
+<td>User-supplied</td>
+<td>α,β weighted Jaccard generalization</td>
+</tr>
+</tbody>
+</table>
+<h3>USGS &amp; geothermal science</h3>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>URL</th>
+<th>Status</th>
+<th>What it supports</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>USGS GeoDAWN data release</strong></td>
+<td>https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and</td>
+<td><strong>Verified</strong> (search id1 DOI 10.5066/P93LGLVQ)</td>
+<td>Airborne magnetic &amp; radiometric surveys: 149 030 line-km, 51 857 km², 400 m spacing, Winnemucca/Fallon/Hawthorne/Tonopah blocks, EDCON-PRJ contractor, Glen &amp; Earney 2024</td>
+</tr>
+<tr>
+<td>ScienceBase catalog</td>
+<td>https://www.sciencebase.gov/catalog/item/657e1d85d34e23d3533209f7</td>
+<td>Verified (search id3)</td>
+<td>Same DOI, full data files + contractor report</td>
+</tr>
+<tr>
+<td>DOI landing</td>
+<td>https://doi.org/10.5066/P93LGLVQ</td>
+<td>Verified via USGS citation</td>
+<td>Official DOI for citation</td>
+</tr>
+<tr>
+<td><strong>Faulds et al. structural settings</strong></td>
+<td>https://gdr.openei.org/submissions/383</td>
+<td>Verified (search id1)</td>
+<td>32% step-overs/relay ramps, 25% terminations, 22% intersections, 9% accommodation zones, etc.; step-overs most favorable</td>
+</tr>
+<tr>
+<td>Faulds &amp; Hinz 2015</td>
+<td>https://www.osti.gov/servlets/purl/1724082</td>
+<td>Verified (search id3)</td>
+<td>Figure 2 characteristic settings (major fault, bend, tip, step-over, intersection, accommodation zone, displacement transfer)</td>
+</tr>
+<tr>
+<td>Giddens et al. 2025 Stanford</td>
+<td>https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2025/Giddens.pdf</td>
+<td>Verified (search id2)</td>
+<td>450+ step-overs inventoried, 2.8–3.5 km avg relay width, overlapping hard-linked geometries favor &gt;120 °C systems</td>
+</tr>
+<tr>
+<td>Lyell synthesis</td>
+<td>https://www.lyellcollection.org/doi/full/10.1144/geoenergy2023-009</td>
+<td>Verified (search id4)</td>
+<td>Step-overs 25%, terminations 20%, intersections 18% summary</td>
+</tr>
+<tr>
+<td>Faulds dataset</td>
+<td>https://www.osti.gov/dataexplorer/biblio/dataset/1148722</td>
+<td>Verified (search id5)</td>
+<td>Structural inventory hierarchal complexity</td>
+</tr>
+<tr>
+<td>munimtechnologies baseline</td>
+<td>https://github.com/munimtechnologies/gems-fault-mapping</td>
+<td>Verified (search id2)</td>
+<td>Local DTI metric, CPU baseline, results table</td>
+</tr>
+</tbody>
+</table>
+<h2>Why hidden faults are plausible targets</h2>
+<p>Great Basin extension creates high-angle normal faults; Quaternary alluvium
+often buries scarps while gravity (isostatic anomaly) and basement depth retain
+offset. GeoDAWN's 400-m magnetic/radiometric grids at 150–200 m terrain clearance
+resolve 100-m-scale lineaments under cover. H33's retained dots are on average
+nearly 2 km from mapped faults, indicating hidden truth may be not random
+near known faults but in covered basins—exactly where discordance is high.</p>
+<h2>What we did not claim</h2>
+<ul>
+<li>No geothermal vent, temperature, permeability, or economic resource is claimed.
+  Target is fault traces, per organizer's fault-detection notebook.</li>
+<li>No leaderboard score is projected from HOLDOUT-DTI; they are different label sets.</li>
+<li>No authenticated organizer receipt for 0.2778, 0.3195, 0.4413, or 0.3774.</li>
+<li>No private registry exemption: dense continuous prior (17GEMSDOE E-proba-multiscale
+  20260930T044527Z, SHA256 <code>ab0a0a62…</code>, 5 167 373 positives) covers entire footprint,
+  so literal forward overlap is 1.0 for any nonempty candidate. Two-phase reading
+  (DENSE_SUPPORT_FRACTION=0.20) separates rank correlation (surface) from 3-px
+  dot overlap (dot fields); literal firing is reported for completeness.</li>
+</ul>
+<h2>Next steps (priority)</h2>
+<ol>
+<li>Fetch full registry (GH API) outside rate-limit, measure like-for-like overlap
+   vs H33/H27 sparse fields with <code>uniqueness.compare_array_to_registry</code> both ways.</li>
+<li>Relax catalogue pruning 3 px → 2 px to improve withheld recovery without
+   sacrificing emission efficiency; re-evaluate HOLDOUT-DTI.</li>
+<li>Add conductivity (<code>cond_surf</code> band 17) and GeoDAWN radiometrics (external)
+   for alteration halo (hypothesis 5) if licensed; verify via <code>scripts/fetch_data.py</code>.</li>
+<li>Test basement-ramp endpoint operator (hypothesis 3) on distinct folds.</li>
+<li>Obtain weekly-slot confirmation and organizer receipt before claiming any
+   ORGANIZER-CONFIRMED score; weekly cap not guessed.</li>
+</ol></main><footer>Evidence before leaderboard claims.</footer></body></html>

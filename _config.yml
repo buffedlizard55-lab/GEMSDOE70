@@ -1,0 +1,32 @@
+{
+  "exclude": [
+    ".cache",
+    ".github",
+    ".venv",
+    "AGENTS.md",
+    "Gemfile",
+    "Gemfile.lock",
+    "HANDOFF.md",
+    "LICENSE",
+    "PROJECT_BRIEF.md",
+    "PROMPT.md",
+    "README.md",
+    "_config.yml",
+    "_site",
+    "assets",
+    "data",
+    "docs/*.md",
+    "evidence",
+    "pyproject.toml",
+    "quarantine",
+    "registry",
+    "reports",
+    "requirements.lock",
+    "requirements.txt",
+    "scripts",
+    "src",
+    "submissions",
+    "tests",
+    "vendor"
+  ]
+}

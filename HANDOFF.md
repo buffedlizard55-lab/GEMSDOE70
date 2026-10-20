@@ -1,82 +1,64 @@
-# Handoff — 2026-10-20
+# Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
 
-Read README.md and PROJECT_BRIEF.md at session start.
+Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
 
-**NEGATIVE. DO NOT SUBMIT. No eligible TIFF exists.**
+## State
 
-The checkout started with only an eleven-byte README. Pinned numerical features,
-sample and catalogue were restored from public owner mirrors into `.cache/data`.
-No organizer-authenticated identity, current leaderboard receipt or weekly-cap
-state is available. The notebook reference was retrieved from the official
-DrivenData GitHub repository. No GPU was required for this fixed CPU hypothesis.
+* **Artifact published:** `docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif`
+  (126,097 bytes, sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`),
+  plus a one-TIFF ZIP and the writer receipt.
+* **Verdict: negative.** `download_ok = true`, `submit_recommended = false`.
+  The pre-registered target-like gate (instrument B′) is 12.6 % below the H33 reference with a
+  95 % CI excluding zero. Instrument A and the unrestricted proxy favour the candidate.
+* **No weekly slot used. No organizer-confirmed score exists in this repository.**
 
-One preregistered contact-termination experiment ran. Every raw and transformed
-feature received an AUC leakage canary and shared HOLDOUT-DTI. Whole mapped
-components were withheld with a real three-pixel feature-context buffer, spatially
-eroded quadrants and pixel-exact known-fault masking. No catalogue predictor was
-used. The continuous surface is worse than its random sparse control; current
-holdout best was not independently rerun. See evidence/holdout.json.
+## What was done
 
-The surface passed numerical array checks but failed the literal overlap gate.
-A SHA-verified 17GEMSDOE continuous prediction covers every footprint cell; its
-halo leaves no off-catalogue allowed cell uncovered. No nonempty candidate can
-pass the inherited literal support rule against it. **Do not silently exempt it.**
-Only this decisive witness was compared; an incomplete scan cannot certify
-uniqueness, but a duplicate witness suffices to stop. Final dots were not placed,
-no submission writer was invoked for the scientific run, and no slot was used.
-The shared writer's TIFF/ZIP behavior is tested only with synthetic temporary
-unit-test fixtures, never published as competition predictions.
+1. **Two defects in the shared uniqueness tool were found and fixed** (reported, hashes in
+   `registry/template_pin.json` with `all_identical: false`, full text in
+   `evidence/upstream_fix_report.md`):
+   * dots are binary (`|value − 1| < 1e-6`), not every positive value;
+   * duplication requires **mutual** overlap; forward-only overlap fires at 1.00 on three archived
+     dense lattices whose 3-px halos cover the whole footprint.
+2. **Three preregistered experiments.**
+   * Exp 2 (geophysically gated continuation prior): A 0.0591, B 0.0432 — the four-field
+     geophysical gate hurt and was removed.
+   * Exp 3 (damage-zone intensity): A 0.0873, B 0.1098, B′ 0.0471 — concentration wasted mass
+     because `T` saturates per truth cell while `S` scales per dot.
+   * Exp 4 (coverage-stratified halo, weak tilt): A 0.0730, B 0.0948, B′ 0.0812 — best balance;
+     this is the published artifact.
+3. The site was rebuilt to read every number from JSON receipts and to state the download/submit
+   decision explicitly on the landing page.
 
-`vendor/gems57` is unchanged from 60GEMSDOE commit
-`32024716f218d06a94e01464157392119c03cb15`; evidence/template_verification.json
-compares both SHA-256 and upstream git blob identities. A false bound in the
-metric's explanatory docstring was identified, but executable coverage arithmetic
-is correct. Cross-repo issue creation was denied; see evidence/upstream_metric_report.md.
+## Do not
 
-Next session must resolve the protocol representation conflict and missing lane
-assignment before new science. A fresh ranking needs untouched evaluation blocks,
-comparable current-best validation and complete pre-placement/final-dot audits.
-Never tune the present fixed hypothesis after seeing its holdout.
+* Do not relabel the artifact as promoted, and do not edit the card's gates.
+* Do not describe 0.2778 or 0.44 as organizer-confirmed; both are user-supplied.
+* Do not remove the two uniqueness fixes without replacing them upstream in the shared template.
+* Do not publish any TIFF/ZIP other than the three files named by the run card —
+  `release.assert_no_public_rasters` enforces this.
 
-Publication is intentionally fail-closed for this stopped experiment. The static
-site cannot generate or train a TIFF in-browser. A fresh reviewed scientific run
-and release contract are prerequisites to connecting the validated shared writer
-to a real one-click artifact; editing run-card booleans is not sufficient.
+## Next session, in order
 
-Commands:
+1. Supervised within-halo ranking on the SGMC off-catalogue proxy with leave-one-quadrant-out.
+   Features: 19-band stack, `lidar_scarp_features_u8` (12 bands), `geodawn_rad_u8` (K/Th/U/TC and
+   ratios), catalogue geometry (distance, side, host length, tip position), and the measured
+   coverage stratification (7×7 strata, 5-px NMS) which was worth +70 % on B′ at fixed mass.
+2. Quantify SGMC duplication against QFaults (buffer tests 1–6 px) so instrument B/B′ can be
+   improved or replaced by a genuinely independent additional-fault set.
+3. Upstream the two uniqueness fixes to the template repository and run its suite.
+4. Only then spend a slot, and record the returned score as ORGANIZER-CONFIRMED.
 
+## Reproduce
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_experiment_v4.py
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+.venv/bin/python -m pytest -q          # 118 passed at handoff
 ```
-python -m venv .venv
-.venv/bin/pip install -r requirements.lock
-bash scripts/download_competition_data.sh
-.venv/bin/python scripts/build_site.py
-.venv/bin/python scripts/build_readme.py
-.venv/bin/python -m pytest -q
-```
 
-Do not rerun scripts/run_experiment.py: its existing experiment manifest makes it
-refuse a second attempt. Data are reconstructible; large caches are ignored and
-not committed. Source-health refresh is separate from scientific validation.
-
-## Concurrent-main integration
-
-Main advanced through PRs 1 and 2 while this session ran. Their reports, audit
-helpers, bridge fixtures and tests are retained. The earlier review-only run card,
-README and handoff are archived in evidence/history/parallel-review2. Canonical
-publication scripts use the measured one-experiment card; the legacy card command
-now verifies it rather than overwrite it. Root historical HTML paths redirect to
-the current workbench. The combined suite passes 68 tests (three upstream
-Rasterio/Affine pending-deprecation warnings). No unrelated candidate PR is
-endorsed by this integration.
-
-## Concurrent H70-C publication quarantine
-
-Main subsequently advanced through PRs 4 and 5, advertising a second session's
-H70-C TIFF as ready. Inspection found explicit simulated/placeholder holdout
-values in generation source and a one-raster H33 comparison, not full literal
-uniqueness clearance. All source, claims and files are preserved with hashes in
-quarantine/concurrent-h70c and evidence/concurrent_h70c_quarantine.json; none is
-endorsed or linked as a submission. Source text is retained, not executed. The
-canonical site remains negative. No additional scientific experiment was run.
-
-Final suite after adding quarantine hash/publication coverage: **69 tests pass**.
+Large inputs and the registry clone stay outside Git (`.cache/`, `/tmp`). Published evidence is
+JSON plus the 126 KB artifact.

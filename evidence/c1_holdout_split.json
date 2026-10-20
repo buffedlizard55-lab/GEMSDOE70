@@ -1,12 +1,13 @@
 {
   "evidence_class": "HOLDOUT-DTI",
-  "evaluator_version": "gems57-pooled-hide-v2",
+  "seed": 71,
+  "fresh_blocks_not_seed20": true,
   "receipts": [
     {
       "fold": "NW",
-      "seed": 20,
-      "held_components": 96,
-      "withheld_positive_pixels": 1923,
+      "seed": 71,
+      "held_components": 137,
+      "withheld_positive_pixels": 1931,
       "eligible_components": 598,
       "boundary_buffer_px": 12,
       "feature_buffer_px": 3,
@@ -16,9 +17,9 @@
     },
     {
       "fold": "NE",
-      "seed": 20,
-      "held_components": 145,
-      "withheld_positive_pixels": 2367,
+      "seed": 71,
+      "held_components": 133,
+      "withheld_positive_pixels": 2364,
       "eligible_components": 628,
       "boundary_buffer_px": 12,
       "feature_buffer_px": 3,
@@ -28,9 +29,9 @@
     },
     {
       "fold": "SW",
-      "seed": 20,
-      "held_components": 223,
-      "withheld_positive_pixels": 3781,
+      "seed": 71,
+      "held_components": 199,
+      "withheld_positive_pixels": 3845,
       "eligible_components": 983,
       "boundary_buffer_px": 12,
       "feature_buffer_px": 3,
@@ -40,9 +41,9 @@
     },
     {
       "fold": "SE",
-      "seed": 20,
-      "held_components": 142,
-      "withheld_positive_pixels": 3250,
+      "seed": 71,
+      "held_components": 140,
+      "withheld_positive_pixels": 3285,
       "eligible_components": 648,
       "boundary_buffer_px": 12,
       "feature_buffer_px": 3,
@@ -51,9 +52,7 @@
       "evaluation_region_label_blind": true
     }
   ],
-  "total_withheld_positive_pixels": 11321,
-  "catalogue_predictors": [],
-  "valid_feature_pixels": 4989581,
-  "known_mask_rule": "catalogue minus globally withheld components, pixel exact; feature collar is not removed from evaluation",
-  "limitation": "Mapped components are a surrogate for previously unmapped faults; no hidden organizer labels."
+  "total_withheld_positive_pixels": 11425,
+  "visible_catalogue_pixels": 48557,
+  "catalogue_features_from": "visible traces only (holdout-visible mask)"
 }

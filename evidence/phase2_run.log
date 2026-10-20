@@ -1,0 +1,27 @@
+fold 0 evaluated
+fold 1 evaluated
+fold 2 evaluated
+fold 3 evaluated
+B quadrant 0 evaluated
+B quadrant 1 evaluated
+B quadrant 2 evaluated
+B quadrant 3 evaluated
+Traceback (most recent call last):
+  File "/home/user/GEMSDOE70/scripts/run_experiment_v2.py", line 337, in <module>
+    main()
+  File "/home/user/GEMSDOE70/scripts/run_experiment_v2.py", line 239, in main
+    audit = uniqueness.compare_to_registry(_write_tmp(prod), index, fp,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/GEMSDOE70/vendor/gems57/uniqueness.py", line 322, in compare_to_registry
+    result = compare_array_to_registry(mine, registry_index, footprint,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/GEMSDOE70/vendor/gems57/uniqueness.py", line 234, in compare_array_to_registry
+    records, inventory_complete, source_errors = records_from_index(idx)
+                                                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/GEMSDOE70/vendor/gems57/uniqueness.py", line 215, in records_from_index
+    records = [dict(repo=r['repo_first'], submission=r['sources'][0], file=r['cache_file'],
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/user/GEMSDOE70/vendor/gems57/uniqueness.py", line 215, in <listcomp>
+    records = [dict(repo=r['repo_first'], submission=r['sources'][0], file=r['cache_file'],
+                         ~^^^^^^^^^^^^^^
+KeyError: 'repo_first'

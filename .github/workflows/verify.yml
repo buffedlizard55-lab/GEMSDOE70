@@ -1,4 +1,4 @@
-name: Verify evidence and negative release gate
+name: Verify evidence and the release contract
 on:
   push:
   pull_request:
