@@ -1,0 +1,205 @@
+{
+  "hypothesis": "H-P5-1 magnetic-gravity correlation halo with radiometric refinement",
+  "mechanism": "within-halo ranking by magnetic-gravity correlation + edge amplitudes + basement gradient; coverage-stratified 7x7 block sampling; 5-px NMS",
+  "non_fault_mimic": "lithologic contacts with contrasting magnetization/density but no slip",
+  "verdict": "negative",
+  "evidence_class": "HOLDOUT-DTI (A) and PROXY-DTI (B-B-prime); neither organizer-confirmed",
+  "instrument_a_holdout": {
+    "candidate": {
+      "dti": 0.07814825485913764,
+      "ci95": [
+        0.07257105681245818,
+        0.08437676096179914
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "random_control": {
+      "dti": 0.0505547543622084,
+      "ci95": [
+        0.045115887268522566,
+        0.05583407617316418
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "h33_reference": {
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.003037134722219959,
+        0.004497470563248019
+      ],
+      "withheld_positive_pixels": 11321
+    }
+  },
+  "instrument_b_prime_proxy": {
+    "candidate": {
+      "dti": 0.08267709555946105,
+      "ci95": [
+        0.07397385100341228,
+        0.0920245581266371
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "random_control": {
+      "dti": 0.06972784527138284,
+      "ci95": [
+        0.06575396086921854,
+        0.07316676604814398
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "h33_reference": {
+      "dti": 0.09377056861492462,
+      "ci95": [
+        0.08375251373533825,
+        0.104028711800872
+      ],
+      "withheld_positive_pixels": 59937
+    }
+  },
+  "instrument_b_unrestricted": {
+    "candidate": {
+      "dti": 0.0872617435369351,
+      "ci95": [
+        0.07957287807737608,
+        0.0950176784827841
+      ]
+    },
+    "random_control": {
+      "dti": 0.07101315599892798,
+      "ci95": [
+        0.067852845424844,
+        0.07407922986767024
+      ]
+    },
+    "h33_reference": {
+      "dti": 0.09059897608840377,
+      "ci95": [
+        0.08214959351246441,
+        0.09919171835657462
+      ]
+    }
+  },
+  "paired_a_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.07444847317350806,
+    "ci95": [
+      0.06889928836133952,
+      0.08086161184440478
+    ],
+    "withheld_positive_pixels": 11321
+  },
+  "paired_b_prime_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": -0.01109347305546357,
+    "ci95": [
+      -0.02210107132488058,
+      -0.0009682170038687329
+    ],
+    "withheld_positive_pixels": 59937
+  },
+  "gate_a_candidate_ge_h33": true,
+  "gate_b_prime_candidate_gt_h33_significant": false,
+  "correlation_overlap_vs_registry": {
+    "stage": "final production dots (37,654 binary)",
+    "rasters_checked": 62,
+    "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
+    "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+    "worst_mutual_overlap": 0.28228454015335874,
+    "worst_mutual_submission": "calib_h25ctx_01280.tif",
+    "worst_forward_overlap": 1.0,
+    "worst_forward_submission": "calib_r13lattice_00904.tif",
+    "worst_spearman_full_footprint": 0.0056727210155642456,
+    "worst_rho_submission": "57GEMSDOE__h57-anatomy-enechelon-zeros.tif",
+    "worst_jaccard": 0.007575145154617605,
+    "duplicate": false
+  },
+  "raster_sha256": "60791e689524d195464efddc25e662c8fcdfb935cf57373ca06747889e91014d",
+  "raster_sha256_reason": null,
+  "validator_output": {
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-mag-gravity-correl-halo-37654-20261020.tif",
+    "bytes": 144629,
+    "sha256": "60791e689524d195464efddc25e662c8fcdfb935cf57373ca06747889e91014d",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "emitted_positive_pixels": 37654,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 37654,
+    "footprint_fraction": 0.007286874781441169
+  },
+  "submission_name": "gems70-p5-mag-gravity-correl-halo-37654-20261020",
+  "submission_note": "P5 magnetic-gravity correlation halo with radiometric refinement, 37654 binary dots off-catalogue; within-halo physics ranking",
+  "note_chars": 126,
+  "download_and_submit_ok": false,
+  "weekly_slots_used": 0,
+  "experiment_count": 5,
+  "elapsed_seconds": 76.76,
+  "organizer_confirmed_score": null,
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "method_source_sha256": {
+    "src/gems70/method_v2.py": "8e8896aba8a0b56737b5d1930d1f0898da7d29d8ec39f7f13e5cf1c7717b4a41",
+    "/home/user/GEMSDOE70/scripts/run_experiment_v5.py": "8ee74223fffbeabfbc2639edc121c5be0a92a160021bae6d3a15517b2ec0152a"
+  },
+  "registered_parameters": {
+    "dot_count": 37654,
+    "block_px": 7,
+    "nms_px": 5.0,
+    "d_min_px": 2.4,
+    "d_max_px": 32.0,
+    "correlation_weight": 0.5,
+    "edge_weight": 0.35,
+    "base_weight": 0.15,
+    "min_score_fraction": 0.001
+  }
+}

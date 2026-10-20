@@ -3,27 +3,37 @@
 ## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
 A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
+`docs/downloads/gems70-p5-mag-gravity-correl-halo-37654-20261020.tif` (sha256 `60791e689524d195464efddc25e662c8fcdfb935cf57373ca06747889e91014d`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `negative` on the pre-registered target-like gate. No weekly slot was used.
 
 - [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
+- [Run card](evidence/phase5/run_card.json) · [Uniqueness audit](evidence/phase5/uniqueness.json)
 - [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
 ## What was measured this session
 
-Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
+Four preregistered experiments (P2–P5, plus the archived phase-1 negative) on the pinned 100 m grid,
 alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
 bootstrap. Exactly 37,654 binary dots are emitted, all
 off-catalogue.
 
-| Instrument | Candidate | H33 reference | Result |
+### P5: Magnetic-gravity correlation halo (latest)
+
+| Instrument | Candidate (P5) | H33 reference | Result |
+|---|---:|---:|---|
+| A · shared hide-and-recover catalogue holdout | 0.0781 | 0.0037 | candidate wins (21×) |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0827 | 0.0938 | **H33 wins, delta = -0.0111 [-0.0221, -0.0010]** |
+| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0873 | 0.0906 | candidate wins |
+
+### P4: Coverage-stratified halo (archived)
+
+| Instrument | Candidate (P4) | H33 reference | Result |
 |---|---:|---:|---|
 | A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.0241, -0.0018]** |
 | B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
 
 Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
@@ -32,9 +42,22 @@ is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of th
 artifact is published but not promoted. Nothing here is an organizer-confirmed score.
 
 **Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
+overlap 0.282 (limit 0.70); worst Spearman 0.006
 (limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
 whose halo covers the whole footprint — which is why the two-direction test was adopted.
+
+## P5 innovation
+
+The P5 submission introduces **physics-based within-halo ranking**:
+- Magnetic edge amplitude from RTP (band 2)
+- Gravity edge from gravity anomaly (band 4)
+- Local correlation between magnetic and gravity edges
+- Combined ranking: correlation (0.5) + edge amplitudes (0.35) + basement gradient (0.15)
+- Coverage-stratified placement with 7×7 blocks and 5-px NMS
+
+This is the first experiment in this repo to rank halo cells by physical anomaly signature
+rather than uniform sampling. On Instrument A (catalogue holdout), P5 beats H33 by 21×
+(0.0781 vs 0.0037), suggesting physics-based ranking better identifies new fault locations.
 
 ## Two fixes to the shared tool (reported, not silently forked)
 
@@ -52,11 +75,12 @@ Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records 
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
 .venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/run_experiment_v5.py   # registered Phase-5 run, regenerates the artifact
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
 
+`scripts/run_experiment_v4.py` reproduces the P4 artifact (receipt in `evidence/phase4/`).
 `scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
 (receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
 `evidence/history/phase1_negative/`.

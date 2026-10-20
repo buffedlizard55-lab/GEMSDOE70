@@ -3,10 +3,28 @@
   "policy": "Every TIFF/ZIP in docs/ must appear here with a matching SHA-256; the build refuses anything else.",
   "artifacts": [
     {
+      "path": "docs/downloads/gems70-p5-mag-gravity-correl-halo-37654-20261020.tif",
+      "sha256": "60791e689524d195464efddc25e662c8fcdfb935cf57373ca06747889e91014d",
+      "bytes": 144629,
+      "note": "this session (P5), published candidate; run card evidence/phase5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-mag-gravity-correl-halo-37654-20261020.zip",
+      "sha256": "9d7fb0a8a5b805a54f9aad09214fa5b0c825934873527e05df0983ca6ade0252",
+      "bytes": 111452,
+      "note": "this session (P5), one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-mag-gravity-correl-halo-37654-20261020.json",
+      "sha256": "681ee2bb18e748158f3acb08adfaff5a8c491221f48413d6aaac410f67262604",
+      "bytes": 3515,
+      "note": "this session (P5), writer receipt"
+    },
+    {
       "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
       "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
       "bytes": 126097,
-      "note": "this session (P4), published candidate; run card evidence/phase4/run_card.json"
+      "note": "this session (P4), archived candidate; run card evidence/phase4/run_card.json"
     },
     {
       "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.zip",
