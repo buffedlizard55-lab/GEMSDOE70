@@ -17,7 +17,7 @@
 
 ## Next session, in priority order
 
-1. Resolve the literal continuous-surface/dot representation conflict at the shared protocol level. Until then, no nonempty submission can pass. Do not silently change the threshold or registry support definition.
+1. Resolve the literal continuous-surface/dot representation conflict at the shared protocol level. Until then, no nonempty submission can pass. Do not silently change the threshold or registry support definition. See the [versioned decision request](protocol-decision.md): its alternatives are proposals, not an approved change.
 2. Obtain an explicit lane paragraph, official sample/data identity and rule confirmation, and a current-best implementation on a comparable holdout split. Do not request credentials in chat.
 3. Use the archived negative evidence to reject the present fixed ranking. A fresh preregistered idea must use untouched evaluation blocks and satisfy the budget; do not tune this experiment on its reported holdout.
 4. Verify scientific literature/data licensing from official sources when network access permits. The research queue is not a list of verified discoveries.
