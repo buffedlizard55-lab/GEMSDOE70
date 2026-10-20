@@ -58,6 +58,7 @@ def check_output(site: Path, baseurl: str = '/GEMSDOE70', *, allowed_artifacts=N
     allowed_artifacts = allowed_artifacts or {}
     raster_count = 0
     paths = list(site.rglob('*'))
+    raster_count = 0
     violations = []
     for path in paths:
         rel = path.relative_to(site)

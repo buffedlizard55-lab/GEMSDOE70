@@ -42,6 +42,14 @@ def ci(d):
 
 
 def frame(title, body):
+    review = load('evidence/literal_protocol_review.json', {})
+    if review.get('correlation_overlap_vs_registry', {}).get('stop'):
+        body = ('''<section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
+<p>Download for review only. The archived Phase-4 TIFF fails the requested one-way
+3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
+are not clearance under the current prompt. No new TIFF was generated in this review.</p>
+<p><a href="protocol-review.html">Current protocol review and next steps</a> · <a href="research-review.html">Research and source review</a> ·
+<a href="literal-protocol-review.json">Current JSON run card</a></p></section>''' + body)
     nav = ''.join(f'<a href="{h}">{esc(t)}</a>' for h, t in NAV)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -75,6 +83,12 @@ def main():
     card = load('evidence/run_card.json', {})
     if not card:
         raise SystemExit('evidence/run_card.json missing; run the experiment first')
+    review = load('evidence/literal_protocol_review.json', {})
+    if review:
+        (DOCS / 'literal-protocol-review.json').write_text(json.dumps(review, indent=2) + '\n')
+        import markdown
+        text = (ROOT / 'reports/literal-protocol-review.md').read_text()
+        (DOCS / 'protocol-review.html').write_text(frame('Current protocol review', markdown.markdown(text, extensions=['tables'])))
     name = card['submission_name']
     sha = card['raster_sha256']
     val = card.get('validator_output') or {}
@@ -94,7 +108,7 @@ def main():
     sources = load('registry/sources.json', [])
 
     import markdown
-    (DOCS / 'protocol-review.html').write_text(frame('Current protocol review', markdown.markdown((DOCS / 'protocol-review.md').read_text(), extensions=['tables'])))
+    (DOCS / 'research-review.html').write_text(frame('Current research review', markdown.markdown((DOCS / 'protocol-review.md').read_text(), extensions=['tables'])))
 
     DOCS.mkdir(parents=True, exist_ok=True)
     DOWN.mkdir(parents=True, exist_ok=True)
@@ -147,6 +161,8 @@ def main():
     decision = f'''<section class="{tone}" aria-labelledby="decision">
 <div class="eyebrow">SUBMISSION STATUS</div>
 <h1 id="decision">{esc(headline)}</h1>
+<p><strong>Competition submission: NO — not recommended.</strong></p>
+<p>Registry scope is not every private or uncommitted raster.</p>
 <p><strong>Download: yes.</strong> Historical file for review only; format validation is not submission clearance.
 The current forward-overlap protocol flags this artifact as a duplicate.
 <strong>DO NOT SUBMIT under the current protocol.</strong>

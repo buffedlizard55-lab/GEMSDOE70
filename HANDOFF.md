@@ -88,3 +88,13 @@ prevents stale promotion flags bypassing scientific, leakage, and literal overla
 gates. See docs/protocol-review.md and evidence/review-20261020/run_card.json.
 Do not resume the earlier next-session plan without a named lane and resolution
 of the explicit stop. Official reference README confirms CPU training support.
+
+## Current literal-protocol review (2026-10-20, arena/00dc63c0-gemsdoe70)
+
+Read `reports/literal-protocol-review.md` and `evidence/literal_protocol_review.json`
+before interpreting the historical mutual-overlap clearance above. The requested forward-only
+rule fails on four archived Phase-4 witnesses (maximum 1.0). Stop; no new experiment or TIFF,
+no weekly slot. Frozen scientific receipts are preserved, not reclassified as new measurements.
+Site-wide warnings and the README opening supersede old uniqueness claims for this prompt.
+Reproduce: `.venv/bin/python scripts/audit_literal_protocol.py`, rebuild site/readme, pytest.
+Resolve the protocol contradiction and explicit lane assignment before the supervised next step.
