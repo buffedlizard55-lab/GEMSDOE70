@@ -20,7 +20,7 @@ DOWN = DOCS / 'downloads'
 NAV = [('index.html', 'Overview'), ('submission.html', 'Submit a file'),
        ('results.html', 'Evidence'), ('hypotheses.html', 'Hypotheses'),
        ('h33-analysis.html', 'Why H33 scored'), ('sources.html', 'Sources'),
-       ('limitations.html', 'Limitations')]
+       ('limitations.html', 'Limitations'), ('protocol-review.html', 'Current protocol')]
 
 
 def load(rel, default=None):
@@ -43,13 +43,16 @@ def ci(d):
 
 def frame(title, body):
     nav = ''.join(f'<a href="{h}">{esc(t)}</a>' for h, t in NAV)
+    protocol_banner = '''<section class="stop" role="note"><strong>CURRENT PROTOCOL: DO NOT SUBMIT.</strong>
+Existing TIFF downloads are for review only. The inherited mutual-overlap clearance does not satisfy the requested forward-overlap stop rule.
+No new TIFF was generated in this review. <a href="protocol-review.html">Review and next hypotheses</a> · <a href="current_protocol_review.json">Current run card</a></section>'''
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)} · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main">{nav}</nav><main id="main">{body}</main>
+<nav aria-label="Main">{nav}</nav><main id="main">{protocol_banner}{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
@@ -96,6 +99,8 @@ def main():
     DOCS.mkdir(parents=True, exist_ok=True)
     DOWN.mkdir(parents=True, exist_ok=True)
 
+    shutil.copyfile(ROOT / 'evidence/current_protocol_review.json', DOCS / 'current_protocol_review.json')
+
     # ------------------------------------------------------------- copy evidence
     copies = {
         'evidence/run_card.json': 'run_card.json',
@@ -141,12 +146,11 @@ def main():
     decision = f'''<section class="{tone}" aria-labelledby="decision">
 <div class="eyebrow">SUBMISSION STATUS</div>
 <h1 id="decision">{esc(headline)}</h1>
-<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
+<p><strong>Download: yes.</strong> The archived file passed the historical mutual-overlap audit only (not the current protocol),
 passes every shared-validator check, and its SHA-256 is recorded below.</p>
 <p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
 <strong>{esc(card['verdict'])}</strong>: the pre-registered target-like gate (instrument B′) is
-negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
-not a validated improvement.</p>
+negative, so we cannot claim this beats the family best of 0.2778. Do not upload under the current protocol; the existing file is for review only.</p>
 <div class="actions">
 <a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download submission TIFF</a>
 <a class="button secondary" href="downloads/{esc(name)}.zip" download>Download one-TIFF ZIP</a>
@@ -171,7 +175,7 @@ not a validated improvement.</p>
 <p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ {uniqueness.get('worst_spearman_full_footprint', 0):.3f}</p></section></div>'''
 
     index = decision + f'''<section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
-<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
+<h2>An auditable archive — not cleared by the current protocol.</h2>
 <p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
 pre-registered experiments and published the best candidate. Two instruments favour it, one does
 not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
@@ -325,7 +329,8 @@ always reported.</p>
     import markdown
     for src, dst, title in [('docs/hypotheses.md', 'hypotheses.html', 'Hypotheses'),
                             ('docs/h33-analysis.md', 'h33-analysis.html', 'Why H33 scored'),
-                            ('docs/irregularities.md', 'limitations.html', 'Limitations')]:
+                            ('docs/irregularities.md', 'limitations.html', 'Limitations'),
+                            ('docs/protocol-review.md', 'protocol-review.html', 'Current protocol review')]:
         text = (ROOT / src).read_text()
         body = markdown.markdown(text, extensions=['tables'])
         (DOCS / dst).write_text(frame(title, body))

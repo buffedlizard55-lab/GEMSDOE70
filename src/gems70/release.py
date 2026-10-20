@@ -14,6 +14,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
+from .protocol import strict_gate
 
 
 def valid_canary(canary):
@@ -82,7 +83,15 @@ def release_status(root):
         if not card.get('gate_b_prime_candidate_gt_h33_significant'):
             reasons.append("Candidate did not beat H33 on instrument B' with a 95% CI above zero.")
         notes.append('A downloadable, validated file is not a validated leaderboard improvement.')
+    protocol = strict_gate(audit or {})
+    protocol_ok = (not protocol['stop_required']
+                   and protocol['current_registry_clearance'] is True)
+    if not protocol_ok:
+        submit = False
+        reasons.append('Current forward-overlap protocol requires STOP; archive download is review-only.')
     return {
+        'current_forward_protocol_ok': protocol_ok,
+        'review_only': not protocol_ok,
         'verdict': (card or {}).get('verdict', 'negative'),
         'download_ok': download_ok,
         'submit_recommended': submit,

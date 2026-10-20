@@ -18,3 +18,12 @@
 ## Parallel-lane addendum (2026-10-20, PR #16)
 - E2/E3 evidence and cards (`evidence/e2|e3/`) are frozen like Phase 1-4. The E2 review TIFF is inventoried but never promoted; `release.candidate_status().submit_ok` stays False until selector gates in `docs/publication-amendment-e2.md` are recorded.
 - E2 uniqueness numbers predate the mutual-overlap fix (R1 subset audit). Re-audit E2 under the corrected rule before comparing uniqueness across lanes.
+
+## Current-request override (2026-10-20, arena/3169a6c0-gemsdoe70)
+The user explicitly requires **forward** overlap >0.70 to stop. Historical mutual-overlap
+clearances are not sufficient for this request. Read `docs/protocol-review.md` and
+`evidence/current_protocol_review.json` first; a P4 final-dot witness requires STOP.
+No new lane paragraph was identifiable. Do not generate a new candidate or silently waive the
+stop. `gems70.protocol` is a policy adapter over frozen measurements, not a replacement metric.
+The shared scientific cards/evaluator/writer remain unchanged. Review-only downloads are allowed;
+no slot is authorized. A passing historical subset audit cannot certify current registry coverage.

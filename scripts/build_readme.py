@@ -19,7 +19,7 @@ def main():
 
 ## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
-A unique, format-validated competition TIFF is published:
+A format-validated archive TIFF is published (not cleared under the current protocol):
 `docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used.
@@ -108,6 +108,13 @@ PROJECT_BRIEF.md is the source for this embedded copy.
                    f"(selector-review only; complete corrected uniqueness scan pending). "
                    f"Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. "
                    f"Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).\n")
+    warning = '''> **CURRENT PROTOCOL OVERRIDE — DO NOT SUBMIT.** Downloads are review-only.
+> The frozen forward-overlap witness exceeds the user stop threshold. No new TIFF was generated.
+> See [review and ranked hypotheses](docs/protocol-review.md) and [current JSON card](evidence/current_protocol_review.json).
+> Historical mutual-overlap claims below do not establish current-protocol uniqueness.
+
+'''
+    head = head.replace('## Submission status:', warning + '## Historical submission status:', 1)
     (ROOT / 'README.md').write_text(head + e2_note + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
 
 

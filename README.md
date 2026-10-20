@@ -1,8 +1,13 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+> **CURRENT PROTOCOL OVERRIDE — DO NOT SUBMIT.** Downloads are review-only.
+> The frozen forward-overlap witness exceeds the user stop threshold. No new TIFF was generated.
+> See [review and ranked hypotheses](docs/protocol-review.md) and [current JSON card](evidence/current_protocol_review.json).
+> Historical mutual-overlap claims below do not establish current-protocol uniqueness.
 
-A unique, format-validated competition TIFF is published:
+## Historical submission status: **DOWNLOADABLE — NOT PROMOTED**
+
+A format-validated archive TIFF is published (not cleared under the current protocol):
 `docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `negative` on the pre-registered target-like gate. No weekly slot was used.

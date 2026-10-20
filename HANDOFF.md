@@ -79,3 +79,21 @@ before any slot consideration. Evidence: `evidence/e2/`, `evidence/e3/`,
 
 ## Integration note (PR #16 second merge, 2026-10-20)
 PR #18 (H2 stepover-relay, negative; HOLDOUT-DTI 0.023034, lane stop fired) landed during PR #16 CI and replaced `evidence/run_card.json`, builders and 4 test files with its fail-closed system. Integration preserved: H2 card moved byte-identical to `evidence/history/h2_stepover_negative/run_card.json`; H2 diagnostic TIFF registered in `registry/published_artifacts.json`; Phase-4 canonical card restored from `fefc857` blob (sha256 `9cd64b1e...`); session-2 builders/tests retained so P4 + discordance + E2 artifacts stay coherent. `make_run_card.py` stale-schema fix (pre-existing red Verify on main) retained. All verdicts negative; slots used 0.
+
+## Current-request review — arena/3169a6c0-gemsdoe70 (2026-10-20)
+
+**Overrides historical uniqueness clearance: DO NOT SUBMIT.** The latest user request explicitly
+uses forward overlap, not the inherited mutual criterion. `scripts/audit_current_protocol.py`
+reapplies that rule to frozen P4 rows: multiple witnesses fail, including forward overlap 1.00.
+This is a historical negative witness, not a refreshed registry scan. No scientific experiment,
+new TIFF, fitting, placement or competition upload occurred in this session. All TIFF bytes and
+frozen scientific cards are preserved. Fresh local validation confirms P4 finite [0,1] and grid
+consistency against cached reference metadata, not organizer acceptance.
+
+- Current JSON: `evidence/current_protocol_review.json` (also published under docs).
+- Review / ranked conditional hypotheses: `docs/protocol-review.md`.
+- Official reference README retrieved at pinned commit and archived in `evidence/current-review/`;
+  CPU-only training is supported (GPU is not a hard requirement).
+- Website has a global DO NOT SUBMIT override, archive downloads remain available for review.
+- Reconcile explicit lane and uniqueness policy before the old supervised-ranking next step.
+- Reproduce: audit_current_protocol.py, build_site.py, build_readme.py, pytest; no data download needed.
