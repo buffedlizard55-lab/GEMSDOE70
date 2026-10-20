@@ -43,6 +43,12 @@
       "sha256": "5c23877dc4c9343fee9de700b21b96f93495b7c012f7b6f73e8b01aefb8f4ebe",
       "bytes": 151585,
       "note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
+    },
+    {
+      "path": "docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+      "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
+      "bytes": 498152,
+      "note": "parallel session (H2 step-over) BLOCKED diagnostic surface; DO NOT SUBMIT; not linked from site pages"
     }
   ]
 }
