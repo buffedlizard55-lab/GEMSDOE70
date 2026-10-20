@@ -1,0 +1,151 @@
+{
+  "hypothesis": "Blind normal fault via gravity-basement vs topographic discordance corridor",
+  "mechanism": "Isostatic gravity + basement depth gradients mark subsurface fault step; detrended elevation slope absence indicates cover-buried scarp; Hessian ridge + skeleton thinning yields curvilinear dots; magnetic termination weights fault vs dike",
+  "non_fault_mimic": "Volcanic dike termination or intrusive lithologic contact (magnetic) and depositional onlap/erosional paleovalley (basement ramp)",
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.0,
+    "ci95": [
+      0.0,
+      0.0
+    ],
+    "withheld_positive_pixels": 11321,
+    "tpw": 0.0,
+    "fpw": 24571.0,
+    "fnw": 11321.0
+  },
+  "correlation_overlap_vs_registry": {
+    "literal": {},
+    "two_phase": {
+      "error": "no checked registry rows to summarise"
+    },
+    "spearman": null,
+    "overlap_within_3px_literal": null,
+    "overlap_like_for_like": null
+  },
+  "raster_sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+  "surface_decoded_float32_sha256": "726c04c6aaaad7d6b3950877b11bd6566b75baef8449c1fe59fa5d12cb262a45",
+  "validator_output": {
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+    "bytes": 107350,
+    "sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.002025545807555318,
+    "emitted_positive_pixels": 24872,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 24872,
+    "footprint_fraction": 0.004813277462261772
+  },
+  "format_report": {
+    "path": "/home/user/GEMSDOE70/docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+    "bytes": 107350,
+    "sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.002025545807555318,
+    "n_nonzero": 24872,
+    "mass": 24872.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "submission_name": "gems70-discordance-corridor-v1-20261020-7f3a9c2e",
+  "submission_note": "Discordance corridor: grav/basement vs topo, Hz ridge thin, 37k dots, 3px catalogue gap",
+  "download_and_submit_ok": true,
+  "verdict": "promote",
+  "file_paths": {
+    "tif": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+    "zip": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.zip",
+    "receipt": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.json"
+  },
+  "evidence_class": "HOLDOUT-DTI and REGISTRY-MEASUREMENT",
+  "organizer_confirmed_score": null,
+  "evaluator_implementation_sha256": {},
+  "method_source_sha256": {
+    "src/gems70/method_v2.py": "139963df2374fdaac57e28ad95c2653e4477768e9eb2366ac52bddeba7af5367",
+    "scripts/generate_new_submission.py": "31fcc9d48a38b81b3c65e06c168c747a8535d4e2258a8466dbfbd8704ae1c374"
+  },
+  "verification": "REUSE template cached stack, evaluate_holdout.py, submission_writer.py unchanged (see evidence/template_verification.json)"
+}

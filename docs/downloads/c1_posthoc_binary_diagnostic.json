@@ -1,0 +1,74 @@
+{
+  "evidence_class": "HOLDOUT-DTI",
+  "label": "POST-HOC DIAGNOSTIC, NOT PREREGISTERED, NOT A PROMOTION BASIS",
+  "reason": "Tests whether the output transform (linear upper-2% rescale) explains the deficit.",
+  "transform": "binary top 2% of valid cells -> 1.0, others 0.0 (same for all arms)",
+  "holdout_seed": 71,
+  "positives_per_arm": 99792,
+  "scores": {
+    "candidate": {
+      "dti": 0.012116185733178445,
+      "ci95": [
+        0.007596833636734699,
+        0.01789788183624252
+      ],
+      "tpw": 329.4506580770986,
+      "fpw": 89925.32311818855,
+      "fnw": 11095.549341922902
+    },
+    "ablation_no_catalogue": {
+      "dti": 0.013964579134835326,
+      "ci95": [
+        0.007710251613080305,
+        0.02101082581935883
+      ],
+      "tpw": 398.98811726248164,
+      "fpw": 96758.20557616801,
+      "fnw": 11026.011882737519
+    },
+    "ablation_no_alignment": {
+      "dti": 0.008380581136262517,
+      "ci95": [
+        0.005142897774411004,
+        0.012439642026223054
+      ],
+      "tpw": 226.43291017523583,
+      "fpw": 89167.36696694045,
+      "fnw": 11198.567089824764
+    },
+    "random_control": {
+      "dti": 0.062245476008549676,
+      "ci95": [
+        0.05457593712279612,
+        0.06936800279869398
+      ],
+      "tpw": 1785.4862384721018,
+      "fpw": 95937.48623802225,
+      "fnw": 9639.513761527895
+    }
+  },
+  "paired_differences": {
+    "ablation_no_catalogue": {
+      "delta": -0.0018483934016568816,
+      "ci95": [
+        -0.007030110903337058,
+        0.003910451351779003
+      ]
+    },
+    "ablation_no_alignment": {
+      "delta": 0.003735604596915928,
+      "ci95": [
+        0.00048675157834372675,
+        0.00788483122695249
+      ]
+    },
+    "random_control": {
+      "delta": -0.05012929027537123,
+      "ci95": [
+        -0.05712424820175857,
+        -0.04196040428379085
+      ]
+    }
+  },
+  "evaluator_version": "gems57-pooled-hide-v2"
+}

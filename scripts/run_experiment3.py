@@ -24,7 +24,7 @@ from sklearn.metrics import roc_auc_score
 from gems57 import emit, evaluate_holdout, holdout
 from gems57.grid import load_grid
 from gems70.method import physical_features, joint_field
-from gems70.method2 import coherence, corroboration_gate, dequant, domain_surfaces, multiscale_edge, ortho_gate_score, road_factor
+from gems70.method_s2 import coherence, corroboration_gate, dequant, domain_surfaces, multiscale_edge, ortho_gate_score, road_factor
 
 E = ROOT / "evidence"
 CACHE = ROOT / ".cache"

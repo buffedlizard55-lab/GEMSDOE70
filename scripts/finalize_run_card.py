@@ -107,15 +107,15 @@ def main():
         "elapsed_seconds": summ["elapsed_seconds"],
         "organizer_confirmed_score": None,
         "evaluator_implementation_sha256": h3["implementation_sha256"],
-        "method_source_sha256": {p: sha(ROOT / p) for p in ["src/gems70/method2.py", "src/gems70/method.py", "scripts/run_experiment3.py"]},
+        "method_source_sha256": {p: sha(ROOT / p) for p in ["src/gems70/method_s2.py", "src/gems70/method.py", "scripts/run_experiment3.py"]},
         "release_reasons": reasons,
     }
     assert len(card["submission_note"]) <= 140, len(card["submission_note"])
-    (E / "run_card.json").write_text(json.dumps(card, indent=2) + "\n")
+    (E / "s2_run_card.json").write_text(json.dumps(card, indent=2) + "\n")
     release = {"download_and_submit_ok": ok, "download_research_ok": True,
                "verdict": card["verdict"], "reasons": reasons,
                "policy": "OK-TO-SUBMIT requires holdout promotion + like-for-like uniqueness + validator on exact bytes. This run fails the holdout gate; TIFF is a research download only. Weekly-slot selection is separate and no slot was used."}
-    (E / "release2.json").write_text(json.dumps(release, indent=2) + "\n")
+    (E / "s2_release.json").write_text(json.dumps(release, indent=2) + "\n")
     print(json.dumps({"verdict": card["verdict"], "download_and_submit_ok": ok, "reasons": reasons}, indent=2))
 
 

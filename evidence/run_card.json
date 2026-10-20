@@ -1,128 +1,155 @@
 {
-  "hypothesis": "H70-3A dual-detector rank fusion: supervised multi-physics HGB x unsupervised GEMSDOE49-architecture breakline detector (geometric mean of footprint ranks)",
-  "mechanism": "Out-of-fold HistGradientBoosting over 36 label-free features (cross-scale 1m/10m/100m scarps, potential fields, radiometrics, GDR1391 thermal density, strain/seismicity) fused by rank geometric mean with the multiscale topographic breakline x coherence x cross-gradient-orthogonality detector; dots placed by shared gems57 emit_decimated/emit_prefix at 37,654 dots, >2 px off catalogue",
-  "non_fault_mimic": "Anthropogenic (I-80/US-50/US-95, rail, canal) and Pleistocene Lake Lahontan paleoshoreline linear scarps that are also geophysically textured",
-  "hypothesis_status": "Experiment 3 of 3 (budget exhausted). Experiments 1 negative, 2 negative (gate hurt), 3 best point estimate but promotion gate failed.",
+  "hypothesis": "H70-A conductive breach at magnetic discordance",
+  "mechanism": "off = exp(-((d-16)/9)^2) band 2.4-32 px \u00d7 (0.7+0.3\u00b7tip) \u00d7 (1+0.6\u00b7rank(\u2016\u2207cond\u2016\u00b7analytic)) ; 7\u00d77 stratum max, 5px NMS, 37654 dots",
+  "non_fault_mimic": "saline groundwater / clay basin-fill conductivity boundary; Lahontan paleolake edge",
   "verdict": "negative",
-  "stop_reason": "holdout promotion gate not passed (paired 95% CI vs RawHGB_NoGate and vs GEMS49_OrthoGate cross zero); budget of 3 experiments exhausted",
-  "holdout_dti": {
-    "evidence_class": "HOLDOUT-DTI",
-    "evaluator_version": "gems57-pooled-hide-v2",
-    "dti": 0.09161315877394201,
-    "ci95": [
-      0.07488848117077676,
-      0.11105736675869819
-    ],
-    "withheld_positive_pixels": 11520,
-    "tpw": 1503.171582028315,
-    "fpw": 34455.89366499764,
-    "fnw": 10016.828417971681,
-    "stage": "final dotted field (emit_decimated/emit_prefix), untouched seed-703 holdout",
-    "current_best_verified": false,
-    "promotion_allowed": false,
-    "paired_differences": {
-      "RawHGB_NoGate": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": 0.007802454878722484,
-        "ci95": [
-          -0.0005725388146375291,
-          0.01621495916364463
-        ],
-        "withheld_positive_pixels": 11520
-      },
-      "Gated_H70_2A": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": 0.021166156134646688,
-        "ci95": [
-          0.012973024674909598,
-          0.03040099046525528
-        ],
-        "withheld_positive_pixels": 11520
-      },
-      "GEMS49_OrthoGate": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": 0.00894890842430715,
-        "ci95": [
-          -0.0011329623427333152,
-          0.01894143911287858
-        ],
-        "withheld_positive_pixels": 11520
-      },
-      "SingleBand_ElevSlope": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": 0.07590966362344027,
-        "ci95": [
-          0.05800389274022248,
-          0.09536862684132703
-        ],
-        "withheld_positive_pixels": 11520
-      },
-      "GEMS70_E1_ContactTermination": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": 0.05825795435825402,
-        "ci95": [
-          0.039537283506306274,
-          0.07864719978047842
-        ],
-        "withheld_positive_pixels": 11520
-      },
-      "Random_Sparse_Control": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": 0.04860235656343053,
-        "ci95": [
-          0.031844968572499445,
-          0.06694517595915427
-        ],
-        "withheld_positive_pixels": 11520
-      }
+  "evidence_class": "HOLDOUT-DTI (A) and PROXY-DTI (B/B'); neither organizer-confirmed",
+  "instrument_a_holdout": {
+    "candidate": {
+      "dti": 0.07091157672574441,
+      "ci95": [
+        0.06529379979774812,
+        0.07689490783504999
+      ],
+      "withheld_positive_pixels": 11321
     },
-    "all_scores": {
-      "candidate": 0.09161315877394201,
-      "RawHGB_NoGate": 0.08381070389521952,
-      "Gated_H70_2A": 0.07044700263929532,
-      "GEMS49_OrthoGate": 0.08266425034963486,
-      "SingleBand_ElevSlope": 0.01570349515050173,
-      "GEMS70_E1_ContactTermination": 0.03335520441568799,
-      "Random_Sparse_Control": 0.04301080221051148
+    "random_control": {
+      "dti": 0.0505547543622084,
+      "ci95": [
+        0.045115887268522566,
+        0.05583407617316418
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "h33_reference": {
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.003037134722219959,
+        0.004497470563248019
+      ],
+      "withheld_positive_pixels": 11321
     }
   },
-  "prior_experiment_holdout_dti": {
-    "experiment_2_candidate": 0.07828993089487506,
-    "experiment_2_note": "H70-2A gated candidate on seed-702; gate significantly hurt vs NoGate ablation; not retuned.",
-    "experiment_1": "H70-E1 contact termination: HOLDOUT-DTI 0.010193 [0.006062, 0.015042], 11321 withheld px (archived evidence/history/exp1_contact_termination)."
+  "instrument_b_prime_proxy": {
+    "candidate": {
+      "dti": 0.07926121716822297,
+      "ci95": [
+        0.07172585977375863,
+        0.08720218962529636
+      ],
+      "withheld_positive_pixels": 60383
+    },
+    "random_control": {
+      "dti": 0.06980464660008862,
+      "ci95": [
+        0.06606483943964757,
+        0.07317293602598576
+      ],
+      "withheld_positive_pixels": 60383
+    },
+    "h33_reference": {
+      "dti": 0.09530534390891478,
+      "ci95": [
+        0.08474881849371492,
+        0.10611916140764767
+      ],
+      "withheld_positive_pixels": 60383
+    }
   },
+  "instrument_b_unrestricted": {
+    "candidate": {
+      "dti": 0.09454629803259493,
+      "ci95": [
+        0.08640791588870608,
+        0.10229135242511866
+      ]
+    },
+    "random_control": {
+      "dti": 0.0710857667756016,
+      "ci95": [
+        0.06810446828411833,
+        0.07415872637882169
+      ]
+    },
+    "h33_reference": {
+      "dti": 0.09232712781026912,
+      "ci95": [
+        0.08366486305874189,
+        0.10147134682712979
+      ]
+    }
+  },
+  "paired_a_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.06721179504011483,
+    "ci95": [
+      0.06156524186709918,
+      0.07323835375666857
+    ],
+    "withheld_positive_pixels": 11321
+  },
+  "paired_b_prime_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": -0.016044126740691805,
+    "ci95": [
+      -0.02718049103902757,
+      -0.004737767848247423
+    ],
+    "withheld_positive_pixels": 60383
+  },
+  "gate_a_candidate_ge_h33": true,
+  "gate_b_prime_candidate_gt_h33_significant": false,
   "correlation_overlap_vs_registry": {
-    "stage": "surface before placement AND final dots",
-    "rasters_checked": 940,
-    "registry_complete_accessible_scan": true,
-    "surface": {
-      "spearman_worst": 0.6085190530186994,
-      "overlap_within_3px_literal": 1.0,
-      "like_for_like_duplicate": true
-    },
-    "final_dots": {
-      "spearman_worst": 0.12050648591784155,
-      "overlap_within_3px_dot_fields_worst": 0.9999203271896744,
-      "worst_overlap_submission": "13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
-      "like_for_like_duplicate": true,
-      "literal_overlap_worst": 1.0
-    },
-    "literal_reading_note": "Literal positive-support reading fires vs whole-footprint continuous priors by construction (saturation certificate in uniqueness3.json); like-for-like dot-field reading is the operative lane test, reported alongside, thresholds unchanged."
+    "stage": "final production dots (37654 binary)",
+    "rasters_checked": 2,
+    "inventory_scope": "2 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
+    "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+    "worst_mutual_overlap": 0.19766824241780423,
+    "worst_mutual_submission": "GEMSDOE25__dotted-h19-5-d2-8.tif",
+    "worst_forward_overlap": 0.19766824241780423,
+    "worst_forward_submission": "GEMSDOE25__dotted-h19-5-d2-8.tif",
+    "worst_spearman_full_footprint": 0.0020997004635860492,
+    "worst_rho_submission": "GEMSDOE28__h27-4-r1-solo-d2-8.tif",
+    "worst_jaccard": 0.004827114443913835,
+    "duplicate": false
   },
-  "raster_sha256": "83b711a20b518eb89040456f70e6d750d3d361536390df198184c4d2818b9c74",
-  "raster_file": "docs/downloads/gems70-fusion-dotted-37654-20261020.tif",
-  "surface_decoded_float32_sha256": "2d777b741daaa95f30fa2eec3f8b97e9fbb3c766f3870d7905f6f33d6cd50189",
-  "dots_decoded_sha256": "4d176f06875e5667f4d6f513ca513022cd0e5be8a1e792a4217c48d4508b80e0",
+  "raster_sha256": "fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88",
+  "raster_sha256_reason": null,
   "validator_output": {
-    "submission_tiff": "gems70-fusion-dotted-37654-20261020.tif",
-    "status": "PASS",
-    "all_checks_passed": true,
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif",
+    "bytes": 135849,
+    "sha256": "fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "emitted_positive_pixels": 37654,
     "checks": {
       "single_band": true,
       "dtype_float32": true,
@@ -140,19 +167,21 @@
       "outside_footprint_zero": true,
       "zero_dots_on_mapped_catalogue": true
     },
-    "no_nan_inside_footprint": true,
-    "values_in_0_1": true,
-    "crs_shape_transform_file_match": true,
-    "emitted_positive_pixels": 37654,
-    "on_catalogue_positive_pixels": 0
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 37654,
+    "footprint_fraction": 0.007286874781441169
   },
-  "submission_name": "gems70-fusion-dotted-37654-20261020",
-  "submission_note": "GEMSDOE70 H70-3A fusion | rank-geomean supervised HGB x GEMSDOE49-arch detector, 37654 dots >2px off-catalogue; DO NOT SUBMIT - see site",
+  "submission_name": "gems70-h70-conductive-breach-37654-20261020",
+  "submission_note": "H70-A conductive breach x analytic magnetics, 7px strata, 37654 dots off-cat; HOLDOUT-DTI vs H33",
+  "note_chars": 96,
   "download_and_submit_ok": false,
-  "download_research_ok": true,
+  "download_ok": true,
+  "submit_recommended": false,
   "weekly_slots_used": 0,
-  "experiment_count": 3,
-  "elapsed_seconds": 505.4,
+  "experiment_count": 1,
+  "elapsed_seconds": 45.59,
   "organizer_confirmed_score": null,
   "evaluator_implementation_sha256": {
     "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
@@ -161,12 +190,18 @@
     "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
   },
   "method_source_sha256": {
-    "src/gems70/method2.py": "7267c909613d1bc95f6cd7e84636cb7700dbf1467d5c5dbe719d27d5ea3b6fe9",
-    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
-    "scripts/run_experiment3.py": "92a6b0d78a90f56e81b7403e11e7a7733781415eb186343fe3fb610e2558ad71"
+    "src/gems70/method_h70.py": "3491144e58ec165a4c09bc02656241637b7f2a8d411043adced9a4b8e93b7810",
+    "scripts/run_experiment_h70.py": "d07a78ccc8a636da504ae55cb6e636549e145960f380f7635a88c10d387651ee"
   },
-  "release_reasons": [
-    "Holdout promotion gate failed: candidate did not beat RawHGB_NoGate and GEMS49_OrthoGate with paired 95% CI > 0 on untouched seed-703 blocks.",
-    "Uniqueness gate failed: final-dots worst like-for-like 3px dot-field overlap 1.000 > 0.70 (worst vs 13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif); the fusion includes the GEMSDOE49-architecture detector, and 0.896 of its dots lie within 3px of GEMSDOE49's own 40k dots \u2014 lane drift into the parent detector by construction. Worst |Spearman| is only 0.121 and exact-cell Jaccard <= 0.055, but the protocol's 3px rule is the operative test and it fires."
-  ]
+  "registered_parameters": {
+    "dot_count": 37654,
+    "block_px": 7,
+    "nms_px": 5.0,
+    "d_min_px": 2.4,
+    "d_max_px": 32.0,
+    "breach_amplitude": 0.6,
+    "tip_floor": 0.7,
+    "tip_weight": 0.3,
+    "gap_px": 3.0
+  }
 }

@@ -1,0 +1,18 @@
+{
+  "stepover_feature": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.6595855443423725,
+    "inverse_auc": 0.3404144556576275,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "rtp_edge": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.534255466831552,
+    "inverse_auc": 0.465744533168448,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  }
+}

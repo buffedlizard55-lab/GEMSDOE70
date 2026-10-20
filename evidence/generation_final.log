@@ -1,0 +1,59 @@
+=== GEMSDOE70 v2 discordance-corridor generation ===
+Grid: (3730, 3292) EPSG:32611, footprint 5167373, catalogue 60988
+Pin training_features.tif: 4371c82e3b83... OK
+Pin existing_faults.tif: 7ba308ccdc44... OK
+Pin sample_submission.tif: 2176d08e485a... OK
+Features: ("mag_anom - Magnetic anomaly - deviation from expected Earth's magnetic field", 'rtp - Reduced to pole magnetic data - magnetic anomaly corrected for latitude effects', 'tmi_hg - Total magnetic intensity horizontal gradient - rate of change in horizontal direction', 'geod_2ndinv - Geodetic second invariant - measure of strain rate tensor magnitude', 'iso_grav_anom_slope - Isostatic gravity anomaly slope - gradient of gravity after isostatic correction', 'tc - Tilt angle or total curvature - magnetic field derivative for edge detection', 'geod_shearrate - Geodetic shear rate - rate of angular deformation from GPS/InSAR', 'geod_dilaterate - Geodetic dilatation rate - rate of volumetric strain (expansion/contraction)', 'tmi_vg - Total magnetic intensity vertical gradient - rate of change in vertical direction', 'deq_n100a15 - Distance to earthquake (n=100km radius, a=15° azimuth parameters)', 'iso_grav_anom_vg - Isostatic gravity anomaly vertical gradient - vertical rate of change', 'det_elev - Detrended elevation - topography with regional trends removed', 'iso_grav_anom - Isostatic gravity anomaly - gravity after compensating for topographic mass', 'tmi - Total magnetic intensity - total strength of magnetic field', 'depth_to_base_surf - Depth to basement surface - thickness of sedimentary cover', 'ieq_n100a15 - Earthquake intensity or density (n=100km radius, a=15° parameters)', 'cond_surf - Conductivity surface - electrical conductivity of subsurface', 'iso_grav_anom_hg - Isostatic gravity anomaly horizontal gradient - horizontal rate of change', 'det_elev_slope - Detrended elevation slope - gradient of elevation after detrending')
+  mag_anom band 1: finite 5164312 min -1052.00 max 2109.45
+  rtp band 2: finite 5164312 min -2786.30 max 4508.76
+  tmi_hg band 3: finite 5164312 min 0.00 max 2200.44
+  iso_grav_anom_slope band 5: finite 5164312 min 0.00 max 0.65
+  iso_grav_anom band 13: finite 5164312 min -45.76 max 24.23
+  tmi band 14: finite 5164312 min -2178.28 max 4506.14
+  depth_to_base band 15: finite 5164312 min -14.84 max 7135.31
+  det_elev band 12: finite 5164312 min -589.98 max 1469.91
+  iso_grav_hg band 18: finite 5164312 min -15.44 max 12.86
+  det_elev_slope band 19: finite 5164312 min 0.00 max 62.65
+Valid before erosion: 5164312
+Valid after 12-px erosion: 4989581
+Physical features computed: ['grav_edge', 'base_grad', 'topo_scarp', 'termination', 'basement_normal', 'mag_edge_amp']
+Discordance: min 0.0000 max 1.0000 mean 0.5000
+Ridge strength: min 0.0000 max 0.0963 percentile 95 0.0120
+Skeleton pixels: 27439
+Dots after pruning/sampling: 24872, positive 24872
+Final pred: shape (3730, 3292), positives 24872, unique vals [0. 1.]
+Holdout folds recomputed: 4 folds, total withheld 11321
+Canary mag_anom: AUC 0.5094 ok
+Canary rtp: AUC 0.5176 ok
+Canary tmi_hg: AUC 0.5285 ok
+Canary iso_grav_anom_slope: AUC 0.5247 ok
+Canary iso_grav_anom: AUC 0.4588 ok
+Canary tmi: AUC 0.5093 ok
+Canary depth_to_base: AUC 0.5243 ok
+Canary det_elev: AUC 0.5124 ok
+Canary iso_grav_hg: AUC 0.4922 ok
+Canary det_elev_slope: AUC 0.5640 ok
+Canary grav_edge: AUC 0.5122 ok
+Canary base_grad: AUC 0.5398 ok
+Canary topo_scarp: AUC 0.5710 ok
+Canary termination: AUC 0.5253 ok
+Canary basement_normal: AUC 0.5426 ok
+Canary mag_edge_amp: AUC 0.5343 ok
+Canary discordance: AUC 0.5092 ok
+Canary ridge: AUC 0.4885 ok
+Holdout pooled DTI (candidate vs random):
+  candidate_dots: DTI 0.00000 CI [0.00000,0.00000]
+  random_control: DTI 0.02348 CI [0.02074,0.02649]
+Wrote TIF /home/user/GEMSDOE70/docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif sha256 d8ac9f2c4842... bytes 107350 info 24872 positives
+Wrote ZIP /home/user/GEMSDOE70/docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.zip 58118
+Validate all_checks_passed True checks {'single_band': True, 'dtype_float32': True, 'dimensions_3730x3292': True, 'crs_epsg_32611': True, 'transform_matches_sample_submission': True, 'no_nan_anywhere': True, 'no_inf_anywhere': True, 'no_sentinel_values': True, 'range_0_1_guaranteed': True, 'min_ge_0': True, 'max_le_1': True, 'in_footprint_all_finite': True, 'in_footprint_range_0_1': True, 'outside_footprint_zero': True, 'zero_dots_on_mapped_catalogue': True}
+Format report ok True {'path': '/home/user/GEMSDOE70/docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif', 'bytes': 107350, 'sha256': 'd8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d', 'bands': 1, 'dtype': 'float32', 'crs': 'EPSG:32611', 'width': 3292, 'height': 3730, 'bounds': [243350.0, 4135550.0, 572550.0, 4508550.0], 'ref_bounds': [243350.0, 4135550.0, 572550.0, 4508550.0], 'transform': [100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0], 'nodata': None, 'blocksize': [256, 256], 'fixture_grid': False, 'has_validity_mask': False, 'nan_pixels': 0, 'infinity_pixels': 0, 'n_nan': 0, 'min': 0.0, 'max': 1.0, 'mean': 0.002025545807555318, 'n_nonzero': 24872, 'mass': 24872.0, 'mass_outside_footprint': 0, 'problems': [], 'ok': True, 'validation_class': 'local on-disk template/range check; not organizer upload acceptance'}
+gh: API rate limit exceeded for user ID 309556078. If you reach out to GitHub Support for help, please include the request ID EAAE:360622:2DB99:41986:6AD7E504 and timestamp 2026-10-20 22:02:44 UTC. For more on scraping GitHub and how it may affect your rights, please review our Terms of Service (https://docs.github.com/en/site-policy/github-terms/github-terms-of-service) (HTTP 403)
+Traceback (most recent call last):
+  File "/home/user/GEMSDOE70/scripts/generate_new_submission.py", line 406, in <module>
+    main()
+  File "/home/user/GEMSDOE70/scripts/generate_new_submission.py", line 339, in main
+    sp.run(["gh","api", f"repos/{witness_spec['repo']}/git/blobs/{witness_spec['git_blob']}", "-H","Accept: application/vnd.github.raw"], stdout=out, check=True)
+  File "/usr/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['gh', 'api', 'repos/buffedlizard55-lab/17GEMSDOE/git/blobs/374c88b1da2b803e2ed160de467fd71ae114010d', '-H', 'Accept: application/vnd.github.raw']' returned non-zero exit status 1.
