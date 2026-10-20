@@ -1,0 +1,79 @@
+Feature-alone canaries complete.
+rtp evaluated
+gravity evaluated
+basement evaluated
+termination evaluated
+gravity_edge evaluated
+basement_normal evaluated
+candidate evaluated
+ablation_no_termination evaluated
+random_control evaluated
+{
+  "hypothesis": "Magnetic-edge termination at a gravity-supported basement boundary",
+  "mechanism": "Along-gravity-tangent change of magnetic edge amplitude, weighted by gravity edge and basement normal gradient",
+  "non_fault_mimic": "Volcanic dike termination or intrusive lithologic contact",
+  "hypothesis_status": "Provisional lane: method paragraph absent from supplied prompt",
+  "verdict": "negative",
+  "stop_reason": "duplicate",
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.010192889039757751,
+    "ci95": [
+      0.006062085930570772,
+      0.01504164485152884
+    ],
+    "withheld_positive_pixels": 11321,
+    "tpw": 189.76122960484457,
+    "fpw": 47611.3439180494,
+    "fnw": 11131.238770395157,
+    "stage": "continuous pre-placement surface, not final dots",
+    "current_best_verified": false
+  },
+  "correlation_overlap_vs_registry": {
+    "stage": "surface before final placement",
+    "rasters_checked": 1,
+    "registry_complete": false,
+    "spearman": 0.036308180143609856,
+    "overlap_within_3px": 1.0,
+    "witness": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+    "witness_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+    "literal_duplicate": true,
+    "final_dots": null,
+    "final_dots_reason": "Not placed: literal surface stop rule."
+  },
+  "raster_sha256": null,
+  "raster_sha256_reason": "No submission TIFF written after surface gate stop.",
+  "surface_decoded_float32_sha256": "8c9592811e91062e3001b4469a7a7ddbe758965f0208a629c44749a9a78fd70a",
+  "validator_output": {
+    "submission_tiff": null,
+    "status": "NOT_WRITTEN",
+    "pre_export_array_checks": {
+      "no_nan_inside_footprint": true,
+      "all_values_finite": true,
+      "values_in_0_1": true,
+      "shape_matches": true,
+      "zero_on_catalogue": true,
+      "zero_outside_footprint": true
+    },
+    "crs_shape_transform_file_match": null,
+    "reason": "Array checks are not a TIFF validator receipt; no output file exists."
+  },
+  "submission_name": "gems70-contact-termination-e1-20261020-NOT-RELEASED",
+  "submission_note": "Magnetic-edge termination on gravity/basement boundaries; negative surface gate; DO NOT SUBMIT.",
+  "download_and_submit_ok": false,
+  "weekly_slots_used": 0,
+  "experiment_count": 1,
+  "elapsed_seconds": 40.87,
+  "organizer_confirmed_score": null,
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "method_source_sha256": {
+    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
+    "scripts/run_experiment.py": "80afcb2d3ea851344e99bd7cca262e7fe9410c0b91534cb06b012623c1d572b5"
+  }
+}

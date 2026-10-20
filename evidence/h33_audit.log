@@ -1,0 +1,44 @@
+{
+  "h33": {
+    "evidence_class": "DATA-MEASUREMENT",
+    "source": "https://github.com/buffedlizard55-lab/60GEMSDOE/blob/32024716f218d06a94e01464157392119c03cb15/registry/rasters/GEMSDOE32__h33-2-b2-zeros.tif",
+    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "positive_pixels": 37654,
+    "on_catalogue": 0,
+    "min_catalogue_distance_px": 2.23606797749979,
+    "median_catalogue_distance_m": 1964.68827043885,
+    "within_300m_fraction": 0.057656557072289796,
+    "finite_values": [
+      0.0,
+      1.0
+    ]
+  },
+  "h27": {
+    "evidence_class": "DATA-MEASUREMENT",
+    "source": "https://github.com/buffedlizard55-lab/60GEMSDOE/blob/32024716f218d06a94e01464157392119c03cb15/registry/rasters/GEMSDOE28__h27-4-r1-solo-d2-8.tif",
+    "sha256": "2fc94a38d77f74d4f4ed1a97a83e7bb71a1ceea090515ec641e6681cc47c44c8",
+    "positive_pixels": 40199,
+    "on_catalogue": 0,
+    "min_catalogue_distance_px": 1.4142135623730951,
+    "median_catalogue_distance_m": 1769.1806012954132,
+    "within_300m_fraction": 0.11731635115301375,
+    "finite_values": [
+      0.0,
+      1.0
+    ]
+  },
+  "d28": {
+    "evidence_class": "DATA-MEASUREMENT",
+    "source": "https://github.com/buffedlizard55-lab/60GEMSDOE/blob/32024716f218d06a94e01464157392119c03cb15/registry/rasters/GEMSDOE25__dotted-h19-5-d2-8.tif",
+    "sha256": "3e78737f0da8dd2ca66cc6caac0ce8eeefcd6715707f8d1bd3091845cd9bcc30",
+    "positive_pixels": 44090,
+    "on_catalogue": 0,
+    "min_catalogue_distance_px": 1.0,
+    "median_catalogue_distance_m": 1500.0,
+    "within_300m_fraction": 0.19521433431617147,
+    "finite_values": [
+      0.0,
+      1.0
+    ]
+  }
+}

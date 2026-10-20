@@ -1,0 +1,10 @@
+{
+  "sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+  "bytes": 25065181,
+  "blob": "374c88b1da2b803e2ed160de467fd71ae114010d",
+  "cache_file": "/tmp/gems_registry_cache/ab0a0a62eecf066a.tif",
+  "sources": [
+    "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif"
+  ],
+  "repo_first": "17GEMSDOE"
+}

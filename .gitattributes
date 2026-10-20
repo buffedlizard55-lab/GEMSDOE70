@@ -1,0 +1,3 @@
+# Preserve byte-level source evidence, including upstream extraction whitespace.
+evidence/mirrored_geodawn_report.txt -whitespace
+evidence/official-reference-excerpts.txt -whitespace

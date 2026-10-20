@@ -1,0 +1,59 @@
+"""Publication is fail-closed, distinct from format validity and slot selection."""
+from __future__ import annotations
+import hashlib
+import json
+from pathlib import Path
+
+
+def digest(path):
+    h = hashlib.sha256()
+    with Path(path).open('rb') as f:
+        for b in iter(lambda:f.read(1<<20),b''):
+            h.update(b)
+    return h.hexdigest()
+
+
+def release_status(root):
+    """Current run is negative. No booleans alone can authorize a download."""
+    root = Path(root)
+    reasons = []
+    try:
+        card = json.loads((root/'evidence/run_card.json').read_text())
+        holdout = json.loads((root/'evidence/holdout.json').read_text())
+        canaries = json.loads((root/'evidence/canaries.json').read_text())
+        audit = json.loads((root/'evidence/surface_uniqueness.json').read_text())
+        manifest = json.loads((root/'evidence/experiment_manifest.json').read_text())
+        if card.get('verdict') != 'promote': reasons.append('Run verdict is negative.')
+        if audit.get('stop_required') is not False or audit.get('unique') is not True:
+            reasons.append('Surface uniqueness is blocked or incomplete.')
+        if not card.get('holdout_dti',{}).get('current_best_verified'):
+            reasons.append('Comparable current holdout best has not been beaten.')
+        if holdout.get('promotion_allowed') is not True:
+            reasons.append('Holdout evidence does not permit promotion.')
+        if not canaries or any(c.get('suspected_leakage') is not False or max(c['auc'],1-c['auc']) > .90 for c in canaries.values()):
+            reasons.append('Feature-alone leakage evidence is missing or fails.')
+        expected = manifest['source_sha256']
+        if expected != card['method_source_sha256']:
+            reasons.append('Run-card source pins differ from the experiment manifest.')
+        for rel, pin in expected.items():
+            if digest(root/rel) != pin: reasons.append('Source changed since experiment: '+rel)
+        if digest(root/'docs/hypotheses.md') != manifest['preregistration_sha256']:
+            reasons.append('Preregistration changed since experiment.')
+        # The current instrument intentionally has no final placement evidence. A future
+        # method must supply a new reviewed release contract, not edit booleans in a card.
+        if not card.get('raster_sha256'):
+            reasons.append('No submission TIFF or on-disk validator receipt exists.')
+        reasons.append('No final-dot full-inventory audit or separate weekly-slot selector authorization exists for this run.')
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        reasons.append('Missing or invalid evidence: '+str(exc))
+    return {'download_and_submit_ok':False, 'verdict':'negative', 'reasons':reasons,
+            'policy':'This stopped experiment cannot be promoted by editing metadata. A fresh reviewed run is required.'}
+
+
+def assert_no_public_rasters(root):
+    """Fail builds on stale/accidentally copied predictions, never silently serve them."""
+    docs = Path(root)/'docs'
+    paths = [p.relative_to(root).as_posix() for p in docs.rglob('*')
+             if p.is_file() and p.suffix.lower() in {'.tif','.tiff','.zip'}]
+    if paths:
+        raise ValueError('Stopped run must not publish TIFF/ZIP artifacts: '+', '.join(paths))
