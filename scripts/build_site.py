@@ -378,7 +378,7 @@ as a predictor.</li></ul>
 <h2>Receipts</h2>
 <p><a href="downloads/data_receipt.json">Input SHA-256 pins</a> ·
 <a href="downloads/template_verification.json">Shared-template verification</a> ·
-<a href="downloads/upstream_fix_report.md">Upstream fix report</a></p>'''
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/evidence/upstream_fix_report.md">Upstream fix report</a></p>'''
     (DOCS / 'sources.html').write_text(frame('Sources', src_page))
 
     # Root entry point (repository-root Pages keeps working).
