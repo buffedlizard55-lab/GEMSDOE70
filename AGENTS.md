@@ -25,3 +25,10 @@ Earlier mutual-overlap language above describes historical evidence only, not
 permission to relax this instruction. Preserve frozen audits. Release authorization
 must apply the stricter current rule. See docs/protocol-review.md; no method
 paragraph was supplied, no new modeling is authorized by this review.
+
+## Parallel-session E3 scarp lane (PR #17)
+
+Candidate `gems70e3-scarpcurv-60k-ex3-20261020-zeros` published; catalogue-holdout promotion only;
+B′ unscored. Frozen one-shot drivers: `scripts/run_experiment_e2_scarp.py`,
+`scripts/run_experiment_e3_scarp.py`, `scripts/complete_e3_release.py` — do not rerun.
+`src/gems70/release_e3.py` guards its hash binding (RENAMED_AT_MERGE resolves frozen pins).

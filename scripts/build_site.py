@@ -18,6 +18,7 @@ DOCS = ROOT / 'docs'
 DOWN = DOCS / 'downloads'
 
 NAV = [('index.html', 'Overview'), ('submission.html', 'Submit a file'),
+       ('e3-candidate.html', 'E3 scarp candidate'),
        ('results.html', 'Evidence'), ('hypotheses.html', 'Hypotheses'),
        ('h33-analysis.html', 'Why H33 scored'), ('sources.html', 'Sources'),
        ('limitations.html', 'Limitations')]
@@ -134,6 +135,15 @@ def main():
         'evidence/upstream_fix_report.md': 'upstream_fix_report.txt',
         'evidence/registry_saturation.json': 'phase1_registry_saturation.json',
         'evidence/history/phase1_negative/run_card.json': 'phase1_run_card.json',
+        'evidence/run_card_e3_amended.json': 'run_card_e3_amended.json',
+        'evidence/run_card_e3.json': 'run_card_e3.json',
+        'evidence/run_card_e2.json': 'run_card_e2.json',
+        'evidence/holdout_e3.json': 'holdout_e3.json',
+        'evidence/canaries_e3.json': 'canaries_e3.json',
+        'evidence/final_uniqueness_e3.json': 'final_uniqueness_e3.json',
+        'evidence/validator_e3.json': 'validator_e3.json',
+        'evidence/selection_grid_e3.json': 'selection_grid_e3.json',
+        'evidence/holdout_e2.json': 'holdout_e2.json',
         'evidence/e2/run_card.json': 'e2_run_card.json',
         'evidence/e2/holdout.json': 'e2_holdout.json',
         'evidence/e2/canaries.json': 'e2_canaries.json',
@@ -213,6 +223,11 @@ lattice reaches 1.00 by construction and is reported separately).</p>
 95% CI {ci(p4b['paired_differences']['h33_reference'])}). The pre-registered rule requires a
 positive lower bound. It does not hold.</p>
 <a href="hypotheses.html">Why this rule →</a></section></div>
+<section class="panel"><h2>Second candidate from a parallel session (E3 scarp curvature)</h2>
+<p>An independent lane published a DEM scarp-curvature TIFF (60,000 dots) with catalogue-holdout
+HOLDOUT-DTI 0.0943. It has <strong>not</strong> been scored on instrument B′. The selector's next
+step is to B′-score that exact TIF before any weekly slot is spent on either candidate.</p>
+<a href="e3-candidate.html">E3 candidate, evidence and download →</a></section>
 <section><h2>What is measured and what is not</h2>
 <p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue
 components and measures catalogue recovery; instrument B/B′ uses USGS SGMC faults minus the
@@ -344,6 +359,51 @@ always reported.</p>
                     + table(['Arm', 'DTI', '95% CI', 'Positives'], _rows,
                             'E2 arms · gems57-pooled-hide-v2 · seed-20'))
     (DOCS / 'results.html').write_text(frame('Evidence', results))
+
+    # ------------------------------------- E3 scarp parallel candidate (PR17)
+    e3 = load('evidence/run_card_e3_amended.json', {})
+    if e3:
+        e3h = load('evidence/holdout_e3.json', {})
+        e3u = load('evidence/final_uniqueness_e3.json', {})
+        e3v = (load('evidence/validator_e3.json', {}) or {}).get('validator') or {}
+        e3name = e3['submission_name']
+        e3d = e3['holdout_dti']
+        h33row = {}
+        for r in (e3u.get('audit') or {}).get('rows', []):
+            if str(r.get('submission', '')).endswith('GEMSDOE32__h33-2-b2-zeros.tif'):
+                h33row = r
+        e3rows = instrument_rows(e3h) if e3h else []
+        e3checks = [[esc(k), 'pass' if v else 'FAIL']
+                    for k, v in (e3v.get('checks') or {}).items()]
+        e3page = f"""<div class="eyebrow">PARALLEL-SESSION CANDIDATE E3 (SCARP LANE)</div>
+<h1>Scarp-curvature candidate — score it on B′ before choosing.</h1>
+<p class="lead"><strong>Download: yes.</strong> <code>downloads/{esc(e3name)}.tif</code>
+({e3['n_final_dots']:,} dots, SHA-256 <code>{esc(e3['raster_sha256'])}</code>).
+<strong>Slot decision: selector-owned.</strong> E3 was promoted on catalogue
+hide-and-recover only and has <strong>not</strong> been scored on instrument B′;
+the Phase-4 candidate remains the only B′-scored option (negative there).
+Do not upload either file until E3 is B′-scored and the weekly cap is checked.
+(Not to be confused with the PR #16 lane's negative depth-step E3.)</p>
+<div class="actions">
+<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(e3name)}.tif" download>Download E3 TIFF</a>
+<a class="button secondary" href="downloads/{esc(e3name)}.zip" download>Download one-TIFF ZIP</a>
+<a class="button secondary" href="downloads/run_card_e3_amended.json">E3 run card + erratum</a></div>
+<p class="small">Note ({len(e3['submission_note'])}/140 chars): <code>{esc(e3['submission_note'])}</code></p>
+<h2>Catalogue holdout (seed-40, untouched folds)</h2>
+<p>HOLDOUT-DTI {e3d['dti']:.4f} {ci(e3d)} · {e3d['withheld_positive_pixels']:,} withheld ·
+{e3d['evaluator_version']}. The same lane's gated E2 variant was falsified first (negative).</p>
+{table(['Arm', 'DTI', '95% CI', 'Positives'], e3rows, 'E3 dotted arms at the selected cell')}
+<h2>Uniqueness vs H33 (63 hash-verified rasters, saturation-adjusted)</h2>
+<p>Forward overlap {h33row.get('my_dots_within_3px_of_theirs', float('nan')):.3f} ·
+Jaccard {h33row.get('jaccard_dot_sets', float('nan')):.4f} ·
+Spearman {h33row.get('spearman_full_footprint', float('nan')):.4f}.
+Full inventory (862) scan remains a selector step. Literal readings are in the receipt.</p>
+<h2>On-disk validator</h2>
+{table(['Check', 'Result'], e3checks, 'Shared validator on the published E3 bytes.')}
+<p><a href="downloads/holdout_e3.json">Holdout</a> ·
+<a href="downloads/final_uniqueness_e3.json">Uniqueness</a> ·
+<a href="downloads/validator_e3.json">Writer receipt</a></p>"""
+        (DOCS / 'e3-candidate.html').write_text(frame('E3 scarp candidate', e3page))
 
     # ------------------------------------------------------------------ markdown
     import markdown

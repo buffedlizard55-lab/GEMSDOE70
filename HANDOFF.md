@@ -98,3 +98,13 @@ no weekly slot. Frozen scientific receipts are preserved, not reclassified as ne
 Site-wide warnings and the README opening supersede old uniqueness claims for this prompt.
 Reproduce: `.venv/bin/python scripts/audit_literal_protocol.py`, rebuild site/readme, pytest.
 Resolve the protocol contradiction and explicit lane assignment before the supervised next step.
+
+## Parallel-session E3 scarp lane (PR #17)
+
+Independent lane, three frozen experiments: E1 contact-termination (negative, archived), gated
+joint scarp×strain×cover (negative), scarp-curvature alone (PROMOTE-to-selector on catalogue
+HOLDOUT-DTI 0.0943 [0.0782, 0.1109], seed-40/11,437 withheld). Candidate
+`docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif` (sha256 in
+`evidence/run_card_e3_amended.json`). **Not yet scored on instrument B′** — selector's next step.
+Frozen drivers live at `scripts/run_experiment_e2_scarp.py` / `run_experiment_e3_scarp.py`
+(byte-identical rename; PR #16 owns canonical paths). Do not rerun.
