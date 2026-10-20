@@ -87,3 +87,10 @@ def test_link_to_checkout_only_evidence_is_rejected_in_built_output(tmp_path):
         check_output(tmp_path)
     page.write_text('DO NOT SUBMIT <a href="https://github.com/example/evidence.json">Evidence</a>')
     assert check_output(tmp_path)['built_output_ok']
+
+
+def test_project_pages_mount_is_resolved_against_site(tmp_path):
+    safe_output(tmp_path)
+    (tmp_path / 'index.html').write_text(
+        'DO NOT SUBMIT <a href="/GEMSDOE70/docs/index.html">Current site</a>')
+    assert check_output(tmp_path)['built_output_ok']

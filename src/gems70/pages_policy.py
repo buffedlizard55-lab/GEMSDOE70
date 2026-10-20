@@ -49,7 +49,7 @@ def check_source(root: Path) -> dict:
             'excluded_private_roots': sorted(private)}
 
 
-def check_output(site: Path) -> dict:
+def check_output(site: Path, baseurl: str = '/GEMSDOE70') -> dict:
     """Check the built directory, including direct URLs never linked by a page."""
     site = Path(site)
     if not site.is_dir() or site.is_symlink():
@@ -78,6 +78,8 @@ def check_output(site: Path) -> dict:
         links = LocalLinks()
         links.feed(page.read_text())
         for link in links.paths:
+            if baseurl and link.startswith(baseurl.rstrip('/') + '/'):
+                link = link[len(baseurl.rstrip('/')):]
             target = ((site / link.lstrip('/')) if link.startswith('/')
                       else (page.parent / link)).resolve()
             if not target.is_relative_to(site.resolve()) or not target.exists():
