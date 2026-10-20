@@ -1,0 +1,206 @@
+{
+  "evidence_class": "LEAKAGE-CANARY",
+  "threshold": 0.9,
+  "withheld_positive_pixels_a": 11321,
+  "positive_pixels_b_prime": 60718,
+  "worst_symmetric_auc": 0.790284460736684,
+  "all_passed": true,
+  "features": {
+    "dem_slope": {
+      "auc_instrument_a": 0.5771712613726704,
+      "auc_instrument_b_prime": 0.7563258470717086,
+      "symmetric_auc_a": 0.5771712613726704,
+      "symmetric_auc_b_prime": 0.7563258470717086,
+      "suspected_leakage": false
+    },
+    "dem_curv": {
+      "auc_instrument_a": 0.5701692531578482,
+      "auc_instrument_b_prime": 0.7317315426644486,
+      "symmetric_auc_a": 0.5701692531578482,
+      "symmetric_auc_b_prime": 0.7317315426644486,
+      "suspected_leakage": false
+    },
+    "dem_coherence": {
+      "auc_instrument_a": 0.5351740780408092,
+      "auc_instrument_b_prime": 0.3424394031835699,
+      "symmetric_auc_a": 0.5351740780408092,
+      "symmetric_auc_b_prime": 0.6575605968164301,
+      "suspected_leakage": false
+    },
+    "tf_rtp": {
+      "auc_instrument_a": 0.5193578908665312,
+      "auc_instrument_b_prime": 0.5252208599591555,
+      "symmetric_auc_a": 0.5193578908665312,
+      "symmetric_auc_b_prime": 0.5252208599591555,
+      "suspected_leakage": false
+    },
+    "tf_tc": {
+      "auc_instrument_a": 0.5701063145923505,
+      "auc_instrument_b_prime": 0.4800130807174149,
+      "symmetric_auc_a": 0.5701063145923505,
+      "symmetric_auc_b_prime": 0.5199869192825851,
+      "suspected_leakage": false
+    },
+    "tf_abs_dilatation": {
+      "auc_instrument_a": 0.4680538320378059,
+      "auc_instrument_b_prime": 0.374958494227412,
+      "symmetric_auc_a": 0.5319461679621942,
+      "symmetric_auc_b_prime": 0.625041505772588,
+      "suspected_leakage": false
+    },
+    "tf_det_elev": {
+      "auc_instrument_a": 0.5124176470718135,
+      "auc_instrument_b_prime": 0.7036776751951646,
+      "symmetric_auc_a": 0.5124176470718135,
+      "symmetric_auc_b_prime": 0.7036776751951646,
+      "suspected_leakage": false
+    },
+    "tf_det_elev_slope": {
+      "auc_instrument_a": 0.4578385862556311,
+      "auc_instrument_b_prime": 0.614295169677855,
+      "symmetric_auc_a": 0.5421614137443689,
+      "symmetric_auc_b_prime": 0.614295169677855,
+      "suspected_leakage": false
+    },
+    "tf_depth_to_base_surf": {
+      "auc_instrument_a": 0.5243031452610193,
+      "auc_instrument_b_prime": 0.33738936143318293,
+      "symmetric_auc_a": 0.5243031452610193,
+      "symmetric_auc_b_prime": 0.6626106385668171,
+      "suspected_leakage": false
+    },
+    "tf_iso_grav_anom": {
+      "auc_instrument_a": 0.4795751943291229,
+      "auc_instrument_b_prime": 0.5185814088079318,
+      "symmetric_auc_a": 0.5204248056708771,
+      "symmetric_auc_b_prime": 0.5185814088079318,
+      "suspected_leakage": false
+    },
+    "tf_cond_surf": {
+      "auc_instrument_a": 0.5660629674940376,
+      "auc_instrument_b_prime": 0.7581243743618037,
+      "symmetric_auc_a": 0.5660629674940376,
+      "symmetric_auc_b_prime": 0.7581243743618037,
+      "suspected_leakage": false
+    },
+    "lidar_step_max": {
+      "auc_instrument_a": 0.5891026170391309,
+      "auc_instrument_b_prime": 0.5695761627935703,
+      "symmetric_auc_a": 0.5891026170391309,
+      "symmetric_auc_b_prime": 0.5695761627935703,
+      "suspected_leakage": false
+    },
+    "lidar_upface_max": {
+      "auc_instrument_a": 0.6008673401201308,
+      "auc_instrument_b_prime": 0.5963843821025065,
+      "symmetric_auc_a": 0.6008673401201308,
+      "symmetric_auc_b_prime": 0.5963843821025065,
+      "suspected_leakage": false
+    },
+    "lidar_downface_max": {
+      "auc_instrument_a": 0.6053208729352532,
+      "auc_instrument_b_prime": 0.5915266712506999,
+      "symmetric_auc_a": 0.6053208729352532,
+      "symmetric_auc_b_prime": 0.5915266712506999,
+      "suspected_leakage": false
+    },
+    "lidar_along_std": {
+      "auc_instrument_a": 0.6001539362688809,
+      "auc_instrument_b_prime": 0.601179320423927,
+      "symmetric_auc_a": 0.6001539362688809,
+      "symmetric_auc_b_prime": 0.601179320423927,
+      "suspected_leakage": false
+    },
+    "lidar_cross_max": {
+      "auc_instrument_a": 0.5873755776874835,
+      "auc_instrument_b_prime": 0.5801506106097039,
+      "symmetric_auc_a": 0.5873755776874835,
+      "symmetric_auc_b_prime": 0.5801506106097039,
+      "suspected_leakage": false
+    },
+    "rad_K": {
+      "auc_instrument_a": 0.46118924763713454,
+      "auc_instrument_b_prime": 0.34463652763595637,
+      "symmetric_auc_a": 0.5388107523628655,
+      "symmetric_auc_b_prime": 0.6553634723640436,
+      "suspected_leakage": false
+    },
+    "rad_Th": {
+      "auc_instrument_a": 0.4776121040544121,
+      "auc_instrument_b_prime": 0.43786911537764744,
+      "symmetric_auc_a": 0.5223878959455879,
+      "symmetric_auc_b_prime": 0.5621308846223525,
+      "suspected_leakage": false
+    },
+    "rad_U": {
+      "auc_instrument_a": 0.4710921608073491,
+      "auc_instrument_b_prime": 0.40179507942455284,
+      "symmetric_auc_a": 0.5289078391926509,
+      "symmetric_auc_b_prime": 0.5982049205754472,
+      "suspected_leakage": false
+    },
+    "rad_TC": {
+      "auc_instrument_a": 0.46808001788711245,
+      "auc_instrument_b_prime": 0.37498354021871605,
+      "symmetric_auc_a": 0.5319199821128875,
+      "symmetric_auc_b_prime": 0.625016459781284,
+      "suspected_leakage": false
+    },
+    "rad_K_Th_ratio": {
+      "auc_instrument_a": 0.4738121590407208,
+      "auc_instrument_b_prime": 0.3386511539411707,
+      "symmetric_auc_a": 0.5261878409592792,
+      "symmetric_auc_b_prime": 0.6613488460588293,
+      "suspected_leakage": false
+    },
+    "topo10_slope_p90": {
+      "auc_instrument_a": 0.5712921826693755,
+      "auc_instrument_b_prime": 0.7618369266115487,
+      "symmetric_auc_a": 0.5712921826693755,
+      "symmetric_auc_b_prime": 0.7618369266115487,
+      "suspected_leakage": false
+    },
+    "topo10_curv_prof_absmax": {
+      "auc_instrument_a": 0.5683968507640668,
+      "auc_instrument_b_prime": 0.7617441854968874,
+      "symmetric_auc_a": 0.5683968507640668,
+      "symmetric_auc_b_prime": 0.7617441854968874,
+      "suspected_leakage": false
+    },
+    "topo10_relief_local": {
+      "auc_instrument_a": 0.5882928237346524,
+      "auc_instrument_b_prime": 0.7203628024638492,
+      "symmetric_auc_a": 0.5882928237346524,
+      "symmetric_auc_b_prime": 0.7203628024638492,
+      "suspected_leakage": false
+    },
+    "topo10_hs_lineament": {
+      "auc_instrument_a": 0.5795053001059978,
+      "auc_instrument_b_prime": 0.7478652169455514,
+      "symmetric_auc_a": 0.5795053001059978,
+      "symmetric_auc_b_prime": 0.7478652169455514,
+      "suspected_leakage": false
+    },
+    "d_cat": {
+      "auc_instrument_a": 0.790284460736684,
+      "auc_instrument_b_prime": 0.4643800004940874,
+      "symmetric_auc_a": 0.790284460736684,
+      "symmetric_auc_b_prime": 0.5356199995059125,
+      "suspected_leakage": false
+    },
+    "halo_decay_15px": {
+      "auc_instrument_a": 0.790284460736684,
+      "auc_instrument_b_prime": 0.5356199995059125,
+      "symmetric_auc_a": 0.790284460736684,
+      "symmetric_auc_b_prime": 0.5356199995059125,
+      "suspected_leakage": false
+    },
+    "tip_continuation": {
+      "auc_instrument_a": 0.790284460736684,
+      "auc_instrument_b_prime": 0.5272151727247274,
+      "symmetric_auc_a": 0.790284460736684,
+      "symmetric_auc_b_prime": 0.5272151727247274,
+      "suspected_leakage": false
+    }
+  }
+}

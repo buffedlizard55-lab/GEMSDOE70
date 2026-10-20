@@ -169,6 +169,16 @@ for new source receipts, a failed controlled test and reproducible commands.
 4. **Selector step.** Only a candidate that beats H33 on a live-calibrated instrument should use
    a weekly slot; record any returned score as ORGANIZER-CONFIRMED with the receipt.
 
+## E6 multi-modal extended-domain LOQO lane & completed selector audits (2026-10-20, `arena/effcd5f7-gemsdoe70`)
+
+- **SGMC vs. QFaults buffer calibration ($r = 1\dots 6\text{ px}$, `evidence/e6/sgmc_buffer_audit.json`):**
+  Off-catalogue SGMC shell enrichment is `3.83×` in `(0, 1]` px, `2.98×` in `(1, 2]` px, `1.86×` in `(2, 3]` px, `1.40×` in `(3, 4]` px, `1.14×` in `(4, 5]` px, and `0.97×` in `(5, 6]` px; `35.89%` of `SGMC B′` pixels lie at $d_{\text{cat}} > 32\text{ px}$.
+- **Experiment E6 (`docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif`, sha256 `9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771`):**
+  28-feature LOQO HGB across $d_{\text{cat}} \in [3.0, 96.0]\text{ px}$ with 7×7 regional coverage stratification (`37,654` binary dots) beats `H33` on `Instrument A` (`0.0710 vs 0.0037`) and `Instrument B′` (`0.1100 [0.1058, 0.1133] vs 0.0938 [0.0839, 0.1044]`, paired $\Delta = +0.0162$, 95% CI `[+0.0045, +0.0270]`), passes amended mutual-overlap uniqueness across all 62 registry rasters (`worst_mutual = 0.2960 <= 0.70`, `worst_nonlattice_forward = 0.3526 <= 0.70`, `worst_spearman = 0.0133 <= 0.90`) and all 11 sibling repository TIFFs (`worst_mutual = 0.3508`), and remains review-only (`download_ok = true`, `submit_recommended = false`) under the active literal one-way forward-overlap gate (`1.00 > 0.70` against `calib_r13lattice_00904.tif`) and live-board calibration caution.
+- **Full 62-raster E2 uniqueness re-audit (`evidence/e6/e2_uniqueness_62rasters.json`) & 7-lane `Instrument B′` comparison (`evidence/e6/cross_lane_bprime.json`):**
+  `E2` has `worst_mutual = 0.2876 <= 0.70` (`unique = true`), `worst_nonlattice_forward = 0.4795 <= 0.70`, `worst_forward = 1.00`. On `Instrument B′`, `E3` (`60,000` dots) scores `0.2137 [0.2002, 0.2261]`; among `37,654`-dot mass-matched candidates, `E6` ranks first at `0.1100 [0.1058, 0.1133]`, ahead of `E2` (`0.1048`), `H33` (`0.0938`), `E5` (`0.0886`), `P4` (`0.0812`), and `H70-A` (`0.0792`).
+
+
 ## P6 dual-horizon LOQO scarp–rad–basement lane & SGMC buffer calibration (`arena/c6a19d32-gemsdoe70`, 2026-10-20)
 - Executed handoff priority #1 (`lidar_scarp_features_u8` + `topo_10m_derived_100m_u8` + `geodawn_rad_u8`/`geodawn_extensions_u8` + 19-band stack + visible-catalogue geometry, `evidence/p6_dualhorizon/`) and priority #2 (`1–20 px` SGMC vs QFaults buffer calibration, `evidence/p6_dualhorizon/sgmc_buffer_audit.json`, plus E2 62-raster mutual re-audit `evidence/p6_dualhorizon/e2_mutual_uniqueness.json`).
 - Exp 5.3 (`gems70-p5-dualhorizon-37654-20261020.tif`, SHA-256 `bb014897052c478ca2f4690920e4d863fa2a6b810a05a15d8e33e129cc76de84`) clears H33 on Instrument A (`0.0790` vs `0.0037`), Instrument B′ (`0.1440` vs `0.0938`, Δ `+0.0502` `[+0.0339, +0.0663]`), and Instrument B′′ (`d >= 6 px`, `0.1234` vs `0.0850`), as does the unsupervised breakline ablation Exp 5.2 (`A = 0.0774`, `B′ = 0.1201`).

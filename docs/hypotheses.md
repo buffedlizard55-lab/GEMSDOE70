@@ -296,6 +296,22 @@ scores). Any new idea therefore needs an instrument that tracks the board before
 | 4 | Drainage knickpoint lines: `dem10_chi_100m_u8` knick_n aligned across ≥ 3 adjacent catchments | footwall uplift across drainages | blind/young faults deform drainage before scarps are mapped | lithologic knickpoints | by submission name, chi was used before as a corridor score (60GEMSDOE h73), not as cross-catchment alignment | medium | in hand |
 | 5 | Radiometric alteration halo at basin margins: GeoDAWN K and Th/K (`geodawn_rad_u8`, `geodawn_extensions_u8`) local anomaly 0.5–3 km from range fronts | hydrothermal K depletion/enrichment along fluid pathways | alteration can mark permeable unmapped faults | primary lithology; flight-line artifacts | by submission name, radiometrics were used before in a scarp fusion (GEMSDOE46 r11f/r12), not as a margin-anomaly operator | medium | in hand (USGS DOI 10.5066/P93LGLVQ) |
 
+---
+
+# Experiment E6 (`arena/effcd5f7-gemsdoe70`) — 28-feature Multi-Modal Extended-Domain LOQO + 7×7 Stratification
+
+Full preregistration in `docs/preregistration-e6.md`; reproducible driver in `scripts/run_experiment_e6.py`; receipts in `evidence/e6/`.
+
+* **Hypothesis (`H-E6-1`):** Extending the off-catalogue domain from $d \in [2.4, 32]\text{ px}$ to $d \in [3.0, 96.0]\text{ px}$ (capturing the `35.89%` of `SGMC B′` positives at $d > 32\text{ px}$ missed by `P4` and `E5`) and training a 4-fold Leave-One-Quadrant-Out `HistGradientBoostingClassifier` on **28 multi-modal features** (100 m DEM gradient-directional scarp curvature/coherence, 8 core 19-band channels, 5 1 m LiDAR scarp channels, 5 GeoDAWN radiometric channels, 4 10 m DEM lineament/curvature channels, and 3 catalogue geometry channels) with **7×7 regional coverage stratification** (`block = 7 px`, `nms = 5.0 px`, `37,654` binary dots) will beat `H33` on `Instrument B′` with a 95% spatial-cluster bootstrap CI strictly above zero while also beating `H33` on `Instrument A` and bounding regional terrain concentration via 7×7 stratification.
+* **Measured results (`37,654` binary dots):**
+  - **`candidate` (`E6`, $d \in [3, 96]$, 28-feat, 7×7 strat):** `Instrument A = 0.0710 [0.0637, 0.0781]`, **`Instrument B′ = 0.1100 [0.1058, 0.1133]`** (paired $\Delta$ vs `H33` = **`+0.0162` `[+0.0045, +0.0270]`**; `gate_a = true`, `gate_b_prime = true`).
+  - `ablation_truncated_d32` ($d \in [2.4, 32]$, 28-feat, 7×7 strat): `Instrument A = 0.0843`, `Instrument B′ = 0.0879 [0.0779, 0.0977]` (paired $\Delta$ vs `E6` = `+0.0221 [0.0124, 0.0324]`).
+  - `ablation_no_external` ($d \in [3, 96]$, 11-feat 19-band/geom, 7×7 strat): `Instrument A = 0.0711`, `Instrument B′ = 0.0945 [0.0868, 0.1011]` (paired $\Delta$ vs `E6` = `+0.0155 [0.0092, 0.0231]`).
+  - `ablation_unstratified_sep28` ($d \in [3, 96]$, 28-feat, greedy `sep=2.8 px`): `Instrument A = 0.0564`, `Instrument B′ = 0.0946 [0.0721, 0.1201]`.
+  - `random_control`: `Instrument A = 0.0457`, `Instrument B′ = 0.0751 [0.0717, 0.0784]`.
+  - `h33_reference`: `Instrument A = 0.0037`, `Instrument B′ = 0.0938 [0.0839, 0.1044]`.
+
+
 ## P6 dual-horizon LOQO scarp–rad–basement addendum (branch `arena/c6a19d32-gemsdoe70`, 2026-10-20)
 
 Written before running `scripts/run_experiment_dualhorizon.py`, executing the handoff's priority #1 (within-halo physical ranking with leave-one-quadrant-out cross-validation including `lidar_scarp_features_u8`, `topo_10m_derived_100m_u8`, and `geodawn_rad_u8` / `geodawn_extensions_u8`) and priority #2 (SGMC vs QFaults buffer calibration `1–20 px`). All named external rasters were verified present and SHA-pinned in `/tmp/60GEMSDOE/data/external/`.

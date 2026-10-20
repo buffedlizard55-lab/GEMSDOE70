@@ -189,6 +189,39 @@ requirements are retained there; the current active branch is recorded in HANDOF
         _pb = _p5['instrument_b_prime_proxy']['candidate']
         p5_note = (f"\n## Parallel P5 analytic-signal lane (arena/97660a79-gemsdoe70) — DO NOT SUBMIT\n\n"
                    f"Analytic-signal halo 7px, 37,654 dots, `tmi_hg`+`tmi_vg` rank in 2.4–32 px halo with tip kernel. HOLDOUT-DTI A {_pa['dti']:.4f} [{_pa['ci95'][0]:.4f},{_pa['ci95'][1]:.4f}] vs H33 0.0037 win; **B′ {_pb['dti']:.4f} [{_pb['ci95'][0]:.4f},{_pb['ci95'][1]:.4f}] vs 0.0938 H33 win Δ { _p5['paired_b_prime_vs_h33']['delta']:+.4f} {_p5['paired_b_prime_vs_h33']['ci95']} → negative**, no slot. Uniqueness: 62 rasters worst mutual 0.30 (limit 0.70) worst ρ 0.042; forward 1.00 vs dense lattice `calib_r13lattice_00904.tif` (literal duplicate, review only). File `docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif` (sha256 `{_p5['raster_sha256']}`, 149,414 bytes, ZIP `bf61cacc...`). Evidence `evidence/phase5/` (run_card, instrument holds, uniqueness, canaries), method `src/gems70/method_p5.py`. Hypotheses.md now ranks 5 candidates (H-2 tested P5, H-3 radiometric GeoDAWN already fetched 36+26 MB, H-4 lidar scarp 36 MB, H-5 conductive breach, H-6 basement curvature) with preregistered validation rule; h33-analysis.md PhD-level byte audit + metric algebra. Under literal forward rule, P5 is duplicate (as is H70 and P4) — download for review only.\n")
+    e6_note = ''
+    e6p = ROOT / 'evidence/e6/run_card.json'
+    if e6p.is_file():
+        _e6 = json.loads(e6p.read_text())
+        _a6 = _e6['instrument_a_holdout']
+        _b6 = _e6['instrument_b_prime_proxy']
+        _db6 = _e6['paired_b_prime_vs_h33']
+        _u6 = _e6['correlation_overlap_vs_registry']['final_dots_stage']
+        e6_note = (
+            f"\n## E6 lane — multi-modal extended-domain LOQO ranker (2026-10-20, `arena/effcd5f7-gemsdoe70`), "
+            f"`scientific_verdict = {_e6['scientific_verdict']}` (`download_ok = true`, "
+            f"`submit_recommended = false` under literal forward rule — DO NOT SUBMIT without selector exemption)\n\n"
+            f"Diagnoses why P4 (`0.0812`) and E5 (`0.0886`) trailed H33 (`0.0938`) on Instrument B′: "
+            f"**35.89% of all SGMC B′ off-catalogue fault pixels lie at `d_cat > 32 px`** (`evidence/e6/sgmc_buffer_audit.json`), "
+            f"which P4 and E5 truncated to zero, and E5 omitted the external LiDAR scarp, 10 m DEM lineament/curvature, "
+            f"GeoDAWN radiometric, and 100 m scarp-curvature channels (`HANDOFF.md` Next Steps 1–2). "
+            f"Training a 4-fold Leave-One-Quadrant-Out HGB across **28 multi-modal features in `d_cat in [3.0, 96.0] px`** "
+            f"with 7×7 regional coverage stratification (`37,654` binary dots; preregistered in `docs/preregistration-e6.md`, "
+            f"driver `scripts/run_experiment_e6.py`) achieves:\n"
+            f"- **Instrument B′ (`PROXY-DTI`, `d >= 3 px`, 59,937 positives):** **`{_b6['candidate']['dti']:.4f}`** "
+            f"`[{_b6['candidate']['ci95'][0]:.4f}, {_b6['candidate']['ci95'][1]:.4f}]` vs H33 **`{_b6['h33_reference']['dti']:.4f}`** "
+            f"— **paired Δ `{_db6['delta']:+.4f}`, 95% CI `[{_db6['ci95'][0]:+.4f}, {_db6['ci95'][1]:.4f}]` (strictly positive; "
+            f"`gate_b_prime_candidate_gt_h33_significant = true`)**, beating H33 (+17.3%), E5 (+24.0%), and P4 (+35.5%).\n"
+            f"- **Instrument A (`HOLDOUT-DTI`, 11,321 withheld catalogue pixels):** **`{_a6['candidate']['dti']:.4f}`** "
+            f"`[{_a6['candidate']['ci95'][0]:.4f}, {_a6['candidate']['ci95'][1]:.4f}]` vs H33 **`{_a6['h33_reference']['dti']:.4f}`** "
+            f"(`gate_a_candidate_ge_h33 = true`).\n"
+            f"- **Uniqueness:** Passes amended mutual-overlap uniqueness across all 62 registry rasters "
+            f"(worst mutual `{_u6['worst_mutual_overlap']:.4f} <= 0.70`, worst non-lattice forward `{_u6['worst_nonlattice_forward_overlap']:.4f} <= 0.70`, "
+            f"worst Spearman `{_u6['worst_spearman_full_footprint']:.4f} <= 0.90`) and all 11 sibling repository TIFFs (`worst_mutual = 0.3508`). "
+            f"Blocked from automatic slot upload ONLY by literal one-way forward overlap (`1.00 > 0.70`) against the dense binary lattice witness `calib_r13lattice_00904.tif`.\n"
+            f"- **Artifact:** `docs/downloads/{_e6['submission_name']}.tif` (sha256 `{_e6['raster_sha256']}`), "
+            f"evidence in `evidence/e6/` (including 62-raster E2 re-audit `e2_uniqueness_62rasters.json` and 7-lane B′ audit `cross_lane_bprime.json`). No weekly slot used.\n"
+        )
     import sys as _sys
     _sys.path.insert(0, str(ROOT / 'scripts'))
     import s3_site
@@ -227,7 +260,7 @@ requirements are retained there; the current active branch is recorded in HANDOF
             f"evidence `evidence/p6_dualhorizon/`, method `src/gems70/method_dualhorizon.py`, runner `scripts/run_experiment_dualhorizon.py`.\n"
         )
     head = head.replace('## Complete retained project prompt',
-                          s3_site.readme_block() + e5_note + p5_note + p6_note + '## Complete retained project prompt', 1)
+                          e6_note + s3_site.readme_block() + e5_note + p5_note + p6_note + '## Complete retained project prompt', 1)
     (ROOT / 'README.md').write_text(head + (ROOT / 'PROJECT_BRIEF.md').read_text() + '\n</details>\n')
 
 
