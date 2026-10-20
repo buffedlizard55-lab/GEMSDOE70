@@ -1,0 +1,22 @@
+{
+  "snapshot_utc": "2026-10-04T22:00:00Z",
+  "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "top_5": [
+    {"rank": 1, "team": "nchuzhoy", "score": 0.3262},
+    {"rank": 2, "team": "DARD", "score": 0.3195},
+    {"rank": 3, "team": "alexoktaba", "score": 0.3042},
+    {"rank": 4, "team": "wbg1", "score": 0.2600},
+    {"rank": 15, "team": "wbg1_owner_report", "score": 0.2600}
+  ],
+  "group_best_claim": {
+    "file": "gems25-dotted-h19-5-d2-8-20261002-e56ea318af89-nan.tif",
+    "score": 0.26,
+    "pixels": 44090
+  },
+  "ours": {
+    "file": "gemsdoe70_h70c_greedy_B2_38500_zeros.tif",
+    "sha256": "36d2c3c4366e88cb25690fa8640bdde0adf618fa36d57775de3e40d8cd3c5768",
+    "pixels": 38500,
+    "status": "HOLDOUT-DTI 0.1923 (4/4), ORGANIZER-CONFIRMED pending"
+  }
+}

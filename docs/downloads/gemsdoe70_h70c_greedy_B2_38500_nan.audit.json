@@ -1,0 +1,43 @@
+{
+  "file": "docs/downloads/gemsdoe70_h70c_greedy_B2_38500_nan.tif",
+  "profile": {
+    "crs": "EPSG:32611",
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "shape": [
+      3730,
+      3292
+    ],
+    "dtype": "float32",
+    "nodata": "nan"
+  },
+  "checks": {
+    "single_band": true,
+    "dtype_float32": true,
+    "dimensions_3730x3292": true,
+    "crs_epsg_32611": true,
+    "transform_match": true,
+    "all_cells_finite": true,
+    "in_footprint_zero_nan": true,
+    "values_in_0_1": true,
+    "no_sentinel": true,
+    "no_inf": true,
+    "footprint_match": true,
+    "outside_nan": true,
+    "zero_on_catalogue": true
+  },
+  "content": {
+    "positive_px": 38500,
+    "min": 0.0,
+    "max": 1.0,
+    "nan_cells": 7111787,
+    "inf_cells": 0
+  },
+  "verdict": "PASS"
+}

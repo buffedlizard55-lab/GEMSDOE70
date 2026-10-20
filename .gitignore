@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+data/training_features.tif
+data/*.tif
+data/**/*.tif.part-*

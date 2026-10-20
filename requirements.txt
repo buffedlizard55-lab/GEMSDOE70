@@ -1,0 +1,4 @@
+rasterio==1.4.4
+numpy==2.4.6
+scipy==1.17.1
+scikit-image==0.26.0
