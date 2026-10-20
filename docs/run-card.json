@@ -1,207 +1,126 @@
 {
-  "hypothesis": "H70-A conductive breach at magnetic discordance",
-  "mechanism": "off = exp(-((d-16)/9)^2) band 2.4-32 px \u00d7 (0.7+0.3\u00b7tip) \u00d7 (1+0.6\u00b7rank(\u2016\u2207cond\u2016\u00b7analytic)) ; 7\u00d77 stratum max, 5px NMS, 37654 dots",
-  "non_fault_mimic": "saline groundwater / clay basin-fill conductivity boundary; Lahontan paleolake edge",
-  "verdict": "negative",
-  "evidence_class": "HOLDOUT-DTI (A) and PROXY-DTI (B/B'); neither organizer-confirmed",
-  "instrument_a_holdout": {
-    "candidate": {
-      "dti": 0.07091157672574441,
-      "ci95": [
-        0.06529379979774812,
-        0.07689490783504999
-      ],
-      "withheld_positive_pixels": 11321
-    },
-    "random_control": {
-      "dti": 0.0505547543622084,
-      "ci95": [
-        0.045115887268522566,
-        0.05583407617316418
-      ],
-      "withheld_positive_pixels": 11321
-    },
-    "h33_reference": {
-      "dti": 0.0036997816856295857,
-      "ci95": [
-        0.003037134722219959,
-        0.004497470563248019
-      ],
-      "withheld_positive_pixels": 11321
-    }
-  },
-  "instrument_b_prime_proxy": {
-    "candidate": {
-      "dti": 0.07926121716822297,
-      "ci95": [
-        0.07172585977375863,
-        0.08720218962529636
-      ],
-      "withheld_positive_pixels": 60383
-    },
-    "random_control": {
-      "dti": 0.06980464660008862,
-      "ci95": [
-        0.06606483943964757,
-        0.07317293602598576
-      ],
-      "withheld_positive_pixels": 60383
-    },
-    "h33_reference": {
-      "dti": 0.09530534390891478,
-      "ci95": [
-        0.08474881849371492,
-        0.10611916140764767
-      ],
-      "withheld_positive_pixels": 60383
-    }
-  },
-  "instrument_b_unrestricted": {
-    "candidate": {
-      "dti": 0.09454629803259493,
-      "ci95": [
-        0.08640791588870608,
-        0.10229135242511866
-      ]
-    },
-    "random_control": {
-      "dti": 0.0710857667756016,
-      "ci95": [
-        0.06810446828411833,
-        0.07415872637882169
-      ]
-    },
-    "h33_reference": {
-      "dti": 0.09232712781026912,
-      "ci95": [
-        0.08366486305874189,
-        0.10147134682712979
-      ]
-    }
-  },
-  "paired_a_vs_h33": {
+  "hypothesis": "Deferred: supervised within-halo ranking from the previous handoff",
+  "mechanism": "Learn residual fault evidence using leave-one-quadrant-out proxy training; not run because literal lane preflight stops.",
+  "non_fault_mimic": "SGMC re-digitization offsets, lithologic contacts and erosional scarps",
+  "holdout_dti": {
     "evidence_class": "HOLDOUT-DTI",
     "evaluator_version": "gems57-pooled-hide-v2",
-    "delta": 0.06721179504011483,
-    "ci95": [
-      0.06156524186709918,
-      0.07323835375666857
-    ],
-    "withheld_positive_pixels": 11321
+    "dti": null,
+    "ci95": null,
+    "withheld_positive_pixels": null,
+    "reason": "No new experiment after fixed-mass overlap stop."
   },
-  "paired_b_prime_vs_h33": {
+  "archived_p4_holdout_not_a_new_result": {
     "evidence_class": "HOLDOUT-DTI",
     "evaluator_version": "gems57-pooled-hide-v2",
-    "delta": -0.016044126740691805,
+    "dti": 0.08277116132149999,
     "ci95": [
-      -0.02718049103902757,
-      -0.004737767848247423
+      0.07551434562164547,
+      0.08951206859535318
     ],
-    "withheld_positive_pixels": 60383
+    "withheld_positive_pixels": 11321,
+    "source": "evidence/phase4/run_card.json"
   },
-  "gate_a_candidate_ge_h33": true,
-  "gate_b_prime_candidate_gt_h33_significant": false,
   "correlation_overlap_vs_registry": {
-    "stage": "final production dots (37654 binary)",
-    "rasters_checked": 2,
-    "inventory_scope": "2 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
-    "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
-    "worst_mutual_overlap": 0.19766824241780423,
-    "worst_mutual_submission": "GEMSDOE25__dotted-h19-5-d2-8.tif",
-    "worst_forward_overlap": 0.19766824241780423,
-    "worst_forward_submission": "GEMSDOE25__dotted-h19-5-d2-8.tif",
-    "worst_spearman_full_footprint": 0.0020997004635860492,
-    "worst_rho_submission": "GEMSDOE28__h27-4-r1-solo-d2-8.tif",
-    "worst_jaccard": 0.004827114443913835,
-    "duplicate": false
-  },
-  "raster_sha256": "fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88",
-  "raster_sha256_reason": null,
-  "validator_output": {
-    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif",
-    "bytes": 135849,
-    "sha256": "fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88",
-    "meta": {
-      "crs": "EPSG:32611",
-      "shape": [
-        3730,
-        3292
-      ],
-      "dtype": "float32",
-      "count": 1,
-      "nodata": null,
-      "transform": [
-        100.0,
-        0.0,
-        243350.0,
-        0.0,
-        -100.0,
-        4508550.0
-      ],
-      "profile_compress": "deflate"
+    "source": "evidence/review/literal_protocol_audit.json",
+    "witness_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "witness_rasters_checked": 1,
+    "footprint_halo_coverage": 0.9987132726822701,
+    "minimum_forward_overlap_at_fixed_budget": 0.8234184947150369,
+    "new_surface_spearman": null,
+    "archived_p4_vs_witness": {
+      "repo": "buffedlizard55-lab/60GEMSDOE",
+      "submission": "registry/rasters/calib_r13lattice_00904.tif",
+      "file": ".cache/registry/calib_r13lattice_00904.tif",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "decoded_sha256": "3140ac4bcfca3d20dc2684c1efb7d8b770d9f861ac3f1869e360b0451970cfec",
+      "their_dots": 206895,
+      "my_dots_within_3px_of_theirs": 1.0,
+      "their_dots_within_3px_of_mine": 0.21055607917059377,
+      "mutual_overlap": 0.21055607917059377,
+      "spearman_full_footprint": -0.0004249861963070003,
+      "jaccard_dot_sets": 0.006051555467792231,
+      "identical_bytes": false,
+      "identical_decoded_predictions": false,
+      "duplicate_by_rho": false,
+      "duplicate_by_overlap": false,
+      "forward_only_overlap_warning": true,
+      "duplicate_by_jaccard": false
     },
-    "band_description": [
-      null
-    ],
-    "n_finite": 12279160,
-    "n_nan": 0,
-    "n_infinite": 0,
-    "min": 0.0,
-    "max": 1.0,
-    "mean": 0.0030664964579045773,
-    "emitted_positive_pixels": 37654,
-    "checks": {
-      "single_band": true,
-      "dtype_float32": true,
-      "dimensions_3730x3292": true,
-      "crs_epsg_32611": true,
-      "transform_matches_sample_submission": true,
-      "no_nan_anywhere": true,
-      "no_inf_anywhere": true,
-      "no_sentinel_values": true,
-      "range_0_1_guaranteed": true,
-      "min_ge_0": true,
-      "max_le_1": true,
-      "in_footprint_all_finite": true,
-      "in_footprint_range_0_1": true,
-      "outside_footprint_zero": true,
-      "zero_dots_on_mapped_catalogue": true
-    },
-    "all_checks_passed": true,
-    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
-    "on_catalogue_positive_pixels": 0,
-    "in_footprint_positive_pixels": 37654,
-    "footprint_fraction": 0.007286874781441169
+    "stop_required": true
   },
-  "submission_name": "gems70-h70-conductive-breach-37654-20261020",
-  "submission_note": "H70-A conductive breach x analytic magnetics, 7px strata, 37654 dots off-cat; HOLDOUT-DTI vs H33",
-  "note_chars": 96,
-  "download_and_submit_ok": false,
-  "download_ok": true,
+  "raster_sha256": null,
+  "new_raster_generated": false,
+  "validator_output": null,
+  "archived_p4": {
+    "artifact": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+    "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "validator_output": {
+      "file": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+      "bytes": 126097,
+      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+      "meta": {
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "dtype": "float32",
+        "count": 1,
+        "nodata": null,
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "profile_compress": "deflate"
+      },
+      "band_description": [
+        null
+      ],
+      "n_finite": 12279160,
+      "n_nan": 0,
+      "n_infinite": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0030664964579045773,
+      "emitted_positive_pixels": 37654,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "dimensions_3730x3292": true,
+        "crs_epsg_32611": true,
+        "transform_matches_sample_submission": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "no_sentinel_values": true,
+        "range_0_1_guaranteed": true,
+        "min_ge_0": true,
+        "max_le_1": true,
+        "in_footprint_all_finite": true,
+        "in_footprint_range_0_1": true,
+        "outside_footprint_zero": true,
+        "zero_dots_on_mapped_catalogue": true
+      },
+      "all_checks_passed": true,
+      "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+      "on_catalogue_positive_pixels": 0,
+      "in_footprint_positive_pixels": 37654,
+      "footprint_fraction": 0.007286874781441169
+    },
+    "download_ok_for_review": true,
+    "protocol_unique": false,
+    "submit_recommended": false
+  },
+  "submission_name": "gems70-literal-lane-review-20261020-NO-SUBMISSION",
+  "submission_note": "Negative preflight: fixed-mass overlap exceeds literal gate against binary registry lattice. No new TIFF or slot.",
+  "verdict": "negative",
+  "download_ok": false,
   "submit_recommended": false,
   "weekly_slots_used": 0,
-  "experiment_count": 1,
-  "elapsed_seconds": 45.59,
-  "organizer_confirmed_score": null,
-  "evaluator_implementation_sha256": {
-    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
-    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
-    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
-    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
-  },
-  "method_source_sha256": {
-    "src/gems70/method_h70.py": "3491144e58ec165a4c09bc02656241637b7f2a8d411043adced9a4b8e93b7810",
-    "scripts/run_experiment_h70.py": "d07a78ccc8a636da504ae55cb6e636549e145960f380f7635a88c10d387651ee"
-  },
-  "registered_parameters": {
-    "dot_count": 37654,
-    "block_px": 7,
-    "nms_px": 5.0,
-    "d_min_px": 2.4,
-    "d_max_px": 32.0,
-    "breach_amplitude": 0.6,
-    "tip_floor": 0.7,
-    "tip_weight": 0.3,
-    "gap_px": 3.0
-  }
+  "new_scientific_experiments": 0,
+  "organizer_confirmed_score": null
 }

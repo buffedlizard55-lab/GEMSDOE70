@@ -16,6 +16,11 @@ jobs:
       - run: pip install -r requirements.lock
       - name: Audit literal parallel-run protocol against archived measurements
         run: python scripts/audit_literal_protocol.py
+      - name: Reproduce literal lane stop against pinned binary witness
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OPENBLAS_NUM_THREADS: '1'
+        run: python scripts/review_literal_protocol.py --fetch --verify
       - name: Build evidence-driven site
         run: python scripts/build_site.py && python scripts/build_readme.py
       - name: Test metric, protocol, writer and site contracts
@@ -23,4 +28,16 @@ jobs:
           OPENBLAS_NUM_THREADS: '1'
         run: python -m pytest -q
       - name: Check generated pages and embedded brief are current
-        run: git diff --exit-code -- docs README.md index.html
+        run: |
+          python - <<'PYCODE'
+          import subprocess
+          import sys
+          result = subprocess.run(['git', 'diff', '--exit-code', '--', 'docs', 'README.md', 'index.html'], capture_output=True, text=True)
+          print(result.stdout)
+          print(result.stderr, file=sys.stderr)
+          if result.returncode:
+              # API-visible diagnostics when the runner log-download host is unavailable.
+              message = result.stdout[:14000].replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+              print('::error title=Generated publication drift::' + message)
+          sys.exit(result.returncode)
+          PYCODE

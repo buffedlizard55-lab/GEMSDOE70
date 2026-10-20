@@ -3,62 +3,69 @@
 <title>Limitations · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="e3-candidate.html">E3 scarp candidate</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a> · <a href="supplemental-protocol-review.html">Supplemental hypotheses and fresh format audit</a> · <a href="current_protocol_review.json">Supplemental JSON card</a>.</section><section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
-<p>Download for review only. The archived Phase-4 and new Phase-5 (P5) TIFFs fail the requested one-way
-3-pixel overlap rule (forward 1.00 vs dense lattice <code>calib_r13lattice_00904.tif</code>); P5 was measured under the corrected mutual rule (worst 0.30). Historical “unique” claims below use a different, mutual rule and
-are not clearance under the current prompt. No weekly slot was used for these candidates.</p>
-<p><a href="protocol-review.html">Current protocol review and next steps</a> · <a href="research-review.html">Research and source review</a> ·
-<a href="literal-protocol-review.json">Current JSON run card</a></p></section><h1>Limitations, irregularities and next-session work</h1>
-<h2>Two shared-tool defects were found and fixed this session</h2>
-<ol>
-<li><strong>Dot definition.</strong> <code>uniqueness._dots</code> counted every finite positive value as a dot, so any
-   nonempty candidate "duplicated" the archived continuous surface <code>E-proba-multiscale</code>
-   (sha256 <code>ab0a0a62…</code>, positive on all 5,167,373 footprint cells). Fixed to binary dots
-   (<code>|value − 1| &lt; 1e-6</code>). Reported in <code>evidence/upstream_fix_report.md</code>.</li>
-<li><strong>Forward-only overlap.</strong> A duplicate must coincide in both directions. Measuring this session:
-   <code>calib_r13lattice_00904</code> (206,895 dots), <code>r11_greedy_mp</code> (272,853) and
-   <code>calib_hedgev2_01563_sample</code> (227,507) each have a 3-px halo covering <strong>100 %</strong> of the footprint,
-   so forward-only overlap is 1.00 for <em>any</em> nonempty candidate. The gate now requires
-   <code>min(forward, reverse) &gt; 0.70</code>; both directions and Jaccard are always reported, ρ &gt; 0.90 still
-   applies to every raster, and no threshold was changed. Three archived submissions — not one —
-   triggered the old rule, which is why this is a representation defect rather than duplication.</li>
-</ol>
-<p>Both fixes are in <code>vendor/gems57/uniqueness.py</code>; <code>registry/template_pin.json</code> records the new hash
-with <code>all_identical: false</code>. They must be proposed upstream to the shared template.</p>
-<h2>What is not established</h2>
+<span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
+<strong>DO NOT SUBMIT — literal protocol stop.</strong> Archived TIFFs are downloadable for review only.
+The current literal forward-overlap gate fails. <a href="protocol-review.html">Current audit</a> ·
+<a href="downloads/review_run_card.json">Current negative run card</a>.
+Historical receipts below are not current submission approval.</aside><h1>Limitations and current next steps</h1>
+<h2>Current blocker: literal forward-overlap stop</h2>
+<p><strong>Do not submit the published files.</strong> They remain available for forensic review only.
+The fresh <a href="protocol-review.html">protocol review</a> supersedes prior mutual-overlap promotion logic,
+not the frozen experimental measurements. All six archived final TIFFs have forward overlap 1.0
+against the hash-verified binary lattice. This exceeds the prompt's 0.70 stop rule even though
+rank correlation and mutual overlap are small. No new candidate was generated after the stop.</p>
+<p>The inherited assertion that three lattice halos cover 100% of the footprint was not established.
+The re-fetched <code>calib_r13lattice_00904.tif</code> covers 99.871327%, with 6,649 uncovered cells. This
+still blocks the fixed 37,654-dot design (minimum overlap 0.82341849), but does not prove a universal
+block at every mass. The archived mutual-rule receipts have not been rewritten to conceal this error.</p>
+<h2>Other irregularities</h2>
 <ul>
-<li><strong>No organizer receipt.</strong> 0.2778 and 0.44 are user-supplied historical values. No score on this
-  site is ORGANIZER-CONFIRMED. The portal was not reachable from this sandbox.</li>
-<li><strong>Neither instrument is the hidden truth.</strong> Instrument A withholds catalogue components (measures
-  catalogue recovery, biased against the task). Instrument B/B′ uses SGMC faults minus the
-  catalogue (an independent state compilation, but partially a re-drawing of the same traces).
-  They disagree, and the disagreement is reported rather than averaged.</li>
-<li><strong>The candidate is not promoted.</strong> On B′, H33 wins by 13 % with a CI excluding zero. The
-  pre-registered rule therefore returns <code>negative</code>, even though instrument A and unrestricted B
-  favour the candidate.</li>
-<li><strong>Registry scope.</strong> Uniqueness was checked against the 62 single-band 100 m rasters archived in
-  <code>buffedlizard55-lab/60GEMSDOE/registry/rasters</code>, not against every private or uncommitted file.
-  Zero Spearman exceedances (max 0.05) and zero mutual-overlap exceedances were found.</li>
-<li><strong>Geophysical fields are weak.</strong> Feature-alone AUCs on withheld catalogue segments were
-  0.46–0.57. The four-field gate hurt both instruments and was removed after Experiment 2; this is
-  recorded, not hidden.</li>
+<li>The current prompt specifies a single-method lane paragraph but supplies none identifiable.
+  The previous handoff's supervised within-halo ranking was deferred, not silently replaced.</li>
+<li>No authenticated submission-page score receipt exists. H33's reported 0.2778 is user-supplied;
+  historical public leaderboard captures are not receipts for our own submissions. Conflicting
+  leader values in the brief are not current verified targets.</li>
+<li>Local format validity is not portal acceptance. All six re-read TIFFs are single-band float32,
+  finite in [0,1], and match the pinned sample's CRS, shape and transform. The rejected upload's
+  exact error cannot be diagnosed without its bytes. The footprint-zero policy differs from a
+  historical problem-page null/NaN quotation; organizer behavior has not been independently confirmed.</li>
+<li>The owner-mirror sample has 60,988 positive known-fault pixels, not an all-zero reference.
+  It supplies grid geometry and footprint only, never hidden validation labels. Owner-mirror hashes
+  establish integrity, not organizer authenticity or every license condition.</li>
+<li>Catalogue recovery and SGMC proxy recovery are different populations. SGMC/QFaults re-digitization
+  overlap can persist outside a narrow exclusion band. Neither is the organizer's hidden truth.
+  A holdout win is not a forecast of leaderboard improvement.</li>
+<li>P4 was already negative on the preregistered B′ proxy gate; E2 did not beat its D28 holdout arm.
+  These frozen results stay negative regardless of the uniqueness issue.</li>
+<li>The historical handoff's claim that geometry has reached its limit is not a theorem. Neither
+  the remaining leaderboard gap nor a guaranteed route to beating it can be inferred from three
+  experiments.</li>
+<li><code>scripts/prepare_data.py</code> from the retained prompt is absent. Data placement is not the sole
+  blocker to training/validation. The official reference supports CPU as well as GPU; GPU is
+  preferred for speed, not an absolute requirement.</li>
+<li>Only GitHub, npm and PyPI hosts are allowed for outbound traffic in this session. The organizer
+  reference README/notebook were re-fetched on GitHub; other official pages and the current
+  authenticated slot cap were not re-verified. No competition slot was spent.</li>
 </ul>
-<h2>Next session, in priority order</h2>
+<h2>Next session, in order</h2>
 <ol>
-<li><strong>Supervised within-halo ranking.</strong> Train on the SGMC-off-catalogue proxy with leave-one-quadrant-out;
-   features: 19-band stack, lidar-scarp (12 bands), GeoDAWN radiometrics (K/Th/U/TC and ratios),
-   catalogue geometry (distance, side, host length, tip position), plus the measured coverage
-   stratification. Report A and B′ with the same bootstrap. This is the only path with information
-   the geometry does not already contain.</li>
-<li><strong>Calibrate the proxy.</strong> Quantify how much of SGMC-only support is a re-drawing of QFaults
-   (buffer tests at 1–6 px) and, if possible, obtain a genuinely independent additional-fault set
-   (e.g. Nevada Bureau of Mines county maps, published INGENIOUS trace exports).</li>
-<li><strong>Upstream the two uniqueness fixes</strong> as a PR to the shared template and re-run its test suite.</li>
-<li><strong>Selector step.</strong> If a future candidate clears both gates, promote one slot within the weekly
-   cap and record the returned score as ORGANIZER-CONFIRMED.</li>
+<li>Read the retained brief, current protocol review and new handoff note first. Do not bypass the
+   literal stop by invoking an old generator or a mutual-overlap rule. Resolve any protocol revision
+   explicitly before attempting another fixed-mass candidate. A different mass is a new preregistration,
+   not an automatic exemption or a reason to target only boundary slivers.</li>
+<li>Quantify SGMC versus QFaults overlap across buffers and spatial quadrants. Review independent
+   official fault data, licensing and obtainability before treating it as new truth.</li>
+<li>If the protocol permits it, validate the ranked residual within-halo model with train-only
+   preprocessing, buffered leave-one-quadrant-out and the shared evaluator. Recompute catalogue
+   geometry only from visible faults and test every raw/derived feature alone for leakage.</li>
+<li>Rerun the current-best baseline on identical folds and mass. Keep HOLDOUT-DTI, SGMC PROXY-DTI
+   and any eventual ORGANIZER-CONFIRMED receipt separate. A negative remains a deliverable.</li>
+<li>Only a separate selector can approve a real weekly slot after all gates and the live cap are
+   checked. Save its authenticated submission-page receipt before reporting an organizer score.</li>
 </ol>
-<h2>Repository-level risks</h2>
+<h2>Publication and reproducibility</h2>
 <ul>
 <li><code>docs/downloads/</code> now contains exactly one TIFF/ZIP pair, authorised by the run card;
   <code>release.assert_no_public_rasters</code> rejects anything else, including symlinks.</li>
@@ -80,17 +87,35 @@ published tree.</p>
 <li>E2 alluvial-step and E3 depth-step are additional negatives (see <code>docs/preregistration-e2.md</code>, <code>evidence/e2|e3/</code>). E2 bytes are published for selector review under <code>docs/publication-amendment-e2.md</code>; submit remains NO. E2 uniqueness used pre-fix R1 subset definitions — not directly comparable to the corrected 62-raster mutual audit until rerun.</li>
 <li>Bridge <code>sample_submission.tif</code> positives are exactly the catalogue (60,988 px), not an all-zero sample; footprint use only. Two-round expanded-label composition and known-fault masking remain unverified from fetched organizer text.</li>
 </ul>
-<h2>E2/E3 addendum — 2026-10-20 (supersedes "no eligible TIFF" for E1 only)</h2>
+<h2>E5 supervised lane (2026-10-20)</h2>
 <ul>
-<li><strong>E2 negative (gated scarp).</strong> Scarp×strain×cover joint dotted HOLDOUT-DTI 0.0598 [0.0437, 0.0762] (11,342 withheld, seed 30) failed preregistered gates: paired Δ vs random includes 0 and scarp alone (0.0794) beat it significantly. Cover direction was wrong (shallow AUC 0.468); strain diluted. No E2 TIFF published.</li>
-<li><strong>E3 candidate released under disclosed adjusted uniqueness.</strong> Scarp-alone dotted HOLDOUT-DTI 0.0943 [0.0782, 0.1109] (11,437 withheld, seed 40), beats random with paired CI excluding 0. Final TIF <code>gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif</code> (SHA-256 in run card) is downloadable as a <em>candidate</em>; slot use still requires selector completion of the full 862-raster scan (63 checked here, incl. champion: forward 0.342, Jaccard 0.0142, Spearman 0.0198) and weekly-cap verification. Literal forward-overlap still fires on 5 saturating covering fields (halo coverage 0.74–1.00; Jaccards ≤0.041) — certificates in evidence; selector owns the final protocol call.</li>
-<li><strong>E3 erratum (gating-code bug, science unchanged).</strong> The frozen E3 driver gated support-Jaccard over all rows at surface stage; the everywhere-positive dense proba fired at 0.9543 by construction and blocked placement. <code>scripts/complete_e3_release.py</code> applied the preregistered dot-field scope to saved rows, SHA-verified deterministic surface reproduction, then placed dots. Original negative card preserved; amended card carries the erratum. Not a fourth experiment (no new folds/selection).</li>
-<li><strong>Holdout transfer warning (H33 lesson).</strong> Archived H33 scores HOLDOUT-DTI 0.0043 on E2 folds because its pruning used the full catalogue and it targets off-catalogue faults. Catalogue-recovery holdout therefore cannot predict live ranking; E3 passing it is necessary falsification evidence, not a projected score. No claim to beat 0.2778 (family-reported, no organizer receipt) is made.</li>
-<li><strong>Selection-edge caveats.</strong> E3 picked the grid-edge cell (60k, &gt;3 px); 45k scored 0.0925 (flattening curve). The 3 px fold collar structurally favours larger exclusions on this instrument, and holdout prevalence (20% hide) may exceed live hidden prevalence, favouring larger budgets. A future session with fresh budget should test a 38–45k scarp variant on new folds rather than retune E3.</li>
-<li><strong>Official pages now verified.</strong> Problem (p967) and About (p968) retrieved 2026-10-20: metric α=0.2/β=0.8/R=300 m and float32 [0,1] EPSG:32611 format match the shared tools. Leaderboard is JS-rendered; conflicting user-reported leaders (0.3195/0.3774/0.4413) remain unverified. Mirror sample still contradicts the page's "total fault absence" wording (its 60,988 ones sit on the catalogue); it is used only as grid template.</li>
-<li><strong>Experiment budget exhausted</strong> (E1+E2+E3 = 3). Further science needs a new session preregistration with untouched folds. Highest-value next steps: (1) selector full-registry scan + slot decision with receipt capture; (2) 1 m DEM scarp refinement of E3 dots' corridors (USGS 3DEP, free) as a fresh lane; (3) off-catalogue proxy-truth validation (SGMC/expert-style) to complement catalogue recovery.</li>
+<li>E5 executed the registered next step (SGMC-proxy LOQO ranking) and is a
+  measured negative on the frozen B′ gate: Δ −0.0051 [−0.0161, +0.0053] vs H33
+  (<code>evidence/e5/run_card.json</code>). Artifact published review-only; submit NO.</li>
+<li>Emission Amendment 1: P4's one-per-block pass cannot reach 37,654 dots on a
+  sharp supervised surface (34,409 measured). Same-NMS fill added before any
+  DTI existed; disclosed in <code>docs/preregistration-e5.md</code>. P4 bytes unaffected.</li>
+<li>New information: OOF AUC 0.69–0.78 (real within-halo signal) does not
+  convert to B′ DTI above uniform halo sampling at this dot budget — the
+  remaining gap to the 0.4413 public leader is not explained by 100 m
+  potential-field/topography ranking of the SGMC proxy. Candidate queues:
+  radiometric/lidar feature sets (E5-3/E5-4, obtainability unchecked), finer
+  (sub-100 m) emission geometry, or a genuinely independent additional-fault
+  truth set to replace the SGMC proxy.</li>
+<li>E5 canary context defect (found in review, corrected post-hoc): the primary
+  canary table computed <code>d_cat</code> against the full catalogue, giving
+  Instrument-A AUC 0.0 by construction (A positives are catalogue pixels).
+  Prediction-time folds always used visible-only distance; its corrected
+  canary AUC is 0.245 (<code>evidence/e5/canaries_correction.json</code>). No leakage;
+  frozen receipts and artifact unchanged.
+All inventoried TIFF/ZIP bytes are preserved; none was renamed or reused as a new submission.
+Publication inventory and Pages guards still reject unauthorized rasters or symlinks. Current
+review evidence lives in <code>evidence/review/</code>; Phase 1–4, E2/E3 and historical cards remain frozen.
+The shared metric, evaluator, writer and vendored uniqueness bytes were not modified in this review.
+The new policy adapter acts only on existing shared measurements and restores the current prompt's
+literal decision rule. See the review for sources, four proposed hypotheses and reproducible commands.</li>
 </ul></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/phase4_run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

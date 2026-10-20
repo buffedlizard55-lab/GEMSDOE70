@@ -1,3 +1,40 @@
+# Current handoff — literal protocol review, arena/9d9f624f-gemsdoe70
+
+This note supersedes older submission-approval language below, not the frozen scientific evidence.
+
+- **DO NOT SUBMIT.** New current card: `evidence/review/run_card.json`; new measured audit:
+  `evidence/review/literal_protocol_audit.json`. All six published final TIFFs have forward overlap
+  1.0 with the pinned binary `calib_r13lattice_00904.tif` witness. No new TIFF, experiment or slot.
+- The inherited "100% halo coverage" claim was false: fresh coverage is 0.9987132726822701,
+  leaving 6649 cells uncovered. At fixed mass 37654, the minimum possible overlap is still
+  0.8234184947150369 > 0.70. Do not generalize the proof to every smaller mass.
+- Vendor metric/evaluator/writer/uniqueness bytes and Phase1–4 / E2 / E3 / scarp E3 receipts are
+  preserved. `src/gems70/protocol.py` applies literal thresholds to shared measurements; no mutual
+  exemption is authorized. Both historical audit CLI and release API use this adapter.
+- Parallel main advanced during the review (including scarp E3, PR17). Integration preserved
+  that artifact and its hash pins, all incoming scientific tests and publication guards.
+- Website: current review-only banner everywhere, real executive summary, current measured
+  run-card links, ranked research queue and conservative H33 analysis. The default public
+  `docs/run-card.json` is the new negative card; old P4 evidence stays at its historical path.
+- Official organizer GitHub README/notebook re-fetched. Other official hosts, portal auth, live
+  weekly cap and score receipts remain unavailable this session. Upstream issue creation was
+  denied integration permission; report retained in `evidence/review/upstream-policy-report.md`.
+
+Next: resolve explicit protocol authorization before another fixed-mass experiment; quantify SGMC
+redigitization overlap; then evaluate the first residual-ranking hypothesis with nested spatial
+validation, feature-alone canaries and a matched current-best baseline. No boundary-only loophole
+experiment or new slot without the separate selector gates. Reproduce this review with
+`python scripts/review_literal_protocol.py --fetch`, builders, pytest and audit_pages.
+
+
+Latest integration: PR #28 H70 conductive-breach archive and PR #24 protocol audit preserved.
+Canonical `evidence/run_card.json` remains H70 as set by that session; P4 builders/audits now
+read `evidence/phase4/run_card.json` explicitly. The new measured review card remains
+`evidence/review/run_card.json`. All six artifacts directly fail the binary-witness forward rule.
+Integrated suite: 212 passed (three upstream affine deprecation warnings).
+
+---
+
 # Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
 
 Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
@@ -80,6 +117,26 @@ before any slot consideration. Evidence: `evidence/e2/`, `evidence/e3/`,
 ## Integration note (PR #16 second merge, 2026-10-20)
 PR #18 (H2 stepover-relay, negative; HOLDOUT-DTI 0.023034, lane stop fired) landed during PR #16 CI and replaced `evidence/run_card.json`, builders and 4 test files with its fail-closed system. Integration preserved: H2 card moved byte-identical to `evidence/history/h2_stepover_negative/run_card.json`; H2 diagnostic TIFF registered in `registry/published_artifacts.json`; Phase-4 canonical card restored from `fefc857` blob (sha256 `9cd64b1e...`); session-2 builders/tests retained so P4 + discordance + E2 artifacts stay coherent. `make_run_card.py` stale-schema fix (pre-existing red Verify on main) retained. All verdicts negative; slots used 0.
 
+## E5 lane (2026-10-20, branch arena/e22c56cf-gemsdoe70) — supervised LOQO, negative
+
+Executed the registered next step: SGMC-proxy (d≥3 px) HGB ranker, LOQO, OOF
+surface, P4 emission + Amendment-1 same-NMS fill (P4 block pass alone placed
+34,409/37,654 on the sharper surface; amended pre-score in
+`docs/preregistration-e5.md`). Artifact
+`docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif`
+(sha256 `8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2`,
+byte-identical across two full reruns). Canaries ≤0.755; OOF AUC 0.689–0.781.
+A HOLDOUT-DTI 0.0815 vs H33 0.0037; **B′ PROXY-DTI 0.0886 vs H33 0.0938,
+Δ −0.0051 [−0.0161, +0.0053]** → gate fails, verdict negative,
+`submit_recommended=false`, no slot used. Supervised ranking halved P4's B′
+deficit (−0.0126) and is statistically tied with H33 on B′, but does not beat
+uniform halo sampling: ranking signal exists (AUC) yet does not convert into
+DTI at 37,654 dots / 300 m saturation. Evidence `evidence/e5/`; script
+`scripts/run_experiment_e5.py`. Next: E5-3/E5-4 features (GeoDAWN
+radiometrics, lidar scarp) inside the same LOQO harness after checking mirror
+obtainability; or selector decision to spend one slot on P4/E5 as a deliberate
+measurement (never recorded as expected win). Public leader 0.4413
+(organizer-page read 2026-10-20, `evidence/e5/leaderboard_read.json`).
 ## Latest protocol review (arena/4aea4e21-gemsdoe70)
 Current prompt's literal forward-overlap rule conflicts with the prior mutual
 amendment. P4 has four duplicate witnesses; no new experiment/TIFF generated.

@@ -1,0 +1,10 @@
+{
+  "evidence_class": "POST-HOC DIAGNOSTIC (does not alter frozen E5 receipts or the artifact)",
+  "issue": "Primary canaries computed d_cat against the FULL catalogue; Instrument-A positives are withheld catalogue pixels, so d_cat=0 for every positive and AUC=0.0 by construction (perfectly anti-predictive definitional artifact).",
+  "corrected_feature": "d_visible (EDT to fold-visible catalogue, the exact feature used at prediction time)",
+  "auc_instrument_a_d_visible": 0.24500764066778552,
+  "auc_instrument_a_log1p_d_visible": 0.24500764066778552,
+  "withheld_positive_pixels": 11321,
+  "sampled_negatives": 200000,
+  "conclusion": "Corrected geometry canary is far below the 0.90 leakage stop; no leakage. Fold predictions already used visible-only geometry."
+}
