@@ -22,3 +22,20 @@
 3. Use the archived negative evidence to reject the present fixed ranking. A fresh preregistered idea must use untouched evaluation blocks and satisfy the budget; do not tune this experiment on its reported holdout.
 4. Verify scientific literature/data licensing from official sources when network access permits. The research queue is not a list of verified discoveries.
 5. Only after a successful complete surface audit: place final dots, repeat the complete literal registry audit, invoke the shared writer, validate the exact bytes, bind the receipt/hash and publish a one-click file. Weekly-slot selection remains separate.
+
+## Follow-up publication review
+
+The GitHub Pages API reported legacy `main:/` publication, not `main:/docs`.
+Removing links from `docs/` alone therefore did not exclude quarantined artifacts
+from the deployment source. A direct API change to `/docs` was denied with HTTP
+403 (`Resource not accessible by integration`); see
+`evidence/pages_publication.json` in the repository. No successful settings change
+is claimed.
+
+The repository-level mitigation removes root `.nojekyll` and adds explicit
+Jekyll exclusions in `_config.yml` for `quarantine/`, `data/` and internal evidence
+and code. Site generation now checks this guard as well as `docs/`, including
+symlink bypasses. Remote deployment completion is separate from source-policy
+validation. The archives remain accessible through the public GitHub repository;
+this is publication hygiene, **not secrecy or deletion**. A future settings change
+to `/docs` remains preferable, but requires Pages administration permission.

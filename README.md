@@ -97,6 +97,15 @@ only H33. Its source, documents and TIFFs are preserved in
 Those historical READY / score claims are withdrawn, not endorsed as measurements.
 See [the quarantine receipt](evidence/concurrent_h70c_quarantine.json).
 
+## Follow-up publication boundary
+
+Pages is configured for the repository root, not only `docs/`. The root
+`.nojekyll` bypass has been removed and `_config.yml` excludes quarantine/data
+and internal directories. Site builds now check both the root policy and docs,
+including symlink bypasses. An API change to `/docs` was denied (403); no
+settings change is claimed. GitHub archives remain public, not redacted.
+See [follow-up review](reports/followup-publication-review-20261020.md).
+
 ## Own the outcome
 
 Do not use “maximize probability of winning” as permission to hide negatives,
