@@ -93,9 +93,15 @@ def test_fresh_review_binds_every_archived_final_file_and_does_not_claim_univers
         assert f['literal_lane_status']['stop_required'] is True
         assert f['literal_lane_status']['protocol_unique'] is False
         assert digest(ROOT / f['artifact']) == f['raster_sha256']
+    s2 = json.loads((ROOT / 'evidence/s2/literal_lane.json').read_text())['files']
+    s2_paths = {f['artifact'] for f in s2.values()}
+    for f in s2.values():
+        assert f['literal_lane_status']['stop_required'] is True
+        assert f['literal_lane_status']['protocol_unique'] is False
+        assert digest(ROOT / f['artifact']) == f['raster_sha256']
     assert expected - frozen == ({'docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif',
                                   'docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif'}
-                                 | s3_paths)
+                                 | s3_paths | s2_paths)
     for row in review['archived_artifacts']:
         assert digest(ROOT / row['artifact']) == row['raster_sha256']
         assert literal_lane_status(row['shared_measurements'])['stop_required']

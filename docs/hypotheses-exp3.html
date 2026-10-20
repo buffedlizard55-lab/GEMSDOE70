@@ -1,0 +1,50 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exp-3 addendum · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Unique research TIFF available; DO NOT SUBMIT — holdout gate failed.">
+<link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Preregistration Addendum — Experiment 3 (H70-3A), written before running it</h1>
+<p><strong>Motivation from Experiment 2 (already-reported evidence, <code>evidence/holdout2.json</code>):</strong>
+on the seed-702 holdout the corroboration gate significantly <em>hurt</em>
+(candidate 0.07829 vs NoGate ablation 0.08854; paired Δ −0.01025 [−0.01794, −0.00239]),
+and the unsupervised GEMSDOE49-architecture detector (0.08681) was statistically
+indistinguishable from the raw supervised model. Experiment 2 is negative and is
+not retuned. This addendum specifies ONE new experiment, evaluated on <strong>untouched</strong>
+blocks (seed <strong>703</strong>; no model, surface, or dot from seed 702 is reused as an input).</p>
+<h2>H70-3A — Dual-detector rank fusion</h2>
+<ul>
+<li><strong>Layers / signature:</strong> identical label-free 36-feature stack and out-of-fold
+  HistGradientBoosting model as H70-2A (features unchanged), fused with the
+  unsupervised GEMSDOE49-architecture surface (multiscale <code>det_elev_slope</code> edge ×
+  structure-tensor coherence × cross-gradient orthogonality gate, <code>w=0.25</code>) by
+  <strong>geometric mean of footprint ranks</strong>: <code>sqrt(rank01(HGB_oof) * rank01(G49))</code>.</li>
+<li><strong>Why it could catch unmapped faults:</strong> the supervised model exploits subtle
+  multi-physics co-variation learned from visible faults; the unsupervised
+  detector requires an actual linear topographic breakline. Rank fusion keeps
+  only locations both mechanisms support, suppressing single-mechanism false
+  positives (learned-texture artefacts and non-tectonic scarps respectively).</li>
+<li><strong>Named non-fault mimic:</strong> anthropogenic/paleoshoreline linear scarps that are
+  also geophysically textured (e.g. shoreline benches on magnetic basement) —
+  these can satisfy both detectors and remain the principal failure mode.</li>
+<li><strong>Difference from prior repos:</strong> no prior family submission fuses a supervised
+  out-of-fold model with this unsupervised detector by rank geometric mean;
+  GEMSDOE63 fused prior <em>submission surfaces</em> (prohibited here as inputs).</li>
+</ul>
+<h2>Fixed protocol (seed 703, otherwise identical to Experiment 2)</h2>
+<ul>
+<li>Same features, model hyperparameters, canary rule (stop if any |AUC−0.5| implies
+  max(AUC,1−AUC) &gt; 0.90), <code>buffered_component_draw(seed=703, buffer_px=3, boundary_px=12)</code>,
+  same <code>emit_decimated</code>/<code>emit_prefix</code> dotted placement, global budget 37,654 dots
+  (per-fold proportional, identical for every arm), dots &gt;2 px from <em>visible</em> faults.</li>
+<li><strong>Arms:</strong> <code>candidate</code> (fusion), <code>RawHGB_NoGate</code>, <code>GEMS49_OrthoGate</code>,
+  <code>Gated_H70_2A</code> (Exp-2 candidate construction), <code>SingleBand_ElevSlope</code>,
+  <code>Random_Sparse_Control</code> — all on identical seed-703 blocks, pooled by the shared
+  evaluator (<code>gems57-pooled-hide-v2</code>, 1,000 paired bootstrap draws).</li>
+<li><strong>Promotion gate (holdout part):</strong> candidate must beat <code>RawHGB_NoGate</code>,
+  <code>GEMS49_OrthoGate</code>, <code>Gated_H70_2A</code>, and <code>Random_Sparse_Control</code>, each with paired
+  95% CI lower bound &gt; 0. Any failure ⇒ verdict negative, no “OK to submit”.</li>
+<li><strong>Uniqueness part:</strong> two-stage 940-raster audit (surface + final dots) with the
+  shared tool; like-for-like dot-field overlap ≤ 0.70 and |Spearman| ≤ 0.90 required,
+  literal reading reported alongside (see <code>docs/irregularities.md</code> protocol note).</li>
+<li><strong>Budget:</strong> this is experiment 3 of 3. No further experiments after this one.</li>
+</ul></main><footer>Evidence before leaderboard claims. No competition upload performed.
+<a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>

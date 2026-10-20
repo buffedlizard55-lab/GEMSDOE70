@@ -267,12 +267,19 @@ consistency against cached reference metadata, not organizer acceptance.
 
 Integration: main advanced concurrently with PRs adding a separate E3 scarp artifact and a literal-protocol review. All those frozen receipts, artifacts, tests and drivers were retained. This session's four conditional hypotheses and fresh P4 format card are supplemental (`docs/supplemental-protocol-review.html`), not a replacement for the concurrent review or an authorization of E3.
 
+## Session-2 lane (arena/9a895360, merged additively)
+
+Exp2 (seed 702, gate hurt) and Exp3 (seed 703, fusion 0.09161) both negative; unique TIFF
+`gems70-fusion-dotted-37654-20261020.tif` is DO NOT SUBMIT (holdout CI gate + 0.896 3-px
+overlap vs GEMSDOE49 parent). Card `evidence/s2_run_card.json`, findings `docs/s2-findings.md`,
+prereg `docs/s2-hypotheses.md` + `docs/hypotheses-exp3.md`, method `src/gems70/method_s2.py`.
+Spent seeds for this lane: 702/703 — do not retune. Zero slots used.
+
 ## Parallel E6 multi-modal extended-domain LOQO lane & completed selector audits (2026-10-20, `arena/effcd5f7-gemsdoe70`)
 
 1. **SGMC vs. QFaults buffer calibration ($r = 1\dots 6\text{ px}$, `evidence/e6/sgmc_buffer_audit.json`):**
    Off-catalogue SGMC shell enrichment is `3.83×` at `(0, 1]` px, `2.98×` at `(1, 2]` px, `1.86×` at `(2, 3]` px, `1.40×` at `(3, 4]` px, `1.14×` at `(4, 5]` px, and `0.97×` at `(5, 6]` px; **35.89% of all `SGMC B′` ($d \ge 3\text{ px}$) fault pixels lie at $d_{\text{cat}} > 32\text{ px}$** (`p50 = 22.80 px`, `p75 = 41.98 px`), explaining why `P4` (`0.0812`) and `E5` (`0.0886`) trailed `H33` (`0.0938`) when restricted to $d \le 32\text{ px}$.
 2. **Experiment E6 (`docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif`, sha256 `9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771`):**
-   28-feature LOQO HGB across $d_{\text{cat}} \in [3.0, 96.0]\text{ px}$ with 7×7 regional coverage stratification (`37,654` binary dots; preregistered in `docs/preregistration-e6.md`, driver `scripts/run_experiment_e6.py`) achieves `Instrument B′ = 0.1100 [0.1058, 0.1133]` vs. `H33` `0.0938 [0.0839, 0.1044]` (**paired $\Delta = +0.0162$, 95% CI `[+0.0045, +0.0270]`**, `gate_b_prime_candidate_gt_h33_significant = true`) and `Instrument A = 0.0710 [0.0637, 0.0781]` vs. `H33` `0.0037` (`gate_a_candidate_ge_h33 = true`). Passes amended mutual-overlap uniqueness across all 62 registry rasters (`worst_mutual = 0.2960 <= 0.70`, `worst_nonlattice_forward = 0.3526 <= 0.70`, `worst_spearman = 0.0133 <= 0.90`) and all 11 sibling repository TIFFs (`worst_mutual = 0.3508`). Published with `download_ok = true` and `submit_recommended = false` under the active literal one-way forward-overlap gate (`1.00 > 0.70` against `calib_r13lattice_00904.tif`).
+   28-feature LOQO HGB across $d_{\text{cat}} \in [3.0, 96.0]\text{ px}$ with 7×7 regional coverage stratification (`37,654` binary dots; preregistered in `docs/preregistration-e6.md`, driver `scripts/run_experiment_e6.py`) achieves `Instrument B′ = 0.1100 [0.1058, 0.1133]` vs. `H33` `0.0938 [0.0839, 0.1044]` (**paired $\Delta = +0.0162$, 95% CI `[+0.0045, +0.0270]`**, `gate_b_prime_candidate_gt_h33_significant = true`) and `Instrument A = 0.0710 [0.0637, 0.0781]` vs. `H33` `0.0037` (`gate_a_candidate_ge_h33 = true`). Passes amended mutual-overlap uniqueness across all 62 registry rasters (`worst_mutual = 0.2960 <= 0.70`, `worst_nonlattice_forward = 0.3526 <= 0.70`, `worst_spearman = 0.0133 <= 0.90`) and all sibling repository TIFFs (`worst_mutual = 0.3508`). Published with `download_ok = true` and `submit_recommended = false` under the active literal one-way forward-overlap gate (`1.00 > 0.70` against `calib_r13lattice_00904.tif`).
 3. **Completed selector audits (`evidence/e6/e2_uniqueness_62rasters.json` and `evidence/e6/cross_lane_bprime.json`):**
    Full 62-raster E2 uniqueness re-audit (`worst_mutual = 0.2876 <= 0.70`, `worst_nonlattice_forward = 0.4795 <= 0.70`) and 7-lane `Instrument B′` comparison (`E3` `60,000` dots `0.2137`; `E6` `0.1100`; `E2` `0.1048`; `H33` `0.0938`; `E5` `0.0886`; `P4` `0.0812`; `H70-A` `0.0792`).
-
