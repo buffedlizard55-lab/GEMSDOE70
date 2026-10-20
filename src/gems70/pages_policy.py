@@ -49,26 +49,33 @@ def check_source(root: Path) -> dict:
             'excluded_private_roots': sorted(private)}
 
 
-def check_output(site: Path, baseurl: str = '/GEMSDOE70') -> dict:
+def check_output(site: Path, baseurl: str = '/GEMSDOE70',
+                 allowed_artifacts: dict[str, str] | None = None) -> dict:
     """Check the built directory, including direct URLs never linked by a page."""
+    import hashlib
     site = Path(site)
     if not site.is_dir() or site.is_symlink():
         raise ValueError('A real built site directory is required')
+    allowed = allowed_artifacts or {}
     paths = list(site.rglob('*'))
     violations = []
     for path in paths:
         rel = path.relative_to(site)
+        rel_str = rel.as_posix()
         if path.is_symlink():
             violations.append(f'{rel}: symlink')
         # GitHub's legacy Jekyll builder injects the default theme stylesheet
         # even though repository assets/ is excluded. Permit only that exact
         # generated CSS path and its directories, never arbitrary assets/ files.
-        theme_css = rel.as_posix() == 'assets/css/style.css' and path.is_file()
-        theme_dir = rel.as_posix() in {'assets', 'assets/css'} and path.is_dir()
+        theme_css = rel_str == 'assets/css/style.css' and path.is_file()
+        theme_dir = rel_str in {'assets', 'assets/css'} and path.is_dir()
         if rel.parts[0] not in PUBLIC_ROOTS and not (theme_css or theme_dir):
             violations.append(f'{rel}: nonpublic root')
         if path.suffix.lower() in {'.tif', '.tiff', '.zip'}:
-            violations.append(f'{rel}: stopped-run raster/archive')
+            if rel_str not in allowed:
+                violations.append(f'{rel}: stopped-run raster/archive')
+            elif allowed[rel_str] and hashlib.sha256(path.read_bytes()).hexdigest() != allowed[rel_str]:
+                violations.append(f'{rel}: published artifact hash mismatch')
     if violations:
         raise ValueError('Unsafe Pages build: ' + '; '.join(violations))
     # Check the deployed tree, not the checkout where excluded evidence still
