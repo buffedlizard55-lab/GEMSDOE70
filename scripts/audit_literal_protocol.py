@@ -7,8 +7,11 @@ import hashlib
 import json
 import math
 from pathlib import Path
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'scripts'))
+from validate_submission import run_validation
 
 
 def literal_gate(audit):
@@ -44,21 +47,41 @@ def main():
     sha = hashlib.sha256(artifact.read_bytes()).hexdigest()
     if sha != old['raster_sha256'] or sha != audit['candidate_file_sha256']:
         raise ValueError('Archived candidate and uniqueness receipt are not hash-linked')
+    validation = run_validation(artifact)
+    if validation.get('local_format_pass') is not True:
+        raise ValueError('Archived TIFF failed fresh local byte-level validation')
+    holdout_a = {'evidence_class': 'HOLDOUT-DTI',
+                 'evaluator_version': 'gems57-pooled-hide-v2',
+                 **old['instrument_a_holdout']['candidate'],
+                 'provenance': 'Archived phase4 instrument A; not rerun this session'}
+    holdout_b_prime = {'evidence_class': 'HOLDOUT-DTI',
+                       'evaluator_version': 'gems57-pooled-hide-v2',
+                       **old['instrument_b_prime_proxy']['candidate'],
+                       'provenance': 'Archived phase4 instrument B-prime proxy; not rerun this session'}
+    submission_note = old['submission_note']
     result = {
+        'evidence_class': 'PROMPT-PROTOCOL-REVIEW',
         'hypothesis': 'Protocol audit of the archived coverage-stratified halo candidate; no new experiment',
-        'mechanism': 'Sparse coverage avoids redundant truth-cell credit; not proof of geothermal activity',
+        'mechanism': 'Sparse coverage may reduce redundant truth-cell credit; this is not proof of geothermal activity',
         'non_fault_mimic': 'Depositional basin margins correlated with mapped-fault habitat',
-        'holdout': {'evidence_class': 'HOLDOUT-DTI',
-                    'evaluator_version': 'gems57-pooled-hide-v2',
-                    **old['instrument_a_holdout']['candidate'],
-                    'provenance': 'Archived phase4 instrument A, not rerun this session'},
+        'holdout_dti': {'instrument_a': holdout_a, 'instrument_b_prime': holdout_b_prime},
         'correlation_overlap_vs_registry': gate,
+        'preplacement_surface_audit': {
+            'status': 'not_recorded_for_phase4_candidate',
+            'required_by_prompt': True,
+            'cleared': False,
+            'note': 'The archived P4 audit covers final dots; no pre-placement surface receipt was found.'
+        },
         'raster_sha256': sha,
-        'validator_output': old['validator_output'],
-        'validator_provenance': 'Archived shared-validator receipt; not a new data restoration',
+        'validator_output': validation['shared_validator'],
+        'sample_comparison': validation['sample_comparison'],
+        'validator_provenance': 'Fresh local shared-validator run on archived TIFF bytes during this review; not organizer acceptance',
         'submission_name': old['submission_name'],
-        'note': 'Archived review only. Literal one-way overlap gate fails; DO NOT SUBMIT. No new candidate generated.',
-        'verdict': 'negative', 'download_ok': True, 'submit_recommended': False,
+        'submission_note': submission_note,
+        'submission_note_chars': len(submission_note),
+        'review_note': 'Archived review only. Literal one-way overlap gate fails; DO NOT SUBMIT. No new candidate generated.',
+        'verdict': 'negative', 'download_ok': True, 'download_ok_for_review': True,
+        'submit_recommended': False, 'submit_ok': False,
         'new_candidate_generated': False, 'experiments_this_session': 0,
         'weekly_slots_used': 0,
         'limitation': 'No single method paragraph assigns this session a lane. Stop on existing duplicate witness; do not invent a new lane.',

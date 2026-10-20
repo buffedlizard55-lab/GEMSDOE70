@@ -7,7 +7,8 @@
   "artifact_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
   "submission_name": "gems70-p4-stratified-halo-37654-20261020",
   "reasons": [
-    "Candidate did not beat H33 on instrument B' with a 95% CI above zero."
+    "Candidate did not beat H33 on instrument B' with a 95% CI above zero.",
+    "Current literal one-way uniqueness audit requires STOP; review download only."
   ],
   "notes": [
     "A downloadable, validated file is not a validated leaderboard improvement."

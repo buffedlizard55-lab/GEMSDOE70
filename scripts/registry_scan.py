@@ -1,18 +1,18 @@
-"""Complete literal uniqueness scan of a candidate GeoTIFF against the indexed registry.
+"""Compare a candidate GeoTIFF with the pinned, indexed registry and write measurements.
 
-Uses the SHARED comparator (vendor/gems57/uniqueness.py) and its literal thresholds
-(Spearman > 0.90 or forward 3 px dot overlap > 0.70). Nothing is exempted or reinterpreted.
+This scan delegates dot detection and the mutual-overlap classification to the shared
+comparator (vendor/gems57/uniqueness.py); it reports forward overlap separately. It does
+not by itself clear the current prompt's stricter forward-only stop rule. For that policy,
+run scripts/audit_literal_protocol.py and stop if any forward overlap exceeds 0.70.
 Rasters come from .cache/registry (fetched by scripts/fetch_registry_full.py, SHA-verified).
 
-Also records each registry raster's support fraction, so dense continuous surfaces that
-make the literal overlap rule degenerate are visible for human review. The scan itself
-never clears or blocks a file; it writes evidence only.
-
-Limitation: the index was generated 2026-10-12. Repos changed after that date are NOT
-covered unless the index is regenerated (see docs/irregularities.md).
+The result is evidence only, not organizer acceptance or a slot-selection decision. The
+registry index is historical and may omit changed, private, unlinked, inaccessible, or
+later-published files; regenerate and document the inventory before any release decision.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -106,5 +106,15 @@ def main(candidate_tif: str, out_json: str, mine_name: str) -> int:
     return 0
 
 
+def cli(argv=None) -> int:
+    """Parse command-line arguments without exposing an IndexError traceback."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('candidate_tif', help='candidate single-band GeoTIFF to compare')
+    parser.add_argument('out_json', help='path for the JSON comparison receipt')
+    parser.add_argument('mine_name', help='candidate name recorded in the receipt')
+    args = parser.parse_args(argv)
+    return main(args.candidate_tif, args.out_json, args.mine_name)
+
+
 if __name__ == '__main__':
-    raise SystemExit(main(sys.argv[1], sys.argv[2], sys.argv[3]))
+    raise SystemExit(cli())

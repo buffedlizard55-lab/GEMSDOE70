@@ -35,11 +35,23 @@ def test_fail_closed_for_missing_nonfinite_and_wrong_type():
 def test_current_card_is_negative_and_does_not_invent_experiment():
     card = json.loads((ROOT / 'evidence/literal_protocol_review.json').read_text())
     assert card['verdict'] == 'negative'
+    assert card['download_ok'] is True
+    assert card['download_ok_for_review'] is True
     assert card['submit_recommended'] is False
+    assert card['submit_ok'] is False
     assert card['new_candidate_generated'] is False
     assert card['correlation_overlap_vs_registry']['duplicate'] is True
-    assert len(card['note']) <= 140
-    assert card['holdout']['withheld_positive_pixels'] == 11321
+    assert card['submission_note_chars'] == len(card['submission_note']) <= 140
+    assert card['holdout_dti']['instrument_a']['withheld_positive_pixels'] == 11321
+    assert card['holdout_dti']['instrument_b_prime']['withheld_positive_pixels'] == 59937
+    assert card['preplacement_surface_audit']['cleared'] is False
+    validator = card['validator_output']
+    assert validator['all_checks_passed'] is True
+    assert validator['checks']['in_footprint_all_finite'] is True
+    assert validator['checks']['in_footprint_range_0_1'] is True
+    assert validator['meta']['crs'] == 'EPSG:32611'
+    assert validator['meta']['shape'] == [3730, 3292]
+    assert validator['meta']['transform'] == [100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0]
 
 
 def test_generated_pages_show_current_stop():

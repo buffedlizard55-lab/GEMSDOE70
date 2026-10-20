@@ -1,17 +1,31 @@
 {
+  "evidence_class": "PROMPT-PROTOCOL-REVIEW",
   "hypothesis": "Protocol audit of the archived coverage-stratified halo candidate; no new experiment",
-  "mechanism": "Sparse coverage avoids redundant truth-cell credit; not proof of geothermal activity",
+  "mechanism": "Sparse coverage may reduce redundant truth-cell credit; this is not proof of geothermal activity",
   "non_fault_mimic": "Depositional basin margins correlated with mapped-fault habitat",
-  "holdout": {
-    "evidence_class": "HOLDOUT-DTI",
-    "evaluator_version": "gems57-pooled-hide-v2",
-    "dti": 0.07304229212058164,
-    "ci95": [
-      0.06673987703804156,
-      0.07899496967047342
-    ],
-    "withheld_positive_pixels": 11321,
-    "provenance": "Archived phase4 instrument A, not rerun this session"
+  "holdout_dti": {
+    "instrument_a": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.07304229212058164,
+      "ci95": [
+        0.06673987703804156,
+        0.07899496967047342
+      ],
+      "withheld_positive_pixels": 11321,
+      "provenance": "Archived phase4 instrument A; not rerun this session"
+    },
+    "instrument_b_prime": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.08116240066330835,
+      "ci95": [
+        0.07234947587460432,
+        0.09002008521926923
+      ],
+      "withheld_positive_pixels": 59937,
+      "provenance": "Archived phase4 instrument B-prime proxy; not rerun this session"
+    }
   },
   "correlation_overlap_vs_registry": {
     "rule": "spearman > 0.90 OR candidate dots within 3 px > 0.70",
@@ -42,6 +56,12 @@
       }
     ],
     "registry_rasters_checked": 62
+  },
+  "preplacement_surface_audit": {
+    "status": "not_recorded_for_phase4_candidate",
+    "required_by_prompt": true,
+    "cleared": false,
+    "note": "The archived P4 audit covers final dots; no pre-placement surface receipt was found."
   },
   "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
   "validator_output": {
@@ -100,12 +120,65 @@
     "in_footprint_positive_pixels": 37654,
     "footprint_fraction": 0.007286874781441169
   },
-  "validator_provenance": "Archived shared-validator receipt; not a new data restoration",
+  "sample_comparison": {
+    "path": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+    "bytes": 126097,
+    "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "bands": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "width": 3292,
+    "height": 3730,
+    "bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "ref_bounds": [
+      243350.0,
+      4135550.0,
+      572550.0,
+      4508550.0
+    ],
+    "transform": [
+      100.0,
+      0.0,
+      243350.0,
+      0.0,
+      -100.0,
+      4508550.0
+    ],
+    "nodata": null,
+    "blocksize": [
+      256,
+      256
+    ],
+    "fixture_grid": false,
+    "has_validity_mask": false,
+    "nan_pixels": 0,
+    "infinity_pixels": 0,
+    "n_nan": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "n_nonzero": 37654,
+    "mass": 37654.0,
+    "mass_outside_footprint": 0,
+    "problems": [],
+    "ok": true,
+    "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+  },
+  "validator_provenance": "Fresh local shared-validator run on archived TIFF bytes during this review; not organizer acceptance",
   "submission_name": "gems70-p4-stratified-halo-37654-20261020",
-  "note": "Archived review only. Literal one-way overlap gate fails; DO NOT SUBMIT. No new candidate generated.",
+  "submission_note": "P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence",
+  "submission_note_chars": 108,
+  "review_note": "Archived review only. Literal one-way overlap gate fails; DO NOT SUBMIT. No new candidate generated.",
   "verdict": "negative",
   "download_ok": true,
+  "download_ok_for_review": true,
   "submit_recommended": false,
+  "submit_ok": false,
   "new_candidate_generated": false,
   "experiments_this_session": 0,
   "weekly_slots_used": 0,
