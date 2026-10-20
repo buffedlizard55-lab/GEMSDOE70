@@ -59,11 +59,13 @@ def test_release_is_negative_and_has_no_artifact():
     assert r['verdict']=='negative'
     assert not r['download_available'] and not r['approved_for_weekly_slot']
     assert r['generated_tif'] is None
-    assert r['scientific_experiments_run']==r['submission_slots_used']==0
+    assert r['scientific_experiments_run']==1
+    assert r['submission_slots_used']==0
 
 
 def test_card_does_not_fabricate_missing_evidence():
-    card=json.loads((ROOT/'evidence/run_card.json').read_text())
+    # Historical review-only assertions stay bound to their archived card.
+    card=json.loads((ROOT/'evidence/history/parallel-review2/run_card.json').read_text())
     assert card['raster_sha256'] is None
     assert card['holdout']['dti'] is None
     assert card['holdout']['ci95'] is None

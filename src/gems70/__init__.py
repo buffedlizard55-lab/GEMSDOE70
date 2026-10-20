@@ -1,1 +1,1 @@
-"""Audit and submission-readiness tools; no fitted scientific model is present."""
+"""GEMSDOE70: fail-closed scientific experiment workbench."""

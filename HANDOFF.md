@@ -1,58 +1,82 @@
-# Next session — read before modeling
+# Handoff — 2026-10-20
 
-Read README.md, PROMPT.md, AGENTS.md, reports/review.md, and evidence/run_card.json.
+Read README.md and PROJECT_BRIEF.md at session start.
 
-## Current outcome
+**NEGATIVE. DO NOT SUBMIT. No eligible TIFF exists.**
 
-**NEGATIVE / DO NOT SUBMIT. No new TIFF. No scientific experiment. No slot used.**
-The user's highest-priority TIFF deliverable remains **unmet**, because the
-literal protocol rejects every nonempty in-footprint candidate. The missing
-single-method lane is also a blocker. Do not “fix” this by changing the threshold,
-stratifying dense rasters out, renaming a prior TIFF, or changing the run-card verdict.
+The checkout started with only an eleven-byte README. Pinned numerical features,
+sample and catalogue were restored from public owner mirrors into `.cache/data`.
+No organizer-authenticated identity, current leaderboard receipt or weekly-cap
+state is available. The notebook reference was retrieved from the official
+DrivenData GitHub repository. No GPU was required for this fixed CPU hypothesis.
 
-The obstruction is remeasured, not merely inherited: a member of the historical
-registry has positive values at every finite sample-footprint cell. Its byte hash,
-Git blob, membership, grid alignment and support were verified. One witness is
-sufficient to prove failure of an any-registry rule; no full scan is claimed.
+One preregistered contact-termination experiment ran. Every raw and transformed
+feature received an AUC leakage canary and shared HOLDOUT-DTI. Whole mapped
+components were withheld with a real three-pixel feature-context buffer, spatially
+eroded quadrants and pixel-exact known-fault masking. No catalogue predictor was
+used. The continuous surface is worse than its random sparse control; current
+holdout best was not independently rerun. See evidence/holdout.json.
 
-## Reproduce the delivered audit and site
+The surface passed numerical array checks but failed the literal overlap gate.
+A SHA-verified 17GEMSDOE continuous prediction covers every footprint cell; its
+halo leaves no off-catalogue allowed cell uncovered. No nonempty candidate can
+pass the inherited literal support rule against it. **Do not silently exempt it.**
+Only this decisive witness was compared; an incomplete scan cannot certify
+uniqueness, but a duplicate witness suffices to stop. Final dots were not placed,
+no submission writer was invoked for the scientific run, and no slot was used.
+The shared writer's TIFF/ZIP behavior is tested only with synthetic temporary
+unit-test fixtures, never published as competition predictions.
 
-    python -m venv .venv
-    .venv/bin/pip install -r requirements.txt
-    .venv/bin/python scripts/audit.py
-    .venv/bin/python scripts/make_run_card.py
-    .venv/bin/python scripts/release_gate.py --expect-negative
-    .venv/bin/python scripts/build_site.py
-    .venv/bin/python -m pytest -q
+`vendor/gems57` is unchanged from 60GEMSDOE commit
+`32024716f218d06a94e01464157392119c03cb15`; evidence/template_verification.json
+compares both SHA-256 and upstream git blob identities. A false bound in the
+metric's explanatory docstring was identified, but executable coverage arithmetic
+is correct. Cross-repo issue creation was denied; see evidence/upstream_metric_report.md.
 
-`audit.py` restores a content-addressed witness from GitHub if absent, checks
-its SHA-256 and input pins, then reproduces the universal-overlap proof. The
-scientific budget is still unused. The local audit succeeds with exit 0 when it
-reproduces a negative; `release_gate.py` without `--expect-negative` exits 2 and
-NEVER authorizes a release.
+Next session must resolve the protocol representation conflict and missing lane
+assignment before new science. A fresh ranking needs untouched evaluation blocks,
+comparable current-best validation and complete pre-placement/final-dot audits.
+Never tune the present fixed hypothesis after seeing its holdout.
 
-## Concurrent review
+Publication is intentionally fail-closed for this stopped experiment. The static
+site cannot generate or train a TIFF in-browser. A fresh reviewed scientific run
+and release contract are prerequisites to connecting the validated shared writer
+to a real one-click artifact; editing run-card booleans is not sufficient.
 
-PR #1 reached main while this work was open. Its dated review in
-`docs/review-2026-10-20.md` is preserved as historical, with corrected evidence
-classification and a link to the current report. Shared-tool restoration is
-now complete; the scientific and protocol blockers still stand.
+Commands:
 
-## Resume priorities
+```
+python -m venv .venv
+.venv/bin/pip install -r requirements.lock
+bash scripts/download_competition_data.sh
+.venv/bin/python scripts/build_site.py
+.venv/bin/python scripts/build_readme.py
+.venv/bin/python -m pytest -q
+```
 
-1. Explicit protocol resolution and a real method-lane paragraph are required.
-2. Confirm organizer data identities, official band semantics, nodata encoding,
-   current rules and authenticated weekly quota. No credentials in files/chat.
-3. Restore the large feature stack only when a legitimate lane run is possible;
-   inherited `scripts/fetch_data.py` is unmodified and uses pinned public mirrors.
-4. Build a visible-only same-evaluator incumbent and preregister the assigned
-   candidate; all proposed hypotheses are conditional and locally novel only.
-5. Feature canaries, pooled buffered whole-segment holdout, paired physical-block
-   CI, ordered uniqueness, shared writer, exact-byte validator, separate selector.
-6. Replace the negative-only publisher only after a separately reviewed,
-   evidence-bound positive gate exists. A run-card field must not enable downloads.
+Do not rerun scripts/run_experiment.py: its existing experiment manifest makes it
+refuse a second attempt. Data are reconstructible; large caches are ignored and
+not committed. Source-health refresh is separate from scientific validation.
 
-No shared module was edited. Upstream prose issue in metric.py is documented;
-any correction must be made once in the shared template, not a private fork.
-Official reference README supports CPU-only training; GPU is beneficial, not a
-hard requirement. This checkout has no fitted scientific training implementation.
+## Concurrent-main integration
+
+Main advanced through PRs 1 and 2 while this session ran. Their reports, audit
+helpers, bridge fixtures and tests are retained. The earlier review-only run card,
+README and handoff are archived in evidence/history/parallel-review2. Canonical
+publication scripts use the measured one-experiment card; the legacy card command
+now verifies it rather than overwrite it. Root historical HTML paths redirect to
+the current workbench. The combined suite passes 68 tests (three upstream
+Rasterio/Affine pending-deprecation warnings). No unrelated candidate PR is
+endorsed by this integration.
+
+## Concurrent H70-C publication quarantine
+
+Main subsequently advanced through PRs 4 and 5, advertising a second session's
+H70-C TIFF as ready. Inspection found explicit simulated/placeholder holdout
+values in generation source and a one-raster H33 comparison, not full literal
+uniqueness clearance. All source, claims and files are preserved with hashes in
+quarantine/concurrent-h70c and evidence/concurrent_h70c_quarantine.json; none is
+endorsed or linked as a submission. Source text is retained, not executed. The
+canonical site remains negative. No additional scientific experiment was run.
+
+Final suite after adding quarantine hash/publication coverage: **69 tests pass**.

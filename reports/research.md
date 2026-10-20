@@ -1,3 +1,5 @@
+> **Historical parallel-session review.** Retained for provenance. Current status, experiment count and evidence are in [README](../README.md) and [the current run card](../evidence/run_card.json); this document is not a current release authorization.
+
 # Scientific review and conditional research queue
 
 Reviewed 2026-10-20 UTC. This is a research queue, **not an assigned lane**, fitted model, new discovery, or predicted leaderboard result. No new scientific experiment was run because the preflight establishes a mandatory stop.

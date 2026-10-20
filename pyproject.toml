@@ -1,17 +1,19 @@
 [project]
 name = "gemsdoe70"
-version = "1.0.0"
-description = "GEMSDOE70 transtensional relay-ramp discovery system for DOE GEMS Prize"
-requires-python = ">=3.10"
-dependencies = [
-  "rasterio>=1.3",
-  "numpy>=1.22",
-  "scipy>=1.9",
-  "scikit-image>=0.19",
-]
+version = "0.1.0"
+description = "Evidence-first fault-discovery workbench; current run is negative"
+requires-python = ">=3.11"
+dynamic = ["dependencies"]
 
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
 
 [tool.pytest.ini_options]
 pythonpath = ["src", "vendor"]

@@ -1,12 +1,11 @@
-__pycache__/
-*.pyc
 .venv/
 .cache/
+__pycache__/
 .pytest_cache/
+*.pyc
 build/
 dist/
 submissions/
 data/external/
 data/training_features.tif
-data/*.tif
-data/**/*.tif.part-*
+evidence/ci-tests.xml

@@ -1,0 +1,24 @@
+name: Verify research workbench
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.lock
+      - name: Build evidence-driven site
+        run: python scripts/build_site.py && python scripts/build_readme.py
+      - name: Test metric, protocol, writer and site contracts
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+        run: python -m pytest -q
+      - name: Check generated pages and embedded brief are current
+        run: git diff --exit-code -- docs README.md index.html

@@ -1,0 +1,92 @@
+{
+  "status": "QUARANTINED \u2014 DO NOT SUBMIT",
+  "source_commits": [
+    "243d4e0",
+    "0a962e8",
+    "40fa65a",
+    "34d54a8"
+  ],
+  "reason": "Source explicitly labels hardcoded values as simulated/placeholder holdout; no full literal uniqueness clearance; verified universal overlap blocker applies. Not endorsed as a scientific result.",
+  "artifacts": [
+    {
+      "path": "quarantine/concurrent-h70c/original-README.md",
+      "bytes": 22259,
+      "sha256": "4f9c4e50b52e482e2800f4e310caafec47eda668dfb57ae9b510a821904499c8"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/downloads/gemsdoe70_h70c_greedy_B2_38500_nan.audit.json",
+      "bytes": 837,
+      "sha256": "365dbd84789e5b62c94a830022e072000f547ba85ddb26beebfdb39994f9f1ef"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/downloads/gemsdoe70-h70c-relay-ramp-B2-38500-20261020T000000Z-36d2c3c4-zeros.zip",
+      "bytes": 188509,
+      "sha256": "c7b4c99d8184786b12528cdd85ca6a0bf8c11cb01cd0a6205cda1bea47520dd1"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/downloads/gemsdoe70_h70c_greedy_B2_38500_nan.tif",
+      "bytes": 318930,
+      "sha256": "1ca28ea7dae7ebb9e6402f5724ccee024bfff52621938a25bb85c076d319cd0f"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/downloads/gemsdoe70_h70c_greedy_B2_38500_zeros.audit.json",
+      "bytes": 834,
+      "sha256": "31dd7c5ee2e7c94466aa20351742cd10a1cdd10043d03d992eeb2e35016350e3"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/downloads/gemsdoe70_h70c_greedy_B2_38500_zeros.tif",
+      "bytes": 298905,
+      "sha256": "36d2c3c4366e88cb25690fa8640bdde0adf618fa36d57775de3e40d8cd3c5768"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/downloads/submissions_manifest.json",
+      "bytes": 603,
+      "sha256": "240ab5261ff854e7b119962de18bf36ff37301f44e8f05e69eca3cb4a3b1b434"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/source/generate_h70_greedy.py.txt",
+      "bytes": 9516,
+      "sha256": "a046ca511640fd4fb075407f251414fd4d5b188bf51391dad131d71a4ff1c339"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/source/generate_h70_submission.py.txt",
+      "bytes": 25200,
+      "sha256": "10fcd570691a7575abdf38a1bd117838b43b0fe837f03c1793f21acfd6118f05"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/source/validate_submission.py.txt",
+      "bytes": 5493,
+      "sha256": "bd8b2b4514644eb3d857bfe8249a8f218d8ef711b7e4b61dbbdf7f535d1e966e"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/source/pages.yml.txt",
+      "bytes": 567,
+      "sha256": "227dd35ff6c483067369c362ea0a22bc05a6390ab677c56accd72e30eefada88"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/site/geothermal-vents-knowledge.html",
+      "bytes": 9465,
+      "sha256": "937f616fe5ef9e22bd7508641a79644f2b2641fa3bc4fa8078cab5fbc811202c"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/site/h70-c-details.md",
+      "bytes": 2810,
+      "sha256": "0d96664d7bd50740f5ae1c16e7d1df4118531a4b42ed14b86384eb20688c505e"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/data/feed.json",
+      "bytes": 505,
+      "sha256": "52a247c17db4433ae1dbbcd736a109f5564a32df030dbc9d4998ffdc97c3abd4"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/data/source_health.json",
+      "bytes": 6432,
+      "sha256": "ca214b3db5574c2dfc9c2e90ae5d267227c39d8dcf5f11d8bf1f56f99002b111"
+    },
+    {
+      "path": "quarantine/concurrent-h70c/data/leaderboard_snapshot_2026-10-04.json",
+      "bytes": 813,
+      "sha256": "30d4c6a3b30fe48a52150623e65607501eb01ff216c1d45ebf5114ef1c510322"
+    }
+  ]
+}

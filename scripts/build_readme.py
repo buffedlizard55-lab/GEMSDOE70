@@ -1,117 +1,127 @@
-#!/usr/bin/env python3
-"""Keep the working prompt directly in README as requested."""
+"""Embed the entire retained user brief behind a short, accurate session summary."""
 from pathlib import Path
+import json
 ROOT=Path(__file__).resolve().parents[1]
-SUMMARY='''# GEMSDOE70 — evidence-first fault discovery
 
-## Submission status: BLOCKED / DO NOT SUBMIT
+def main():
+    card=json.loads((ROOT/'evidence/run_card.json').read_text())
+    d=card['holdout_dti']
+    head=f'''# GEMSDOE70 — geothermal fault research
 
-**No new submission TIFF was generated.** This highest-priority deliverable is
-unmet, not replaced by an old, renamed, randomly perturbed or all-zero file.
-No scientific experiment or competition slot was used.
+## Submission status: **DO NOT SUBMIT — no eligible TIFF**
 
-The literal parallel-run protocol is unsatisfiable for any nonempty prediction
-inside the sample footprint: a hash-verified registry member is positive at
-every footprint pixel. Forward overlap with that member is necessarily 100%,
-above the mandatory 70% duplicate-and-stop limit. The required method-lane
-paragraph is also absent from the supplied brief. We did not silently revise
-either constraint.
+The fixed contact-termination experiment failed the literal surface uniqueness gate.
+Final dot placement and submission export stopped. **No previous submission was
+copied, renamed or advertised as a new prediction. No weekly slot was used.**
+The requested unique downloadable competition TIFF is **not fulfilled**; the
+protocol's verified dense-prior blocker makes it impossible for any nonempty
+candidate to pass its current literal support rule. A negative result is retained
+instead of an unsafe download.
 
-**[Open the site](https://buffedlizard55-lab.github.io/GEMSDOE70/)** ·
-[Executive submission guide](https://buffedlizard55-lab.github.io/GEMSDOE70/executive-summary.html) ·
-[Negative run card](evidence/run_card.json) · [Measured proof](evidence/preflight.json)
+- [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission guide](docs/executive-summary.html)
+- [Run card](evidence/run_card.json) · [Measured results](evidence/holdout.json)
+- [H33 forensic analysis](docs/h33-analysis.md) · [Four preregistered hypotheses](docs/hypotheses.md)
+- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
+- **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-### Start every session here
+## What was verified
 
-Read this README including the working brief below, [AGENTS.md](AGENTS.md),
-[HANDOFF.md](HANDOFF.md), and [the review](reports/review.md). Preserve the user's
-literal stop rules. **Maximize P(Win):** protect scarce submission slots.
-**Own the Outcome:** publish negative evidence and identify unmet deliverables.
+This checkout originally contained only an eleven-byte README. We restored the
+cached numerical stack, sample and mapped faults from pinned owner mirrors;
+checksums prove mirror consistency, not organizer authentication. Shared
+`evaluate_holdout.py`, `submission_writer.py`, metric, holdout and uniqueness
+tools are reused unchanged from the pinned template. Their upstream blob/hash
+verification is in [evidence/template_verification.json](evidence/template_verification.json).
 
-### What was actually delivered
+One fixed CPU experiment targeted magnetic-edge termination along gravity-supported
+basement boundaries. Each raw/derived feature received its own leakage canary and
+holdout score. No catalogue-derived predictor was used. Whole connected fault
+components were hidden with a feature-context buffer and spatial erosion, visible
+faults were masked pixel-exactly, and weighted metric terms were pooled before a
+paired spatial-cluster bootstrap.
 
-- Audited the initially empty checkout and corrected inherited infrastructure claims.
-- Read official competition problem/metric/format text and relevant rules sections;
-  stored a [source ledger](reports/sources.md) with explicit evidence limits.
-- Inspected H33 method source and prior TIFF bytes **for education only**.
-  Its reported result remains USER-REPORTED, not artifact-bound ORGANIZER-CONFIRMED.
-- Ranked [four conditional geological hypotheses](reports/research.md) with
-  physical signatures, layer names, confounders, and qualitative benefit/cost.
-- Reused byte-pinned shared evaluator, writer, metric and registry tools;
-  verified upstream Git blobs without editing the shared implementation.
-- Added reproducible audit, local format-validator wrapper, negative-only release
-  policy, software tests, CI, and a clean static Pages site with no misleading TIFF link.
+**HOLDOUT-DTI:** {d['dti']:.6f}, 95% CI [{d['ci95'][0]:.6f}, {d['ci95'][1]:.6f}],
+{d['withheld_positive_pixels']:,} withheld positive pixels, evaluator
+`{d['evaluator_version']}`. This is the continuous pre-placement surface, not final
+dots and not a leaderboard score. It underperforms the random sparse control;
+no same-split current-best claim is made. See the full receipt for controls and
+paired intervals.
 
-### Reproduce
+**REGISTRY-MEASUREMENT:** one decisive, SHA-verified continuous prior covers the
+whole footprint. Surface Spearman is {card['correlation_overlap_vs_registry']['spearman']:.6f};
+three-pixel forward support overlap is 1.0, above the literal 0.70 stop threshold.
+The [saturation certificate](evidence/registry_saturation.json) proves this blocks
+every nonempty off-catalogue candidate under the inherited support definition.
+This is a representation/protocol conflict, not evidence that all geological
+methods are identical. No private density exemption was used. Only this witness
+was checked: a complete fresh uniqueness clearance is **not** claimed.
+
+The user-reported H33 historical value has **no ORGANIZER-CONFIRMED receipt** here.
+Actual bytes show H33 is the previous sparse field with catalogue-near dots deleted.
+The site explains conditional metric efficiency without inferring hidden labels or
+promising a higher score. Conflicting leaderboard values in the prompt remain
+unverified. Official non-GitHub pages failed access here; we do not call that a
+verified login redirect.
+
+## Reproduce the workbench
 
 ```bash
 python -m venv .venv
-.venv/bin/pip install -r requirements.txt
-.venv/bin/python scripts/audit.py
-.venv/bin/python scripts/make_run_card.py
-.venv/bin/python scripts/release_gate.py --expect-negative
+.venv/bin/pip install -r requirements.lock
+bash scripts/download_competition_data.sh  # pinned public owner mirrors, not DrivenData auth
 .venv/bin/python scripts/build_site.py
+.venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
 
-The audit downloads one content-addressed registry witness via `gh` if absent,
-checks its SHA-256, and reproduces the negative. Its exit 0 means “audit ran,”
-**not** “submission approved.” The release gate without `--expect-negative`
-exits 2 and does not authorize publication. Test-generated TIFFs exist only in
-pytest temporary directories and are not scientific candidate deliverables.
+`run_experiment.py` is the preserved one-experiment implementation; it deliberately
+refuses a second attempt when its manifest already exists. Do not delete the
+manifest to tune on reported holdout blocks. `build_submission.py` exits with a
+clear blocked status, never creates a decoy TIFF. The shared writer's real
+TIFF/one-TIFF-ZIP round trip, range rejection and no-overwrite behavior are tested
+with temporary synthetic fixtures only. No synthetic fixture is published.
 
-For a future file's **local format** check only:
+The static Pages site reports evidence; it does not train or generate in-browser.
+A fresh reviewed scientific run, resolved protocol, complete two-stage audit and
+separate weekly-slot selection are needed before enabling a real artifact link.
+[Source-health workflow](.github/workflows/source-health.yml) refreshes availability
+as a downloadable Actions artifact; it is not an authenticated live-score feed.
 
-```bash
-.venv/bin/python scripts/validate_submission.py path/to/candidate.tif --out evidence/validation.json
-```
+## Concurrent review history
 
-A local format PASS is not novelty clearance, geological validation, slot
-approval or organizer acceptance. The shared writer rejects invalid values
-without clipping. Its all-finite outside-footprint convention must be reconciled
-with official null/NaN guidance before claiming a submit-ready artifact.
+Two parallel reviews merged into main during this session. Their reports, source
+notes, bridge fixtures, audit helpers and software tests are retained. The earlier
+review-only run card and handoff are archived under
+[evidence/history/parallel-review2](evidence/history/parallel-review2/), where their
+zero-experiment statements remain historically accurate. The canonical current
+card records the one fixed experiment reported here. Legacy publication entry
+points now delegate to this evidence-driven site; `make_run_card.py` verifies the
+existing card rather than overwrite it with an older schema.
 
-### Concurrent prior review preserved
+A subsequent concurrent H70-C publication (PRs 4/5) contained explicit
+simulated/placeholder holdout values in its source and checked novelty against
+only H33. Its source, documents and TIFFs are preserved in
+`quarantine/concurrent-h70c` with hash evidence, but removed from site downloads.
+Those historical READY / score claims are withdrawn, not endorsed as measurements.
+See [the quarantine receipt](evidence/concurrent_h70c_quarantine.json).
 
-A separate review reached main while this PR was open. Its original dated
-[review](docs/review-2026-10-20.md) is preserved with a supersession note. Its
-next-step request to restore shared tools is now addressed; lane, protocol,
-scientific-validation and organizer-authentication blockers remain. A public
-leaderboard observation is not a submission-page-confirmed artifact score.
+## Own the outcome
 
-### Limits and next actions
+Do not use “maximize probability of winning” as permission to hide negatives,
+overstate verification, spend unvalidated slots or weaken uniqueness. Honest
+negative evidence and clear stop conditions protect future experiments. Next-session
+priorities and unmet requirements are explicit in HANDOFF.md and the limitations page.
 
-See the [completion matrix](reports/requirements.md). There is no fitted model,
-real-data holdout result, feature AUC, comparable holdout best, current complete
-registry scan or submission-page receipt in this repository. The large cached
-feature stack was not restored after the preflight stop; the inherited pinned
-fetcher is available, not a claimed complete training pipeline. Bridge inputs
-are hash-pinned owner mirrors, not independently organizer-authenticated.
+## Complete retained project prompt
 
-Resolve the explicit protocol conflict and assign a lane first. Then authenticate
-inputs, restore caches, verify physical band meanings, preregister a same-evaluator
-visible-only candidate/incumbent comparison, run canaries and pooled confidence
-intervals on untouched blocks, perform surface uniqueness before placement and
-final-dot uniqueness afterward, validate exact output bytes, and pass to the
-separate selector. No leaderboard improvement is promised.
+Historical statements below are user-supplied requirements/claims, not verified
+current results. No leaderboard value below becomes ORGANIZER-CONFIRMED by being
+copied into this README. The dedicated PROJECT_BRIEF.md is the source for this
+embedded copy (formatting whitespace normalized from the supplied message).
 
-GitHub Pages is static: this site reports evidence and explains submission; it
-does not run scientific training or produce geophysical rasters in the browser.
-Source observation dates are shown. No automatic live leaderboard or account
-quota feed is claimed. No DrivenData account session is available; shell binary
-hosts are restricted. CPU-only training is possible in the official reference;
-a GPU can help, but is not a proven hard prerequisite.
-
-## Original working brief
-
-The following preserves the full user-supplied working brief in readable
-Markdown (whitespace normalized). Its historical claims are not verified facts;
-corrections and blockers above take precedence in our factual reports. It is
-also maintained separately in [PROMPT.md](PROMPT.md).
-
----
+<details>
+<summary>Read the complete supplied project brief before every session</summary>
 
 '''
-
-if __name__=='__main__':
-    (ROOT/'README.md').write_text(SUMMARY+(ROOT/'PROMPT.md').read_text())
+    (ROOT/'README.md').write_text(head+(ROOT/'PROJECT_BRIEF.md').read_text()+'\n</details>\n')
+if __name__=='__main__':main()

@@ -1,3 +1,5 @@
+> **Historical parallel-session review.** Retained for provenance. Current status, experiment count and evidence are in [README](../README.md) and [the current run card](../evidence/run_card.json); this document is not a current release authorization.
+
 # Repository review — 2026-10-20 UTC
 
 ## Executive decision

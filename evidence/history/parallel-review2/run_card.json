@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "repository": "buffedlizard55-lab/GEMSDOE70",
+  "date_utc": "2026-10-20",
+  "hypothesis": "No method lane supplied; signed gravity/conductance edge-sidedness is a deferred research proposal only.",
+  "mechanism": "Proposed: persistent side-ordered density/electrical contrasts across a connected edge could indicate a concealed structural boundary. Not implemented or tested.",
+  "non_fault_mimic": "Sedimentary facies contact or intrusive margin without displacement.",
+  "holdout": {
+    "evidence_class": "HOLDOUT-DTI",
+    "status": "NOT RUN \u2014 mandatory preflight stop",
+    "evaluator_version": "gems57-pooled-hide-v2 (available, not run on real holdout)",
+    "withheld_positives": null,
+    "dti": null,
+    "ci95": null,
+    "current_best_same_evaluator": null
+  },
+  "leakage_canary": {
+    "status": "NOT RUN \u2014 no features fitted or trusted",
+    "feature_auc": null
+  },
+  "registry": {
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "status": "UNIVERSAL DUPLICATE OBSTRUCTION; no candidate-specific clearance",
+    "spearman": null,
+    "candidate_dot_overlap": null,
+    "minimum_overlap_for_any_nonempty_in_footprint_candidate": 1.0,
+    "limit": 0.7,
+    "witness_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+    "evidence": "evidence/preflight.json",
+    "scope": "One hash-verified member of an inherited owner registry; not a complete current registry scan.",
+    "surface_check": "Blocked before surface construction/placement by universal support proof.",
+    "final_dot_check": "NOT RUN \u2014 no final dots created."
+  },
+  "raster_sha256": null,
+  "validator": {
+    "status": "NOT RUN \u2014 no submission raster exists",
+    "no_nan_inside_footprint": null,
+    "values_in_0_1": null,
+    "crs_match": null,
+    "shape_match": null,
+    "transform_match": null,
+    "grid_reference_only": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ]
+    },
+    "organizer_acceptance": false
+  },
+  "submission_name": null,
+  "proposed_name_prefix": "gems70-signededge (reserved concept, no file)",
+  "note": "NEGATIVE: no TIFF. Lane absent; a dense registry member forces 100% overlap under the literal duplicate rule.",
+  "download_available": false,
+  "approved_for_weekly_slot": false,
+  "scientific_experiments_run": 0,
+  "submission_slots_used": 0,
+  "verdict": "negative"
+}

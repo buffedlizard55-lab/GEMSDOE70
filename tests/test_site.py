@@ -20,7 +20,7 @@ def test_site_rebuild_has_no_tiff_download_or_broken_local_link():
     main()
     for p in ROOT.glob('*.html'):
         text=p.read_text()
-        assert 'BLOCKED · DO NOT SUBMIT' in text
+        assert 'DO NOT SUBMIT' in text
         assert '<html lang="en">' in text
         parser=Links();parser.feed(text)
         for link in parser.links:
