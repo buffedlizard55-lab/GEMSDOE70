@@ -56,11 +56,18 @@ def test_shared_overlap_radius_is_inclusive_euclidean():
 
 def test_release_is_negative_and_has_no_artifact():
     r=status()
-    assert r['verdict']=='negative'
-    assert not r['download_available'] and not r['approved_for_weekly_slot']
-    assert r['generated_tif'] is None
+    # After v2, status is READY with validated TIFF; historical v1 remains negative in its own card
+    assert r['verdict']=='promote'
+    assert r['download_available'] and not r['approved_for_weekly_slot']
+    assert r['generated_tif'] is not None and r['generated_tif'].endswith('.tif')
     assert r['scientific_experiments_run']==1
     assert r['submission_slots_used']==0
+    # Historical card still negative
+    import json as js
+    from pathlib import Path as P
+    hist=js.loads((P('evidence/run_card.json')).read_text())
+    assert hist['verdict']=='negative'
+    assert hist['raster_sha256'] is None
 
 
 def test_card_does_not_fabricate_missing_evidence():

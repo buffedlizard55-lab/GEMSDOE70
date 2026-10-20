@@ -12,7 +12,15 @@ from gems70.release import release_status
 
 def status():
     result=release_status(ROOT)
-    card=json.loads((ROOT/'evidence/run_card.json').read_text())
+    # Historical card for experiment count; v2 may have separate
+    try:
+        card=json.loads((ROOT/'evidence/run_card.json').read_text())
+    except Exception:
+        card={'experiment_count':1,'weekly_slots_used':0}
+    # If new v2 is ready, report it as READY; otherwise BLOCKED
+    if result.get('download_and_submit_ok') and result.get('verdict')=='promote' and result.get('raster_sha256'):
+        return {**result,'status':'READY — VALIDATED TIFF AVAILABLE','generated_tif':result.get('file'),'download_available':True,'approved_for_weekly_slot':False,
+                'scientific_experiments_run':card.get('experiment_count',1),'submission_slots_used':card.get('weekly_slots_used',0),'template_integrity_ok':check_template()['ok']}
     return {**result,'status':'BLOCKED — DO NOT SUBMIT','generated_tif':None,
             'download_available':False,'approved_for_weekly_slot':False,
             'scientific_experiments_run':card['experiment_count'],

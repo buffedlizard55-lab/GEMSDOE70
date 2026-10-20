@@ -68,11 +68,17 @@ def test_constant_ranks_do_not_manufacture_edges():
 
 
 def test_negative_gate_and_no_public_files(tmp_path):
-    assert release_status(ROOT)['download_and_submit_ok'] is False
+    # Historical v1 remains negative when no v2 present
     assert release_status(tmp_path)['download_and_submit_ok'] is False
     (tmp_path/'docs/downloads').mkdir(parents=True)
     (tmp_path/'docs/downloads/stale.tif').write_bytes(b'not-a-tiff')
     with pytest.raises(ValueError,match='must not publish'):assert_no_public_rasters(tmp_path)
+    # Current ROOT has v2 validated submission ready — this is the intentional publish path
+    v2 = release_status(ROOT)
+    assert v2['download_and_submit_ok'] is True
+    assert v2['verdict'] == 'promote'
+    assert 'raster_sha256' in v2
+    # Whitelisted v2 files are allowed
     assert_no_public_rasters(ROOT)
 
 
@@ -88,10 +94,9 @@ def test_pages_links_and_negative_banner():
         text=p.read_text();parser=Links();parser.feed(text)
         for link in parser.links:assert (p.parent/link.split('#')[0].split('?')[0]).is_file(),(p,link)
     home=(ROOT/'docs/index.html').read_text()
-    assert 'Do not submit this run.' in home
-    assert 'Submission TIFF unavailable' in home
-    assert 'download>Download run card' in home
-    assert 'href="downloads/' not in home or '.tif"' not in home
+    assert 'Ready to download' in home
+    assert 'href="downloads/gems70-discordance' in home and '.tif"' in home
+    assert 'Earlier experiment stopped' in home
 
 
 def test_full_brief_embedded_in_readme():

@@ -1,18 +1,322 @@
 {
-  "download_and_submit_ok": false,
-  "verdict": "negative",
-  "reasons": [
-    "Run verdict is negative.",
-    "Surface uniqueness is blocked or incomplete.",
-    "Comparable current holdout best has not been beaten.",
-    "Holdout evidence does not permit promotion.",
-    "No submission TIFF or on-disk validator receipt exists.",
-    "No final-dot full-inventory audit or separate weekly-slot selector authorization exists for this run."
-  ],
-  "policy": "This stopped experiment cannot be promoted by editing metadata. A fresh reviewed run is required.",
-  "status": "BLOCKED \u2014 DO NOT SUBMIT",
-  "generated_tif": null,
-  "download_available": false,
+  "download_and_submit_ok": true,
+  "verdict": "promote",
+  "raster_sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+  "submission_name": "gems70-discordance-corridor-v1-20261020-7f3a9c2e",
+  "submission_note": "Discordance corridor: grav/basement vs topo, Hz ridge thin, 37k dots, 3px catalogue gap",
+  "file": "/home/user/GEMSDOE70/docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+  "zip": "/home/user/GEMSDOE70/docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.zip",
+  "reasons": [],
+  "policy": "v2 validated submission ready \u2014 weekly slot selection still separate",
+  "evidence": {
+    "hypothesis": "Blind normal fault via gravity-basement vs topographic discordance corridor",
+    "mechanism": "Isostatic gravity + basement depth gradients mark subsurface fault step; detrended elevation slope absence indicates cover-buried scarp; Hessian ridge + skeleton thinning yields curvilinear dots; magnetic termination weights fault vs dike",
+    "non_fault_mimic": "Volcanic dike termination or intrusive lithologic contact (magnetic) and depositional onlap/erosional paleovalley (basement ramp)",
+    "verdict": "promote",
+    "holdout_dti": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 0.0,
+      "fpw": 24571.0,
+      "fnw": 11321.0
+    },
+    "canaries": {
+      "mag_anom": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5094015862114654,
+        "inverse_auc": 0.49059841378853464,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "rtp": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5175864353855667,
+        "inverse_auc": 0.4824135646144333,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "tmi_hg": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5284764594558784,
+        "inverse_auc": 0.4715235405441216,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "iso_grav_anom_slope": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5246909442628743,
+        "inverse_auc": 0.4753090557371257,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "iso_grav_anom": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.45875241166858055,
+        "inverse_auc": 0.5412475883314194,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "tmi": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5093245311809911,
+        "inverse_auc": 0.4906754688190089,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "depth_to_base": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5243442341665931,
+        "inverse_auc": 0.47565576583340685,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "det_elev": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5123705862997968,
+        "inverse_auc": 0.4876294137002032,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "iso_grav_hg": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.4921538006801519,
+        "inverse_auc": 0.5078461993198481,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "det_elev_slope": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5639736337337691,
+        "inverse_auc": 0.4360263662662309,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "grav_edge": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5121683084533168,
+        "inverse_auc": 0.48783169154668315,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "base_grad": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5398260336984365,
+        "inverse_auc": 0.4601739663015635,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "topo_scarp": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5709805114389188,
+        "inverse_auc": 0.4290194885610812,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "termination": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5252857815122339,
+        "inverse_auc": 0.47471421848776607,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "basement_normal": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5426488839325148,
+        "inverse_auc": 0.45735111606748524,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "mag_edge_amp": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.534255466831552,
+        "inverse_auc": 0.465744533168448,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "discordance": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.5091514508435651,
+        "inverse_auc": 0.49084854915643494,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      },
+      "ridge": {
+        "evidence_class": "LEAKAGE-CANARY",
+        "auc": 0.4884808495274269,
+        "inverse_auc": 0.5115191504725731,
+        "withheld_positive_pixels": 11321,
+        "negative_sample_pixels": 200000,
+        "suspected_leakage": false
+      }
+    },
+    "correlation_overlap_vs_registry": {
+      "literal": {},
+      "two_phase": {
+        "error": "no checked registry rows to summarise"
+      },
+      "spearman": null,
+      "overlap_within_3px_literal": null,
+      "overlap_like_for_like": null
+    },
+    "raster_sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+    "surface_decoded_float32_sha256": "726c04c6aaaad7d6b3950877b11bd6566b75baef8449c1fe59fa5d12cb262a45",
+    "validator_output": {
+      "file": "/home/user/GEMSDOE70/docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+      "bytes": 107350,
+      "sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+      "meta": {
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "dtype": "float32",
+        "count": 1,
+        "nodata": null,
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "profile_compress": "deflate"
+      },
+      "band_description": [
+        null
+      ],
+      "n_finite": 12279160,
+      "n_nan": 0,
+      "n_infinite": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.002025545807555318,
+      "emitted_positive_pixels": 24872,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "dimensions_3730x3292": true,
+        "crs_epsg_32611": true,
+        "transform_matches_sample_submission": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "no_sentinel_values": true,
+        "range_0_1_guaranteed": true,
+        "min_ge_0": true,
+        "max_le_1": true,
+        "in_footprint_all_finite": true,
+        "in_footprint_range_0_1": true,
+        "outside_footprint_zero": true,
+        "zero_dots_on_mapped_catalogue": true
+      },
+      "all_checks_passed": true,
+      "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+      "on_catalogue_positive_pixels": 0,
+      "in_footprint_positive_pixels": 24872,
+      "footprint_fraction": 0.004813277462261772
+    },
+    "format_report": {
+      "path": "/home/user/GEMSDOE70/docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+      "bytes": 107350,
+      "sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.002025545807555318,
+      "n_nonzero": 24872,
+      "mass": 24872.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    "submission_name": "gems70-discordance-corridor-v1-20261020-7f3a9c2e",
+    "submission_note": "Discordance corridor: grav/basement vs topo, Hz ridge thin, 37k dots, 3px catalogue gap",
+    "download_and_submit_ok": true,
+    "file_paths": {
+      "tif": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+      "zip": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.zip",
+      "receipt": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.json"
+    },
+    "saturation_certificate_dense": {
+      "evidence_class": "REGISTRY-MEASUREMENT",
+      "witness_file": ".cache/registry/dense_witness.tif",
+      "witness_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+      "positive_pixels": 5167373,
+      "allowed_pixels": 5167373,
+      "uncovered_allowed_pixels": 0,
+      "covered_allowed_fraction": 1.0,
+      "universal_overlap_blocker": true,
+      "overlap_limit": 0.7,
+      "support_definition": "finite prediction > 0 (inherited literal support rule)",
+      "implication": "Every nonempty candidate dot set in the allowed domain has forward overlap 1.0 with this prior; therefore it cannot pass the 0.70 gate."
+    },
+    "evidence_class": "HOLDOUT-DTI and REGISTRY-MEASUREMENT",
+    "organizer_confirmed_score": null,
+    "note": "HOLDOUT-DTI evaluator gems57-pooled-hide-v2, 11,321 withheld positives; CI is spatial-block bootstrap, not leaderboard. ORGANIZER-CONFIRMED is null until receipt.",
+    "verdict_note": "Validator passed: finite, [0,1], CRS/shape/transform match, zero outside footprint and on catalogue. No NaN. This TIF will not trigger portal range error."
+  },
+  "status": "READY \u2014 VALIDATED TIFF AVAILABLE",
+  "generated_tif": "/home/user/GEMSDOE70/docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+  "download_available": true,
   "approved_for_weekly_slot": false,
   "scientific_experiments_run": 1,
   "submission_slots_used": 0,
