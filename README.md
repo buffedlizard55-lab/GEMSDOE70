@@ -13,7 +13,7 @@ instead of an unsafe download.
 - [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission guide](docs/executive-summary.html)
 - [Run card](evidence/run_card.json) · [Measured results](evidence/holdout.json)
 - [H33 forensic analysis](docs/h33-analysis.md) · [Four preregistered hypotheses](docs/hypotheses.md)
-- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
+- [Protocol decision required](docs/protocol-decision.md) · [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - [Follow-up review and release-safety fixes](reports/review-followup-2026-10-20.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
