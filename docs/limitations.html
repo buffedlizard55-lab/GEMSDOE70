@@ -104,7 +104,13 @@ geologic maps at mixed scales, not a map of newly discovered geothermal faults. 
 largest permutation effect is <code>det_elev_slope</code> (0.374), a feature that alluvial-fan and lake-shore
 terrace edges also produce; the single-feature canary AUC is 0.740 (below the 0.90 leakage stop,
 but the mimic is real). A live score at or below 0.2778 falsifies the hypothesis and must be
-recorded as a negative result.</p></main>
+recorded as a negative result.</p>
+<p><strong>IR-P5-6 — QFaults rasterisation transposition (corrected).</strong> The first Phase-5 receipt
+rasterised QFaults with row/column swapped and reported 8.7 % within 3 px. The code was corrected,
+the receipt recomputed from the same 84,331 segments (60,852 in-footprint pixels, <strong>99.998 %</strong>
+within 3 px), and the correction is recorded in <code>post_run_corrections</code> in the run card with both
+script hashes. No model feature, emission pixel, gate or artifact byte depends on this measurement;
+the published TIFF is unchanged (SHA-256 <code>264b7219...</code>).</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·

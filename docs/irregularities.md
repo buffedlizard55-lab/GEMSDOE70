@@ -107,3 +107,10 @@ largest permutation effect is `det_elev_slope` (0.374), a feature that alluvial-
 terrace edges also produce; the single-feature canary AUC is 0.740 (below the 0.90 leakage stop,
 but the mimic is real). A live score at or below 0.2778 falsifies the hypothesis and must be
 recorded as a negative result.
+
+**IR-P5-6 — QFaults rasterisation transposition (corrected).** The first Phase-5 receipt
+rasterised QFaults with row/column swapped and reported 8.7 % within 3 px. The code was corrected,
+the receipt recomputed from the same 84,331 segments (60,852 in-footprint pixels, **99.998 %**
+within 3 px), and the correction is recorded in `post_run_corrections` in the run card with both
+script hashes. No model feature, emission pixel, gate or artifact byte depends on this measurement;
+the published TIFF is unchanged (SHA-256 `264b7219...`).

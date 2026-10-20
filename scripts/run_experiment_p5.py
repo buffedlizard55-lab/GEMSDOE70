@@ -110,8 +110,8 @@ def main():
     seg_path = CLONE / 'data/external/trace_segments_utm11.csv'
     rows = list(csv.DictReader(open(seg_path)))
     for row in rows:
-        r0, c0 = (int(round(v)) for v in (~tr * (float(row['x0']), float(row['y0']))))
-        r1, c1 = (int(round(v)) for v in (~tr * (float(row['x1']), float(row['y1']))))
+        c0, r0 = (int(round(v)) for v in (~tr * (float(row['x0']), float(row['y0']))))
+        c1, r1 = (int(round(v)) for v in (~tr * (float(row['x1']), float(row['y1']))))
         m = max(abs(r1 - r0), abs(c1 - c0), 1)
         for t in np.linspace(0, 1, m + 1):
             r = int(round(r0 + (r1 - r0) * t))

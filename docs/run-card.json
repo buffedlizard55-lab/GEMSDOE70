@@ -247,7 +247,7 @@
     "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
   },
   "method_source_sha256": {
-    "scripts/run_experiment_p5.py": "be7148264c290bceafacea509148f3717de6a8c12b553a9794db20c97a9134d8",
+    "scripts/run_experiment_p5.py": "4776895128e4d048bd8749eb6f058e2888f32b62146d32e2c7dcec401e16fcb8",
     "docs/preregistration-p5.md": "6695be427cc3390e69ec1b4255ee3bb5f866f0da3069d5ffd26136f9ff2411ee"
   },
   "registered_parameters": {
@@ -258,5 +258,17 @@
     "halo_max_px": 32.0,
     "label_gap_px": 3.0,
     "seed": 70520
-  }
+  },
+  "post_run_corrections": [
+    {
+      "date": "2026-10-20",
+      "what": "QFaults rasterisation row/column transposition in the first receipt",
+      "effect": "side measurement only; model features, emission, gates, artifact bytes unchanged",
+      "before_fraction_within_3px": 0.08676984523215177,
+      "after_fraction_within_3px": 0.9999835666863867,
+      "script_sha256_before": "be7148264c290bceafacea509148f3717de6a8c12b553a9794db20c97a9134d8",
+      "script_sha256_after": "4776895128e4d048bd8749eb6f058e2888f32b62146d32e2c7dcec401e16fcb8",
+      "receipt": "evidence/phase5/qfaults_catalogue_overlap.json"
+    }
+  ]
 }
