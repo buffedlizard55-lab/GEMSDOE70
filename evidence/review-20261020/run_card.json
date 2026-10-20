@@ -108,5 +108,5 @@
     "Literal duplicate stop triggered",
     "No organizer submission receipt"
   ],
-  "tests": "152 passed; three rasterio deprecation warnings"
+  "tests": "153 passed; three rasterio deprecation warnings"
 }

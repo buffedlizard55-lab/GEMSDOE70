@@ -117,7 +117,7 @@ def main():
         'evidence/h33_audit.json': 'h33_audit.json',
         'evidence/data_receipt.json': 'data_receipt.json',
         'evidence/template_verification.json': 'template_verification.json',
-        'evidence/upstream_fix_report.md': 'upstream_fix_report.md',
+        'evidence/upstream_fix_report.md': 'upstream_fix_report.txt',
         'evidence/registry_saturation.json': 'phase1_registry_saturation.json',
         'evidence/history/phase1_negative/run_card.json': 'phase1_run_card.json',
         'evidence/e2/run_card.json': 'e2_run_card.json',
@@ -372,7 +372,7 @@ as a predictor.</li></ul>
 <h2>Receipts</h2>
 <p><a href="downloads/data_receipt.json">Input SHA-256 pins</a> ·
 <a href="downloads/template_verification.json">Shared-template verification</a> ·
-<a href="downloads/upstream_fix_report.md">Upstream fix report</a></p>'''
+<a href="downloads/upstream_fix_report.txt">Upstream fix report</a></p>'''
     (DOCS / 'sources.html').write_text(frame('Sources', src_page))
 
     # Root entry point (repository-root Pages keeps working).
