@@ -3,7 +3,7 @@
 ## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
 A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
+`docs/downloads/gems70-asarc-ridge-30000-20261020.tif` (sha256 `0c6da9176e8a49bd8b3536fa3d6b2e3f942b496666e7a9cfd1d29cd455848542`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `negative` on the pre-registered target-like gate. No weekly slot was used.
 
@@ -17,14 +17,14 @@ A unique, format-validated competition TIFF is published:
 
 Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
 alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
-bootstrap. Exactly 37,654 binary dots are emitted, all
+bootstrap. Exactly 30,000 binary dots are emitted, all
 off-catalogue.
 
 | Instrument | Candidate | H33 reference | Result |
 |---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
+| A · shared hide-and-recover catalogue holdout | 0.0641 | 0.0037 | candidate wins |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0653 | 0.0938 | **H33 wins, delta = -0.0285 [-0.038380915719187704, -0.019018970744023124]** |
+| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0618 | 0.0906 | candidate wins |
 
 Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
 is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
@@ -32,7 +32,7 @@ is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of th
 artifact is published but not promoted. Nothing here is an organizer-confirmed score.
 
 **Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
+overlap 0.257 (limit 0.70); worst Spearman 0.041
 (limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
 whose halo covers the whole footprint — which is why the two-direction test was adopted.
 

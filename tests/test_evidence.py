@@ -57,9 +57,11 @@ def test_published_tiff_matches_card_and_is_binary():
         assert src.count == 1 and src.dtypes[0] == 'float32'
         assert (src.height, src.width) == (3730, 3292)
         assert str(src.crs) == 'EPSG:32611'
+    card = json.loads((ROOT / 'evidence/run_card.json').read_text())
+    expected_dots = int(card['registered_parameters']['dot_count'])
     vals = np.unique(a)
     assert set(np.round(vals, 6)).issubset({0.0, 1.0})
-    assert int((a > 0).sum()) == 37654
+    assert int((a > 0).sum()) == expected_dots, (int((a > 0).sum()), expected_dots)
     assert np.isfinite(a).all()
 
 

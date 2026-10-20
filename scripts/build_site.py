@@ -67,8 +67,12 @@ def table(headers, rows, caption=None):
 def instrument_rows(d):
     if not d:
         return []
-    return [[esc(k), f"{v['dti']:.4f}", ci(v), f"{v['withheld_positive_pixels']:,}"]
-            for k, v in d['scores'].items()]
+    rows = []
+    for k, v in d['scores'].items():
+        wp = v.get('withheld_positive_pixels')
+        wp = f"{wp:,}" if isinstance(wp, (int, float)) else '—'
+        rows.append([esc(k), f"{v['dti']:.4f}", ci(v), wp])
+    return rows
 
 
 def main():
@@ -80,6 +84,7 @@ def main():
     val = card.get('validator_output') or {}
     checks = val.get('checks') or {}
     uniqueness = load('evidence/phase4/uniqueness.json', {})
+    u = card.get('correlation_overlap_vs_registry', {}) or {}
     canaries = load('evidence/phase2/canaries.json', {})
     p2a = load('evidence/phase2/instrumentA_holdout.json')
     p2b = load('evidence/phase2/instrumentB_proxy.json')
@@ -89,6 +94,9 @@ def main():
     p4a = load('evidence/phase4/instrumentA_holdout.json')
     p4b = load('evidence/phase4/instrumentB_prime.json')
     p4ball = load('evidence/phase4/instrumentB_all.json')
+    p5a = load('evidence/phase5/instrumentA_holdout.json' ) if (ROOT / 'evidence/phase5/instrumentA_holdout.json').is_file() else None
+    p5b = load('evidence/phase5/instrumentB_prime.json') if (ROOT / 'evidence/phase5/instrumentB_prime.json').is_file() else None
+    p5ball = load('evidence/phase5/instrumentB_all.json') if (ROOT / 'evidence/phase5/instrumentB_all.json').is_file() else None
     h33 = load('evidence/h33_audit.json', {})
     receipt = load(f'docs/downloads/{name}.json', {})
     sources = load('registry/sources.json', [])
@@ -156,19 +164,23 @@ not a validated improvement.</p>
 <code>{esc(card.get('submission_note', ''))}</code></p></section>'''
 
     # ------------------------------------------------------------------ overview
-    a = p4a['scores'] if p4a else {}
-    b = p4b['scores'] if p4b else {}
-    ball = p4ball['scores'] if p4ball else {}
+    def _scores_block(key):
+        block = card.get(key) or {}
+        return {'scores': block} if block else {}
+    cur_a = _scores_block('instrument_a_holdout')
+    cur_b = _scores_block('instrument_b_prime_proxy')
+    cur_ball = _scores_block('instrument_b_unrestricted')
+    u = card.get('correlation_overlap_vs_registry', {}) or {}
     metrics = f'''<div class="metrics">
-<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
-<div class="number">{a['candidate']['dti']:.4f}</div>
-<p>{ci(a['candidate'])} · {a['candidate']['withheld_positive_pixels']:,} withheld catalogue pixels</p></section>
-<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
-<div class="number">{b['candidate']['dti']:.4f}</div>
-<p>{ci(b['candidate'])} · SGMC proxy outside the duplication band</p></section>
-<section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
-<div class="number">{uniqueness.get('worst_dot_overlap', 0):.2f}</div>
-<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ {uniqueness.get('worst_spearman_full_footprint', 0):.3f}</p></section></div>'''
+<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI (current card)</div>
+<div class="number">{cur_a['scores']['candidate']['dti']:.4f}</div>
+<p>{ci(cur_a['scores']['candidate'])} · {cur_a['scores']['candidate']['withheld_positive_pixels']:,} withheld catalogue pixels</p></section>
+<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI (current card)</div>
+<div class="number">{cur_b['scores']['candidate']['dti']:.4f}</div>
+<p>{ci(cur_b['scores']['candidate'])} · SGMC proxy outside the duplication band · vs H33 {cur_b['scores']['h33_reference']['dti']:.4f}</p></section>
+<section><div class="eyebrow">UNIQUENESS · {u.get('rasters_checked', '?')} RASTERS</div>
+<div class="number">{u.get('worst_dot_overlap', 0):.2f}</div>
+<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ {u.get('worst_spearman_full_footprint', 0):.3f}</p></section></div>'''
 
     index = decision + f'''<section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
 <h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
@@ -184,9 +196,9 @@ Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only 
 lattice reaches 1.00 by construction and is reported separately).</p>
 <a href="results.html">Full evidence →</a></section>
 <section class="panel"><h2>Why it is not promoted</h2>
-<p>On instrument B′ the candidate scores {b['candidate']['dti']:.4f} versus H33's
-{b['h33_reference']['dti']:.4f} (paired Δ {p4b['paired_differences']['h33_reference']['delta']:+.4f},
-95% CI {ci(p4b['paired_differences']['h33_reference'])}). The pre-registered rule requires a
+<p>On instrument B′ the candidate scores {cur_b['scores']['candidate']['dti']:.4f} versus H33's
+{cur_b['scores']['h33_reference']['dti']:.4f} (paired Δ {card['paired_b_prime_vs_h33']['delta']:+.4f},
+95% CI {ci(card['paired_b_prime_vs_h33'])}). The pre-registered rule requires a
 positive lower bound. It does not hold.</p>
 <a href="hypotheses.html">Why this rule →</a></section></div>
 <section><h2>What is measured and what is not</h2>
@@ -252,21 +264,21 @@ rejected upload, so we do not claim to know its specific defect.</p></section>
 {table(['Check', 'Result'], vrows, 'Shared validator, all checks must pass.')}
 <p class="small">Validator class: {esc(val.get('validation_class', 'local format/range preflight'))}.</p></section>
 <section><h2>Uniqueness receipt</h2>
-<p>{esc(uniqueness.get('overlap_definition', ''))}</p>
+<p>{esc(u.get('overlap_definition', ''))}</p>
 {table(['Measurement', 'Value'],
- [['Rasters checked', uniqueness.get('registry_rasters_checked')],
-  ['Duplicate count (mutual rule)', uniqueness.get('duplicate_count')],
-  ['Worst mutual overlap', f"{uniqueness.get('worst_dot_overlap'):.4f} ({esc(uniqueness.get('worst_overlap_submission'))})"],
-  ['Worst forward-only overlap', f"{uniqueness.get('worst_forward_overlap'):.4f} ({esc(uniqueness.get('worst_forward_submission'))})"],
-  ['Worst Spearman ρ', f"{uniqueness.get('worst_spearman_full_footprint'):.4f}"],
-  ['Inventory scope', esc(uniqueness.get('inventory_scope'))]],
+ [['Rasters checked', u.get('rasters_checked')],
+  ['Duplicate count (mutual rule)', u.get('duplicate_count', 0)],
+  ['Worst mutual overlap', f"{u.get('worst_mutual_overlap'):.4f} ({esc(u.get('worst_mutual_submission'))})"],
+  ['Worst forward-only overlap', f"{u.get('worst_forward_overlap'):.4f} ({esc(u.get('worst_forward_submission'))})"],
+  ['Worst Spearman ρ', f"{u.get('worst_spearman_full_footprint'):.4f}"],
+  ['Inventory scope', esc(u.get('inventory_scope'))]],
  'Corrected binary-dot definition; forward-only overlap with a dense sampling grid is uninformative.')}</section>'''
     (DOCS / 'submission.html').write_text(frame('Submit a file', guide))
 
     # ------------------------------------------------------------------- results
-    rows_a = instrument_rows(p4a)
-    rows_bp = instrument_rows(p4b)
-    rows_ball = instrument_rows(p4ball)
+    rows_a = instrument_rows({'scores': card['instrument_a_holdout']}) if card.get('instrument_a_holdout') else instrument_rows(p4a)
+    rows_bp = instrument_rows({'scores': card['instrument_b_prime_proxy']}) if card.get('instrument_b_prime_proxy') else instrument_rows(p4b)
+    rows_ball = instrument_rows({'scores': card['instrument_b_unrestricted']}) if card.get('instrument_b_unrestricted') else instrument_rows(p4ball)
     ablate = []
     for tag, d in (('A · shared holdout', p3a), ('B′ · proxy', p3b), ('B · unrestricted proxy', p3ball)):
         if d:

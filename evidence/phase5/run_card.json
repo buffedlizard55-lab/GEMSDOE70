@@ -1,0 +1,266 @@
+{
+  "hypothesis": "H-2 catalogue-free magnetic analytic-signal ridge: total gradient magnitude of TMI gated by basement-depth step and detrended-elevation slope",
+  "mechanism": "ASA = sqrt(TMI_x^2 + TMI_y^2 + TMI_z^2) ridges mark buried magnetic-source edges regardless of magnetization direction; basement step and scarp slope gate cover-buried fault traces; dots placed >= 3 px from mapped traces",
+  "non_fault_mimic": "Volcanic dike margin / remanence-contrast contact; depositional breakline unrelated to faulting",
+  "verdict": "negative",
+  "evidence_class": "HOLDOUT-DTI (evaluator gems57-pooled-hide-v2; 11,321 withheld positives)",
+  "instrument_a_holdout": {
+    "candidate": {
+      "dti": 0.0641151748742296,
+      "ci95": [
+        0.05703394216384132,
+        0.07196496136674926
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "random_control": {
+      "dti": 0.037448253511350935,
+      "ci95": [
+        0.03309827307980037,
+        0.04148270832261378
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "h33_reference": {
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.0029906859965140482,
+        0.004485163811463106
+      ],
+      "withheld_positive_pixels": 11321
+    }
+  },
+  "instrument_b_prime_proxy": {
+    "candidate": {
+      "dti": 0.06527523102631434,
+      "ci95": [
+        0.057394321870613794,
+        0.0734966719202927
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "random_control": {
+      "dti": 0.059476708565074164,
+      "ci95": [
+        0.05636280298070083,
+        0.06229608838164795
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "h33_reference": {
+      "dti": 0.09377056861492462,
+      "ci95": [
+        0.08337691155434282,
+        0.10495630999550308
+      ],
+      "withheld_positive_pixels": 59937
+    }
+  },
+  "instrument_b_unrestricted": {
+    "candidate": {
+      "dti": 0.061849246167031705,
+      "ci95": [
+        0.05526772629764463,
+        0.06864387638443126
+      ]
+    },
+    "random_control": {
+      "dti": 0.05977086676511839,
+      "ci95": [
+        0.0568732411648011,
+        0.06251356424953133
+      ]
+    },
+    "h33_reference": {
+      "dti": 0.09059897608840377,
+      "ci95": [
+        0.08150322927994692,
+        0.09967500814322929
+      ]
+    }
+  },
+  "paired_a_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.060415393188600015,
+    "ci95": [
+      0.05351642907790158,
+      0.0679741958135367
+    ],
+    "withheld_positive_pixels": 11321
+  },
+  "paired_b_prime_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": -0.02849533758861028,
+    "ci95": [
+      -0.038380915719187704,
+      -0.019018970744023124
+    ],
+    "withheld_positive_pixels": 59937
+  },
+  "gate_a_candidate_ge_h33": true,
+  "gate_b_prime_candidate_gt_h33_significant": false,
+  "correlation_overlap_vs_registry": {
+    "stage": "final production dots (30,000 binary, catalogue-free)",
+    "rasters_checked": 62,
+    "inventory_scope": "62 single-band 100 m rasters indexed in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
+    "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+    "worst_mutual_overlap": 0.256563245823389,
+    "worst_mutual_submission": "gemsdoe32-h32a-dip-projected-step-46090-20261004T183200Z-838fcd84-nan.tif",
+    "worst_forward_overlap": 1.0,
+    "worst_forward_submission": "calib_r13lattice_00904.tif",
+    "worst_spearman_full_footprint": 0.04137840178321958,
+    "worst_rho_submission": "r11_greedy_mp.tif",
+    "worst_jaccard": 0.017528121598193766,
+    "duplicate": false,
+    "duplicate_fired": false,
+    "unique_certified": false,
+    "certification_note": "Measured against every accessible registry raster; no threshold fired. unique=False in the audit receipt only because the public owner-repository inventory is not organizer-complete (fail-closed certification), not because any threshold was exceeded.",
+    "duplicate_count": 0
+  },
+  "canaries": {
+    "asa_proxy_hgrad": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5275819627241409,
+      "inverse_auc": 0.47241803727585907,
+      "withheld_positive_pixels": 11321,
+      "negative_sample_pixels": 200000,
+      "suspected_leakage": false
+    },
+    "asa_proxy_vgrad": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.4869484407296175,
+      "inverse_auc": 0.5130515592703825,
+      "withheld_positive_pixels": 11321,
+      "negative_sample_pixels": 200000,
+      "suspected_leakage": false
+    },
+    "rtp": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5184064369313666,
+      "inverse_auc": 0.48159356306863343,
+      "withheld_positive_pixels": 11321,
+      "negative_sample_pixels": 200000,
+      "suspected_leakage": false
+    },
+    "depth_to_base": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5245081757353591,
+      "inverse_auc": 0.47549182426464087,
+      "withheld_positive_pixels": 11321,
+      "negative_sample_pixels": 200000,
+      "suspected_leakage": false
+    },
+    "det_elev_slope": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5632699364013779,
+      "inverse_auc": 0.4367300635986221,
+      "withheld_positive_pixels": 11321,
+      "negative_sample_pixels": 200000,
+      "suspected_leakage": false
+    }
+  },
+  "raster_sha256": "0c6da9176e8a49bd8b3536fa3d6b2e3f942b496666e7a9cfd1d29cd455848542",
+  "raster_sha256_reason": null,
+  "validator_output": {
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-asarc-ridge-30000-20261020.tif",
+    "bytes": 134047,
+    "sha256": "0c6da9176e8a49bd8b3536fa3d6b2e3f942b496666e7a9cfd1d29cd455848542",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.002443163888528943,
+    "emitted_positive_pixels": 30000,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 30000,
+    "footprint_fraction": 0.005805657923281327
+  },
+  "submission_name": "gems70-asarc-ridge-30000-20261020",
+  "submission_note": "ASA ridge x basement step x scarp slope; 30000 binary dots, >=3 px from catalogue",
+  "note_chars": 81,
+  "download_ok": true,
+  "submit_recommended": false,
+  "download_and_submit_ok": false,
+  "artifact": "docs/downloads/gems70-asarc-ridge-30000-20261020.tif",
+  "artifact_zip": "docs/downloads/gems70-asarc-ridge-30000-20261020.zip",
+  "artifact_receipt": "docs/downloads/gems70-asarc-ridge-30000-20261020.json",
+  "decision_note": "Download: yes if validator passed and uniqueness is clear. Submit a weekly slot: not recommended -- pre-registered gate not met",
+  "weekly_slots_used": 0,
+  "experiment_count": 5,
+  "elapsed_seconds": 193.03,
+  "organizer_confirmed_score": null,
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "method_source_sha256": {
+    "scripts/run_experiment_v5.py": "cb6941dca327117933eb5daeffc9c6a8af62b8b350e55f1c9f1e72eae732ad78"
+  },
+  "registered_parameters": {
+    "dot_count": 30000,
+    "block_px": 7,
+    "nms_px": 5.0,
+    "cat_gap_px": 3.0,
+    "bands": {
+      "tmi": 14,
+      "tmi_hg": 3,
+      "tmi_vg": 9,
+      "depth_to_base": 15,
+      "det_elev_slope": 19
+    }
+  },
+  "uniqueness_detail": {
+    "registry_rasters_checked": 62,
+    "worst_dot_overlap": 0.256563245823389,
+    "worst_spearman_full_footprint": 0.04137840178321958,
+    "worst_forward_overlap": 1.0,
+    "inventory_scope": "62 single-band 100 m rasters indexed in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
+    "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint."
+  }
+}
