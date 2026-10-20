@@ -2,7 +2,7 @@
 <title>Limitations · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Current candidate: DO NOT SUBMIT (not cleared).">
 <link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH · OCT 2026</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="candidates-2026-10-20.html">Candidates</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Irregularities, limitations and remaining work</h1>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="candidates-2026-10-20.html">Candidates</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="protocol-decision.html">Protocol decision</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Irregularities, limitations and remaining work</h1>
 <p>Status as of 2026-10-20. Current candidate C1: <strong>DO NOT SUBMIT</strong>. Nothing here is ORGANIZER-CONFIRMED.</p>
 <h2>Irregularities found in the official material or in this repository</h2>
 <ul>
@@ -43,6 +43,20 @@
 <li>Decide whether to preregister a third experiment on a fresh seed (C2, C5 or C3). Do not tune C1 on seed 71.</li>
 <li>Write the generative-AI narrative and confirm eligibility before any submission.</li>
 <li>Only after a candidate passes the holdout gate and the complete registry scan may a file be made downloadable. A separate weekly-slot selection is then required.</li>
-</ol></main>
+</ol>
+<h2>Follow-up publication review</h2>
+<p>The GitHub Pages API reported legacy <code>main:/</code> publication, not <code>main:/docs</code>.
+Removing links from <code>docs/</code> alone therefore did not exclude quarantined artifacts
+from the deployment source. A direct API change to <code>/docs</code> was denied with HTTP
+403 (<code>Resource not accessible by integration</code>); see
+<code>evidence/pages_publication.json</code> in the repository. No successful settings change
+is claimed.</p>
+<p>The repository-level mitigation removes root <code>.nojekyll</code> and adds explicit
+Jekyll exclusions in <code>_config.yml</code> for <code>quarantine/</code>, <code>data/</code> and internal evidence
+and code. Site generation now checks this guard as well as <code>docs/</code>, including
+symlink bypasses. Remote deployment completion is separate from source-policy
+validation. The archives remain accessible through the public GitHub repository;
+this is publication hygiene, <strong>not secrecy or deletion</strong>. A future settings change
+to <code>/docs</code> remains preferable, but requires Pages administration permission.</p></main>
 <footer>DO NOT SUBMIT the generated candidate. No competition upload has been made. Evidence before leaderboard claims.
 <a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>

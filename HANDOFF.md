@@ -81,6 +81,78 @@ canonical site remains negative. No additional scientific experiment was run.
 
 Final suite after adding quarantine hash/publication coverage: **69 tests pass**.
 
+## Current branch review — arena/9560f995-gemsdoe70
+
+Read docs/session-review.md for the latest review, not the historical parallel
+reports. No new scientific experiment was run. The unchanged measured run card
+remains negative; the fresh content-addressed witness audit reproduced the stop.
+
+The Pages API showed legacy `main:/` publication with root `.nojekyll`, exposing
+an archive/data direct-URL risk even though docs contained no download link.
+The attempt to switch source to `/docs` returned 403 (integration permission).
+Fallback: remove ONLY the root `.nojekyll`, add root Jekyll exclusions for all
+nonpublic paths, and enforce public-root classification in `audit_pages.py`.
+The nested `docs/.nojekyll` is retained for compatibility; it does not bypass the
+root build. CI builds the actual legacy-root Jekyll source using GitHub's pinned
+build action and inspects its output for private roots, rasters/ZIPs and symlinks.
+Do not restore the root marker or publish quarantine. Quarantine bytes remain
+unchanged and publicly auditable in GitHub; this is not a secrecy boundary.
+
+Deployment requires a successful main Pages build. See the PR/checks for actual
+build and merge receipts. Keep the experimental preregistration/source pins and
+scientific receipts unchanged. Resolve the protocol/lane/current-best blockers
+before any new candidate, rather than manufacturing a download.
+
+## Follow-up review on arena/75897427-gemsdoe70
+
+No new scientific experiment or eligible TIFF; the duplicate stop still applies.
+Reproduced `scripts/audit.py` from the content-addressed registry witness: universal
+support and minimum overlap 1.0 confirmed, with no change to committed evidence.
+Hardened negative-release CLI assertions and invalid/nonfinite canary diagnostics;
+shared template and frozen experiment sources remain unchanged. See
+`reports/review-followup-2026-10-20.md` for the three-pass review and limitations.
+
+Local verification: `.venv/bin/python -m pytest -q` — **100 passed**, three existing
+Rasterio/Affine pending-deprecation warnings. The expected-negative gate exits zero;
+the default gate and build-submission command exit two intentionally. Neither is
+submission authorization. GitHub Pages configuration was verified as enabled from
+main at `/`; deployment of this branch depends on merge and the Pages build.
+
+## Follow-up source-boundary review
+
+Pages API reports `main:/`, and updating it to `/docs` is denied (403 integration
+permission). Removed root `.nojekyll`, added Jekyll `_config.yml` exclusions, and
+added a root-tree guard plus symlink-bypass tests. Do not restore root `.nojekyll`:
+it bypasses those exclusions. The public GitHub archives are still public; this is
+not redaction. `scripts/check_pages.py` is read-only unless `--configure` is passed.
+See reports/followup-publication-review-20261020.md. No new scientific run or slot.
+
+Integrated concurrent main `37b37b9` after PR #7's first merge was rejected.
+Preserved root-Pages exclusions and all publication-boundary tests. Combined final
+suite: **117 passed**, three existing warnings; no additional scientific run.
+
+PR #8 integration: merged concurrent main f1197da into the assigned branch after
+the initial merge was rejected. Retained both parallel reports and release/source
+guards; added real built-output verification. Combined suite: 129 passed, three
+existing warnings. Scientific evidence and shared template remain unchanged.
+
+## Release-evidence edge-case review on arena/fd9c8ead-gemsdoe70
+
+Reproduced the immutable registry witness audit; universal literal overlap remains
+1.0 and the existing stopped-run preflight receipt is unchanged. No new science,
+TIFF, placement, training, or slot. Fixed oversized-integer AUC diagnostic overflow
+and required literal boolean current-best verification in the local publication
+wrapper, not the shared template. Added seven regression cases; full suite is
+124 passed with three existing warnings. Site/README rebuilds and expected-negative
+release gate pass. See reports/release-evidence-review-20261020.md for all three
+passes, evidence boundaries and ordered next steps. PR #8 is another session's
+open publication-policy review, not this session's submission or authorization.
+
+PR #8 second integration retained concurrent main 7a2d2ae (PRs #9–#11),
+including the unresolved protocol memo and evidence edge-case diagnostics. Fixed
+checkout-only memo links for the excluded Pages roots and added built-output link
+checks. Combined suite: 138 passed, three existing warnings. No new science.
+
 ## Session 2026-10-20 — candidate C1 (experiment 2 of 3)
 
 - **Result: negative. Do not submit.** C1 (strike-coherent catalogue extrapolation) passed the leakage canary

@@ -27,5 +27,13 @@ def main():
     result=status()
     (ROOT/'evidence/release-status.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))
-    return 0 if args.expect_negative and result['template_integrity_ok'] else 2
+    expected_negative = (
+        result.get('verdict') == 'negative'
+        and result.get('download_and_submit_ok') is False
+        and result.get('download_available') is False
+        and result.get('generated_tif') is None
+        and result.get('approved_for_weekly_slot') is False
+        and bool(result.get('reasons'))
+    )
+    return 0 if args.expect_negative and expected_negative and result['template_integrity_ok'] else 2
 if __name__=='__main__':raise SystemExit(main())

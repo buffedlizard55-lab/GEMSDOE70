@@ -36,6 +36,8 @@ The leakage canary passed. No tuning on holdout seed 71 was made. No previous su
 - [C1 run card](evidence/c1_run_card.json) · [C1 holdout](evidence/c1_holdout.json) · [registry scan](evidence/c1_registry_scan.json)
 - [Official-source ledger, verified 2026-10-20](evidence/official_sources_2026-10-20.json) · [Candidate ranking](docs/candidates-2026-10-20.md)
 - [Limitations / irregularities](docs/irregularities.md) · [Session handoff](HANDOFF.md)
+- [Protocol decision required](docs/protocol-decision.md) · [Latest repository review / Pages safeguards](docs/session-review.md)
+- [Follow-up publication review](reports/followup-publication-review-20261020.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
 ## Official facts used (verified 2026-10-20; quotes in the ledger)
@@ -74,12 +76,22 @@ python -m venv .venv
 bash scripts/download_competition_data.sh  # pinned public owner mirrors, not DrivenData auth
 .venv/bin/python scripts/build_site.py
 .venv/bin/python scripts/build_readme.py
+.venv/bin/python scripts/audit_pages.py
 .venv/bin/python -m pytest -q
 ```
 
 Shared `evaluate_holdout.py`, `submission_writer.py` and the metric are reused unchanged from
 vendor/gems57 (pinned; byte identity is recorded in evidence/template_verification.json).
 Do not rerun `scripts/run_experiment.py`. Do not tune an experiment after seeing its holdout.
+
+## Publication boundary
+
+Pages is configured to serve the repository root (`main:/`), not only `docs/`. The root
+`.nojekyll` bypass was removed, and `_config.yml` excludes quarantine, data, evidence,
+code and the local `submissions/` folder. `scripts/audit_pages.py` and the build guards
+check the publication boundary, including unlinked artifacts. Remote deployment is a
+separate step. The exclusions do not make archived bytes secret; they only keep them out
+of the Pages build.
 
 ## Own the outcome
 

@@ -41,3 +41,20 @@ Status as of 2026-10-20. Current candidate C1: **DO NOT SUBMIT**. Nothing here i
 3. Decide whether to preregister a third experiment on a fresh seed (C2, C5 or C3). Do not tune C1 on seed 71.
 4. Write the generative-AI narrative and confirm eligibility before any submission.
 5. Only after a candidate passes the holdout gate and the complete registry scan may a file be made downloadable. A separate weekly-slot selection is then required.
+
+## Follow-up publication review
+
+The GitHub Pages API reported legacy `main:/` publication, not `main:/docs`.
+Removing links from `docs/` alone therefore did not exclude quarantined artifacts
+from the deployment source. A direct API change to `/docs` was denied with HTTP
+403 (`Resource not accessible by integration`); see
+`evidence/pages_publication.json` in the repository. No successful settings change
+is claimed.
+
+The repository-level mitigation removes root `.nojekyll` and adds explicit
+Jekyll exclusions in `_config.yml` for `quarantine/`, `data/` and internal evidence
+and code. Site generation now checks this guard as well as `docs/`, including
+symlink bypasses. Remote deployment completion is separate from source-policy
+validation. The archives remain accessible through the public GitHub repository;
+this is publication hygiene, **not secrecy or deletion**. A future settings change
+to `/docs` remains preferable, but requires Pages administration permission.

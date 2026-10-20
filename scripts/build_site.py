@@ -15,7 +15,8 @@ import markdown
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
-from gems70.release import release_status, assert_no_public_rasters  # noqa: E402
+from gems70.release import release_status, assert_no_public_rasters, assert_root_pages_guard  # noqa: E402
+from gems70.pages_policy import check_source  # noqa: E402
 
 DOCS = ROOT / 'docs'
 EV = ROOT / 'evidence'
@@ -47,7 +48,7 @@ def frame(title, body):
     links = [('index.html', 'Overview'), ('executive-summary.html', 'Submission guide'),
              ('results.html', 'Results'), ('candidates-2026-10-20.html', 'Candidates'),
              ('hypotheses.html', 'Hypotheses'), ('h33-analysis.html', 'H33 analysis'),
-             ('sources.html', 'Sources'), ('irregularities.html', 'Limitations')]
+             ('protocol-decision.html', 'Protocol decision'), ('sources.html', 'Sources'), ('irregularities.html', 'Limitations')]
     nav = ''.join(f'<a href="{u}">{l}</a>' for u, l in links)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)} · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Current candidate: DO NOT SUBMIT (not cleared).">
@@ -59,6 +60,8 @@ def frame(title, body):
 
 
 def main():
+    check_source(ROOT)
+    assert_root_pages_guard(ROOT)
     assert_no_public_rasters(ROOT)
     card = load('run_card.json')
     e1 = load('holdout.json')
@@ -129,7 +132,7 @@ def main():
 <div class="columns"><section class="panel"><h2>What we tested</h2><p>Candidate C1 (strike-coherent catalogue extrapolation), two ablations and a random control, on a pre-registered design with fresh holdout blocks. It passed the leakage canary. It did not beat the random control, and it did not beat the catalogue-free ablation.</p><a href="results.html">See the measured results →</a></section>
 <section class="panel"><h2>What to do next</h2><p>Read the candidate ranking and the limitations. Any new candidate needs fresh, pre-registered holdout validation before a slot is considered.</p><a href="candidates-2026-10-20.html">Read the candidate ranking →</a></section></div>
 <section><h2>Reproducible, not speculative</h2><p>Inputs are restored from pinned mirrors and checked by hash. The shared evaluator, the writer and the uniqueness tools are used unchanged (vendor/gems57 is pinned).</p>
-<ul><li><a href="hypotheses.html">Preregistered hypotheses</a></li><li><a href="sources.html">Official and other sources, with retrieval status</a></li><li><a href="irregularities.html">Irregularities and limitations</a></li></ul></section>'''
+<ul><li><a href="session-review.html">Latest repository review and publication safeguards</a></li><li><a href="protocol-decision.html">Unresolved protocol decision</a></li><li><a href="hypotheses.html">Preregistered hypotheses</a></li><li><a href="sources.html">Official and other sources, with retrieval status</a></li><li><a href="irregularities.html">Irregularities and limitations</a></li></ul></section>'''
     (DOCS / 'index.html').write_text(frame('Overview', overview))
 
     guide = status + f'''<div class="eyebrow">EXECUTIVE SUMMARY · HOW TO SUBMIT</div><h1>Making a submission to the GEMS Prize</h1>
@@ -207,7 +210,8 @@ def main():
     (DOCS / 'results.html').write_text(frame('Results', results))
 
     for name, title in [('hypotheses', 'Hypotheses'), ('h33-analysis', 'H33 analysis'),
-                        ('irregularities', 'Limitations'), ('candidates-2026-10-20', 'Candidates')]:
+                        ('irregularities', 'Limitations'), ('candidates-2026-10-20', 'Candidates'),
+                        ('protocol-decision', 'Protocol decision'), ('session-review', 'Repository review')]:
         (DOCS / f'{name}.html').write_text(frame(title, markdown.markdown(
             (DOCS / f'{name}.md').read_text(), extensions=['tables', 'fenced_code'])))
 
@@ -242,7 +246,7 @@ def main():
             f'<body><h1>DO NOT SUBMIT</h1><p>This older entry point now links to the current evidence. '
             f'<a href="docs/{target}.html">Continue to the current workbench</a>.</p></body></html>\n')
     assert check_guard, 'sample comparison failed'
-    print('Built site. Candidate not cleared; no TIFF or ZIP published.')
+    print('Built evidence pages. Candidate not cleared; no TIFF or ZIP staged for publication.')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,13 @@
+{
+  "operation": "PUT /repos/buffedlizard55-lab/GEMSDOE70/pages",
+  "requested_source": {
+    "branch": "main",
+    "path": "/docs"
+  },
+  "http_status": 403,
+  "message": "Resource not accessible by integration",
+  "applied": false,
+  "fallback": "Remove root .nojekyll and use audited Jekyll exclusions under the existing legacy main:/ Pages source. Requires merge and successful Pages build.",
+  "scientific_experiments_this_session": 0,
+  "submission_slots_used_this_session": 0
+}
