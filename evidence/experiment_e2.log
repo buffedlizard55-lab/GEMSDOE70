@@ -1,0 +1,217 @@
+valid0=5164312 eroded_valid=4989581
+features complete
+canaries complete
+continuous slope19 evaluated
+continuous dem_slope evaluated
+continuous dem_curv evaluated
+continuous dem_coherence evaluated
+continuous scarp evaluated
+continuous strain evaluated
+continuous shallow evaluated
+continuous joint evaluated
+continuous joint_nostrain evaluated
+continuous joint_nocover evaluated
+continuous joint_nocoh evaluated
+best single continuous: scarp
+dotted budget=20000 excl=0 DTI=0.02637
+dotted budget=30000 excl=0 DTI=0.04048
+dotted budget=38000 excl=0 DTI=0.04943
+dotted budget=45000 excl=0 DTI=0.05514
+dotted budget=20000 excl=1 DTI=0.02745
+dotted budget=30000 excl=1 DTI=0.04166
+dotted budget=38000 excl=1 DTI=0.05116
+dotted budget=45000 excl=1 DTI=0.05573
+dotted budget=20000 excl=2 DTI=0.02852
+dotted budget=30000 excl=2 DTI=0.04413
+dotted budget=38000 excl=2 DTI=0.05249
+dotted budget=45000 excl=2 DTI=0.05805
+dotted budget=20000 excl=3 DTI=0.02882
+dotted budget=30000 excl=3 DTI=0.04588
+dotted budget=38000 excl=3 DTI=0.05418
+dotted budget=45000 excl=3 DTI=0.05977
+comparator scarp_dotted evaluated
+comparator slope19_dotted evaluated
+comparator best_single_dotted evaluated
+{
+  "joint_dotted": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.05976622137594544,
+    "ci95": [
+      0.04366883503064455,
+      0.0761738203415616
+    ],
+    "withheld_positive_pixels": 11342,
+    "tpw": 1069.8069379103922,
+    "fpw": 43061.488256027136,
+    "fnw": 10272.193062089606
+  },
+  "scarp_dotted": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.07944821864016599,
+    "ci95": [
+      0.06513777950550693,
+      0.09529289165091073
+    ],
+    "withheld_positive_pixels": 11342,
+    "tpw": 1432.2131432760798,
+    "fpw": 43334.79351828345,
+    "fnw": 9909.786856723917
+  },
+  "slope19_dotted": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.030942598062590154,
+    "ci95": [
+      0.02388685160303499,
+      0.03915563421254374
+    ],
+    "withheld_positive_pixels": 11342,
+    "tpw": 553.2371851422286,
+    "fpw": 43476.101723366664,
+    "fnw": 10788.76281485777
+  },
+  "best_single_dotted": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.07944821864016599,
+    "ci95": [
+      0.06513777950550693,
+      0.09529289165091073
+    ],
+    "withheld_positive_pixels": 11342,
+    "tpw": 1432.2131432760798,
+    "fpw": 43334.79351828345,
+    "fnw": 9909.786856723917
+  },
+  "random_dotted": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.05245916771153202,
+    "ci95": [
+      0.0470349845545312,
+      0.05776089736017954
+    ],
+    "withheld_positive_pixels": 11342,
+    "tpw": 944.8569488932623,
+    "fpw": 43743.56122466041,
+    "fnw": 10397.14305110673
+  },
+  "h33_reference": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.0043145621577985425,
+    "ci95": [
+      0.0034710697814317013,
+      0.0052207709695759955
+    ],
+    "withheld_positive_pixels": 11342,
+    "tpw": 69.64271809502877,
+    "fpw": 35268.94528313474,
+    "fnw": 11272.35728190497
+  }
+}
+registry rasters to check: 63
+surface worst rho=0.19645955882138177
+final dots: 45000 (budget 45000)
+final like-for-like: {'dot_field_rasters': 62, 'continuous_surface_rasters': 1, 'worst_forward_overlap_dot_fields': 1.0, 'worst_forward_overlap_dot_field_submission': 'registry/rasters/calib_r13lattice_00904.tif', 'worst_reverse_overlap': 0.3555, 'worst_reverse_overlap_submission': 'registry/rasters/GEMSDOE49__gate_ortho_w0.25-40k.tif', 'worst_jaccard': 0.018171364229843202, 'worst_jaccard_submission': 'registry/rasters/GEMSDOE49__gate_ortho_w0.25-40k.tif', 'forward_overlap_firings': 4, 'duplicate': True, 'note': 'Inherited thresholds, applied to dot fields only; rank correlation still applies to every raster including the continuous surfaces.'}
+gates: {'canaries_pass': True, 'beats_random_ci': False, 'beats_singles_point': False, 'surface_rho_pass': True, 'final_unique_pass': False, 'final_budget_reached': True} promote=False
+{
+  "hypothesis": "DEM scarp curvature gated by geodetic strain partitioning and shallow basement cover",
+  "mechanism": "Strike-coherent profile-curvature scarp steps (slope x curvature x tensor coherence) weighted by smoothed geodetic strain corridor and inverted depth-to-basement; rank-ordered 2.8px dotted emission off-catalogue",
+  "non_fault_mimic": "Lake-shoreline or fluvial terrace riser; road cut",
+  "hypothesis_status": "Provisional lane declared in docs/hypotheses-e2.md: prompt supplies no identifiable method paragraph",
+  "verdict": "negative",
+  "stop_reason": "promotion gates failed (see gates)",
+  "gates": {
+    "canaries_pass": true,
+    "beats_random_ci": false,
+    "beats_singles_point": false,
+    "surface_rho_pass": true,
+    "final_unique_pass": false,
+    "final_budget_reached": true
+  },
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.05976622137594544,
+    "ci95": [
+      0.04366883503064455,
+      0.0761738203415616
+    ],
+    "withheld_positive_pixels": 11342,
+    "tpw": 1069.8069379103922,
+    "fpw": 43061.488256027136,
+    "fnw": 10272.193062089606,
+    "stage": "final dotted emission rule scored on hide-and-recover folds (visible-only masks)",
+    "selected_budget": 45000,
+    "selected_exclusion_px": 3,
+    "random_control_dti": 0.05245916771153202,
+    "paired_delta_vs_random": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.007307053664413421,
+      "ci95": [
+        -0.0079409106941261,
+        0.024020621551039078
+      ],
+      "withheld_positive_pixels": 11342
+    }
+  },
+  "continuous_diagnostic_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.012088382522171209,
+    "ci95": [
+      0.006586235019645062,
+      0.017424633989513435
+    ],
+    "withheld_positive_pixels": 11342,
+    "tpw": 222.6411068716319,
+    "fpw": 46498.23284433217,
+    "fnw": 11119.358893128368
+  },
+  "correlation_overlap_vs_registry": {
+    "stage": "surface rho pre-placement + final dots",
+    "rasters_checked": 63,
+    "registry_complete": false,
+    "registry_scope": "62 pinned 60GEMSDOE registry rasters + 17GEMSDOE dense witness, hash-verified locally; inherited inventory lists 862 unique rasters - full scan is a selector step",
+    "surface_worst_spearman": 0.19645955882138177,
+    "surface_worst_spearman_submission": "docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+    "final_worst_spearman": 0.027774028560223384,
+    "final_worst_dot_overlap_like_for_like": 1.0,
+    "final_worst_dot_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
+    "final_literal_worst_overlap": 1.0,
+    "duplicate_like_for_like": true
+  },
+  "raster_sha256": null,
+  "raster_sha256_reason": "No TIFF written: promotion gates failed.",
+  "surface_decoded_float32_sha256": "2622104f5bfe932aaef5e4011f54d38e1e810b20b364beeb7e0e8f44120a29c2",
+  "validator_output": {
+    "submission_tiff": null,
+    "status": "NOT_WRITTEN",
+    "reason": "Promotion gates failed; see gates in run card."
+  },
+  "submission_name": "gems70e2-scarpstrain-45k-ex3-20261020-zeros-NOT-RELEASED",
+  "submission_note": "E2 scarp-strain-cover dotted candidate; NEGATIVE gates; DO NOT SUBMIT.",
+  "download_and_submit_ok": false,
+  "download_candidate_ok": false,
+  "slot_authorized": false,
+  "slot_note": "Slot use requires separate selector step incl. full-registry scan + weekly-cap check on official submission page.",
+  "weekly_slots_used": 0,
+  "experiment_count": 2,
+  "elapsed_seconds": 143.91,
+  "organizer_confirmed_score": null,
+  "n_final_dots": 45000,
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "method_source_sha256": {
+    "src/gems70/method_e2.py": "12f9c32259214ae089e7c1472ad3f3f8be0d2f4a4c75bdbd0fb7cb43ff42fbec",
+    "scripts/run_experiment_e2.py": "75e8eadcda514b8ab48c9eadba36eb1cd72250370fb50346d83b5362dd13b0d5"
+  }
+}

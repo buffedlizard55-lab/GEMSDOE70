@@ -1,0 +1,14 @@
+{
+  "file_sha256_unchanged": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a",
+  "validated": true,
+  "registry_checked": 68,
+  "max_spearman": 0.023162112298445472,
+  "worst_rho_submission": "h60_officialstack_50k.tif",
+  "positive_support_forward_overlap": 1.0,
+  "training_region_pixels": [
+    3785175,
+    3522961,
+    3539692,
+    3800035
+  ]
+}

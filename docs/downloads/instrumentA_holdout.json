@@ -9,54 +9,41 @@
     "candidate": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "dti": 0.08220252394709567,
+      "dti": 0.08277116132149999,
       "ci95": [
-        0.07530641887564495,
-        0.08857678448943612
+        0.07551434562164547,
+        0.08951206859535318
       ],
       "withheld_positive_pixels": 11321,
-      "tpw": 1361.4024950199662,
-      "fpw": 36162.425637857385,
-      "fnw": 9959.59750498003
+      "tpw": 1369.9268189843685,
+      "fpw": 36099.94524904755,
+      "fnw": 9951.073181015629
     },
     "random_control": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "dti": 0.053125375016710635,
+      "dti": 0.043328292903593316,
       "ci95": [
-        0.04713962413791506,
-        0.05932962140450564
+        0.03834206666392739,
+        0.04815727235776552
       ],
       "withheld_positive_pixels": 11321,
-      "tpw": 878.087151706418,
-      "fpw": 36480.826091749725,
-      "fnw": 10442.912848293583
+      "tpw": 715.9724421281858,
+      "fpw": 36621.84279084727,
+      "fnw": 10605.027557871816
     },
     "h33_reference": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
       "dti": 0.0036997816856295857,
       "ci95": [
-        0.0029985377894749337,
-        0.004431173368572766
+        0.0029878559789966543,
+        0.004435087767188226
       ],
       "withheld_positive_pixels": 11321,
       "tpw": 59.65441084410811,
       "fpw": 35275.171121231586,
       "fnw": 11261.345589155892
-    },
-    "p4_reference": {
-      "evidence_class": "HOLDOUT-DTI",
-      "evaluator_version": "gems57-pooled-hide-v2",
-      "dti": 0.004809030158551737,
-      "ci95": [
-        0.004484809705412453,
-        0.005124016707644191
-      ],
-      "withheld_positive_pixels": 11321,
-      "tpw": 78.92352261675242,
-      "fpw": 36694.70557792587,
-      "fnw": 11242.076477383249
     }
   },
   "best_comparable_control": "random_control",
@@ -64,30 +51,20 @@
     "random_control": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "delta": 0.02907714893038503,
+      "delta": 0.039442868417906674,
       "ci95": [
-        0.022216295900851234,
-        0.03597845578121657
+        0.03213065045415274,
+        0.04662206935330811
       ],
       "withheld_positive_pixels": 11321
     },
     "h33_reference": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "delta": 0.07850274226146609,
+      "delta": 0.07907137963587041,
       "ci95": [
-        0.07167758761857196,
-        0.08469725843727594
-      ],
-      "withheld_positive_pixels": 11321
-    },
-    "p4_reference": {
-      "evidence_class": "HOLDOUT-DTI",
-      "evaluator_version": "gems57-pooled-hide-v2",
-      "delta": 0.07739349378854393,
-      "ci95": [
-        0.070701746796986,
-        0.08356066482811066
+        0.07183512083453227,
+        0.08605649351695648
       ],
       "withheld_positive_pixels": 11321
     }
@@ -96,7 +73,7 @@
     "method": "paired physical spatial-cluster percentile",
     "clusters": 159,
     "draws": 1000,
-    "seed": 70520,
+    "seed": 70421,
     "confidence": 0.95,
     "caveat": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
   },
@@ -106,6 +83,5 @@
     "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
     "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
   },
-  "instrument": "A: shared hide-and-recover catalogue holdout",
-  "candidate_construction": "production model, fold-visible catalogue geometry, fold-band domain, stratified emission"
+  "instrument": "A: shared hide-and-recover catalogue holdout"
 }

@@ -1,0 +1,187 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Protocol review · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
+<strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
+are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
+rule; neither a local validator nor distinct bytes authorize a slot.
+<a href="p5.html">P5-cover negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
+<a href="downloads/p5_run_card.json">New P5 run card</a> ·
+<a href="downloads/review_run_card.json">Prior review card</a>.</aside><h1>Literal-protocol review — 2026-10-20</h1>
+<h2>Decision: DO NOT SUBMIT; archived downloads are for review only</h2>
+<p><strong>No new TIFF was generated. No new geological experiment was run. No competition slot was used.</strong>
+This is a negative deliverable, not completion of the request for a new protocol-compliant submission.
+The supplied prompt has no identifiable single-method lane paragraph; the prior handoff's supervised
+within-halo ranking is the deferred lane, not an invented assignment.</p>
+<p>The current prompt explicitly requires a stop when <strong>forward</strong> dot overlap exceeds 70% within
+3 pixels, or rank correlation exceeds 0.90. Earlier work changed forward overlap to mutual overlap
+without user approval. That change does not satisfy the current prompt. A low reverse overlap or
+rank correlation cannot cancel a high forward overlap.</p>
+<h3>Fresh measurements, not inherited assertions</h3>
+<p>Reproduction: <code>python scripts/review_literal_protocol.py --fetch</code> (after installing requirements).
+The script uses the existing shared <code>saturation_certificate</code>, <code>compare_to_registry</code>, and <code>validate</code>
+functions; it does not replace the metric or writer. <code>src/gems70/protocol.py</code> applies the user's
+literal thresholds to their reported measurements. Vendor bytes and frozen experiments are unchanged.</p>
+<ul>
+<li>Witness: <a href="https://github.com/buffedlizard55-lab/60GEMSDOE/blob/32024716f218d06a94e01464157392119c03cb15/registry/rasters/calib_r13lattice_00904.tif">binary lattice, immutable owner-mirror revision</a>.</li>
+<li>Witness SHA-256: <code>b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2</code>.</li>
+<li><strong>REGISTRY-MEASUREMENT:</strong> 206,895 binary dots; halo covers 5,160,724 of 5,167,373 footprint cells
+  (99.871327%). <strong>6,649 cells remain uncovered.</strong> The earlier claim of 100% coverage is false.</li>
+<li>For the handoff's fixed 37,654-dot design, even placing a dot in every uncovered cell gives
+  forward overlap at least <code>1 − 6649/37654 = 0.82341849</code>, exceeding 0.70. This rejects every placement
+  <strong>at that mass</strong>, before a new surface or final dots are built. It does not prove impossibility
+  at every smaller mass. Deliberately predicting only edge slivers would be optimizing the registry
+  loophole, not validating the geological hypothesis; no such experiment was attempted.</li>
+<li><strong>REGISTRY-MEASUREMENT:</strong> all seven inventoried final TIFFs (P4, discordance, E2, H2 diagnostic, scarp E3, H70 conductive breach, and E5 supervised LOQO)
+  have measured forward overlap <strong>1.0</strong> against this binary witness. P4 Spearman is
+  <strong>−0.0004249862</strong>. Each is a duplicate <strong>under the prompt's rule</strong>, not necessarily a copied file.</li>
+<li>All seven pass the shared local format validator, including finite [0,1], CRS, shape and transform.
+  Format validity does not imply uniqueness, portal acceptance or scientific usefulness.</li>
+</ul>
+<p>Receipts: <a href="downloads/literal_protocol_audit.json">full fresh audit</a>,
+<a href="downloads/review_run_card.json">current negative run card</a>,
+<a href="downloads/instrumentA_holdout.json">historical P4 holdout</a>.
+One positive witness suffices to reject. This is not an exhaustive scan of all GEMSDOE sites.</p>
+<h2>Research queue: four candidates, ranked before any new implementation</h2>
+<p>These are <strong>untested conjectures</strong>, ranked qualitatively for expected useful information versus
+implementation cost, not projected DTI scores. Novelty is relative to the inspected local methods
+(<code>method.py</code>, <code>method2.py</code>, <code>method_v2.py</code>, <code>strike.py</code>) and archived experiments, not every other
+team's private work. They stay within supervised residual within-halo ranking from the handoff.
+No added external source is required; layer identities below come from
+<code>evidence/inherited_band_metadata.json</code>, not independent validation of survey units or inversions.
+The large feature stack has not been restored during this stopped review.</p>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Candidate and exact cached layers</th>
+<th>Proposed physical signature</th>
+<th>Why an unmapped fault is plausible</th>
+<th>Named non-fault mimic</th>
+<th>Difference from local implementations; cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First</td>
+<td>Residual cross-sensor ranking: <code>rtp</code> (2), <code>det_elev</code> (12), <code>cond_surf</code> (17), <code>depth_to_base_surf</code> (15)</td>
+<td>A fold-trained model learns departures from each sensor's local smooth background, conditional on visible-catalogue distance; paired elevation break and magnetic/conductivity gradient evidence</td>
+<td>A covered fault may perturb basement and electrical structure while having a weak surface trace</td>
+<td>Saline groundwater boundaries and lithologic contacts</td>
+<td>Learned residual interactions rather than P4 geometry, C1 prescribed discordance product or E2 oriented step; medium cost, highest qualitative priority</td>
+</tr>
+<tr>
+<td>Second</td>
+<td>Displaced texture patches: <code>rtp</code> (2), <code>mag_anom</code> (1), <code>iso_grav_anom</code> (13)</td>
+<td>Opposite-side magnetic texture matches best after a nonzero along-strike offset, with a stable offset across scales and gravity support</td>
+<td>Concealed displacement can offset a contact without an exposed scarp</td>
+<td>Intrusive margins or independent volcanic flows</td>
+<td>Patch phase-correlation displacement, not the prior along-tangent amplitude derivative or E3 depth step; high cost, potentially useful but nonunique</td>
+</tr>
+<tr>
+<td>Third</td>
+<td>Relief-conditioned cross-modal disagreement: <code>det_elev</code> (12), <code>det_elev_slope</code> (19), <code>depth_to_base_surf</code> (15), <code>rtp</code> (2)</td>
+<td>Supervised basement/magnetic boundary evidence is upweighted only where surface-relief response is unexpectedly weak within a training-fold relief stratum</td>
+<td>Sedimentary burial may hide a fault scarp</td>
+<td>Depositional onlap or an erosional paleovalley</td>
+<td>Explicit conditional residual by relief, not E2's elevation-step product or weak geometric tilt; medium cost, uncertain gain</td>
+</tr>
+<tr>
+<td>Fourth</td>
+<td>Dilation/shear contrast interactions: <code>geod_dilaterate</code> (8), <code>geod_shearrate</code> (7), <code>iso_grav_anom</code> (13), <code>rtp</code> (2)</td>
+<td>Broad strain context conditions local gravity/magnetic evidence instead of being interpreted as a 100m fault locator</td>
+<td>Distributed deformation can include structures absent from a mapped-trace catalogue</td>
+<td>Aquifer compaction, broad regional strain or geodetic interpolation</td>
+<td>Learned context interaction, not univariate geodetic weighting or catalogue-endpoint relay pairing; low–medium cost, lowest qualitative priority because effective resolution is uncertain</td>
+</tr>
+</tbody>
+</table>
+<h3>Validation plan, deferred — not a measured result</h3>
+<p>Once a separately authorized protocol resolves the literal-gate conflict, test only the first candidate.
+Keep the shared evaluator and writer. Freeze the mass, folds, feature list and gates first. Hide whole
+fault components with the shared buffer, regenerate catalogue-derived features from visible faults
+only, and mask visible faults pixel-exactly. Compute each raw/derived feature-alone AUC <strong>before</strong>
+interpreting any joint result; &gt;0.90 is a leakage alarm, including inverse-predictive features as a
+conservative diagnostic. All feature fitting, scaling and SGMC proxy labels must exclude the test
+quadrant and its buffer. SGMC is proxy training truth, not an inference feature; its overlap with
+QFaults must be quantified, not called independent truth.</p>
+<p>Evaluate pooled HOLDOUT-DTI (shared evaluator <code>gems57-pooled-hide-v2</code>, alpha 0.2, beta 0.8,
+300m triangular kernel), withheld-positive count, and paired spatial-bootstrap 95% intervals.
+Re-evaluate D28 and the current best on exactly the same folds/mass; compare B′ separately as a proxy,
+not as HOLDOUT-DTI or an organizer score. The cached E2 D28 HOLDOUT-DTI 0.0919 is an <strong>archived</strong>
+reference, not a newly rerun baseline. No promotion without a matched best-baseline comparison,
+canaries, both-stage literal uniqueness, format validation and a separate selector decision.
+Stop after at most three experiments or two hours. No automatic weekly submission.</p>
+<h2>Source/evidence audit and limitations</h2>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Evidence / official review link</th>
+<th>Verification boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The task predicts faults, not a catalogue of geothermal vents</td>
+<td><a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb">Official organizer notebook</a>, opening cell</td>
+<td>Re-fetched via GitHub API this review; excerpts in <code>evidence/review/official-reference-excerpts.txt</code></td>
+</tr>
+<tr>
+<td>CPU training is possible, GPU preferred</td>
+<td><a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/README.md">Official README</a></td>
+<td>Re-fetched; the retained prompt's GPU-required statement is too strong</td>
+</tr>
+<tr>
+<td>Training-loss weights are 0.2/0.8</td>
+<td>Same notebook, cell 16</td>
+<td>Verified training loss; this notebook excerpt alone does not establish the distance-transform competition scorer</td>
+</tr>
+<tr>
+<td>Competition format, scoring and current slot cap</td>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem page</a>, <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">rules</a>, submission-page cap</td>
+<td>Historical fetched quotations in <code>evidence/official_sources_2026-10-20.json</code>; these hosts are not in this session's outbound allowlist. No fresh cap or authenticated receipt verified</td>
+</tr>
+<tr>
+<td>GeoDAWN / INGENIOUS source provenance</td>
+<td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a>, <a href="https://gdr.openei.org/submissions/1391">DOE GDR 1391</a></td>
+<td>Official manual-review links; availability and licensing not re-verified this review. No new external-data-dependent candidate asserted viable</td>
+</tr>
+<tr>
+<td>Reported H33 performance and leader values</td>
+<td>User's brief and historical page captures</td>
+<td>No submission-page receipt. Not ORGANIZER-CONFIRMED; conflicting values are not averaged or treated as forecasts</td>
+</tr>
+</tbody>
+</table>
+<p>Hash consistency on an owner mirror is not organizer authentication. The local sample contains known
+fault positives, so it is a geometry/footprint template, not hidden validation labels. Earlier snippets
+in <code>docs/hypotheses.md</code> also mis-indexed detrended elevation (correctly band 12) and seismicity distance
+(correctly band 10); the table here uses the recorded metadata and avoids inferring ambiguous units.
+<code>prepare_data.py</code> is absent, so the retained prompt's advertised command is not a working pipeline.
+Data placement is not the single blocker: protocol consistency, proxy validity and independent model
+validation remain. No scientific-discovery or leaderboard-improvement claim is established.</p>
+<h2>Integration and upstream report</h2>
+<p>During this review, parallel PRs #17, #21 and #22 advanced main. Their frozen evidence and
+scarp E3 artifact were preserved, then the fresh audit was rerun against the expanded five-TIFF
+inventory. The existing literal-policy CLI and the release API now share one policy adapter;
+this avoids two subtly different interpretations of the threshold rule. Historical policy cards
+remain available with provenance. The newest measured review card is linked at the top of every page.</p>
+<p>An attempted upstream issue to the shared template repository returned
+<code>Resource not accessible by integration (createIssue)</code>. It was not posted. The report is retained
+in <code>evidence/review/upstream-policy-report.md</code>; GitHub issue-creation permission, not credentials
+in chat, is needed for that operation. No shared-template code was changed during this review.</p>
+<p>A second concurrent integration added PR #28's H70 conductive-breach archive (negative). It is
+not this review's new experiment. Its original canonical card is preserved at <code>evidence/run_card.json</code>
+and <code>evidence/h70/</code>; P4 pages read P4's own frozen card explicitly. The fresh audit now checks all
+seven TIFFs. The concurrent <code>strict_gate</code> API delegates to the same literal policy implementation.</p></main>
+<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
+<a href="downloads/p5_run_card.json">New P5 negative card</a> ·
+<a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·
+<a href="downloads/archived_p4_run_card.json">Archived P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

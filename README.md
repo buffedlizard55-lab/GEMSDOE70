@@ -1,86 +1,149 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
 
-A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif` (sha256 `0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`negative` on the pre-registered target-like gate. No weekly slot was used.
+A newly generated, format-validated **continuous** GeoTIFF is available:
+[Download P5 TIFF — DO NOT SUBMIT](docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif) ·
+[One-TIFF ZIP for review](docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.zip) ·
+[P5 evidence page](docs/p5.html) · [P5 run card](evidence/p5/run_card.json).
+SHA-256 `30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a`. Name `gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT`;
+note (120/140): `P5 magnetic width and cover, SGMC LOQO proxy; continuous review map. Literal dot overlap blocks promotion; DO NOT SUBMIT` (**not an upload instruction**).
 
-- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase5/uniqueness.json)
-- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
-- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
-- **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
+**Download for review: yes. Contest upload / weekly slot: NO.**
+HOLDOUT-DTI A (`gems57-pooled-hide-v2`, 11,321 withheld
+catalogue pixels) = 0.0123 [0.007525362402102077, 0.017652899299874254]; paired vs regenerated visible-only P4
+Δ -0.0608 [-0.06869402290922029, -0.05215269960053514]. SGMC proxy HOLDOUT-DTI B′
+(`gems57-pooled-hide-v2`, 59,937 proxy positives)
+= 0.0254 [0.018528422238356795, 0.033629285104751244]; paired vs frozen H33 Δ -0.0683
+[-0.08194331910889527, -0.05446790963256574]. Both 95% intervals for improvement are below zero; these are **not**
+organizer-confirmed scores. Leakage canaries clear (all features below AUC 0.90).
+The new continuous surface has ~26,987
+summed probability mass versus 37,654 full-mass H33/P4 dots; this is a **joint test** of
+ranking, proxy training and emission, not an isolated causal feature comparison.
 
-## What was measured this session (session 3, experiment 5)
+The literal 3-px **forward** overlap gate blocks any proposed dot placement in the
+4,989,581-pixel feature-valid interior: a hash-pinned archived lattice covers every
+cell of that domain. The continuous P5 map has no exact-one binary dots, but its
+**positive support has 1.00 forward overlap** with the same lattice; that is not a
+loophole or a protocol-unique submission. Distinct bytes/low rank correlation
+(ρ ≤ 0.0232 vs
+70 checked rasters) do not
+clear the other gate. No weekly slot was used; no organizer submission receipt exists.
 
-The handoff's top priority: **supervised within-halo ranking** — HistGradientBoosting over the
-19-band physics stack + visible-catalogue geometry, trained on the SGMC off-catalogue proxy with
-leave-one-quadrant-out, emitted through the measured P4 coverage-stratified design
-(37,654 binary dots, all off-catalogue). Preregistered in
-`docs/hypotheses.md` (Phase-5 addendum) before the run; canaries, gates and uniqueness receipts in
-`evidence/phase5/`.
+- [Executive summary / exact future submission workflow](docs/executive-summary.html)
+- [Four ranked preregistered hypotheses](docs/preregistration-p5.md) ·
+  [Official-source claim/limit table](evidence/p5/official_source_review.json)
+- [H33 analysis](docs/h33-analysis.md) ·
+  [Literal overlap witness](evidence/p5/literal_blocker.json)
+- **Session start:** read this README, the complete retained brief below, AGENTS.md and HANDOFF.md.
 
-| Instrument | Candidate | H33 reference | P4 reference | Result |
-|---|---:|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout (label-independent) | 0.0822 | 0.0037 | — | beats random 0.0531 |
-| B′ · SGMC proxy d ≥ 3 px, LOQO (pre-registered target-like gate) | 0.0793 | 0.0938 | 0.0812 | **H33 wins, Δ -0.0145 [-0.024286076863923648, -0.003909813992753573]** |
-| B · unrestricted SGMC proxy, LOQO | 0.0844 | 0.0906 | — | H33 wins |
-
-Scientific reading (a deliverable, not a failure to hide): the model learns the proxy
-(out-of-fold AUC 0.641) yet places dots no better than the pure-geometry
-halo — statistically indistinguishable from P4 on B′ (Δ -0.0019 [-0.005952404035546539, 0.002392549234704787]). The
-SGMC off-catalogue proxy does not contain enough transferable within-halo information for this
-feature set; the ceiling is the label source, not the learner. No feature canary fired
-(worst A-truth AUC 0.565); disclosure: 31.9 % of A-truth pixels
-lie within 3 px of proxy pixels (SGMC re-draws), and B′/B share the training label source.
-
-**Uniqueness (corrected):** 62 archived rasters checked on the score
-surface before placement (worst ρ 0.096) and
-on the final dots (worst mutual overlap 0.301, limit 0.70; worst Spearman
-0.015, limit 0.90; 0 duplicates).
-
-## Earlier sessions (summaries)
-
-Sessions 1–2 ran four preregistered geometry experiments (all negative on B′; receipts in
-`evidence/phase2..4/`), audited why H33 scored 0.2778 (`docs/h33-analysis.md`: emission geometry,
-not geology), and fixed two shared-uniqueness defects (binary dots; mutual overlap), reported in
-`evidence/upstream_fix_report.md` and pinned in `registry/template_pin.json` with
-`all_identical: false`.
-
-## Reproduce
+### Reproduce or verify P5 (CPU; no slot, no automatic promotion)
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
-.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
+.venv/bin/python scripts/restore_data.py
+# owner archive provides the pinned SGMC proxy + 62 registry rasters:
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v5.py   # registered Phase-5 run, regenerates the artifact
-.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+.venv/bin/python scripts/verify_p5_artifact.py   # re-check unchanged TIFF without refitting
+# Run scripts/run_experiment_p5_cover.py only on a clean checkout; writer refuses to overwrite.
 .venv/bin/python -m pytest -q
 ```
 
-`scripts/run_experiment_v2.py`/`v3.py`/`v4.py` reproduce the earlier negatives; the phase-1
-negative is archived in `evidence/history/phase1_negative/`.
+Input mirrors are SHA-pinned owner copies, **not** organizer-authenticated; the competition
+data page requires a login. USGS magnetic edges can also represent dikes, remanence changes
+or survey artifacts, not fault/vent proof. The reported H33 0.2778 has no authenticated
+file-specific receipt here. Public-leaderboard 0.4413 was read on 2026-10-20,
+not copied from a P5 submission. See [official problem](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/),
+[USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and),
+[DOE rules](https://docs.nlr.gov/docs/fy26osti/96647.pdf).
 
-## Next session
+## PRIOR REVIEW (8 archived dot files): DO NOT SUBMIT — literal lane stop
 
-The proxy ceiling is now measured — see `docs/irregularities.md` for the revised priorities
-(independent truth source, band widening, mass calibration), ranked by expected information gain.
+**Download: yes, 8 older archived TIFFs for review only. Submit: NO.**
+That *prior* review generated no new protocol-compliant TIFF, geological experiment or slot.
+P5 above is a later, separate research-only negative, not a promoted competition submission.
+The frozen prior-review negative run card is [here](evidence/review/run_card.json).
 
+- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/)
+- [Executive summary / exact submission workflow](docs/executive-summary.html)
+- [Download archived P4 TIFF — DO NOT SUBMIT](docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif)
+- [Fresh literal-protocol audit](evidence/review/literal_protocol_audit.json)
+- [Four ranked hypotheses / source table / limitations](docs/protocol-review.md)
+- [H33 analysis — measured geometry, not a verified leaderboard explanation](docs/h33-analysis.md)
+- [Handoff](HANDOFF.md)
+- **Session start:** read this README, the complete retained brief below, AGENTS.md and HANDOFF.md.
+
+## What this review verified
+
+The previous mutual-overlap gate weakened the prompt's **forward**-overlap rule without approval.
+Current policy applies the literal rule to shared-tool measurements; it does not change the
+metric, writer or frozen historical evidence. The 8 historically reviewed dot TIFFs have measured forward
+overlap **1.0** against the pinned binary lattice, exceeding **0.70**. They are duplicates under
+the prompt's rule, even though their bytes differ. Small rank correlation does not cancel overlap.
+
+Fresh REGISTRY-MEASUREMENT: halo coverage **99.871327268%**,
+not the previously asserted 100%. There are **6,649 uncovered footprint cells**. At the prior
+handoff's fixed **37,654-dot mass**, even the minimum possible overlap is
+**0.823418495**, still a stop. This does not prove
+impossibility at every smaller mass. We did not optimize a boundary-only loophole.
+
+All 8 reviewed dot TIFFs pass shared local format checks (single-band float32, finite [0,1],
+CRS/shape/transform matching the pinned sample); that is not portal acceptance or uniqueness.
+The previous canonical P4 card and historical receipts remain frozen and superseded for current
+policy by `evidence/review/run_card.json`.
+
+## Scientific outcome and next session
+
+At the time of that prior review, no new HOLDOUT-DTI or ORGANIZER-CONFIRMED score existed;
+P5 HOLDOUT-DTI is newly measured above. The historical P4 HOLDOUT-DTI is 0.07304 [0.06674, 0.07899], evaluator `gems57-pooled-hide-v2`, 11,321 withheld
+catalogue positives. Its SGMC proxy gate was already negative. H33's reported 0.2778 and the
+conflicting leader values in the brief lack authenticated submission-page receipts here.
+
+The prior handoff's supervised within-halo ranking was deferred in this archived review;
+the new P5 test above executed one narrow magnetic-cover version and measured a negative.
+Four earlier ranked hypotheses and their non-fault mimics are in the historical review.
+Resolve the literal-gate conflict by a
+separately authorized protocol, then validate one candidate using nested spatial splits, canaries,
+a matched current-best baseline and the shared evaluator/writer. Do not silently reintroduce a
+mutual-overlap exemption, and do not spend a weekly slot before an independent selector decision.
+
+## Reproduce this review (CPU; does not generate a TIFF)
+
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/review_literal_protocol.py --fetch
+.venv/bin/python scripts/build_site.py
+.venv/bin/python scripts/build_readme.py
+.venv/bin/python -m pytest -q
+.venv/bin/python scripts/audit_pages.py
+```
+
+The witness fetch uses the configured GitHub connection and immutable revision/SHA pins. It lands
+in ignored `.cache/`, not Git. Data bridge files already in the repo supply the reference geometry.
+Official reference README/notebook were re-fetched via GitHub API. Other official hosts and the
+authenticated submission page were not accessible within this session's outbound allowlist; live
+cap, eligibility and organizer acceptance remain unverified. GPU is preferred, not required by the
+organizer reference. `scripts/prepare_data.py` advertised in the historical prompt is absent.
+
+
+## E5 lane — supervised within-halo ranking (2026-10-20), verdict `negative` — DO NOT SUBMIT
+
+SGMC-proxy LOQO ranker (the previously deferred next step, now executed under its own preregistration `docs/preregistration-e5.md`), 37,654 dots: A HOLDOUT-DTI 0.0815 vs H33 0.0037; B′ PROXY-DTI 0.0886 vs H33 0.0938 (Δ -0.0051 [-0.0161, +0.0053] — includes zero) → negative. File `docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif` (sha256 `8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2`), review-only under the literal policy above (forward overlap 1.00 vs the dense lattice; mutual 0.308). Evidence: `evidence/e5/`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/e5/leaderboard_read.json`). No weekly slot used.
+
+
+## Parallel P5 analytic-signal lane (arena/97660a79-gemsdoe70) — DO NOT SUBMIT
+
+Analytic-signal halo 7px, 37,654 dots, `tmi_hg`+`tmi_vg` rank in 2.4–32 px halo with tip kernel. HOLDOUT-DTI A 0.0828 [0.0755,0.0895] vs H33 0.0037 win; **B′ 0.0766 [0.0687,0.0852] vs 0.0938 H33 win Δ -0.0172 [-0.027760492095023067, -0.006296864003715159] → negative**, no slot. Uniqueness: 62 rasters worst mutual 0.30 (limit 0.70) worst ρ 0.042; forward 1.00 vs dense lattice `calib_r13lattice_00904.tif` (literal duplicate, review only). File `docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif` (sha256 `aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4`, 149,414 bytes, ZIP `bf61cacc...`). Evidence `evidence/phase5/` (run_card, instrument holds, uniqueness, canaries), method `src/gems70/method_p5.py`. Hypotheses.md now ranks 5 candidates (H-2 tested P5, H-3 radiometric GeoDAWN already fetched 36+26 MB, H-4 lidar scarp 36 MB, H-5 conductive breach, H-6 basement curvature) with preregistered validation rule; h33-analysis.md PhD-level byte audit + metric algebra. Under literal forward rule, P5 is duplicate (as is H70 and P4) — download for review only.
 ## Complete retained project prompt
 
-Historical statements below are user-supplied requirements and claims, not verified results. No
-leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
-PROJECT_BRIEF.md is the source for this embedded copy.
+Historical statements below are user-supplied requirements and claims, not verified results.
+PROJECT_BRIEF.md is preserved verbatim and embedded in full. The current prompt's substantive
+requirements are retained there; the current active branch is recorded in HANDOFF.md.
 
 <details>
 <summary>Read the complete supplied project brief before every session</summary>
 
-
-## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET
-
-Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818] (beats random, loses to D28 0.0919) → negative. File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` (selector-review only; complete corrected uniqueness scan pending). Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).
 # User project prompt — retained as supplied
 
 Read this at the beginning of every session. Scores and access statements below are user-supplied claims, not current verified facts. Execution status and verified evidence belong in README.md and evidence/, not by silently rewriting this historical brief.

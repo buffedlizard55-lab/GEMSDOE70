@@ -1,0 +1,112 @@
+{
+  "hypothesis": "Review of historical P4 coverage-stratified halo; no new lane assigned",
+  "mechanism": "one dot per 7x7-px stratum at the stratum maximum of (1+0.8*exp(-(d-2.4)/6))*(0.7+0.3*tip), 5-px NMS, band 2.4-32 px",
+  "non_fault_mimic": "colluvial/collinear basin-floor lineaments inside the halo",
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "provenance": "Inherited Phase-4 result, not rerun this review",
+    "dti": 0.07304229212058164,
+    "ci95": [
+      0.06673987703804156,
+      0.07899496967047342
+    ],
+    "withheld_positive_pixels": 11321
+  },
+  "correlation_overlap_vs_registry": {
+    "surface": "Not re-audited; stopped before new placement",
+    "final_worst_spearman": 0.050042619451799414,
+    "final_worst_forward_overlap": 1.0,
+    "duplicate_witnesses": [
+      {
+        "submission": "calib_r13lattice_00904.tif",
+        "forward_overlap": 1.0
+      },
+      {
+        "submission": "r11_greedy_mp.tif",
+        "forward_overlap": 0.8069262229776385
+      },
+      {
+        "submission": "r13_lattice_s5_00904.tif",
+        "forward_overlap": 1.0
+      },
+      {
+        "submission": "r14_union_tips10_lat6.tif",
+        "forward_overlap": 0.7803686195357731
+      }
+    ],
+    "rule": "forward overlap > 0.70 OR Spearman > 0.90",
+    "scope": "Archived 62-raster scan; not a current global uniqueness certificate"
+  },
+  "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+  "raster_status": "Historical artifact; no new TIFF generated",
+  "validator_output": {
+    "file": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+    "bytes": 126097,
+    "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "emitted_positive_pixels": 37654,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 37654,
+    "footprint_fraction": 0.007286874781441169
+  },
+  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
+  "submission_note": "Historical P4 review only; literal overlap stop. DO NOT SUBMIT.",
+  "verdict": "negative",
+  "download_ok_for_review": true,
+  "submit_recommended": false,
+  "experiments_this_review": 0,
+  "weekly_slots_used": 0,
+  "limitations": [
+    "Single-method lane paragraph missing",
+    "Literal duplicate stop triggered",
+    "No organizer submission receipt"
+  ],
+  "tests": "158 passed after concurrent-review integration; three rasterio deprecation warnings"
+}

@@ -1,22 +1,11 @@
 [
   {
-    "id": "organizer-reference",
+    "id": "competition-about",
     "authority": "organizer",
-    "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
-    "retrieved_via": "https://api.github.com/repos/drivendataorg/gems-prize-reference-solution/contents/README.md?ref=aebe92f7c8a990f0e3443451b7a825d9afd6336b",
-    "status": "verified-content",
-    "claim": "The organizer reference solution is a fault-detection U-Net; notebook training loss uses alpha 0.2 and beta 0.8. It supports CPU-only execution, with GPU recommended for speed.",
-    "evidence": "evidence/official-reference-readme.md; evidence/official-reference-excerpts.txt",
-    "limit": "The notebook loss is not independent confirmation of the full distance-weighted evaluation implementation."
-  },
-  {
-    "id": "competition-problem",
-    "authority": "organizer",
-    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-    "status": "verified-content",
-    "claim": "Official problem description: single GeoTIFF, pixel probabilities in [0,1]; EPSG:32611; 100 m; same bounds; outside bounds null or NaN; single float32 layer; metric alpha 0.2, beta 0.8, 300 m triangular kernel; private initial round then expanded final round; one submission must be chosen.",
-    "limit": "Text verified on the page. Organizer sample and the platform validator were not run here. Note the page says the sample predicts total fault absence; the local sample raster contains 60,988 positive pixels (see docs/irregularities.md).",
-    "retrieved": "2026-10-20 (session fetch_page)"
+    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/",
+    "status": "verified-content-2026-10-20",
+    "claim": "Sponsor/data/task background: DOE Geothermal, USGS GeoDAWN + 3DEP lidar context; faults as fluid conduits (target remains fault traces, not vents).",
+    "limit": "Background only; no format/score authority."
   },
   {
     "id": "competition-data",
@@ -28,12 +17,12 @@
     "retrieved": "2026-10-20 (session fetch_page)"
   },
   {
-    "id": "leaderboard",
+    "id": "competition-problem",
     "authority": "organizer",
-    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-    "status": "js-rendered-unverified",
-    "claim": "The leaderboard HTML returns only a Loading placeholder; numeric leaderboard values cannot be verified from this environment.",
-    "limit": "Any leaderboard number in a prompt, README or site is UNVERIFIED unless copied from a submission-page receipt.",
+    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "status": "verified-content",
+    "claim": "Official problem description: single GeoTIFF, pixel probabilities in [0,1]; EPSG:32611; 100 m; same bounds; outside bounds null or NaN; single float32 layer; metric alpha 0.2, beta 0.8, 300 m triangular kernel; private initial round then expanded final round; one submission must be chosen.",
+    "limit": "Text verified on the page. Organizer sample and the platform validator were not run here. Note the page says the sample predicts total fault absence; the local sample raster contains 60,988 positive pixels (see docs/irregularities.md).",
     "retrieved": "2026-10-20 (session fetch_page)"
   },
   {
@@ -46,29 +35,23 @@
     "retrieved": "2026-10-20 (session fetch_page)"
   },
   {
-    "id": "geodawn",
-    "authority": "USGS",
-    "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
-    "status": "not-retrieved-this-session",
-    "claim": "GeoDAWN source named by the problem page and rules (DOI 10.5066/P93LGLVQ, cited in the NLR rules footnote 3).",
-    "limit": "Not fetched in this session."
+    "id": "competition-rules-pdf",
+    "authority": "organizer (DOE/NLR rules document)",
+    "url": "https://www.nlr.gov/docs/fy26osti/96647.pdf",
+    "retrieved_via": "fetch_page 2026-10-20 (redirects to docs.nlr.gov); document dated SEPTEMBER 2026",
+    "status": "verified-content",
+    "claim": "Eligibility (\u00a71.3), up to three submissions per week and one final selection (\u00a73.2, \u00a73.4, \u00a73.5), 5:00 p.m. ET deadline-date cutoff (A.1), generative-AI narrative disclosure (\u00a73.2).",
+    "evidence": "evidence/official_sources_2026-10-20.json",
+    "limit": "Confirms rule text only. Not a portal receipt; the deadline timestamp conflicts with the competition page and is flagged."
   },
   {
-    "id": "ingenious",
-    "authority": "DOE Geothermal Data Repository",
-    "url": "https://gdr.openei.org/submissions/1391",
-    "status": "not-retrieved-this-session",
-    "claim": "Official-source research queue entry from the user prompt.",
-    "limit": "Licensing, contents and current downloads not independently checked in this environment."
-  },
-  {
-    "id": "template",
-    "authority": "owner mirror, not organizer",
-    "url": "https://github.com/buffedlizard55-lab/60GEMSDOE/tree/32024716f218d06a94e01464157392119c03cb15/src/gems57",
-    "status": "verified-pinned-bytes",
-    "claim": "Shared evaluator, writer, validator, holdout and uniqueness implementation reused unchanged.",
-    "evidence": "registry/template_pin.json; evidence/template_verification.json",
-    "limit": "Implements the requested protocol; transcription is not independent organizer authentication."
+    "id": "e3-candidate",
+    "authority": "this repository (not organizer)",
+    "url": "https://github.com/buffedlizard55-lab/GEMSDOE70",
+    "status": "holdout-validated-candidate",
+    "claim": "E3 scarp-curvature candidate TIF with HOLDOUT-DTI evidence, validator receipt and 63-raster uniqueness audit.",
+    "evidence": "evidence/run_card_e3_amended.json; evidence/validator_e3.json; evidence/final_uniqueness_e3.json",
+    "limit": "No organizer receipt or score; selector full-registry scan outstanding."
   },
   {
     "id": "features",
@@ -78,6 +61,14 @@
     "claim": "Existing numerical feature stack restored from five parts.",
     "evidence": "evidence/data_receipt.json",
     "limit": "Public mirror consistency only; no assertion of download licensing from GitHub visibility."
+  },
+  {
+    "id": "geodawn",
+    "authority": "USGS",
+    "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+    "status": "not-retrieved-this-session",
+    "claim": "GeoDAWN source named by the problem page and rules (DOI 10.5066/P93LGLVQ, cited in the NLR rules footnote 3).",
+    "limit": "Not fetched in this session."
   },
   {
     "id": "h33",
@@ -97,13 +88,39 @@
     "limit": "Not a handoff originally present in this empty repository."
   },
   {
-    "id": "competition-rules-pdf",
-    "authority": "organizer (DOE/NLR rules document)",
-    "url": "https://www.nlr.gov/docs/fy26osti/96647.pdf",
-    "retrieved_via": "fetch_page 2026-10-20 (redirects to docs.nlr.gov); document dated SEPTEMBER 2026",
+    "id": "ingenious",
+    "authority": "DOE Geothermal Data Repository",
+    "url": "https://gdr.openei.org/submissions/1391",
+    "status": "not-retrieved-this-session",
+    "claim": "Official-source research queue entry from the user prompt.",
+    "limit": "Licensing, contents and current downloads not independently checked in this environment."
+  },
+  {
+    "id": "leaderboard",
+    "authority": "organizer",
+    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "status": "js-rendered-unverified",
+    "claim": "The leaderboard HTML returns only a Loading placeholder; numeric leaderboard values cannot be verified from this environment.",
+    "limit": "Any leaderboard number in a prompt, README or site is UNVERIFIED unless copied from a submission-page receipt.",
+    "retrieved": "2026-10-20 (session fetch_page)"
+  },
+  {
+    "id": "organizer-reference",
+    "authority": "organizer",
+    "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+    "retrieved_via": "https://api.github.com/repos/drivendataorg/gems-prize-reference-solution/contents/README.md?ref=aebe92f7c8a990f0e3443451b7a825d9afd6336b",
     "status": "verified-content",
-    "claim": "Eligibility (§1.3), up to three submissions per week and one final selection (§3.2, §3.4, §3.5), 5:00 p.m. ET deadline-date cutoff (A.1), generative-AI narrative disclosure (§3.2).",
-    "evidence": "evidence/official_sources_2026-10-20.json",
-    "limit": "Confirms rule text only. Not a portal receipt; the deadline timestamp conflicts with the competition page and is flagged."
+    "claim": "The organizer reference solution is a fault-detection U-Net; notebook training loss uses alpha 0.2 and beta 0.8. It supports CPU-only execution, with GPU recommended for speed.",
+    "evidence": "evidence/official-reference-readme.md; evidence/official-reference-excerpts.txt",
+    "limit": "The notebook loss is not independent confirmation of the full distance-weighted evaluation implementation."
+  },
+  {
+    "id": "template",
+    "authority": "owner mirror, not organizer",
+    "url": "https://github.com/buffedlizard55-lab/60GEMSDOE/tree/32024716f218d06a94e01464157392119c03cb15/src/gems57",
+    "status": "verified-pinned-bytes",
+    "claim": "Shared evaluator, writer, validator, holdout and uniqueness implementation reused unchanged.",
+    "evidence": "registry/template_pin.json; evidence/template_verification.json",
+    "limit": "Implements the requested protocol; transcription is not independent organizer authentication."
   }
 ]

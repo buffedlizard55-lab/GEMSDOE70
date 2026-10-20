@@ -3,7 +3,7 @@
 Two independent facts are tracked and must never be conflated:
 
 * ``download_ok``  - the file exists, matches its recorded SHA-256, passed the shared
-  validator, and cleared the (corrected) mutual-overlap uniqueness gate.
+  validator. This authorizes forensic download only, not uniqueness or upload.
 * ``submit_recommended`` - the pre-registered scientific promotion gate passed.
 
 The page and the run card always show both. A downloadable file is not a promise.
@@ -14,6 +14,9 @@ import hashlib
 import json
 import math
 from pathlib import Path
+from .protocol import strict_gate
+
+from .protocol import literal_lane_status
 
 
 def valid_canary(canary):
@@ -43,56 +46,19 @@ def _load(root, rel):
     return json.loads(p.read_text()) if p.is_file() else None
 
 
-def _canary_records(canaries):
-    """Canary records from either the legacy flat file or the Phase-5 nested one."""
-    if not isinstance(canaries, dict):
-        return []
-    records = []
-    for value in canaries.values():
-        if not isinstance(value, dict):
-            continue
-        if 'auc' in value:
-            records.append(value)
-        else:
-            records.extend(v for v in value.values()
-                           if isinstance(v, dict) and 'auc' in v)
-    return records
-
-
-def _phase_paths(card):
-    """Resolve the current candidate's evidence locations from the card itself.
-
-    Legacy Phase-4 card: no ``phase_evidence`` block, canaries in phase2,
-    uniqueness in phase4. Phase-5+ cards carry an explicit mapping.
-    """
-    phase = card.get('phase_evidence') or {}
-    base = phase.get('dir', 'evidence/phase4')
-    return dict(
-        canaries=phase.get('canaries', 'canaries.json') if phase
-        else '../phase2/canaries.json',
-        uniqueness=phase.get('uniqueness', 'uniqueness.json'),
-        base=base,
-    )
-
-
 def release_status(root):
-    """Report the published candidate's status without ever inventing a score.
-
-    Reads the canonical ``evidence/run_card.json`` (the current candidate,
-    Phase-5 as of 2026-10-20 session 3) and resolves its phase receipts through
-    the card's own ``phase_evidence`` mapping. Fail-closed in both directions.
-    """
+    """Report the published candidate's status without ever inventing a score."""
     root = Path(root)
-    card = _load(root, 'evidence/run_card.json')
-    paths = _phase_paths(card) if card else {}
-    canaries = _load(root, f"{paths['base']}/{paths['canaries']}") if card else None
-    audit = _load(root, f"{paths['base']}/{paths['uniqueness']}") if card else None
+    card = _load(root, 'evidence/phase4/run_card.json')
+    canaries = _load(root, 'evidence/phase2/canaries.json')
+    audit = _load(root, 'evidence/phase4/uniqueness.json')
     reasons, notes = [], []
+    lane = literal_lane_status(audit)
     download_ok = False
     submit = False
     tif = sha = None
     if not card:
-        reasons.append('Run card is missing.')
+        reasons.append('Phase-4 run card is missing.')
     else:
         name = card.get('submission_name', '')
         tif = root / 'docs/downloads' / f'{name}.tif'
@@ -103,32 +69,50 @@ def release_status(root):
             reasons.append('Published TIFF is absent or does not match the recorded SHA-256.')
         validator = card.get('validator_output') or {}
         checks = validator.get('checks') or {}
-        if not checks or not all(bool(v) for v in checks.values()):
-            reasons.append('Shared validator checks did not all pass.')
+        if (not isinstance(checks, dict) or not checks
+                or not all(v is True for v in checks.values())
+                or validator.get('all_checks_passed') is not True
+                or validator.get('sha256') != sha):
+            reasons.append('Shared validator evidence is not all true and hash-bound to this artifact.')
             download_ok = False
-        expected_dots = (card.get('registered_parameters') or {}).get('dot_count')
-        if not expected_dots:
-            reasons.append('Run card does not record its registered dot count.')
+        if validator.get('emitted_positive_pixels') != 37654:
+            reasons.append('Emitted dot count differs from the registered 37,654.')
             download_ok = False
-        elif validator.get('emitted_positive_pixels') != expected_dots:
-            reasons.append('Emitted dot count differs from the registered '
-                           f'{expected_dots:,}.')
-            download_ok = False
-        if not audit or audit.get('unique') is not True or int(audit.get('duplicate_count', 1)) != 0:
-            reasons.append('Uniqueness is not cleared under the corrected mutual-overlap rule.')
-            download_ok = False
-        records = _canary_records(canaries) if canaries else []
-        if not canaries or not records or not all(valid_canary(c) for c in records):
+        audit_bound = bool(audit and audit.get('candidate_file_sha256') == sha)
+        if not audit_bound or not lane['protocol_unique']:
+            reasons.append('Literal forward-overlap lane gate is not cleared; mutual overlap is not an exemption.')
+        canaries_ok = bool(canaries and isinstance(canaries, dict)
+                           and all(valid_canary(c) for c in canaries.values()))
+        if not canaries_ok:
             reasons.append('Feature-alone leakage evidence is missing or fails.')
-        submit = bool(card.get('download_and_submit_ok') is True and download_ok)
+        # Every prerequisite is an actual gate, not just a printed reason.
+        submit = bool(card.get('download_and_submit_ok') is True and download_ok
+                      and card.get('verdict') == 'promote' and audit_bound
+                      and lane['protocol_unique'] and canaries_ok
+                      and card.get('gate_a_candidate_ge_h33') is True
+                      and card.get('gate_b_prime_candidate_gt_h33_significant') is True)
         if not card.get('gate_a_candidate_ge_h33'):
             reasons.append("Candidate did not match H33 on instrument A.")
         if not card.get('gate_b_prime_candidate_gt_h33_significant'):
             reasons.append("Candidate did not beat H33 on instrument B' with a 95% CI above zero.")
         notes.append('A downloadable, validated file is not a validated leaderboard improvement.')
+    current_review = _load(root, 'evidence/literal_protocol_review.json')
+    if current_review and current_review.get('correlation_overlap_vs_registry', {}).get('stop') is True:
+        submit = False
+        reasons.append('Current literal one-way uniqueness audit requires STOP; review download only.')
+    protocol = strict_gate(audit or {})
+    protocol_ok = not protocol['stop_required']
+    if not protocol_ok:
+        submit = False
+        reasons.append('Current forward-overlap protocol requires STOP; archive download is review-only.')
     return {
+        'current_forward_protocol_ok': protocol_ok,
+        'review_only': not protocol_ok,
         'verdict': (card or {}).get('verdict', 'negative'),
         'download_ok': download_ok,
+        'download_scope': 'archived negative; forensic review only',
+        'protocol_unique': lane['protocol_unique'],
+        'literal_lane_status': lane,
         'submit_recommended': submit,
         'download_and_submit_ok': bool(download_ok and submit),
         'artifact': str(tif) if tif else None,
@@ -187,7 +171,7 @@ def published_artifacts(root):
 def assert_no_public_rasters(root):
     """Fail builds on stale or unauthorised prediction files.
 
-    Only the three artifacts named by the current run card may live in the public
+    Only the hash-inventoried artifacts may live in the public
     tree; anything else (old candidates, quarantined copies, symlinks) is rejected.
     """
     root = Path(root)
@@ -202,6 +186,55 @@ def assert_no_public_rasters(root):
             bad.append(rel)
     if bad:
         raise ValueError('Unauthorised TIFF/ZIP in the publication tree: ' + ', '.join(bad))
+
+
+def p5_status(root):
+    """Fail-closed download permission for the *new* P5 research map.
+
+    This only authorizes a hash-verified REVIEW download. It never promotes a
+    raster: P5 failed both paired holdout bars and the literal forward-dot
+    witness. The frozen Phase-4 release_status and old review are untouched.
+    """
+    root = Path(root)
+    card = _load(root, 'evidence/p5/run_card.json') or {}
+    receipt_path = root / 'docs/downloads' / (card.get('submission_name', '') + '.json')
+    receipt = _load(root, receipt_path.relative_to(root)) if receipt_path.is_file() else {}
+    receipt = receipt or {}
+    name = card.get('submission_name', '')
+    tif = root / 'docs/downloads' / (name + '.tif')
+    zip_file = tif.with_suffix('.zip')
+    inv = _load(root, 'registry/published_artifacts.json') or {}
+    pins = {r.get('path'): r.get('sha256') for r in inv.get('artifacts', []) if isinstance(r, dict)}
+    checks = (card.get('validator_output') or {}).get('checks') or {}
+    forward = (card.get('correlation_overlap_vs_registry') or {}).get('forward_overlap_positive_support_lattice')
+    research_only = (card.get('verdict') == 'negative'
+                     and card.get('submit_recommended') is False
+                     and card.get('download_and_submit_ok') is False
+                     and forward == 1.0
+                     and (card.get('correlation_overlap_vs_registry') or {}).get('literal_3px_forward_gate_passes') is False
+                     and (card.get('gate_results') or {}).get('literal_dot_overlap_gate_passed') is False)
+    valid = (bool(name and 'DO-NOT-SUBMIT' in name and tif.is_file() and zip_file.is_file())
+             and research_only and card.get('note_chars') == len(card.get('submission_note', ''))
+             and len(card.get('submission_note', '')) <= 140
+             and isinstance(checks, dict) and bool(checks)
+             and all(v is True for v in checks.values())
+             and (card.get('validator_output') or {}).get('all_checks_passed') is True)
+    if valid:
+        try:
+            valid = (digest(tif) == card.get('raster_sha256')
+                     == (card.get('validator_output') or {}).get('sha256')
+                     == receipt.get('sha256') == pins.get(tif.relative_to(root).as_posix())
+                     and digest(zip_file) == receipt.get('zip_sha256')
+                     == pins.get(zip_file.relative_to(root).as_posix()))
+        except (OSError, ValueError):
+            valid = False
+    return dict(download_ok_for_review=bool(valid), submit_recommended=False,
+                download_and_submit_ok=False, verdict='negative',
+                tif=tif.relative_to(root).as_posix() if name else None,
+                zip_file=zip_file.relative_to(root).as_posix() if name else None,
+                sha256=card.get('raster_sha256'),
+                reason=('Format/hash verified; failed scientific holdouts and the literal forward-dot gate. '
+                        'No organizer acceptance; DO NOT SUBMIT.'))
 
 
 def candidate_status(root):

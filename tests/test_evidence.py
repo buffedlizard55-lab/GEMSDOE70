@@ -38,9 +38,8 @@ def test_saved_pooled_scores_match_fold_terms(phase):
     assert checked > 0
 
 
-@pytest.mark.parametrize('phase', ['phase4'])
-def test_uniqueness_receipt_is_mutual_and_complete(phase):
-    audit = json.loads((ROOT / f'evidence/{phase}/uniqueness.json').read_text())
+def test_historical_receipt_is_mutual_but_not_a_literal_pass():
+    audit = json.loads((ROOT / 'evidence/phase4/uniqueness.json').read_text())
     assert audit['registry_rasters_checked'] == 62
     assert audit['unique'] is True
     assert audit['duplicate_count'] == 0
@@ -48,9 +47,36 @@ def test_uniqueness_receipt_is_mutual_and_complete(phase):
     assert audit['worst_forward_overlap'] >= audit['worst_dot_overlap']
     assert audit['worst_spearman_full_footprint'] <= 0.90
     assert 'mutual' in audit['overlap_definition']
+    from gems70.protocol import literal_lane_status
+    assert literal_lane_status(audit)['stop_required']
+    assert not literal_lane_status(audit)['protocol_unique']
 
 
-def test_phase5_card_extra_receipts_exist_and_agree():
+def test_published_tiff_matches_card_and_is_binary():
+    card = json.loads((ROOT / 'evidence/run_card.json').read_text())
+    path = ROOT / 'docs/downloads' / (card['submission_name'] + '.tif')
+    with rasterio.open(path) as src:
+        a = src.read(1)
+        assert src.count == 1 and src.dtypes[0] == 'float32'
+        assert (src.height, src.width) == (3730, 3292)
+        assert str(src.crs) == 'EPSG:32611'
+    vals = np.unique(a)
+    assert set(np.round(vals, 6)).issubset({0.0, 1.0})
+    assert int((a > 0).sum()) == 37654
+    assert np.isfinite(a).all()
+
+
+def test_no_historical_projection_is_current_score():
+    card = json.loads((ROOT / 'evidence/run_card.json').read_text())
+    assert card['organizer_confirmed_score'] is None
+    audit = json.loads((ROOT / 'evidence/h33_audit.json').read_text())
+    assert audit['organizer_confirmed_scores'] is None
+    assert audit['files']['h33']['positive_pixels'] == 37654
+    assert audit['comparisons']['h27_to_h33']['removed'] == 2545
+
+
+def test_p5hgb_lane_receipts_exist_and_agree():
+    """My parallel lane (P5-HGB supervised within-halo ranking), evidence/p5hgb/."""
     card = json.loads((ROOT / 'evidence/p5hgb/run_card.json').read_text())
     assert card['phase_evidence']['dir'] == 'evidence/p5hgb'
     for rel in ('uniqueness.json', 'canaries.json', 'surface_uniqueness.json',
@@ -71,26 +97,7 @@ def test_phase5_card_extra_receipts_exist_and_agree():
     # the card's contamination disclosure is a measured fraction in [0, 1]
     frac = card['contamination_disclosure']['a_truth_pixels_within_3px_of_proxy']
     assert 0.0 <= frac <= 1.0
-
-
-def test_published_tiff_matches_card_and_is_binary():
-    card = json.loads((ROOT / 'evidence/run_card.json').read_text())
-    path = ROOT / 'docs/downloads' / (card['submission_name'] + '.tif')
-    with rasterio.open(path) as src:
-        a = src.read(1)
-        assert src.count == 1 and src.dtypes[0] == 'float32'
-        assert (src.height, src.width) == (3730, 3292)
-        assert str(src.crs) == 'EPSG:32611'
-    vals = np.unique(a)
-    assert set(np.round(vals, 6)).issubset({0.0, 1.0})
-    assert int((a > 0).sum()) == card['registered_parameters']['dot_count']
-    assert np.isfinite(a).all()
-
-
-def test_no_historical_projection_is_current_score():
-    card = json.loads((ROOT / 'evidence/run_card.json').read_text())
-    assert card['organizer_confirmed_score'] is None
-    audit = json.loads((ROOT / 'evidence/h33_audit.json').read_text())
-    assert audit['organizer_confirmed_scores'] is None
-    assert audit['files']['h33']['positive_pixels'] == 37654
-    assert audit['comparisons']['h27_to_h33']['removed'] == 2545
+    # the published TIFF matches the lane card
+    tif = ROOT / 'docs/downloads' / (card['submission_name'] + '.tif')
+    assert tif.is_file()
+    assert card['raster_sha256'] == __import__('hashlib').sha256(tif.read_bytes()).hexdigest()
