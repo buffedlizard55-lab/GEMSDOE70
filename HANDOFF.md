@@ -1,3 +1,46 @@
+# Handoff — 2026-10-20 (session 3, branch arena/a0382202-gemsdoe70)
+
+Read README.md, PROJECT_BRIEF.md, AGENTS.md, this file, `docs/s3-findings.md` and
+`docs/irregularities.md` first.
+
+## State after session 3
+
+* **Two new unique, validated files, both DO NOT SUBMIT** (`docs/downloads/`):
+  * `gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif`
+    (sha256 `e1982061f8ebbafcbd290e7383340306170a0df04a999905702f505f06ddabc9`) — E1, pre-registered
+    proxy gate passed (B′ +0.0300 vs H33, CI [+0.0034, +0.0557]) but **vetoed** after calibration.
+  * `gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif`
+    (sha256 `41099fcd8cc1e81605383183266d829e8504964044435b876d8d4f5d6d14a2fc`) — E2, negative.
+* **Key finding:** offline instruments do not track the live board (Spearman −0.28 for B′, −0.64 for
+  A, n = 18 reported scores). E1's proxy gain is concentrated in steep terrain (64 % vs H33 20 %),
+  like gate_ortho (48 %, reported 0.2376 live). With terrain and distance matched (E2) the model adds
+  no significant information.
+* Budget: 2 of 3 experiments, ≈ 1 h of 2 h. Weekly slots used: 0. No organizer-confirmed score.
+
+## Reproduce session 3
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE   # HEAD b99591e used
+.venv/bin/python scripts/run_experiment_s3.py        # ~25 min on 2 CPU / 3 GB
+.venv/bin/python scripts/proxy_calibration_s3.py     # ~1 min
+.venv/bin/python scripts/run_experiment_s3_e2.py     # ~20 min (needs E1 TIFF at its original name;
+                                                     #  see evidence/s3/run_card.json 'artifact')
+.venv/bin/python scripts/terrain_marginals_s3.py
+.venv/bin/python scripts/build_s3_report.py && .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+.venv/bin/python -m pytest -q
+```
+
+## Next session (from docs/irregularities.md)
+
+1. Live-calibrated instrument (pre-declared proxy family, leave-one-file-out against the 18 scores).
+2. Only then a new candidate (basin-floor LiDAR micro-scarps is the queued geological idea).
+3. Upstream the two uniqueness fixes. 4. Selector step only for a candidate that beats H33 on the
+   calibrated instrument.
+
+---
+
 # Handoff — 2026-10-20 · P5 research negative · branch arena/90160b2d-gemsdoe70
 
 **Top priority: new TIFF exists but DO NOT SUBMIT.** Download-for-review file:

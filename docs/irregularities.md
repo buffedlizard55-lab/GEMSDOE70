@@ -136,3 +136,35 @@ literal decision rule. P5 uses the same shared evaluator/writer and a separate h
 artifact; it did not change the shared metric or its threshold. See the
 [scientific review](https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/reports/p5-scientific-review.md)
 for new source receipts, a failed controlled test and reproducible commands.
+
+## Session 3 (2026-10-20, branch arena/a0382202) — irregularities and limits
+
+1. **Offline instruments are not calibrated to the live board** (most important). Spearman of
+   reported live score vs B′ = −0.28 and vs A = −0.64 over 18 archived files
+   (`evidence/s3/proxy_calibration.json`). No offline gate in this repo can currently justify a slot.
+2. **Conservative post-hoc veto of S3-E1.** E1's frozen rule returned `promote`; it was overridden
+   to `negative` after the calibration diagnostic. The veto can only block, never promote, and both
+   the raw card (`evidence/s3/run_card_raw.json`) and final card are published.
+3. **E2 design error, disclosed.** The pre-registered "E1 candidate (reference)" arm used the E1
+   production file, which is in-sample on B′ (0.4614). It is annotated and used in no gate.
+4. **H33 domain count.** 2,438 of H33's 37,654 dots fall outside the scored valid domain (12-px edge
+   erosion or d < 2.4 px), so H33 is slightly handicapped on B′ against arms that place all dots
+   in-domain. E2 therefore gates on random-within-strata as well.
+5. **Name-matched scores.** Seven calibration rows take their live score from the user brief by
+   repository file name only; byte identity to the scored upload is not authenticated.
+6. **Same-lane siblings.** E1 and E2 have mutual 3-px overlap 0.80 with each other; at most one
+   should ever be considered.
+7. **Sandbox limits.** No DrivenData login and no network beyond GitHub/PyPI: organizer pages,
+   SGMC/USGS originals and the GDR could not be re-fetched; all inputs are SHA-pinned owner mirrors.
+
+### Next session, in priority order
+
+1. **Build a live-calibrated instrument.** Pre-declare a small family of proxy definitions
+   (SGMC-only by distance band; catalogue holdout stratified by `qfault_attributes.csv` age/slip
+   class; truth subsampled to a fixed size), select the one whose ranking of the 18 scored files
+   best matches the live board (leave-one-file-out), then re-test E2 and P4 on it.
+2. **Test the opposite terrain hypothesis** (basin-floor LiDAR micro-scarps, `docs/hypotheses.md`
+   Session-3 rank 2) only after step 1 exists.
+3. **Upstream the two uniqueness fixes** to the shared template (still pending from session 2).
+4. **Selector step.** Only a candidate that beats H33 on a live-calibrated instrument should use
+   a weekly slot; record any returned score as ORGANIZER-CONFIRMED with the receipt.

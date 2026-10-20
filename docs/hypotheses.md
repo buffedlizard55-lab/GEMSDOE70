@@ -278,3 +278,20 @@ and Spearman > 0.90 still applies to every raster. Reported in `evidence/upstrea
 
 Identical to Experiment 3: pass uniqueness (mutual), validator, A ≥ H33, and B′ > H33 with the
 paired 95 % CI excluding zero. Otherwise **NOT PROMOTED**, published with an explicit label.
+
+## Session 3 (2026-10-20, branch arena/a0382202) — candidates, ranking, what was tested
+
+Ranking is qualitative (expected live-DTI gain ÷ cost) and was revised after the instrument
+calibration diagnostic (`evidence/s3/proxy_calibration.json`): offline B′ and A **do not** order
+archived files the way the live board did (Spearman −0.28 and −0.64, n = 18 owner/user-reported
+scores). Any new idea therefore needs an instrument that tracks the board before it can be promoted.
+
+| Rank | Hypothesis / layers | Physical signature | Why it could catch faults missing from the USGS/INGENIOUS catalogue | Named mimic | Difference from repo | Cost | Data |
+|---|---|---|---|---|---|---|---|
+| tested E1 | S3 supervised proxy ranking: 19-band stack + 6 gradients + 33 LiDAR/topo/chi/radiometric bands + 7 catalogue-geometry, LOQO GBM on SGMC-only faults | learned combination; strongest single features are 10 m-DEM slope/relief (AUC 0.76) | geologic-map faults absent from the Quaternary catalogue | bedrock/map-density bias | first supervised model in this repo trained on an off-catalogue population | medium | in hand |
+| tested E2 | Same model, ranking only **within** H33's distance × slope strata | within-stratum ranking | removes terrain/distance confound | lithologic contacts | marginal-matched placement (new) | low | in hand |
+| 1 | Live-calibrated instrument: choose, among a small pre-declared family of proxy definitions (SGMC-only by distance band; catalogue holdout by fault age/slip-rate class from `qfault_attributes.csv`), the one whose ranking of the 18 scored archives best matches the live board, then re-test E2 on it | meta-measurement | without it no candidate can be promoted on evidence | over-fitting 18 points | nothing like it exists in the family | low | in hand |
+| 2 | Basin-floor LiDAR micro-scarp continuity: `lidar_scarp_features_u8` step_max/downface_max with coh100 strike coherence, restricted to the lowest two slope quartiles | young intrabasin scarps in alluvium | Quaternary catalogues under-sample short, low-relief intrabasin scarps; the opposite terrain to E1's bias | shorelines, canal/road berms | E1 learned bedrock; this explicitly targets low-slope terrain | low | in hand (24.6 % LiDAR gaps) |
+| 3 | Thermal-spring/well alignment: `gdr_wellspring_in_footprint.csv` (GDR 1391) points, Hough-style alignment lines through ≥ 3 springs within 20 km | fault-controlled fluid outflow | springs line up on permeable faults that may be unmapped | groundwater discharge at lithologic contacts | no repo method uses spring geometry | medium | in hand (owner mirror of GDR 1391; https://gdr.openei.org/submissions/1391) |
+| 4 | Drainage knickpoint lines: `dem10_chi_100m_u8` knick_n aligned across ≥ 3 adjacent catchments | footwall uplift across drainages | blind/young faults deform drainage before scarps are mapped | lithologic knickpoints | by submission name, chi was used before as a corridor score (60GEMSDOE h73), not as cross-catchment alignment | medium | in hand |
+| 5 | Radiometric alteration halo at basin margins: GeoDAWN K and Th/K (`geodawn_rad_u8`, `geodawn_extensions_u8`) local anomaly 0.5–3 km from range fronts | hydrothermal K depletion/enrichment along fluid pathways | alteration can mark permeable unmapped faults | primary lithology; flight-line artifacts | by submission name, radiometrics were used before in a scarp fusion (GEMSDOE46 r11f/r12), not as a margin-anomaly operator | medium | in hand (USGS DOI 10.5066/P93LGLVQ) |

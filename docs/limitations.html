@@ -4,7 +4,7 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
 <aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
 <strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
 are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
@@ -143,7 +143,39 @@ literal decision rule. P5 uses the same shared evaluator/writer and a separate h
 artifact; it did not change the shared metric or its threshold. See the
 <a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/reports/p5-scientific-review.md">scientific review</a>
 for new source receipts, a failed controlled test and reproducible commands.</li>
-</ul></main>
+</ul>
+<h2>Session 3 (2026-10-20, branch arena/a0382202) — irregularities and limits</h2>
+<ol>
+<li><strong>Offline instruments are not calibrated to the live board</strong> (most important). Spearman of
+   reported live score vs B′ = −0.28 and vs A = −0.64 over 18 archived files
+   (<code>evidence/s3/proxy_calibration.json</code>). No offline gate in this repo can currently justify a slot.</li>
+<li><strong>Conservative post-hoc veto of S3-E1.</strong> E1's frozen rule returned <code>promote</code>; it was overridden
+   to <code>negative</code> after the calibration diagnostic. The veto can only block, never promote, and both
+   the raw card (<code>evidence/s3/run_card_raw.json</code>) and final card are published.</li>
+<li><strong>E2 design error, disclosed.</strong> The pre-registered "E1 candidate (reference)" arm used the E1
+   production file, which is in-sample on B′ (0.4614). It is annotated and used in no gate.</li>
+<li><strong>H33 domain count.</strong> 2,438 of H33's 37,654 dots fall outside the scored valid domain (12-px edge
+   erosion or d &lt; 2.4 px), so H33 is slightly handicapped on B′ against arms that place all dots
+   in-domain. E2 therefore gates on random-within-strata as well.</li>
+<li><strong>Name-matched scores.</strong> Seven calibration rows take their live score from the user brief by
+   repository file name only; byte identity to the scored upload is not authenticated.</li>
+<li><strong>Same-lane siblings.</strong> E1 and E2 have mutual 3-px overlap 0.80 with each other; at most one
+   should ever be considered.</li>
+<li><strong>Sandbox limits.</strong> No DrivenData login and no network beyond GitHub/PyPI: organizer pages,
+   SGMC/USGS originals and the GDR could not be re-fetched; all inputs are SHA-pinned owner mirrors.</li>
+</ol>
+<h3>Next session, in priority order</h3>
+<ol>
+<li><strong>Build a live-calibrated instrument.</strong> Pre-declare a small family of proxy definitions
+   (SGMC-only by distance band; catalogue holdout stratified by <code>qfault_attributes.csv</code> age/slip
+   class; truth subsampled to a fixed size), select the one whose ranking of the 18 scored files
+   best matches the live board (leave-one-file-out), then re-test E2 and P4 on it.</li>
+<li><strong>Test the opposite terrain hypothesis</strong> (basin-floor LiDAR micro-scarps, <code>docs/hypotheses.md</code>
+   Session-3 rank 2) only after step 1 exists.</li>
+<li><strong>Upstream the two uniqueness fixes</strong> to the shared template (still pending from session 2).</li>
+<li><strong>Selector step.</strong> Only a candidate that beats H33 on a live-calibrated instrument should use
+   a weekly slot; record any returned score as ORGANIZER-CONFIRMED with the receipt.</li>
+</ol></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/p5_run_card.json">New P5 negative card</a> ·
 <a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·

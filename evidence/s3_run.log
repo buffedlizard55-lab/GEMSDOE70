@@ -1,0 +1,144 @@
+22:49:38 valid pixels 4989581
+22:50:50 physics matrix (4989581, 59) 588.770558 MB
+22:50:54 geometry matrix (4989581, 7)
+22:51:11 canaries done; alarms [] max strength 0.7684644220876626
+22:53:46 LOQO fold 0 {'candidate': 0.7459, 'abl_physics_only': 0.7301, 'abl_geometry_only': 0.5943}
+22:56:08 LOQO fold 1 {'candidate': 0.6994, 'abl_physics_only': 0.6888, 'abl_geometry_only': 0.5288}
+22:58:52 LOQO fold 2 {'candidate': 0.8143, 'abl_physics_only': 0.8039, 'abl_geometry_only': 0.5457}
+23:01:02 LOQO fold 3 {'candidate': 0.7349, 'abl_physics_only': 0.7435, 'abl_geometry_only': 0.4771}
+23:01:05 arms placed {'candidate': 37654, 'abl_physics_only': 37654, 'abl_geometry_only': 37654, 'abl_stratified7_placement': 37654, 'random_control': 37654, 'h33_reference': 37654, 'p4_published': 37654}
+23:01:26 B prime {'candidate': 0.1237, 'abl_physics_only': 0.1316, 'abl_geometry_only': 0.0576, 'abl_stratified7_placement': 0.1134, 'random_control': 0.0766, 'h33_reference': 0.0938, 'p4_published': 0.0812}
+23:04:12 production dots 37654
+23:06:32 A fold 0 done
+23:08:38 A fold 1 done
+23:10:38 A fold 2 done
+23:12:52 A fold 3 done
+23:13:28 surface worst rho 0.0753097299014113
+23:14:03 final uniqueness: worst mutual 0.2938 rho 0.028140375813631845 duplicate False
+23:14:04 DONE verdict promote download_ok True
+{
+  "verdict": "promote",
+  "gates": {
+    "canary_no_alarm": true,
+    "b_prime_beats_h33_ci_above_0": true,
+    "a_candidate_ge_h33": true,
+    "unique": true,
+    "validator": true
+  },
+  "instrument_b_prime_proxy": {
+    "candidate": {
+      "dti": 0.12373569545209608,
+      "ci95": [
+        0.09857914628123471,
+        0.15056401663086239
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "abl_physics_only": {
+      "dti": 0.1316394789047803,
+      "ci95": [
+        0.09852232728677363,
+        0.16405525095417814
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "abl_geometry_only": {
+      "dti": 0.057649975721676364,
+      "ci95": [
+        0.04821667969391911,
+        0.06753014774202318
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "abl_stratified7_placement": {
+      "dti": 0.11344751112294618,
+      "ci95": [
+        0.11002825844170584,
+        0.11680066581690778
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "random_control": {
+      "dti": 0.07655397250948875,
+      "ci95": [
+        0.0727343685985896,
+        0.08008833226899398
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "h33_reference": {
+      "dti": 0.09377056861492462,
+      "ci95": [
+        0.08375251373533825,
+        0.104028711800872
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "p4_published": {
+      "dti": 0.08116240066330835,
+      "ci95": [
+        0.07234947587460432,
+        0.09002008521926923
+      ],
+      "withheld_positive_pixels": 59937
+    }
+  },
+  "instrument_a_holdout": {
+    "candidate": {
+      "dti": 0.04726252380244204,
+      "ci95": [
+        0.0351872451795632,
+        0.06138061032835728
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "random_control": {
+      "dti": 0.049374148066566606,
+      "ci95": [
+        0.043972842548579735,
+        0.055176942498785624
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "h33_reference": {
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.003037134722219959,
+        0.004497470563248019
+      ],
+      "withheld_positive_pixels": 11321
+    }
+  },
+  "loqo_oof_auc": {
+    "candidate": [
+      0.7458676080785857,
+      0.699433409972291,
+      0.8143090429897909,
+      0.7348571948553061
+    ],
+    "abl_physics_only": [
+      0.7301413537450281,
+      0.6887929788801217,
+      0.803888571570029,
+      0.7435490625469774
+    ],
+    "abl_geometry_only": [
+      0.5942860815651672,
+      0.5288006453182756,
+      0.5457305887030989,
+      0.4771309753821021
+    ]
+  },
+  "correlation_overlap_vs_registry": {
+    "surface_worst_spearman": 0.0753097299014113,
+    "final_rasters_checked": 62,
+    "final_worst_mutual_overlap": 0.2938,
+    "final_worst_mutual_submission": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+    "final_worst_forward_overlap": 1.0,
+    "final_worst_spearman": 0.028140375813631845,
+    "final_worst_jaccard": 0.01819480887443488,
+    "duplicate": false,
+    "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not exhaustive"
+  },
+  "raster_sha256": "e1982061f8ebbafcbd290e7383340306170a0df04a999905702f505f06ddabc9"
+}

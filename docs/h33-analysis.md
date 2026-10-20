@@ -57,3 +57,26 @@ no new TIFF was generated after that stop. We will not prune, rename or jitter H
 - [Historical B′ proxy receipt](downloads/instrumentB_prime.json)
 - [Current literal-protocol audit and proposed research](protocol-review.html)
 - [Organizer fault-detection reference](https://github.com/drivendataorg/gems-prize-reference-solution)
+
+## Session 3 addendum — calibration against the live board (see `docs/s3-findings.md`)
+
+Evidence class: owner/user-reported live scores for 18 archived rasters, re-scored offline here
+(`evidence/s3/proxy_calibration.json`, `evidence/s3/terrain_marginals.json`). None is
+organizer-confirmed.
+
+* **Neither offline instrument predicts the live ordering.** Spearman(live, B′) = −0.28 and
+  Spearman(live, A) = −0.64 (n = 18). The dense lattice `r13` has the best B′ (0.252) and the worst
+  live score (0.0904): B′'s proxy truth is large (≈ 60 k px), so it rewards dense coverage that the
+  live truth punishes.
+* **What the live board did reward, descriptively.** Among ≈ 37–44 k-dot files, the reported live
+  score rose as dots within ≈ 2 px of mapped faults were removed (share of dots within 6 px:
+  D28 0.300 → H27 0.232 → H33 0.181; scores 0.2600 → 0.2708 → 0.2778). The one file that
+  concentrated dots in steep terrain (GEMSDOE49 gate_ortho, 47.5 % in the steepest slope quartile
+  versus H33's 19.9 %) scored 0.2376 despite the highest B′ in its size class.
+* **Answer to "why H33 is the family best".** It is the best-spaced (2.83 px minimum), terrain-
+  neutral sample of the 0.3–8 km band around mapped faults with the nearest shells removed. It
+  carries no physical information; its edge over its siblings is emission geometry.
+* **Can we beat 0.2778?** Not with evidence available today. Our supervised model concentrates in
+  bedrock terrain (the named mimic) and, once terrain and distance are matched to H33, adds no
+  significant information on the proxy (E2). Beating H33 needs an instrument that tracks the live
+  board first — that is the next session's top task.
