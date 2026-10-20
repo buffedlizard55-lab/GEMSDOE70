@@ -20,6 +20,10 @@ def main():
             report.update(check_output(args.site))
     except (OSError, ValueError, TypeError) as exc:
         print(json.dumps({'ok': False, 'error': str(exc)}))
+        # Surface diagnostics via the Checks API even when log-download hosts
+        # are unavailable to the review environment.
+        message = str(exc).replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+        print('::error title=Unsafe Pages publication::' + message)
         return 2
     print(json.dumps({'ok': True, **report}, indent=2))
     return 0
