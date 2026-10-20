@@ -66,12 +66,55 @@ block at every mass. The archived mutual-rule receipts have not been rewritten t
    checked. Save its authenticated submission-page receipt before reporting an organizer score.</li>
 </ol>
 <h2>Publication and reproducibility</h2>
-<p>All inventoried TIFF/ZIP bytes are preserved; none was renamed or reused as a new submission.
+<ul>
+<li><code>docs/downloads/</code> now contains exactly one TIFF/ZIP pair, authorised by the run card;
+  <code>release.assert_no_public_rasters</code> rejects anything else, including symlinks.</li>
+<li>Large inputs (<code>training_features.tif</code>, the registry clone) live outside Git; restore commands are
+  in the README. Published evidence is small JSON.</li>
+<li>The published TIFF is binary 0/1 with no nodata tag; outside-footprint cells are 0, which the
+  shared validator and the sample comparison both accept.</li>
+</ul>
+<h2>Parallel-session candidate (merged 2026-10-20)</h2>
+<p>A concurrent branch added <code>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</code>
+(24,872 binary dots, sha256 recorded in <code>registry/published_artifacts.json</code>, verdict
+<code>DO NOT SUBMIT</code> in its own receipts). It is preserved and inventoried but is not the file this
+run card selects; the landing page points only at the P4 artifact. Both files are hash-pinned by
+<code>release.assert_no_public_rasters</code>, so neither can be silently replaced. Its narrative pages were
+moved to <code>reports/archive/concurrent-v2/</code> to avoid two contradictory download instructions in the
+published tree.</p>
+<h2>Parallel E2/E3 lane (integrated PR #16, 2026-10-20)</h2>
+<ul>
+<li>E2 alluvial-step and E3 depth-step are additional negatives (see <code>docs/preregistration-e2.md</code>, <code>evidence/e2|e3/</code>). E2 bytes are published for selector review under <code>docs/publication-amendment-e2.md</code>; submit remains NO. E2 uniqueness used pre-fix R1 subset definitions — not directly comparable to the corrected 62-raster mutual audit until rerun.</li>
+<li>Bridge <code>sample_submission.tif</code> positives are exactly the catalogue (60,988 px), not an all-zero sample; footprint use only. Two-round expanded-label composition and known-fault masking remain unverified from fetched organizer text.</li>
+</ul>
+<h2>E5 supervised lane (2026-10-20)</h2>
+<ul>
+<li>E5 executed the registered next step (SGMC-proxy LOQO ranking) and is a
+  measured negative on the frozen B′ gate: Δ −0.0051 [−0.0161, +0.0053] vs H33
+  (<code>evidence/e5/run_card.json</code>). Artifact published review-only; submit NO.</li>
+<li>Emission Amendment 1: P4's one-per-block pass cannot reach 37,654 dots on a
+  sharp supervised surface (34,409 measured). Same-NMS fill added before any
+  DTI existed; disclosed in <code>docs/preregistration-e5.md</code>. P4 bytes unaffected.</li>
+<li>New information: OOF AUC 0.69–0.78 (real within-halo signal) does not
+  convert to B′ DTI above uniform halo sampling at this dot budget — the
+  remaining gap to the 0.4413 public leader is not explained by 100 m
+  potential-field/topography ranking of the SGMC proxy. Candidate queues:
+  radiometric/lidar feature sets (E5-3/E5-4, obtainability unchecked), finer
+  (sub-100 m) emission geometry, or a genuinely independent additional-fault
+  truth set to replace the SGMC proxy.</li>
+<li>E5 canary context defect (found in review, corrected post-hoc): the primary
+  canary table computed <code>d_cat</code> against the full catalogue, giving
+  Instrument-A AUC 0.0 by construction (A positives are catalogue pixels).
+  Prediction-time folds always used visible-only distance; its corrected
+  canary AUC is 0.245 (<code>evidence/e5/canaries_correction.json</code>). No leakage;
+  frozen receipts and artifact unchanged.
+All inventoried TIFF/ZIP bytes are preserved; none was renamed or reused as a new submission.
 Publication inventory and Pages guards still reject unauthorized rasters or symlinks. Current
 review evidence lives in <code>evidence/review/</code>; Phase 1–4, E2/E3 and historical cards remain frozen.
 The shared metric, evaluator, writer and vendored uniqueness bytes were not modified in this review.
 The new policy adapter acts only on existing shared measurements and restores the current prompt's
-literal decision rule. See the review for sources, four proposed hypotheses and reproducible commands.</p></main>
+literal decision rule. See the review for sources, four proposed hypotheses and reproducible commands.</li>
+</ul></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/phase4_run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·

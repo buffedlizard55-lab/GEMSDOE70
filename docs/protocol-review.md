@@ -28,10 +28,10 @@ literal thresholds to their reported measurements. Vendor bytes and frozen exper
   **at that mass**, before a new surface or final dots are built. It does not prove impossibility
   at every smaller mass. Deliberately predicting only edge slivers would be optimizing the registry
   loophole, not validating the geological hypothesis; no such experiment was attempted.
-- **REGISTRY-MEASUREMENT:** all six inventoried final TIFFs (P4, discordance, E2, H2 diagnostic, scarp E3, and H70 conductive breach)
+- **REGISTRY-MEASUREMENT:** all seven inventoried final TIFFs (P4, discordance, E2, H2 diagnostic, scarp E3, H70 conductive breach, and E5 supervised LOQO)
   have measured forward overlap **1.0** against this binary witness. P4 Spearman is
   **−0.0004249862**. Each is a duplicate **under the prompt's rule**, not necessarily a copied file.
-- All six pass the shared local format validator, including finite [0,1], CRS, shape and transform.
+- All seven pass the shared local format validator, including finite [0,1], CRS, shape and transform.
   Format validity does not imply uniqueness, portal acceptance or scientific usefulness.
 
 Receipts: [full fresh audit](downloads/literal_protocol_audit.json),
@@ -110,4 +110,4 @@ in chat, is needed for that operation. No shared-template code was changed durin
 A second concurrent integration added PR #28's H70 conductive-breach archive (negative). It is
 not this review's new experiment. Its original canonical card is preserved at `evidence/run_card.json`
 and `evidence/h70/`; P4 pages read P4's own frozen card explicitly. The fresh audit now checks all
-six TIFFs. The concurrent `strict_gate` API delegates to the same literal policy implementation.
+seven TIFFs. The concurrent `strict_gate` API delegates to the same literal policy implementation.

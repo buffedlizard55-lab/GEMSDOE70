@@ -1,0 +1,14 @@
+{
+  "evidence_class": "ORGANIZER-PAGE-READ (public leaderboard page fetched 2026-10-20; not a score of this project)",
+  "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "fetched": "2026-10-20",
+  "metric": "public DW-Tversky",
+  "top": [
+    {"rank": 1, "participant": "xiaofanhu", "best_public_dw_tversky": 0.4413},
+    {"rank": 2, "participant": "Batik Shirt Brothers", "best_public_dw_tversky": 0.3811},
+    {"rank": 3, "participant": "cfld__", "best_public_dw_tversky": 0.3788},
+    {"rank": 4, "participant": "BrandenKMurray", "best_public_dw_tversky": 0.3713},
+    {"rank": 5, "participant": "No Fault of Our Own", "best_public_dw_tversky": 0.3539}
+  ],
+  "note": "User-supplied family best 0.2778 (H33) has no organizer receipt in this repo. This page read is context only; nothing here is an ORGANIZER-CONFIRMED score for any artifact in this repository."
+}

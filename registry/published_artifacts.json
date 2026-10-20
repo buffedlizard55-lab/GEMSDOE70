@@ -85,6 +85,24 @@
       "sha256": "b3c8bbfde2d4117f6683181ea81544c670816852e27e0c69c91e1d1e72721621",
       "bytes": 3459,
       "note": "H70-A conductive breach, 37654 dots; run card evidence/h70/run_card.json (negative but unique, added during merge)"
+    },
+    {
+      "path": "docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif",
+      "sha256": "8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2",
+      "bytes": 150815,
+      "note": "E5 supervised LOQO lane, review-only DO NOT SUBMIT (B-prime gate negative); card evidence/e5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e5-supervised-loqo-37654-20261020.zip",
+      "sha256": "56cf2b7a4b02a0b5cd7e4bd887a8910d6ae1beb5ccc59518f406834b2d6efba2",
+      "bytes": 118675,
+      "note": "E5 lane, one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-e5-supervised-loqo-37654-20261020.json",
+      "sha256": "55c4a7dbeb50aa1a1036648316d706976c6bc0127286d30ff7e9b7628c1fa708",
+      "bytes": 3443,
+      "note": "E5 lane, writer receipt"
     }
   ]
 }

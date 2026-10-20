@@ -30,7 +30,7 @@ The current negative run card is [here](evidence/review/run_card.json).
 
 The previous mutual-overlap gate weakened the prompt's **forward**-overlap rule without approval.
 Current policy applies the literal rule to shared-tool measurements; it does not change the
-metric, writer or frozen historical evidence. All six published final TIFFs have measured forward
+metric, writer or frozen historical evidence. All seven published final TIFFs have measured forward
 overlap **1.0** against the pinned binary lattice, exceeding **0.70**. They are duplicates under
 the prompt's rule, even though their bytes differ. Small rank correlation does not cancel overlap.
 
@@ -40,7 +40,7 @@ handoff's fixed **37,654-dot mass**, even the minimum possible overlap is
 **{audit['minimum_forward_overlap_at_fixed_budget']:.9f}**, still a stop. This does not prove
 impossibility at every smaller mass. We did not optimize a boundary-only loophole.
 
-All six existing TIFFs pass shared local format checks (single-band float32, finite [0,1],
+All seven existing TIFFs pass shared local format checks (single-band float32, finite [0,1],
 CRS/shape/transform matching the pinned sample); that is not portal acceptance or uniqueness.
 The previous canonical P4 card and historical receipts remain frozen and superseded for current
 policy by `evidence/review/run_card.json`.
@@ -87,6 +87,27 @@ requirements are retained there; the current active branch is recorded in HANDOF
 <summary>Read the complete supplied project brief before every session</summary>
 
 '''
+    e5_note = ''
+    e5p = ROOT / 'evidence/e5/run_card.json'
+    if e5p.is_file():
+        _e5 = json.loads(e5p.read_text())
+        _a = _e5['instrument_a_holdout']
+        _b = _e5['instrument_b_prime_proxy']
+        _db = _e5['paired_b_prime_vs_h33']
+        _u5 = _e5['correlation_overlap_vs_registry']['final_dots_stage']
+        e5_note = (f"\n## E5 lane — supervised within-halo ranking (2026-10-20), verdict `{_e5['verdict']}` — DO NOT SUBMIT\n\n"
+                   f"SGMC-proxy LOQO ranker (the previously deferred next step, now executed under its own "
+                   f"preregistration `docs/preregistration-e5.md`), 37,654 dots: "
+                   f"A HOLDOUT-DTI {_a['candidate']['dti']:.4f} vs H33 {_a['h33_reference']['dti']:.4f}; "
+                   f"B′ PROXY-DTI {_b['candidate']['dti']:.4f} vs H33 {_b['h33_reference']['dti']:.4f} "
+                   f"(Δ {_db['delta']:+.4f} [{_db['ci95'][0]:+.4f}, {_db['ci95'][1]:+.4f}] — includes zero) → negative. "
+                   f"File `docs/downloads/{_e5['submission_name']}.tif` (sha256 `{_e5['raster_sha256']}`), "
+                   f"review-only under the literal policy above (forward overlap {_u5['worst_forward_overlap']:.2f} "
+                   f"vs the dense lattice; mutual {_u5['worst_mutual_overlap']:.3f}). Evidence: `evidence/e5/`. "
+                   f"Public leader at organizer-page read 2026-10-20: 0.4413 "
+                   f"(`evidence/e5/leaderboard_read.json`). No weekly slot used.\n\n")
+    head = head.replace('## Complete retained project prompt',
+                          e5_note + '## Complete retained project prompt', 1)
     (ROOT / 'README.md').write_text(head + (ROOT / 'PROJECT_BRIEF.md').read_text() + '\n</details>\n')
 
 

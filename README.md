@@ -20,7 +20,7 @@ The current negative run card is [here](evidence/review/run_card.json).
 
 The previous mutual-overlap gate weakened the prompt's **forward**-overlap rule without approval.
 Current policy applies the literal rule to shared-tool measurements; it does not change the
-metric, writer or frozen historical evidence. All six published final TIFFs have measured forward
+metric, writer or frozen historical evidence. All seven published final TIFFs have measured forward
 overlap **1.0** against the pinned binary lattice, exceeding **0.70**. They are duplicates under
 the prompt's rule, even though their bytes differ. Small rank correlation does not cancel overlap.
 
@@ -30,7 +30,7 @@ handoff's fixed **37,654-dot mass**, even the minimum possible overlap is
 **0.823418495**, still a stop. This does not prove
 impossibility at every smaller mass. We did not optimize a boundary-only loophole.
 
-All six existing TIFFs pass shared local format checks (single-band float32, finite [0,1],
+All seven existing TIFFs pass shared local format checks (single-band float32, finite [0,1],
 CRS/shape/transform matching the pinned sample); that is not portal acceptance or uniqueness.
 The previous canonical P4 card and historical receipts remain frozen and superseded for current
 policy by `evidence/review/run_card.json`.
@@ -66,6 +66,11 @@ Official reference README/notebook were re-fetched via GitHub API. Other officia
 authenticated submission page were not accessible within this session's outbound allowlist; live
 cap, eligibility and organizer acceptance remain unverified. GPU is preferred, not required by the
 organizer reference. `scripts/prepare_data.py` advertised in the historical prompt is absent.
+
+
+## E5 lane — supervised within-halo ranking (2026-10-20), verdict `negative` — DO NOT SUBMIT
+
+SGMC-proxy LOQO ranker (the previously deferred next step, now executed under its own preregistration `docs/preregistration-e5.md`), 37,654 dots: A HOLDOUT-DTI 0.0815 vs H33 0.0037; B′ PROXY-DTI 0.0886 vs H33 0.0938 (Δ -0.0051 [-0.0161, +0.0053] — includes zero) → negative. File `docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif` (sha256 `8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2`), review-only under the literal policy above (forward overlap 1.00 vs the dense lattice; mutual 0.308). Evidence: `evidence/e5/`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/e5/leaderboard_read.json`). No weekly slot used.
 
 ## Complete retained project prompt
 
