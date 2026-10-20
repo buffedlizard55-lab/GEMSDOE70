@@ -1,5 +1,9 @@
 # GEMSDOE70 — geothermal fault research
 
+> **Submission decision (all lanes, 2026-10-20): no file in this repository is recommended for a
+> weekly slot.** Every published TIFF is download-for-review only. Latest lane: Session 3
+> (supervised proxy ranking) — see its section below and `docs/s3-findings.md`.
+
 ## NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
 
 A newly generated, format-validated **continuous** GeoTIFF is available:
@@ -125,6 +129,19 @@ Official reference README/notebook were re-fetched via GitHub API. Other officia
 authenticated submission page were not accessible within this session's outbound allowlist; live
 cap, eligibility and organizer acceptance remain unverified. GPU is preferred, not required by the
 organizer reference. `scripts/prepare_data.py` advertised in the historical prompt is absent.
+
+## Session 3 (branch arena/a0382202): supervised proxy ranking — **download for review, do NOT submit**
+
+| File | Download | Submit | Why |
+|---|---|---|---|
+| [`gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif`](docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif) | yes | **NO** | E1: pre-registered proxy gate passed (B′ Δ vs H33 +0.0300, 95 % CI [+0.0034, +0.0557]) but **vetoed** — offline B′ does not track the live board (Spearman -0.28, n = 18) and the gain is confounded with steep terrain |
+| [`gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif`](docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif) | yes | **NO** | E2: negative — within H33's distance × slope strata, no gain over random placement (B′ Δ +0.0075, CI [-0.0186, +0.0327]) |
+
+Key finding for every lane: the offline instruments (B′ and A) do not order the 18 archived files
+with reported live scores the way the board did (Spearman -0.28 and
+-0.64). [Findings](docs/s3-findings.md) · [E1 card](evidence/s3/run_card.json) ·
+[E2 card](evidence/s3/e2/run_card.json) · [calibration](evidence/s3/proxy_calibration.json) ·
+preregistrations [S3](docs/preregistration-s3.md), [S3-E2](docs/preregistration-s3-e2.md).
 
 
 ## E5 lane — supervised within-halo ranking (2026-10-20), verdict `negative` — DO NOT SUBMIT

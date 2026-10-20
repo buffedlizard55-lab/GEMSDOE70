@@ -4,7 +4,7 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
 <aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
 <strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
 are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
@@ -307,6 +307,97 @@ and Spearman &gt; 0.90 still applies to every raster. Reported in <code>evidence
 <h2>Promotion rule</h2>
 <p>Identical to Experiment 3: pass uniqueness (mutual), validator, A ≥ H33, and B′ &gt; H33 with the
 paired 95 % CI excluding zero. Otherwise <strong>NOT PROMOTED</strong>, published with an explicit label.</p>
+<h2>Session 3 (2026-10-20, branch arena/a0382202) — candidates, ranking, what was tested</h2>
+<p>Ranking is qualitative (expected live-DTI gain ÷ cost) and was revised after the instrument
+calibration diagnostic (<code>evidence/s3/proxy_calibration.json</code>): offline B′ and A <strong>do not</strong> order
+archived files the way the live board did (Spearman −0.28 and −0.64, n = 18 owner/user-reported
+scores). Any new idea therefore needs an instrument that tracks the board before it can be promoted.</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Hypothesis / layers</th>
+<th>Physical signature</th>
+<th>Why it could catch faults missing from the USGS/INGENIOUS catalogue</th>
+<th>Named mimic</th>
+<th>Difference from repo</th>
+<th>Cost</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tested E1</td>
+<td>S3 supervised proxy ranking: 19-band stack + 6 gradients + 33 LiDAR/topo/chi/radiometric bands + 7 catalogue-geometry, LOQO GBM on SGMC-only faults</td>
+<td>learned combination; strongest single features are 10 m-DEM slope/relief (AUC 0.76)</td>
+<td>geologic-map faults absent from the Quaternary catalogue</td>
+<td>bedrock/map-density bias</td>
+<td>first supervised model in this repo trained on an off-catalogue population</td>
+<td>medium</td>
+<td>in hand</td>
+</tr>
+<tr>
+<td>tested E2</td>
+<td>Same model, ranking only <strong>within</strong> H33's distance × slope strata</td>
+<td>within-stratum ranking</td>
+<td>removes terrain/distance confound</td>
+<td>lithologic contacts</td>
+<td>marginal-matched placement (new)</td>
+<td>low</td>
+<td>in hand</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Live-calibrated instrument: choose, among a small pre-declared family of proxy definitions (SGMC-only by distance band; catalogue holdout by fault age/slip-rate class from <code>qfault_attributes.csv</code>), the one whose ranking of the 18 scored archives best matches the live board, then re-test E2 on it</td>
+<td>meta-measurement</td>
+<td>without it no candidate can be promoted on evidence</td>
+<td>over-fitting 18 points</td>
+<td>nothing like it exists in the family</td>
+<td>low</td>
+<td>in hand</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Basin-floor LiDAR micro-scarp continuity: <code>lidar_scarp_features_u8</code> step_max/downface_max with coh100 strike coherence, restricted to the lowest two slope quartiles</td>
+<td>young intrabasin scarps in alluvium</td>
+<td>Quaternary catalogues under-sample short, low-relief intrabasin scarps; the opposite terrain to E1's bias</td>
+<td>shorelines, canal/road berms</td>
+<td>E1 learned bedrock; this explicitly targets low-slope terrain</td>
+<td>low</td>
+<td>in hand (24.6 % LiDAR gaps)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Thermal-spring/well alignment: <code>gdr_wellspring_in_footprint.csv</code> (GDR 1391) points, Hough-style alignment lines through ≥ 3 springs within 20 km</td>
+<td>fault-controlled fluid outflow</td>
+<td>springs line up on permeable faults that may be unmapped</td>
+<td>groundwater discharge at lithologic contacts</td>
+<td>no repo method uses spring geometry</td>
+<td>medium</td>
+<td>in hand (owner mirror of GDR 1391; https://gdr.openei.org/submissions/1391)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Drainage knickpoint lines: <code>dem10_chi_100m_u8</code> knick_n aligned across ≥ 3 adjacent catchments</td>
+<td>footwall uplift across drainages</td>
+<td>blind/young faults deform drainage before scarps are mapped</td>
+<td>lithologic knickpoints</td>
+<td>by submission name, chi was used before as a corridor score (60GEMSDOE h73), not as cross-catchment alignment</td>
+<td>medium</td>
+<td>in hand</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Radiometric alteration halo at basin margins: GeoDAWN K and Th/K (<code>geodawn_rad_u8</code>, <code>geodawn_extensions_u8</code>) local anomaly 0.5–3 km from range fronts</td>
+<td>hydrothermal K depletion/enrichment along fluid pathways</td>
+<td>alteration can mark permeable unmapped faults</td>
+<td>primary lithology; flight-line artifacts</td>
+<td>by submission name, radiometrics were used before in a scarp fusion (GEMSDOE46 r11f/r12), not as a margin-anomaly operator</td>
+<td>medium</td>
+<td>in hand (USGS DOI 10.5066/P93LGLVQ)</td>
+</tr>
+</tbody>
+</table>
 <h2>P6 dual-horizon LOQO scarp–rad–basement addendum (branch <code>arena/c6a19d32-gemsdoe70</code>, 2026-10-20)</h2>
 <p>Written before running <code>scripts/run_experiment_dualhorizon.py</code>, executing the handoff's priority #1 (within-halo physical ranking with leave-one-quadrant-out cross-validation including <code>lidar_scarp_features_u8</code>, <code>topo_10m_derived_100m_u8</code>, and <code>geodawn_rad_u8</code> / <code>geodawn_extensions_u8</code>) and priority #2 (SGMC vs QFaults buffer calibration <code>1–20 px</code>). All named external rasters were verified present and SHA-pinned in <code>/tmp/60GEMSDOE/data/external/</code>.</p>
 <table>

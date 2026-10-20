@@ -4,7 +4,7 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
 <aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
 <strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
 are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
@@ -93,7 +93,20 @@ catalogue as a proxy for newly mapped faults. Every number is labelled, and no p
 presented as a leaderboard score.</p>
 <ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
 <li><a href="results.html">All three experiments, ablations and canaries</a></li>
-<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section><h2>Concurrent P6 — dual-horizon LOQO scarp-rad-basement ranker + SGMC 1–20 px buffer calibration (verdict: negative — DO NOT SUBMIT)</h2>
+<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section class="stop" aria-labelledby="s3">
+<div class="eyebrow">SESSION 3 · SUPERVISED PROXY RANKING · DECISION</div>
+<h2 id="s3">Session 3 files: download for review — do NOT submit</h2>
+<p>Both files pass the shared validator (single band, float32, 3730 × 3292, EPSG:32611, values
+exactly 0/1, no NaN, 37,654 dots) and are unique under the mutual rule against
+62 archived rasters and every sibling TIFF in this repository (worst mutual
+overlap 0.29). Under the <em>literal</em> forward-overlap rule they
+reach 1.00 against the dense r13 lattice, like every dot file here.
+<strong>Neither is evidence of a live score above 0.2778.</strong> Weekly slots used: 0.</p>
+<div class="table-wrap"><table><caption>Session 3 · download vs submit</caption><thead><tr><th>File</th><th>What it is</th><th>Download</th><th>Submit</th><th>Why</th></tr></thead><tbody><tr><td><a href="downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif" download><code>gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif</code></a></td><td>E1 · proxy-trained ranking, H33 spacing</td><td>yes</td><td><strong>NO</strong></td><td>Passed its pre-registered proxy gate (B′ Δ vs H33 +0.0300, CI [0.0034, 0.0557]) but <strong>vetoed</strong>: offline B′ does not track the live board (ρ = -0.28, n = 18); 64 % of its dots are in the steepest terrain quartile, like the live-tested gate_ortho file (48 %, reported 0.2376 &lt; 0.2778).</td></tr><tr><td><a href="downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif" download><code>gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif</code></a></td><td>E2 · same model, ranking only within H33 distance × slope strata</td><td>yes</td><td><strong>NO</strong></td><td>Negative: no significant gain over random placement within the same strata (B′ Δ +0.0075, CI [-0.0186, 0.0327]).</td></tr></tbody></table></div>
+<p class="small"><a href="s3-findings.html">Session 3 findings and live-board calibration table</a> ·
+<a href="downloads/s3_run_card.json">E1 run card</a> · <a href="downloads/s3e2_run_card.json">E2 run card</a> ·
+<a href="downloads/s3_proxy_calibration.json">calibration receipt</a> ·
+<a href="downloads/s3_sibling_uniqueness.json">sibling uniqueness</a></p></section><section><h2>Concurrent P6 — dual-horizon LOQO scarp-rad-basement ranker + SGMC 1–20 px buffer calibration (verdict: negative — DO NOT SUBMIT)</h2>
 <p>Preregistered in <code>docs/hypotheses.md</code> (<code>H-P5-1</code> through <code>H-P5-5</code>): combines leave-one-quadrant-out
 scarp-radiometric-basement ranking (19-band stack + 1 m LiDAR scarp + 10 m 3DEP breaklines + GeoDAWN radiometric ratios)
 with the visible-catalogue tip/host-length halo across <code>5&times;5</code> strata and <code>3.2 px</code> NMS (<code>37,654</code> binary dots).

@@ -21,6 +21,10 @@ def main():
     db = p5['holdout_dti']['paired_vs_h33']
     head = f'''# GEMSDOE70 — geothermal fault research
 
+> **Submission decision (all lanes, 2026-10-20): no file in this repository is recommended for a
+> weekly slot.** Every published TIFF is download-for-review only. Latest lane: Session 3
+> (supervised proxy ranking) — see its section below and `docs/s3-findings.md`.
+
 ## NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
 
 A newly generated, format-validated **continuous** GeoTIFF is available:
@@ -185,6 +189,9 @@ requirements are retained there; the current active branch is recorded in HANDOF
         _pb = _p5['instrument_b_prime_proxy']['candidate']
         p5_note = (f"\n## Parallel P5 analytic-signal lane (arena/97660a79-gemsdoe70) — DO NOT SUBMIT\n\n"
                    f"Analytic-signal halo 7px, 37,654 dots, `tmi_hg`+`tmi_vg` rank in 2.4–32 px halo with tip kernel. HOLDOUT-DTI A {_pa['dti']:.4f} [{_pa['ci95'][0]:.4f},{_pa['ci95'][1]:.4f}] vs H33 0.0037 win; **B′ {_pb['dti']:.4f} [{_pb['ci95'][0]:.4f},{_pb['ci95'][1]:.4f}] vs 0.0938 H33 win Δ { _p5['paired_b_prime_vs_h33']['delta']:+.4f} {_p5['paired_b_prime_vs_h33']['ci95']} → negative**, no slot. Uniqueness: 62 rasters worst mutual 0.30 (limit 0.70) worst ρ 0.042; forward 1.00 vs dense lattice `calib_r13lattice_00904.tif` (literal duplicate, review only). File `docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif` (sha256 `{_p5['raster_sha256']}`, 149,414 bytes, ZIP `bf61cacc...`). Evidence `evidence/phase5/` (run_card, instrument holds, uniqueness, canaries), method `src/gems70/method_p5.py`. Hypotheses.md now ranks 5 candidates (H-2 tested P5, H-3 radiometric GeoDAWN already fetched 36+26 MB, H-4 lidar scarp 36 MB, H-5 conductive breach, H-6 basement curvature) with preregistered validation rule; h33-analysis.md PhD-level byte audit + metric algebra. Under literal forward rule, P5 is duplicate (as is H70 and P4) — download for review only.\n")
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / 'scripts'))
+    import s3_site
     p6_note = ''
     p6p = ROOT / 'evidence/p6_dualhorizon/run_card.json'
     if p6p.is_file():
@@ -220,7 +227,7 @@ requirements are retained there; the current active branch is recorded in HANDOF
             f"evidence `evidence/p6_dualhorizon/`, method `src/gems70/method_dualhorizon.py`, runner `scripts/run_experiment_dualhorizon.py`.\n"
         )
     head = head.replace('## Complete retained project prompt',
-                          e5_note + p5_note + p6_note + '## Complete retained project prompt', 1)
+                          s3_site.readme_block() + e5_note + p5_note + p6_note + '## Complete retained project prompt', 1)
     (ROOT / 'README.md').write_text(head + (ROOT / 'PROJECT_BRIEF.md').read_text() + '\n</details>\n')
 
 

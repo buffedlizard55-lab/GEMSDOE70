@@ -4,7 +4,7 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
 <aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
 <strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
 are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
@@ -79,6 +79,28 @@ no new TIFF was generated after that stop. We will not prune, rename or jitter H
 <li><a href="downloads/instrumentB_prime.json">Historical B′ proxy receipt</a></li>
 <li><a href="protocol-review.html">Current literal-protocol audit and proposed research</a></li>
 <li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Organizer fault-detection reference</a></li>
+</ul>
+<h2>Session 3 addendum — calibration against the live board (see <code>docs/s3-findings.md</code>)</h2>
+<p>Evidence class: owner/user-reported live scores for 18 archived rasters, re-scored offline here
+(<code>evidence/s3/proxy_calibration.json</code>, <code>evidence/s3/terrain_marginals.json</code>). None is
+organizer-confirmed.</p>
+<ul>
+<li><strong>Neither offline instrument predicts the live ordering.</strong> Spearman(live, B′) = −0.28 and
+  Spearman(live, A) = −0.64 (n = 18). The dense lattice <code>r13</code> has the best B′ (0.252) and the worst
+  live score (0.0904): B′'s proxy truth is large (≈ 60 k px), so it rewards dense coverage that the
+  live truth punishes.</li>
+<li><strong>What the live board did reward, descriptively.</strong> Among ≈ 37–44 k-dot files, the reported live
+  score rose as dots within ≈ 2 px of mapped faults were removed (share of dots within 6 px:
+  D28 0.300 → H27 0.232 → H33 0.181; scores 0.2600 → 0.2708 → 0.2778). The one file that
+  concentrated dots in steep terrain (GEMSDOE49 gate_ortho, 47.5 % in the steepest slope quartile
+  versus H33's 19.9 %) scored 0.2376 despite the highest B′ in its size class.</li>
+<li><strong>Answer to "why H33 is the family best".</strong> It is the best-spaced (2.83 px minimum), terrain-
+  neutral sample of the 0.3–8 km band around mapped faults with the nearest shells removed. It
+  carries no physical information; its edge over its siblings is emission geometry.</li>
+<li><strong>Can we beat 0.2778?</strong> Not with evidence available today. Our supervised model concentrates in
+  bedrock terrain (the named mimic) and, once terrain and distance are matched to H33, adds no
+  significant information on the proxy (E2). Beating H33 needs an instrument that tracks the live
+  board first — that is the next session's top task.</li>
 </ul>
 <h2>P6 dual-horizon LOQO scarp–rad–basement &amp; SGMC buffer diagnosis (<code>evidence/p6_dualhorizon/</code>)</h2>
 <p>In parallel lane P6 (<code>arena/c6a19d32-gemsdoe70</code>, <code>docs/downloads/gems70-p5-dualhorizon-37654-20261020.tif</code>), we tested whether expanding the horizon beyond <code>d_cat &lt;= 32 px</code> (since <code>35.9%</code> of <code>SGMC B′</code> pixels and <code>34.0%</code> of H33's dots lie at <code>d_cat &gt; 32 px</code>) and ranking pixels within <code>7×7</code> or <code>5×5</code> strata using 10 m 3DEP breaklines + 1 m LiDAR scarps + GeoDAWN radiometric ratios could beat H33 on <code>Instrument B′</code>:

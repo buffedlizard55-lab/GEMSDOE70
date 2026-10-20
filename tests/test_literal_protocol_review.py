@@ -85,7 +85,16 @@ def test_fresh_review_binds_every_archived_final_file_and_does_not_claim_univers
     expected = {r['path'] for r in inv['artifacts'] if r['path'].endswith('.tif')}
     frozen = {r['artifact'] for r in review['archived_artifacts']}
     assert len(frozen) >= 6 and frozen < expected  # P5-cover is a *later* separate review.
-    assert expected - frozen == {'docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif'}
+    # Later, separately reviewed files: P5-cover, and Session-3 files that carry their own
+    # literal-lane receipt (evidence/s3/literal_lane.json) with stop_required=True.
+    s3 = json.loads((ROOT / 'evidence/s3/literal_lane.json').read_text())['files']
+    s3_paths = {f['artifact'] for f in s3.values()}
+    for f in s3.values():
+        assert f['literal_lane_status']['stop_required'] is True
+        assert f['literal_lane_status']['protocol_unique'] is False
+        assert digest(ROOT / f['artifact']) == f['raster_sha256']
+    assert expected - frozen == ({'docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif'}
+                                 | s3_paths)
     for row in review['archived_artifacts']:
         assert digest(ROOT / row['artifact']) == row['raster_sha256']
         assert literal_lane_status(row['shared_measurements'])['stop_required']

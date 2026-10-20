@@ -58,6 +58,29 @@ no new TIFF was generated after that stop. We will not prune, rename or jitter H
 - [Current literal-protocol audit and proposed research](protocol-review.html)
 - [Organizer fault-detection reference](https://github.com/drivendataorg/gems-prize-reference-solution)
 
+## Session 3 addendum — calibration against the live board (see `docs/s3-findings.md`)
+
+Evidence class: owner/user-reported live scores for 18 archived rasters, re-scored offline here
+(`evidence/s3/proxy_calibration.json`, `evidence/s3/terrain_marginals.json`). None is
+organizer-confirmed.
+
+* **Neither offline instrument predicts the live ordering.** Spearman(live, B′) = −0.28 and
+  Spearman(live, A) = −0.64 (n = 18). The dense lattice `r13` has the best B′ (0.252) and the worst
+  live score (0.0904): B′'s proxy truth is large (≈ 60 k px), so it rewards dense coverage that the
+  live truth punishes.
+* **What the live board did reward, descriptively.** Among ≈ 37–44 k-dot files, the reported live
+  score rose as dots within ≈ 2 px of mapped faults were removed (share of dots within 6 px:
+  D28 0.300 → H27 0.232 → H33 0.181; scores 0.2600 → 0.2708 → 0.2778). The one file that
+  concentrated dots in steep terrain (GEMSDOE49 gate_ortho, 47.5 % in the steepest slope quartile
+  versus H33's 19.9 %) scored 0.2376 despite the highest B′ in its size class.
+* **Answer to "why H33 is the family best".** It is the best-spaced (2.83 px minimum), terrain-
+  neutral sample of the 0.3–8 km band around mapped faults with the nearest shells removed. It
+  carries no physical information; its edge over its siblings is emission geometry.
+* **Can we beat 0.2778?** Not with evidence available today. Our supervised model concentrates in
+  bedrock terrain (the named mimic) and, once terrain and distance are matched to H33, adds no
+  significant information on the proxy (E2). Beating H33 needs an instrument that tracks the live
+  board first — that is the next session's top task.
+
 ## P6 dual-horizon LOQO scarp–rad–basement & SGMC buffer diagnosis (`evidence/p6_dualhorizon/`)
 
 In parallel lane P6 (`arena/c6a19d32-gemsdoe70`, `docs/downloads/gems70-p5-dualhorizon-37654-20261020.tif`), we tested whether expanding the horizon beyond `d_cat <= 32 px` (since `35.9%` of `SGMC B′` pixels and `34.0%` of H33's dots lie at `d_cat > 32 px`) and ranking pixels within `7×7` or `5×5` strata using 10 m 3DEP breaklines + 1 m LiDAR scarps + GeoDAWN radiometric ratios could beat H33 on `Instrument B′`:
@@ -65,4 +88,3 @@ In parallel lane P6 (`arena/c6a19d32-gemsdoe70`, `docs/downloads/gems70-p5-dualh
 - **Exp 5.2 (`H-P5-2`, unsupervised 10m-3DEP breakline + LiDAR scarp + rad `7×7`, `5.0 px` NMS):** `A = 0.0774` `[0.0698, 0.0849]`, `B′ = 0.1201` `[0.1137, 0.1260]` (+28.1% over H33 with zero SGMC training).
 - **Exp 5.3 (`H-P5-3`, submodular dual-horizon `5×5`, `3.2 px` NMS):** `A = 0.0790` `[0.0688, 0.0900]`, `B′ = 0.1440` `[0.1319, 0.1558]` (+53.5% over H33, paired Δ `+0.0502` `[+0.0339, +0.0663]`), `B′′ (d ≥ 6 px) = 0.1234` `[0.1118, 0.1359]` (vs H33 `0.0850`).
 - **Why P6 is still held fail-closed (`download_ok = true`, `submit_recommended = false`):** (1) Paired Instrument A gain over P4 (`+0.0059`) has a 95% CI straddling zero (`[-0.0050, +0.0163]`); (2) our `1–20 px` SGMC buffer/slope audit ([receipt](downloads/sgmc_buffer_audit.json)) shows `SGMC B′` sits in steep bedrock ranges (`median slope = 13.42°` vs Quaternary catalogue `5.55°`, where sibling SGMC-promoted submissions `GEMSDOE49 = 0.1304` and `GEMSDOE68 = 0.0680` regressed live); and (3) literal forward overlap against the dense lattice is `1.00` (worst mutual overlap `0.4230 <= 0.70`, worst Spearman `0.0300 <= 0.90`).
-

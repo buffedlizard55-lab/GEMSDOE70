@@ -20,12 +20,15 @@ from gems70.release import p5_status
 DOCS = ROOT / 'docs'
 DOWN = DOCS / 'downloads'
 
+sys.path.insert(0, str(ROOT / 'scripts'))
+import s3_site  # noqa: E402  (Session-3 lane fragments)
+
 NAV = [('index.html', 'Overview'), ('executive-summary.html', 'Executive summary'),
        ('p5.html', 'P5-cover research TIFF'),
        ('protocol-review.html', 'Protocol review'), ('submission.html', 'Submission guide'),
        ('results.html', 'Evidence'), ('hypotheses.html', 'Hypotheses'),
        ('h33-analysis.html', 'Why H33 scored'), ('e3-candidate.html', 'Archived scarp E3'), ('sources.html', 'Sources'),
-       ('limitations.html', 'Limitations')]
+       s3_site.NAV_ENTRY, ('limitations.html', 'Limitations')]
 
 
 def load(rel, default=None):
@@ -121,6 +124,7 @@ def main():
 
     # ------------------------------------------------------------- copy evidence
     copies = {
+        **s3_site.COPIES,
         'evidence/run_card.json': 'run_card.json',
         'evidence/phase4/run_card.json': 'phase4_run_card.json',
         'evidence/history/p4_stratified_halo/run_card.json': 'archived_p4_run_card.json',
@@ -388,7 +392,7 @@ SHA-256 <code>{esc(p6card['raster_sha256'])}</code>.</p>
         for r in review['archived_artifacts']]
     archives = f'<h2>{len(review["archived_artifacts"])} frozen prior dot TIFFs — forensic review only</h2>' + table(
         ['Archive', 'Download', 'Local format', 'Forward overlap (limit 0.70)'], archive_rows)
-    (DOCS / 'index.html').write_text(frame('Overview', index + p6_section + e5_section + e2_section + p5_section + archives))
+    (DOCS / 'index.html').write_text(frame('Overview', index + s3_site.banner() + p6_section + e5_section + e2_section + p5_section + archives))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
@@ -437,7 +441,7 @@ rejected upload, so we do not claim to know its specific defect.</p></section>
   ['Worst Spearman ρ', f"{uniqueness.get('worst_spearman_full_footprint'):.4f}"],
   ['Inventory scope', esc(uniqueness.get('inventory_scope'))]],
  'Historical mutual-rule receipt only; current forward-rule status is STOP. See the fresh audit.')}</section>'''
-    (DOCS / 'submission.html').write_text(frame('Submit a file', guide))
+    (DOCS / 'submission.html').write_text(frame('Submit a file', s3_site.guide_note() + guide))
 
     # ------------------------------------------------------------------- results
     rows_a = instrument_rows(p4a)
@@ -558,6 +562,7 @@ labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed score
                             "P6 instrument B′′ · PROXY-DTI · SGMC proxy d ≥ 6 px (LOQO)")
                     + table(['Buffer', 'SGMC px in band', 'SGMC %', 'Domain %', 'Enrichment', 'Remaining SGMC (d >= r)'],
                             buf_rows, 'SGMC vs QFaults cartographic duplication calibration (1–20 px)'))
+    results = s3_site.results_block(instrument_rows, table) + results
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 
     # ------------------------------------- new P5 scientific negative (one lane)
@@ -703,7 +708,8 @@ Full inventory (862) scan remains a selector step. Literal readings are in the r
     for src, dst, title in [('docs/hypotheses.md', 'hypotheses.html', 'Hypotheses'),
                             ('docs/h33-analysis.md', 'h33-analysis.html', 'Why H33 scored'),
                             ('docs/irregularities.md', 'limitations.html', 'Limitations'),
-                            ('docs/protocol-review.md', 'protocol-review.html', 'Protocol review')]:
+                            ('docs/protocol-review.md', 'protocol-review.html', 'Protocol review'),
+                            s3_site.MARKDOWN]:
         text = (ROOT / src).read_text()
         body = markdown.markdown(text, extensions=['tables'])
         (DOCS / dst).write_text(frame(title, body))
