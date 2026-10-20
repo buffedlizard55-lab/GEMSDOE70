@@ -81,6 +81,28 @@ canonical site remains negative. No additional scientific experiment was run.
 
 Final suite after adding quarantine hash/publication coverage: **69 tests pass**.
 
+## Current branch review — arena/9560f995-gemsdoe70
+
+Read docs/session-review.md for the latest review, not the historical parallel
+reports. No new scientific experiment was run. The unchanged measured run card
+remains negative; the fresh content-addressed witness audit reproduced the stop.
+
+The Pages API showed legacy `main:/` publication with root `.nojekyll`, exposing
+an archive/data direct-URL risk even though docs contained no download link.
+The attempt to switch source to `/docs` returned 403 (integration permission).
+Fallback: remove ONLY the root `.nojekyll`, add root Jekyll exclusions for all
+nonpublic paths, and enforce public-root classification in `audit_pages.py`.
+The nested `docs/.nojekyll` is retained for compatibility; it does not bypass the
+root build. CI builds the actual legacy-root Jekyll source using GitHub's pinned
+build action and inspects its output for private roots, rasters/ZIPs and symlinks.
+Do not restore the root marker or publish quarantine. Quarantine bytes remain
+unchanged and publicly auditable in GitHub; this is not a secrecy boundary.
+
+Deployment requires a successful main Pages build. See the PR/checks for actual
+build and merge receipts. Keep the experimental preregistration/source pins and
+scientific receipts unchanged. Resolve the protocol/lane/current-best blockers
+before any new candidate, rather than manufacturing a download.
+
 ## Follow-up review on arena/75897427-gemsdoe70
 
 No new scientific experiment or eligible TIFF; the duplicate stop still applies.
@@ -109,6 +131,11 @@ Integrated concurrent main `37b37b9` after PR #7's first merge was rejected.
 Preserved root-Pages exclusions and all publication-boundary tests. Combined final
 suite: **117 passed**, three existing warnings; no additional scientific run.
 
+PR #8 integration: merged concurrent main f1197da into the assigned branch after
+the initial merge was rejected. Retained both parallel reports and release/source
+guards; added real built-output verification. Combined suite: 129 passed, three
+existing warnings. Scientific evidence and shared template remain unchanged.
+
 ## Release-evidence edge-case review on arena/fd9c8ead-gemsdoe70
 
 Reproduced the immutable registry witness audit; universal literal overlap remains
@@ -120,3 +147,8 @@ wrapper, not the shared template. Added seven regression cases; full suite is
 release gate pass. See reports/release-evidence-review-20261020.md for all three
 passes, evidence boundaries and ordered next steps. PR #8 is another session's
 open publication-policy review, not this session's submission or authorization.
+
+PR #8 second integration retained concurrent main 7a2d2ae (PRs #9–#11),
+including the unresolved protocol memo and evidence edge-case diagnostics. Fixed
+checkout-only memo links for the excluded Pages roots and added built-output link
+checks. Combined suite: 138 passed, three existing warnings. No new science.

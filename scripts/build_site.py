@@ -9,6 +9,7 @@ import markdown
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src'))
 from gems70.release import release_status, assert_no_public_rasters, assert_root_pages_guard
+from gems70.pages_policy import check_source
 DOCS=ROOT/'docs'
 
 
@@ -29,6 +30,7 @@ def frame(title,body):
 
 
 def main():
+    check_source(ROOT)
     assert_root_pages_guard(ROOT)
     assert_no_public_rasters(ROOT)
     card=json.loads((ROOT/'evidence/run_card.json').read_text())
@@ -61,7 +63,7 @@ def main():
 <div class="columns"><section class="panel"><h2>Why no download?</h2><p>A prior continuous raster is positive on the whole footprint. With the inherited positive-support definition of “dots,” every nonempty candidate overlaps it. We measured this conflict rather than waive it.</p><a href="results.html">See the stop certificate →</a></section>
 <section class="panel"><h2>What about the H33 result?</h2><p>The archived field is an efficient sparse prediction followed by catalogue-flank pruning, not a new trained detector. Its reported historical score has no organizer receipt here.</p><a href="h33-analysis.html">Read the forensic analysis →</a></section></div>
 <section><h2>Reproducible, not speculative</h2><p>The numerical stack was restored from pinned mirrors. The shared evaluator and writer remain byte-identical to the template. Every raw input and derived feature received a leakage canary.</p>
-<ul><li><a href="hypotheses.html">Four preregistered geological hypotheses</a></li><li><a href="sources.html">Auditable sources and retrieval status</a></li><li><a href="irregularities.html">Limitations and next-session priorities</a></li></ul></section>'''
+<ul><li><a href="session-review.html">Latest repository review and publication safeguards</a></li><li><a href="hypotheses.html">Four preregistered geological hypotheses</a></li><li><a href="sources.html">Auditable sources and retrieval status</a></li><li><a href="irregularities.html">Limitations and next-session priorities</a></li></ul></section>'''
     (DOCS/'index.html').write_text(frame('Overview',overview))
     guide=status+'''<section><h2>How a future eligible submission works</h2><p><strong>Do not use this negative run.</strong> The <a href="protocol-decision.html">unresolved protocol decision</a> explains why a new, nonempty submission cannot pass the current literal uniqueness test. The workflow below applies only after a fresh candidate passes every scientific and publication gate. This static website reports precomputed evidence; it does not train a model in your browser.</p>
 <ol class="steps"><li><strong>Check the readiness banner.</strong> Only a released artifact may receive a TIFF download link. A valid format alone does not mean it is unique or worth a competition slot.</li>
@@ -91,7 +93,7 @@ def main():
 <h2>Validator status: NOT WRITTEN</h2><p>The in-memory surface is finite, in range, correctly shaped, zero outside the footprint and zero on mapped faults. There is no TIFF validator receipt, file SHA-256, or final-dot audit because export and placement were stopped. Surface decoded-array SHA-256 is not a file hash.</p>'''
     (DOCS/'results.html').write_text(frame('Results',results))
     for name,title in [('hypotheses','Hypotheses'),('h33-analysis','H33 analysis'),
-                       ('protocol-decision','Protocol decision'),('irregularities','Limitations')]:
+                       ('protocol-decision','Protocol decision'),('irregularities','Limitations'),('session-review','Repository review')]:
         (DOCS/f'{name}.html').write_text(frame(title,md(DOCS/f'{name}.md')))
     sourcerows=''.join(f'<tr><th scope="row"><a href="{html.escape(s["url"])}">{html.escape(s["id"])}</a></th><td>{html.escape(s["authority"])}</td><td>{html.escape(s["status"])}</td><td>{html.escape(s["claim"])}<br><small>{html.escape(s["limit"])}</small></td></tr>' for s in sources)
     srcpage=f'''<div class="eyebrow">AUDITABLE KNOWLEDGE</div><h1>Know what the evidence can say.</h1><p>GitHub reference content was retrieved. Official sites outside this environment's network allowlist were not verified live. A working HTTP endpoint does not verify a scientific claim, a license, or a competition result.</p>
@@ -108,6 +110,6 @@ def main():
                'run-card':'results','sources':'sources'}
     for old,target in redirects.items():
         (ROOT/f'{old}.html').write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=docs/{target}.html"><title>GEMSDOE70 — DO NOT SUBMIT</title></head><body><h1>DO NOT SUBMIT</h1><p>This historical entry point now links to the current evidence. <a href="docs/{target}.html">Continue to the current workbench</a>.</p></body></html>\n')
-    print('Built site. No eligible TIFF; no prediction files published.')
+    print('Built evidence pages. No TIFF staged; Pages deployment is a separate verification step.')
 
 if __name__=='__main__':main()

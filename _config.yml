@@ -1,8 +1,31 @@
 {
   "exclude": [
-    "quarantine", "data", "evidence", "vendor", "src", "scripts", "tests",
-    "registry", "reports", "README.md", "PROJECT_BRIEF.md", "PROMPT.md",
-    "AGENTS.md", "HANDOFF.md", "LICENSE", "pyproject.toml",
-    "requirements.txt", "requirements.lock", "Gemfile", "Gemfile.lock"
+    ".cache",
+    ".github",
+    ".venv",
+    "AGENTS.md",
+    "Gemfile",
+    "Gemfile.lock",
+    "HANDOFF.md",
+    "LICENSE",
+    "PROJECT_BRIEF.md",
+    "PROMPT.md",
+    "README.md",
+    "_config.yml",
+    "_site",
+    "assets",
+    "data",
+    "docs/*.md",
+    "evidence",
+    "pyproject.toml",
+    "quarantine",
+    "registry",
+    "reports",
+    "requirements.lock",
+    "requirements.txt",
+    "scripts",
+    "src",
+    "tests",
+    "vendor"
   ]
 }
