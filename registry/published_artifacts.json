@@ -55,6 +55,24 @@
       "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
       "bytes": 498152,
       "note": "parallel H2 session (PR #18), blocked diagnostic, NOT a submission; card evidence/history/h2_stepover_negative/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.tif",
+      "sha256": "a8cef5bdbbc030cd6bdd59ea275e09e27edf87b4ee8068d3e8052bdff1cb9667",
+      "bytes": 150240,
+      "note": "Phase-5 (P5) LOQO supervised within-halo ranker candidate; run card evidence/phase5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.zip",
+      "sha256": "0528f2809bf0208e46d36ddece74650aa14f4b3c8b7ca4bd3af4f9bd4b4c8e4d",
+      "bytes": 118468,
+      "note": "Phase-5 (P5), one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.json",
+      "sha256": "915fa941e37372b0bd3e8547d4c73ad4f07d892ee35a2dd2280cb0b8c632e4b6",
+      "bytes": 3484,
+      "note": "Phase-5 (P5), writer receipt"
     }
   ]
 }

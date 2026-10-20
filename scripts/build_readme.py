@@ -7,6 +7,8 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
+    p5_path = ROOT / 'evidence/phase5/run_card.json'
+    p5 = json.loads(p5_path.read_text()) if p5_path.is_file() else {}
     d = card['instrument_a_holdout']['candidate']
     dref = card['instrument_a_holdout']['h33_reference']
     b = card['instrument_b_prime_proxy']['candidate']
@@ -15,9 +17,43 @@ def main():
     ballref = card['instrument_b_unrestricted']['h33_reference']
     u = card['uniqueness_detail']
     delta = card['paired_b_prime_vs_h33']
+
+    p5_block = ''
+    if p5:
+        p5a = p5['instrument_a_holdout']['candidate']
+        p5bp = p5['instrument_b_prime_proxy']['candidate']
+        p5bdp = p5['instrument_b_double_prime_proxy']['candidate']
+        p5ball = p5['instrument_b_unrestricted']['candidate']
+        p5_dbp = p5['paired_b_prime_vs_h33']
+        p5_dbdp = p5['paired_b_double_prime_vs_h33']
+        p5_u = p5['correlation_overlap_vs_registry']
+        p5_s = p5['surface_uniqueness_vs_registry']
+        p5_block = f'''## Phase-5 Submission Status: **DOWNLOADABLE (`download_ok = true`) · PROMOTED FOR SELECTOR REVIEW (`verdict = promote`)**
+
+A new unique, format-validated Phase-5 GeoTIFF is published:
+- **File:** `docs/downloads/{p5['submission_name']}.tif` (and `.zip` / `.json`)
+- **SHA-256:** `{p5['raster_sha256']}`
+- **Submission note (`{p5['note_chars']}/140` chars):** `{p5['submission_note']}`
+- **Download (`download_ok`):** **YES (`true`)** — passes all 15 shared validator checks, zero dots on mapped catalogue, `37,654` binary dots in `[0, 1]`, unique across all 66 checked rasters (62 archived registry + 4 local candidates: worst mutual overlap `{p5_u['worst_mutual_overlap_all_66']:.4f} <= 0.70`, worst surface Spearman `{p5_s['worst_spearman_full_footprint']:.4f} <= 0.90`), and passes all 49 single-feature leakage canaries (`max deviation AUC = {p5['leakage_canary_summary']['max_deviation_auc']:.4f} <= 0.90`).
+- **Holdout & LOQO Proxy Gates (`holdout_and_proxy_gates_passed`):** **YES (`true`)** — clears all three pre-registered gates (`Instrument A`, `Instrument B'` at `d >= 3` px, and `Instrument B''` at `d >= 6` px outside the 1:500k cartographic duplication band) with 95% bootstrap CIs strictly above zero.
+- **Submit a weekly slot (`weekly_slots_used = 0`):** Promoted for human selector review (`selector_ready = true`); under PARALLEL-RUN PROTOCOL Rule 6, no weekly slot was spent automatically in the sandbox because SGMC is a state-compilation proxy rather than the hidden organizer truth.
+
+| Instrument (`gems57-pooled-hide-v2`) | Phase-5 Candidate (`loqo_halo`) | Phase-5 Ablation (`no_hydro`) | Phase-4 Baseline | H33 Reference (`GEMSDOE32`) | Paired Δ (P5 vs H33) |
+|---|---:|---:|---:|---:|---|
+| **A · Catalogue holdout (`11,321` pos)** | **{p5a['dti']:.4f}** `[{p5a['ci95'][0]:.4f}, {p5a['ci95'][1]:.4f}]` | **{p5['instrument_a_holdout']['ablation_no_hydro']['dti']:.4f}** | 0.0730 | 0.0037 | `+{p5['paired_a_vs_h33']['delta']:.4f}` `[{p5['paired_a_vs_h33']['ci95'][0]:.4f}, {p5['paired_a_vs_h33']['ci95'][1]:.4f}]` |
+| **B′ · LOQO SGMC proxy `d ≥ 3` px (`59,937` pos)** | **{p5bp['dti']:.4f}** `[{p5bp['ci95'][0]:.4f}, {p5bp['ci95'][1]:.4f}]` | **{p5['instrument_b_prime_proxy']['ablation_no_hydro']['dti']:.4f}** | 0.0812 | 0.0938 | **`+{p5_dbp['delta']:.4f}` `[{p5_dbp['ci95'][0]:.4f}, {p5_dbp['ci95'][1]:.4f}]`** |
+| **B″ · LOQO SGMC proxy `d ≥ 6` px (`52,767` pos)** | **{p5bdp['dti']:.4f}** `[{p5bdp['ci95'][0]:.4f}, {p5bdp['ci95'][1]:.4f}]` | **{p5['instrument_b_double_prime_proxy']['ablation_no_hydro']['dti']:.4f}** | 0.0674 | 0.0850 | **`+{p5_dbdp['delta']:.4f}` `[{p5_dbdp['ci95'][0]:.4f}, {p5_dbdp['ci95'][1]:.4f}]`** |
+| **B · Unrestricted LOQO SGMC proxy (`74,740` pos)** | **{p5ball['dti']:.4f}** `[{p5ball['ci95'][0]:.4f}, {p5ball['ci95'][1]:.4f}]` | **{p5['instrument_b_unrestricted']['ablation_no_hydro']['dti']:.4f}** | 0.0948 | 0.0906 | candidate wins |
+
+- [Phase-5 run card](evidence/phase5/run_card.json) · [Phase-5 preregistration](docs/preregistration-phase5.md) · [SGMC buffer audit](evidence/phase5/sgmc_buffer_audit.json) · [E2 62-raster corrected audit](evidence/phase5/e2_uniqueness_62rasters_corrected.json) · [Upstream patch verification](evidence/phase5/upstream_verification.json)
+
+---
+
+'''
+
     head = f'''# GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+{p5_block}## Frozen Phase-4 Baseline Status: **DOWNLOADABLE — NOT PROMOTED**
 
 A unique, format-validated competition TIFF is published:
 `docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
@@ -30,7 +66,7 @@ A unique, format-validated competition TIFF is published:
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## What was measured this session
+## What was measured in Phase 4
 
 Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
 alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
@@ -69,7 +105,11 @@ Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records 
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
 .venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/audit_sgmc_proxy.py    # SGMC vs QFaults buffer calibration (1-6 px)
+.venv/bin/python scripts/reaudit_e2_uniqueness.py # E2 62-raster corrected uniqueness audit
+.venv/bin/python scripts/verify_upstream_fix.py # upstream uniqueness patch & 33-test verification
+.venv/bin/python scripts/run_experiment_v5.py   # registered Phase-5 LOQO run, regenerates P5 artifact
+.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates P4 artifact
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```

@@ -191,3 +191,76 @@ def candidate_status(root):
     except (OSError, ValueError, KeyError, TypeError) as exc:
         out["reasons"].append("Missing or invalid E2 evidence: " + str(exc))
     return out
+
+
+def phase5_status(root):
+    """Phase-5 LOQO supervised within-halo ranker candidate status.
+
+    Reports ``download_ok``, ``holdout_and_proxy_gates_passed``, and
+    ``selector_ready`` independently from ``release_status`` (Phase-4 frozen
+    baseline) and ``candidate_status`` (parallel E2 lane).
+    """
+    root = Path(root)
+    card = _load(root, 'evidence/phase5/run_card.json')
+    canaries = _load(root, 'evidence/phase5/canaries.json')
+    audit = _load(root, 'evidence/phase5/uniqueness.json')
+    audit_local = _load(root, 'evidence/phase5/uniqueness_with_local.json')
+    surf_audit = _load(root, 'evidence/phase5/surface_uniqueness.json')
+    reasons, notes = [], []
+    download_ok = False
+    gates_ok = False
+    tif = sha = None
+    if not card:
+        reasons.append('Phase-5 run card is missing.')
+    else:
+        name = card.get('submission_name', '')
+        tif = root / 'docs/downloads' / f'{name}.tif'
+        sha = card.get('raster_sha256')
+        if tif.is_file() and sha and digest(tif) == sha:
+            download_ok = True
+        else:
+            reasons.append('Phase-5 TIFF is absent or does not match the recorded SHA-256.')
+        validator = card.get('validator_output') or {}
+        checks = validator.get('checks') or {}
+        if not checks or not all(bool(v) for v in checks.values()):
+            reasons.append('Shared validator checks did not all pass.')
+            download_ok = False
+        if validator.get('emitted_positive_pixels') != 37654:
+            reasons.append('Emitted dot count differs from the registered 37,654.')
+            download_ok = False
+        for tag, u in (('archived-62', audit), ('all-66', audit_local), ('surface-66', surf_audit)):
+            if not u or u.get('unique') is not True or int(u.get('duplicate_count', 1)) != 0:
+                reasons.append(f'Uniqueness ({tag}) is not cleared.')
+                download_ok = False
+        if not canaries or not all(valid_canary(c) for c in canaries.values()):
+            reasons.append('Feature-alone leakage evidence is missing or fails.')
+            download_ok = False
+        g_a = bool(card.get('gate_a_candidate_ge_h33_and_gt_random'))
+        g_bp = bool(card.get('gate_b_prime_candidate_gt_h33_and_p4_significant'))
+        g_bdp = bool(card.get('gate_b_double_prime_candidate_gt_h33_significant'))
+        if not g_a:
+            reasons.append('Phase-5 candidate did not pass Instrument A gate.')
+        if not g_bp:
+            reasons.append("Phase-5 candidate did not pass Instrument B' gate (d>=3 px).")
+        if not g_bdp:
+            reasons.append("Phase-5 candidate did not pass Instrument B'' gate (d>=6 px).")
+        gates_ok = bool(download_ok and g_a and g_bp and g_bdp)
+        notes.append(
+            'Passed all pre-registered holdout (A) and LOQO SGMC proxy (B\', B\'\') gates; '
+            'SGMC is a 1:500k state-compilation proxy, so weekly slot expenditure remains '
+            'a human selector decision (Protocol Rule 6).'
+        )
+    return {
+        'verdict': (card or {}).get('verdict', 'negative'),
+        'download_ok': download_ok,
+        'holdout_and_proxy_gates_passed': gates_ok,
+        'selector_ready': bool(download_ok and gates_ok and (card or {}).get('verdict') == 'promote'),
+        'artifact': str(tif) if tif else None,
+        'artifact_sha256': sha,
+        'submission_name': (card or {}).get('submission_name'),
+        'submission_note': (card or {}).get('submission_note'),
+        'reasons': reasons,
+        'notes': notes,
+        'weekly_slots_used': int((card or {}).get('weekly_slots_used', 0)),
+    }
+

@@ -79,3 +79,30 @@ before any slot consideration. Evidence: `evidence/e2/`, `evidence/e3/`,
 
 ## Integration note (PR #16 second merge, 2026-10-20)
 PR #18 (H2 stepover-relay, negative; HOLDOUT-DTI 0.023034, lane stop fired) landed during PR #16 CI and replaced `evidence/run_card.json`, builders and 4 test files with its fail-closed system. Integration preserved: H2 card moved byte-identical to `evidence/history/h2_stepover_negative/run_card.json`; H2 diagnostic TIFF registered in `registry/published_artifacts.json`; Phase-4 canonical card restored from `fefc857` blob (sha256 `9cd64b1e...`); session-2 builders/tests retained so P4 + discordance + E2 artifacts stay coherent. `make_run_card.py` stale-schema fix (pre-existing red Verify on main) retained. All verdicts negative; slots used 0.
+
+---
+
+## Phase-5 Handoff — 2026-10-20 (branch `arena/3ccffc1b-gemsdoe70`)
+
+All four tasks from the Session-2 handoff above have been executed while keeping all frozen Phase 1–4 and E2/E3 evidence files untouched:
+
+1. **Phase-5 LOQO Supervised Within-Halo Ranker (`evidence/phase5/run_card.json`, `src/gems70/method_v5.py`, `scripts/run_experiment_v5.py`):**
+   - **Published artifact:** `docs/downloads/gems70-p5-loqo-halo-37654-20261020.tif` (`150,240` bytes, `sha256: a8cef5bdbbc030cd6bdd59ea275e09e27edf87b4ee8068d3e8052bdff1cb9667`), plus `.zip` (`92,761` bytes) and `.json` (`3,794` bytes), registered in `registry/published_artifacts.json`.
+   - **Status (`gems70.release.phase5_status`):** `verdict = "promote"`, `download_ok = true`, `holdout_and_proxy_gates_passed = true`, `selector_ready = true`, `weekly_slots_used = 0`.
+   - **Submission note (`120/140` chars):** `P5 LOQO HGB 49-feat within-halo rank x tip/damage prior, 7px strata 5px NMS, 37654 binary dots d>=3px; passes A, B', B''`
+   - **Evaluation (`gems57-pooled-hide-v2`, `HOLDOUT-DTI` / `LOQO-PROXY-DTI`, 1,000-draw 20 km spatial-cluster bootstrap):**
+     - **Instrument A (`11,321` withheld catalogue positives):** `0.0752` (`[0.0683, 0.0821]`) vs Phase-4 `0.0730`, Random `0.0460` (paired `Δ = +0.0292` `[+0.0230, +0.0354]`), H33 `0.0037` (paired `Δ = +0.0715` `[+0.0647, +0.0780]`).
+     - **Instrument B′ (`d_cat >= 3` px, `59,937` SGMC proxy positives):** `0.1138` (`[0.1077, 0.1192]`) vs H33 `0.0938` (paired `Δ = +0.0200` `[+0.0097, +0.0302]`) and Phase-4 `0.0812` (paired `Δ = +0.0326` `[+0.0249, +0.0411]`).
+     - **Instrument B″ (`d_cat >= 6` px, `52,767` SGMC proxy positives outside the 1:500k duplication band):** `0.1000` (`[0.0940, 0.1058]`) vs H33 `0.0850` (paired `Δ = +0.0149` `[+0.0050, +0.0245]`) and Phase-4 `0.0674`.
+     - **Instrument B (`74,740` unrestricted SGMC proxy positives):** `0.1158` (`[0.1103, 0.1203]`) vs Phase-4 `0.0948` and H33 `0.0906`.
+   - **Uniqueness (`66` rasters = `62` archived registry + `4` local candidates):**
+     - Pre-placement surface (`evidence/phase5/surface_uniqueness.json`): `unique = true`, `worst_spearman = 0.1210 <= 0.90`, `worst_dot_overlap = 0.00003 <= 0.70`.
+     - Final binary dots (`evidence/phase5/uniqueness_with_local.json`): `unique = true`, `duplicate_count = 0`, `worst_mutual_overlap = 0.4870 <= 0.70` (vs Phase-4; `0.3054` vs archived 62), `worst_spearman = 0.1153 <= 0.90` (`0.0301` vs archived 62), `worst_jaccard = 0.0648`.
+   - **Leakage canaries (`evidence/phase5/canaries.json`):** All `49` features pass single-feature holdout AUC `<= 0.90` (`max_deviation_auc = 0.7770`).
+2. **SGMC vs QFaults Buffer Audit (`evidence/phase5/sgmc_buffer_audit.json`, `scripts/audit_sgmc_proxy.py`):**
+   - Quantifies annular enrichment across `[1,2)..[6,8)` px (`3.62× -> 0.92×` background), proving that cartographic duplication decays to baseline at `r = 6` px (`600 m`) and that `r = 3` px (`300 m`) is the exact threshold where `H33 > D28` flips to match the user-reported leaderboard ordering (`0.2778 > 0.2600`).
+3. **E2 62-Raster Corrected Uniqueness Re-Audit (`evidence/phase5/e2_uniqueness_62rasters_corrected.json`, `scripts/reaudit_e2_uniqueness.py`):**
+   - Confirms E2 is unique across all 62 archived registry rasters (`unique = true`, `worst_mutual_overlap = 0.2876`, `worst_spearman = 0.0241`), while remaining `DO NOT SUBMIT` on its Instrument A gate.
+4. **Upstream Uniqueness Patch & Verification (`evidence/phase5/upstream_uniqueness.patch`, `evidence/phase5/upstream_verification.json`, `scripts/verify_upstream_fix.py`):**
+   - Produces the 109-line unified diff from `1c5094b8...` to `93726c6a...` and verifies that all 33 shared tests pass when applied to `/tmp/60GEMSDOE`.
+

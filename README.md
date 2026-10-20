@@ -1,6 +1,27 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## Phase-5 Submission Status: **DOWNLOADABLE (`download_ok = true`) · PROMOTED FOR SELECTOR REVIEW (`verdict = promote`)**
+
+A new unique, format-validated Phase-5 GeoTIFF is published:
+- **File:** `docs/downloads/gems70-p5-loqo-halo-37654-20261020.tif` (and `.zip` / `.json`)
+- **SHA-256:** `a8cef5bdbbc030cd6bdd59ea275e09e27edf87b4ee8068d3e8052bdff1cb9667`
+- **Submission note (`120/140` chars):** `P5 LOQO HGB 49-feat within-halo rank x tip/damage prior, 7px strata 5px NMS, 37654 binary dots d>=3px; passes A, B', B''`
+- **Download (`download_ok`):** **YES (`true`)** — passes all 15 shared validator checks, zero dots on mapped catalogue, `37,654` binary dots in `[0, 1]`, unique across all 66 checked rasters (62 archived registry + 4 local candidates: worst mutual overlap `0.4870 <= 0.70`, worst surface Spearman `0.1210 <= 0.90`), and passes all 49 single-feature leakage canaries (`max deviation AUC = 0.7770 <= 0.90`).
+- **Holdout & LOQO Proxy Gates (`holdout_and_proxy_gates_passed`):** **YES (`true`)** — clears all three pre-registered gates (`Instrument A`, `Instrument B'` at `d >= 3` px, and `Instrument B''` at `d >= 6` px outside the 1:500k cartographic duplication band) with 95% bootstrap CIs strictly above zero.
+- **Submit a weekly slot (`weekly_slots_used = 0`):** Promoted for human selector review (`selector_ready = true`); under PARALLEL-RUN PROTOCOL Rule 6, no weekly slot was spent automatically in the sandbox because SGMC is a state-compilation proxy rather than the hidden organizer truth.
+
+| Instrument (`gems57-pooled-hide-v2`) | Phase-5 Candidate (`loqo_halo`) | Phase-5 Ablation (`no_hydro`) | Phase-4 Baseline | H33 Reference (`GEMSDOE32`) | Paired Δ (P5 vs H33) |
+|---|---:|---:|---:|---:|---|
+| **A · Catalogue holdout (`11,321` pos)** | **0.0752** `[0.0683, 0.0821]` | **0.0755** | 0.0730 | 0.0037 | `+0.0715` `[0.0647, 0.0780]` |
+| **B′ · LOQO SGMC proxy `d ≥ 3` px (`59,937` pos)** | **0.1138** `[0.1077, 0.1192]` | **0.1162** | 0.0812 | 0.0938 | **`+0.0200` `[0.0097, 0.0302]`** |
+| **B″ · LOQO SGMC proxy `d ≥ 6` px (`52,767` pos)** | **0.1000** `[0.0940, 0.1058]` | **0.1024** | 0.0674 | 0.0850 | **`+0.0149` `[0.0050, 0.0245]`** |
+| **B · Unrestricted LOQO SGMC proxy (`74,740` pos)** | **0.1158** `[0.1103, 0.1203]` | **0.1178** | 0.0948 | 0.0906 | candidate wins |
+
+- [Phase-5 run card](evidence/phase5/run_card.json) · [Phase-5 preregistration](docs/preregistration-phase5.md) · [SGMC buffer audit](evidence/phase5/sgmc_buffer_audit.json) · [E2 62-raster corrected audit](evidence/phase5/e2_uniqueness_62rasters_corrected.json) · [Upstream patch verification](evidence/phase5/upstream_verification.json)
+
+---
+
+## Frozen Phase-4 Baseline Status: **DOWNLOADABLE — NOT PROMOTED**
 
 A unique, format-validated competition TIFF is published:
 `docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
@@ -13,7 +34,7 @@ A unique, format-validated competition TIFF is published:
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## What was measured this session
+## What was measured in Phase 4
 
 Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
 alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
@@ -52,7 +73,11 @@ Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records 
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
 .venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/audit_sgmc_proxy.py    # SGMC vs QFaults buffer calibration (1-6 px)
+.venv/bin/python scripts/reaudit_e2_uniqueness.py # E2 62-raster corrected uniqueness audit
+.venv/bin/python scripts/verify_upstream_fix.py # upstream uniqueness patch & 33-test verification
+.venv/bin/python scripts/run_experiment_v5.py   # registered Phase-5 LOQO run, regenerates P5 artifact
+.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates P4 artifact
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```

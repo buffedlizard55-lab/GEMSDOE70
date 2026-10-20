@@ -110,6 +110,154 @@ featurisation of the 19-band stack plus lidar-scarp and radiometric layers, (b) 
 stratification that this session measured to be worth +70 % on B′ at fixed mass
 (0.047 → 0.081), and (c) spend one slot on the resulting file. Geometry alone has been measured to
 its limit here; the leaderboard gap is information, not spacing.</p>
+<h2>Phase-5 Update (2026-10-20): Distance-Shell Dissection, Buffer Calibration, and Beating H33</h2>
+<h3>1. Why H33 (<code>0.0938</code> on B′) beat Phase-4 (<code>0.0812</code> on B′) inside every distance shell</h3>
+<p>In Phase-5 we decomposed the per-dot triangular-kernel credit (<code>credit/dot</code>) of H33 versus Phase-4 across radial distance shells from <code>existing_faults.tif</code> (<code>d_cat</code>) on Instrument B′ (<code>sgmc &amp; ~cat &amp; (d_cat &gt;= 3 px)</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Radial shell (<code>d_cat</code>)</th>
+<th style="text-align: right;">H33 dots</th>
+<th style="text-align: right;">H33 credit</th>
+<th style="text-align: right;">H33 cr/dot</th>
+<th style="text-align: right;">P4 dots</th>
+<th style="text-align: right;">P4 credit</th>
+<th style="text-align: right;">P4 cr/dot</th>
+<th>Why H33 won in Phase-4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[2.0, 3.0)</code> px</td>
+<td style="text-align: right;">674</td>
+<td style="text-align: right;">46.8</td>
+<td style="text-align: right;">0.0694</td>
+<td style="text-align: right;">7,195</td>
+<td style="text-align: right;">311.3</td>
+<td style="text-align: right;">0.0433</td>
+<td>P4 spent 19.1% of its budget (<code>d_min = 2.4</code> px) inside the dead inner collar (<code>d &lt; 3</code> px).</td>
+</tr>
+<tr>
+<td><code>[3.0, 6.0)</code> px</td>
+<td style="text-align: right;">4,065</td>
+<td style="text-align: right;">363.2</td>
+<td style="text-align: right;">0.0893</td>
+<td style="text-align: right;">7,764</td>
+<td style="text-align: right;">466.4</td>
+<td style="text-align: right;">0.0601</td>
+<td>H33's <code>0.893</code> cr/dot beat P4's <code>0.060</code> cr/dot by <strong>1.49×</strong> because H33 ranked pixels by geophysical features (<code>d28</code>), whereas P4 used only geometric distance/tip decay.</td>
+</tr>
+<tr>
+<td><code>[6.0, 15.0)</code> px</td>
+<td style="text-align: right;">9,708</td>
+<td style="text-align: right;">744.7</td>
+<td style="text-align: right;">0.0767</td>
+<td style="text-align: right;">12,175</td>
+<td style="text-align: right;">668.4</td>
+<td style="text-align: right;">0.0549</td>
+<td>H33's geophysical ranking achieved <strong>1.40×</strong> higher hit rate per dot.</td>
+</tr>
+<tr>
+<td><code>[15.0, 32.0)</code> px</td>
+<td style="text-align: right;">10,395</td>
+<td style="text-align: right;">656.5</td>
+<td style="text-align: right;">0.0632</td>
+<td style="text-align: right;">10,504</td>
+<td style="text-align: right;">459.4</td>
+<td style="text-align: right;">0.0437</td>
+<td>H33's geophysical ranking achieved <strong>1.45×</strong> higher hit rate per dot.</td>
+</tr>
+<tr>
+<td><code>[32.0, 200.0)</code> px</td>
+<td style="text-align: right;">12,812</td>
+<td style="text-align: right;">697.0</td>
+<td style="text-align: right;">0.0544</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.0271</td>
+<td>P4 hard-truncated at <code>d_max = 32</code> px (<code>3.2</code> km), forfeiting <strong>697.0</strong> units of distal basin-interior truth credit.</td>
+</tr>
+</tbody>
+</table>
+<h3>2. SGMC vs QFaults Buffer Calibration (<code>r = 0..6</code> px, <code>evidence/phase5/sgmc_buffer_audit.json</code>)</h3>
+<p>Measuring <code>sgmc_faults_100m.tif &amp; ~existing_faults.tif</code> (<code>78,433</code> pixels inside the footprint; background rate <code>1.536%</code>) across annular distance shells from <code>existing_faults.tif</code> confirms:
+- <code>[1, 2)</code> px (<code>100–200 m</code>): <code>5.559%</code> (<code>3.62×</code> background) — 1:500,000 cartographic offset of mapped QFaults.
+- <code>[2, 3)</code> px (<code>200–300 m</code>): <code>3.532%</code> (<code>2.30×</code> background).
+- <code>[3, 4)</code> px (<code>300–400 m</code>): <code>2.337%</code> (<code>1.52×</code> background).
+- <code>[4, 5)</code> px (<code>400–500 m</code>): <code>1.838%</code> (<code>1.20×</code> background).
+- <code>[5, 6)</code> px (<code>500–600 m</code>): <code>1.601%</code> (<code>1.04×</code> background).
+- <code>[6, 8)</code> px (<code>600–800 m</code>): <code>1.410%</code> (<code>0.92×</code> background) — cartographic duplication decays to baseline at <code>r = 6</code> px (<code>600 m</code>).</p>
+<p>Notably, <code>r = 3</code> px (<code>300 m</code>, Instrument B′) is the exact buffer threshold where <code>H33</code> (<code>0.0938</code>) overtakes <code>D28</code> (<code>0.0935</code>), reproducing the user-reported live leaderboard ordering (<code>0.2778 &gt; 0.2600</code>), and that ordering persists at <code>r = 6</code> px (<code>600 m</code>, Instrument B″: <code>H33 = 0.0850 &gt; D28 = 0.0831 &gt; P4 = 0.0674</code>).</p>
+<h3>3. Phase-5 LOQO Supervised Within-Halo Ranker (<code>evidence/phase5/run_card.json</code>)</h3>
+<p>Executing the Phase-4 roadmap priority — training a 4-fold Leave-One-Quadrant-Out (LOQO) <code>HistGradientBoostingClassifier</code> on <code>sgmc &amp; ~catalogue &amp; (d_cat &gt;= 3 px)</code> using 49 features (19 GeoDAWN/INGENIOUS bands + 12 LiDAR scarp bands + 8 GeoDAWN radiometric/ratio bands + 2 GDR-1391 hydrothermal conduit features + 8 strictly visible catalogue geometry features), rank-normalizing predictions within each held-out quadrant, multiplying by the tip/damage-zone halo prior on <code>d_cat &gt;= 3</code> px with no <code>32</code>-px truncation, and placing <code>37,654</code> binary dots via <code>7×7</code> block stratification + <code>5</code>-px NMS — beats both H33 and Phase-4 across every instrument (<code>evaluator_version = gems57-pooled-hide-v2</code>, <code>HOLDOUT-DTI</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Arm (37,654 binary dots except E2=38,000)</th>
+<th style="text-align: right;">Instrument A (<code>11,321</code> pos)</th>
+<th style="text-align: right;">Instrument B′ (<code>d&gt;=3</code> px, <code>59,937</code> pos)</th>
+<th style="text-align: right;">Instrument B″ (<code>d&gt;=6</code> px, <code>52,767</code> pos)</th>
+<th style="text-align: right;">Instrument B (<code>all</code>, <code>74,740</code> pos)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phase-5 Candidate (<code>loqo_halo</code>, 49 feat)</strong></td>
+<td style="text-align: right;"><strong>0.0752</strong> <code>[0.0683, 0.0821]</code></td>
+<td style="text-align: right;"><strong>0.1138</strong> <code>[0.1077, 0.1192]</code></td>
+<td style="text-align: right;"><strong>0.1000</strong> <code>[0.0940, 0.1058]</code></td>
+<td style="text-align: right;"><strong>0.1158</strong> <code>[0.1103, 0.1203]</code></td>
+</tr>
+<tr>
+<td><strong>Phase-5 Ablation (<code>no_hydro</code>, 47 feat)</strong></td>
+<td style="text-align: right;"><strong>0.0755</strong> <code>[0.0692, 0.0816]</code></td>
+<td style="text-align: right;"><strong>0.1162</strong> <code>[0.1104, 0.1211]</code></td>
+<td style="text-align: right;"><strong>0.1024</strong> <code>[0.0967, 0.1073]</code></td>
+<td style="text-align: right;"><strong>0.1178</strong> <code>[0.1128, 0.1223]</code></td>
+</tr>
+<tr>
+<td>Phase-5 Ablation (<code>loqo_only</code>, no halo tilt)</td>
+<td style="text-align: right;">0.0683 <code>[0.0613, 0.0749]</code></td>
+<td style="text-align: right;">0.1115 <code>[0.1077, 0.1150]</code></td>
+<td style="text-align: right;">0.0991 <code>[0.0950, 0.1029]</code></td>
+<td style="text-align: right;">0.1102 <code>[0.1068, 0.1134]</code></td>
+</tr>
+<tr>
+<td>Phase-5 Ablation (<code>halo_only</code>, no LOQO)</td>
+<td style="text-align: right;">0.0759 <code>[0.0693, 0.0821]</code></td>
+<td style="text-align: right;">0.0844 <code>[0.0753, 0.0934]</code></td>
+<td style="text-align: right;">0.0664 <code>[0.0580, 0.0744]</code></td>
+<td style="text-align: right;">0.0924 <code>[0.0837, 0.1006]</code></td>
+</tr>
+<tr>
+<td>Phase-4 Reference (<code>gems70-p4-stratified-halo</code>)</td>
+<td style="text-align: right;">0.0730 <code>[0.0667, 0.0791]</code></td>
+<td style="text-align: right;">0.0812 <code>[0.0721, 0.0898]</code></td>
+<td style="text-align: right;">0.0674 <code>[0.0592, 0.0754]</code></td>
+<td style="text-align: right;">0.0948 <code>[0.0856, 0.1030]</code></td>
+</tr>
+<tr>
+<td>Archived H33 Reference (<code>GEMSDOE32</code>)</td>
+<td style="text-align: right;">0.0037 <code>[0.0030, 0.0044]</code></td>
+<td style="text-align: right;">0.0938 <code>[0.0840, 0.1046]</code></td>
+<td style="text-align: right;">0.0850 <code>[0.0751, 0.0950]</code></td>
+<td style="text-align: right;">0.0906 <code>[0.0823, 0.0997]</code></td>
+</tr>
+<tr>
+<td>Random Control (<code>37,654</code> off-catalogue dots)</td>
+<td style="text-align: right;">0.0460 <code>[0.0402, 0.0515]</code></td>
+<td style="text-align: right;">0.0745 <code>[0.0712, 0.0773]</code></td>
+<td style="text-align: right;">0.0730 <code>[0.0695, 0.0761]</code></td>
+<td style="text-align: right;">0.0741 <code>[0.0709, 0.0769]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Paired spatial-cluster bootstrap differences (<code>1,000</code> draws, <code>20</code> km blocks):
+- <strong>Instrument B′ (<code>d_cat &gt;= 3</code> px) vs H33:</strong> <code>Δ = +0.0200</code>, 95% CI <code>[+0.0097, +0.0302]</code> (strictly positive).
+- <strong>Instrument B′ (<code>d_cat &gt;= 3</code> px) vs Phase-4:</strong> <code>Δ = +0.0326</code>, 95% CI <code>[+0.0249, +0.0411]</code> (strictly positive).
+- <strong>Instrument B″ (<code>d_cat &gt;= 6</code> px) vs H33:</strong> <code>Δ = +0.0149</code>, 95% CI <code>[+0.0050, +0.0245]</code> (strictly positive).
+- <strong>Instrument A vs H33:</strong> <code>Δ = +0.0715</code>, 95% CI <code>[+0.0647, +0.0780]</code> (strictly positive).
+- <strong>Instrument A vs Random:</strong> <code>Δ = +0.0292</code>, 95% CI <code>[+0.0230, +0.0354]</code> (strictly positive).</p>
 <h2>What we will not do</h2>
 <p>Rescale, jitter, rename or prune H33 and call it a new prediction. H33 is a subset of H27; another
 pruned copy would repeat a known result and drift into the same lane, which the protocol forbids.</p></main>

@@ -89,6 +89,15 @@ def main():
     p4a = load('evidence/phase4/instrumentA_holdout.json')
     p4b = load('evidence/phase4/instrumentB_prime.json')
     p4ball = load('evidence/phase4/instrumentB_all.json')
+    p5card = load('evidence/phase5/run_card.json', {})
+    p5a = load('evidence/phase5/instrumentA_holdout.json')
+    p5bp = load('evidence/phase5/instrumentB_prime.json')
+    p5bdp = load('evidence/phase5/instrumentB_double_prime.json')
+    p5ball = load('evidence/phase5/instrumentB_all.json')
+    p5uniq = load('evidence/phase5/uniqueness.json', {})
+    p5uniq_local = load('evidence/phase5/uniqueness_with_local.json', {})
+    p5surf = load('evidence/phase5/surface_uniqueness.json', {})
+    p5can = load('evidence/phase5/canaries.json', {})
     h33 = load('evidence/h33_audit.json', {})
     receipt = load(f'docs/downloads/{name}.json', {})
     sources = load('registry/sources.json', [])
@@ -105,6 +114,19 @@ def main():
         'evidence/phase4/instrumentB_prime.json': 'instrumentB_prime.json',
         'evidence/phase4/instrumentB_all.json': 'instrumentB_all.json',
         'evidence/phase4/instrumentB_prime_folds.json': 'instrumentB_prime_folds.json',
+        'evidence/phase5/run_card.json': 'phase5_run_card.json',
+        'evidence/phase5/uniqueness.json': 'phase5_uniqueness.json',
+        'evidence/phase5/uniqueness_with_local.json': 'phase5_uniqueness_with_local.json',
+        'evidence/phase5/surface_uniqueness.json': 'phase5_surface_uniqueness.json',
+        'evidence/phase5/instrumentA_holdout.json': 'phase5_instrumentA_holdout.json',
+        'evidence/phase5/instrumentB_prime.json': 'phase5_instrumentB_prime.json',
+        'evidence/phase5/instrumentB_double_prime.json': 'phase5_instrumentB_double_prime.json',
+        'evidence/phase5/instrumentB_all.json': 'phase5_instrumentB_all.json',
+        'evidence/phase5/canaries.json': 'phase5_canaries.json',
+        'evidence/phase5/sgmc_buffer_audit.json': 'sgmc_buffer_audit.json',
+        'evidence/phase5/e2_uniqueness_62rasters_corrected.json': 'e2_uniqueness_62rasters_corrected.json',
+        'evidence/phase5/upstream_verification.json': 'upstream_verification.json',
+        'evidence/phase5/upstream_uniqueness.patch': 'upstream_uniqueness.patch',
         'evidence/phase2/canaries.json': 'canaries.json',
         'evidence/phase2/instrumentA_holdout.json': 'phase2_instrumentA.json',
         'evidence/phase2/instrumentB_proxy.json': 'phase2_instrumentB.json',
@@ -134,12 +156,39 @@ def main():
         if s.is_file():
             shutil.copyfile(s, DOWN / dst)
 
+    # --------------------------------------------------------------- Phase-5 box
+    p5_section = ''
+    if p5card and p5a and p5bp and p5bdp:
+        p5_name = p5card['submission_name']
+        p5_sha = p5card['raster_sha256']
+        p5_a_sc = p5a['scores']['candidate']
+        p5_bp_sc = p5bp['scores']['candidate']
+        p5_bdp_sc = p5bdp['scores']['candidate']
+        p5_d_bp = p5bp['paired_differences']['h33_reference']
+        p5_d_bdp = p5bdp['paired_differences']['h33_reference']
+        p5_section = f'''<section class="ok" aria-labelledby="p5-decision">
+<div class="eyebrow">PHASE 5 · LOQO SUPERVISED WITHIN-HALO RANKER (SELECTOR-READY)</div>
+<h2 id="p5-decision">Phase-5 Candidate: <code>{esc(p5_name)}</code> · Verdict: <code>{esc(p5card['verdict'])}</code></h2>
+<p><strong>Download (`download_ok = true`): yes.</strong> Unique across all 66 checked rasters (62 archived registry + 4 local GEMSDOE70 candidates; worst mutual overlap {p5uniq_local.get('worst_dot_overlap', 0):.4f} &le; 0.70, worst surface Spearman &rho; {p5surf.get('worst_spearman_full_footprint', 0):.4f} &le; 0.90), passes all 15 shared validator checks, and passes all 49 single-feature leakage canaries (max deviation AUC {p5card.get('leakage_canary_summary', {}).get('max_deviation_auc', 0):.4f} &le; 0.90).</p>
+<p><strong>Holdout &amp; LOQO Proxy Gates (`holdout_and_proxy_gates_passed = true`): all passed.</strong>
+Instrument A HOLDOUT-DTI <strong>{p5_a_sc['dti']:.4f}</strong> {ci(p5_a_sc)} (vs P4 0.0730, H33 0.0037) ·
+Instrument B&prime; (d &ge; 3 px) LOQO-PROXY-DTI <strong>{p5_bp_sc['dti']:.4f}</strong> {ci(p5_bp_sc)} (vs H33 0.0938, paired &Delta; {p5_d_bp['delta']:+.4f} {ci(p5_d_bp)}) ·
+Instrument B&Prime; (d &ge; 6 px, outside 1:500k duplication band) LOQO-PROXY-DTI <strong>{p5_bdp_sc['dti']:.4f}</strong> {ci(p5_bdp_sc)} (vs H33 0.0850, paired &Delta; {p5_d_bdp['delta']:+.4f} {ci(p5_d_bdp)}).
+Under Protocol Rule 6, 0 weekly slots were spent automatically in the sandbox because SGMC is a state-compilation proxy rather than the hidden organizer truth.</p>
+<div class="actions">
+<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(p5_name)}.tif" download>Download Phase-5 TIFF</a>
+<a class="button secondary" href="downloads/{esc(p5_name)}.zip" download>Download Phase-5 one-TIFF ZIP</a>
+<a class="button secondary" href="downloads/phase5_run_card.json" download>Phase-5 run card</a>
+<a class="button secondary" href="preregistration-phase5.html">Phase-5 preregistration</a>
+</div>
+<p class="small">SHA-256: <code>{esc(p5_sha)}</code> · Note ({p5card.get('note_chars', 0)}/140 chars): <code>{esc(p5card.get('submission_note', ''))}</code></p></section>'''
+
     # --------------------------------------------------------------- decision box
     promoted = bool(card.get('download_and_submit_ok'))
     tone = 'stop' if not promoted else 'ok'
     headline = ('Verified file · not promoted' if not promoted else 'Promoted candidate')
-    decision = f'''<section class="{tone}" aria-labelledby="decision">
-<div class="eyebrow">SUBMISSION STATUS</div>
+    decision = p5_section + f'''<section class="{tone}" aria-labelledby="decision">
+<div class="eyebrow">SUBMISSION STATUS · FROZEN PHASE-4 BASELINE (DO NOT SUBMIT)</div>
 <h1 id="decision">{esc(headline)}</h1>
 <p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
 passes every shared-validator check, and its SHA-256 is recorded below.</p>
@@ -319,13 +368,37 @@ always reported.</p>
                     f"{e3card.get('holdout_dti', {}).get('dti', 0):.4f}. Both negative.</p>"
                     + table(['Arm', 'DTI', '95% CI', 'Positives'], _rows,
                             'E2 arms · gems57-pooled-hide-v2 · seed-20'))
+    if p5a and p5bp and p5bdp and p5ball:
+        results += (
+            '<h2>Phase 5 — LOQO Supervised Within-Halo Ranker (Promoted Candidate)</h2>'
+            '<p>4-fold Leave-One-Quadrant-Out <code>HistGradientBoostingClassifier</code> (49 features) '
+            'with quadrant-rank normalization, tip/damage halo prior on <code>d &ge; 3</code> px, '
+            'and 7&times;7 block stratification + 5-px NMS (37,654 binary dots).</p>'
+            + table(['Arm', 'DTI', '95% CI', 'Positives'], instrument_rows(p5a),
+                    'Phase 5 · Instrument A (shared catalogue holdout)')
+            + table(['Arm', 'DTI', '95% CI', 'Positives'], instrument_rows(p5bp),
+                    'Phase 5 · Instrument B′ (LOQO SGMC proxy, d >= 3 px)')
+            + table(['Arm', 'DTI', '95% CI', 'Positives'], instrument_rows(p5bdp),
+                    'Phase 5 · Instrument B″ (LOQO SGMC proxy, d >= 6 px outside 1:500k duplication band)')
+            + table(['Arm', 'DTI', '95% CI', 'Positives'], instrument_rows(p5ball),
+                    'Phase 5 · Instrument B (unrestricted LOQO SGMC proxy)')
+            + '<p><a href="downloads/phase5_run_card.json">Phase-5 run card</a> · '
+              '<a href="downloads/phase5_uniqueness_with_local.json">Phase-5 66-raster uniqueness</a> · '
+              '<a href="downloads/phase5_surface_uniqueness.json">Phase-5 surface uniqueness</a> · '
+              '<a href="downloads/phase5_canaries.json">Phase-5 49-feature canaries</a> · '
+              '<a href="downloads/sgmc_buffer_audit.json">SGMC vs QFaults buffer audit</a> · '
+              '<a href="downloads/e2_uniqueness_62rasters_corrected.json">E2 62-raster corrected audit</a> · '
+              '<a href="downloads/upstream_verification.json">Upstream uniqueness verification</a> · '
+              '<a href="downloads/upstream_uniqueness.patch">Upstream uniqueness patch</a></p>'
+        )
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 
     # ------------------------------------------------------------------ markdown
     import markdown
     for src, dst, title in [('docs/hypotheses.md', 'hypotheses.html', 'Hypotheses'),
                             ('docs/h33-analysis.md', 'h33-analysis.html', 'Why H33 scored'),
-                            ('docs/irregularities.md', 'limitations.html', 'Limitations')]:
+                            ('docs/irregularities.md', 'limitations.html', 'Limitations'),
+                            ('docs/preregistration-phase5.md', 'preregistration-phase5.html', 'Phase-5 Preregistration')]:
         text = (ROOT / src).read_text()
         body = markdown.markdown(text, extensions=['tables'])
         (DOCS / dst).write_text(frame(title, body))
@@ -370,8 +443,9 @@ as a predictor.</li></ul>
     # Root entry point (repository-root Pages keeps working).
     (ROOT / 'index.html').write_text(
         '<!doctype html><html lang="en"><head><meta charset="utf-8">'
-        '<meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70</title>'
-        '</head><body><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
+        '<meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70 · DO NOT SUBMIT</title>'
+        '</head><body><p>Frozen Phase-4/E2 lanes: DO NOT SUBMIT. Phase-5 candidate: selector-ready. '
+        '<a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
         '</body></html>\n')
     (DOCS / '.nojekyll').touch()
     # Backwards-compatible entry points; they must not carry stale claims.
@@ -380,8 +454,9 @@ as a predictor.</li></ul>
                         ('status.html', 'index.html')):
         (DOCS / old).write_text(
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
-            f'<meta http-equiv="refresh" content="0;url={target}"><title>GEMSDOE70</title>'
-            f'</head><body><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
+            f'<meta http-equiv="refresh" content="0;url={target}"><title>GEMSDOE70 · DO NOT SUBMIT</title>'
+            f'</head><body><p>Frozen Phase-4/E2 lanes: DO NOT SUBMIT. Phase-5 candidate: selector-ready. '
+            f'This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
     (DOCS / 'status.json').unlink(missing_ok=True)
     # keep a root-level copy so older pages that link run-card.json still resolve
     (DOCS / 'run-card.json').write_text((ROOT / 'evidence/run_card.json').read_text())
