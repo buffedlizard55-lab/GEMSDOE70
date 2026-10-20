@@ -1,59 +1,54 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **DO NOT SUBMIT — no eligible TIFF**
+## Submission status: **DO NOT SUBMIT — the generated GeoTIFF is not cleared**
 
-The fixed contact-termination experiment failed the literal surface uniqueness gate.
-Final dot placement and submission export stopped. **No previous submission was
-copied, renamed or advertised as a new prediction. No weekly slot was used.**
-The requested unique downloadable competition TIFF is **not fulfilled**; the
-protocol's verified dense-prior blocker makes it impossible for any nonempty
-candidate to pass its current literal support rule. A negative result is retained
-instead of an unsafe download.
+Current candidate **C1** (strike-coherent catalogue extrapolation, pre-registered in
+[docs/candidates-2026-10-20.md](docs/candidates-2026-10-20.md)) produced a format-valid,
+unique-named single-band float32 GeoTIFF, `submissions/gems70-c1-strike-catalogue-NOT-CLEARED-20261020.tif` (git-ignored,
+LOCAL-FORMAT-VALIDATION only). **It is not OK to download or submit.** Two gates fail:
 
-- [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission guide](docs/executive-summary.html)
-- [Run card](evidence/run_card.json) · [Measured results](evidence/holdout.json)
-- [H33 forensic analysis](docs/h33-analysis.md) · [Four preregistered hypotheses](docs/hypotheses.md)
-- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
+- **Holdout (HOLDOUT-DTI, evaluator `gems57-pooled-hide-v2`, holdout seed 71):** C1 0.00557
+  (95% CI [0.00352, 0.00803]) is below the random sparse control
+  0.04838 and the catalogue-free ablation 0.00902. Paired difference vs random:
+  -0.04281.
+- **Registry (REGISTRY-MEASUREMENT, complete scan of 862 of 862 indexed rasters):**
+  40 sparse dot-field rasters exceed the literal 3 px overlap limit of 0.70 (worst 1.0, a 13GEMSDOE lattice file).
+
+The leakage canary passed. No tuning on holdout seed 71 was made. No previous submission was copied.
+
+- [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission guide (how to submit)](docs/executive-summary.html)
+- [C1 run card](evidence/c1_run_card.json) · [C1 holdout](evidence/c1_holdout.json) · [registry scan](evidence/c1_registry_scan.json)
+- [Official-source ledger, verified 2026-10-20](evidence/official_sources_2026-10-20.json) · [Candidate ranking](docs/candidates-2026-10-20.md)
+- [Limitations / irregularities](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## What was verified
+## Official facts used (verified 2026-10-20; quotes in the ledger)
 
-This checkout originally contained only an eleven-byte README. We restored the
-cached numerical stack, sample and mapped faults from pinned owner mirrors;
-checksums prove mirror consistency, not organizer authentication. Shared
-`evaluate_holdout.py`, `submission_writer.py`, metric, holdout and uniqueness
-tools are reused unchanged from the pinned template. Their upstream blob/hash
-verification is in [evidence/template_verification.json](evidence/template_verification.json).
+- Format: one GeoTIFF, single layer, float32, values between 0 and 1, EPSG 32611, 100 m,
+  same bounds; outside bounds “null or nan” (problem page).
+- Deadline: competition page “Dec. 3, 2026, 11:59 p.m. UTC”; rules A.1 “5:00 p.m. ET on the prize
+  submission deadline date”. Plan to the earlier cutoff. This discrepancy is unresolved.
+- Limits: up to three submissions per week; one final submission chosen before the deadline (rules §3.4–3.5).
+- Eligibility, generative-AI narrative disclosure and external-data license rules: rules §1.2–1.3, §3.2.
+  You must confirm eligibility yourself. Nothing here checks it.
+- Upload path: enroll, then Submit → Make new submission (competition page, steps 1 and 6).
 
-One fixed CPU experiment targeted magnetic-edge termination along gravity-supported
-basement boundaries. Each raw/derived feature received its own leakage canary and
-holdout score. No catalogue-derived predictor was used. Whole connected fault
-components were hidden with a feature-context buffer and spatial erosion, visible
-faults were masked pixel-exactly, and weighted metric terms were pooled before a
-paired spatial-cluster bootstrap.
+## Experiments (budget: 3 experiments or 2 hours; 2 used)
 
-**HOLDOUT-DTI:** 0.010193, 95% CI [0.006062, 0.015042],
-11,321 withheld positive pixels, evaluator
-`gems57-pooled-hide-v2`. This is the continuous pre-placement surface, not final
-dots and not a leaderboard score. It underperforms the random sparse control;
-no same-split current-best claim is made. See the full receipt for controls and
-paired intervals.
+1. **E1, magnetic-edge termination (seed 20):** stopped by the surface-uniqueness gate; no TIFF written.
+   HOLDOUT-DTI 0.010193, below the random control. Negative.
+2. **E2, C1 (seed 71):** described above. Negative. Its post-hoc binary diagnostic is labeled not preregistered and not a promotion basis.
 
-**REGISTRY-MEASUREMENT:** one decisive, SHA-verified continuous prior covers the
-whole footprint. Surface Spearman is 0.036308;
-three-pixel forward support overlap is 1.0, above the literal 0.70 stop threshold.
-The [saturation certificate](evidence/registry_saturation.json) proves this blocks
-every nonempty off-catalogue candidate under the inherited support definition.
-This is a representation/protocol conflict, not evidence that all geological
-methods are identical. No private density exemption was used. Only this witness
-was checked: a complete fresh uniqueness clearance is **not** claimed.
+Slot selection (the weekly cap of three) is a separate step. No slot is used.
 
-The user-reported H33 historical value has **no ORGANIZER-CONFIRMED receipt** here.
-Actual bytes show H33 is the previous sparse field with catalogue-near dots deleted.
-The site explains conditional metric efficiency without inferring hidden labels or
-promising a higher score. Conflicting leaderboard values in the prompt remain
-unverified. Official non-GitHub pages failed access here; we do not call that a
-verified login redirect.
+## Known gaps (not fixed in this session)
+
+- **Registry coverage is incomplete.** The index dates from 2026-10-12. Eleven repos in the
+  owner namespace (GEMSDOE69 and GEMSDOE73–GEMSDOE82) are not in it; ten of them were created on 2026-10-20.
+  Their rasters were **not** checked, because the GitHub API rate limit was reached during this session.
+  This cannot clear C1, but a complete scan is still required before any candidate is cleared.
+- Leaderboard numbers are JavaScript-rendered and were not readable. No ORGANIZER-CONFIRMED score exists.
+- The shared writer writes 0 outside the footprint, not NaN. Portal acceptance of that is unverified.
 
 ## Reproduce the workbench
 
@@ -66,50 +61,21 @@ bash scripts/download_competition_data.sh  # pinned public owner mirrors, not Dr
 .venv/bin/python -m pytest -q
 ```
 
-`run_experiment.py` is the preserved one-experiment implementation; it deliberately
-refuses a second attempt when its manifest already exists. Do not delete the
-manifest to tune on reported holdout blocks. `build_submission.py` exits with a
-clear blocked status, never creates a decoy TIFF. The shared writer's real
-TIFF/one-TIFF-ZIP round trip, range rejection and no-overwrite behavior are tested
-with temporary synthetic fixtures only. No synthetic fixture is published.
-
-The static Pages site reports evidence; it does not train or generate in-browser.
-A fresh reviewed scientific run, resolved protocol, complete two-stage audit and
-separate weekly-slot selection are needed before enabling a real artifact link.
-[Source-health workflow](.github/workflows/source-health.yml) refreshes availability
-as a downloadable Actions artifact; it is not an authenticated live-score feed.
-
-## Concurrent review history
-
-Two parallel reviews merged into main during this session. Their reports, source
-notes, bridge fixtures, audit helpers and software tests are retained. The earlier
-review-only run card and handoff are archived under
-[evidence/history/parallel-review2](evidence/history/parallel-review2/), where their
-zero-experiment statements remain historically accurate. The canonical current
-card records the one fixed experiment reported here. Legacy publication entry
-points now delegate to this evidence-driven site; `make_run_card.py` verifies the
-existing card rather than overwrite it with an older schema.
-
-A subsequent concurrent H70-C publication (PRs 4/5) contained explicit
-simulated/placeholder holdout values in its source and checked novelty against
-only H33. Its source, documents and TIFFs are preserved in
-`quarantine/concurrent-h70c` with hash evidence, but removed from site downloads.
-Those historical READY / score claims are withdrawn, not endorsed as measurements.
-See [the quarantine receipt](evidence/concurrent_h70c_quarantine.json).
+Shared `evaluate_holdout.py`, `submission_writer.py` and the metric are reused unchanged from
+vendor/gems57 (pinned; byte identity is recorded in evidence/template_verification.json).
+Do not rerun `scripts/run_experiment.py`. Do not tune an experiment after seeing its holdout.
 
 ## Own the outcome
 
-Do not use “maximize probability of winning” as permission to hide negatives,
-overstate verification, spend unvalidated slots or weaken uniqueness. Honest
-negative evidence and clear stop conditions protect future experiments. Next-session
-priorities and unmet requirements are explicit in HANDOFF.md and the limitations page.
+Maximizing the probability of winning does not mean hiding negatives, overstating verification
+or spending unvalidated slots. A negative result with a clear stop condition is the correct output
+here. Next-session priorities are in HANDOFF.md and the limitations page.
 
 ## Complete retained project prompt
 
-Historical statements below are user-supplied requirements/claims, not verified
-current results. No leaderboard value below becomes ORGANIZER-CONFIRMED by being
-copied into this README. The dedicated PROJECT_BRIEF.md is the source for this
-embedded copy (formatting whitespace normalized from the supplied message).
+Historical statements below are user-supplied requirements, not verified current results. No
+leaderboard value below becomes ORGANIZER-CONFIRMED by being copied here. PROJECT_BRIEF.md is the
+source for this embedded copy (whitespace normalized from the supplied message).
 
 <details>
 <summary>Read the complete supplied project brief before every session</summary>

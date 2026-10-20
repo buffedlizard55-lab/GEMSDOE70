@@ -1,24 +1,43 @@
-# Irregularities and limitations
+# Irregularities, limitations and remaining work
 
-- **No eligible TIFF.** The scientific run failed the literal surface overlap gate. Per the explicit stop rule, final dots were not placed and no submission TIFF/ZIP was written. A cosmetic file, previous submission copy, all-zero decoy or metadata-only rename would not fulfill the request for a unique prediction. The requested downloadable competition artifact remains unmet.
-- **Literal protocol is globally saturated.** A newly SHA-verified archived continuous prediction is positive on every footprint cell. Its three-pixel halo covers every allowed off-catalogue cell. Any nonempty candidate necessarily has full forward overlap under the inherited support definition. This is a protocol/representation conflict, not proof of scientific method duplication. It is logged as a duplicate and stops this run nonetheless. No density exemption was applied.
-- **Concurrent unsafe readiness claims quarantined.** While this PR was being prepared, other sessions merged H70-C TIFFs and a READY TO SUBMIT site into main. The preserved generation source explicitly says it will “simulate plausible but label as HOLDOUT” and contains placeholder holdout numbers and hardcoded canary claims; these are not accepted as measurements. Its greedy uniqueness check uses only H33, not the universal dense witness. The source, documents and artifacts are retained under `quarantine/concurrent-h70c`, with hashes in `evidence/concurrent_h70c_quarantine.json`, removed from website downloads and not endorsed. This is a separate session's artifact, not an additional experiment run here.
-- **Lane paragraph missing.** A provisional single-method lane was declared before the experiment. No uniqueness or geological novelty claim is made across all private parallel sessions.
-- **Initially empty checkout.** Only an eleven-byte README existed. Claims that this checkout already had a train/inference pipeline, GPU requirement, or only a data-placement blocker were not true of the checked-out files. A CPU fixed-feature experiment was feasible; we did not pretend to train an unavailable model.
-- **Scoped family review.** We inspected source/artifacts from GEMSDOE32, the pinned shared template in 60GEMSDOE, and the latest GEMSDOE69 handoff; inherited registry metadata covers more repositories. We did not independently review every line of every linked website or reauthenticate every historical score.
-- **Not current leaderboard facts.** Multiple conflicting leader values in the supplied prompt have no authenticated organizer receipts here. Neither the historical H33 claim nor any projection is labelled ORGANIZER-CONFIRMED. No weekly cap is guessed.
-- **Network and identity limits.** Official DrivenData, USGS, GDR and NLR pages failed retrieval here. GitHub-hosted organizer reference content was retrieved and pinned. Public mirrors were restored and checksum-matched, but mirror identity is not independent organizer authentication, license clearance or proof that all files are current.
-- **Holdout transfer limits.** Whole mapped connected components are withheld with buffered visible context and spatially eroded quadrants. This is not the hidden organizer truth. No catalogue-derived feature is used. Feature-ranking is an unsupervised whole-footprint transform, not supervised cross-validation. Confidence intervals are conditional spatial-cluster bootstrap intervals, not leaderboard intervals.
-- **Current-best comparison unavailable.** Current-best methodology has not been rerun on this identical split. The ablation and random sparse control are diagnostics, not a certificate of beating the family best. The candidate also underperforms the random control.
-- **No final-dot metric or file validator result.** Array checks are recorded, not disguised as a validated GeoTIFF receipt. The run card uses null values with reasons for unperformed stages.
-- **Shared-template prose defect.** The `metric.py` docstring says marginal truth coverage is bounded by nearest-truth self-credit (`dT <= k`). This is false when a dot covers several truth pixels. Executable arithmetic returns the correct multiple-pixel coverage. An upstream issue-creation attempt was denied by the GitHub integration (`Resource not accessible by integration`); the report is retained in `evidence/upstream_metric_report.md` and is not claimed filed. The byte-pinned template has not been privately modified. Our explanation and regression test use the general inequality without that assumption.
-- **Boundary-fill implementation limitation.** The frozen experiment erodes the feature domain before nearest-finite filling, which creates a new fill boundary at that interior mask. Its comment about guarding all filter-boundary effects is too strong: smoothing can still affect pixels near that new boundary. No positive inference is based on this run. Do not alter the source pins or rerun the stopped experiment to repair its result; a future preregistered implementation should fill from the original finite data domain, then apply an output-support erosion after filtering, with a dedicated edge test.
-- **Scientific resolution.** The cached basement/gravity layers may share inversion priors; magnetic changes can reflect magnetization, lithology, or leveling residuals. No geothermal vent, resource, or active fault is claimed discovered.
+Status as of 2026-10-20. Current candidate C1: **DO NOT SUBMIT**. Nothing here is ORGANIZER-CONFIRMED.
 
-## Next session, in priority order
+## Irregularities found in the official material or in this repository
 
-1. Resolve the literal continuous-surface/dot representation conflict at the shared protocol level. Until then, no nonempty submission can pass. Do not silently change the threshold or registry support definition.
-2. Obtain an explicit lane paragraph, official sample/data identity and rule confirmation, and a current-best implementation on a comparable holdout split. Do not request credentials in chat.
-3. Use the archived negative evidence to reject the present fixed ranking. A fresh preregistered idea must use untouched evaluation blocks and satisfy the budget; do not tune this experiment on its reported holdout.
-4. Verify scientific literature/data licensing from official sources when network access permits. The research queue is not a list of verified discoveries.
-5. Only after a successful complete surface audit: place final dots, repeat the complete literal registry audit, invoke the shared writer, validate the exact bytes, bind the receipt/hash and publish a one-click file. Weekly-slot selection remains separate.
+- **Deadline mismatch.** The competition page gives “Dec. 3, 2026, 11:59 p.m. UTC”. Rules A.1 require posting “by 5:00 p.m. ET on the prize submission deadline date”, which is 22:00 UTC on Dec. 3. The earlier cutoff is the safe one. Confirm with the organizers (gemsprize@nlr.gov is listed on the competition page).
+- **Sample described as “total fault absence”, but not all-zero.** The problem page calls `sample_submission.tif` a prediction of total absence. The local copy has finite cells exactly {0, 1} with 60,988 ones (measured in an earlier session). Treat the sample as a format template only. Its values are not a model of absence.
+- **Outside-footprint convention.** The problem page says data outside the bounds is “null or nan”. The sample uses NaN there. Our shared writer writes 0 outside the footprint (C1 export: `nan_count` 0, `outside_footprint_positive` 0). The validator accepts this locally. Organizer acceptance is not verified.
+- **Source checksums are not authentication.** Competition data came from pinned public owner mirrors. The checksums show consistency with each other, not organizer authorship.
+- **Leaderboard not readable.** The DrivenData leaderboard is rendered by script. Leader values in the prompt (for example 0.2778 and 0.4413) remain unverified.
+- **Data tab requires login.** The data page redirects to login; the official data files were not fetched directly from DrivenData.
+- **Generative AI disclosure.** Rules §3.2 require a narrative disclosure. The narrative must be written and checked before any submission.
+- **Rules reference.** The DrivenData rules page only links to HeroX, which links to the NLR PDF. We used the PDF (dated SEPTEMBER 2026).
+
+## Registry coverage gaps (must fix before any candidate is cleared)
+
+- **Index age.** `registry/inherited_registry_index.json` was generated 2026-10-12. The complete scan covers the 862 rasters in it and nothing newer.
+- **Eleven owner repos are not in the index:** GEMSDOE69 and GEMSDOE73 through GEMSDOE82 (ten of them were created on 2026-10-20). Their rasters were not scanned: the GitHub API rate limit was reached during this session (HTTP 403). This does not change the C1 verdict, which is already negative, but it means the uniqueness claim for any future candidate must include them.
+- **Literal overlap rule.** The shared 3 px overlap rule (limit 0.70) flags lane collisions. It is not a quality measure. A random raster can pass it while scoring poorly, and a good raster can fail it. Its effect on a good candidate is unmeasured. Do not exempt or reinterpret it without a revised protocol (AGENTS.md rule 5).
+
+## Scientific limitations
+
+- **C1 is negative on the pre-registered holdout.** HOLDOUT-DTI 0.005570 is below the random sparse control (0.048375) and the catalogue-free ablation (0.009023). The leakage canary passed. The candidate is not promoted, and the holdout seed 71 must not be used for tuning.
+- **Post-hoc transform diagnostic.** The binary top-2% test is not preregistered. It does not rescue C1 (random control 0.0622 vs C1 0.0121). It is reported for transparency only.
+- **Holdout proxy.** Mapped connected components are a surrogate for previously unmapped faults. The organizer's hidden labels are not available. Confidence intervals are conditional on the fitted folds, catalogue labels and budgets.
+- **No current-best comparison.** The current best method has not been rerun on the identical split. Controls are not a certificate of beating the family best.
+- **Continuous surfaces, not final dots.** All holdout numbers are for continuous pre-placement surfaces. The final placement step and its full-inventory uniqueness audit have not been done.
+
+## Process limitations
+
+- **Experiment budget.** 2 of 3 experiments used (E1 magnetic-edge termination, E2 C1). The 2-hour budget is nearly exhausted.
+- **No weekly slot used.** Submissions are capped at three per week (rules §3.2 and §3.4). Slot selection is a separate step and was not performed.
+- **Eligibility not checked.** Rules §1.3 require U.S. citizenship or permanent residence for individuals, and U.S. incorporation for private entities. The user must confirm this.
+- **Concurrent sessions.** Other sessions have pushed material into main at various times (for example the quarantined H70-C artifacts). They are not endorsed here. See `evidence/concurrent_h70c_quarantine.json`.
+
+## Remaining work, in order
+
+1. Scan the eleven uncovered owner repos (GEMSDOE69, GEMSDOE73–82) once the API rate limit resets; rerun `scripts/registry_scan.py` against an index that includes them.
+2. Resolve the deadline discrepancy with the organizers, and confirm the outside-footprint convention (0 vs NaN) through an official channel.
+3. Decide whether to preregister a third experiment on a fresh seed (C2, C5 or C3). Do not tune C1 on seed 71.
+4. Write the generative-AI narrative and confirm eligibility before any submission.
+5. Only after a candidate passes the holdout gate and the complete registry scan may a file be made downloadable. A separate weekly-slot selection is then required.

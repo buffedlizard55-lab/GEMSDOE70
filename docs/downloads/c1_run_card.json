@@ -1,0 +1,227 @@
+{
+  "experiment": "C1 strike-coherent catalogue extrapolation (experiment 2 of a 3-experiment budget)",
+  "preregistration": "docs/candidates-2026-10-20.md (section 'Validated in this session: C1'); holdout seed 71 fixed before evaluation",
+  "hypothesis": "Magnetic edges whose orientation matches the local strike of visible catalogue traces, within about 2 km of them, mark unmapped continuation of Basin-and-Range fault systems.",
+  "mechanism": "F = rank(W)·A·rank(M)·coh, with W = exp(-d_visible/20 px) (catalogue proximity), A = |cos(phi_m - theta_n)| (edge parallel to strike), M = magnetic gradient magnitude, coh = structure-tensor coherence of visible traces; output = upper_surface(rank(F), cutoff 0.98).",
+  "non_fault_mimic": "Dike swarms and lithologic contacts parallel to the fault system.",
+  "layers_used": "rtp (reduced-to-pole magnetics) gradient direction and magnitude; visible catalogue traces (holdout-visible mask only during validation).",
+  "holdout": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "alpha": 0.2,
+    "beta": 0.8,
+    "triangular_radius_m": 300.0,
+    "holdout_seed": 71,
+    "candidate": {
+      "dti": 0.005569588073043673,
+      "ci95": [
+        0.0035150543517525955,
+        0.008026877715958237
+      ],
+      "withheld_positive_pixels": 11425
+    },
+    "arms": {
+      "candidate": {
+        "dti": 0.005569588073043673,
+        "ci95": [
+          0.0035150543517525955,
+          0.008026877715958237
+        ],
+        "withheld_positive_pixels": 11425
+      },
+      "ablation_no_catalogue": {
+        "dti": 0.009022745897075078,
+        "ci95": [
+          0.004495180607830141,
+          0.014456648113226738
+        ],
+        "withheld_positive_pixels": 11425
+      },
+      "ablation_no_alignment": {
+        "dti": 0.0036551579017287963,
+        "ci95": [
+          0.0020581914648648445,
+          0.0056236317050245
+        ],
+        "withheld_positive_pixels": 11425
+      },
+      "random_control": {
+        "dti": 0.04837536002218926,
+        "ci95": [
+          0.04407602138265207,
+          0.05242074883530398
+        ],
+        "withheld_positive_pixels": 11425
+      }
+    },
+    "bootstrap": {
+      "method": "paired physical spatial-cluster percentile",
+      "clusters": 159,
+      "draws": 1000,
+      "seed": 71,
+      "confidence": 0.95,
+      "caveat": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+    },
+    "current_holdout_best_comparable": null,
+    "stage": "continuous pre-placement surface, not final dots; not organizer-confirmed"
+  },
+  "paired_differences": {
+    "vs_random_control": {
+      "delta": -0.04280577194914558,
+      "ci95": [
+        -0.04681048154526808,
+        -0.03840056161140905
+      ]
+    },
+    "vs_no_catalogue": {
+      "delta": -0.003453157824031405,
+      "ci95": [
+        -0.00833330096082186,
+        0.0008776066172284903
+      ]
+    }
+  },
+  "posthoc_binary_diagnostic": {
+    "evidence_class": "HOLDOUT-DTI (POST-HOC, NOT PREREGISTERED, NOT A PROMOTION BASIS)",
+    "arms": {
+      "candidate": {
+        "dti": 0.012116185733178445,
+        "ci95": [
+          0.007596833636734699,
+          0.01789788183624252
+        ]
+      },
+      "ablation_no_catalogue": {
+        "dti": 0.013964579134835326,
+        "ci95": [
+          0.007710251613080305,
+          0.02101082581935883
+        ]
+      },
+      "ablation_no_alignment": {
+        "dti": 0.008380581136262517,
+        "ci95": [
+          0.005142897774411004,
+          0.012439642026223054
+        ]
+      },
+      "random_control": {
+        "dti": 0.062245476008549676,
+        "ci95": [
+          0.05457593712279612,
+          0.06936800279869398
+        ]
+      }
+    }
+  },
+  "leakage_canaries": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "threshold_auc": 0.9,
+    "features": {
+      "rtp": {
+        "auc": 0.5099239258205689,
+        "suspected_leakage": false
+      },
+      "proximity": {
+        "auc": 0.7474038376367615,
+        "suspected_leakage": false
+      },
+      "alignment": {
+        "auc": 0.5177836866520787,
+        "suspected_leakage": false
+      },
+      "magnetic_gradient": {
+        "auc": 0.5292520439824945,
+        "suspected_leakage": false
+      },
+      "coherence": {
+        "auc": 0.46402430021881835,
+        "suspected_leakage": false
+      },
+      "magnetic_coherence": {
+        "auc": 0.5147732708971553,
+        "suspected_leakage": false
+      }
+    },
+    "max_folded_auc": 0.7474038376367615
+  },
+  "pass_criteria": {
+    "no_canary_auc_gt_0_90": true,
+    "candidate_beats_no_catalogue": false,
+    "candidate_beats_random_control": false,
+    "registry_gate_complete_index": true
+  },
+  "correlation_overlap_vs_registry": {
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "index_generated_utc": "2026-10-12T02:24:36Z",
+    "rasters_expected": 862,
+    "rasters_checked": 862,
+    "complete_accessible_scan": true,
+    "missing_or_invalid": 0,
+    "worst_spearman_full_footprint": 0.20509155406081173,
+    "worst_dot_overlap": 1.0,
+    "worst_overlap_submission": "13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+    "duplicate_by_overlap_total": 92,
+    "duplicate_by_overlap_dot_fields": 40,
+    "duplicate_by_overlap_continuous_surfaces": 52,
+    "byte_unique_among_checked": true,
+    "pixel_unique_among_checked": true,
+    "verdict": "negative",
+    "stop_required": true,
+    "limit": "Index covers rasters present by 2026-10-12 only."
+  },
+  "raster": {
+    "file": "submissions/gems70-c1-strike-catalogue-NOT-CLEARED-20261020.tif",
+    "name": "gems70-c1-strike-catalogue-NOT-CLEARED-20261020",
+    "sha256": "5da9ed6b80b3db39599ae31b1437cae4ac15651912d1a01e970556f73ed0472e",
+    "zip_file": "gems70-c1-strike-catalogue-NOT-CLEARED-20261020.zip",
+    "zip_sha256": "60992d71d551afb97f74c5a34ef39fb859fc8714056d3dbfc4e19edc36811122",
+    "bytes": 550651,
+    "positive_pixels": 91924,
+    "catalogue_positive_pixels": 0,
+    "outside_footprint_positive": 0,
+    "min": 0.0,
+    "max": 0.9999781847000122,
+    "nan_count": 0,
+    "nodata": null,
+    "note_outside_footprint": "Written as 0 (not NaN); problem page says outside bounds is null or nan. Portal acceptance not verified."
+  },
+  "validator_output": {
+    "evidence_class": "LOCAL-FORMAT-VALIDATION-NOT-ORGANIZER-ACCEPTANCE",
+    "ok": true,
+    "problems": [],
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "approved_for_weekly_slot": false,
+    "warning": "Format checks do not establish novelty, geological accuracy, improvement, or organizer acceptance."
+  },
+  "submission_name": "gems70-c1-strike-catalogue-NOT-CLEARED-20261020",
+  "submission_note": "C1 strike-coherent catalogue extrapolation. Holdout below random control. Do not submit.",
+  "submission_note_chars": 88,
+  "download_and_submit_ok": false,
+  "verdict": "negative",
+  "verdict_reason": "Candidate HOLDOUT-DTI is below the random sparse control and below the catalogue-free ablation; registry gate fails on sparse dot fields. Leakage gate passed. Per protocol no tuning on seed 71.",
+  "budget": {
+    "experiments_used": 2,
+    "experiments_budget": 3,
+    "session_hours_budget": 2,
+    "elapsed_hours_at_card": "about 1.6 (estimate)"
+  },
+  "irregularities": "docs/irregularities.md",
+  "raster_sha256": "5da9ed6b80b3db39599ae31b1437cae4ac15651912d1a01e970556f73ed0472e"
+}

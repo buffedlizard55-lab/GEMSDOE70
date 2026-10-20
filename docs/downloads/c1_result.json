@@ -1,0 +1,25 @@
+{
+  "pass_no_leakage": true,
+  "pass_beats_no_catalogue": false,
+  "pass_beats_random_control": false,
+  "paired_difference_vs_random": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": -0.04280577194914558,
+    "ci95": [
+      -0.04681048154526808,
+      -0.03840056161140905
+    ],
+    "withheld_positive_pixels": 11425
+  },
+  "paired_difference_vs_no_catalogue": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": -0.003453157824031405,
+    "ci95": [
+      -0.00833330096082186,
+      0.0008776066172284903
+    ],
+    "withheld_positive_pixels": 11425
+  }
+}
