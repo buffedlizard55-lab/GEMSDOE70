@@ -14,8 +14,8 @@ def valid_canary(canary):
     return (
         canary.get('suspected_leakage') is False
         and type(auc) in (int, float)
-        and math.isfinite(auc)
         and 0 <= auc <= 1
+        and math.isfinite(auc)
         and max(auc, 1 - auc) <= .90
     )
 
@@ -43,7 +43,7 @@ def release_status(root):
         if card.get('verdict') != 'promote': reasons.append('Run verdict is negative.')
         if audit.get('stop_required') is not False or audit.get('unique') is not True:
             reasons.append('Surface uniqueness is blocked or incomplete.')
-        if not card.get('holdout_dti',{}).get('current_best_verified'):
+        if card.get('holdout_dti',{}).get('current_best_verified') is not True:
             reasons.append('Comparable current holdout best has not been beaten.')
         if holdout.get('promotion_allowed') is not True:
             reasons.append('Holdout evidence does not permit promotion.')
