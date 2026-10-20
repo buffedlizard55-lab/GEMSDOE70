@@ -49,6 +49,12 @@
       "sha256": "ad334842d38691de6049fcad30515abcf5efab7119e3e39b4d39abfa4546c683",
       "bytes": 3614,
       "note": "parallel E2 lane, writer receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+      "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
+      "bytes": 498152,
+      "note": "parallel H2 session (PR #18), blocked diagnostic, NOT a submission; card evidence/history/h2_stepover_negative/run_card.json"
     }
   ]
 }
