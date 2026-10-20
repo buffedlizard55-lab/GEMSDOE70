@@ -25,7 +25,11 @@ def main():
 
 ## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
-A unique, format-validated competition TIFF is published:
+**CURRENT PROTOCOL STOP:** The historical candidate exceeds forward overlap against four
+registry rasters. No new TIFF generated; no slot used. Missing single-method lane paragraph.
+See [current review](docs/protocol-review.md). Mutual overlap does not satisfy the current prompt.
+
+A historical, format-validated TIFF is published for review only:
 `docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used.
