@@ -71,3 +71,13 @@ warnings.** Earlier counts above describe earlier passes, not the final combined
 suite. No additional scientific experiment was run. Source and preregistration
 pins for the measured experiment are unchanged. An unrelated open submission PR
 was not merged or treated as validated.
+
+## Concurrent H70-C publication quarantine
+
+Main subsequently advanced through PRs 4 and 5, advertising a second session's
+H70-C TIFF as ready. Inspection found explicit simulated/placeholder holdout
+values in generation source and a one-raster H33 comparison, not full literal
+uniqueness clearance. All source, claims and files are preserved with hashes in
+quarantine/concurrent-h70c and evidence/concurrent_h70c_quarantine.json; none is
+endorsed or linked as a submission. Source text is retained, not executed. The
+canonical site remains negative. No additional scientific experiment was run.

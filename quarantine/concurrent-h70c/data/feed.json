@@ -1,0 +1,20 @@
+{
+  "generated_utc": "2026-10-20T00:00:00Z",
+  "leaderboard": {
+    "top": 0.3262,
+    "team": "nchuzhoy",
+    "second": 0.3195,
+    "group_best": 0.2778
+  },
+  "submissions": [
+    {
+      "file": "gemsdoe70_h70c_greedy_B2_38500_zeros.tif",
+      "sha256": "36d2c3c4366e88cb25690fa8640bdde0adf618fa36d57775de3e40d8cd3c5768",
+      "bytes": 292000,
+      "pixels": 38500,
+      "holdout_dti": 0.1923,
+      "holdout_ci": [0.171, 0.214],
+      "status": "HOLDOUT-DTI, 4/4 folds, not organizer"
+    }
+  ]
+}

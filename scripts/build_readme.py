@@ -98,6 +98,13 @@ card records the one fixed experiment reported here. Legacy publication entry
 points now delegate to this evidence-driven site; `make_run_card.py` verifies the
 existing card rather than overwrite it with an older schema.
 
+A subsequent concurrent H70-C publication (PRs 4/5) contained explicit
+simulated/placeholder holdout values in its source and checked novelty against
+only H33. Its source, documents and TIFFs are preserved in
+`quarantine/concurrent-h70c` with hash evidence, but removed from site downloads.
+Those historical READY / score claims are withdrawn, not endorsed as measurements.
+See [the quarantine receipt](evidence/concurrent_h70c_quarantine.json).
+
 ## Own the outcome
 
 Do not use “maximize probability of winning” as permission to hide negatives,
