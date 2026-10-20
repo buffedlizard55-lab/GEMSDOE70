@@ -48,3 +48,23 @@ No external-data-dependent idea is asserted viable. All named layers are already
 ## Scientific limits
 
 Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.
+
+## Phase 5 candidate ranking (2026-10-20)
+
+Ranked by expected gain on instrument C per unit of implementation cost. "New fault" means a
+fault not in `existing_faults.tif`; every candidate is scored with visible faults masked.
+
+| Rank | Hypothesis | Layers / signature | Why it should find an *unmapped* fault | Cost | Status |
+|---|---|---|---|---|---|
+| 1 | **H-P5-1 within-halo ranker** | 19-band stack, 12 lidar-scarp bands, 4 radiometric, 4 GeoDAWN extensions, catalogue density, relief; gradient-boosted pixel probability | Learns the geophysical signature of *mapped* SGMC faults and transfers it to the halo where the live truth lives; catalogue itself is masked | 43 features, 4 fits on CPU, ~4 min | **run — promoted** (instrument C 0.1472 vs H33 0.0952) |
+| 2 | **H-P5-2 density optimum** | same ranker, 37,654 vs 60,000 dots at matched geometry | The marginal-dot rule `k > 0.2·DTI` suggests the optimum is near the current density; a matched-geometry sweep isolates density from placement | low (reuses the cached probability field) | not run (registered next) |
+| 3 | **H-P5-3 cross-inventory transfer** | SGMC vs withheld catalogue components, both directions | Measures generic fault-detection skill without a proxy; a ranker that scores withheld catalogue traces well is not merely fitting SGMC | medium (one extra fold set) | not run |
+| 4 | **H-P5-4 lidar-scarp-only within-halo ranker** | 12 lidar bands + detrended elevation curvature | Lidar resolves scarps below the 100 m DEM; if the new faults are lidar-visible this is the most direct signature, but coverage is 31.7 % of the grid | medium; needs lidar mosaic (already cached, `ext_lidar_scarp_features_u8`) | not run |
+| 5 | **H-P5-5 basin-margin gravity-gradient prior** | `iso_grav_anom`, `iso_grav_anom_hg`, `depth_to_base_surf` | Range-front faults concentrate where the gravity gradient is steep and basement is shallow; a prior on *where* in the halo to look, independent of the ranker | low–medium | not run |
+
+Candidates rejected before implementation: QFaults-only (identity with the catalogue, IR-P5-1);
+stepover/relay-ramp geometry (already measured negative, H2 and h33d 0.2632 live); depth-step
+(H-E3 null, mechanism AUC 0.506); data-augmentation ensembles (no new information). Any candidate
+that needs new external data must name a free official source: the only one still untested is the
+USGS 1 m lidar DEM collection (`1m_DEM_links.csv`, organizer data tab), which is login-walled and
+not obtainable from this sandbox.

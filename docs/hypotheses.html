@@ -152,7 +152,70 @@
 <li>At most one scientific experiment planned; never more than three or two hours. No competition upload or weekly slot.</li>
 </ul>
 <h2>Scientific limits</h2>
-<p>Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p></main>
+<p>Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p>
+<h2>Phase 5 candidate ranking (2026-10-20)</h2>
+<p>Ranked by expected gain on instrument C per unit of implementation cost. "New fault" means a
+fault not in <code>existing_faults.tif</code>; every candidate is scored with visible faults masked.</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Hypothesis</th>
+<th>Layers / signature</th>
+<th>Why it should find an <em>unmapped</em> fault</th>
+<th>Cost</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>H-P5-1 within-halo ranker</strong></td>
+<td>19-band stack, 12 lidar-scarp bands, 4 radiometric, 4 GeoDAWN extensions, catalogue density, relief; gradient-boosted pixel probability</td>
+<td>Learns the geophysical signature of <em>mapped</em> SGMC faults and transfers it to the halo where the live truth lives; catalogue itself is masked</td>
+<td>43 features, 4 fits on CPU, ~4 min</td>
+<td><strong>run — promoted</strong> (instrument C 0.1472 vs H33 0.0952)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>H-P5-2 density optimum</strong></td>
+<td>same ranker, 37,654 vs 60,000 dots at matched geometry</td>
+<td>The marginal-dot rule <code>k &gt; 0.2·DTI</code> suggests the optimum is near the current density; a matched-geometry sweep isolates density from placement</td>
+<td>low (reuses the cached probability field)</td>
+<td>not run (registered next)</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>H-P5-3 cross-inventory transfer</strong></td>
+<td>SGMC vs withheld catalogue components, both directions</td>
+<td>Measures generic fault-detection skill without a proxy; a ranker that scores withheld catalogue traces well is not merely fitting SGMC</td>
+<td>medium (one extra fold set)</td>
+<td>not run</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>H-P5-4 lidar-scarp-only within-halo ranker</strong></td>
+<td>12 lidar bands + detrended elevation curvature</td>
+<td>Lidar resolves scarps below the 100 m DEM; if the new faults are lidar-visible this is the most direct signature, but coverage is 31.7 % of the grid</td>
+<td>medium; needs lidar mosaic (already cached, <code>ext_lidar_scarp_features_u8</code>)</td>
+<td>not run</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>H-P5-5 basin-margin gravity-gradient prior</strong></td>
+<td><code>iso_grav_anom</code>, <code>iso_grav_anom_hg</code>, <code>depth_to_base_surf</code></td>
+<td>Range-front faults concentrate where the gravity gradient is steep and basement is shallow; a prior on <em>where</em> in the halo to look, independent of the ranker</td>
+<td>low–medium</td>
+<td>not run</td>
+</tr>
+</tbody>
+</table>
+<p>Candidates rejected before implementation: QFaults-only (identity with the catalogue, IR-P5-1);
+stepover/relay-ramp geometry (already measured negative, H2 and h33d 0.2632 live); depth-step
+(H-E3 null, mechanism AUC 0.506); data-augmentation ensembles (no new information). Any candidate
+that needs new external data must name a free official source: the only one still untested is the
+USGS 1 m lidar DEM collection (<code>1m_DEM_links.csv</code>, organizer data tab), which is login-walled and
+not obtainable from this sandbox.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
