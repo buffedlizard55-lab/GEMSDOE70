@@ -1,185 +1,84 @@
 {
-  "hypothesis": "H-P4-1 coverage-stratified halo sample with weak damage tilt and tip kernel",
-  "mechanism": "one dot per 7x7-px stratum at the stratum maximum of (1+0.8*exp(-(d-2.4)/6))*(0.7+0.3*tip), 5-px NMS, band 2.4-32 px",
-  "non_fault_mimic": "colluvial/collinear basin-floor lineaments inside the halo",
+  "hypothesis": "Stepover-relay dilation propensity: unmapped cross-faults nucleate where visible catalogue lineament endpoints pair across small stepovers, weighted by RTP magnetic edge amplitude",
+  "mechanism": "Endpoint pairs from different visible catalogue components within 1.2 km dilate into an off-catalogue corridor (6 px), smoothed and multiplied by RTP gradient magnitude; rank-transformed, upper-2% sparsified surface",
+  "non_fault_mimic": "Volcanic intrusive contact endpoints, line-leveling artifacts, depositional pinchouts",
+  "hypothesis_status": "Tested this session; research-queue candidate H-1",
   "verdict": "negative",
-  "evidence_class": "HOLDOUT-DTI (A) and PROXY-DTI (B/B'); neither organizer-confirmed",
-  "instrument_a_holdout": {
-    "candidate": {
-      "dti": 0.07304229212058164,
-      "ci95": [
-        0.06673987703804156,
-        0.07899496967047342
-      ],
-      "withheld_positive_pixels": 11321
-    },
-    "random_control": {
-      "dti": 0.0505547543622084,
-      "ci95": [
-        0.045115887268522566,
-        0.05583407617316418
-      ],
-      "withheld_positive_pixels": 11321
-    },
-    "h33_reference": {
-      "dti": 0.0036997816856295857,
-      "ci95": [
-        0.003037134722219959,
-        0.004497470563248019
-      ],
-      "withheld_positive_pixels": 11321
-    }
-  },
-  "instrument_b_prime_proxy": {
-    "candidate": {
-      "dti": 0.08116240066330835,
-      "ci95": [
-        0.07234947587460432,
-        0.09002008521926923
-      ],
-      "withheld_positive_pixels": 59937
-    },
-    "random_control": {
-      "dti": 0.06972784527138284,
-      "ci95": [
-        0.06575396086921854,
-        0.07316676604814398
-      ],
-      "withheld_positive_pixels": 59937
-    },
-    "h33_reference": {
-      "dti": 0.09377056861492462,
-      "ci95": [
-        0.08375251373533825,
-        0.104028711800872
-      ],
-      "withheld_positive_pixels": 59937
-    }
-  },
-  "instrument_b_unrestricted": {
-    "candidate": {
-      "dti": 0.09483894035517236,
-      "ci95": [
-        0.08573631335752449,
-        0.10339452460864469
-      ]
-    },
-    "random_control": {
-      "dti": 0.07101315599892798,
-      "ci95": [
-        0.067852845424844,
-        0.07407922986767024
-      ]
-    },
-    "h33_reference": {
-      "dti": 0.09059897608840377,
-      "ci95": [
-        0.08214959351246441,
-        0.09919171835657462
-      ]
-    }
-  },
-  "paired_a_vs_h33": {
+  "stop_reason": "duplicate",
+  "holdout_dti": {
     "evidence_class": "HOLDOUT-DTI",
     "evaluator_version": "gems57-pooled-hide-v2",
-    "delta": 0.06934251043495206,
+    "dti": 0.023034226000900448,
     "ci95": [
-      0.06291014535705214,
-      0.07537236714056564
+      0.01423844923386256,
+      0.0321326819658628
     ],
-    "withheld_positive_pixels": 11321
+    "withheld_positive_pixels": 11321,
+    "tpw": 412.48042736043743,
+    "fpw": 43839.93971202534,
+    "fnw": 10908.519572639567,
+    "stage": "continuous pre-placement surface, not final dots",
+    "current_best_verified": false
   },
-  "paired_b_prime_vs_h33": {
-    "evidence_class": "HOLDOUT-DTI",
-    "evaluator_version": "gems57-pooled-hide-v2",
-    "delta": -0.012608167951616275,
-    "ci95": [
-      -0.02407310642988495,
-      -0.0017959437463979239
-    ],
-    "withheld_positive_pixels": 59937
+  "canaries": {
+    "stepover_feature": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.6595855443423725,
+      "inverse_auc": 0.3404144556576275,
+      "withheld_positive_pixels": 11321,
+      "negative_sample_pixels": 200000,
+      "suspected_leakage": false
+    },
+    "rtp_edge": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.534255466831552,
+      "inverse_auc": 0.465744533168448,
+      "withheld_positive_pixels": 11321,
+      "negative_sample_pixels": 200000,
+      "suspected_leakage": false
+    }
   },
-  "gate_a_candidate_ge_h33": true,
-  "gate_b_prime_candidate_gt_h33_significant": false,
   "correlation_overlap_vs_registry": {
-    "stage": "final production dots (37,654 binary)",
-    "rasters_checked": 62,
-    "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
-    "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
-    "worst_mutual_overlap": 0.3118657881445429,
-    "worst_mutual_submission": "calib_h25ctx_01280.tif",
-    "worst_forward_overlap": 1.0,
-    "worst_forward_submission": "calib_r13lattice_00904.tif",
-    "worst_spearman_full_footprint": 0.050042619451799414,
-    "worst_rho_submission": "57GEMSDOE__h57r2-shipped8-all-flank0-20261009T180433Z-90e532947353-zeros.tif",
-    "worst_jaccard": 0.029416053556041627,
-    "duplicate": false
+    "stage": "surface before final placement",
+    "rasters_checked": 1,
+    "registry_complete": false,
+    "spearman": 0.1727214302134486,
+    "overlap_within_3px": 1.0,
+    "witness": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+    "witness_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+    "literal_duplicate": true,
+    "final_dots": null,
+    "final_dots_reason": "Not placed: literal surface stop rule."
   },
-  "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
-  "raster_sha256_reason": null,
+  "raster_sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
+  "raster_sha256_reason": "Diagnostic surface GeoTIFF in docs/downloads; format-validated locally, blocked by the literal overlap gate, not organizer-accepted, not a submission.",
+  "diagnostic_tiff": "docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+  "diagnostic_tiff_bytes": 498152,
   "validator_output": {
-    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-    "bytes": 126097,
-    "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
-    "meta": {
-      "crs": "EPSG:32611",
-      "shape": [
-        3730,
-        3292
-      ],
-      "dtype": "float32",
-      "count": 1,
-      "nodata": null,
-      "transform": [
-        100.0,
-        0.0,
-        243350.0,
-        0.0,
-        -100.0,
-        4508550.0
-      ],
-      "profile_compress": "deflate"
-    },
-    "band_description": [
-      null
-    ],
-    "n_finite": 12279160,
-    "n_nan": 0,
-    "n_infinite": 0,
-    "min": 0.0,
-    "max": 1.0,
-    "mean": 0.0030664964579045773,
-    "emitted_positive_pixels": 37654,
-    "checks": {
-      "single_band": true,
-      "dtype_float32": true,
-      "dimensions_3730x3292": true,
-      "crs_epsg_32611": true,
-      "transform_matches_sample_submission": true,
-      "no_nan_anywhere": true,
-      "no_inf_anywhere": true,
-      "no_sentinel_values": true,
-      "range_0_1_guaranteed": true,
-      "min_ge_0": true,
-      "max_le_1": true,
-      "in_footprint_all_finite": true,
-      "in_footprint_range_0_1": true,
-      "outside_footprint_zero": true,
-      "zero_dots_on_mapped_catalogue": true
-    },
+    "submission_tiff": "gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+    "status": "LOCALLY_FORMAT-VALIDATED-BLOCKED-BY-GATE",
+    "format_report_ok": true,
     "all_checks_passed": true,
-    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
-    "on_catalogue_positive_pixels": 0,
-    "in_footprint_positive_pixels": 37654,
-    "footprint_fraction": 0.007286874781441169
+    "pre_export_array_checks": {
+      "no_nan_inside_footprint": true,
+      "all_values_finite": true,
+      "values_in_0_1": true,
+      "shape_matches": true,
+      "zero_on_catalogue_export": true,
+      "zero_outside_footprint_export": true,
+      "format_report_ok": true,
+      "local_validation_all_checks_passed": true
+    },
+    "crs_shape_transform_file_match": true,
+    "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
+    "bytes": 498152,
+    "reason": "Local format/range checks pass; uniqueness gate fired (duplicate), so the file is explicitly not releasable as a submission."
   },
-  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
-  "submission_note": "P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence",
-  "note_chars": 108,
+  "submission_name": "gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT",
+  "submission_note": "Stepover-relay dilation diagnostic surface; literal registry overlap gate fired 1.00 > 0.70; holdout DTI negative; DO NOT SUBMIT.",
   "download_and_submit_ok": false,
   "weekly_slots_used": 0,
-  "experiment_count": 4,
-  "elapsed_seconds": 71.34,
+  "experiment_count": 2,
   "organizer_confirmed_score": null,
   "evaluator_implementation_sha256": {
     "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
@@ -188,342 +87,8 @@
     "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
   },
   "method_source_sha256": {
-    "src/gems70/method_v2.py": "8e8896aba8a0b56737b5d1930d1f0898da7d29d8ec39f7f13e5cf1c7717b4a41",
-    "scripts/run_experiment_v4.py": "b68360644e42164505b41f25de70b9ee72bc99c08b310a1caf7319cec04ac462"
-  },
-  "registered_parameters": {
-    "dot_count": 37654,
-    "block_px": 7,
-    "nms_px": 5.0,
-    "d_min_px": 2.4,
-    "d_max_px": 32.0,
-    "tilt_amplitude": 0.8,
-    "tilt_scale_px": 6.0,
-    "tip_floor": 0.7,
-    "tip_weight": 0.3,
-    "b_prime_gap_px": 3.0
-  },
-  "experiment_history": {
-    "phase1": {
-      "hypothesis": "magnetic-edge termination at gravity-supported basement boundary",
-      "verdict": "negative",
-      "holdout_dti": 0.010192889039757751,
-      "note": "archived under evidence/history/phase1_negative"
-    },
-    "phase2": {
-      "hypothesis": "geophysically gated continuation/strand prior",
-      "verdict": "negative",
-      "instrument_a": {
-        "candidate": {
-          "dti": 0.05913189211163828,
-          "ci95": [
-            0.04992408307643526,
-            0.06835861133988781
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "ablation_offset_only": {
-          "dti": 0.04870965558159305,
-          "ci95": [
-            0.04154644527285682,
-            0.055861974817152445
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "ablation_offset_tip": {
-          "dti": 0.07063570372539084,
-          "ci95": [
-            0.060920598846774546,
-            0.07948363736884798
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "ablation_geo_only": {
-          "dti": 0.037264789562340396,
-          "ci95": [
-            0.027216214367710708,
-            0.046539665321394835
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "random_control": {
-          "dti": 0.04671158105386572,
-          "ci95": [
-            0.04105009361341659,
-            0.05203562468819201
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "h33_reference": {
-          "dti": 0.0036997816856295857,
-          "ci95": [
-            0.0029729600958292276,
-            0.004518037322727499
-          ],
-          "withheld_positive_pixels": 11321
-        }
-      },
-      "instrument_b_all_proxy": {
-        "candidate": {
-          "dti": 0.04315492324269234,
-          "ci95": [
-            0.036752796492217174,
-            0.050847058377963494
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "random_control": {
-          "dti": 0.07217676862599225,
-          "ci95": [
-            0.0689476472029366,
-            0.07548205268115987
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "h33_reference": {
-          "dti": 0.09059897608840377,
-          "ci95": [
-            0.08187424834264379,
-            0.0998575093069701
-          ],
-          "withheld_positive_pixels": 74740
-        }
-      },
-      "paired_b_vs_h33": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": -0.047444052845711425,
-        "ci95": [
-          -0.05759499832145804,
-          -0.03722110281812896
-        ],
-        "withheld_positive_pixels": 74740
-      },
-      "note": "failed the unrestricted proxy gate before the duplication band was measured"
-    },
-    "phase3": {
-      "hypothesis": "damage-zone intensity x tip kernel",
-      "verdict": "negative",
-      "instrument_a": {
-        "candidate": {
-          "dti": 0.08734286005480706,
-          "ci95": [
-            0.07623801232958502,
-            0.09870617961008454
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "ablation_no_tip": {
-          "dti": 0.07679368258549837,
-          "ci95": [
-            0.06622208683161582,
-            0.08799954554736572
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "random_control": {
-          "dti": 0.04711841142387777,
-          "ci95": [
-            0.041761414168778405,
-            0.05256373142121609
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "h33_reference": {
-          "dti": 0.0036997816856295857,
-          "ci95": [
-            0.00298292824837043,
-            0.004390833343663595
-          ],
-          "withheld_positive_pixels": 11321
-        }
-      },
-      "instrument_b_prime": {
-        "candidate": {
-          "dti": 0.047122772810595626,
-          "ci95": [
-            0.0398822151835543,
-            0.05538002500826015
-          ],
-          "withheld_positive_pixels": 59937
-        },
-        "random_control": {
-          "dti": 0.07212577438671838,
-          "ci95": [
-            0.06861818486439683,
-            0.07541132527498534
-          ],
-          "withheld_positive_pixels": 59937
-        },
-        "h33_reference": {
-          "dti": 0.09377056861492462,
-          "ci95": [
-            0.08368320686183914,
-            0.10356333845916207
-          ],
-          "withheld_positive_pixels": 59937
-        }
-      },
-      "instrument_b_all": {
-        "candidate": {
-          "dti": 0.10976079546030465,
-          "ci95": [
-            0.09574036141090113,
-            0.12498514471013682
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "random_control": {
-          "dti": 0.07141711151975555,
-          "ci95": [
-            0.06832760177631635,
-            0.07434037273470752
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "h33_reference": {
-          "dti": 0.09059897608840377,
-          "ci95": [
-            0.08196525893067165,
-            0.09912697052352538
-          ],
-          "withheld_positive_pixels": 74740
-        }
-      },
-      "paired_b_prime_vs_h33": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": -0.046647795804329,
-        "ci95": [
-          -0.05720550099885407,
-          -0.03562237739909747
-        ],
-        "withheld_positive_pixels": 59937
-      },
-      "uniqueness_forward_only_firings": 7,
-      "note": "concentrated placement proved redundant; triggered the mutual-overlap fix"
-    },
-    "phase4": {
-      "hypothesis": "H-P4-1 coverage-stratified halo sample with weak damage tilt and tip kernel",
-      "verdict": "negative",
-      "instrument_a": {
-        "candidate": {
-          "dti": 0.07304229212058164,
-          "ci95": [
-            0.06673987703804156,
-            0.07899496967047342
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "random_control": {
-          "dti": 0.0505547543622084,
-          "ci95": [
-            0.045115887268522566,
-            0.05583407617316418
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "h33_reference": {
-          "dti": 0.0036997816856295857,
-          "ci95": [
-            0.003037134722219959,
-            0.004497470563248019
-          ],
-          "withheld_positive_pixels": 11321
-        }
-      },
-      "instrument_b_prime": {
-        "candidate": {
-          "dti": 0.08116240066330835,
-          "ci95": [
-            0.07234947587460432,
-            0.09002008521926923
-          ],
-          "withheld_positive_pixels": 59937
-        },
-        "random_control": {
-          "dti": 0.06972784527138284,
-          "ci95": [
-            0.06575396086921854,
-            0.07316676604814398
-          ],
-          "withheld_positive_pixels": 59937
-        },
-        "h33_reference": {
-          "dti": 0.09377056861492462,
-          "ci95": [
-            0.08375251373533825,
-            0.104028711800872
-          ],
-          "withheld_positive_pixels": 59937
-        }
-      },
-      "instrument_b_all": {
-        "candidate": {
-          "dti": 0.09483894035517236,
-          "ci95": [
-            0.08573631335752449,
-            0.10339452460864469
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "random_control": {
-          "dti": 0.07101315599892798,
-          "ci95": [
-            0.067852845424844,
-            0.07407922986767024
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "h33_reference": {
-          "dti": 0.09059897608840377,
-          "ci95": [
-            0.08214959351246441,
-            0.09919171835657462
-          ],
-          "withheld_positive_pixels": 74740
-        }
-      },
-      "paired_a_vs_h33": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": 0.06934251043495206,
-        "ci95": [
-          0.06291014535705214,
-          0.07537236714056564
-        ],
-        "withheld_positive_pixels": 11321
-      },
-      "paired_b_prime_vs_h33": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": -0.012608167951616275,
-        "ci95": [
-          -0.02407310642988495,
-          -0.0017959437463979239
-        ],
-        "withheld_positive_pixels": 59937
-      }
-    }
-  },
-  "uniqueness_detail": {
-    "registry_rasters_checked": 62,
-    "unique": true,
-    "duplicate_count": 0,
-    "worst_dot_overlap": 0.3118657881445429,
-    "worst_overlap_submission": "calib_h25ctx_01280.tif",
-    "worst_forward_overlap": 1.0,
-    "worst_forward_submission": "calib_r13lattice_00904.tif",
-    "worst_spearman_full_footprint": 0.050042619451799414,
-    "worst_rho_submission": "57GEMSDOE__h57r2-shipped8-all-flank0-20261009T180433Z-90e532947353-zeros.tif",
-    "worst_jaccard_dot_sets": 0.029416053556041627,
-    "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
-    "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint."
-  },
-  "download_ok": true,
-  "submit_recommended": false,
-  "artifact": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-  "artifact_zip": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.zip",
-  "artifact_receipt": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.json",
-  "decision_note": "File is unique, format-validated and downloadable. It is NOT promoted: the pre-registered target-like proxy gate is negative (-12.6% vs H33). Submitting is a deliberate test, not a validated improvement."
+    "scripts/finalize_stepover.py": "12d224af7ab02fe30e02a1899f51ccb6196e9851eb196128d0b437063d6ea928",
+    "scripts/run_hypothesis_stepover.py": "c2d2d4ae996696476a79957136b36bb58909460b6d1be48907d7a70e892134a3",
+    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374"
+  }
 }

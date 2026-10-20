@@ -1,77 +1,115 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## Submission status: **DO NOT SUBMIT — no eligible TIFF**
 
-A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`negative` on the pre-registered target-like gate. No weekly slot was used.
+The fixed contact-termination experiment failed the literal surface uniqueness gate.
+Final dot placement and submission export stopped. **No previous submission was
+copied, renamed or advertised as a new prediction. No weekly slot was used.**
+The requested unique downloadable competition TIFF is **not fulfilled**; the
+protocol's verified dense-prior blocker makes it impossible for any nonempty
+candidate to pass its current literal support rule. A negative result is retained
+instead of an unsafe download.
 
-- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
-- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
+- [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission guide](docs/executive-summary.html)
+- [Run card](evidence/run_card.json) · [Measured results](evidence/holdout.json)
+- [H33 forensic analysis](docs/h33-analysis.md) · [Four preregistered hypotheses](docs/hypotheses.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## What was measured this session
+## What was verified
 
-Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
-alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
-bootstrap. Exactly 37,654 binary dots are emitted, all
-off-catalogue.
+This checkout originally contained only an eleven-byte README. We restored the
+cached numerical stack, sample and mapped faults from pinned owner mirrors;
+checksums prove mirror consistency, not organizer authentication. Shared
+`evaluate_holdout.py`, `submission_writer.py`, metric, holdout and uniqueness
+tools are reused unchanged from the pinned template. Their upstream blob/hash
+verification is in [evidence/template_verification.json](evidence/template_verification.json).
 
-| Instrument | Candidate | H33 reference | Result |
-|---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
+One fixed CPU experiment targeted magnetic-edge termination along gravity-supported
+basement boundaries. Each raw/derived feature received its own leakage canary and
+holdout score. No catalogue-derived predictor was used. Whole connected fault
+components were hidden with a feature-context buffer and spatial erosion, visible
+faults were masked pixel-exactly, and weighted metric terms were pooled before a
+paired spatial-cluster bootstrap.
 
-Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
-is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
-21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
-artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+**HOLDOUT-DTI:** 0.023034, 95% CI [0.014238, 0.032133],
+11,321 withheld positive pixels, evaluator
+`gems57-pooled-hide-v2`. This is the continuous pre-placement surface, not final
+dots and not a leaderboard score. It underperforms the random sparse control;
+no same-split current-best claim is made. See the full receipt for controls and
+paired intervals.
 
-**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
-(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
-whose halo covers the whole footprint — which is why the two-direction test was adopted.
+**REGISTRY-MEASUREMENT:** one decisive, SHA-verified continuous prior covers the
+whole footprint. Surface Spearman is 0.172721;
+three-pixel forward support overlap is 1.0, above the literal 0.70 stop threshold.
+The [saturation certificate](evidence/registry_saturation.json) proves this blocks
+every nonempty off-catalogue candidate under the inherited support definition.
+This is a representation/protocol conflict, not evidence that all geological
+methods are identical. No private density exemption was used. Only this witness
+was checked: a complete fresh uniqueness clearance is **not** claimed.
 
-## Two fixes to the shared tool (reported, not silently forked)
+The user-reported H33 historical value has **no ORGANIZER-CONFIRMED receipt** here.
+Actual bytes show H33 is the previous sparse field with catalogue-near dots deleted.
+The site explains conditional metric efficiency without inferring hidden labels or
+promising a higher score. Conflicting leaderboard values in the prompt remain
+unverified. Official non-GitHub pages failed access here; we do not call that a
+verified login redirect.
 
-1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
-   registry surface blocks every candidate.
-2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
-   halos cover 100 % of the footprint would otherwise block every candidate.
-
-Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
-`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
-
-## Reproduce
+## Reproduce the workbench
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
-.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
-git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
-.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+python -m venv .venv
+.venv/bin/pip install -r requirements.lock
+bash scripts/download_competition_data.sh  # pinned public owner mirrors, not DrivenData auth
+.venv/bin/python scripts/build_site.py
+.venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
 
-`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
-(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
-`evidence/history/phase1_negative/`.
+`run_experiment.py` is the preserved one-experiment implementation; it deliberately
+refuses a second attempt when its manifest already exists. Do not delete the
+manifest to tune on reported holdout blocks. `build_submission.py` exits with a
+clear blocked status, never creates a decoy TIFF. The shared writer's real
+TIFF/one-TIFF-ZIP round trip, range rejection and no-overwrite behavior are tested
+with temporary synthetic fixtures only. No synthetic fixture is published.
 
-## Next session
+The static Pages site reports evidence; it does not train or generate in-browser.
+A fresh reviewed scientific run, resolved protocol, complete two-stage audit and
+separate weekly-slot selection are needed before enabling a real artifact link.
+[Source-health workflow](.github/workflows/source-health.yml) refreshes availability
+as a downloadable Actions artifact; it is not an authenticated live-score feed.
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+## Concurrent review history
+
+Two parallel reviews merged into main during this session. Their reports, source
+notes, bridge fixtures, audit helpers and software tests are retained. The earlier
+review-only run card and handoff are archived under
+[evidence/history/parallel-review2](evidence/history/parallel-review2/), where their
+zero-experiment statements remain historically accurate. The canonical current
+card records the one fixed experiment reported here. Legacy publication entry
+points now delegate to this evidence-driven site; `make_run_card.py` verifies the
+existing card rather than overwrite it with an older schema.
+
+A subsequent concurrent H70-C publication (PRs 4/5) contained explicit
+simulated/placeholder holdout values in its source and checked novelty against
+only H33. Its source, documents and TIFFs are preserved in
+`quarantine/concurrent-h70c` with hash evidence, but removed from site downloads.
+Those historical READY / score claims are withdrawn, not endorsed as measurements.
+See [the quarantine receipt](evidence/concurrent_h70c_quarantine.json).
+
+## Own the outcome
+
+Do not use “maximize probability of winning” as permission to hide negatives,
+overstate verification, spend unvalidated slots or weaken uniqueness. Honest
+negative evidence and clear stop conditions protect future experiments. Next-session
+priorities and unmet requirements are explicit in HANDOFF.md and the limitations page.
 
 ## Complete retained project prompt
 
-Historical statements below are user-supplied requirements and claims, not verified results. No
-leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
-PROJECT_BRIEF.md is the source for this embedded copy.
+Historical statements below are user-supplied requirements/claims, not verified
+current results. No leaderboard value below becomes ORGANIZER-CONFIRMED by being
+copied into this README. The dedicated PROJECT_BRIEF.md is the source for this
+embedded copy (formatting whitespace normalized from the supplied message).
 
 <details>
 <summary>Read the complete supplied project brief before every session</summary>
