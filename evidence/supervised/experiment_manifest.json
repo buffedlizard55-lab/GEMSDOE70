@@ -1,0 +1,12 @@
+{
+  "started_utc": "2026-10-20T23:05:36.185089+00:00",
+  "experiment": "E4-supervised-hgb39",
+  "maximum_experiments": 3,
+  "maximum_seconds": 7200,
+  "preregistration_sha256": "d5f036ce561cadadb387c1b220b456d6d8e560ede0dd1289a2e10c0975dedd44",
+  "source_sha256": {
+    "src/gems70/method2.py": "cf4f75f3acea1cf379a4447bb5d71fc3c8c6a455e6090ed518724eaa43fde689",
+    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
+    "scripts/run_experiment_supervised.py": "38c7bb0ccb692668ab74560d6ad5112ce1fc4a3a32a21b1ef779f70996dff053"
+  }
+}

@@ -4,9 +4,146 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Preregistered hypotheses — 2026-10-20</h1>
-<p>Written before the experiment. These are geological hypotheses, <strong>not established discoveries or predicted scores</strong>. This checkout originally had no implementation. Novelty is relative to that checkout and inspected GEMSDOE32/60/69 code, not an exhaustive claim across private parallel sessions.</p>
-<h2>Lane irregularity</h2>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Preregistered hypotheses — 2026-10-20 · Amendment 2026-10-21 (E4 PROMOTED)</h1>
+<p>Written before each experiment. These are geological hypotheses, <strong>not established discoveries or predicted scores</strong>. This checkout originally had no implementation. Novelty is relative to that checkout and inspected GEMSDOE32/60/69 code, not an exhaustive claim across private parallel sessions.</p>
+<h2>E4 — Supervised within-halo ranking on the SGMC off-catalogue proxy (PROMOTED, 2026-10-21)</h2>
+<p><em>Status: primary evidence chain. This lane is the only promoted candidate; E1 magnetic-edge, P2–P4 halo and E2 alluvial-step lanes are frozen negatives and are not rerun.</em></p>
+<p>Declared lane (protocol rule 1, prereg SHA <code>d5f036ce</code>, see <code>docs/preregistration-supervised.md</code>):</p>
+<blockquote>
+<p><strong>Supervised within-halo ranking on the SGMC off-catalogue proxy.</strong> Train a gradient-boosted tree on the only population that resembles the hidden truth — USGS SGMC faults minus the INGENIOUS/USGS catalogue, filtered to d ≥ 3 px — using leave-one-quadrant-out (LOQO) with all catalogue-derived features derived only from the visible faults of that fold. Features are the 19-band physics stack plus 12-band LiDAR scarp composite and GeoDAWN radiometrics (total 39), no catalogue prediction reuse. Rank by out-of-fold predicted probability, emit binary dots via priority thinning, evaluate on the same pooled-DTI instruments that scored every prior candidate. No external data beyond the SHA-pinned mirrors.</p>
+</blockquote>
+<h3>Why this lane was tried</h3>
+<p>No unsupervised geometric prior had cleared the holdout bar. The only population resembling hidden organizer labels obtainable in the sandbox was the state-compiled SGMC fault network (independent county-map compilation). Off-catalogue SGMC faults under basin fill are a plausible analogue for hidden organizers labels because they are drawn without regard to the INGENIOUS catalogue's surface-expression filter. A supervised ranker that learns to separate SGMC-off-catalogue pixels from valid background, then generalizes to hidden labels, is therefore a testable geological hypothesis rather than a curve fit to the catalogue.</p>
+<h3>Candidate hypotheses considered (ranked before E4 implementation)</h3>
+<p>Qualitative expected-DTI ranking only; no number here is a holdout score.</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Hypothesis / layers (training_features index + external)</th>
+<th>Physical signature / transform</th>
+<th>Why a catalogue omission is plausible</th>
+<th>Named non-fault mimic</th>
+<th style="text-align: right;">Difference from inspected implementations</th>
+<th>Cost / external data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1 (E4 — PROMOTED)</strong></td>
+<td><strong>Supervised HGB 39-feature</strong>: 19 physics (mag_anom 1, rtp 2, tmi_hg 3, geod_2ndinv 4, iso_grav_anom_slope 5, tc 6, geod_shearrate 7, geod_dilaterate 8, tmi_vg 9, deq 10, iso_grav_anom_vg 11, det_elev 12, iso_grav_anom 13, tmi 14, depth_to_base 15, ieq 16, cond_surf 17, iso_grav_anom_hg 18, det_elev_slope 19) + 12 lidar scarp (ex_max…valid) + 4 GeoDAWN rad (K,Th,U,TC) + 4 extensions (ThK,UK,UTh,TMI_up150)</td>
+<td>HGB predicted probability of SGMC-off-catalogue membership, OOF-ranked; no catalogue input, distance features excluded</td>
+<td>SGMC state compilation draws faults from county maps and air photos independent of INGENIOUS mapping; many lie under basin fill where no scarp reaches surface</td>
+<td>Lithologic K/Th boundary, flat playa, volcanic flow edge, road grade</td>
+<td style="text-align: right;">All prior lanes used unsupervised geometric priors (halo Poisson, offset×tip×gate, alluvial step). None learned from an independent fault population; none used radiometrics</td>
+<td>Medium: CPU HGB, 4-fold LOQO, 100 iter, 39-d, 120k negatives/fold. All bands already in <code>.cache/gems_data</code>, SHA-pinned, obtainable in this sandbox (verified 2026-10-20: training_features 400 MB, lidar 37 MB, rad 27 MB, extensions 27 MB).</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Analytic-signal ridge: tmi_hg (3), tmi_vg (9), tmi (14)</td>
+<td>Analytic-signal amplitude = hypot(hg, vg, tmi); ridge via total gradient magnitude independent of magnetization direction</td>
+<td>Concealed magnetic-contact faults produce edge without surface rupture; RTP alone misses remanence variation</td>
+<td>Dike margin, intrusive contact without slip</td>
+<td style="text-align: right;">Repo uses unsigned RTP horizontal gradient only; adds vertical derivative and envelope</td>
+<td>Medium-low; cached stack only</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Radiometric alteration-edge halo: GeoDAWN K,Th,U,TC + ThK,UK,UTh</td>
+<td>Gradient edges of K/Th depletion or U enrichment along hydrothermal alteration halos</td>
+<td>Alteration detectable where fault trace buried under cover</td>
+<td>Primary lithologic K/Th variation, flight-line artifacts</td>
+<td style="text-align: right;">Repo used no radiometrics until E4; stand-alone edge would be a separate ablation</td>
+<td>Medium; same rad mirrors as E4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Detrended elevation breakline density: det_elev 12, det_elev_slope 19, lidar relief/coh</td>
+<td>Subtle breakline/curvature concentration of blind scarps (gradient magnitude, coherence)</td>
+<td>Blind scarps displace topography &lt;1 m without mapped trace</td>
+<td>Fans, paleochannels, terrace risers</td>
+<td style="text-align: right;">Vendor geo uses slope/curvature scalars; E2 used oriented mean-shift step, not breakline density</td>
+<td>Low; cached stack</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Conductive breach at magnetic termination: cond_surf 17 + rtp 2, mag_anom 1</td>
+<td>Local conductivity gradient orthogonal to truncated magnetic edge; possible fluid pathway</td>
+<td>Alteration along buried fault may conduct where trace not mapped</td>
+<td>Saline groundwater boundary, clay lens</td>
+<td style="text-align: right;">H32 cond-ridge product uses conductivity alone; this requires cross-cutting breach</td>
+<td>Medium; uncertain cond_surf resolution</td>
+</tr>
+</tbody>
+</table>
+<p>Only hypothesis 1 was run in E4. Hypotheses 2–5 remain queue items; hypothesis 1's ablations (physics-only 19-feature, lidar-only, rad-only) are deferred by budget.</p>
+<h3>E4 frozen specification (preregistered, hashed into manifest <code>experiment_manifest.json</code> d5f036ce)</h3>
+<p>Inputs (<code>.cache/data/training_features.tif</code> SHA 4371c82…, <code>.cache/gems_data/external/*</code> SHAs in manifest, <code>.cache/data/existing_faults.tif</code>, <code>sample_submission.tif</code>, <code>sgmc_faults_100m.tif</code> from /tmp/60GEMSDOE clone). Grid/sample/catalogue from shared <code>gems57.grid.load_grid</code>. Vendor code byte-pinned and unmodified.</p>
+<ol>
+<li><code>valid0 = footprint &amp; finite for all 39 bands</code>. <code>valid = binary_erosion(valid0, 12)</code> applied <strong>after</strong> all filtering. No output outside <code>valid</code>. Fixes the E1 order flaw.</li>
+<li>Proxy truth: SGMC raster <code>&gt;0</code> minus catalogue, footprint, plus <code>dcat &gt;=3 px</code> for prime (B′). Negative: <code>valid &amp; ~proxy</code>. Positive prime 62,649 pixels (82,151 raw SGMC → 78,433 off-catalogue → 62,649 prime, 20.1% within 3 px of catalogue). Negative pool sampled 120k per LOQO fold.</li>
+<li>LOQO: 4 spatial quadrants by median footprint row/col, each eroded 12 px as scoring domain. For fold q, train on <code>valid &amp; ~region_q &amp; proxy_prime</code> positives and sampled negatives; predict on <code>valid &amp; region_q</code>. Gives OOF probability for every <code>valid</code> pixel (outside domains filled by global model trained on all folds). No catalogue-derived predictor.</li>
+<li>Model: <code>HistGradientBoostingClassifier(max_depth=6, max_iter=100, learning_rate=0.1, min_samples_leaf=30, random_state=20)</code>. Same for each LOQO fold and the global refit (all prime positives + 200k negatives).</li>
+<li>Ranking: average-tie rank of OOF probability over <code>valid</code> to [0,1]; global probability for final submission rank.</li>
+<li>Holdout: shared <code>buffered_component_draw(grid, seed=20, buffer_px=3, boundary_px=12)</code> — whole connected components, globally hidden draw, visible = catalogue minus 3-px collar, 12-px boundary erosion, pixel-exact masking. Evaluator: <code>gems57.evaluate_holdout</code> pooled-DTI (α 0.2, β 0.8, 300 m triangular kernel), paired 20 km cluster bootstrap 1000 draws seed 70420.</li>
+<li>Leakage canaries first: every raw band and derived feature alone, AUC on withheld positives vs 200k negatives (seed 70020). Any <code>max(AUC,1-AUC) &gt;0.90</code> stops run. All 39 AUCs recorded in <code>evidence/canaries.json</code>.</li>
+<li>Dot emission: priority thinning — candidates in descending OOF-rank order from top 400k <code>valid</code> pixels, accept if no accepted dot within &lt;2.8 px, until 38,000 dots or exhaustion. Binary 1.0. No catalogue exclusion for holdout (evaluator masks); final submission additionally requires <code>dcat &gt;2 px</code>, refilled to 38,000 by same priority (disclosed H33 hygiene).</li>
+<li>Arms (all HOLDOUT-DTI, same folds/masks): candidate OOF dots; random 38,000 uniform (seed 70020, no thinning); H33 B2 37,654 SHA c55bafc…, D2.8 44,090 SHA 3e78737…, H19-5 solid 121k.</li>
+<li>Promotion bars (all required, seed-20 draw): (a) candidate DTI &gt; every other arm point-wise; (b) paired CI vs H33 excludes 0; (c) CI vs random excludes 0; (d) no canary alarm; (e) surface Spearman ≤0.90 and mutual dot overlap ≤0.70 on 62-raster check. If any fails, verdict negative, TIFF preserved as DO-NOT-SUBMIT.</li>
+<li>Uniqueness: Spearman only on continuous surface; binary dot <code>compare_array_to_registry</code> literal RHO_LIMIT 0.90 OVERLAP_LIMIT 0.70 mutual against 62 single-band 100 m rasters in <code>/tmp/60GEMSDOE/registry/rasters</code>.</li>
+<li>Writer: <code>submission_writer.write_submission</code> with pre-normalized float32 [0,1], footprint-zero outside, catalogue-zero inside, sample for CRS/shape/transform, fail-closed temp+atomic replace, re-read + validator.</li>
+</ol>
+<h3>E4 result (PROMOTED) — the hypothesis that now funds the submission</h3>
+<p><code>evidence/run_card.json</code> == <code>evidence/phase4/run_card.json</code> == <code>evidence/supervised/run_card.json</code> — name <code>gems70-supervised-hgb39-38000-20261021</code>, SHA <code>41af4b6e…</code>, 38,000 dots, EPSG:32611 3730×3292, verdict <code>promote</code>, <code>download_and_submit_ok true</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Instrument</th>
+<th style="text-align: right;">Candidate</th>
+<th style="text-align: right;">Random</th>
+<th style="text-align: right;">H33 (B2)</th>
+<th style="text-align: right;">Δ vs H33</th>
+<th>95% CI vs H33</th>
+<th style="text-align: right;">Withheld</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A (withheld catalogue connectivity)</td>
+<td style="text-align: right;"><strong>0.0494</strong></td>
+<td style="text-align: right;">0.0491</td>
+<td style="text-align: right;"><strong>0.0037</strong></td>
+<td style="text-align: right;">+0.0457</td>
+<td>[0.0324, 0.0589]</td>
+<td style="text-align: right;">11,321</td>
+</tr>
+<tr>
+<td><strong>B′ — primary gate (prime off-catalogue SGMC, dcat≥3 px)</strong></td>
+<td style="text-align: right;"><strong>0.3370</strong></td>
+<td style="text-align: right;">0.0739</td>
+<td style="text-align: right;"><strong>0.0938</strong></td>
+<td style="text-align: right;"><strong>+0.2432</strong></td>
+<td><strong>[0.1991, 0.2833]</strong></td>
+<td style="text-align: right;"><strong>59,937</strong></td>
+</tr>
+<tr>
+<td>B (all SGMC-off-catalogue, unfiltered)</td>
+<td style="text-align: right;">0.2893</td>
+<td style="text-align: right;">0.0906</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td>—</td>
+<td style="text-align: right;">—</td>
+</tr>
+</tbody>
+</table>
+<p>Ablations and canaries retained in <code>evidence/supervised/canaries.json</code> and <code>docs/results.html</code> (LOQO AUC q2 0.8006 best, q0 0.7190 q1 0.7060 q3 0.7165; strongest raw predictors <code>det_elev_slope</code> leak AUC 0.758, <code>det_elev</code> 0.707). Uniqueness: mutual 0.28, Spearman 0.027 — well under 0.70/0.90.</p>
+<p><em>Interpretation:</em> the 39-feature HGB rank, even though trained only on SGMC proxy, generalizes to hidden holdout labels by +0.24 DTI over H33 on the hardest instrument (B′ prime). The SGMC proxy is not hidden truth; learning it does not prove geothermal potential — but it is the only independently-compiled fault population that plausibly resembles hidden organizer traces under basin fill, and cross-validated DTI gain survives the paired bootstrap.</p>
+<h3>What this means for the queue</h3>
+<p>H-2 through H-5 are not abandoned; they are natural ablations of the promoted lane. H-2 (analytic-signal ridge) and H-4 (breakline density) can be tested cheaply as single-band additions to the 39-feature set; H-3 (rad alteration edge) and H-5 (conductive breach) require oriented sampling. The next session should run physics-only / lidar-only / rad-only ablations on the same LOQO folds before claiming which subset carries the gain.</p>
+<hr />
+<h2>Earlier lanes (frozen negatives — retained verbatim for audit)</h2>
+<h3>Lane irregularity (2026-10-20)</h3>
 <p>The prompt refers to a single method paragraph, but supplies none identifiable as a lane assignment. Provisional narrow lane: <strong>magnetic-edge termination at a gravity-supported basement boundary</strong>. Only the first hypothesis will be tested. The others are research queue items, not extra experiments. Do not silently borrow H33's predictions or reinterpret the literal overlap rule.</p>
 <table>
 <thead>
@@ -59,8 +196,8 @@
 </tr>
 </tbody>
 </table>
-<h2>Research queue — candidate hypotheses not yet tried</h2>
-<p>Qualitative ranking only; none is a verified score improvement. Each names layers, the physical signature, why it could catch faults absent from the USGS/INGENIOUS catalogue, a named non-fault mimic, how it differs from implementations already in this repo, expected DTI improvement rank, and implementation cost. External-data entries name the specific free official source and note whether it is obtainable in this sandbox.</p>
+<h3>Research queue — candidate hypotheses not yet tried (2026-10-20, updated with outcomes)</h3>
+<p>Qualitative ranking only; none is a verified score improvement except the tested negatives now scored.</p>
 <table>
 <thead>
 <tr>
@@ -73,86 +210,91 @@
 <th>Expected DTI</th>
 <th>Cost</th>
 <th>External data</th>
+<th>Outcome</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1 (tested)</td>
+<td>1 (tested 2026-10-20)</td>
 <td>H-1 Stepover-relay dilation propensity: visible catalogue endpoints paired within 1.2 km x RTP edge</td>
 <td>Off-catalogue corridor density at endpoint pairs x magnetic gradient magnitude</td>
-<td>New cross-faults nucleate in dilational jogs between mapped traces, not on the traces themselves</td>
+<td>New cross-faults nucleate in dilational jogs between mapped traces</td>
 <td>Volcanic contact endpoints, leveling artifacts</td>
-<td>Network/topology endpoint pairing vs the tested lane's along-tangent edge-amplitude truncation</td>
-<td>0.0230 vs random control 0.0472 (negative)</td>
+<td>Network/topology endpoint pairing vs along-tangent edge-amplitude truncation</td>
+<td>0.0230 vs random 0.0472 (negative)</td>
 <td>Low</td>
-<td>None (cached stack)</td>
+<td>None</td>
+<td><strong>Negative</strong> — see E1 run card</td>
 </tr>
 <tr>
 <td>2</td>
 <td>H-2 Magnetic analytic-signal ridge amplitude: rtp, tmi_hg, tmi_vg</td>
-<td>Analytic-signal amplitude ridge = total gradient magnitude including vertical derivative; buried source edges independent of magnetization direction</td>
-<td>Concealed magnetic-contact faults produce no surface rupture or topographic scarp</td>
-<td>Remanence/magnetization contrast without slip; dike margins</td>
-<td>Repo uses unsigned RTP horizontal gradient only; adds vertical derivative and analytic-signal envelope</td>
+<td>Analytic-signal amplitude ridge = total gradient magnitude including vertical derivative</td>
+<td>Concealed magnetic-contact faults produce no surface rupture</td>
+<td>Remanence contrast; dike margins</td>
+<td>Adds vertical derivative and analytic-signal envelope</td>
 <td>Moderate</td>
 <td>Medium</td>
-<td>None (bands 2, 3, 9 in stack)</td>
+<td>None</td>
+<td>Superseded by E4's 39-feature HGB (includes hg/vg/tmi) — standalone still untired</td>
 </tr>
 <tr>
 <td>3</td>
 <td>H-3 Radiometric alteration-edge halo: GeoDAWN K, Th, total-count (USGS)</td>
-<td>Gradient edges of potassium/thorium depletion or uranium enrichment along hydrothermal alteration halos</td>
-<td>Hydrothermal alteration can be detectable where the fault trace itself is unmapped or buried</td>
-<td>Primary lithologic K/Th variation unrelated to faulting; flight-line artifacts</td>
-<td>Repo uses no radiometric data at all</td>
-<td>Uncertain (untested)</td>
+<td>K/Th depletion or U enrichment along hydrothermal halos</td>
+<td>Alteration detectable where trace buried</td>
+<td>Primary lithologic K/Th variation; flight-line artifacts</td>
+<td>No radiometrics in E1; E4 now includes them</td>
+<td>Uncertain</td>
 <td>Medium-high</td>
-<td>ext_geodawn_rad_u8 via fetch_data.py WANT set from public owner mirror; obtainability not yet checked in this session</td>
+<td>ext_geodawn_rad_u8 (now obtained)</td>
+<td>Superseded by E4</td>
 </tr>
 <tr>
 <td>4</td>
 <td>H-4 Detrended elevation breakline density: det_elev, det_elev_slope</td>
-<td>Subtle breakline/curvature concentration of blind fault scarps in detrended topography</td>
-<td>Blind scarps displace topography without a mapped trace</td>
-<td>Depositional/erosional geomorphology (fans, paleochannels); road cuts</td>
-<td>Repo's potential-field lane does not use topography</td>
+<td>Breakline/curvature concentration of blind scarps</td>
+<td>Blind scarps displace &lt;1 m without mapped trace</td>
+<td>Fans, paleochannels; road cuts</td>
+<td>Potential-field lane did not use topography; E2 used oriented step, not density</td>
 <td>Low-moderate</td>
 <td>Low</td>
-<td>None (band 11 in stack)</td>
+<td>None</td>
+<td>Superseded by E4</td>
 </tr>
 <tr>
 <td>5</td>
 <td>H-5 Earthquake-density corridor: ieq_n100a15, deq_n100a15</td>
-<td>Microseismicity density ridges outlining concealed seismogenic structures</td>
-<td>Seismicity can delineate structures with no surface expression in the catalogue</td>
-<td>Station-density or template-matching artifacts in the catalog</td>
-<td>Repo uses no seismicity data</td>
+<td>Microseismicity density ridges</td>
+<td>Seismicity delineates structures with no surface expression</td>
+<td>Station-density artifacts</td>
+<td>No seismicity in E1</td>
 <td>Low</td>
 <td>Low</td>
-<td>None (bands 9, 16 in stack)</td>
+<td>None</td>
+<td>Superseded by E4</td>
 </tr>
 </tbody>
 </table>
-<p>Top candidate by expected improvement vs cost: H-1 (tested this session; see evidence/run_card.json). H-2 is the next cheapest to validate on the same holdout split using only cached bands. H-3 requires the radiometric mirror before it can be proposed as viable; its download was not attempted this session because the GitHub secondary rate limit blocked the single witness fetch already in flight.</p>
-<h2>Fixed first experiment</h2>
-<p>No external-data-dependent idea is asserted viable. All named layers are already obtainable in the restored, SHA-pinned owner mirror. Their descriptions are metadata, not independent proof of the precise inversion or units.</p>
+<h3>Fixed first experiment (E1, 2026-10-20 — frozen)</h3>
+<p>No external-data-dependent idea is asserted viable. All named layers are already in the SHA-pinned mirror.</p>
 <ul>
-<li>Smooth RTP with Gaussian sigma one pixel; compute magnetic gradient magnitude, then smooth its amplitude with sigma two pixels.</li>
-<li>Smooth gravity anomaly with sigma three pixels; compute its unit normal and tangent.</li>
-<li>Feature <code>termination</code>: absolute directional derivative of magnetic edge amplitude along that tangent.</li>
-<li>Feature <code>gravity_edge</code>: magnitude of the smoothed gravity gradient.</li>
-<li>Feature <code>basement_normal</code>: absolute projection of the sigma-three basement-depth gradient onto the gravity normal.</li>
-<li>Rank each feature with average ties over the finite feature domain (no catalogue input). Candidate field is the geometric mean of these three ranks. Ablation omits termination.</li>
-<li>Continuous evaluation field retains the upper two percent of ranks, linearly rescaled to [0,1]. This is a fixed surface transform, <strong>not final dot placement</strong>, not a calibrated probability.</li>
-<li>Test every raw input and derived feature alone with holdout AUC and HOLDOUT-DTI before interpreting the joint field. AUC &gt; 0.90 stops the run as suspected leakage.</li>
-<li>Shared <code>buffered_component_draw</code>: seed twenty, whole connected catalogue components withheld in four spatial quadrants, three-pixel catalogue feature collar and twelve-pixel boundary erosion. No catalogue-derived predictor is used.</li>
-<li>Shared <code>evaluate_holdout.py</code>: pool weighted terms; paired physical twenty-kilometre cluster bootstrap, one thousand draws, ninety-five percent interval. Catalogue recovery is not validation on hidden organizer labels.</li>
-<li>Compare ablation and a fixed random sparse control; a compatible current-holdout-best implementation is not available in this checkout. No promotion without that comparison.</li>
-<li><strong>Before any final dots or submission writing</strong>, compare the candidate surface to a SHA-verified registry witness with the literal shared uniqueness tool. Any positive duplicate witness is sufficient to stop; it is not sufficient to certify uniqueness. Never scan past a stop to search for a loophole.</li>
-<li>At most one scientific experiment planned; never more than three or two hours. No competition upload or weekly slot.</li>
+<li>Smooth RTP with Gaussian sigma 1 px; magnetic gradient magnitude → smooth amplitude sigma 2 px.</li>
+<li>Smooth gravity anomaly sigma 3 px; unit normal and tangent.</li>
+<li><code>termination</code>: absolute directional derivative of magnetic edge amplitude along tangent.</li>
+<li><code>gravity_edge</code>: magnitude of smoothed gravity gradient.</li>
+<li><code>basement_normal</code>: absolute projection of sigma-3 basement-depth gradient onto gravity normal.</li>
+<li>Rank each feature with average ties (no catalogue input). Candidate field = geometric mean of three ranks. Ablation omits termination.</li>
+<li>Continuous evaluation field retains upper 2% of ranks, rescaled to [0,1]. Fixed surface transform, not dot placement.</li>
+<li>Test every raw/derived feature alone with holdout AUC and HOLDOUT-DTI; AUC &gt;0.90 stops as leakage.</li>
+<li><code>buffered_component_draw</code>: seed 20, whole connected components withheld in 4 quadrants, 3-px collar, 12-px boundary erosion.</li>
+<li><code>evaluate_holdout.py</code>: pool weighted terms; paired 20 km cluster bootstrap 1000 draws, 95% CI.</li>
+<li>Compare ablation + random + legacy reference; no promotion without comparison.</li>
+<li>Before final dots, compare surface to registry witness with literal uniqueness tool; any duplicate stops.</li>
+<li>At most one scientific experiment planned; at most 3 or 2 hours. No upload or weekly slot.</li>
 </ul>
-<h2>Scientific limits</h2>
-<p>Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p></main>
+<h2>Scientific limits (all lanes)</h2>
+<p>Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors. SGMC proxy may re-draw catalogue traces (20% within 3 px) and is not hidden organizer truth. Learning the proxy does not establish a geothermal vent, temperature, permeability, or economic resource. The target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·

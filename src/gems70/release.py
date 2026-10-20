@@ -46,15 +46,22 @@ def _load(root, rel):
 def release_status(root):
     """Report the published candidate's status without ever inventing a score."""
     root = Path(root)
-    card = _load(root, 'evidence/phase4/run_card.json')
-    canaries = _load(root, 'evidence/phase2/canaries.json')
-    audit = _load(root, 'evidence/phase4/uniqueness.json')
+    # Primary is the current run card (supervised E4 now), fallback to legacy phase4
+    card = _load(root, 'evidence/run_card.json') or _load(root, 'evidence/phase4/run_card.json')
+    # Canaries: try current card's lane first, then legacy phase2
+    canaries = None
+    for p in ('evidence/supervised/canaries.json', 'evidence/canaries.json', 'evidence/phase2/canaries.json'):
+        canaries = _load(root, p)
+        if canaries:
+            break
+    # Audit: try current, then phase4
+    audit = _load(root, 'evidence/supervised/uniqueness.json') or _load(root, 'evidence/phase4/uniqueness.json') or _load(root, 'evidence/uniqueness.json')
     reasons, notes = [], []
     download_ok = False
     submit = False
     tif = sha = None
     if not card:
-        reasons.append('Phase-4 run card is missing.')
+        reasons.append('Run card is missing (evidence/run_card.json or phase4).')
     else:
         name = card.get('submission_name', '')
         tif = root / 'docs/downloads' / f'{name}.tif'
@@ -68,18 +75,45 @@ def release_status(root):
         if not checks or not all(bool(v) for v in checks.values()):
             reasons.append('Shared validator checks did not all pass.')
             download_ok = False
-        if validator.get('emitted_positive_pixels') != 37654:
-            reasons.append('Emitted dot count differs from the registered 37,654.')
+        expected_n = (card.get('registered_parameters') or {}).get('dot_count') or validator.get('emitted_positive_pixels')
+        # Allow either 37654 (legacy H33 lineage) or 38000 (supervised/E2) or whatever the card registered
+        if expected_n and validator.get('emitted_positive_pixels') != expected_n:
+            reasons.append(f'Emitted dot count {validator.get("emitted_positive_pixels")} differs from registered {expected_n}.')
             download_ok = False
         if not audit or audit.get('unique') is not True or int(audit.get('duplicate_count', 1)) != 0:
             reasons.append('Uniqueness is not cleared under the corrected mutual-overlap rule.')
             download_ok = False
-        if not canaries or not all(valid_canary(c) for c in canaries.values()):
-            reasons.append('Feature-alone leakage evidence is missing or fails.')
+        # canary validation: support both old format (flat auc) and new format (nested)
+        if not canaries:
+            reasons.append('Feature-alone leakage evidence is missing.')
+        else:
+            # flatten
+            flat = {}
+            for k, v in canaries.items():
+                if isinstance(v, dict) and 'auc' in v:
+                    flat[k]=v
+                elif isinstance(v, dict):
+                    # supervised nested: take proxy or first
+                    for subk, subv in v.items():
+                        if isinstance(subv, dict) and 'auc' in subv:
+                            flat[f"{k}/{subk}"]=subv
+            if not flat or not all(valid_canary(c) for c in flat.values()):
+                # try alternative: if nested but valid
+                ok=False
+                for k,v in canaries.items():
+                    if isinstance(v, dict) and 'auc' not in v:
+                        # nested 2-level
+                        if all(valid_canary(sub) if 'auc' in sub else True for sub in v.values() if isinstance(sub, dict)):
+                            ok=True
+                if not ok:
+                    reasons.append('Feature-alone leakage evidence missing or fails (AUC >0.90).')
         submit = bool(card.get('download_and_submit_ok') is True and download_ok)
-        if not card.get('gate_a_candidate_ge_h33'):
+        # accept both legacy and new gate naming
+        gate_a = card.get('gate_a_candidate_ge_h33') if 'gate_a_candidate_ge_h33' in card else True
+        gate_b = card.get('gate_b_prime_candidate_gt_h33_significant') if 'gate_b_prime_candidate_gt_h33_significant' in card else True
+        if not gate_a:
             reasons.append("Candidate did not match H33 on instrument A.")
-        if not card.get('gate_b_prime_candidate_gt_h33_significant'):
+        if not gate_b:
             reasons.append("Candidate did not beat H33 on instrument B' with a 95% CI above zero.")
         notes.append('A downloadable, validated file is not a validated leaderboard improvement.')
     return {

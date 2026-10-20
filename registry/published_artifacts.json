@@ -55,6 +55,24 @@
       "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
       "bytes": 498152,
       "note": "parallel H2 session (PR #18), blocked diagnostic, NOT a submission; card evidence/history/h2_stepover_negative/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-supervised-hgb39-38000-20261021.tif",
+      "sha256": "41af4b6e244c9c1ae4b7e0cc86fdb47aef2e5fcbccf197ff12bcb481eea4875a",
+      "bytes": 123199,
+      "note": "this session E4, PROMOTED candidate; run card evidence/supervised/run_card.json HOLDOUT-DTI 0.337 vs H33 0.094"
+    },
+    {
+      "path": "docs/downloads/gems70-supervised-hgb39-38000-20261021.zip",
+      "sha256": "c7fc888e6f448c350b25f27b02d4ae76fd570e547a606b7b0d31eea52e4a058a",
+      "bytes": 80273,
+      "note": "this session E4, PROMOTED candidate ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-supervised-hgb39-38000-20261021.json",
+      "sha256": "6cc02e04eabfbd4bbe866e01afc1cc52299ad30fb69bb210b22637c6c7f44f98",
+      "bytes": 3415,
+      "note": "this session E4, writer receipt"
     }
   ]
 }

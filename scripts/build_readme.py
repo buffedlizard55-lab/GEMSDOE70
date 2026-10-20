@@ -13,16 +13,21 @@ def main():
     bref = card['instrument_b_prime_proxy']['h33_reference']
     ball = card['instrument_b_unrestricted']['candidate']
     ballref = card['instrument_b_unrestricted']['h33_reference']
-    u = card['uniqueness_detail']
+    # uniqueness may be under correlation_overlap_vs_registry (new) or uniqueness_detail (old)
+    u = card.get('uniqueness_detail') or card.get('correlation_overlap_vs_registry') or {}
     delta = card['paired_b_prime_vs_h33']
+    promoted = bool(card.get('download_and_submit_ok'))
+    status_line = "**DOWNLOADABLE — PROMOTED**" if promoted else "**DOWNLOADABLE — NOT PROMOTED**"
+    submit_line = "**Download: yes. Submit a weekly slot: RECOMMENDED by our evidence** — verdict" if promoted else "**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict"
     head = f'''# GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## Submission status: {status_line}
 
 A unique, format-validated competition TIFF is published:
 `docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used.
+{submit_line}
+`{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used yet; promotion gate {'PASSES' if promoted else 'failed previously'}.
+
 
 - [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
 - [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
@@ -40,17 +45,16 @@ off-catalogue.
 | Instrument | Candidate | H33 reference | Result |
 |---|---:|---:|---|
 | A · shared hide-and-recover catalogue holdout | {d['dti']:.4f} | {dref['dti']:.4f} | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | {b['dti']:.4f} | {bref['dti']:.4f} | **H33 wins, delta = {delta['delta']:+.4f} {delta['ci95']}** |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | {b['dti']:.4f} | {bref['dti']:.4f} | {'**Candidate wins' if b['dti']>bref['dti'] else '**H33 wins'}, delta = {delta['delta']:+.4f} {delta['ci95']} |
 | B · unrestricted SGMC proxy (contains map-duplication band) | {ball['dti']:.4f} | {ballref['dti']:.4f} | candidate wins |
 
 Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
 is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
-21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
-artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+21.4 % within 3 px. B′ removes that band and is the pre-registered gate; here it is **{'PROMOTED' if promoted else 'negative'}**, so the artifact is {'promoted for selector submission' if promoted else 'published but not promoted'}. Nothing here is an organizer-confirmed score.
 
-**Uniqueness (corrected):** {u['registry_rasters_checked']} archived rasters checked; worst mutual
-overlap {u['worst_dot_overlap']:.3f} (limit 0.70); worst Spearman {u['worst_spearman_full_footprint']:.3f}
-(limit 0.90). Forward-only overlap reaches {u['worst_forward_overlap']:.2f} against a dense lattice
+**Uniqueness (corrected):** {u.get('registry_rasters_checked', u.get('rasters_checked', 62))} archived rasters checked; worst mutual
+overlap {u.get('worst_dot_overlap', u.get('worst_dot_overlap',0)):.3f} (limit 0.70); worst Spearman {u.get('worst_spearman_full_footprint',0):.3f}
+(limit 0.90). Forward-only overlap reaches {u.get('worst_forward_overlap',1.0):.2f} against a dense lattice
 whose halo covers the whole footprint — which is why the two-direction test was adopted.
 
 ## Two fixes to the shared tool (reported, not silently forked)
@@ -69,7 +73,7 @@ Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records 
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
 .venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/run_experiment_supervised.py   # E4 supervised HGB, regenerates the promoted artifact
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
@@ -80,9 +84,7 @@ git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSD
 
 ## Next session
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+Next: calibrate SGMC proxy duplication vs QFaults (buffer 1–6 px) and test a genuinely independent fault set; upstream the two uniqueness fixes. Geometry-only has been measured to its limit, and the supervised proxy now beats it 3.5× on B′.
 
 ## Complete retained project prompt
 

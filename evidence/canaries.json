@@ -1,50 +1,480 @@
 {
+  "mag_anom": {
+    "proxy": {
+      "auc": 0.5182516640040844,
+      "inverse": 0.4817483359959156,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5091357921120042,
+      "inverse": 0.4908642078879958,
+      "suspected": false
+    }
+  },
   "rtp": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.5175864353855667,
-    "inverse_auc": 0.4824135646144333,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
+    "proxy": {
+      "auc": 0.5240698824071939,
+      "inverse": 0.4759301175928061,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5177217275417366,
+      "inverse": 0.4822782724582634,
+      "suspected": false
+    }
   },
-  "gravity": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.45875241166858055,
-    "inverse_auc": 0.5412475883314194,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
+  "tmi_hg": {
+    "proxy": {
+      "auc": 0.4893290157778583,
+      "inverse": 0.5106709842221417,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5289476799752673,
+      "inverse": 0.47105232002473274,
+      "suspected": false
+    }
   },
-  "basement": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.5243442341665931,
-    "inverse_auc": 0.47565576583340685,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
+  "geod_2ndinv": {
+    "proxy": {
+      "auc": 0.4770666614924734,
+      "inverse": 0.5229333385075265,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5677914939051321,
+      "inverse": 0.43220850609486794,
+      "suspected": false
+    }
   },
-  "termination": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.5252857815122339,
-    "inverse_auc": 0.47471421848776607,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
+  "iso_grav_anom_slope": {
+    "proxy": {
+      "auc": 0.4269810727049639,
+      "inverse": 0.5730189272950361,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5237700783941348,
+      "inverse": 0.4762299216058652,
+      "suspected": false
+    }
   },
-  "gravity_edge": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.5287904977475488,
-    "inverse_auc": 0.4712095022524512,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
+  "tc": {
+    "proxy": {
+      "auc": 0.37912898102704307,
+      "inverse": 0.6208710189729569,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.47252966765303417,
+      "inverse": 0.5274703323469658,
+      "suspected": false
+    }
   },
-  "basement_normal": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.5426488839325148,
-    "inverse_auc": 0.45735111606748524,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
+  "geod_shearrate": {
+    "proxy": {
+      "auc": 0.4767439262656873,
+      "inverse": 0.5232560737343127,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5672988569914318,
+      "inverse": 0.4327011430085682,
+      "suspected": false
+    }
+  },
+  "geod_dilaterate": {
+    "proxy": {
+      "auc": 0.438418329613953,
+      "inverse": 0.561581670386047,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.51652547323558,
+      "inverse": 0.48347452676442004,
+      "suspected": false
+    }
+  },
+  "tmi_vg": {
+    "proxy": {
+      "auc": 0.5023515943789321,
+      "inverse": 0.49764840562106794,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.48707452102287785,
+      "inverse": 0.5129254789771222,
+      "suspected": false
+    }
+  },
+  "deq_n100a15": {
+    "proxy": {
+      "auc": 0.48055116197009123,
+      "inverse": 0.5194488380299087,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5380595777758148,
+      "inverse": 0.4619404222241852,
+      "suspected": false
+    }
+  },
+  "iso_grav_anom_vg": {
+    "proxy": {
+      "auc": 0.46427901882473077,
+      "inverse": 0.5357209811752692,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5140800088331419,
+      "inverse": 0.48591999116685813,
+      "suspected": false
+    }
+  },
+  "det_elev": {
+    "proxy": {
+      "auc": 0.7067131491485227,
+      "inverse": 0.2932868508514773,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5117192935694727,
+      "inverse": 0.48828070643052734,
+      "suspected": false
+    }
+  },
+  "iso_grav_anom": {
+    "proxy": {
+      "auc": 0.615946032601535,
+      "inverse": 0.384053967398465,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.4589213808409151,
+      "inverse": 0.5410786191590848,
+      "suspected": false
+    }
+  },
+  "tmi": {
+    "proxy": {
+      "auc": 0.5325761142083073,
+      "inverse": 0.4674238857916927,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5087215555162972,
+      "inverse": 0.49127844448370284,
+      "suspected": false
+    }
+  },
+  "depth_to_base_surf": {
+    "proxy": {
+      "auc": 0.33551764904970516,
+      "inverse": 0.6644823509502948,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5244851609840121,
+      "inverse": 0.4755148390159879,
+      "suspected": false
+    }
+  },
+  "ieq_n100a15": {
+    "proxy": {
+      "auc": 0.47919332932573533,
+      "inverse": 0.5208066706742647,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5434653537673351,
+      "inverse": 0.45653464623266493,
+      "suspected": false
+    }
+  },
+  "cond_surf": {
+    "proxy": {
+      "auc": 0.5195094813729042,
+      "inverse": 0.4804905186270958,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.47809404226658425,
+      "inverse": 0.5219059577334157,
+      "suspected": false
+    }
+  },
+  "iso_grav_anom_hg": {
+    "proxy": {
+      "auc": 0.504220017046016,
+      "inverse": 0.49577998295398396,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.4928259597208727,
+      "inverse": 0.5071740402791274,
+      "suspected": false
+    }
+  },
+  "det_elev_slope": {
+    "proxy": {
+      "auc": 0.7578170967011431,
+      "inverse": 0.24218290329885694,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5636917354915644,
+      "inverse": 0.43630826450843563,
+      "suspected": false
+    }
+  },
+  "lidar_ex_max": {
+    "proxy": {
+      "auc": 0.5583575571906189,
+      "inverse": 0.44164244280938114,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5855634833495275,
+      "inverse": 0.41443651665047254,
+      "suspected": false
+    }
+  },
+  "lidar_ex_mean": {
+    "proxy": {
+      "auc": 0.5589331439194308,
+      "inverse": 0.44106685608056917,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5792218342019255,
+      "inverse": 0.4207781657980745,
+      "suspected": false
+    }
+  },
+  "lidar_step_max": {
+    "proxy": {
+      "auc": 0.5675202607134623,
+      "inverse": 0.4324797392865377,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5867315625828107,
+      "inverse": 0.4132684374171893,
+      "suspected": false
+    }
+  },
+  "lidar_lapneg_max": {
+    "proxy": {
+      "auc": 0.5651124647139234,
+      "inverse": 0.4348875352860766,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5888133917056798,
+      "inverse": 0.4111866082943202,
+      "suspected": false
+    }
+  },
+  "lidar_lappos_max": {
+    "proxy": {
+      "auc": 0.5686983018627095,
+      "inverse": 0.43130169813729047,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.591924597208727,
+      "inverse": 0.40807540279127297,
+      "suspected": false
+    }
+  },
+  "lidar_downface_max": {
+    "proxy": {
+      "auc": 0.5934740153249448,
+      "inverse": 0.4065259846750552,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5979337055030475,
+      "inverse": 0.4020662944969525,
+      "suspected": false
+    }
+  },
+  "lidar_upface_max": {
+    "proxy": {
+      "auc": 0.5880375092229652,
+      "inverse": 0.41196249077703484,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.6018550485822808,
+      "inverse": 0.3981449514177192,
+      "suspected": false
+    }
+  },
+  "lidar_cross_max": {
+    "proxy": {
+      "auc": 0.5984993881139036,
+      "inverse": 0.4015006118860964,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5968613512498896,
+      "inverse": 0.4031386487501104,
+      "suspected": false
+    }
+  },
+  "lidar_relief": {
+    "proxy": {
+      "auc": 0.5790957856813465,
+      "inverse": 0.42090421431865355,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5846544216500309,
+      "inverse": 0.4153455783499691,
+      "suspected": false
+    }
+  },
+  "lidar_coh100": {
+    "proxy": {
+      "auc": 0.4379350168813203,
+      "inverse": 0.5620649831186797,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5239379939934634,
+      "inverse": 0.4760620060065366,
+      "suspected": false
+    }
+  },
+  "lidar_strike": {
+    "proxy": {
+      "auc": 0.4423214445469219,
+      "inverse": 0.5576785554530781,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5415002424697465,
+      "inverse": 0.4584997575302535,
+      "suspected": false
+    }
+  },
+  "lidar_valid": {
+    "proxy": {
+      "auc": 0.4438344640798446,
+      "inverse": 0.5561655359201554,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.532358320598887,
+      "inverse": 0.467641679401113,
+      "suspected": false
+    }
+  },
+  "rad_K": {
+    "proxy": {
+      "auc": 0.34885342340821507,
+      "inverse": 0.651146576591785,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.46583776742337246,
+      "inverse": 0.5341622325766275,
+      "suspected": false
+    }
+  },
+  "rad_Th": {
+    "proxy": {
+      "auc": 0.44301614595342403,
+      "inverse": 0.5569838540465759,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.48124188388834915,
+      "inverse": 0.5187581161116508,
+      "suspected": false
+    }
+  },
+  "rad_U": {
+    "proxy": {
+      "auc": 0.403626809348134,
+      "inverse": 0.596373190651866,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.4737417895945588,
+      "inverse": 0.5262582104054412,
+      "suspected": false
+    }
+  },
+  "rad_TC": {
+    "proxy": {
+      "auc": 0.3791601564610165,
+      "inverse": 0.6208398435389835,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.47254950688985076,
+      "inverse": 0.5274504931101492,
+      "suspected": false
+    }
+  },
+  "ext_ThK": {
+    "proxy": {
+      "auc": 0.5494739389472645,
+      "inverse": 0.4505260610527355,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5038371817860613,
+      "inverse": 0.4961628182139387,
+      "suspected": false
+    }
+  },
+  "ext_UK": {
+    "proxy": {
+      "auc": 0.5593974783425014,
+      "inverse": 0.4406025216574986,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5081669437328858,
+      "inverse": 0.49183305626711415,
+      "suspected": false
+    }
+  },
+  "ext_UTh": {
+    "proxy": {
+      "auc": 0.5043855577835239,
+      "inverse": 0.4956144422164761,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5086502433530605,
+      "inverse": 0.4913497566469395,
+      "suspected": false
+    }
+  },
+  "ext_TMI_up150": {
+    "proxy": {
+      "auc": 0.5515452273213874,
+      "inverse": 0.44845477267861256,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5088428886582457,
+      "inverse": 0.4911571113417543,
+      "suspected": false
+    }
+  },
+  "OOF_prob_proxy_LOQO": {
+    "proxy": {
+      "auc": 0.6830256008514773,
+      "suspected": false
+    },
+    "holdout": {
+      "auc": 0.5845045565762741,
+      "suspected": false
+    }
   }
 }

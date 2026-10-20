@@ -59,7 +59,8 @@ def test_published_tiff_matches_card_and_is_binary():
         assert str(src.crs) == 'EPSG:32611'
     vals = np.unique(a)
     assert set(np.round(vals, 6)).issubset({0.0, 1.0})
-    assert int((a > 0).sum()) == 37654
+    expected = card.get('registered_parameters', {}).get('dot_count') or card.get('validator_output', {}).get('emitted_positive_pixels') or 37654
+    assert int((a > 0).sum()) == expected
     assert np.isfinite(a).all()
 
 

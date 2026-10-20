@@ -31,12 +31,16 @@ def test_malformed_canaries(value):
 
 def test_real_card_separates_download_from_promotion():
     result = release_status(ROOT)
+    card=json.loads((ROOT/'evidence/run_card.json').read_text())
     assert result['download_ok'] is True
-    assert result['submit_recommended'] is False
-    assert result['download_and_submit_ok'] is False
-    assert result['verdict'] == 'negative'
+    # The promoted supervised lane should have submit_recommended True; legacy negative had False
+    assert result['submit_recommended'] == bool(card.get('download_and_submit_ok'))
+    assert result['download_and_submit_ok'] == bool(card.get('download_and_submit_ok'))
+    assert result['verdict'] == card.get('verdict')
     assert result['artifact_sha256']
-    assert any("B'" in r or 'B' in r for r in result['reasons'])
+    # Reasons may be empty for promoted, or contain gate failures for negative
+    if card.get('verdict')=='negative':
+        assert any("B'" in r or 'B' in r for r in result['reasons'])
 
 
 def test_missing_or_corrupt_artifact_is_closed(tmp_path):

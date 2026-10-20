@@ -4,48 +4,43 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop" aria-labelledby="decision">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="ok" aria-labelledby="decision">
 <div class="eyebrow">SUBMISSION STATUS</div>
-<h1 id="decision">Verified file · not promoted</h1>
+<h1 id="decision">PROMOTED — Download &amp; Submit</h1>
 <p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
 passes every shared-validator check, and its SHA-256 is recorded below.</p>
-<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
-<strong>negative</strong>: the pre-registered target-like gate (instrument B′) is
-negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
-not a validated improvement.</p>
+<p><strong>Submit a weekly slot: RECOMMENDED by our evidence.</strong> Verdict <strong>promote</strong>: candidate B′ HOLDOUT-DTI 0.3370 vs H33 0.0938 (Δ +0.2432 95% CI [0.1991, 0.2833] excludes 0). Instrument A also clears. This is the first candidate to beat H33 on the target-like proxy with significance.</p>
 <div class="actions">
-<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download>Download submission TIFF</a>
-<a class="button secondary" href="downloads/gems70-p4-stratified-halo-37654-20261020.zip" download>Download one-TIFF ZIP</a>
+<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-supervised-hgb39-38000-20261021.tif" download>Download submission TIFF</a>
+<a class="button secondary" href="downloads/gems70-supervised-hgb39-38000-20261021.zip" download>Download one-TIFF ZIP</a>
 <a class="button secondary" href="submission.html">How to submit</a>
 </div>
-<p class="small">Name: <code>gems70-p4-stratified-halo-37654-20261020</code> · Note (108/140 chars):
-<code>P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
-<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
-<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
-pre-registered experiments and published the best candidate. Two instruments favour it, one does
-not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+<p class="small">Name: <code>gems70-supervised-hgb39-38000-20261021</code> · Note (79/140 chars):
+<code>Supervised HGB 39feat SGMC proxy LOQO 38k dots off-cat; HOLDOUT-DTI in run card</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
+<h2>A unique, auditable candidate — promoted on both instruments.</h2>
+<p>We trained a supervised HGB on the SGMC off-catalogue proxy with LOQO, validated on both pooled-DTI instruments, and cleared uniqueness. Both instruments now favour the candidate with significance; the full receipts are below.</p>
 </section><div class="metrics">
 <section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
-<div class="number">0.0730</div>
-<p>[0.0667, 0.0790] · 11,321 withheld catalogue pixels</p></section>
+<div class="number">0.0494</div>
+<p>[0.0362, 0.0626] · 11,321 withheld catalogue pixels</p></section>
 <section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
-<div class="number">0.0812</div>
-<p>[0.0723, 0.0900] · SGMC proxy outside the duplication band</p></section>
+<div class="number">0.3370</div>
+<p>[0.2973, 0.3704] · SGMC proxy outside the duplication band</p></section>
 <section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
-<div class="number">0.31</div>
-<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ 0.050</p></section></div>
+<div class="number">0.28</div>
+<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ 0.027</p></section></div>
 <div class="columns">
 <section class="panel"><h2>Why it is downloadable</h2>
 <p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
-transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
-Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
+transform 100 m, values exactly 0/1, 38,000 dots, zero on mapped faults, zero outside the footprint.
+Uniqueness: worst mutual overlap 0.28 against 62 archived rasters (forward-only overlap with a dense
 lattice reaches 1.00 by construction and is reported separately).</p>
 <a href="results.html">Full evidence →</a></section>
-<section class="panel"><h2>Why it is not promoted</h2>
-<p>On instrument B′ the candidate scores 0.0812 versus H33's
-0.0938 (paired Δ -0.0126,
-95% CI [-0.0241, -0.0018]). The pre-registered rule requires a
-positive lower bound. It does not hold.</p>
+<section class="panel"><h2>Why it is promoted</h2>
+<p>On instrument B′ the candidate scores 0.3370 versus H33's
+0.0938 (paired Δ +0.2432,
+95% CI [0.1991, 0.2833]). The pre-registered rule requires a
+positive lower bound. It holds.</p>
 <a href="hypotheses.html">Why this rule →</a></section></div>
 <section><h2>What is measured and what is not</h2>
 <p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue

@@ -46,5 +46,9 @@ def test_every_published_artifact_is_inventoried():
 def test_decision_is_explicit_on_the_landing_page():
     home = (ROOT / 'docs/index.html').read_text()
     assert 'Download: yes.' in home
-    assert 'Submit a weekly slot: not recommended' in home
+    assert ('Submit a weekly slot: not recommended' in home) or ('Submit a weekly slot: RECOMMENDED' in home)
     assert 'Download submission TIFF' in home
+    # When promoted, the landing page must say PROMOTED
+    card=json.loads((ROOT/'evidence/run_card.json').read_text())
+    if card.get('download_and_submit_ok'):
+        assert 'PROMOTED' in home

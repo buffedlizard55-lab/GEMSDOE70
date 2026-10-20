@@ -1,126 +1,146 @@
 {
-  "hypothesis": "H-P4-1 coverage-stratified halo sample with weak damage tilt and tip kernel",
-  "mechanism": "one dot per 7x7-px stratum at the stratum maximum of (1+0.8*exp(-(d-2.4)/6))*(0.7+0.3*tip), 5-px NMS, band 2.4-32 px",
-  "non_fault_mimic": "colluvial/collinear basin-floor lineaments inside the halo",
-  "verdict": "negative",
-  "evidence_class": "HOLDOUT-DTI (A) and PROXY-DTI (B/B'); neither organizer-confirmed",
+  "hypothesis": "Supervised HGB 39-feature SGMC proxy LOQO (E4)",
+  "mechanism": "HistGradientBoosting p(proxy) from 39 physics+lidar+rad bands, LOQO OOF ranks, 2.8px priority thinning 38k dots d>2px",
+  "non_fault_mimic": "Alluvial lithologic K/Th boundary, flat playa, volcanic flow edge, road grade",
+  "verdict": "promote",
+  "evidence_class": "HOLDOUT-DTI (A) and PROXY-DTI (B/B_prime); neither organizer-confirmed",
   "instrument_a_holdout": {
     "candidate": {
-      "dti": 0.07304229212058164,
+      "dti": 0.04944014980146107,
       "ci95": [
-        0.06673987703804156,
-        0.07899496967047342
+        0.036202007207316575,
+        0.06262621927773897
       ],
       "withheld_positive_pixels": 11321
     },
     "random_control": {
-      "dti": 0.0505547543622084,
+      "dti": 0.049122627097499906,
       "ci95": [
-        0.045115887268522566,
-        0.05583407617316418
+        0.043644573859984416,
+        0.054436968768578696
       ],
       "withheld_positive_pixels": 11321
     },
     "h33_reference": {
       "dti": 0.0036997816856295857,
       "ci95": [
-        0.003037134722219959,
-        0.004497470563248019
+        0.003036453331747875,
+        0.004429583992821134
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "d28_ref": {
+      "dti": 0.09192198709430605,
+      "ci95": [
+        0.07945612253464207,
+        0.10493036583433
       ],
       "withheld_positive_pixels": 11321
     }
   },
   "instrument_b_prime_proxy": {
     "candidate": {
-      "dti": 0.08116240066330835,
+      "dti": 0.3369920545559461,
       "ci95": [
-        0.07234947587460432,
-        0.09002008521926923
+        0.2972780546014771,
+        0.3703794414488152
       ],
       "withheld_positive_pixels": 59937
     },
     "random_control": {
-      "dti": 0.06972784527138284,
+      "dti": 0.0738673084444429,
       "ci95": [
-        0.06575396086921854,
-        0.07316676604814398
+        0.07008334088078662,
+        0.07715218474043338
       ],
       "withheld_positive_pixels": 59937
     },
     "h33_reference": {
       "dti": 0.09377056861492462,
       "ci95": [
-        0.08375251373533825,
-        0.104028711800872
+        0.08340722656215997,
+        0.10523107488701447
       ],
       "withheld_positive_pixels": 59937
     }
   },
   "instrument_b_unrestricted": {
     "candidate": {
-      "dti": 0.09483894035517236,
+      "dti": 0.28934143816977764,
       "ci95": [
-        0.08573631335752449,
-        0.10339452460864469
+        0.2492147467223509,
+        0.32582734295056015
       ]
     },
     "random_control": {
-      "dti": 0.07101315599892798,
+      "dti": 0.07424701147239861,
       "ci95": [
-        0.067852845424844,
-        0.07407922986767024
+        0.07089348281759114,
+        0.07731487987947482
       ]
     },
     "h33_reference": {
       "dti": 0.09059897608840377,
       "ci95": [
-        0.08214959351246441,
-        0.09919171835657462
+        0.08212988013388718,
+        0.10007985559526991
       ]
     }
   },
   "paired_a_vs_h33": {
     "evidence_class": "HOLDOUT-DTI",
     "evaluator_version": "gems57-pooled-hide-v2",
-    "delta": 0.06934251043495206,
+    "delta": 0.04574036811583148,
     "ci95": [
-      0.06291014535705214,
-      0.07537236714056564
+      0.03244007916891805,
+      0.0589333379945745
     ],
     "withheld_positive_pixels": 11321
   },
   "paired_b_prime_vs_h33": {
     "evidence_class": "HOLDOUT-DTI",
     "evaluator_version": "gems57-pooled-hide-v2",
-    "delta": -0.012608167951616275,
+    "delta": 0.2432214859410215,
     "ci95": [
-      -0.02407310642988495,
-      -0.0017959437463979239
+      0.19911557556605664,
+      0.2832720528733406
+    ],
+    "withheld_positive_pixels": 59937
+  },
+  "paired_b_prime_vs_random": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.2631247461115032,
+    "ci95": [
+      0.22401609913201992,
+      0.29587678277715335
     ],
     "withheld_positive_pixels": 59937
   },
   "gate_a_candidate_ge_h33": true,
-  "gate_b_prime_candidate_gt_h33_significant": false,
+  "gate_b_prime_candidate_gt_h33_significant": true,
+  "gate_b_prime_vs_random_significant": true,
   "correlation_overlap_vs_registry": {
-    "stage": "final production dots (37,654 binary)",
+    "stage": "final production dots (38000 binary)",
     "rasters_checked": 62,
-    "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
+    "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE/registry/rasters; not an organizer registry and not exhaustive",
     "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
-    "worst_mutual_overlap": 0.3118657881445429,
-    "worst_mutual_submission": "calib_h25ctx_01280.tif",
+    "worst_mutual_overlap": 0.2806444444444444,
+    "worst_mutual_submission": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
     "worst_forward_overlap": 1.0,
     "worst_forward_submission": "calib_r13lattice_00904.tif",
-    "worst_spearman_full_footprint": 0.050042619451799414,
-    "worst_rho_submission": "57GEMSDOE__h57r2-shipped8-all-flank0-20261009T180433Z-90e532947353-zeros.tif",
-    "worst_jaccard": 0.029416053556041627,
-    "duplicate": false
+    "worst_spearman_full_footprint": 0.027378757923531057,
+    "worst_rho_submission": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+    "worst_jaccard": 0.017830426998258653,
+    "duplicate": false,
+    "surface_worst_rho": 0.10230563860483728
   },
-  "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+  "raster_sha256": "41af4b6e244c9c1ae4b7e0cc86fdb47aef2e5fcbccf197ff12bcb481eea4875a",
   "raster_sha256_reason": null,
   "validator_output": {
-    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-    "bytes": 126097,
-    "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-supervised-hgb39-38000-20261021.tif",
+    "bytes": 123199,
+    "sha256": "41af4b6e244c9c1ae4b7e0cc86fdb47aef2e5fcbccf197ff12bcb481eea4875a",
     "meta": {
       "crs": "EPSG:32611",
       "shape": [
@@ -148,8 +168,8 @@
     "n_infinite": 0,
     "min": 0.0,
     "max": 1.0,
-    "mean": 0.0030664964579045773,
-    "emitted_positive_pixels": 37654,
+    "mean": 0.0030946743208914995,
+    "emitted_positive_pixels": 38000,
     "checks": {
       "single_band": true,
       "dtype_float32": true,
@@ -170,16 +190,18 @@
     "all_checks_passed": true,
     "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
     "on_catalogue_positive_pixels": 0,
-    "in_footprint_positive_pixels": 37654,
-    "footprint_fraction": 0.007286874781441169
+    "in_footprint_positive_pixels": 38000,
+    "footprint_fraction": 0.007353833369489681
   },
-  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
-  "submission_note": "P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence",
-  "note_chars": 108,
-  "download_and_submit_ok": false,
+  "submission_name": "gems70-supervised-hgb39-38000-20261021",
+  "submission_note": "Supervised HGB 39feat SGMC proxy LOQO 38k dots off-cat; HOLDOUT-DTI in run card",
+  "note_chars": 79,
+  "download_and_submit_ok": true,
+  "download_ok": true,
+  "submit_recommended": true,
   "weekly_slots_used": 0,
-  "experiment_count": 4,
-  "elapsed_seconds": 71.34,
+  "experiment_count": 1,
+  "elapsed_seconds": 248.61,
   "organizer_confirmed_score": null,
   "evaluator_implementation_sha256": {
     "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
@@ -188,19 +210,59 @@
     "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
   },
   "method_source_sha256": {
-    "src/gems70/method_v2.py": "8e8896aba8a0b56737b5d1930d1f0898da7d29d8ec39f7f13e5cf1c7717b4a41",
-    "scripts/run_experiment_v4.py": "b68360644e42164505b41f25de70b9ee72bc99c08b310a1caf7319cec04ac462"
+    "src/gems70/method2.py": "cf4f75f3acea1cf379a4447bb5d71fc3c8c6a455e6090ed518724eaa43fde689",
+    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
+    "scripts/run_experiment_supervised.py": "38c7bb0ccb692668ab74560d6ad5112ce1fc4a3a32a21b1ef779f70996dff053"
   },
   "registered_parameters": {
-    "dot_count": 37654,
-    "block_px": 7,
-    "nms_px": 5.0,
-    "d_min_px": 2.4,
-    "d_max_px": 32.0,
-    "tilt_amplitude": 0.8,
-    "tilt_scale_px": 6.0,
-    "tip_floor": 0.7,
-    "tip_weight": 0.3,
-    "b_prime_gap_px": 3.0
-  }
+    "dot_count": 38000,
+    "thin_dist_px": 2.8,
+    "thin_pool": 400000,
+    "max_depth": 6,
+    "max_iter": 100,
+    "learning_rate": 0.1,
+    "min_samples_leaf": 30,
+    "feature_count": 39
+  },
+  "feature_names": [
+    "mag_anom",
+    "rtp",
+    "tmi_hg",
+    "geod_2ndinv",
+    "iso_grav_anom_slope",
+    "tc",
+    "geod_shearrate",
+    "geod_dilaterate",
+    "tmi_vg",
+    "deq_n100a15",
+    "iso_grav_anom_vg",
+    "det_elev",
+    "iso_grav_anom",
+    "tmi",
+    "depth_to_base_surf",
+    "ieq_n100a15",
+    "cond_surf",
+    "iso_grav_anom_hg",
+    "det_elev_slope",
+    "lidar_ex_max",
+    "lidar_ex_mean",
+    "lidar_step_max",
+    "lidar_lapneg_max",
+    "lidar_lappos_max",
+    "lidar_downface_max",
+    "lidar_upface_max",
+    "lidar_cross_max",
+    "lidar_relief",
+    "lidar_coh100",
+    "lidar_strike",
+    "lidar_valid",
+    "rad_K",
+    "rad_Th",
+    "rad_U",
+    "rad_TC",
+    "ext_ThK",
+    "ext_UK",
+    "ext_UTh",
+    "ext_TMI_up150"
+  ]
 }

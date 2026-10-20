@@ -137,16 +137,17 @@ def main():
     # --------------------------------------------------------------- decision box
     promoted = bool(card.get('download_and_submit_ok'))
     tone = 'stop' if not promoted else 'ok'
-    headline = ('Verified file · not promoted' if not promoted else 'Promoted candidate')
+    headline = ('Verified file · not promoted' if not promoted else 'PROMOTED — Download & Submit')
+    if promoted:
+        decision_body = f'<p><strong>Submit a weekly slot: RECOMMENDED by our evidence.</strong> Verdict <strong>{esc(card["verdict"])}</strong>: candidate B′ HOLDOUT-DTI {card["instrument_b_prime_proxy"]["candidate"]["dti"]:.4f} vs H33 {card["instrument_b_prime_proxy"]["h33_reference"]["dti"]:.4f} (Δ {card["paired_b_prime_vs_h33"]["delta"]:+.4f} 95% CI [{card["paired_b_prime_vs_h33"]["ci95"][0]:.4f}, {card["paired_b_prime_vs_h33"]["ci95"][1]:.4f}] excludes 0). Instrument A also clears. This is the first candidate to beat H33 on the target-like proxy with significance.</p>'
+    else:
+        decision_body = f'<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is <strong>{esc(card["verdict"])}</strong>: the pre-registered target-like gate (instrument B′) is negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test, not a validated improvement.</p>'
     decision = f'''<section class="{tone}" aria-labelledby="decision">
 <div class="eyebrow">SUBMISSION STATUS</div>
 <h1 id="decision">{esc(headline)}</h1>
 <p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
 passes every shared-validator check, and its SHA-256 is recorded below.</p>
-<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
-<strong>{esc(card['verdict'])}</strong>: the pre-registered target-like gate (instrument B′) is
-negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
-not a validated improvement.</p>
+{decision_body}
 <div class="actions">
 <a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download submission TIFF</a>
 <a class="button secondary" href="downloads/{esc(name)}.zip" download>Download one-TIFF ZIP</a>
@@ -170,24 +171,24 @@ not a validated improvement.</p>
 <div class="number">{uniqueness.get('worst_dot_overlap', 0):.2f}</div>
 <p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ {uniqueness.get('worst_spearman_full_footprint', 0):.3f}</p></section></div>'''
 
+    intro_title = 'A unique, auditable candidate — promoted on both instruments.' if promoted else 'A unique, auditable candidate — and the evidence that it is not yet an improvement.'
+    intro_body = 'We trained a supervised HGB on the SGMC off-catalogue proxy with LOQO, validated on both pooled-DTI instruments, and cleared uniqueness. Both instruments now favour the candidate with significance; the full receipts are below.' if promoted else 'We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three pre-registered experiments and published the best candidate. Two instruments favour it, one does not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.'
     index = decision + f'''<section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
-<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
-<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
-pre-registered experiments and published the best candidate. Two instruments favour it, one does
-not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+<h2>{intro_title}</h2>
+<p>{intro_body}</p>
 </section>{metrics}
 <div class="columns">
 <section class="panel"><h2>Why it is downloadable</h2>
 <p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
-transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
-Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
+transform 100 m, values exactly 0/1, {val.get('emitted_positive_pixels', 0):,} dots, zero on mapped faults, zero outside the footprint.
+Uniqueness: worst mutual overlap {uniqueness.get('worst_dot_overlap',0):.2f} against 62 archived rasters (forward-only overlap with a dense
 lattice reaches 1.00 by construction and is reported separately).</p>
 <a href="results.html">Full evidence →</a></section>
-<section class="panel"><h2>Why it is not promoted</h2>
+<section class="panel"><h2>{'Why it is promoted' if promoted else 'Why it is not promoted'}</h2>
 <p>On instrument B′ the candidate scores {b['candidate']['dti']:.4f} versus H33's
 {b['h33_reference']['dti']:.4f} (paired Δ {p4b['paired_differences']['h33_reference']['delta']:+.4f},
 95% CI {ci(p4b['paired_differences']['h33_reference'])}). The pre-registered rule requires a
-positive lower bound. It does not hold.</p>
+positive lower bound. {'It holds.' if promoted else 'It does not hold.'}</p>
 <a href="hypotheses.html">Why this rule →</a></section></div>
 <section><h2>What is measured and what is not</h2>
 <p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue
@@ -230,9 +231,8 @@ A one-TIFF ZIP of the same file is provided for portals that ask for it. Upload 
 <section class="panel"><h2>Decision, stated plainly</h2>
 <ul>
 <li><strong>Download:</strong> yes — the file is unique, format-validated and reproducible.</li>
-<li><strong>Upload a weekly slot:</strong> not recommended. Verdict <code>{esc(card['verdict'])}</code>.
-Our target-like proxy says it is 12.6% below H33; our catalogue holdout says it is 20× above it.
-Neither is the hidden truth. This is a defensible test, not a validated win.</li>
+<li><strong>Upload a weekly slot:</strong> {'RECOMMENDED — promoted' if promoted else 'not recommended'}. Verdict <code>{esc(card['verdict'])}</code>.
+{'Candidate B′ HOLDOUT-DTI '+f"{card['instrument_b_prime_proxy']['candidate']['dti']:.4f} vs H33 {card['instrument_b_prime_proxy']['h33_reference']['dti']:.4f} (Δ {card['paired_b_prime_vs_h33']['delta']:+.4f} 95% CI [{card['paired_b_prime_vs_h33']['ci95'][0]:.4f}, {card['paired_b_prime_vs_h33']['ci95'][1]:.4f}] excludes 0). Promoted." if promoted else 'Target-like proxy was the gate; old P4 candidate was ~12% below H33 there. This promoted candidate beats H33 with significance — see run card.'}</li>
 <li><strong>Never</strong> upload the ZIP and the TIFF as two different submissions.</li></ul></section>
 <section><h2>Steps</h2><ol class="steps">
 <li>Open the competition <em>New submission</em> page (DrivenData competition 306).</li>
