@@ -1,4 +1,6 @@
 {
+  "current_forward_protocol_ok": false,
+  "review_only": true,
   "verdict": "negative",
   "download_ok": true,
   "download_scope": "archived negative; forensic review only",
@@ -27,7 +29,8 @@
   "reasons": [
     "Literal forward-overlap lane gate is not cleared; mutual overlap is not an exemption.",
     "Candidate did not beat H33 on instrument B' with a 95% CI above zero.",
-    "Current literal one-way uniqueness audit requires STOP; review download only."
+    "Current literal one-way uniqueness audit requires STOP; review download only.",
+    "Current forward-overlap protocol requires STOP; archive download is review-only."
   ],
   "notes": [
     "A downloadable, validated file is not a validated leaderboard improvement."
@@ -40,7 +43,7 @@
   "archived_tif_available_for_review": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
   "approved_for_weekly_slot": false,
   "scientific_experiments_run": 0,
-  "historical_experiment_count": 4,
+  "historical_experiment_count": 1,
   "submission_slots_used": 0,
   "template_integrity_ok": true
 }

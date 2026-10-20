@@ -55,3 +55,26 @@ def literal_lane_status(audit):
         'invalid_rows': invalid,
         'scope': 'Only the supplied shared-tool measurements; no organizer/private registry claim.',
     }
+
+
+def strict_gate(audit):
+    """Compatibility view for the concurrent protocol audit; same literal policy."""
+    data = audit if isinstance(audit, dict) else {}
+    result = literal_lane_status(data)
+    rows = data.get('rows', [])
+    rows = rows if isinstance(rows, list) else []
+    witnesses = [{k: row.get(k) for k in (
+        'submission', 'sha256', 'spearman_full_footprint',
+        'my_dots_within_3px_of_theirs', 'their_dots_within_3px_of_mine')}
+        for row in rows if isinstance(row, dict)
+        and row.get('submission') in result['duplicate_witnesses']]
+    errors = list(result['invalid_rows'])
+    if not rows:
+        errors.append('No registry rows')
+    return {'rule': 'Spearman > 0.90 OR candidate dots within 3px of registry dots > 0.70',
+            'policy': 'Forward overlap, not mutual; exact threshold equality does not trigger.',
+            'witnesses': witnesses, 'measurement_errors': errors,
+            'historical_scan_complete': result['complete_scan'],
+            'stop_required': not result['protocol_unique'],
+            'current_registry_clearance': False,
+            'scope': 'Frozen historical rows only; not a refreshed all-repository inventory.'}

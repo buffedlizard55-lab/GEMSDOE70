@@ -4,7 +4,7 @@
 
 **Do not submit the published files.** They remain available for forensic review only.
 The fresh [protocol review](protocol-review.html) supersedes prior mutual-overlap promotion logic,
-not the frozen experimental measurements. All five archived final TIFFs have forward overlap 1.0
+not the frozen experimental measurements. All six archived final TIFFs have forward overlap 1.0
 against the hash-verified binary lattice. This exceeds the prompt's 0.70 stop rule even though
 rank correlation and mutual overlap are small. No new candidate was generated after the stop.
 
@@ -20,7 +20,7 @@ block at every mass. The archived mutual-rule receipts have not been rewritten t
 - No authenticated submission-page score receipt exists. H33's reported 0.2778 is user-supplied;
   historical public leaderboard captures are not receipts for our own submissions. Conflicting
   leader values in the brief are not current verified targets.
-- Local format validity is not portal acceptance. All five re-read TIFFs are single-band float32,
+- Local format validity is not portal acceptance. All six re-read TIFFs are single-band float32,
   finite in [0,1], and match the pinned sample's CRS, shape and transform. The rejected upload's
   exact error cannot be diagnosed without its bytes. The footprint-zero policy differs from a
   historical problem-page null/NaN quotation; organizer behavior has not been independently confirmed.

@@ -47,3 +47,14 @@ Remaining work: explicit protocol resolution; proxy/QFaults independence audit; 
 validation of the top residual-ranking hypothesis against a matched current best. A separate
 selector must verify the live cap and authorize any real slot. GitHub issue-creation permission and
 an authenticated organizer submission receipt are not available through this review.
+
+## Final concurrent integration
+
+PR #28 (negative H70 conductive-breach archive) and PR #24 (additional literal-policy audit)
+merged during PR #29 verification. Preserved all of their frozen evidence, original H70 canonical
+card, new artifact and regression tests. P4-specific builders and audit CLIs now explicitly select
+`evidence/phase4/run_card.json`, avoiding accidental use of H70's different schema. Both public
+policy APIs delegate to one implementation. Fresh audit expanded to **six** final TIFFs, all at
+forward overlap 1.0, still zero new experiments/rasters/slots by this review. The expanded integrated
+suite passes **212 tests**. The earlier three remote checks for commit b1d530a succeeded, including
+real Jekyll safety build; the final integrated commit is checked again on PR #29.

@@ -3,7 +3,7 @@
 This note supersedes older submission-approval language below, not the frozen scientific evidence.
 
 - **DO NOT SUBMIT.** New current card: `evidence/review/run_card.json`; new measured audit:
-  `evidence/review/literal_protocol_audit.json`. All five published final TIFFs have forward overlap
+  `evidence/review/literal_protocol_audit.json`. All six published final TIFFs have forward overlap
   1.0 with the pinned binary `calib_r13lattice_00904.tif` witness. No new TIFF, experiment or slot.
 - The inherited "100% halo coverage" claim was false: fresh coverage is 0.9987132726822701,
   leaving 6649 cells uncovered. At fixed mass 37654, the minimum possible overlap is still
@@ -25,6 +25,13 @@ redigitization overlap; then evaluate the first residual-ranking hypothesis with
 validation, feature-alone canaries and a matched current-best baseline. No boundary-only loophole
 experiment or new slot without the separate selector gates. Reproduce this review with
 `python scripts/review_literal_protocol.py --fetch`, builders, pytest and audit_pages.
+
+
+Latest integration: PR #28 H70 conductive-breach archive and PR #24 protocol audit preserved.
+Canonical `evidence/run_card.json` remains H70 as set by that session; P4 builders/audits now
+read `evidence/phase4/run_card.json` explicitly. The new measured review card remains
+`evidence/review/run_card.json`. All six artifacts directly fail the binary-witness forward rule.
+Integrated suite: 212 passed (three upstream affine deprecation warnings).
 
 ---
 
@@ -138,3 +145,23 @@ HOLDOUT-DTI 0.0943 [0.0782, 0.1109], seed-40/11,437 withheld). Candidate
 `evidence/run_card_e3_amended.json`). **Not yet scored on instrument B′** — selector's next step.
 Frozen drivers live at `scripts/run_experiment_e2_scarp.py` / `run_experiment_e3_scarp.py`
 (byte-identical rename; PR #16 owns canonical paths). Do not rerun.
+
+## Current-request review — arena/3169a6c0-gemsdoe70 (2026-10-20)
+
+**Overrides historical uniqueness clearance: DO NOT SUBMIT.** The latest user request explicitly
+uses forward overlap, not the inherited mutual criterion. `scripts/audit_current_protocol.py`
+reapplies that rule to frozen P4 rows: multiple witnesses fail, including forward overlap 1.00.
+This is a historical negative witness, not a refreshed registry scan. No scientific experiment,
+new TIFF, fitting, placement or competition upload occurred in this session. All TIFF bytes and
+frozen scientific cards are preserved. Fresh local validation confirms P4 finite [0,1] and grid
+consistency against cached reference metadata, not organizer acceptance.
+
+- Current JSON: `evidence/current_protocol_review.json` (also published under docs).
+- Review / ranked conditional hypotheses: `docs/protocol-review.md`.
+- Official reference README retrieved at pinned commit and archived in `evidence/current-review/`;
+  CPU-only training is supported (GPU is not a hard requirement).
+- Website has a global DO NOT SUBMIT override, archive downloads remain available for review.
+- Reconcile explicit lane and uniqueness policy before the old supervised-ranking next step.
+- Reproduce: audit_current_protocol.py, build_site.py, build_readme.py, pytest; no data download needed.
+
+Integration: main advanced concurrently with PRs adding a separate E3 scarp artifact and a literal-protocol review. All those frozen receipts, artifacts, tests and drivers were retained. This session's four conditional hypotheses and fresh P4 format card are supplemental (`docs/supplemental-protocol-review.html`), not a replacement for the concurrent review or an authorization of E3.

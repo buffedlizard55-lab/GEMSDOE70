@@ -51,12 +51,13 @@ def frame(title, body):
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
 <nav aria-label="Main">{nav}</nav><main id="main">
-<aside class="stop"><strong>DO NOT SUBMIT — literal protocol stop.</strong> Archived TIFFs are downloadable for review only.
+<aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
+<strong>DO NOT SUBMIT — literal protocol stop.</strong> Archived TIFFs are downloadable for review only.
 The current literal forward-overlap gate fails. <a href="protocol-review.html">Current audit</a> ·
 <a href="downloads/review_run_card.json">Current negative run card</a>.
 Historical receipts below are not current submission approval.</aside>{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/phase4_run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>'''
 
@@ -77,7 +78,7 @@ def instrument_rows(d):
 
 
 def main():
-    card = load('evidence/run_card.json', {})
+    card = load('evidence/phase4/run_card.json', {})
     if not card:
         raise SystemExit('evidence/run_card.json missing; run the experiment first')
     name = card['submission_name']
@@ -104,6 +105,7 @@ def main():
     # ------------------------------------------------------------- copy evidence
     copies = {
         'evidence/run_card.json': 'run_card.json',
+        'evidence/phase4/run_card.json': 'phase4_run_card.json',
         'evidence/review/run_card.json': 'review_run_card.json',
         'evidence/review/literal_protocol_audit.json': 'literal_protocol_audit.json',
         'evidence/phase4/uniqueness.json': 'uniqueness.json',
@@ -155,7 +157,7 @@ def main():
 The witness scan is sufficient to reject, but covers not every private or uncommitted raster. These are existing archived files,
 not a newly generated protocol-compliant submission. <strong>Submit a weekly slot: not recommended;
 blocked by your protocol.</strong></p>
-<p>All five archived TIFFs have forward overlap 1.00 against a verified binary registry lattice
+<p>All six archived TIFFs have forward overlap 1.00 against a verified binary registry lattice
 (limit 0.70). Mutual overlap is not an authorized exemption. No new TIFF, experiment or slot.</p>
 <div class="actions">
 <a class="button secondary" href="downloads/{esc(name)}.tif" download>Download archived TIFF — DO NOT SUBMIT</a>
@@ -229,7 +231,14 @@ fresh binary-witness comparison fails the literal overlap rule. Archived HOLDOUT
 <code>{esc(e2card.get('submission_note'))}</code>. E3 (depth-step) in the same lane family is
 negative with no file. Full tables on the results page; terms in
 <code>docs/publication-amendment-e2.md</code>.</p></section>"""
-    (DOCS / 'index.html').write_text(frame('Overview', index + e2_section))
+    archive_rows = [[esc(Path(r['artifact']).name),
+        f'<a href="{esc(r["artifact"].removeprefix("docs/"))}" download>Download for review — DO NOT SUBMIT</a>',
+        'pass' if r['validator_output']['all_checks_passed'] else 'FAIL',
+        str(r['shared_measurements']['rows'][0]['my_dots_within_3px_of_theirs'])]
+        for r in review['archived_artifacts']]
+    archives = '<h2>All inventoried final TIFFs — forensic review only</h2>' + table(
+        ['Archive', 'Download', 'Local format', 'Forward overlap (limit 0.70)'], archive_rows)
+    (DOCS / 'index.html').write_text(frame('Overview', index + e2_section + archives))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
