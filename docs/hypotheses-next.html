@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Next hypotheses · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">AUDIT UPDATE · 2026-10-20 · DO NOT SUBMIT</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission.html">How to submit</a><a href="results.html">Evidence</a><a href="hypotheses-next.html">Next hypotheses</a><a href="hypotheses.html">Earlier hypotheses</a><a href="h33-analysis.html">H33 archive analysis</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Untested research queue — 2026-10-20</h1>
+<p><strong>Status: proposed, not executed.</strong> These are <em>four untried methods</em>, not a new lane assignment, a trained model, a discovery, a predicted leaderboard score, or a reason to submit a TIFF. The user's parallel-run prompt mentions a "single method paragraph below" but does not include one. The prior E1/E2/E3, H2, C1 and P4 experiments are frozen; none of their exposed holdout folds can be used to tune a new proposal. Before any future evaluation, assign exactly one lane and reserve untouched spatial blocks.</p>
+<p>Ranking below is qualitative <strong>expected potential to improve held-out DTI</strong>, not a numeric score. It considers potential to find faults <em>absent</em> from the mapped USGS/INGENIOUS catalogue rather than re-trace mapped faults. The 19-band mirror's names and numbers are from <a href="downloads/band_metadata.json">band metadata</a>, pinned by <a href="downloads/data_receipt.json">data receipt</a>. The full 419 MB owner-mirror stack was successfully restored and SHA-256-checked <strong>locally</strong> on 2026-10-20; it is not organizer-authenticated and is not committed. The <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official problem description</a> lists corresponding feature families, but does not authenticate the mirror's exact band semantics.</p>
+<table>
+<thead>
+<tr>
+<th>Benefit rank / relative cost</th>
+<th>Untested hypothesis and layers</th>
+<th>Specific fault signature and omission rationale</th>
+<th>Non-fault process to falsify</th>
+<th>How it differs from implementations reviewed here</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1 / medium</strong></td>
+<td><strong>Signed gravity–conductivity side order.</strong> <code>iso_grav_anom</code> (13), <code>cond_surf</code> (17), <code>depth_to_base_surf</code> (15).</td>
+<td>Take signed paired profiles normal to a gravity edge; look for persistent opposite-side conductivity and depth contrasts along a connected segment. Covered basin-margin displacement could juxtapose density and fluid-bearing units without a mappable surface scarp.</td>
+<td>Depositional facies boundary or saline groundwater front without tectonic slip.</td>
+<td>E1 used along-edge magnetic <strong>amplitude termination</strong>; E2 used unsigned basement-edge × elevation mean shift; P4 used catalogue-halo geometry; H33 fused mostly unsigned oriented lineaments. This proposal tests signed <em>side ordering</em> and a reversed-profile/null control, not ridge multiplication.</td>
+</tr>
+<tr>
+<td><strong>2 / low–medium</strong></td>
+<td><strong>Repeated cross-profile scarp phase.</strong> <code>det_elev</code> (12), <code>det_elev_slope</code> (19), <code>iso_grav_anom_hg</code> (18).</td>
+<td>Test whether paired positive/negative curvature lobes retain the same side and offset on adjacent cross-strike profiles while an independent gravity gradient persists. A degraded alluvial-fan scarp can be too subtle for mapped Quaternary traces.</td>
+<td>Paleoshoreline terrace, road embankment, or drainage-bank asymmetry.</td>
+<td>E2 ranks a one-sided ±2-px <em>step magnitude</em> oriented by RTP; H33-B follows valley chains. Here the statistic is repeated signed lobe <strong>phase</strong> with a drainage null, not a single-pixel gradient or prior dot field. At 100 m this may be below resolution.</td>
+</tr>
+<tr>
+<td><strong>3 / medium–high</strong></td>
+<td><strong>Magnetic edge-width residual under cover.</strong> <code>rtp</code> (2), <code>tmi_hg</code> (3), <code>tmi_vg</code> (9), optionally <code>depth_to_base_surf</code> (15) after semantic checks.</td>
+<td>Measure edge-normal width at multiple smoothing scales and compare to local source-depth/cover expectation; a displacement-modified magnetic contact may keep a coherent but unexpectedly broad/narrow edge beneath alluvium.</td>
+<td>Intrusive dike margins, remanent magnetization changes, variable survey flight clearance.</td>
+<td>E1's magnetic-edge termination follows an edge tangent; E3 uses a ratio of gradient scales and an across-edge <em>depth-index step</em>; this proposal tests a cover-conditioned <strong>width residual</strong> along connected traces, not Euler clustering, raw ridge strength, or their dots. Related magnetic-worm work in other repos makes uniqueness particularly uncertain.</td>
+</tr>
+<tr>
+<td><strong>4 / high</strong></td>
+<td><strong>Cross-field saddle reconnection.</strong> <code>cond_surf</code> (17), <code>depth_to_base_surf</code> (15), <code>iso_grav_anom</code> (13).</td>
+<td>Detect scale-persistent Hessian saddle pairs whose gradient branches reconnect consistently across physically different layers; a blind basin segmentation fault could redirect both gradients across buried cover.</td>
+<td>Sedimentary basin saddle, erosional unconformity or interpolation seam.</td>
+<td>Catalogue-tip graphs and existing scalar-cover/gap heuristics do not test saddle-branch topology extracted exclusively from physical fields. Gravity and basement depth may share inversion priors; do not call them independent without provenance.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Source/availability check.</strong> Each ranked proposal uses only bands already present in the locally restored, pinned owner mirror; <strong>no new external binary is needed to compute its proposed features</strong>. <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a> documents the flight-block geometry, unequal line spacing and variable clearance: acquisition seams are explicit competing explanations, not assumed faults. <a href="https://gdr.openei.org/submissions/1391">DOE GDR INGENIOUS</a> provides public attribution-licensed fault, conductance and thermal resources. An <em>optional, not presently executable</em> radiometric validation would require the official USGS <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">GeoDAWN release DOI 10.5066/P93LGLVQ</a> and its calibrated K/Th grids; the listing is reachable, but the sandbox cannot download its non-GitHub binary hosts. Do <strong>not</strong> label that optional experiment viable until acquisition, licensing and coverage are verified.</p>
+<p><strong>Gate before any method run.</strong> A candidate must first have an assigned method paragraph and a preregistered comparison to a <em>same-split, visible-only</em> current best (not a frozen full-catalogue TIFF). Withhold whole fault components with a buffer; derive catalogue features exclusively from visible faults; mask visible faults pixel-exactly; canary every raw and derived feature alone (AUC &gt; 0.90 means possible leakage). Then score pooled <code>gems57-pooled-hide-v2</code> DTI (α=0.2, β=0.8, 300 m triangular kernel), with a paired spatial-block 95% CI and count of withheld positives. <strong>Before placing dots</strong>, check the surface against the full accessible registry under the user's forward-overlap and rank-correlation rule; repeat on final dots. A duplicate stops the run; no export. Only a holdout improvement and an exact-byte validator PASS can be passed to a separate weekly-slot selector. None of these gates ran for a new method here, because of the lane omission and the archived forward-overlap stop described in the <a href="downloads/run_card.json">current run card</a>.</p></main>
+<footer>DO NOT SUBMIT this run. Historical results are labelled; no organizer-confirmed receipt exists.
+<a href="downloads/run_card.json">Current negative run card</a> ·
+<a href="downloads/literal_overlap_stop.json">Recomputed literal stop</a> ·
+<a href="downloads/phase4_run_card.json">Historical P4 card</a> ·
+<a href="sources.html">Official sources</a></footer></body></html>

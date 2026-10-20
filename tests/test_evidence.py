@@ -38,20 +38,28 @@ def test_saved_pooled_scores_match_fold_terms(phase):
     assert checked > 0
 
 
-def test_uniqueness_receipt_is_mutual_and_complete():
+def test_historical_mutual_pass_is_overruled_by_new_forward_stop():
     audit = json.loads((ROOT / 'evidence/phase4/uniqueness.json').read_text())
     assert audit['registry_rasters_checked'] == 62
-    assert audit['unique'] is True
+    assert audit['unique'] is True  # historical mutual decision, NOT user-rule permission
     assert audit['duplicate_count'] == 0
     assert audit['worst_dot_overlap'] <= 0.70
     assert audit['worst_forward_overlap'] >= audit['worst_dot_overlap']
     assert audit['worst_spearman_full_footprint'] <= 0.90
     assert 'mutual' in audit['overlap_definition']
+    stop = json.loads((ROOT / 'evidence/literal_overlap_stop.json').read_text())
+    assert len(stop['archive_checks']) == 3
+    assert all(r['forward_overlap_within_3px'] == 1.0
+               and r['duplicate_under_user_rule'] for r in stop['archive_checks'])
+    assert stop['new_surface_checked'] is stop['new_final_dots_checked'] is False
 
 
-def test_published_tiff_matches_card_and_is_binary():
-    card = json.loads((ROOT / 'evidence/run_card.json').read_text())
-    path = ROOT / 'docs/downloads' / (card['submission_name'] + '.tif')
+def test_historical_tiff_still_matches_old_card_and_is_binary():
+    current = json.loads((ROOT / 'evidence/run_card.json').read_text())
+    assert current['raster_sha256'] is current['submission_name'] is None
+    assert current['download_ok'] is current['submit_recommended'] is False
+    archived = json.loads((ROOT / 'evidence/phase4/run_card.json').read_text())
+    path = ROOT / 'docs/downloads' / (archived['submission_name'] + '.tif')
     with rasterio.open(path) as src:
         a = src.read(1)
         assert src.count == 1 and src.dtypes[0] == 'float32'

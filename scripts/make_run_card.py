@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Verify the canonical run card instead of overwriting it with an older schema.
 
-Supports both schemas present in this repo's history:
-- Phase-4 card (evidence/run_card.json): instrument_a_holdout / instrument_b_prime_proxy
-- E1/E2-style cards: holdout_dti
+Supports the stopped-current-run card and archived E1/E2/Phase-4 cards.
+Never silently turns a missing holdout or a historical TIFF into a new score.
 Fixes the stale-schema KeyError that left the Verify workflow red on main
 (pre-existing before PR #16; recorded in HANDOFF integration notes).
 """
@@ -19,10 +18,22 @@ from gems70.release import digest
 def main():
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
     assert card['verdict'] in {'promote', 'negative'}
-    if 'holdout_dti' in card:
+    if card.get('schema_version') == 2:
+        stop = json.loads((ROOT / 'evidence/literal_overlap_stop.json').read_text())
+        assert card['verdict'] == stop['verdict'] == 'negative'
+        assert card['experiment_count'] == card['weekly_slots_used'] == 0
+        assert card['lane']['status'] == 'UNASSIGNED'
+        assert card['holdout_dti']['dti'] is card['holdout_dti']['ci95'] is None
+        assert card['raster_sha256'] is card['submission_name'] is card['submission_note'] is None
+        assert card['download_ok'] is card['submit_recommended'] is False
+        assert card['organizer_confirmed_score'] is None
+        archived = stop['archive_checks'][0]
+        assert archived['sha256'] == card['correlation_overlap_vs_registry']['archived_p4_file_sha256']
+        assert archived['forward_overlap_within_3px'] == card['correlation_overlap_vs_registry']['archived_p4_forward_dot_overlap_3px']
+    elif 'holdout_dti' in card:
         assert card['holdout_dti']['evidence_class'].startswith('HOLDOUT-DTI')
     else:
-        # Phase-4 schema: labelled instruments, no organizer-confirmed score.
+        # Historical Phase-4 schema: labelled instruments, not organizer-confirmed.
         assert card.get('organizer_confirmed_score') is None
         assert 'instrument_a_holdout' in card and 'instrument_b_prime_proxy' in card
         assert len(card.get('submission_note', '')) <= 140

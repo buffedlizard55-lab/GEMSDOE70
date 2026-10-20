@@ -1,24 +1,35 @@
 {
+  "evidence_consistent": true,
   "verdict": "negative",
-  "download_ok": true,
+  "download_ok": false,
   "submit_recommended": false,
   "download_and_submit_ok": false,
-  "artifact": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-  "artifact_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
-  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
+  "artifact": null,
+  "artifact_sha256": null,
+  "submission_name": null,
+  "archive_review": {
+    "file": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+    "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "forward_overlap_within_3px": 1.0,
+    "download_for_research_only": true,
+    "submit_ok": false
+  },
   "reasons": [
-    "Candidate did not beat H33 on instrument B' with a 95% CI above zero."
+    "No explicit assigned single-method lane in the prompt; inventing one risks a parallel-lane collision.",
+    "The previous P4, E2 and discordance TIFFs each have forward overlap 1.0 against one verified binary-dot registry lattice (>0.70); all are archives, NOT cleared submissions.",
+    "A new 37,654-dot field cannot pass that witness even in the best geometric case: the witness leaves only 6,514 off-catalogue cells >3 px away; this is a budget-specific bound, not proof that every smaller candidate must fail.",
+    "No new holdout experiment beat a same-split incumbent; no weekly slot may be selected."
   ],
   "notes": [
-    "A downloadable, validated file is not a validated leaderboard improvement."
+    "A valid [0,1] format is necessary, not sufficient; no previous raster is promoted."
   ],
   "weekly_slots_used": 0,
-  "policy": "Never describe a non-promoted artifact as an improvement. Both flags are always published together.",
-  "status": "DOWNLOADABLE \u2014 NOT PROMOTED",
-  "download_available": true,
-  "generated_tif": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+  "policy": "Forward >0.70 OR Spearman >0.90 is a stop. No lane/holdout/new raster; do not spend a weekly slot. Mutual-overlap is diagnostic only.",
+  "status": "DO NOT SUBMIT \u2014 NO ELIGIBLE NEW TIFF",
+  "download_available": false,
+  "generated_tif": null,
   "approved_for_weekly_slot": false,
-  "scientific_experiments_run": 4,
+  "scientific_experiments_run": 0,
   "submission_slots_used": 0,
   "template_integrity_ok": true
 }

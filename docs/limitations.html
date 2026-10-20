@@ -3,79 +3,41 @@
 <title>Limitations · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Limitations, irregularities and next-session work</h1>
-<h2>Two shared-tool defects were found and fixed this session</h2>
+<span class="edition">AUDIT UPDATE · 2026-10-20 · DO NOT SUBMIT</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission.html">How to submit</a><a href="results.html">Evidence</a><a href="hypotheses-next.html">Next hypotheses</a><a href="hypotheses.html">Earlier hypotheses</a><a href="h33-analysis.html">H33 archive analysis</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Limitations and irregularities — current review (2026-10-20)</h1>
+<p><strong>DO NOT SUBMIT.</strong> Current <a href="downloads/run_card.json">negative run card</a> has no new raster SHA, validator receipt, feature canary, holdout DTI or assigned lane. The <a href="executive-summary.html">executive summary</a> states the download/submit decision before any archive links. No weekly slot or organizer submission-page receipt was obtained.</p>
+<h2>Protocol and byte-level findings</h2>
 <ol>
-<li><strong>Dot definition.</strong> <code>uniqueness._dots</code> counted every finite positive value as a dot, so any
-   nonempty candidate "duplicated" the archived continuous surface <code>E-proba-multiscale</code>
-   (sha256 <code>ab0a0a62…</code>, positive on all 5,167,373 footprint cells). Fixed to binary dots
-   (<code>|value − 1| &lt; 1e-6</code>). Reported in <code>evidence/upstream_fix_report.md</code>.</li>
-<li><strong>Forward-only overlap.</strong> A duplicate must coincide in both directions. Measuring this session:
-   <code>calib_r13lattice_00904</code> (206,895 dots), <code>r11_greedy_mp</code> (272,853) and
-   <code>calib_hedgev2_01563_sample</code> (227,507) each have a 3-px halo covering <strong>100 %</strong> of the footprint,
-   so forward-only overlap is 1.00 for <em>any</em> nonempty candidate. The gate now requires
-   <code>min(forward, reverse) &gt; 0.70</code>; both directions and Jaccard are always reported, ρ &gt; 0.90 still
-   applies to every raster, and no threshold was changed. Three archived submissions — not one —
-   triggered the old rule, which is why this is a representation defect rather than duplication.</li>
+<li><strong>Missing lane.</strong> The parallel-run prompt refers to a single method paragraph "below" but contains no identifiable assignment. E1, E2/E3, P4 and H2 in this repository are earlier frozen lanes, not authorization to pick a new one. Four <a href="hypotheses-next.html">untried methods</a> are research ideas only. Current experiment count: zero.</li>
+<li><strong>Forward vs mutual overlap.</strong> Your instruction is to stop if <strong>more than 70% of <em>our</em> dots</strong> fall within 3 pixels of a registry raster's dots. The vendored <code>gems57.uniqueness</code> file instead makes mutual <code>min(forward, reverse)</code> its duplicate gate; it reports high forward overlap as a warning. It also classifies continuous raster support inconsistently between <code>_dots</code> and <code>compare_array_to_registry</code>. That difference is <strong>not approved</strong> as a new interpretation of this run's protocol; no code or rule is privately forked here. The <a href="downloads/upstream_fix_report.txt">earlier upstream fix report</a> documents its provenance; the discrepancy requires an upstream, versioned resolution.</li>
+<li><strong>A real archived duplicate.</strong> Independent <a href="downloads/literal_overlap_stop.json">SHA-pinned preflight</a> re-read the <strong>binary</strong>, single-band <code>calib_r13lattice_00904.tif</code> from the public owner registry (sha256 <code>b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2</code>; <a href="https://api.github.com/repos/buffedlizard55-lab/13GEMSDOE/git/blobs/81c802618e6d46c6d62289d856ae74439439bbc6">stable GitHub blob</a>). It matches the sample grid. The existing P4, E2 and discordance archive TIFFs <strong>each have 100% of their dots within 3 px</strong> of this witness. That exceeds the forward &gt;70% stop; old mutual-overlap passes cannot authorize their upload. This checks <em>one</em> witness, enough to reject these archives; it is not an exhaustive inventory pass or a verdict on a new field that was never made.</li>
+<li><strong>Correction to previous universal-coverage claims.</strong> The witness's 3-px halo covers 5,099,871 / 5,106,385 off-catalogue cells (<strong>99.8724%</strong>), leaving 6,514 uncovered; not 100%. Earlier prose saying no <em>nonempty</em> candidate could ever pass this binary witness was overstated. At a 37,654-dot budget the absolute best forward overlap is at least 82.7004% even if every uncovered cell is filled; any budget above 21,713 cannot pass <em>this witness alone</em> under the fixed footprint. Smaller budgets are not certified, and altering emission just to skirt the witness would not be a geological result. A separate <em>continuous</em> positive raster saturated the old <code>&gt;0</code> representation, but its interpretation as "dots" is disputed; our stop relies on an indisputably binary lattice.</li>
+<li><strong>No new surface or final-dot scan.</strong> The stopped session produced neither. The earlier Phase-4 mutual-overlap inventory of 62 rasters and E2's R1 subset are not a compliant current surface+final-forward clearance. Their receipt files remain immutable historical evidence; the new stop receipt reports only what was actually recomputed. The full inherited public index was last generated 2026-10-12, not a complete current/organizer registry.</li>
+<li><strong>Retracted stale public approval JSON.</strong> Earlier direct-URL JSON claimed <code>verdict=promote</code>, <code>download_and_submit_ok=true</code>, <code>download_ok=true</code> or <code>download_ok_for_selector_review=true</code> for archives now stopped by forward overlap. The public copies were removed; exact bytes survive under excluded <code>evidence/</code>, with SHA-256s and original paths in the <a href="downloads/publication_retractions.json">retraction receipt</a>. A source-and-built-site guard now rejects positive public JSON even without links. A separate old public split JSON contained <strong>unresolved Git merge markers</strong>; the same invalid bytes remain in private <code>evidence/e2/holdout_split.json</code> for investigation. That split cannot be used as an independently reproducible proof of E2 withholding until it is reconstructed and verified against the archived fold terms. No side of the conflict was silently chosen.</li>
 </ol>
-<p>Both fixes are in <code>vendor/gems57/uniqueness.py</code>; <code>registry/template_pin.json</code> records the new hash
-with <code>all_identical: false</code>. They must be proposed upstream to the shared template.</p>
-<h2>What is not established</h2>
+<h2>Science and score limitations</h2>
 <ul>
-<li><strong>No organizer receipt.</strong> 0.2778 and 0.44 are user-supplied historical values. No score on this
-  site is ORGANIZER-CONFIRMED. The portal was not reachable from this sandbox.</li>
-<li><strong>Neither instrument is the hidden truth.</strong> Instrument A withholds catalogue components (measures
-  catalogue recovery, biased against the task). Instrument B/B′ uses SGMC faults minus the
-  catalogue (an independent state compilation, but partially a re-drawing of the same traces).
-  They disagree, and the disagreement is reported rather than averaged.</li>
-<li><strong>The candidate is not promoted.</strong> On B′, H33 wins by 13 % with a CI excluding zero. The
-  pre-registered rule therefore returns <code>negative</code>, even though instrument A and unrestricted B
-  favour the candidate.</li>
-<li><strong>Registry scope.</strong> Uniqueness was checked against the 62 single-band 100 m rasters archived in
-  <code>buffedlizard55-lab/60GEMSDOE/registry/rasters</code>, not against every private or uncommitted file.
-  Zero Spearman exceedances (max 0.05) and zero mutual-overlap exceedances were found.</li>
-<li><strong>Geophysical fields are weak.</strong> Feature-alone AUCs on withheld catalogue segments were
-  0.46–0.57. The four-field gate hurt both instruments and was removed after Experiment 2; this is
-  recorded, not hidden.</li>
+<li><strong>H33 is a pruned older field, not a proven new detector.</strong> <a href="downloads/h33_audit.json">Recomputed byte comparison</a> shows H33's 37,654 positive pixels are exactly H27 less 2,545 near-catalogue pixels. Sparsity can improve distance-weighted Tversky by removing costly redundant predictions, but hidden truth and a submission-page receipt are unavailable. The user-reported 0.2778 is <strong>not ORGANIZER-CONFIRMED</strong>, and exceeding it is unproven. See <a href="h33-analysis.html">H33 analysis</a>.</li>
+<li><strong>Historical HOLDOUT-DTI is not the hidden task.</strong> The Phase-4 archived instrument A is gems57-pooled-hide-v2 catalogue hide-and-recover, 11,321 withheld positives, DTI 0.0730, 95% CI [0.0667, 0.0790]. B′ is a separate SGMC <strong>proxy-DTI</strong> (not a catalogue holdout), on which H33 performed better. Frozen full-catalogue incumbent TIFFs may encode withheld labels through masking: rebuild the incumbent using <em>visible faults only</em> on the same newly blocked folds before claiming an improvement. No such new experiment ran this session.</li>
+<li><strong>No score for the exact archive.</strong> The public leaderboard was observed at 0.4413 on 2026-10-20 (<a href="downloads/leaderboard_read.json">dated page-read receipt</a>); this is a public-leaderboard observation, <em>not</em> an ORGANIZER-CONFIRMED receipt for H33 or GEMSDOE70. The brief also says 0.3774 and 0.3195. It is a changing contest, not a fixed or authenticated team result.</li>
+<li><strong>No geothermal-vent claim.</strong> The <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official task</a> is fault prediction. A magnetic, gravity, topographic or conductance anomaly is not proof of fault displacement, fluid connectivity, temperature or resource value. <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a> documents variable flight clearance, line spacing and acquisition blocks; survey seams are plausible non-fault mimics.</li>
 </ul>
-<h2>Next session, in priority order</h2>
+<h2>Data, format and publication</h2>
+<ul>
+<li>The competition <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data tab</a> redirected to login during this review. The 19-band feature stack was restored from an SHA-256-pinned <em>public owner mirror</em> (<code>4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5</code>) into ignored <code>.cache/data/</code>. Hash consistency does <strong>not</strong> authenticate an organizer download or license for another dataset. USGS GeoDAWN's official page marks its release CC0; GDR INGENIOUS's <a href="https://gdr.openei.org/submissions/1391">collection</a> shows CC BY 4.0, but individual resource and organizer sharing conditions still need checking. This sandbox cannot shell-download USGS/GDR binary hosts; readable page text is not a downloaded dataset.</li>
+<li>The official <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">format page</a> asks for one float32 band, EPSG:32611, 100 m, sample-matching bounds, and values in [0,1]; outside the bounds should be null/NaN. The local shared writer uses zero outside the finite <em>sample-defined footprint</em> and no nodata tag to avoid out-of-range sentinel risk. It has not been tested by a current organizer upload. The mirrored sample contains 60,988 mapped-fault-positive cells despite the page's "total fault absence" wording; it is used for grid/footprint only. We cannot diagnose the user's earlier rejected file without its bytes.</li>
+<li>GitHub Pages is configured as legacy <code>main:/</code>; published <code>docs/downloads/</code> archives can be reached by direct URL even without a button. The build guard now requires an inventory SHA for each built TIFF/ZIP and a DO NOT SUBMIT banner at all entry points. <strong>A public archive is not an eligible new submission.</strong> Changing a file's name, output nodata encoding or note cannot remove a scientific duplicate.</li>
+<li>The scheduled link-health workflow reports availability only; it does not update scientific claims or authenticate a live account leaderboard. The site publishes dated evidence with source links, not an automatic current score feed. The official <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">rules</a> specify <em>up to three submissions per week</em> and generative-AI disclosure in the narrative, but the remaining allowance and eligibility are account-specific and unseen here.</li>
+</ul>
+<h2>Next actions, in order</h2>
 <ol>
-<li><strong>Supervised within-halo ranking.</strong> Train on the SGMC-off-catalogue proxy with leave-one-quadrant-out;
-   features: 19-band stack, lidar-scarp (12 bands), GeoDAWN radiometrics (K/Th/U/TC and ratios),
-   catalogue geometry (distance, side, host length, tip position), plus the measured coverage
-   stratification. Report A and B′ with the same bootstrap. This is the only path with information
-   the geometry does not already contain.</li>
-<li><strong>Calibrate the proxy.</strong> Quantify how much of SGMC-only support is a re-drawing of QFaults
-   (buffer tests at 1–6 px) and, if possible, obtain a genuinely independent additional-fault set
-   (e.g. Nevada Bureau of Mines county maps, published INGENIOUS trace exports).</li>
-<li><strong>Upstream the two uniqueness fixes</strong> as a PR to the shared template and re-run its test suite.</li>
-<li><strong>Selector step.</strong> If a future candidate clears both gates, promote one slot within the weekly
-   cap and record the returned score as ORGANIZER-CONFIRMED.</li>
-</ol>
-<h2>Repository-level risks</h2>
-<ul>
-<li><code>docs/downloads/</code> now contains exactly one TIFF/ZIP pair, authorised by the run card;
-  <code>release.assert_no_public_rasters</code> rejects anything else, including symlinks.</li>
-<li>Large inputs (<code>training_features.tif</code>, the registry clone) live outside Git; restore commands are
-  in the README. Published evidence is small JSON.</li>
-<li>The published TIFF is binary 0/1 with no nodata tag; outside-footprint cells are 0, which the
-  shared validator and the sample comparison both accept.</li>
-</ul>
-<h2>Parallel-session candidate (merged 2026-10-20)</h2>
-<p>A concurrent branch added <code>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</code>
-(24,872 binary dots, sha256 recorded in <code>registry/published_artifacts.json</code>, verdict
-<code>DO NOT SUBMIT</code> in its own receipts). It is preserved and inventoried but is not the file this
-run card selects; the landing page points only at the P4 artifact. Both files are hash-pinned by
-<code>release.assert_no_public_rasters</code>, so neither can be silently replaced. Its narrative pages were
-moved to <code>reports/archive/concurrent-v2/</code> to avoid two contradictory download instructions in the
-published tree.</p>
-<h2>Parallel E2/E3 lane (integrated PR #16, 2026-10-20)</h2>
-<ul>
-<li>E2 alluvial-step and E3 depth-step are additional negatives (see <code>docs/preregistration-e2.md</code>, <code>evidence/e2|e3/</code>). E2 bytes are published for selector review under <code>docs/publication-amendment-e2.md</code>; submit remains NO. E2 uniqueness used pre-fix R1 subset definitions — not directly comparable to the corrected 62-raster mutual audit until rerun.</li>
-<li>Bridge <code>sample_submission.tif</code> positives are exactly the catalogue (60,988 px), not an all-zero sample; footprint use only. Two-round expanded-label composition and known-fault masking remain unverified from fetched organizer text.</li>
-</ul></main>
-<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
+<li>Resolve the absent assigned method paragraph and the forward/mutual discrepancy in the <strong>shared upstream template</strong> (review both the binary-dot vs continuous-surface distinction and the 99.8724% lattice case). Do not edit a local exception to force a green verdict; report actual regressions and use a single versioned definition across sessions.</li>
+<li>On untouched buffered whole-segment folds, preregister one untried hypothesis, a visible-only re-fit of the strongest same-split incumbent, feature-alone AUC canaries and the pooled holdout comparison. Stop on leakage or a null/negative paired interval. Catalogue holdout is a proxy, not leaderboard performance.</li>
+<li>Check every accessible registry raster <strong>on the surface before dot placement</strong> and <strong>on the final dots</strong> using the authoritative forward rule and rank threshold; record counts, hashes and scan completeness. Stop on either &gt;0.90 rho or &gt;0.70 forward overlap. Never borrow H33 predictions or an archived TIFF as a new candidate.</li>
+<li>If and only if the science and duplicate gates pass, write a uniquely named TIFF with the shared writer, re-read exact bytes, publish the validator receipt and a note of at most 140 characters; a separate selector then checks the live weekly quota and chooses whether to upload. Only an actual submission-page receipt supplies ORGANIZER-CONFIRMED feedback.</li>
+</ol></main>
+<footer>DO NOT SUBMIT this run. Historical results are labelled; no organizer-confirmed receipt exists.
+<a href="downloads/run_card.json">Current negative run card</a> ·
+<a href="downloads/literal_overlap_stop.json">Recomputed literal stop</a> ·
+<a href="downloads/phase4_run_card.json">Historical P4 card</a> ·
+<a href="sources.html">Official sources</a></footer></body></html>

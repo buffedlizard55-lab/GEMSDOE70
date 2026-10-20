@@ -1,114 +1,148 @@
-"""Embed the entire retained user brief behind an accurate, evidence-bound summary."""
-from pathlib import Path
+"""Embed the retained user brief after an honest, evidence-bound current status."""
+from __future__ import annotations
+
 import json
+from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def main():
+def main() -> None:
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
-    d = card['instrument_a_holdout']['candidate']
-    dref = card['instrument_a_holdout']['h33_reference']
-    b = card['instrument_b_prime_proxy']['candidate']
-    bref = card['instrument_b_prime_proxy']['h33_reference']
-    ball = card['instrument_b_unrestricted']['candidate']
-    ballref = card['instrument_b_unrestricted']['h33_reference']
-    u = card['uniqueness_detail']
-    delta = card['paired_b_prime_vs_h33']
-    head = f'''# GEMSDOE70 — geothermal fault research
+    stop = json.loads((ROOT / 'evidence/literal_overlap_stop.json').read_text())
+    archived = json.loads((ROOT / 'evidence/phase4/run_card.json').read_text())
+    row = stop['archive_checks'][0]
+    coverage = stop['coverage']
+    lo, hi = archived['instrument_a_holdout']['candidate']['ci95']
+    if (card.get('verdict') != 'negative' or card.get('raster_sha256') is not None
+            or row['sha256'] != archived['raster_sha256']
+            or not row['duplicate_under_user_rule']):
+        raise ValueError('Current negative card and literal-stop receipt do not agree')
+    summary = f'''# GEMSDOE70 — geological fault-discovery workbench
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## DO NOT SUBMIT — no eligible *new* TIFF in this run
 
-A unique, format-validated competition TIFF is published:
-`docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used.
+**Download a new competition TIFF: NO. Spend a weekly submission slot: NO.**
+No new raster was generated or scored on a spatial holdout in this session; the
+parallel-run prompt does not supply its promised single-method lane paragraph.
+Generating or recommending an arbitrary file would violate the stop rule, not
+maximize the probability of a valid win. No portal acceptance or ORGANIZER-CONFIRMED
+score is available for this run.
 
-- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
-- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
-- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
-- **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
+- [Executive summary and exact future submission steps](docs/executive-summary.html) ·
+  [Current negative JSON run card](evidence/run_card.json) ·
+  [Reproducible forward-overlap stop](evidence/literal_overlap_stop.json)
+- [Four ranked, **untested** geological hypotheses](docs/hypotheses-next.md) ·
+  [Historical H33 analysis](docs/h33-analysis.md) ·
+  [Limitations and next steps](docs/irregularities.md) · [Sources](docs/sources.html)
+- [Three independent review passes](evidence/review_passes.md) ·
+  [Retraction of misleading historical direct-URL approval JSON](evidence/publication_retractions.json)
+  (exact bytes preserved under `evidence/`; one archived split has unresolved merge markers).
+- [Public website](https://buffedlizard55-lab.github.io/GEMSDOE70/) (deployment can lag this branch).
 
-## What was measured this session
+**Archived P4 is NOT a new submission:**
+[`{archived['submission_name']}.tif`](docs/downloads/{archived['submission_name']}.tif)
+(sha256 `{row['sha256']}`) passes the shared *local format* validator, but
+**{row['forward_overlap_within_3px']:.0%} of its dots** fall within 3 pixels of the
+hash-verified binary registry witness, above the user's 70% forward-overlap
+stop. E2 and discordance archive TIFFs also each measure 100% against this one
+witness. Their older mutual-overlap exemption is not permission to submit.
+Archive downloads are for forensic learning only. The validator checks [0,1],
+no NaN inside the sample footprint, one float32 band, EPSG:32611 and exact
+shape/transform; it does **not** prove portal acceptance or uniqueness.
 
-Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
-alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
-bootstrap. Exactly {card['registered_parameters']['dot_count']:,} binary dots are emitted, all
-off-catalogue.
+The witness covers **{coverage['witness_halo_fraction_off_catalogue']:.4%}** of the
+{coverage['off_catalogue_cells']:,} off-catalogue cells within 3 pixels, leaving
+**{coverage['witness_halo_uncovered_off_catalogue']:,}** uncovered. Earlier notes
+claiming universal 100% coverage were wrong. Even if a future method used all
+uncovered cells as dots, a {row['binary_dots']:,}-dot file would have **at least
+{coverage['min_possible_forward_overlap_at_archived_budget']:.4%}** overlap with
+this single witness. That is an optimistic geometric bound, not a model score;
+it does not rule out all smaller budgets or certify any particular file.
 
-| Instrument | Candidate | H33 reference | Result |
-|---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | {d['dti']:.4f} | {dref['dti']:.4f} | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | {b['dti']:.4f} | {bref['dti']:.4f} | **H33 wins, delta = {delta['delta']:+.4f} {delta['ci95']}** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | {ball['dti']:.4f} | {ballref['dti']:.4f} | candidate wins |
+## What the historical best teaches (without inventing a score)
 
-Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
-is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
-21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
-artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+[H33 byte audit](evidence/h33_audit.json) finds 37,654 binary dots that are an
+exact pruned subset of H27, itself a subset of D28: 2,545 near-catalogue dots
+were removed from H27 without adding any. Under the organizer's published
+[DTI metric](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/),
+such thinning *can* lower false-positive mass while retaining truth coverage.
+That explains why the user-reported 0.2778 is plausible; it does **not** prove
+causation or establish an ORGANIZER-CONFIRMED H33 receipt. A source-site page
+itself describes its primary as unscored. The public leaderboard displayed
+0.4413 in a dated page read on 2026-10-20
+([receipt](evidence/leaderboard_read.json)); this is a public observation, NOT
+a file-specific score or a fixed current target. The brief also contains
+conflicting historical numbers (0.3774 and 0.3195); do not treat them as current.
 
-**Uniqueness (corrected):** {u['registry_rasters_checked']} archived rasters checked; worst mutual
-overlap {u['worst_dot_overlap']:.3f} (limit 0.70); worst Spearman {u['worst_spearman_full_footprint']:.3f}
-(limit 0.90). Forward-only overlap reaches {u['worst_forward_overlap']:.2f} against a dense lattice
-whose halo covers the whole footprint — which is why the two-direction test was adopted.
+The historical Phase-4 **HOLDOUT-DTI** on the mapped catalogue was
+{archived['instrument_a_holdout']['candidate']['dti']:.4f},
+95% CI [{lo:.4f}, {hi:.4f}],
+{archived['instrument_a_holdout']['candidate']['withheld_positive_pixels']:,}
+withheld positives (gems57-pooled-hide-v2). It is NOT a new holdout or a
+leaderboard estimate. P4's independent SGMC **proxy-DTI** gate was negative
+against H33; the [historical P4 card](evidence/phase4/run_card.json) states
+its scope. The user requires a new method to beat a *same-split, visible-only*
+current best before a weekly slot is considered.
 
-## Two fixes to the shared tool (reported, not silently forked)
-
-1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
-   registry surface blocks every candidate.
-2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
-   halos cover 100 % of the footprint would otherwise block every candidate.
-
-Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
-`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
-
-## Reproduce
+## Reproduce the current negative without generating dots
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
-.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
-git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/audit_literal_overlap.py --check
+.venv/bin/python scripts/make_run_card.py
+.venv/bin/python scripts/release_gate.py --expect-negative
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
 
-`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
-(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
-`evidence/history/phase1_negative/`.
+The witness is fetched through a SHA-pinned public GitHub owner mirror into the
+ignored `.cache/` directory if missing. For the *future* science run, the
+19-band stack was independently restored into `.cache/data/` with
+`.venv/bin/python scripts/restore_data.py` and verified against SHA-256
+`4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5`;
+owner-mirror integrity is not organizer authentication. The DrivenData data tab
+redirects to login. The user must verify eligibility, the organizer-format
+sample, data-sharing rights, the remaining weekly quota and any eventual
+submission-page receipt. No password or token is requested or stored here.
 
-## Next session
+## Own the outcome: next work in order
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+1. Obtain the missing method-lane assignment and resolve the forward vs mutual
+   definition **once upstream** in the shared template. A local exemption or a
+   changed filename is not a fix. The repo's vendored uniqueness file already
+   differs from its upstream pin; see [upstream report](evidence/upstream_fix_report.md)
+   and [new discrepancy report](evidence/literal_overlap_stop.json).
+2. Preregister one untried method on untouched blocks; leak-canary each feature;
+   rebuild any catalogue features using visible faults only. Compare pooled
+   HOLDOUT-DTI and paired 95% CI to a correctly rebuilt same-split incumbent.
+3. Scan the full accessible registry on the **surface before placement** and on
+   final dots. If either hits rho > 0.90 or forward overlap > 0.70, stop;
+   do not write/advertise a candidate. If all gates pass, use the shared
+   writer and revalidate exact GeoTIFF bytes with no NaN inside the footprint
+   and values in [0,1].
+4. Only a separate selector checks live weekly quota (official rules allow up
+   to three per week) and chooses one eligible file. Document any organizer
+   score only from a submission-page receipt; disclose AI assistance in the
+   required narrative.
 
-## Complete retained project prompt
+The source table is a **dated** audit, not a real-time leaderboard feed. The
+scheduled source-health workflow tests link availability only; it does not
+silently rewrite scientific claims or publish unauthenticated scores. Every
+negative result, archive SHA and irregularity is retained for review.
 
-Historical statements below are user-supplied requirements and claims, not verified results. No
-leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
-PROJECT_BRIEF.md is the source for this embedded copy.
+## Complete retained user project brief
+
+Historical claims below are user-supplied, **not** measured or organizer-confirmed
+by being copied here. Read the complete text alongside [AGENTS.md](AGENTS.md)
+and [HANDOFF.md](HANDOFF.md) at the beginning of each session.
 
 <details>
-<summary>Read the complete supplied project brief before every session</summary>
+<summary>Read the retained prompt and the latest user addendum</summary>
 
 '''
-    tail = '\n</details>\n'
-    e2_note = ''
-    e2p = ROOT / 'evidence/e2/run_card.json'
-    if e2p.is_file():
-        import json as _json
-        _e2 = _json.loads(e2p.read_text())
-        _d = _e2['holdout_dti']
-        e2_note = (f"\n## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET\n\n"
-                   f"Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI {_d['dti']:.4f} "
-                   f"[{_d['ci95'][0]:.4f}, {_d['ci95'][1]:.4f}] (beats random, loses to D28 0.0919) → negative. "
-                   f"File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` "
-                   f"(selector-review only; complete corrected uniqueness scan pending). "
-                   f"Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. "
-                   f"Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).\n")
-    (ROOT / 'README.md').write_text(head + e2_note + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
+    brief = (ROOT / 'PROJECT_BRIEF.md').read_text()
+    (ROOT / 'README.md').write_text(summary + brief + '\n</details>\n')
 
 
 if __name__ == '__main__':

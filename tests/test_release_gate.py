@@ -1,4 +1,4 @@
-"""Release diagnostics must keep download permission and promotion independent."""
+"""A historical archive is never an eligible new submission."""
 import importlib.util
 import json
 from pathlib import Path
@@ -29,14 +29,37 @@ def test_malformed_canaries(value):
     assert not valid_canary(value)
 
 
-def test_real_card_separates_download_from_promotion():
+def test_real_card_never_promotes_a_format_valid_archived_tiff():
     result = release_status(ROOT)
-    assert result['download_ok'] is True
-    assert result['submit_recommended'] is False
+    assert result['evidence_consistent'] is True
+    assert result['download_ok'] is result['submit_recommended'] is False
     assert result['download_and_submit_ok'] is False
     assert result['verdict'] == 'negative'
-    assert result['artifact_sha256']
-    assert any("B'" in r or 'B' in r for r in result['reasons'])
+    assert result['artifact'] is result['artifact_sha256'] is None
+    archive = result['archive_review']
+    assert archive['file'].endswith('.tif')
+    assert archive['forward_overlap_within_3px'] == 1.0
+    assert archive['submit_ok'] is False
+    assert archive['download_for_research_only'] is True
+
+
+@pytest.mark.parametrize('key, value', [
+    ('download_ok', True), ('submit_recommended', True),
+    ('download_and_submit_ok', True), ('verdict', 'promote'),
+    ('raster_sha256', '0' * 64), ('organizer_confirmed_score', .5),
+    ('weekly_slots_used', 1), ('submission_name', 'old-raster'),
+])
+def test_malicious_card_flag_cannot_turn_an_archive_into_a_release(monkeypatch, key, value):
+    import gems70.release as release
+    original = release._load
+    card = json.loads((ROOT / 'evidence/run_card.json').read_text())
+    card[key] = value
+    monkeypatch.setattr(release, '_load',
+                        lambda root, rel: card if rel == 'evidence/run_card.json'
+                        else original(root, rel))
+    result = release_status(ROOT)
+    assert not result['evidence_consistent']
+    assert not result['download_ok'] and not result['submit_recommended']
 
 
 def test_missing_or_corrupt_artifact_is_closed(tmp_path):
@@ -48,12 +71,14 @@ def test_missing_or_corrupt_artifact_is_closed(tmp_path):
     result = release_status(tmp_path)
     assert result['download_ok'] is False
     assert result['submit_recommended'] is False
+    assert result['evidence_consistent'] is False
 
 
 @pytest.mark.parametrize('change, expected', [
-    ({}, 0), ({'download_ok': True}, 0), ({'verdict': 'promote'}, 2),
+    ({}, 0), ({'download_ok': True}, 2), ({'verdict': 'promote'}, 2),
     ({'download_and_submit_ok': True}, 2), ({'submit_recommended': True}, 2),
     ({'approved_for_weekly_slot': True}, 2), ({'reasons': []}, 2),
+    ({'evidence_consistent': False}, 2), ({'archive_review': None}, 2),
     ({'template_integrity_ok': False}, 2),
 ])
 def test_expected_negative_cli_checks_actual_result(tmp_path, monkeypatch, change, expected):
@@ -62,7 +87,8 @@ def test_expected_negative_cli_checks_actual_result(tmp_path, monkeypatch, chang
                   download_ok=False, submit_recommended=False,
                   download_available=False, generated_tif=None,
                   approved_for_weekly_slot=False, reasons=['Stopped experiment'],
-                  template_integrity_ok=True)
+                  evidence_consistent=True, archive_review={'submit_ok': False},
+                  submission_slots_used=0, template_integrity_ok=True)
     result.update(change)
     monkeypatch.setattr(cli, 'ROOT', tmp_path)
     monkeypatch.setattr(cli, 'status', lambda: result)

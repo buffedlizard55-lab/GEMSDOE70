@@ -1,109 +1,98 @@
 [
   {
-    "id": "organizer-reference",
-    "authority": "organizer",
-    "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
-    "retrieved_via": "https://api.github.com/repos/drivendataorg/gems-prize-reference-solution/contents/README.md?ref=aebe92f7c8a990f0e3443451b7a825d9afd6336b",
-    "status": "verified-content",
-    "claim": "The organizer reference solution is a fault-detection U-Net; notebook training loss uses alpha 0.2 and beta 0.8. It supports CPU-only execution, with GPU recommended for speed.",
-    "evidence": "evidence/official-reference-readme.md; evidence/official-reference-excerpts.txt",
-    "limit": "The notebook loss is not independent confirmation of the full distance-weighted evaluation implementation."
+    "id": "organizer-problem-and-format",
+    "authority": "DrivenData organizer",
+    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+    "status": "page text read 2026-10-20",
+    "claim": "Goal is to predict faults, with initial private labels for expert-identified faults absent from the USGS set. DTI uses alpha 0.2, beta 0.8 and a 300 m triangular kernel. One float32 GeoTIFF band, EPSG:32611, 100 m, sample bounds and values in [0,1].",
+    "limit": "The page says outside bounds null/NaN. The owner-mirror sample is not organizer-authenticated; our all-finite-zero policy is only a local preflight, not portal acceptance."
   },
   {
-    "id": "competition-problem",
-    "authority": "organizer",
-    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-    "status": "verified-content",
-    "claim": "Official problem description: single GeoTIFF, pixel probabilities in [0,1]; EPSG:32611; 100 m; same bounds; outside bounds null or NaN; single float32 layer; metric alpha 0.2, beta 0.8, 300 m triangular kernel; private initial round then expanded final round; one submission must be chosen.",
-    "limit": "Text verified on the page. Organizer sample and the platform validator were not run here. Note the page says the sample predicts total fault absence; the local sample raster contains 60,988 positive pixels (see docs/irregularities.md).",
-    "retrieved": "2026-10-20 (session fetch_page)"
+    "id": "competition-home",
+    "authority": "DrivenData organizer",
+    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/",
+    "status": "page text read 2026-10-20",
+    "claim": "To enter, enroll; use the competition data tab, train a model, and navigate Submit / Make new submission.",
+    "limit": "Account-specific eligibility and remaining weekly allowance cannot be verified from the public page."
+  },
+  {
+    "id": "organizer-official-rules",
+    "authority": "DOE / National Laboratory of the Rockies",
+    "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+    "status": "rules sections 3.1–3.5 read 2026-10-20",
+    "claim": "One 100 m GeoTIFF covering GeoDAWN; up to three submissions per week; only one final selection per team. Generative-AI assistance must be disclosed in the narrative when applicable.",
+    "limit": "A published maximum is not the account's current remaining quota or proof of eligibility; check the current portal and full rules."
+  },
+  {
+    "id": "public-leaderboard",
+    "authority": "DrivenData organizer (public scoreboard)",
+    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+    "status": "PUBLIC-LEADERBOARD-OBSERVATION read 2026-10-20",
+    "claim": "Top displayed public DW-Tversky value 0.4413 at the page read; receipt: evidence/leaderboard_read.json.",
+    "limit": "Not an ORGANIZER-CONFIRMED submission-page receipt and not a score for a named GEMSDOE70 or H33 file; live ranks may change."
   },
   {
     "id": "competition-data",
-    "authority": "organizer",
+    "authority": "DrivenData organizer",
     "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
-    "status": "login-redirect-verified",
-    "claim": "The data page redirects to the DrivenData login page; the training data cannot be downloaded without an organizer account.",
-    "limit": "Login redirect was observed this session. Data are restored from pinned owner mirrors, not from the organizer.",
-    "retrieved": "2026-10-20 (session fetch_page)"
+    "status": "redirected to login 2026-10-20",
+    "claim": "The public data URL requires an authenticated enrolled account.",
+    "limit": "Local data use a SHA-pinned public owner mirror instead; mirror integrity does not establish official-origin identity."
   },
   {
-    "id": "leaderboard",
-    "authority": "organizer",
-    "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-    "status": "js-rendered-unverified",
-    "claim": "The leaderboard HTML returns only a Loading placeholder; numeric leaderboard values cannot be verified from this environment.",
-    "limit": "Any leaderboard number in a prompt, README or site is UNVERIFIED unless copied from a submission-page receipt.",
-    "retrieved": "2026-10-20 (session fetch_page)"
+    "id": "organizer-reference-solution",
+    "authority": "DrivenData organizer on GitHub",
+    "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+    "status": "public repository and pinned README reviewed",
+    "claim": "Organizer reference provides a baseline fault-prediction approach.",
+    "limit": "A baseline model is not a source of the private labels or an organizer receipt for this repo."
   },
   {
-    "id": "competition-report",
-    "authority": "official source requested by user",
-    "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
-    "status": "verified-content",
-    "claim": "NLR Official Rules (Sept 2026): one GeoTIFF with a single raster layer at 100 m (s3.2); up to three submissions per week (s3.2 and s3.4); one final selected submission per entity (s3.4); generative-AI use must be disclosed in the narrative (s3.2); eligibility in s1.3 includes U.S. citizen/permanent resident individuals and U.S.-incorporated private entities.",
-    "limit": "Rules PDF was retrieved via docs.nlr.gov after redirect from www.nlr.gov. Eligibility of any individual or team must be confirmed by that person; it is not checked here.",
-    "retrieved": "2026-10-20 (session fetch_page)"
-  },
-  {
-    "id": "geodawn",
-    "authority": "USGS",
+    "id": "USGS-GeoDAWN",
+    "authority": "U.S. Geological Survey",
     "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
-    "status": "not-retrieved-this-session",
-    "claim": "GeoDAWN source named by the problem page and rules (DOI 10.5066/P93LGLVQ, cited in the NLR rules footnote 3).",
-    "limit": "Not fetched in this session."
+    "status": "page text read 2026-10-20",
+    "claim": "GeoDAWN airborne magnetic and radiometric surveys, DOI 10.5066/P93LGLVQ; survey blocks, variable flight height and line spacing documented. The release page marks the work CC0.",
+    "limit": "The official binary release was not downloaded from this sandbox. Flight-line artefacts are a plausible non-fault mimic, not proof that any particular lineament is an artefact."
   },
   {
-    "id": "ingenious",
+    "id": "DOE-GDR-INGENIOUS",
     "authority": "DOE Geothermal Data Repository",
     "url": "https://gdr.openei.org/submissions/1391",
-    "status": "not-retrieved-this-session",
-    "claim": "Official-source research queue entry from the user prompt.",
-    "limit": "Licensing, contents and current downloads not independently checked in this environment."
+    "status": "page text read 2026-10-20",
+    "claim": "DOI 10.15121/1881483; the publicly accessible collection lists fault compilations, conductance, seismicity, thermal and other resources and a CC BY 4.0 collection licence.",
+    "limit": "Listing and collection licence do not prove any individual binary is downloadable in this shell, aligned to the competition grid or shareable under every required condition."
   },
   {
-    "id": "template",
-    "authority": "owner mirror, not organizer",
+    "id": "pinned-shared-evaluator-writer",
+    "authority": "owner template (not organizer)",
     "url": "https://github.com/buffedlizard55-lab/60GEMSDOE/tree/32024716f218d06a94e01464157392119c03cb15/src/gems57",
-    "status": "verified-pinned-bytes",
-    "claim": "Shared evaluator, writer, validator, holdout and uniqueness implementation reused unchanged.",
-    "evidence": "registry/template_pin.json; evidence/template_verification.json",
-    "limit": "Implements the requested protocol; transcription is not independent organizer authentication."
+    "status": "file pins recorded in registry/template_pin.json",
+    "claim": "Holdout evaluator, metric and submission writer are byte-pinned copies. The vendored uniqueness comparator has two local changes to its upstream counterpart (all_identical=false).",
+    "limit": "Those changes are not an approved replacement for the user's forward-overlap rule; a shared upstream resolution is outstanding."
   },
   {
-    "id": "features",
-    "authority": "owner mirror, not organizer",
+    "id": "pinned-feature-owner-mirror",
+    "authority": "owner public GitHub mirror (not organizer)",
     "url": "https://github.com/buffedlizard55-lab/GEMSDOE/tree/c0c06ac82178f26b94fce3397036ef8f12a2f3a0/data/bridge",
-    "status": "verified-pinned-bytes",
-    "claim": "Existing numerical feature stack restored from five parts.",
-    "evidence": "evidence/data_receipt.json",
-    "limit": "Public mirror consistency only; no assertion of download licensing from GitHub visibility."
+    "status": "locally restored and SHA-256-checked 2026-10-20",
+    "claim": "19-band training feature stack restored from five GitHub parts; SHA-256 4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5.",
+    "limit": "Identity to the authenticated DrivenData copy, band provenance and rights remain unverified."
   },
   {
-    "id": "h33",
-    "authority": "owner archive, not organizer",
-    "url": "https://github.com/buffedlizard55-lab/GEMSDOE32/tree/98901f3130e8704f4254f173784589e63f000673",
-    "status": "reviewed-source-and-artifact",
-    "claim": "Archived H33 bundle describes catalogue-flank pruning, not a newly trained detector.",
-    "evidence": "evidence/h33_audit.json; evidence/inherited_h33_submission_bundles.json",
-    "limit": "Reported historical score has no organizer submission-page receipt in this session."
+    "id": "binary-lattice-stop-witness",
+    "authority": "owner archived registry raster (not organizer)",
+    "url": "https://api.github.com/repos/buffedlizard55-lab/13GEMSDOE/git/blobs/81c802618e6d46c6d62289d856ae74439439bbc6",
+    "status": "SHA-256 + grid + binary dots recomputed 2026-10-20",
+    "claim": "The archived P4/E2/discordance dots each show 1.0 forward overlap with this one pinned binary-dot raster under the shared 3-pixel radius.",
+    "limit": "One witness suffices to stop those archives; this is not a complete updated registry scan or a claim that every possible smaller-budget surface is a duplicate."
   },
   {
-    "id": "h69-handoff",
-    "authority": "owner archive, not organizer",
-    "url": "https://github.com/buffedlizard55-lab/GEMSDOE69/blob/ae3b9b513500fbf31660cf0a19bf161483478c67/HANDOFF.md",
-    "status": "reviewed-content",
-    "claim": "Latest inherited handoff says negative and do not submit, with a literal-overlap blocker.",
-    "limit": "Not a handoff originally present in this empty repository."
-  },
-  {
-    "id": "competition-rules-pdf",
-    "authority": "organizer (DOE/NLR rules document)",
-    "url": "https://www.nlr.gov/docs/fy26osti/96647.pdf",
-    "retrieved_via": "fetch_page 2026-10-20 (redirects to docs.nlr.gov); document dated SEPTEMBER 2026",
-    "status": "verified-content",
-    "claim": "Eligibility (\u00a71.3), up to three submissions per week and one final selection (\u00a73.2, \u00a73.4, \u00a73.5), 5:00 p.m. ET deadline-date cutoff (A.1), generative-AI narrative disclosure (\u00a73.2).",
-    "evidence": "evidence/official_sources_2026-10-20.json",
-    "limit": "Confirms rule text only. Not a portal receipt; the deadline timestamp conflicts with the competition page and is flagged."
+    "id": "H33-owner-archive",
+    "authority": "owner archive (not organizer)",
+    "url": "https://github.com/buffedlizard55-lab/60GEMSDOE/blob/32024716f218d06a94e01464157392119c03cb15/registry/rasters/GEMSDOE32__h33-2-b2-zeros.tif",
+    "status": "historical TIFF hash and dot-subset audit recorded",
+    "claim": "H33 is an exact 37,654-dot pruned subset of H27; on-disk comparisons in evidence/h33_audit.json.",
+    "limit": "0.2778 is user-supplied and not bound to these bytes by an authenticated submission-page receipt."
   }
 ]

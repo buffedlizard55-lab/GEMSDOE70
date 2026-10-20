@@ -1,0 +1,176 @@
+{
+  "evidence_class": "REGISTRY-MEASUREMENT + LOCAL-VALIDATOR; not HOLDOUT-DTI or ORGANIZER-CONFIRMED",
+  "scope": "One pinned public owner-registry raster is sufficient to stop the archived files; NOT a complete registry clearance.",
+  "registry_index": "registry/inherited_registry_index.json",
+  "registry_index_sha256": "1b76b63e9052cffeaab8191aa0285e19f9a3a71fd9b14e68b9b6c3ddb6903787",
+  "witness": {
+    "repo": "13GEMSDOE",
+    "git_blob": "81c802618e6d46c6d62289d856ae74439439bbc6",
+    "source": "13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+    "url": "https://api.github.com/repos/buffedlizard55-lab/13GEMSDOE/git/blobs/81c802618e6d46c6d62289d856ae74439439bbc6",
+    "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "bytes": 1706456,
+    "binary_dot_count": 206895,
+    "grid_match": true,
+    "dot_rule": "shared binary 1.0 support"
+  },
+  "coverage": {
+    "footprint_cells": 5167373,
+    "off_catalogue_cells": 5106385,
+    "witness_halo_covered_off_catalogue": 5099871,
+    "witness_halo_uncovered_off_catalogue": 6514,
+    "witness_halo_fraction_off_catalogue": 0.9987243421716145,
+    "min_possible_forward_overlap_at_archived_budget": 0.8270037711796887,
+    "largest_budget_not_ruled_out_by_this_witness_alone": 21713,
+    "caveat": "Optimistic bound ignores spacing, geology and other rasters; a smaller budget is not a clearance."
+  },
+  "thresholds": {
+    "rho_gt": 0.9,
+    "forward_overlap_gt": 0.7,
+    "radius_px": 3
+  },
+  "archive_checks": [
+    {
+      "file": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+      "binary_dots": 37654,
+      "forward_overlap_within_3px": 1.0,
+      "spearman_full_footprint": -0.00042498619630697477,
+      "duplicate_under_user_rule": true,
+      "shared_validator": {
+        "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "min": 0.0,
+        "max": 1.0,
+        "n_nan": 0,
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ]
+      }
+    },
+    {
+      "file": "docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif",
+      "sha256": "91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c",
+      "binary_dots": 38000,
+      "forward_overlap_within_3px": 1.0,
+      "spearman_full_footprint": 0.00012164145169401472,
+      "duplicate_under_user_rule": true,
+      "shared_validator": {
+        "sha256": "91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c",
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "min": 0.0,
+        "max": 1.0,
+        "n_nan": 0,
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ]
+      }
+    },
+    {
+      "file": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+      "sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+      "binary_dots": 24872,
+      "forward_overlap_within_3px": 1.0,
+      "spearman_full_footprint": 0.00015912424557190433,
+      "duplicate_under_user_rule": true,
+      "shared_validator": {
+        "sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "min": 0.0,
+        "max": 1.0,
+        "n_nan": 0,
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ]
+      }
+    }
+  ],
+  "historical_claim_correction": "The witness does not cover 100% of allowed cells; earlier blanket-universal statements were too strong.",
+  "new_surface_checked": false,
+  "new_final_dots_checked": false,
+  "new_raster_generated": false,
+  "new_holdout_run": false,
+  "no_submission_slot_used": true,
+  "verdict": "negative"
+}

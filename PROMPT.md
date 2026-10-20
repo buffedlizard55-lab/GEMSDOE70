@@ -512,13 +512,15 @@ ovtr-ml-cover-tau3p0-20261012-nan:
 
 [https://buffedlizard55-lab.github.io/GEMSDOE68/](https://buffedlizard55-lab.github.io/GEMSDOE68/)
 
-:
+gems68-autoctx-s3-strands-35000dots-20261020T210000Z-849a0f04-nan:0.0437
+
+gems68-autoctx-s3-strands-35000dots-20261020T210000Z-849a0f04-zeros:
 
 ....
 
 [https://buffedlizard55-lab.github.io/GEMSDOE69/](https://buffedlizard55-lab.github.io/GEMSDOE69/)
 
-:
+h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5:
 
 ....
 
@@ -530,13 +532,13 @@ ovtr-ml-cover-tau3p0-20261012-nan:
 
 [https://buffedlizard55-lab.github.io/GEMSDOE71/](https://buffedlizard55-lab.github.io/GEMSDOE71/)
 
-:
+gems71-hydro-conduit-38800-20261020T120000Z-zeros: 0.0558
 
 ....
 
 [https://buffedlizard55-lab.github.io/GEMSDOE72/](https://buffedlizard55-lab.github.io/GEMSDOE72/)
 
-:
+gemsdoe72-h72-1-sgmc-offcatalogue-20261020T195456Z-6e6525e5-zeros:
 
 ....
 

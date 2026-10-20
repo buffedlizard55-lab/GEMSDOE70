@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compatibility CLI for the publication/release contract (two independent flags)."""
+"""Fail-closed release decision: a research archive is not a submission download."""
 import argparse
 import json
 from pathlib import Path
@@ -16,8 +16,8 @@ def status():
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
     download_ok = bool(result['download_ok'])
     return {**result,
-            'status': ('DOWNLOADABLE — NOT PROMOTED' if download_ok and not result['submit_recommended']
-                       else 'PROMOTED' if result['submit_recommended'] else 'BLOCKED'),
+            'status': ('ELIGIBLE NEW TIFF' if download_ok and result['submit_recommended']
+                       else 'DO NOT SUBMIT — NO ELIGIBLE NEW TIFF'),
             'download_available': download_ok,
             'generated_tif': result.get('artifact') if download_ok else None,
             'approved_for_weekly_slot': bool(result['submit_recommended']),
@@ -35,12 +35,18 @@ def main():
     print(json.dumps(result, indent=2))
     if not args.expect_negative:
         return 0 if result.get('approved_for_weekly_slot') is True else 2
-    # '--expect-negative' now means: verdict negative, NOT promoted, no slot used.
-    # A downloadable (non-promoted) artifact is the expected state of this repo.
+    # A negative is only expected when no eligible new TIFF is advertised.
     expected = (result.get('verdict') == 'negative'
+                and result.get('evidence_consistent') is True
+                and isinstance(result.get('archive_review'), dict)
+                and result['archive_review'].get('submit_ok') is False
                 and result.get('download_and_submit_ok') is False
+                and result.get('download_ok') is False
+                and result.get('download_available') is False
+                and result.get('generated_tif') is None
                 and result.get('submit_recommended') is False
                 and result.get('approved_for_weekly_slot') is False
+                and result.get('submission_slots_used') == 0
                 and bool(result.get('reasons')))
     return 0 if expected and result['template_integrity_ok'] else 2
 

@@ -1,42 +1,67 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Submit a file · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<title>How to submit · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><div class="eyebrow">SUBMISSION GUIDE</div>
-<h1>How to submit this file — and what the number will mean.</h1>
-<p class="lead"><strong>The file:</strong> <code>downloads/gems70-p4-stratified-halo-37654-20261020.tif</code>
-(126,097 bytes, SHA-256 <code>0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7</code>).
-A one-TIFF ZIP of the same file is provided for portals that ask for it. Upload exactly one of them.</p>
-<section class="panel"><h2>Decision, stated plainly</h2>
-<ul>
-<li><strong>Download:</strong> yes — the file is unique, format-validated and reproducible.</li>
-<li><strong>Upload a weekly slot:</strong> not recommended. Verdict <code>negative</code>.
-Our target-like proxy says it is 12.6% below H33; our catalogue holdout says it is 20× above it.
-Neither is the hidden truth. This is a defensible test, not a validated win.</li>
-<li><strong>Never</strong> upload the ZIP and the TIFF as two different submissions.</li></ul></section>
-<section><h2>Steps</h2><ol class="steps">
-<li>Open the competition <em>New submission</em> page (DrivenData competition 306).</li>
-<li>Choose <code>gems70-p4-stratified-halo-37654-20261020.tif</code> (or the matching <code>.zip</code>, which contains only that TIFF).</li>
-<li>Paste the note exactly as below (one line, 108 characters).</li>
-<li>Submit and keep the receipt: filename, SHA-256, timestamp and the score the portal returns.</li>
-<li>Record the returned score as ORGANIZER-CONFIRMED — nothing on this site may be relabelled as one.</li>
-</ol>
-<p><code>P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence</code></p></section>
-<section><h2>Why the earlier portal error happened</h2>
-<p>“Predicted values must be in range [0, 1]” is raised by the portal's own range check. The shared
-writer refuses non-finite, negative or &gt;1 values instead of clipping them, then re-reads the file
-from disk. This file is all-finite with values in exactly {0, 1}. We cannot inspect the earlier
-rejected upload, so we do not claim to know its specific defect.</p></section>
-<section><h2>On-disk validator receipt</h2>
-<p>Every check below was recomputed from the published bytes by the shared template validator.</p>
-<div class="table-wrap"><table><caption>Shared validator, all checks must pass.</caption><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody><tr><td>single_band</td><td>pass</td></tr><tr><td>dtype_float32</td><td>pass</td></tr><tr><td>dimensions_3730x3292</td><td>pass</td></tr><tr><td>crs_epsg_32611</td><td>pass</td></tr><tr><td>transform_matches_sample_submission</td><td>pass</td></tr><tr><td>no_nan_anywhere</td><td>pass</td></tr><tr><td>no_inf_anywhere</td><td>pass</td></tr><tr><td>no_sentinel_values</td><td>pass</td></tr><tr><td>range_0_1_guaranteed</td><td>pass</td></tr><tr><td>min_ge_0</td><td>pass</td></tr><tr><td>max_le_1</td><td>pass</td></tr><tr><td>in_footprint_all_finite</td><td>pass</td></tr><tr><td>in_footprint_range_0_1</td><td>pass</td></tr><tr><td>outside_footprint_zero</td><td>pass</td></tr><tr><td>zero_dots_on_mapped_catalogue</td><td>pass</td></tr></tbody></table></div>
-<p class="small">Validator class: local format/range preflight; not organizer acceptance or uniqueness clearance.</p></section>
-<section><h2>Uniqueness receipt</h2>
-<p>mutual min(forward,reverse) &gt; 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.</p>
-<div class="table-wrap"><table><caption>Corrected binary-dot definition; forward-only overlap with a dense sampling grid is uninformative.</caption><thead><tr><th>Measurement</th><th>Value</th></tr></thead><tbody><tr><td>Rasters checked</td><td>62</td></tr><tr><td>Duplicate count (mutual rule)</td><td>0</td></tr><tr><td>Worst mutual overlap</td><td>0.3119 (calib_h25ctx_01280.tif)</td></tr><tr><td>Worst forward-only overlap</td><td>1.0000 (calib_r13lattice_00904.tif)</td></tr><tr><td>Worst Spearman ρ</td><td>0.0500</td></tr><tr><td>Inventory scope</td><td>62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive</td></tr></tbody></table></div></section></main>
-<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
+<span class="edition">AUDIT UPDATE · 2026-10-20 · DO NOT SUBMIT</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission.html">How to submit</a><a href="results.html">Evidence</a><a href="hypotheses-next.html">Next hypotheses</a><a href="hypotheses.html">Earlier hypotheses</a><a href="h33-analysis.html">H33 archive analysis</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop" aria-labelledby="decision">
+<div class="eyebrow">CURRENT SUBMISSION STATUS · NEGATIVE</div>
+<h1 id="decision">DO NOT SUBMIT — no eligible new GeoTIFF.</h1>
+<p><strong>Download a new submission file: NO.</strong> <strong>Use a weekly slot: NO.</strong>
+No new surface, spatial holdout, final dots or TIFF were generated this run. The required
+single-method lane paragraph is absent from the prompt. We will not invent a lane or present
+an old raster as a new result.</p>
+<p>A hash-verified binary registry raster already places <strong>100%
+ of the historical P4 dots</strong> within 3 pixels of its dots — above your 70% forward-overlap stop.
+The older site's mutual-overlap exception does not override your instruction. Its TIFF passes local
+format checks but <strong>is not cleared for a competition upload</strong>.</p>
+<div class="actions"><a class="button secondary" href="executive-summary.html">Read the submission decision and steps</a>
+<a class="button secondary" href="downloads/run_card.json">Download current negative run card</a></div>
+<p class="small">Measured against one verified registry witness, not a complete registry clearance.
+No organizer-confirmed score or weekly-slot receipt exists. negative result;
+<a href="downloads/literal_overlap_stop.json">reproducible witness and hashes</a>.</p></section><div class="eyebrow">SUBMISSION GUIDE — STOPPED THIS RUN</div>
+<h1>How to upload a future cleared GeoTIFF (not an archived one)</h1>
+<p class="lead">Currently there is <strong>no eligible filename, submission name or note</strong>
+for this run. A button labelled "Download eligible submission TIFF" must not appear until
+holdout, uniqueness on both stages, exact-byte validation and separate slot selection pass.</p>
+<section><h2>Steps when a future candidate is approved</h2><ol class="steps">
+<li>Confirm the status says <strong>download OK, submit recommended YES</strong> and inspect the
+current run card. Check the proposed file's SHA-256 and the note is at most 140 characters.</li>
+<li>Download the single-band <code>.tif</code> file (or a one-TIFF <code>.zip</code>, never both).
+Compare its SHA-256 to the recorded byte-level validator; check CRS, shape, transform, finite
+in-footprint values in [0,1] and the exact grid used in the contest sample.</li>
+<li>Sign in and enroll at the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData
+competition</a>. Open <em>Submit → Make new submission</em>. Confirm the account's
+remaining weekly allowance and rules; this website cannot see that private status.</li>
+<li>In <em>File to submit</em>, select only the approved new TIFF (or the corresponding one-TIFF ZIP).
+Paste its unique short note into <em>Note (optional)</em>, then submit once.</li>
+<li>Save the submission-page receipt (filename, timestamp, note and actual returned score).
+Only that receipt permits <code>ORGANIZER-CONFIRMED</code> for the specific file. Before any
+prize narrative, disclose any generative-AI assistance as required by the
+<a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">September 2026 official rules, §3.2</a>.</li>
+</ol></section>
+<section class="panel"><h2>About the earlier '[0,1]' rejection</h2>
+<p>According to the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">
+official submission-format page</a>, the one float32 band must contain prediction values
+in [0,1] on the target grid. The shared writer refuses non-finite and out-of-range input
+instead of clipping it; the validator reopens the written file. An older archive below
+passes the <em>local</em> byte check, but the portal has not accepted this run's file because
+there is no new file. We cannot inspect the earlier rejected upload, so we cannot identify
+whether its cause was a negative nodata sentinel, NaNs, or another value.</p>
+<p>The official page says data outside bounds should be null/NaN; the conservative local
+writer uses all-finite zeros outside the sample-defined footprint. Portal acceptance of
+this difference has not been demonstrated here. File format does not override the
+scientific and duplicate gates.</p></section>
+<section><h2>Historical P4 file, for format education ONLY — DO NOT SUBMIT</h2>
+<p><code>gems70-p4-stratified-halo-37654-20261020.tif</code> · SHA-256 <code>0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7</code> ·
+forward overlap 100% &gt; 70% stop.
+These checks belong to an older run, not a newly generated submission.</p>
+<div class="table-wrap"><table><caption>Historical shared-validator receipt; NOT a submission permission</caption><thead><tr><th>Historical local-validator check</th><th>Result</th></tr></thead><tbody><tr><td>single_band</td><td>pass</td></tr><tr><td>dtype_float32</td><td>pass</td></tr><tr><td>dimensions_3730x3292</td><td>pass</td></tr><tr><td>crs_epsg_32611</td><td>pass</td></tr><tr><td>transform_matches_sample_submission</td><td>pass</td></tr><tr><td>no_nan_anywhere</td><td>pass</td></tr><tr><td>no_inf_anywhere</td><td>pass</td></tr><tr><td>no_sentinel_values</td><td>pass</td></tr><tr><td>range_0_1_guaranteed</td><td>pass</td></tr><tr><td>min_ge_0</td><td>pass</td></tr><tr><td>max_le_1</td><td>pass</td></tr><tr><td>in_footprint_all_finite</td><td>pass</td></tr><tr><td>in_footprint_range_0_1</td><td>pass</td></tr><tr><td>outside_footprint_zero</td><td>pass</td></tr><tr><td>zero_dots_on_mapped_catalogue</td><td>pass</td></tr></tbody></table></div>
+<p><a href="downloads/phase4_run_card.json">Older run card</a> ·
+<a href="downloads/run_card.json">Current negative run card</a> ·
+<a href="downloads/literal_overlap_stop.json">SHA-verified witness</a></p></section></main>
+<footer>DO NOT SUBMIT this run. Historical results are labelled; no organizer-confirmed receipt exists.
+<a href="downloads/run_card.json">Current negative run card</a> ·
+<a href="downloads/literal_overlap_stop.json">Recomputed literal stop</a> ·
+<a href="downloads/phase4_run_card.json">Historical P4 card</a> ·
+<a href="sources.html">Official sources</a></footer></body></html>

@@ -45,7 +45,7 @@ This checkout initially contained only `README.md`; none of the following method
 
 ### Data feasibility and source limits
 
-These four proposals require no new external layer beyond the template's pinned feature stack. The inherited manifest identifies a multipart public owner mirror with SHA-256 `4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5`; the reusable fetcher can restore it. The large stack is not restored for this stopped run. **We have not verified its current download completion or its official-origin identity in this session.** Therefore these are conditional proposals, not execution-ready data claims.
+These four proposals require no new external layer beyond the template's pinned feature stack. The multipart public **owner mirror** was restored and SHA-256-verified locally on 2026-10-20 (`4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5`; [receipt](../evidence/data_receipt.json)); it lives in ignored `.cache/data/`, not in Git. **Mirror-byte integrity does not verify authenticated organizer origin, band semantics or reuse rights.** Even though the cached bands exist, these remain conditional proposals, not evaluated models or permissions to create a submission.
 
 Official context and sources actually read:
 

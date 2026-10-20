@@ -16,10 +16,14 @@ jobs:
           python-version: '3.11'
           cache: pip
       - run: pip install -r requirements.txt
-      - name: Reproduce immutable-witness audit
+      - name: Reproduce earlier continuous-witness diagnostic (not a clearance)
         env:
           GH_TOKEN: ${{ github.token }}
         run: python scripts/audit.py
+      - name: Independently remeasure the forward-stop against the pinned binary witness
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/audit_literal_overlap.py --check
       - run: python scripts/make_run_card.py
       - run: python scripts/release_gate.py --expect-negative
       - run: python scripts/build_site.py
@@ -30,6 +34,7 @@ jobs:
           name: negative-audit-evidence
           path: |
             evidence/preflight.json
+            evidence/literal_overlap_stop.json
             evidence/run_card.json
             evidence/release-status.json
             evidence/ci-tests.xml

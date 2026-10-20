@@ -1,8 +1,8 @@
-"""Status entry point. Never creates a submission; publishing is publish_e2_candidate.py.
+"""Historical E2 entry point; never creates or authorizes a new submission.
 
-Prints the E2 selector-review status (download-for-review vs submit are kept
-distinct) and exits 2 while submit_ok is False, so automation cannot mistake
-this for an approval. The shared writer is vendor/gems57/submission_writer.py.
+Prints its current archival forward-overlap stop and exits 2. The old E2
+selector-review permission was superseded; the shared writer remains in
+vendor/gems57/submission_writer.py and is not invoked here.
 """
 from pathlib import Path
 import json

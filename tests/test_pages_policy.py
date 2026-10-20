@@ -1,10 +1,12 @@
-"""Regression: root Pages must not publish archived placeholder predictions."""
+"""Regression: Pages permits only exact-byte archived files, never new rasters."""
+import hashlib
 import json
 from pathlib import Path
 
 import pytest
 
 from gems70.pages_policy import check_output, check_source
+from gems70.release import assert_no_public_rasters
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -52,6 +54,49 @@ def test_direct_url_artifacts_rejected_without_any_link(tmp_path, name):
         check_output(tmp_path)
 
 
+def test_hash_pinned_archival_bytes_only_pass_both_guards(tmp_path):
+    source = tmp_path / 'source'
+    site = tmp_path / 'built-site'
+    source.mkdir()
+    site.mkdir()
+    safe_output(site)
+    archive = source / 'docs/downloads/review-only.tif'
+    archive.parent.mkdir(parents=True)
+    archive.write_bytes(b'synthetic archived bytes; guard test only')
+    built = site / 'docs/downloads/review-only.tif'
+    built.parent.mkdir()
+    built.write_bytes(archive.read_bytes())
+    inventory = source / 'registry/published_artifacts.json'
+    inventory.parent.mkdir()
+    inventory.write_text(json.dumps({'artifacts': [{
+        'path': 'docs/downloads/review-only.tif',
+        'sha256': hashlib.sha256(archive.read_bytes()).hexdigest(),
+    }]}))
+    assert_no_public_rasters(source)
+    assert check_output(site, inventory=inventory)['raster_downloads'] == 1
+    archive.write_bytes(b'replaced bytes')
+    built.write_bytes(archive.read_bytes())
+    with pytest.raises(ValueError, match='hash-drifted'):
+        assert_no_public_rasters(source)
+    with pytest.raises(ValueError, match='unpinned or changed'):
+        check_output(site, inventory=inventory)
+
+
+@pytest.mark.parametrize('payload, reason', [
+    ('{"verdict":"promote","download_and_submit_ok":true}', 'Stale affirmative'),
+    ('{"verdict":"promote-to-selector-only"}', 'Stale affirmative'),
+    ('{"download_ok_for_selector_review":true,"submit_ok":false}', 'Stale affirmative'),
+    ('<<<<<<< HEAD\n{broken JSON}', 'Malformed public JSON'),
+])
+def test_unlinked_stale_json_cannot_publish_old_approval(tmp_path, payload, reason):
+    safe_output(tmp_path)
+    receipt = tmp_path / 'docs/downloads/old-status.json'
+    receipt.parent.mkdir()
+    receipt.write_text(payload)
+    with pytest.raises(ValueError, match=reason):
+        check_output(tmp_path)
+
+
 def test_output_symlinks_rejected(tmp_path):
     safe_output(tmp_path)
     (tmp_path / 'docs/archive').symlink_to(ROOT / 'quarantine', target_is_directory=True)
@@ -65,6 +110,22 @@ def test_empty_or_bannerless_output_rejected(tmp_path):
     safe_output(tmp_path)
     (tmp_path / 'docs/index.html').write_text('READY TO SUBMIT')
     with pytest.raises(ValueError, match='negative banner'):
+        check_output(tmp_path)
+
+
+def test_unlinked_old_html_status_cannot_claim_approval(tmp_path):
+    safe_output(tmp_path)
+    (tmp_path / 'docs/status.html').write_text('Download submission TIFF now!')
+    with pytest.raises(ValueError, match='negative banner: docs/status.html'):
+        check_output(tmp_path)
+
+
+def test_download_directory_is_raw_receipts_not_hidden_html(tmp_path):
+    safe_output(tmp_path)
+    nested = tmp_path / 'docs/downloads/old-promotion.html'
+    nested.parent.mkdir()
+    nested.write_text('DO NOT SUBMIT, but old approval text could be hidden here')
+    with pytest.raises(ValueError, match='Unexpected HTML in Pages downloads'):
         check_output(tmp_path)
 
 

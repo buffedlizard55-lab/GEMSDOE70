@@ -1,0 +1,57 @@
+{
+  "evidence_class": "PUBLICATION-SAFETY-RETRACTION; not a new holdout or score",
+  "date_utc": "2026-10-20",
+  "decision": "Remove obsolete or misleading direct-URL JSON from GitHub Pages, without altering historical evidence bytes. The archived TIFFs remain SHA-pinned review material, never eligible new submissions.",
+  "removed_direct_urls": [
+    {
+      "path": "docs/downloads/run_card_v2.json",
+      "sha256": "e4737c62b959eb03a723b8f15a3b9d05892c1985783e0b62e0c46b0bc9363df0",
+      "retained_exact_bytes": "evidence/run_card_v2.json",
+      "reason": "Older verdict=promote and download_and_submit_ok=true contradict independent 1.0 forward-overlap stop."
+    },
+    {
+      "path": "docs/downloads/submission_v2.json",
+      "sha256": "25db9e4c2c8fec1f5313a2a8fa0298cd0512e14507fe251fba8cbb5429a63754",
+      "retained_exact_bytes": "evidence/submission_v2.json",
+      "reason": "Same obsolete promotion claim; not a current submission receipt."
+    },
+    {
+      "path": "docs/downloads/e1_run_card.json",
+      "sha256": "9cd64b1e85f53e4a4d8d280f1c18d2d771632b5e9ea26f4809583f9958a2e036",
+      "retained_exact_bytes": "evidence/history/legacy_public_claims/e1_run_card.json",
+      "reason": "Old download_ok=true and 'File is unique' assertion for archived P4 are superseded."
+    },
+    {
+      "path": "docs/downloads/e2_publication.json",
+      "sha256": "32acce897e37f397b080cde2157b8a8328270f9f5079b6961afa7279a849e17b",
+      "retained_exact_bytes": "evidence/e2/publication.json",
+      "reason": "Old selector-review download flag true; exact TIFF now has 1.0 forward overlap and is archived only."
+    },
+    {
+      "path": "docs/downloads/e2_run_card_published.json",
+      "sha256": "1989827c09ec7823166b384bad4e892b7aff73535a61e9d6e177cf0568f38790",
+      "retained_exact_bytes": "evidence/history/legacy_public_claims/e2_run_card_published.json",
+      "reason": "Old selector-review flag; not a current eligibility verdict."
+    },
+    {
+      "path": "docs/run-card-e2-published.json",
+      "sha256": "1989827c09ec7823166b384bad4e892b7aff73535a61e9d6e177cf0568f38790",
+      "retained_exact_bytes": "evidence/history/legacy_public_claims/e2_run_card_published.json",
+      "reason": "Duplicate public copy of the same old E2 flag."
+    },
+    {
+      "path": "docs/downloads/uniqueness.json",
+      "sha256": "ec14a681aeca139a3db61e527024c456dced12ea6603265c10c6952b71ba593d",
+      "retained_exact_bytes": "evidence/phase4/uniqueness.json",
+      "reason": "Older mutual-overlap verdict 'promote-to-selector-only' did not apply the user's forward-only rule; current stop supersedes it."
+    },
+    {
+      "path": "docs/downloads/c1_holdout_split.json",
+      "sha256": "2376e44bdde748390447c8502bf4dfc3ba03a9ddd780919e579ac8c09b996bb7",
+      "retained_exact_bytes": "evidence/history/legacy_public_claims/c1_holdout_split_conflicted.txt",
+      "reason": "Invalid JSON with unresolved Git merge markers. The same bytes remain in evidence/e2/holdout_split.json. Do not select one side without a scientific re-audit."
+    }
+  ],
+  "guard": "assert_no_public_release_claims now rejects malformed public JSON or any nested affirmative download/submit/promote claim, even without an HTML link.",
+  "scope_limit": "Removing stale direct-URL JSON does not retract already cached Pages bytes, fix the historical experiment, or authenticate an organizer score. Historical TIFF/ZIP direct URLs remain reachable as forensic archives."
+}

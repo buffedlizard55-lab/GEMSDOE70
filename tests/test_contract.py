@@ -22,16 +22,18 @@ def test_template_unchanged():
 
 def test_scientific_evidence_is_source_bound():
     card=json.loads((ROOT/'evidence/run_card.json').read_text())
-    for p,h in card['method_source_sha256'].items():
-        assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h
-    assert len(card['submission_note'])<=140
-    assert card['weekly_slots_used']==0
+    assert card['schema_version']==2 and card['verdict']=='negative'
+    assert card['lane']['status']=='UNASSIGNED'
+    assert card['experiment_count']==card['weekly_slots_used']==0
+    assert card['holdout_dti']['dti'] is None
     assert card['organizer_confirmed_score'] is None
-    assert card['verdict'] in {'promote','negative'}
-    # a published artifact must carry a validator receipt and a hash
-    if card['raster_sha256']:
-        assert card['validator_output']['checks']
-        assert all(card['validator_output']['checks'].values())
+    assert card['raster_sha256'] is card['submission_name'] is card['submission_note'] is None
+    assert card['validator_output']['status']=='NOT_RUN_FOR_NEW_RASTER'
+    assert card['download_ok'] is card['submit_recommended'] is False
+    archived=json.loads((ROOT/'evidence/phase4/run_card.json').read_text())
+    for p,h in archived['method_source_sha256'].items():
+        assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h
+    assert len(archived['submission_note'])<=140
 
 
 def test_holdout_whole_components_and_feature_buffer():
@@ -76,7 +78,8 @@ def test_constant_ranks_do_not_manufacture_edges():
 def test_release_reports_both_flags(tmp_path):
     from gems70.release import release_status
     real=release_status(ROOT)
-    assert real['download_ok'] is True and real['submit_recommended'] is False
+    assert real['evidence_consistent'] and real['archive_review']
+    assert real['download_ok'] is real['submit_recommended'] is False
     assert release_status(tmp_path)['download_ok'] is False
     (tmp_path/'docs/downloads').mkdir(parents=True)
     (tmp_path/'docs/downloads/stale.tif').write_bytes(b'not-a-tiff')
@@ -96,8 +99,9 @@ def test_pages_links_and_decision_banner():
         text=p.read_text();parser=Links();parser.feed(text)
         for link in parser.links:assert (p.parent/link.split('#')[0].split('?')[0]).is_file(),(p,link)
     home=(ROOT/'docs/index.html').read_text()
-    assert 'Download: yes.' in home
-    assert 'Submit a weekly slot: not recommended' in home
+    assert 'Download a new submission file: NO.' in home
+    assert 'Use a weekly slot: NO.' in home
+    assert 'Download P4 archive for review only — DO NOT SUBMIT' in home
 
 
 def test_full_brief_embedded_in_readme():

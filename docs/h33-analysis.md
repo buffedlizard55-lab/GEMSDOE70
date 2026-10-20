@@ -1,71 +1,29 @@
-# Why the archived H33 field scored 0.2778 — and what it takes to beat it
+# H33 archive: what the bytes show, what the reported 0.2778 cannot prove
 
-**Evidence class:** DATA-MEASUREMENT of the archived bytes, plus user-supplied historical scores.
-The 0.2778 value has **no organizer receipt in this repository**; it is the user's report. Nothing
-below converts it into an ORGANIZER-CONFIRMED score.
+**DO NOT SUBMIT the historical H33/P4 field as a new entry.** The 0.2778 associated with `h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros` is user-supplied historical information. Neither this checkout nor the [GEMSDOE32 site](https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html) contains an authenticated *submission-page receipt* binding that exact TIFF to an organizer score; the source site labels its primary "UNSCORED" and describes a model projection. The [public leaderboard](https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/) cannot identify which filename produced a team's row. **No ORGANIZER-CONFIRMED file-specific value is claimed.**
 
-## What the file actually is
+## Recomputed artifact ancestry (DATA-MEASUREMENT, not a score)
 
-`evidence/h33_audit.json` recomputes the archived GeoTIFF byte-for-byte:
+The [byte-pinned audit](downloads/h33_audit.json) compares three archived single-band TIFFs against the sample grid and mapped catalogue. Source paths and SHA-256 digests appear in that receipt; the [H33 historical owner-archive file](https://github.com/buffedlizard55-lab/60GEMSDOE/blob/32024716f218d06a94e01464157392119c03cb15/registry/rasters/GEMSDOE32__h33-2-b2-zeros.tif) is not an organizer account receipt.
 
-| Field | Positive pixels | Measured relation to its predecessor |
+| Field | Positive binary pixels | Change, directly measured from TIFF bytes |
 |---|---:|---|
-| D28 (`dotted-d2-8`) | 44,090 | Poisson 300 m dots, minimum catalogue distance 1 px |
-| H27 | 40,199 | exactly the 3,891 D28 dots at **1 px** removed |
-| H33 B2 | 37,654 | exactly the 2,545 H27 dots at **√2 or 2 px** removed |
+| D28 | 44,090 | Earlier Poisson-style dots |
+| H27 | 40,199 | No new pixels; exactly 3,891 D28 dots at a 1-pixel distance to mapped faults removed |
+| H33 B2 | 37,654 | No new pixels; exactly 2,545 H27 dots at √2 or 2-pixel distance removed |
 
-So H33 is not a detector. It is a **uniform sparse sample of the 0.2–3 km halo around the mapped
-faults, with the two closest shells deleted**. Nine in ten of its dots lie more than 300 m from any
-mapped trace (median 1.97 km).
+The H33 mask has zero pixels on mapped faults, minimum catalogue distance √5 pixels, and 5.77% of its dots within 300 m of mapped traces (median distance about 1.96 km). It is a **pruned subset** of prior emissions, not a new geophysical detector. The source page calls the B2 step "flank B=2 prune". These are on-disk relationships, not evidence that a vent, active fault, or novel resource was discovered.
 
-## Why that scores well — the metric algebra
+## Causal hypothesis from the official metric — not proof of the live outcome
 
-With `DTI = T / (T + 0.2·(S − M) + 0.8·(N − T))`, where `T` sums a triangular kernel over **truth**
-cells, `S` sums the emitted mass and `M` sums each dot's nearest-truth credit:
+The [official problem and formula](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/) define a distance-weighted Tversky index, α=0.2, β=0.8, triangular kernel to 300 m. For a binary dot set, let **T** be the sum of best kernel coverages over *truth cells*; **S** the prediction mass (dot count); **M** the sum of each dot's nearest-truth kernel credit; and **K** the number of truth cells. Then the published terms imply
 
-* `T` saturates at 1 per truth cell; `M` and `S` scale with the number of dots. Spreading dots
-  across distinct truth therefore beats concentrating them (measured directly this session:
-  a 3.6-px-spaced damage-zone field scored 0.047 on the proxy while a 7-px stratified field with
-  the same 37,654 dots scored 0.081).
-* A dot closer than ~2 px to a mapped fault buys `S` and almost no `T`, because the scorer masks
-  known faults pixel-exactly and the hidden truth does not hug the mapped trace. Deleting those
-  shells raised the reported live score twice (0.2708 → 0.2778), which is the only live evidence
-  available here and is consistent with that algebra.
+`DTI = T / [0.2·(T + S − M) + 0.8·K + ε]`.
 
-The consequence: most of H33's 0.2778 is **emission geometry**, not geological inference. The
-residual 0.16 to the 0.44 leader requires knowing *where inside the halo* the new traces are.
+`T` saturates per truth cell, but prediction mass `S` grows with every dot. Removing redundant mass can reduce false-positive cost without much reduction of `T`, so catalogue-near pruning **could** account for a higher reported value *if* expert-labeled new faults mostly lie away from those deleted dots. Removing useful dots could instead hurt recall. Without hidden truth and a receipt, this conditional mechanism is not a causal attribution for 0.2778.
 
-## Can this be beaten? What the three experiments say
+The often-quoted marginal bar `k > α × DTI` is valid **only for a nonredundant dot whose added truth credit equals its own nearest-truth credit**. In general, adding a dot with marginal truth credit ΔT and self-credit k helps iff `ΔT > α·DTI·(ΔT + 1 − k)`; one dot may cover several truth cells. Neither unthinned mass nor indiscriminate pruning is guaranteed optimal. Catalogue hide-and-recover rewards proximity to *withheld mapped faults*; the contest's initial private test consists of *new expert-mapped faults*. Do not project a holdout result as an organizer score.
 
-| Arm (37,654 binary dots) | A: catalogue holdout | B: SGMC proxy | B′: proxy ≥ 3 px |
-|---|---:|---:|---:|
-| H33 (archived reference) | 0.0037 | 0.0906 | 0.0938 |
-| Exp 2: offset × tip × geophysics | 0.0591 | 0.0432 | — |
-| Exp 3: damage-zone intensity | 0.0873 | 0.1098 | 0.0471 |
-| Exp 4: stratified halo, weak tilt | 0.0730 | 0.0948 | 0.0812 |
+## Can a distinct method beat the historical report?
 
-Readings:
-
-1. **Instrument A is the wrong instrument for this task.** It withholds catalogue segments, so it
-   rewards placing dots beside mapped traces — the opposite of what the competition asks. Every
-   candidate beats H33 there by 20×, which says nothing about the leaderboard.
-2. **Instrument B is contaminated at short range.** 12.5 % of SGMC-only pixels sit within 2 px of
-   the catalogue and 21.4 % within 3 px (7.5 % of the domain is that close). Those are largely the
-   same traces re-drawn, so B rewards exactly the band the live experiments penalised.
-3. **B′ removes that band.** There H33 still wins by 13 % (Δ = −0.0126, 95 % CI [−0.0241, −0.0018]).
-   That is the honest negative and the reason this session's candidate is not promoted.
-
-## The defensible route to >0.2778
-
-The remaining headroom is *within-halo ranking*: a supervised model trained on the only population
-that resembles the hidden truth has to be built, not invented from geometry. Concretely, the next
-session should (a) train on the SGMC-off-catalogue proxy with leave-one-quadrant-out and a proper
-featurisation of the 19-band stack plus lidar-scarp and radiometric layers, (b) keep the coverage
-stratification that this session measured to be worth +70 % on B′ at fixed mass
-(0.047 → 0.081), and (c) spend one slot on the resulting file. Geometry alone has been measured to
-its limit here; the leaderboard gap is information, not spacing.
-
-## What we will not do
-
-Rescale, jitter, rename or prune H33 and call it a new prediction. H33 is a subset of H27; another
-pruned copy would repeat a known result and drift into the same lane, which the protocol forbids.
+**Scientifically possible, not established here.** The [dated public leaderboard read](downloads/leaderboard_read.json) showed a top public observation of 0.4413 on 2026-10-20, but it does not identify an H33-file score. The current run has no new held-out candidate, and its three older archived TIFFs fail the user's **forward** registry-overlap rule against a pinned binary lattice ([recomputed stop](downloads/literal_overlap_stop.json)). A new upload or forecast to exceed 0.2778 would be unjustified. Improving discovery likely requires independent, physically corroborated *within-region ranking*, with nuisance-process controls and newly blocked hide-and-recover plus an independent off-catalogue proxy, rather than copying H33 or only moving its dots. Four untested and cost-ranked proposals are [here](hypotheses-next.html). The [executive summary](executive-summary.html) explains why no file is currently cleared.

@@ -1,85 +1,125 @@
-# GEMSDOE70 — geothermal fault research
+# GEMSDOE70 — geological fault-discovery workbench
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## DO NOT SUBMIT — no eligible *new* TIFF in this run
 
-A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`negative` on the pre-registered target-like gate. No weekly slot was used.
+**Download a new competition TIFF: NO. Spend a weekly submission slot: NO.**
+No new raster was generated or scored on a spatial holdout in this session; the
+parallel-run prompt does not supply its promised single-method lane paragraph.
+Generating or recommending an arbitrary file would violate the stop rule, not
+maximize the probability of a valid win. No portal acceptance or ORGANIZER-CONFIRMED
+score is available for this run.
 
-- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
-- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
-- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
-- **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
+- [Executive summary and exact future submission steps](docs/executive-summary.html) ·
+  [Current negative JSON run card](evidence/run_card.json) ·
+  [Reproducible forward-overlap stop](evidence/literal_overlap_stop.json)
+- [Four ranked, **untested** geological hypotheses](docs/hypotheses-next.md) ·
+  [Historical H33 analysis](docs/h33-analysis.md) ·
+  [Limitations and next steps](docs/irregularities.md) · [Sources](docs/sources.html)
+- [Three independent review passes](evidence/review_passes.md) ·
+  [Retraction of misleading historical direct-URL approval JSON](evidence/publication_retractions.json)
+  (exact bytes preserved under `evidence/`; one archived split has unresolved merge markers).
+- [Public website](https://buffedlizard55-lab.github.io/GEMSDOE70/) (deployment can lag this branch).
 
-## What was measured this session
+**Archived P4 is NOT a new submission:**
+[`gems70-p4-stratified-halo-37654-20261020.tif`](docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif)
+(sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`) passes the shared *local format* validator, but
+**100% of its dots** fall within 3 pixels of the
+hash-verified binary registry witness, above the user's 70% forward-overlap
+stop. E2 and discordance archive TIFFs also each measure 100% against this one
+witness. Their older mutual-overlap exemption is not permission to submit.
+Archive downloads are for forensic learning only. The validator checks [0,1],
+no NaN inside the sample footprint, one float32 band, EPSG:32611 and exact
+shape/transform; it does **not** prove portal acceptance or uniqueness.
 
-Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
-alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
-bootstrap. Exactly 37,654 binary dots are emitted, all
-off-catalogue.
+The witness covers **99.8724%** of the
+5,106,385 off-catalogue cells within 3 pixels, leaving
+**6,514** uncovered. Earlier notes
+claiming universal 100% coverage were wrong. Even if a future method used all
+uncovered cells as dots, a 37,654-dot file would have **at least
+82.7004%** overlap with
+this single witness. That is an optimistic geometric bound, not a model score;
+it does not rule out all smaller budgets or certify any particular file.
 
-| Instrument | Candidate | H33 reference | Result |
-|---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
+## What the historical best teaches (without inventing a score)
 
-Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
-is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
-21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
-artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+[H33 byte audit](evidence/h33_audit.json) finds 37,654 binary dots that are an
+exact pruned subset of H27, itself a subset of D28: 2,545 near-catalogue dots
+were removed from H27 without adding any. Under the organizer's published
+[DTI metric](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/),
+such thinning *can* lower false-positive mass while retaining truth coverage.
+That explains why the user-reported 0.2778 is plausible; it does **not** prove
+causation or establish an ORGANIZER-CONFIRMED H33 receipt. A source-site page
+itself describes its primary as unscored. The public leaderboard displayed
+0.4413 in a dated page read on 2026-10-20
+([receipt](evidence/leaderboard_read.json)); this is a public observation, NOT
+a file-specific score or a fixed current target. The brief also contains
+conflicting historical numbers (0.3774 and 0.3195); do not treat them as current.
 
-**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
-(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
-whose halo covers the whole footprint — which is why the two-direction test was adopted.
+The historical Phase-4 **HOLDOUT-DTI** on the mapped catalogue was
+0.0730,
+95% CI [0.0667, 0.0790],
+11,321
+withheld positives (gems57-pooled-hide-v2). It is NOT a new holdout or a
+leaderboard estimate. P4's independent SGMC **proxy-DTI** gate was negative
+against H33; the [historical P4 card](evidence/phase4/run_card.json) states
+its scope. The user requires a new method to beat a *same-split, visible-only*
+current best before a weekly slot is considered.
 
-## Two fixes to the shared tool (reported, not silently forked)
-
-1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
-   registry surface blocks every candidate.
-2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
-   halos cover 100 % of the footprint would otherwise block every candidate.
-
-Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
-`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
-
-## Reproduce
+## Reproduce the current negative without generating dots
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
-.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
-git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/audit_literal_overlap.py --check
+.venv/bin/python scripts/make_run_card.py
+.venv/bin/python scripts/release_gate.py --expect-negative
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
 
-`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
-(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
-`evidence/history/phase1_negative/`.
+The witness is fetched through a SHA-pinned public GitHub owner mirror into the
+ignored `.cache/` directory if missing. For the *future* science run, the
+19-band stack was independently restored into `.cache/data/` with
+`.venv/bin/python scripts/restore_data.py` and verified against SHA-256
+`4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5`;
+owner-mirror integrity is not organizer authentication. The DrivenData data tab
+redirects to login. The user must verify eligibility, the organizer-format
+sample, data-sharing rights, the remaining weekly quota and any eventual
+submission-page receipt. No password or token is requested or stored here.
 
-## Next session
+## Own the outcome: next work in order
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+1. Obtain the missing method-lane assignment and resolve the forward vs mutual
+   definition **once upstream** in the shared template. A local exemption or a
+   changed filename is not a fix. The repo's vendored uniqueness file already
+   differs from its upstream pin; see [upstream report](evidence/upstream_fix_report.md)
+   and [new discrepancy report](evidence/literal_overlap_stop.json).
+2. Preregister one untried method on untouched blocks; leak-canary each feature;
+   rebuild any catalogue features using visible faults only. Compare pooled
+   HOLDOUT-DTI and paired 95% CI to a correctly rebuilt same-split incumbent.
+3. Scan the full accessible registry on the **surface before placement** and on
+   final dots. If either hits rho > 0.90 or forward overlap > 0.70, stop;
+   do not write/advertise a candidate. If all gates pass, use the shared
+   writer and revalidate exact GeoTIFF bytes with no NaN inside the footprint
+   and values in [0,1].
+4. Only a separate selector checks live weekly quota (official rules allow up
+   to three per week) and chooses one eligible file. Document any organizer
+   score only from a submission-page receipt; disclose AI assistance in the
+   required narrative.
 
-## Complete retained project prompt
+The source table is a **dated** audit, not a real-time leaderboard feed. The
+scheduled source-health workflow tests link availability only; it does not
+silently rewrite scientific claims or publish unauthenticated scores. Every
+negative result, archive SHA and irregularity is retained for review.
 
-Historical statements below are user-supplied requirements and claims, not verified results. No
-leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
-PROJECT_BRIEF.md is the source for this embedded copy.
+## Complete retained user project brief
+
+Historical claims below are user-supplied, **not** measured or organizer-confirmed
+by being copied here. Read the complete text alongside [AGENTS.md](AGENTS.md)
+and [HANDOFF.md](HANDOFF.md) at the beginning of each session.
 
 <details>
-<summary>Read the complete supplied project brief before every session</summary>
+<summary>Read the retained prompt and the latest user addendum</summary>
 
-
-## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET
-
-Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818] (beats random, loses to D28 0.0919) → negative. File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` (selector-review only; complete corrected uniqueness scan pending). Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).
 # User project prompt — retained as supplied
 
 Read this at the beginning of every session. Scores and access statements below are user-supplied claims, not current verified facts. Execution status and verified evidence belong in README.md and evidence/, not by silently rewriting this historical brief.
@@ -594,13 +634,15 @@ ovtr-ml-cover-tau3p0-20261012-nan:
 
 [https://buffedlizard55-lab.github.io/GEMSDOE68/](https://buffedlizard55-lab.github.io/GEMSDOE68/)
 
-:
+gems68-autoctx-s3-strands-35000dots-20261020T210000Z-849a0f04-nan:0.0437
+
+gems68-autoctx-s3-strands-35000dots-20261020T210000Z-849a0f04-zeros:
 
 ....
 
 [https://buffedlizard55-lab.github.io/GEMSDOE69/](https://buffedlizard55-lab.github.io/GEMSDOE69/)
 
-:
+h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5:
 
 ....
 
@@ -612,13 +654,13 @@ ovtr-ml-cover-tau3p0-20261012-nan:
 
 [https://buffedlizard55-lab.github.io/GEMSDOE71/](https://buffedlizard55-lab.github.io/GEMSDOE71/)
 
-:
+gems71-hydro-conduit-38800-20261020T120000Z-zeros: 0.0558
 
 ....
 
 [https://buffedlizard55-lab.github.io/GEMSDOE72/](https://buffedlizard55-lab.github.io/GEMSDOE72/)
 
-:
+gemsdoe72-h72-1-sgmc-offcatalogue-20261020T195456Z-6e6525e5-zeros:
 
 ....
 
