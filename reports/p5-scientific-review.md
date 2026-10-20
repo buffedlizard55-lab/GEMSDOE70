@@ -109,9 +109,10 @@ refused all invalid arrays. We independently reopened the bytes and verified:
 
 Distinct bytes and an all-true local validator are **not** organizer acceptance. The
 [organizer page](https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/)
-requests null/NaN outside bounds, whereas the owner sample contains 60,988 already-positive
-pixels and earlier portal range errors prompted the project's all-finite-zero-outside
-convention. This conflict remains unresolved without a real authenticated portal receipt;
+requests null/NaN outside bounds. The owner-mirrored sample has 60,988 already-positive
+known-fault pixels **and 7,111,787 NaNs outside its footprint**. Earlier portal range errors
+prompted the project's all-finite-zero-outside output convention. Whether the portal accepts
+this departure remains unresolved without a real authenticated portal receipt;
 no claim of accepted submission is made.
 
 After parallel merges to `main`, the old 66-raster scan was recomputed first against

@@ -143,4 +143,9 @@ def test_public_site_first_screen_is_unambiguous_and_receipted():
     assert 'Download NEW P5-cover research TIFF — DO NOT SUBMIT' in idx
     assert 'Competition upload / weekly slot: NO' in idx
     assert 'positive cells have' in idx and 'forward 3-pixel overlap' in idx
-    assert 'downloads/p5_run_card.json' in (ROOT / 'docs/p5.html').read_text()
+    detail = (ROOT / 'docs/p5.html').read_text()
+    assert 'downloads/p5_run_card.json' in detail
+    assert 'sample has NaNs outside its footprint' in detail
+    assert 'sample and this conservative output use all-finite zeros' not in detail
+    with rasterio.open(ROOT / 'data/bridge/sample_submission.tif') as sample:
+        assert int(np.isnan(sample.read(1)).sum()) == 7111787
