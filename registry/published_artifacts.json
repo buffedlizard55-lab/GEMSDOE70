@@ -31,6 +31,30 @@
       "sha256": "fe1b860591bd0557bfe016e67d17d6722f405896282c3a330a7be5d6116b666a",
       "bytes": 58118,
       "note": "parallel session (v2), preserved"
+    },
+    {
+      "path": "docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif",
+      "sha256": "91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c",
+      "bytes": 130071,
+      "note": "parallel E2 alluvial-step lane, selector-review only DO NOT SUBMIT YET; card evidence/e2/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.zip",
+      "sha256": "975e8975ef678cb177855951e9a551ca0a66cbf38d467574af52b91499e34161",
+      "bytes": 90770,
+      "note": "parallel E2 lane, one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.json",
+      "sha256": "ad334842d38691de6049fcad30515abcf5efab7119e3e39b4d39abfa4546c683",
+      "bytes": 3614,
+      "note": "parallel E2 lane, writer receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+      "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
+      "bytes": 498152,
+      "note": "parallel H2 session (PR #18), blocked diagnostic, NOT a submission; card evidence/history/h2_stepover_negative/run_card.json"
     }
   ]
 }

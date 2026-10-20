@@ -1,0 +1,18 @@
+{
+  "evidence_class": "ORGANIZER-PAGE-READ",
+  "source_url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+  "retrieved": "2026-10-20 via page fetch in this session (public leaderboard, DW-Tversky descending)",
+  "top_rows_at_read": [
+    {"rank": 1, "participant": "xiaofanhu", "best_public_dw_tversky": 0.4413},
+    {"rank": 2, "participant": "Batik Shirt Brothers", "best_public_dw_tversky": 0.3811},
+    {"rank": 3, "participant": "cfld__", "best_public_dw_tversky": 0.3788},
+    {"rank": 4, "participant": "BrandenKMurray", "best_public_dw_tversky": 0.3713},
+    {"rank": 5, "participant": "No Fault of Our Own", "best_public_dw_tversky": 0.3539},
+    {"rank": 20, "participant": "nchuzhoy", "best_public_dw_tversky": 0.3262}
+  ],
+  "notes": [
+    "Public-leaderboard values only; private-test standings and any GEMSDOE70 submission receipt are not shown here.",
+    "The user-reported family value 0.2778 for h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros has no submission-page receipt in this repo and is NOT labelled ORGANIZER-CONFIRMED.",
+    "Leaderboard is a moving target; re-check the live page before any selector decision."
+  ]
+}

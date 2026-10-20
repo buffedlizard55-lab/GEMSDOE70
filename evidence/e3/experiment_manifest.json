@@ -1,0 +1,16 @@
+{
+  "started_utc": "2026-10-20T22:05:36.335189+00:00",
+  "experiment": "E3-depth-step",
+  "experiment_count_this_session": 2,
+  "maximum_experiments": 3,
+  "maximum_seconds": 7200,
+  "contingency": "E2 completed, no canary stop, verdict negative (evidence/e2/run_card.json)",
+  "preregistration_sha256": "d8a48ed17b97a4eae842340da067a7e4dc40999562ff3ba7138d7421e7cfd6e3",
+  "protocol_revision_sha256": "0a65ae0876af4e8acc6d3af352de3be6195dcea16d9960ed7cc40492f48c1571",
+  "source_sha256": {
+    "src/gems70/method2.py": "cf4f75f3acea1cf379a4447bb5d71fc3c8c6a455e6090ed518724eaa43fde689",
+    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
+    "scripts/run_experiment_e3.py": "b6350bc4fbe82a16f1b5df045862a14e957f0692a9e225f0157f1e7a16291253",
+    "scripts/run_experiment_e2.py": "16002b9e7795561b1a8a5ba2b096929057c275bf47c792c777b08a1da3933d84"
+  }
+}

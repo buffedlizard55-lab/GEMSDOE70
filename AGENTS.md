@@ -14,3 +14,7 @@
    record a score as ORGANIZER-CONFIRMED without a submission-page receipt.
 7. Own the outcome: a measured negative with a reproducible receipt beats a false score, an
    unsupported promotion, or an unsafe download.
+
+## Parallel-lane addendum (2026-10-20, PR #16)
+- E2/E3 evidence and cards (`evidence/e2|e3/`) are frozen like Phase 1-4. The E2 review TIFF is inventoried but never promoted; `release.candidate_status().submit_ok` stays False until selector gates in `docs/publication-amendment-e2.md` are recorded.
+- E2 uniqueness numbers predate the mutual-overlap fix (R1 subset audit). Re-audit E2 under the corrected rule before comparing uniqueness across lanes.

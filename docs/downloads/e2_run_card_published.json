@@ -1,0 +1,314 @@
+{
+  "hypothesis": "Subsurface-strike-guided alluvial step (E2)",
+  "mechanism": "Oriented detrended-elevation mean-shift across RTP tensor normal, rank-fused with basement edge; 2.8px priority-thinned binary dots",
+  "non_fault_mimic": "Terrace riser, paleoshoreline, or road grade",
+  "hypothesis_status": "Declared lane: method paragraph absent from supplied prompt; preregistered docs/preregistration-e2.md",
+  "verdict": "negative",
+  "promotion_bars": {
+    "a_point_beats_every_arm": false,
+    "b_ci_vs_h33_above_0": true,
+    "b_ci_vs_random_above_0": true,
+    "c_no_canary_alarm": true,
+    "d_surface_rho_ok_subset": true,
+    "d_surface_r1_overlap_ok_subset": true,
+    "d_final_rho_ok_subset": true,
+    "d_final_r1_overlap_ok_subset": true
+  },
+  "best_other_arm": "d28_ref",
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.06464828575614011,
+    "ci95": [
+      0.04868990844970471,
+      0.08180974141513098
+    ],
+    "withheld_positive_pixels": 11321,
+    "tpw": 1063.5873585524537,
+    "fpw": 35911.93013000191,
+    "fnw": 10257.41264144755,
+    "stage": "binary holdout dots (no catalogue exclusion), seed-20 primary",
+    "current_best_verified": false
+  },
+  "holdout_all_arms": {
+    "candidate_dots": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.06464828575614011,
+      "ci95": [
+        0.04868990844970471,
+        0.08180974141513098
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 1063.5873585524537,
+      "fpw": 35911.93013000191,
+      "fnw": 10257.41264144755
+    },
+    "candidate_surface": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.01252271518041912,
+      "ci95": [
+        0.0075757462872196755,
+        0.018529695964991412
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 233.37576967470054,
+      "fpw": 47663.60228195967,
+      "fnw": 11087.624230325298
+    },
+    "step_oriented_dots": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.040456028260616825,
+      "ci95": [
+        0.03037619785464112,
+        0.0497577919804151
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 665.1163306091213,
+      "fpw": 36253.25983005312,
+      "fnw": 10655.883669390878
+    },
+    "step_max_dots": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.03492999804819707,
+      "ci95": [
+        0.025569221545499277,
+        0.04458757938280056
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 574.2775598196889,
+      "fpw": 36345.78655539868,
+      "fnw": 10746.722440180312
+    },
+    "basement_edge_dots": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.029766432973320597,
+      "ci95": [
+        0.015634906405578956,
+        0.04614221891595715
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 489.3311970068321,
+      "fpw": 36421.80408262434,
+      "fnw": 10831.668802993167
+    },
+    "random_dots": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.04242525742520503,
+      "ci95": [
+        0.03702008655540402,
+        0.04735445439832137
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 700.0737719202921,
+      "fpw": 36522.64680066662,
+      "fnw": 10620.92622807971
+    },
+    "h33_ref": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.002998923688171992,
+        0.004409116627766518
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 59.65441084410811,
+      "fpw": 35275.171121231586,
+      "fnw": 11261.345589155892
+    },
+    "d28_ref": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.09192198709430605,
+      "ci95": [
+        0.07885399208012285,
+        0.10473606242508803
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 1605.884660575932,
+      "fpw": 40460.525798262286,
+      "fnw": 9715.115339424063
+    },
+    "h19solid_ref": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.06546175700753229,
+      "ci95": [
+        0.055868270808412286,
+        0.07558220177667217
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 2075.619913883473,
+      "fpw": 111177.21202943298,
+      "fnw": 9245.380086116525
+    }
+  },
+  "paired_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.06094850407051052,
+    "ci95": [
+      0.04491379789955,
+      0.07832207076076425
+    ],
+    "withheld_positive_pixels": 11321
+  },
+  "paired_vs_random": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.022223028330935077,
+    "ci95": [
+      0.007861573648405987,
+      0.03721427549510172
+    ],
+    "withheld_positive_pixels": 11321
+  },
+  "confirmatory_seed21": {
+    "candidate_dots": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.06556622072823885,
+      "ci95": [
+        0.04854629541288864,
+        0.08351795440723636
+      ],
+      "withheld_positive_pixels": 11571,
+      "tpw": 1091.622640478806,
+      "fpw": 35870.18811041086,
+      "fnw": 10479.37735952119
+    },
+    "h33_ref": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.004070769419589067,
+      "ci95": [
+        0.003225664786911114,
+        0.004842130790424965
+      ],
+      "withheld_positive_pixels": 11571,
+      "tpw": 66.45215852512501,
+      "fpw": 35270.67603083959,
+      "fnw": 11504.547841474874
+    },
+    "paired_vs_h33": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.061495451308649786,
+      "ci95": [
+        0.044616860651724856,
+        0.07984054926195626
+      ],
+      "withheld_positive_pixels": 11571
+    }
+  },
+  "correlation_overlap_vs_registry": {
+    "stage": "surface + final dots, 7-raster disclosed subset (R1)",
+    "surface_worst_spearman": 0.0658508790817374,
+    "surface_literal_worst_overlap": 1.0,
+    "surface_r1_worst_overlap": 0.4745011086474501,
+    "final_worst_spearman": 0.03915695448178582,
+    "final_literal_worst_overlap": 1.0,
+    "final_r1_worst_overlap": 0.4428947368421053,
+    "registry_complete": false,
+    "literal_dense_overlap_degenerate": "Dense witness positive on whole footprint; see protocol revision R1. Literal values published in audits, not hidden."
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "status": "NOT_WRITTEN",
+    "pre_export_array_checks": {
+      "no_nan_inside_footprint": true,
+      "values_in_0_1": true,
+      "shape_matches": true,
+      "zero_on_catalogue": true
+    },
+    "reason": "Array checks are not a TIFF validator receipt; export stopped by promotion bars."
+  },
+  "submission_name": "GEMSDOE70-E2-alluvial-step-38000",
+  "submission_note": "E2 oriented elev step x basement edge, 38k dots d>2px; HOLDOUT-DTI in run card; selector scan pending",
+  "download_and_submit_ok": false,
+  "weekly_slots_used": 0,
+  "experiment_count": 1,
+  "elapsed_seconds": 61.83,
+  "organizer_confirmed_score": null,
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "method_source_sha256": {
+    "src/gems70/method2.py": "cf4f75f3acea1cf379a4447bb5d71fc3c8c6a455e6090ed518724eaa43fde689",
+    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
+    "scripts/run_experiment_e2.py": "16002b9e7795561b1a8a5ba2b096929057c275bf47c792c777b08a1da3933d84"
+  },
+  "final_dot_count": 38000,
+  "holdout_dot_count": 38000,
+  "raster_sha256_reason": "Promotion bars failed; no submission TIFF written or published.",
+  "publication_amendment": "docs/publication-amendment-e2.md",
+  "raster_sha256_published": "91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c",
+  "raster_file": "gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif",
+  "validator_output_published": {
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif",
+    "bytes": 130071,
+    "sha256": "91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030946743208914995,
+    "emitted_positive_pixels": 38000,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 38000,
+    "footprint_fraction": 0.007353833369489681
+  },
+  "download_ok_for_selector_review": true,
+  "submit_ok": false
+}

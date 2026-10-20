@@ -1,0 +1,45 @@
+grid loaded (3730, 3292) footprint 5167373
+valid0 5164312 valid(eroded) 4989581
+features computed
+canary det_elev 0.5124
+canary rtp 0.5176
+canary basement 0.5243
+canary det_elev_slope 0.564
+canary step_oriented 0.5797
+canary step_max 0.5782
+canary coherence 0.4959
+canary basement_edge 0.5394
+thinned step_oriented 38000
+thinned step_max 38000
+thinned basement_edge 38000
+arms built {'candidate_dots': 38000, 'step_oriented_dots': 38000, 'step_max_dots': 38000, 'basement_edge_dots': 38000, 'random_dots': 38000, 'h33_ref': 37654, 'd28_ref': 44090, 'h19solid_ref': 121131}
+candidate_dots evaluated
+candidate_surface evaluated
+step_oriented_dots evaluated
+step_max_dots evaluated
+basement_edge_dots evaluated
+random_dots evaluated
+h33_ref evaluated
+d28_ref evaluated
+h19solid_ref evaluated
+confirmatory seed21 done
+final dots 38000
+surface audit done
+final audit done
+bars {'a_point_beats_every_arm': False, 'b_ci_vs_h33_above_0': True, 'b_ci_vs_random_above_0': True, 'c_no_canary_alarm': True, 'd_surface_rho_ok_subset': True, 'd_surface_r1_overlap_ok_subset': True, 'd_final_rho_ok_subset': True, 'd_final_r1_overlap_ok_subset': True} best_other d28_ref
+{
+  "verdict": "negative",
+  "candidate_dti": 0.06464828575614011,
+  "h33_dti": 0.0036997816856295857,
+  "random_dti": 0.04242525742520503,
+  "bars": {
+    "a_point_beats_every_arm": false,
+    "b_ci_vs_h33_above_0": true,
+    "b_ci_vs_random_above_0": true,
+    "c_no_canary_alarm": true,
+    "d_surface_rho_ok_subset": true,
+    "d_surface_r1_overlap_ok_subset": true,
+    "d_final_rho_ok_subset": true,
+    "d_final_r1_overlap_ok_subset": true
+  }
+}

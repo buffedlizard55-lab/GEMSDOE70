@@ -62,3 +62,20 @@ git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSD
 
 Large inputs and the registry clone stay outside Git (`.cache/`, `/tmp`). Published evidence is
 JSON plus the 126 KB artifact.
+
+## Parallel E2/E3 lane integrated 2026-10-20 (branch arena/ef718aa0-gemsdoe70, PR #16)
+
+Independent preregistered lane merged after session 2: E2 alluvial-step candidate
+`gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif`
+(sha256 `91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c`, 38,000 dots,
+registered in `registry/published_artifacts.json`). Verdict **negative**; download-for-selector-review
+only, submit NO. Catalogue HOLDOUT-DTI 0.06465 [0.04869,0.08181] (11,321 withheld) beats random,
+loses to D28 0.09192; independently replicates Instrument-A H33 = 0.0037. E3 depth-step null.
+Uniqueness for E2 was measured pre-fix under disclosed R1 on a 7-raster subset
+(rho <= 0.039, R1 overlap <= 0.443) — rerun under the corrected mutual rule + complete scan
+before any slot consideration. Evidence: `evidence/e2/`, `evidence/e3/`,
+`docs/preregistration-e2.md`, `docs/publication-amendment-e2.md`. Organizer pages fetched
+2026-10-20: public leader 0.4413 (`evidence/leaderboard_read.json`). No slot used.
+
+## Integration note (PR #16 second merge, 2026-10-20)
+PR #18 (H2 stepover-relay, negative; HOLDOUT-DTI 0.023034, lane stop fired) landed during PR #16 CI and replaced `evidence/run_card.json`, builders and 4 test files with its fail-closed system. Integration preserved: H2 card moved byte-identical to `evidence/history/h2_stepover_negative/run_card.json`; H2 diagnostic TIFF registered in `registry/published_artifacts.json`; Phase-4 canonical card restored from `fefc857` blob (sha256 `9cd64b1e...`); session-2 builders/tests retained so P4 + discordance + E2 artifacts stay coherent. `make_run_card.py` stale-schema fix (pre-existing red Verify on main) retained. All verdicts negative; slots used 0.

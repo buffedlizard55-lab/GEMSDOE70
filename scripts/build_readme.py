@@ -95,7 +95,20 @@ PROJECT_BRIEF.md is the source for this embedded copy.
 
 '''
     tail = '\n</details>\n'
-    (ROOT / 'README.md').write_text(head + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
+    e2_note = ''
+    e2p = ROOT / 'evidence/e2/run_card.json'
+    if e2p.is_file():
+        import json as _json
+        _e2 = _json.loads(e2p.read_text())
+        _d = _e2['holdout_dti']
+        e2_note = (f"\n## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET\n\n"
+                   f"Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI {_d['dti']:.4f} "
+                   f"[{_d['ci95'][0]:.4f}, {_d['ci95'][1]:.4f}] (beats random, loses to D28 0.0919) → negative. "
+                   f"File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` "
+                   f"(selector-review only; complete corrected uniqueness scan pending). "
+                   f"Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. "
+                   f"Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).\n")
+    (ROOT / 'README.md').write_text(head + e2_note + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
 
 
 if __name__ == '__main__':
