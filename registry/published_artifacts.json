@@ -67,6 +67,24 @@
       "sha256": "5c23877dc4c9343fee9de700b21b96f93495b7c012f7b6f73e8b01aefb8f4ebe",
       "bytes": 151585,
       "note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
+    },
+    {
+      "path": "docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif",
+      "sha256": "fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88",
+      "bytes": 135849,
+      "note": "H70-A conductive breach, 37654 dots; run card evidence/h70/run_card.json (negative but unique, added during merge)"
+    },
+    {
+      "path": "docs/downloads/gems70-h70-conductive-breach-37654-20261020.zip",
+      "sha256": "5d6e79be1d747a2f26a2e67182b9184e5db6ddc892ce01af1398a974a699609a",
+      "bytes": 101794,
+      "note": "H70-A conductive breach, 37654 dots; run card evidence/h70/run_card.json (negative but unique, added during merge)"
+    },
+    {
+      "path": "docs/downloads/gems70-h70-conductive-breach-37654-20261020.json",
+      "sha256": "b3c8bbfde2d4117f6683181ea81544c670816852e27e0c69c91e1d1e72721621",
+      "bytes": 3459,
+      "note": "H70-A conductive breach, 37654 dots; run card evidence/h70/run_card.json (negative but unique, added during merge)"
     }
   ]
 }

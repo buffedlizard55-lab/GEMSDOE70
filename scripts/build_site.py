@@ -192,8 +192,30 @@ not a validated improvement.</p>
 <code>{esc(card.get('submission_note', ''))}</code></p></section>'''
 
     # ------------------------------------------------------------------ overview
-    a = p4a['scores'] if p4a else {}
-    b = p4b['scores'] if p4b else {}
+    # Prefer the current run_card (H70) when available so the landing page
+    # always reflects the downloadable artifact, not an older phase-4 snapshot.
+    if card.get('instrument_a_holdout') and card.get('instrument_b_prime_proxy'):
+        # card stores instrument blocks as {candidate, random_control, h33_reference} directly;
+        # wrap to the same shape that p4a/b used (which had top-level 'scores')
+        a = {'candidate': card['instrument_a_holdout']['candidate'], 'h33_reference': card['instrument_a_holdout']['h33_reference'], 'random_control': card['instrument_a_holdout'].get('random_control')}
+        b = {'candidate': card['instrument_b_prime_proxy']['candidate'], 'h33_reference': card['instrument_b_prime_proxy']['h33_reference'], 'random_control': card['instrument_b_prime_proxy'].get('random_control')}
+        # drop None entries so instrument_rows/ci still work
+        a = {k:v for k,v in a.items() if v is not None}
+        b = {k:v for k,v in b.items() if v is not None}
+        a_pair = card.get('paired_a_vs_h33', p4b.get('paired_differences',{}).get('h33_reference',{})) if isinstance(card.get('paired_a_vs_h33'), dict) else p4b.get('paired_differences',{}).get('h33_reference',{}) if p4b else {}
+        b_pair = card.get('paired_b_prime_vs_h33', p4b.get('paired_differences',{}).get('h33_reference',{}) if p4b else {}) if isinstance(card.get('paired_b_prime_vs_h33'), dict) else p4b.get('paired_differences',{}).get('h33_reference',{}) if p4b else {}
+        # uniqueness for this card may be 2-raster (H70) vs 62-raster (P4); show card's actual worst
+        uni_card = card.get('uniqueness') or card.get('correlation_overlap_vs_registry') or uniqueness
+        uni_overlap = uni_card.get('worst_dot_overlap', uni_card.get('worst_mutual_overlap', uniqueness.get('worst_dot_overlap',0)))
+        uni_rho = uni_card.get('worst_spearman_full_footprint', uniqueness.get('worst_spearman_full_footprint',0))
+        uni_n = uni_card.get('registry_rasters_checked', uni_card.get('rasters_checked', uniqueness.get('registry_rasters_checked',62)))
+    else:
+        a = p4a['scores'] if p4a else {}
+        b = p4b['scores'] if p4b else {}
+        b_pair = p4b['paired_differences']['h33_reference'] if p4b else {}
+        uni_overlap = uniqueness.get('worst_dot_overlap',0)
+        uni_rho = uniqueness.get('worst_spearman_full_footprint',0)
+        uni_n = uniqueness.get('registry_rasters_checked',62)
     ball = p4ball['scores'] if p4ball else {}
     metrics = f'''<div class="metrics">
 <section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
@@ -202,9 +224,9 @@ not a validated improvement.</p>
 <section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
 <div class="number">{b['candidate']['dti']:.4f}</div>
 <p>{ci(b['candidate'])} · SGMC proxy outside the duplication band</p></section>
-<section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
-<div class="number">{uniqueness.get('worst_dot_overlap', 0):.2f}</div>
-<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ {uniqueness.get('worst_spearman_full_footprint', 0):.3f}</p></section></div>'''
+<section><div class="eyebrow">UNIQUENESS · {uni_n} RASTERS</div>
+<div class="number">{uni_overlap:.2f}</div>
+<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ {uni_rho:.3f}</p></section></div>'''
 
     index = decision + f'''<section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
 <h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
@@ -221,8 +243,8 @@ lattice reaches 1.00 by construction and is reported separately).</p>
 <a href="results.html">Full evidence →</a></section>
 <section class="panel"><h2>Why it is not promoted</h2>
 <p>On instrument B′ the candidate scores {b['candidate']['dti']:.4f} versus H33's
-{b['h33_reference']['dti']:.4f} (paired Δ {p4b['paired_differences']['h33_reference']['delta']:+.4f},
-95% CI {ci(p4b['paired_differences']['h33_reference'])}). The pre-registered rule requires a
+{b['h33_reference']['dti']:.4f} (paired Δ {b_pair.get('delta', 0):+.4f},
+95% CI {ci(b_pair)}). The pre-registered rule requires a
 positive lower bound. It does not hold.</p>
 <a href="hypotheses.html">Why this rule →</a></section></div>
 <section class="panel"><h2>Second candidate from a parallel session (E3 scarp curvature)</h2>
