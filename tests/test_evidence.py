@@ -38,7 +38,7 @@ def test_saved_pooled_scores_match_fold_terms(phase):
     assert checked > 0
 
 
-def test_uniqueness_receipt_is_mutual_and_complete():
+def test_historical_receipt_is_mutual_but_not_a_literal_pass():
     audit = json.loads((ROOT / 'evidence/phase4/uniqueness.json').read_text())
     assert audit['registry_rasters_checked'] == 62
     assert audit['unique'] is True
@@ -47,6 +47,9 @@ def test_uniqueness_receipt_is_mutual_and_complete():
     assert audit['worst_forward_overlap'] >= audit['worst_dot_overlap']
     assert audit['worst_spearman_full_footprint'] <= 0.90
     assert 'mutual' in audit['overlap_definition']
+    from gems70.protocol import literal_lane_status
+    assert literal_lane_status(audit)['stop_required']
+    assert not literal_lane_status(audit)['protocol_unique']
 
 
 def test_published_tiff_matches_card_and_is_binary():

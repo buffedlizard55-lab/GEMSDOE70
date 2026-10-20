@@ -1,0 +1,12 @@
+{
+  "started_utc": "2026-10-20T22:14:36.052349+00:00",
+  "experiment_count": 3,
+  "maximum_experiments": 3,
+  "maximum_seconds": 7200,
+  "preregistration": "docs/hypotheses-e3.md",
+  "preregistration_sha256": "95d0da622a5922c641c347c736742b99b1b76db6078892ab03e88ab8df9d08b6",
+  "source_sha256": {
+    "src/gems70/method_e2.py": "12f9c32259214ae089e7c1472ad3f3f8be0d2f4a4c75bdbd0fb7cb43ff42fbec",
+    "scripts/run_experiment_e3.py": "5192cd408ebaec6ba055175c190d9906036299a893c81955c10c8f4cc14ae8b1"
+  }
+}

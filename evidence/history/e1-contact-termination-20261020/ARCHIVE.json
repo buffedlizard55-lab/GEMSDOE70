@@ -1,0 +1,20 @@
+{
+  "evidence_class": "ARCHIVE-MANIFEST",
+  "run": "e1-contact-termination",
+  "note": "Byte copies of canonical e1 evidence before e2; e1 verdict negative, do not submit.",
+  "sha256": {
+    "canaries.json": "84ffdee6c33f0278b32d0ccdc40f51f2b08c3122de4ec210dbb1ec4d879cf818",
+    "data_receipt.json": "0af5beb3cb633910d26becbf001d6aa4efa94df02b1925c070400a2934f5db8d",
+    "experiment_manifest.json": "13efdb1d8917637dc8e8af9abcb59e75fd5f7a681dbc17bc245877990933f814",
+    "feature_metadata.json": "bd935b4e0efea7e8a282ded296a85672e82277fdc040c19a35d3496d1428b4f3",
+    "holdout.json": "f6452c53217c343322c43cacf493be8717e08d740e347d1be263a8f8181b1f73",
+    "holdout_folds.json": "f77ee5e5a46730d8ba3284cc1bb0e1913fbd793eaffca411cacb0ac761f49a73",
+    "holdout_split.json": "791743288b9798e091bf4bc3497acc1e46f7345882774689e19b6b25d6093f48",
+    "hypotheses-e1.md": "67ec79dd48e1b8af3e3fa314f11916b829a878c4b154b5d910b6f6884188a671",
+    "method-e1.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
+    "registry_saturation.json": "dc8d84646537a68069757472fca9eaeaf725abca6aee5028f93b07ca6dd3ee9b",
+    "run_card.json": "200dcc57cd2eefd906cc061e8fbd3b92567d4657ad82aba6bfe29dcd85e9f13d",
+    "run_experiment-e1.py": "80afcb2d3ea851344e99bd7cca262e7fe9410c0b91534cb06b012623c1d572b5",
+    "surface_uniqueness.json": "21ec3a71146a9ec8d451aa87af52617f59e62edac21b802a52addb4fb3c66ea4"
+  }
+}

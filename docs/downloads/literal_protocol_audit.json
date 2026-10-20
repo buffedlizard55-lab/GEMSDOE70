@@ -1,0 +1,934 @@
+{
+  "evidence_class": "REGISTRY-MEASUREMENT",
+  "policy": "literal-forward-v1",
+  "date_utc": "2026-10-20",
+  "witness_source": "https://github.com/buffedlizard55-lab/60GEMSDOE/blob/32024716f218d06a94e01464157392119c03cb15/registry/rasters/calib_r13lattice_00904.tif",
+  "witness_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+  "shared_saturation_certificate": {
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "witness_file": ".cache/registry/calib_r13lattice_00904.tif",
+    "witness_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "positive_pixels": 206895,
+    "allowed_pixels": 5167373,
+    "uncovered_allowed_pixels": 6649,
+    "covered_allowed_fraction": 0.9987132726822701,
+    "universal_overlap_blocker": false,
+    "overlap_limit": 0.7,
+    "support_definition": "binary 1.0 dots (finite and |value-1|<1e-6); continuous surfaces have empty dot set",
+    "implication": "No universal blockage established under corrected binary-dot definition."
+  },
+  "archived_artifacts": [
+    {
+      "artifact": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+      "raster_sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+      "shared_measurements": {
+        "my_file": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+        "evidence_class": "REGISTRY-MEASUREMENT",
+        "my_dots": 24872,
+        "candidate_decoded_sha256": "726c04c6aaaad7d6b3950877b11bd6566b75baef8449c1fe59fa5d12cb262a45",
+        "candidate_file_sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+        "rho_limit": 0.9,
+        "overlap_limit": 0.7,
+        "jaccard_limit": 0.5,
+        "registry_rasters_expected": 1,
+        "registry_rasters_checked": 1,
+        "complete_accessible_scan": false,
+        "missing_or_invalid": 0,
+        "source_errors": [
+          "Legacy list has no complete-inventory certificate; diagnostic only"
+        ],
+        "worst_spearman_full_footprint": 0.00015912424557190378,
+        "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_dot_overlap": 0.039411295584716885,
+        "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_forward_overlap": 1.0,
+        "worst_forward_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+        "worst_jaccard_dot_sets": 0.00436384122031548,
+        "worst_jaccard_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "byte_unique_among_checked": true,
+        "pixel_unique_among_checked": true,
+        "duplicate_count": 0,
+        "unique": false,
+        "rows": [
+          {
+            "repo": "buffedlizard55-lab/60GEMSDOE",
+            "submission": "registry/rasters/calib_r13lattice_00904.tif",
+            "file": ".cache/registry/calib_r13lattice_00904.tif",
+            "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+            "decoded_sha256": "3140ac4bcfca3d20dc2684c1efb7d8b770d9f861ac3f1869e360b0451970cfec",
+            "their_dots": 206895,
+            "my_dots_within_3px_of_theirs": 1.0,
+            "their_dots_within_3px_of_mine": 0.039411295584716885,
+            "mutual_overlap": 0.039411295584716885,
+            "spearman_full_footprint": 0.00015912424557190378,
+            "jaccard_dot_sets": 0.00436384122031548,
+            "identical_bytes": false,
+            "identical_decoded_predictions": false,
+            "duplicate_by_rho": false,
+            "duplicate_by_overlap": false,
+            "forward_only_overlap_warning": true,
+            "duplicate_by_jaccard": false
+          }
+        ],
+        "jaccard_diagnostic_only": true,
+        "verdict": "negative",
+        "stop_required": true,
+        "candidate_rank_variation": true,
+        "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+      },
+      "literal_lane_status": {
+        "policy": "literal-forward-v1",
+        "overlap_limit": 0.7,
+        "rho_limit": 0.9,
+        "stop_required": true,
+        "protocol_unique": false,
+        "complete_scan": false,
+        "duplicate_witnesses": [
+          "registry/rasters/calib_r13lattice_00904.tif"
+        ],
+        "invalid_rows": [],
+        "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+      },
+      "validator_output": {
+        "file": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+        "bytes": 107350,
+        "sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+        "meta": {
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "dtype": "float32",
+          "count": 1,
+          "nodata": null,
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "profile_compress": "deflate"
+        },
+        "band_description": [
+          null
+        ],
+        "n_finite": 12279160,
+        "n_nan": 0,
+        "n_infinite": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.002025545807555318,
+        "emitted_positive_pixels": 24872,
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+        "on_catalogue_positive_pixels": 0,
+        "in_footprint_positive_pixels": 24872,
+        "footprint_fraction": 0.004813277462261772
+      }
+    },
+    {
+      "artifact": "docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif",
+      "raster_sha256": "91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c",
+      "shared_measurements": {
+        "my_file": "docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif",
+        "evidence_class": "REGISTRY-MEASUREMENT",
+        "my_dots": 38000,
+        "candidate_decoded_sha256": "3670d227fc449dd793a6fe36a8f75e73caed484649b93c22a58245ca72a4508a",
+        "candidate_file_sha256": "91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c",
+        "rho_limit": 0.9,
+        "overlap_limit": 0.7,
+        "jaccard_limit": 0.5,
+        "registry_rasters_expected": 1,
+        "registry_rasters_checked": 1,
+        "complete_accessible_scan": false,
+        "missing_or_invalid": 0,
+        "source_errors": [
+          "Legacy list has no complete-inventory certificate; diagnostic only"
+        ],
+        "worst_spearman_full_footprint": 0.00012164145169402022,
+        "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_dot_overlap": 0.10930665313323183,
+        "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_forward_overlap": 1.0,
+        "worst_forward_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+        "worst_jaccard_dot_sets": 0.006295122923369616,
+        "worst_jaccard_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "byte_unique_among_checked": true,
+        "pixel_unique_among_checked": true,
+        "duplicate_count": 0,
+        "unique": false,
+        "rows": [
+          {
+            "repo": "buffedlizard55-lab/60GEMSDOE",
+            "submission": "registry/rasters/calib_r13lattice_00904.tif",
+            "file": ".cache/registry/calib_r13lattice_00904.tif",
+            "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+            "decoded_sha256": "3140ac4bcfca3d20dc2684c1efb7d8b770d9f861ac3f1869e360b0451970cfec",
+            "their_dots": 206895,
+            "my_dots_within_3px_of_theirs": 1.0,
+            "their_dots_within_3px_of_mine": 0.10930665313323183,
+            "mutual_overlap": 0.10930665313323183,
+            "spearman_full_footprint": 0.00012164145169402022,
+            "jaccard_dot_sets": 0.006295122923369616,
+            "identical_bytes": false,
+            "identical_decoded_predictions": false,
+            "duplicate_by_rho": false,
+            "duplicate_by_overlap": false,
+            "forward_only_overlap_warning": true,
+            "duplicate_by_jaccard": false
+          }
+        ],
+        "jaccard_diagnostic_only": true,
+        "verdict": "negative",
+        "stop_required": true,
+        "candidate_rank_variation": true,
+        "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+      },
+      "literal_lane_status": {
+        "policy": "literal-forward-v1",
+        "overlap_limit": 0.7,
+        "rho_limit": 0.9,
+        "stop_required": true,
+        "protocol_unique": false,
+        "complete_scan": false,
+        "duplicate_witnesses": [
+          "registry/rasters/calib_r13lattice_00904.tif"
+        ],
+        "invalid_rows": [],
+        "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+      },
+      "validator_output": {
+        "file": "docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif",
+        "bytes": 130071,
+        "sha256": "91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c",
+        "meta": {
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "dtype": "float32",
+          "count": 1,
+          "nodata": null,
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "profile_compress": "deflate"
+        },
+        "band_description": [
+          null
+        ],
+        "n_finite": 12279160,
+        "n_nan": 0,
+        "n_infinite": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.0030946743208914995,
+        "emitted_positive_pixels": 38000,
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+        "on_catalogue_positive_pixels": 0,
+        "in_footprint_positive_pixels": 38000,
+        "footprint_fraction": 0.007353833369489681
+      }
+    },
+    {
+      "artifact": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+      "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+      "shared_measurements": {
+        "my_file": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+        "evidence_class": "REGISTRY-MEASUREMENT",
+        "my_dots": 37654,
+        "candidate_decoded_sha256": "92184ac47166886ace9a173ee9c77d3f74099897ebdfefc9affcd0c3c53d4a0b",
+        "candidate_file_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+        "rho_limit": 0.9,
+        "overlap_limit": 0.7,
+        "jaccard_limit": 0.5,
+        "registry_rasters_expected": 1,
+        "registry_rasters_checked": 1,
+        "complete_accessible_scan": false,
+        "missing_or_invalid": 0,
+        "source_errors": [
+          "Legacy list has no complete-inventory certificate; diagnostic only"
+        ],
+        "worst_spearman_full_footprint": -0.0004249861963070003,
+        "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_dot_overlap": 0.21055607917059377,
+        "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_forward_overlap": 1.0,
+        "worst_forward_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+        "worst_jaccard_dot_sets": 0.006051555467792231,
+        "worst_jaccard_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "byte_unique_among_checked": true,
+        "pixel_unique_among_checked": true,
+        "duplicate_count": 0,
+        "unique": false,
+        "rows": [
+          {
+            "repo": "buffedlizard55-lab/60GEMSDOE",
+            "submission": "registry/rasters/calib_r13lattice_00904.tif",
+            "file": ".cache/registry/calib_r13lattice_00904.tif",
+            "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+            "decoded_sha256": "3140ac4bcfca3d20dc2684c1efb7d8b770d9f861ac3f1869e360b0451970cfec",
+            "their_dots": 206895,
+            "my_dots_within_3px_of_theirs": 1.0,
+            "their_dots_within_3px_of_mine": 0.21055607917059377,
+            "mutual_overlap": 0.21055607917059377,
+            "spearman_full_footprint": -0.0004249861963070003,
+            "jaccard_dot_sets": 0.006051555467792231,
+            "identical_bytes": false,
+            "identical_decoded_predictions": false,
+            "duplicate_by_rho": false,
+            "duplicate_by_overlap": false,
+            "forward_only_overlap_warning": true,
+            "duplicate_by_jaccard": false
+          }
+        ],
+        "jaccard_diagnostic_only": true,
+        "verdict": "negative",
+        "stop_required": true,
+        "candidate_rank_variation": true,
+        "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+      },
+      "literal_lane_status": {
+        "policy": "literal-forward-v1",
+        "overlap_limit": 0.7,
+        "rho_limit": 0.9,
+        "stop_required": true,
+        "protocol_unique": false,
+        "complete_scan": false,
+        "duplicate_witnesses": [
+          "registry/rasters/calib_r13lattice_00904.tif"
+        ],
+        "invalid_rows": [],
+        "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+      },
+      "validator_output": {
+        "file": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+        "bytes": 126097,
+        "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+        "meta": {
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "dtype": "float32",
+          "count": 1,
+          "nodata": null,
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "profile_compress": "deflate"
+        },
+        "band_description": [
+          null
+        ],
+        "n_finite": 12279160,
+        "n_nan": 0,
+        "n_infinite": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.0030664964579045773,
+        "emitted_positive_pixels": 37654,
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+        "on_catalogue_positive_pixels": 0,
+        "in_footprint_positive_pixels": 37654,
+        "footprint_fraction": 0.007286874781441169
+      }
+    },
+    {
+      "artifact": "docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+      "raster_sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
+      "shared_measurements": {
+        "my_file": "docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+        "evidence_class": "REGISTRY-MEASUREMENT",
+        "my_dots": 1,
+        "candidate_decoded_sha256": "b130e01abbf47a7bbfdd190386e3de1d103aa4f7ce153130c0f4876516d6b17c",
+        "candidate_file_sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
+        "rho_limit": 0.9,
+        "overlap_limit": 0.7,
+        "jaccard_limit": 0.5,
+        "registry_rasters_expected": 1,
+        "registry_rasters_checked": 1,
+        "complete_accessible_scan": false,
+        "missing_or_invalid": 0,
+        "source_errors": [
+          "Legacy list has no complete-inventory certificate; diagnostic only"
+        ],
+        "worst_spearman_full_footprint": 6.76341633020085e-05,
+        "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_dot_overlap": 4.833369583605211e-06,
+        "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_forward_overlap": 1.0,
+        "worst_forward_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+        "worst_jaccard_dot_sets": 0.0,
+        "worst_jaccard_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "byte_unique_among_checked": true,
+        "pixel_unique_among_checked": true,
+        "duplicate_count": 0,
+        "unique": false,
+        "rows": [
+          {
+            "repo": "buffedlizard55-lab/60GEMSDOE",
+            "submission": "registry/rasters/calib_r13lattice_00904.tif",
+            "file": ".cache/registry/calib_r13lattice_00904.tif",
+            "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+            "decoded_sha256": "3140ac4bcfca3d20dc2684c1efb7d8b770d9f861ac3f1869e360b0451970cfec",
+            "their_dots": 206895,
+            "my_dots_within_3px_of_theirs": 1.0,
+            "their_dots_within_3px_of_mine": 4.833369583605211e-06,
+            "mutual_overlap": 4.833369583605211e-06,
+            "spearman_full_footprint": 6.76341633020085e-05,
+            "jaccard_dot_sets": 0.0,
+            "identical_bytes": false,
+            "identical_decoded_predictions": false,
+            "duplicate_by_rho": false,
+            "duplicate_by_overlap": false,
+            "forward_only_overlap_warning": true,
+            "duplicate_by_jaccard": false
+          }
+        ],
+        "jaccard_diagnostic_only": true,
+        "verdict": "negative",
+        "stop_required": true,
+        "candidate_rank_variation": true,
+        "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+      },
+      "literal_lane_status": {
+        "policy": "literal-forward-v1",
+        "overlap_limit": 0.7,
+        "rho_limit": 0.9,
+        "stop_required": true,
+        "protocol_unique": false,
+        "complete_scan": false,
+        "duplicate_witnesses": [
+          "registry/rasters/calib_r13lattice_00904.tif"
+        ],
+        "invalid_rows": [],
+        "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+      },
+      "validator_output": {
+        "file": "docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+        "bytes": 498152,
+        "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
+        "meta": {
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "dtype": "float32",
+          "count": 1,
+          "nodata": null,
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "profile_compress": "deflate"
+        },
+        "band_description": [
+          null
+        ],
+        "n_finite": 12279160,
+        "n_nan": 0,
+        "n_infinite": 0,
+        "min": 0.0,
+        "max": 0.9999990463256836,
+        "mean": 0.0037141714710742235,
+        "emitted_positive_pixels": 91451,
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+        "on_catalogue_positive_pixels": 0,
+        "in_footprint_positive_pixels": 91451,
+        "footprint_fraction": 0.017697774091400022
+      }
+    },
+    {
+      "artifact": "docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+      "raster_sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
+      "shared_measurements": {
+        "my_file": "docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+        "evidence_class": "REGISTRY-MEASUREMENT",
+        "my_dots": 60000,
+        "candidate_decoded_sha256": "74c7f7357d467fe220944c9a91df23936fe8633c675b65b500fbb61235798aee",
+        "candidate_file_sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
+        "rho_limit": 0.9,
+        "overlap_limit": 0.7,
+        "jaccard_limit": 0.5,
+        "registry_rasters_expected": 1,
+        "registry_rasters_checked": 1,
+        "complete_accessible_scan": false,
+        "missing_or_invalid": 0,
+        "source_errors": [
+          "Legacy list has no complete-inventory certificate; diagnostic only"
+        ],
+        "worst_spearman_full_footprint": 0.00039323355095309705,
+        "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_dot_overlap": 0.20999540829889557,
+        "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_forward_overlap": 1.0,
+        "worst_forward_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+        "worst_jaccard_dot_sets": 0.009245604083947817,
+        "worst_jaccard_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "byte_unique_among_checked": true,
+        "pixel_unique_among_checked": true,
+        "duplicate_count": 0,
+        "unique": false,
+        "rows": [
+          {
+            "repo": "buffedlizard55-lab/60GEMSDOE",
+            "submission": "registry/rasters/calib_r13lattice_00904.tif",
+            "file": ".cache/registry/calib_r13lattice_00904.tif",
+            "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+            "decoded_sha256": "3140ac4bcfca3d20dc2684c1efb7d8b770d9f861ac3f1869e360b0451970cfec",
+            "their_dots": 206895,
+            "my_dots_within_3px_of_theirs": 1.0,
+            "their_dots_within_3px_of_mine": 0.20999540829889557,
+            "mutual_overlap": 0.20999540829889557,
+            "spearman_full_footprint": 0.00039323355095309705,
+            "jaccard_dot_sets": 0.009245604083947817,
+            "identical_bytes": false,
+            "identical_decoded_predictions": false,
+            "duplicate_by_rho": false,
+            "duplicate_by_overlap": false,
+            "forward_only_overlap_warning": true,
+            "duplicate_by_jaccard": false
+          }
+        ],
+        "jaccard_diagnostic_only": true,
+        "verdict": "negative",
+        "stop_required": true,
+        "candidate_rank_variation": true,
+        "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+      },
+      "literal_lane_status": {
+        "policy": "literal-forward-v1",
+        "overlap_limit": 0.7,
+        "rho_limit": 0.9,
+        "stop_required": true,
+        "protocol_unique": false,
+        "complete_scan": false,
+        "duplicate_witnesses": [
+          "registry/rasters/calib_r13lattice_00904.tif"
+        ],
+        "invalid_rows": [],
+        "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+      },
+      "validator_output": {
+        "file": "docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+        "bytes": 184165,
+        "sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
+        "meta": {
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "dtype": "float32",
+          "count": 1,
+          "nodata": null,
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "profile_compress": "deflate"
+        },
+        "band_description": [
+          null
+        ],
+        "n_finite": 12279160,
+        "n_nan": 0,
+        "n_infinite": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.004886327777057886,
+        "emitted_positive_pixels": 60000,
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+        "on_catalogue_positive_pixels": 0,
+        "in_footprint_positive_pixels": 60000,
+        "footprint_fraction": 0.011611315846562654
+      }
+    },
+    {
+      "artifact": "docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif",
+      "raster_sha256": "fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88",
+      "shared_measurements": {
+        "my_file": "docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif",
+        "evidence_class": "REGISTRY-MEASUREMENT",
+        "my_dots": 37654,
+        "candidate_decoded_sha256": "158f8d5ff0c011e63c2c2cbcc7b1ea76eeacda8569147b6a951e6b6c6ce5ced1",
+        "candidate_file_sha256": "fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88",
+        "rho_limit": 0.9,
+        "overlap_limit": 0.7,
+        "jaccard_limit": 0.5,
+        "registry_rasters_expected": 1,
+        "registry_rasters_checked": 1,
+        "complete_accessible_scan": false,
+        "missing_or_invalid": 0,
+        "source_errors": [
+          "Legacy list has no complete-inventory certificate; diagnostic only"
+        ],
+        "worst_spearman_full_footprint": -0.0016087931178800539,
+        "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_dot_overlap": 0.20886923318591555,
+        "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_forward_overlap": 1.0,
+        "worst_forward_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+        "worst_jaccard_dot_sets": 0.005629574800559257,
+        "worst_jaccard_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "byte_unique_among_checked": true,
+        "pixel_unique_among_checked": true,
+        "duplicate_count": 0,
+        "unique": false,
+        "rows": [
+          {
+            "repo": "buffedlizard55-lab/60GEMSDOE",
+            "submission": "registry/rasters/calib_r13lattice_00904.tif",
+            "file": ".cache/registry/calib_r13lattice_00904.tif",
+            "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+            "decoded_sha256": "3140ac4bcfca3d20dc2684c1efb7d8b770d9f861ac3f1869e360b0451970cfec",
+            "their_dots": 206895,
+            "my_dots_within_3px_of_theirs": 1.0,
+            "their_dots_within_3px_of_mine": 0.20886923318591555,
+            "mutual_overlap": 0.20886923318591555,
+            "spearman_full_footprint": -0.0016087931178800539,
+            "jaccard_dot_sets": 0.005629574800559257,
+            "identical_bytes": false,
+            "identical_decoded_predictions": false,
+            "duplicate_by_rho": false,
+            "duplicate_by_overlap": false,
+            "forward_only_overlap_warning": true,
+            "duplicate_by_jaccard": false
+          }
+        ],
+        "jaccard_diagnostic_only": true,
+        "verdict": "negative",
+        "stop_required": true,
+        "candidate_rank_variation": true,
+        "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+      },
+      "literal_lane_status": {
+        "policy": "literal-forward-v1",
+        "overlap_limit": 0.7,
+        "rho_limit": 0.9,
+        "stop_required": true,
+        "protocol_unique": false,
+        "complete_scan": false,
+        "duplicate_witnesses": [
+          "registry/rasters/calib_r13lattice_00904.tif"
+        ],
+        "invalid_rows": [],
+        "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+      },
+      "validator_output": {
+        "file": "docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif",
+        "bytes": 135849,
+        "sha256": "fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88",
+        "meta": {
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "dtype": "float32",
+          "count": 1,
+          "nodata": null,
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "profile_compress": "deflate"
+        },
+        "band_description": [
+          null
+        ],
+        "n_finite": 12279160,
+        "n_nan": 0,
+        "n_infinite": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.0030664964579045773,
+        "emitted_positive_pixels": 37654,
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+        "on_catalogue_positive_pixels": 0,
+        "in_footprint_positive_pixels": 37654,
+        "footprint_fraction": 0.007286874781441169
+      }
+    },
+    {
+      "artifact": "docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif",
+      "raster_sha256": "8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2",
+      "shared_measurements": {
+        "my_file": "docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif",
+        "evidence_class": "REGISTRY-MEASUREMENT",
+        "my_dots": 37654,
+        "candidate_decoded_sha256": "1c293c73e5938ce8ecf9e793423d28f7a464b0a90a6d17394b851aa46a355fc9",
+        "candidate_file_sha256": "8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2",
+        "rho_limit": 0.9,
+        "overlap_limit": 0.7,
+        "jaccard_limit": 0.5,
+        "registry_rasters_expected": 1,
+        "registry_rasters_checked": 1,
+        "complete_accessible_scan": false,
+        "missing_or_invalid": 0,
+        "source_errors": [
+          "Legacy list has no complete-inventory certificate; diagnostic only"
+        ],
+        "worst_spearman_full_footprint": -5.3595789538983527e-05,
+        "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_dot_overlap": 0.21068658014935113,
+        "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_forward_overlap": 1.0,
+        "worst_forward_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+        "worst_jaccard_dot_sets": 0.006184014548686257,
+        "worst_jaccard_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "byte_unique_among_checked": true,
+        "pixel_unique_among_checked": true,
+        "duplicate_count": 0,
+        "unique": false,
+        "rows": [
+          {
+            "repo": "buffedlizard55-lab/60GEMSDOE",
+            "submission": "registry/rasters/calib_r13lattice_00904.tif",
+            "file": ".cache/registry/calib_r13lattice_00904.tif",
+            "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+            "decoded_sha256": "3140ac4bcfca3d20dc2684c1efb7d8b770d9f861ac3f1869e360b0451970cfec",
+            "their_dots": 206895,
+            "my_dots_within_3px_of_theirs": 1.0,
+            "their_dots_within_3px_of_mine": 0.21068658014935113,
+            "mutual_overlap": 0.21068658014935113,
+            "spearman_full_footprint": -5.3595789538983527e-05,
+            "jaccard_dot_sets": 0.006184014548686257,
+            "identical_bytes": false,
+            "identical_decoded_predictions": false,
+            "duplicate_by_rho": false,
+            "duplicate_by_overlap": false,
+            "forward_only_overlap_warning": true,
+            "duplicate_by_jaccard": false
+          }
+        ],
+        "jaccard_diagnostic_only": true,
+        "verdict": "negative",
+        "stop_required": true,
+        "candidate_rank_variation": true,
+        "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+      },
+      "literal_lane_status": {
+        "policy": "literal-forward-v1",
+        "overlap_limit": 0.7,
+        "rho_limit": 0.9,
+        "stop_required": true,
+        "protocol_unique": false,
+        "complete_scan": false,
+        "duplicate_witnesses": [
+          "registry/rasters/calib_r13lattice_00904.tif"
+        ],
+        "invalid_rows": [],
+        "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+      },
+      "validator_output": {
+        "file": "docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif",
+        "bytes": 150815,
+        "sha256": "8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2",
+        "meta": {
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "dtype": "float32",
+          "count": 1,
+          "nodata": null,
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "profile_compress": "deflate"
+        },
+        "band_description": [
+          null
+        ],
+        "n_finite": 12279160,
+        "n_nan": 0,
+        "n_infinite": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.0030664964579045773,
+        "emitted_positive_pixels": 37654,
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+        "on_catalogue_positive_pixels": 0,
+        "in_footprint_positive_pixels": 37654,
+        "footprint_fraction": 0.007286874781441169
+      }
+    }
+  ],
+  "fixed_dot_budget": 37654,
+  "minimum_forward_overlap_at_fixed_budget": 0.8234184947150369,
+  "stop_required": true,
+  "new_scientific_experiments": 0,
+  "new_rasters_generated": 0,
+  "weekly_slots_used": 0,
+  "surface_stage": "Stopped before a new candidate surface: at the fixed 37654-dot mass, at most 6649 dots can escape this witness halo, so every placement exceeds 70% forward overlap. Not a universal proof at smaller masses.",
+  "final_stage": "Existing archived final TIFFs re-audited only; no new final dots placed.",
+  "scope": "One positive binary witness suffices to reject, not to certify uniqueness. No full-registry or new-surface rank-correlation claim."
+}

@@ -1,24 +1,49 @@
 {
+  "current_forward_protocol_ok": false,
+  "review_only": true,
   "verdict": "negative",
   "download_ok": true,
+  "download_scope": "archived negative; forensic review only",
+  "protocol_unique": false,
+  "literal_lane_status": {
+    "policy": "literal-forward-v1",
+    "overlap_limit": 0.7,
+    "rho_limit": 0.9,
+    "stop_required": true,
+    "protocol_unique": false,
+    "complete_scan": true,
+    "duplicate_witnesses": [
+      "calib_r13lattice_00904.tif",
+      "r11_greedy_mp.tif",
+      "r13_lattice_s5_00904.tif",
+      "r14_union_tips10_lat6.tif"
+    ],
+    "invalid_rows": [],
+    "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+  },
   "submit_recommended": false,
   "download_and_submit_ok": false,
   "artifact": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
   "artifact_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
   "submission_name": "gems70-p4-stratified-halo-37654-20261020",
   "reasons": [
-    "Candidate did not beat H33 on instrument B' with a 95% CI above zero."
+    "Literal forward-overlap lane gate is not cleared; mutual overlap is not an exemption.",
+    "Candidate did not beat H33 on instrument B' with a 95% CI above zero.",
+    "Current literal one-way uniqueness audit requires STOP; review download only.",
+    "Current forward-overlap protocol requires STOP; archive download is review-only."
   ],
   "notes": [
     "A downloadable, validated file is not a validated leaderboard improvement."
   ],
   "weekly_slots_used": 0,
   "policy": "Never describe a non-promoted artifact as an improvement. Both flags are always published together.",
-  "status": "DOWNLOADABLE \u2014 NOT PROMOTED",
+  "status": "REVIEW ONLY \u2014 LITERAL LANE STOP",
   "download_available": true,
-  "generated_tif": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+  "generated_tif": null,
+  "archived_tif_available_for_review": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
   "approved_for_weekly_slot": false,
-  "scientific_experiments_run": 4,
+  "scientific_experiments_run": 0,
+  "historical_experiment_count": 1,
   "submission_slots_used": 0,
   "template_integrity_ok": true
 }

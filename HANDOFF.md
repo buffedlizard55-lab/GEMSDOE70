@@ -1,3 +1,40 @@
+# Current handoff — literal protocol review, arena/9d9f624f-gemsdoe70
+
+This note supersedes older submission-approval language below, not the frozen scientific evidence.
+
+- **DO NOT SUBMIT.** New current card: `evidence/review/run_card.json`; new measured audit:
+  `evidence/review/literal_protocol_audit.json`. All six published final TIFFs have forward overlap
+  1.0 with the pinned binary `calib_r13lattice_00904.tif` witness. No new TIFF, experiment or slot.
+- The inherited "100% halo coverage" claim was false: fresh coverage is 0.9987132726822701,
+  leaving 6649 cells uncovered. At fixed mass 37654, the minimum possible overlap is still
+  0.8234184947150369 > 0.70. Do not generalize the proof to every smaller mass.
+- Vendor metric/evaluator/writer/uniqueness bytes and Phase1–4 / E2 / E3 / scarp E3 receipts are
+  preserved. `src/gems70/protocol.py` applies literal thresholds to shared measurements; no mutual
+  exemption is authorized. Both historical audit CLI and release API use this adapter.
+- Parallel main advanced during the review (including scarp E3, PR17). Integration preserved
+  that artifact and its hash pins, all incoming scientific tests and publication guards.
+- Website: current review-only banner everywhere, real executive summary, current measured
+  run-card links, ranked research queue and conservative H33 analysis. The default public
+  `docs/run-card.json` is the new negative card; old P4 evidence stays at its historical path.
+- Official organizer GitHub README/notebook re-fetched. Other official hosts, portal auth, live
+  weekly cap and score receipts remain unavailable this session. Upstream issue creation was
+  denied integration permission; report retained in `evidence/review/upstream-policy-report.md`.
+
+Next: resolve explicit protocol authorization before another fixed-mass experiment; quantify SGMC
+redigitization overlap; then evaluate the first residual-ranking hypothesis with nested spatial
+validation, feature-alone canaries and a matched current-best baseline. No boundary-only loophole
+experiment or new slot without the separate selector gates. Reproduce this review with
+`python scripts/review_literal_protocol.py --fetch`, builders, pytest and audit_pages.
+
+
+Latest integration: PR #28 H70 conductive-breach archive and PR #24 protocol audit preserved.
+Canonical `evidence/run_card.json` remains H70 as set by that session; P4 builders/audits now
+read `evidence/phase4/run_card.json` explicitly. The new measured review card remains
+`evidence/review/run_card.json`. All six artifacts directly fail the binary-witness forward rule.
+Integrated suite: 212 passed (three upstream affine deprecation warnings).
+
+---
+
 # Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
 
 Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
@@ -100,3 +137,51 @@ radiometrics, lidar scarp) inside the same LOQO harness after checking mirror
 obtainability; or selector decision to spend one slot on P4/E5 as a deliberate
 measurement (never recorded as expected win). Public leader 0.4413
 (organizer-page read 2026-10-20, `evidence/e5/leaderboard_read.json`).
+## Latest protocol review (arena/4aea4e21-gemsdoe70)
+Current prompt's literal forward-overlap rule conflicts with the prior mutual
+amendment. P4 has four duplicate witnesses; no new experiment/TIFF generated.
+Historical artifact remains downloadable FOR REVIEW ONLY. Release policy now
+prevents stale promotion flags bypassing scientific, leakage, and literal overlap
+gates. See docs/protocol-review.md and evidence/review-20261020/run_card.json.
+Do not resume the earlier next-session plan without a named lane and resolution
+of the explicit stop. Official reference README confirms CPU training support.
+
+## Current literal-protocol review (2026-10-20, arena/00dc63c0-gemsdoe70)
+
+Read `reports/literal-protocol-review.md` and `evidence/literal_protocol_review.json`
+before interpreting the historical mutual-overlap clearance above. The requested forward-only
+rule fails on four archived Phase-4 witnesses (maximum 1.0). Stop; no new experiment or TIFF,
+no weekly slot. Frozen scientific receipts are preserved, not reclassified as new measurements.
+Site-wide warnings and the README opening supersede old uniqueness claims for this prompt.
+Reproduce: `.venv/bin/python scripts/audit_literal_protocol.py`, rebuild site/readme, pytest.
+Resolve the protocol contradiction and explicit lane assignment before the supervised next step.
+
+## Parallel-session E3 scarp lane (PR #17)
+
+Independent lane, three frozen experiments: E1 contact-termination (negative, archived), gated
+joint scarp×strain×cover (negative), scarp-curvature alone (PROMOTE-to-selector on catalogue
+HOLDOUT-DTI 0.0943 [0.0782, 0.1109], seed-40/11,437 withheld). Candidate
+`docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif` (sha256 in
+`evidence/run_card_e3_amended.json`). **Not yet scored on instrument B′** — selector's next step.
+Frozen drivers live at `scripts/run_experiment_e2_scarp.py` / `run_experiment_e3_scarp.py`
+(byte-identical rename; PR #16 owns canonical paths). Do not rerun.
+
+## Current-request review — arena/3169a6c0-gemsdoe70 (2026-10-20)
+
+**Overrides historical uniqueness clearance: DO NOT SUBMIT.** The latest user request explicitly
+uses forward overlap, not the inherited mutual criterion. `scripts/audit_current_protocol.py`
+reapplies that rule to frozen P4 rows: multiple witnesses fail, including forward overlap 1.00.
+This is a historical negative witness, not a refreshed registry scan. No scientific experiment,
+new TIFF, fitting, placement or competition upload occurred in this session. All TIFF bytes and
+frozen scientific cards are preserved. Fresh local validation confirms P4 finite [0,1] and grid
+consistency against cached reference metadata, not organizer acceptance.
+
+- Current JSON: `evidence/current_protocol_review.json` (also published under docs).
+- Review / ranked conditional hypotheses: `docs/protocol-review.md`.
+- Official reference README retrieved at pinned commit and archived in `evidence/current-review/`;
+  CPU-only training is supported (GPU is not a hard requirement).
+- Website has a global DO NOT SUBMIT override, archive downloads remain available for review.
+- Reconcile explicit lane and uniqueness policy before the old supervised-ranking next step.
+- Reproduce: audit_current_protocol.py, build_site.py, build_readme.py, pytest; no data download needed.
+
+Integration: main advanced concurrently with PRs adding a separate E3 scarp artifact and a literal-protocol review. All those frozen receipts, artifacts, tests and drivers were retained. This session's four conditional hypotheses and fresh P4 format card are supplemental (`docs/supplemental-protocol-review.html`), not a replacement for the concurrent review or an authorization of E3.
