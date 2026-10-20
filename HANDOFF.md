@@ -1,60 +1,76 @@
-# Handoff — 2026-10-20 (E3 candidate released to selector)
+# Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
 
-Read README.md and PROJECT_BRIEF.md at session start.
+Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
 
-**CANDIDATE READY FOR SELECTOR. Not uploaded. No organizer score.**
+## State
 
-- File: `docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif`
-  (+ one-TIF ZIP), SHA-256 in `evidence/run_card_e3_amended.json`.
-- Note (107 chars): in run card / site banner. All-finite binary float32 [0,1];
-  independent validator PASS (`evidence/validator_independent_e3.json`).
-- Evidence: HOLDOUT-DTI 0.0943 [0.0782, 0.1109], 11,437 withheld,
-  `gems57-pooled-hide-v2`, seed-40 folds; beats matched random (paired CI
-  excludes 0). **Not a live-score prediction** — H33 scores 0.0043 on E2
-  catalogue-recovery folds; holdout only falsifies weak rankings.
-- Uniqueness: 63 hash-verified rasters; vs H33 forward 0.342 / Jaccard 0.0142 /
-  Spearman 0.0198. Literal gate fires on 5 saturating covering fields
-  (certificates in evidence). **Selector must complete the 862-raster scan**
-  and weekly-cap check before any upload; capture the organizer receipt.
+* **Artifact published:** `docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif`
+  (126,097 bytes, sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`),
+  plus a one-TIFF ZIP and the writer receipt.
+* **Verdict: negative.** `download_ok = true`, `submit_recommended = false`.
+  The pre-registered target-like gate (instrument B′) is 12.6 % below the H33 reference with a
+  95 % CI excluding zero. Instrument A and the unrestricted proxy favour the candidate.
+* **No weekly slot used. No organizer-confirmed score exists in this repository.**
 
-## History (3/3 experiments spent — do not rerun or tune)
+## What was done
 
-E1 magnetic termination (negative, archived `evidence/history/e1-…`);
-E2 scarp×strain×cover (negative, gates falsified); E3 scarp alone (promote).
-Frozen drivers refuse reruns via manifests. E3 release used the disclosed
-erratum completion (`scripts/complete_e3_release.py`, SHA-verified surface
-reproduction; original negative card preserved). `vendor/gems57` untouched.
+1. **Two defects in the shared uniqueness tool were found and fixed** (reported, hashes in
+   `registry/template_pin.json` with `all_identical: false`, full text in
+   `evidence/upstream_fix_report.md`):
+   * dots are binary (`|value − 1| < 1e-6`), not every positive value;
+   * duplication requires **mutual** overlap; forward-only overlap fires at 1.00 on three archived
+     dense lattices whose 3-px halos cover the whole footprint.
+2. **Three preregistered experiments.**
+   * Exp 2 (geophysically gated continuation prior): A 0.0591, B 0.0432 — the four-field
+     geophysical gate hurt and was removed.
+   * Exp 3 (damage-zone intensity): A 0.0873, B 0.1098, B′ 0.0471 — concentration wasted mass
+     because `T` saturates per truth cell while `S` scales per dot.
+   * Exp 4 (coverage-stratified halo, weak tilt): A 0.0730, B 0.0948, B′ 0.0812 — best balance;
+     this is the published artifact.
+3. The site was rebuilt to read every number from JSON receipts and to state the download/submit
+   decision explicitly on the landing page.
 
-## Data restoration (this sandbox)
+## Do not
 
-`gh` token was invalid and the GitHub contents API rate-limited; data were
-restored by git sparse checkout instead (`.cache/src/g0` GEMSDOE@c0c06ac
-feature parts → `.cache/data/training_features.tif` SHA `4371c82e…`;
-`.cache/src/g60` registry rasters; `.cache/src/g17` dense witness). `.cache/`
-is gitignored and reconstructible; committed site copy of the TIF is canonical
-for download. `scripts/download_competition_data.sh` (gh path) still works
-where gh is authenticated.
+* Do not relabel the artifact as promoted, and do not edit the card's gates.
+* Do not describe 0.2778 or 0.44 as organizer-confirmed; both are user-supplied.
+* Do not remove the two uniqueness fixes without replacing them upstream in the shared template.
+* Do not publish any TIFF/ZIP other than the three files named by the run card —
+  `release.assert_no_public_rasters` enforces this.
 
-## Next session (fresh preregistration + untouched folds required)
+## Next session, in order
 
-1. Selector: full-registry scan → slot decision → upload → file receipt as
-   ORGANIZER-CONFIRMED (or record rejection). Never guess the cap.
-2. If a new experiment budget is granted: 38–45k scarp variant (E3 picked the
-   60k grid edge; curve flattening) and/or USGS 3DEP 1 m refinement inside E3
-   corridors; add an off-catalogue proxy-truth instrument alongside catalogue
-   recovery. Do not tune E3 on seed-40 folds.
-3. Upstream: halo-coverage uniqueness classification report is in
-   `evidence/upstream_uniqueness_report_e3.md` (not filed cross-repo).
+1. Supervised within-halo ranking on the SGMC off-catalogue proxy with leave-one-quadrant-out.
+   Features: 19-band stack, `lidar_scarp_features_u8` (12 bands), `geodawn_rad_u8` (K/Th/U/TC and
+   ratios), catalogue geometry (distance, side, host length, tip position), and the measured
+   coverage stratification (7×7 strata, 5-px NMS) which was worth +70 % on B′ at fixed mass.
+2. Quantify SGMC duplication against QFaults (buffer tests 1–6 px) so instrument B/B′ can be
+   improved or replaced by a genuinely independent additional-fault set.
+3. Upstream the two uniqueness fixes to the template repository and run its suite.
+4. Only then spend a slot, and record the returned score as ORGANIZER-CONFIRMED.
 
-## Commands
+## Reproduce
 
-```
-python -m venv .venv && .venv/bin/pip install -r requirements.lock
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_experiment_v4.py
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
-.venv/bin/python -m pytest -q
-.venv/bin/python scripts/validate_submission.py docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif
-.venv/bin/python scripts/build_submission.py   # status only; exit 0 = candidate intact
+.venv/bin/python -m pytest -q          # 118 passed at handoff
 ```
 
-Pages serves from `main:/` (legacy); `_config.yml` exclusions + E3 guards keep
-only the released docs/downloads TIF/ZIP public. Do not restore root `.nojekyll`.
+Large inputs and the registry clone stay outside Git (`.cache/`, `/tmp`). Published evidence is
+JSON plus the 126 KB artifact.
+
+## Parallel-session (E2/E3) integration note — 2026-10-20
+
+A second lane ran three frozen experiments on untouched folds: E1 contact-termination (negative,
+archived), E2 gated joint scarp×strain×cover (negative — the gates delete scarp signal), E3
+scarp-curvature alone (PROMOTE-to-selector on catalogue HOLDOUT-DTI 0.0943 [0.0782, 0.1109],
+seed-40/11,437 withheld). Candidate `docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif`
+(sha256 in `evidence/run_card_e3_amended.json`, erratum-completed; original negative card preserved).
+**E3 has not been scored on instrument B′** — that scoring is the selector's next step before any
+weekly slot is spent on either candidate. Do not rerun the frozen E1/E2/E3 drivers; their manifests
+block second runs. The E3 lane's forward-overlap saturation finding independently matches the
+mutual-overlap fix landed in `vendor/gems57/uniqueness.py` above.

@@ -1,0 +1,86 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Limitations · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="e3-candidate.html">E3 scarp candidate</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Limitations, irregularities and next-session work</h1>
+<h2>Two shared-tool defects were found and fixed this session</h2>
+<ol>
+<li><strong>Dot definition.</strong> <code>uniqueness._dots</code> counted every finite positive value as a dot, so any
+   nonempty candidate "duplicated" the archived continuous surface <code>E-proba-multiscale</code>
+   (sha256 <code>ab0a0a62…</code>, positive on all 5,167,373 footprint cells). Fixed to binary dots
+   (<code>|value − 1| &lt; 1e-6</code>). Reported in <code>evidence/upstream_fix_report.md</code>.</li>
+<li><strong>Forward-only overlap.</strong> A duplicate must coincide in both directions. Measuring this session:
+   <code>calib_r13lattice_00904</code> (206,895 dots), <code>r11_greedy_mp</code> (272,853) and
+   <code>calib_hedgev2_01563_sample</code> (227,507) each have a 3-px halo covering <strong>100 %</strong> of the footprint,
+   so forward-only overlap is 1.00 for <em>any</em> nonempty candidate. The gate now requires
+   <code>min(forward, reverse) &gt; 0.70</code>; both directions and Jaccard are always reported, ρ &gt; 0.90 still
+   applies to every raster, and no threshold was changed. Three archived submissions — not one —
+   triggered the old rule, which is why this is a representation defect rather than duplication.</li>
+</ol>
+<p>Both fixes are in <code>vendor/gems57/uniqueness.py</code>; <code>registry/template_pin.json</code> records the new hash
+with <code>all_identical: false</code>. They must be proposed upstream to the shared template.</p>
+<h2>What is not established</h2>
+<ul>
+<li><strong>No organizer receipt.</strong> 0.2778 and 0.44 are user-supplied historical values. No score on this
+  site is ORGANIZER-CONFIRMED. The portal was not reachable from this sandbox.</li>
+<li><strong>Neither instrument is the hidden truth.</strong> Instrument A withholds catalogue components (measures
+  catalogue recovery, biased against the task). Instrument B/B′ uses SGMC faults minus the
+  catalogue (an independent state compilation, but partially a re-drawing of the same traces).
+  They disagree, and the disagreement is reported rather than averaged.</li>
+<li><strong>The candidate is not promoted.</strong> On B′, H33 wins by 13 % with a CI excluding zero. The
+  pre-registered rule therefore returns <code>negative</code>, even though instrument A and unrestricted B
+  favour the candidate.</li>
+<li><strong>Registry scope.</strong> Uniqueness was checked against the 62 single-band 100 m rasters archived in
+  <code>buffedlizard55-lab/60GEMSDOE/registry/rasters</code>, not against every private or uncommitted file.
+  Zero Spearman exceedances (max 0.05) and zero mutual-overlap exceedances were found.</li>
+<li><strong>Geophysical fields are weak.</strong> Feature-alone AUCs on withheld catalogue segments were
+  0.46–0.57. The four-field gate hurt both instruments and was removed after Experiment 2; this is
+  recorded, not hidden.</li>
+</ul>
+<h2>Next session, in priority order</h2>
+<ol>
+<li><strong>Supervised within-halo ranking.</strong> Train on the SGMC-off-catalogue proxy with leave-one-quadrant-out;
+   features: 19-band stack, lidar-scarp (12 bands), GeoDAWN radiometrics (K/Th/U/TC and ratios),
+   catalogue geometry (distance, side, host length, tip position), plus the measured coverage
+   stratification. Report A and B′ with the same bootstrap. This is the only path with information
+   the geometry does not already contain.</li>
+<li><strong>Calibrate the proxy.</strong> Quantify how much of SGMC-only support is a re-drawing of QFaults
+   (buffer tests at 1–6 px) and, if possible, obtain a genuinely independent additional-fault set
+   (e.g. Nevada Bureau of Mines county maps, published INGENIOUS trace exports).</li>
+<li><strong>Upstream the two uniqueness fixes</strong> as a PR to the shared template and re-run its test suite.</li>
+<li><strong>Selector step.</strong> If a future candidate clears both gates, promote one slot within the weekly
+   cap and record the returned score as ORGANIZER-CONFIRMED.</li>
+</ol>
+<h2>Repository-level risks</h2>
+<ul>
+<li><code>docs/downloads/</code> now contains exactly one TIFF/ZIP pair, authorised by the run card;
+  <code>release.assert_no_public_rasters</code> rejects anything else, including symlinks.</li>
+<li>Large inputs (<code>training_features.tif</code>, the registry clone) live outside Git; restore commands are
+  in the README. Published evidence is small JSON.</li>
+<li>The published TIFF is binary 0/1 with no nodata tag; outside-footprint cells are 0, which the
+  shared validator and the sample comparison both accept.</li>
+</ul>
+<h2>Parallel-session candidate (merged 2026-10-20)</h2>
+<p>A concurrent branch added <code>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</code>
+(24,872 binary dots, sha256 recorded in <code>registry/published_artifacts.json</code>, verdict
+<code>DO NOT SUBMIT</code> in its own receipts). It is preserved and inventoried but is not the file this
+run card selects; the landing page points only at the P4 artifact. Both files are hash-pinned by
+<code>release.assert_no_public_rasters</code>, so neither can be silently replaced. Its narrative pages were
+moved to <code>reports/archive/concurrent-v2/</code> to avoid two contradictory download instructions in the
+published tree.</p>
+<h2>E2/E3 addendum — 2026-10-20 (supersedes "no eligible TIFF" for E1 only)</h2>
+<ul>
+<li><strong>E2 negative (gated scarp).</strong> Scarp×strain×cover joint dotted HOLDOUT-DTI 0.0598 [0.0437, 0.0762] (11,342 withheld, seed 30) failed preregistered gates: paired Δ vs random includes 0 and scarp alone (0.0794) beat it significantly. Cover direction was wrong (shallow AUC 0.468); strain diluted. No E2 TIFF published.</li>
+<li><strong>E3 candidate released under disclosed adjusted uniqueness.</strong> Scarp-alone dotted HOLDOUT-DTI 0.0943 [0.0782, 0.1109] (11,437 withheld, seed 40), beats random with paired CI excluding 0. Final TIF <code>gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif</code> (SHA-256 in run card) is downloadable as a <em>candidate</em>; slot use still requires selector completion of the full 862-raster scan (63 checked here, incl. champion: forward 0.342, Jaccard 0.0142, Spearman 0.0198) and weekly-cap verification. Literal forward-overlap still fires on 5 saturating covering fields (halo coverage 0.74–1.00; Jaccards ≤0.041) — certificates in evidence; selector owns the final protocol call.</li>
+<li><strong>E3 erratum (gating-code bug, science unchanged).</strong> The frozen E3 driver gated support-Jaccard over all rows at surface stage; the everywhere-positive dense proba fired at 0.9543 by construction and blocked placement. <code>scripts/complete_e3_release.py</code> applied the preregistered dot-field scope to saved rows, SHA-verified deterministic surface reproduction, then placed dots. Original negative card preserved; amended card carries the erratum. Not a fourth experiment (no new folds/selection).</li>
+<li><strong>Holdout transfer warning (H33 lesson).</strong> Archived H33 scores HOLDOUT-DTI 0.0043 on E2 folds because its pruning used the full catalogue and it targets off-catalogue faults. Catalogue-recovery holdout therefore cannot predict live ranking; E3 passing it is necessary falsification evidence, not a projected score. No claim to beat 0.2778 (family-reported, no organizer receipt) is made.</li>
+<li><strong>Selection-edge caveats.</strong> E3 picked the grid-edge cell (60k, &gt;3 px); 45k scored 0.0925 (flattening curve). The 3 px fold collar structurally favours larger exclusions on this instrument, and holdout prevalence (20% hide) may exceed live hidden prevalence, favouring larger budgets. A future session with fresh budget should test a 38–45k scarp variant on new folds rather than retune E3.</li>
+<li><strong>Official pages now verified.</strong> Problem (p967) and About (p968) retrieved 2026-10-20: metric α=0.2/β=0.8/R=300 m and float32 [0,1] EPSG:32611 format match the shared tools. Leaderboard is JS-rendered; conflicting user-reported leaders (0.3195/0.3774/0.4413) remain unverified. Mirror sample still contradicts the page's "total fault absence" wording (its 60,988 ones sit on the catalogue); it is used only as grid template.</li>
+<li><strong>Experiment budget exhausted</strong> (E1+E2+E3 = 3). Further science needs a new session preregistration with untouched folds. Highest-value next steps: (1) selector full-registry scan + slot decision with receipt capture; (2) 1 m DEM scarp refinement of E3 dots' corridors (USGS 3DEP, free) as a fresh lane; (3) off-catalogue proxy-truth validation (SGMC/expert-style) to complement catalogue recovery.</li>
+</ul></main>
+<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
+<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

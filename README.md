@@ -1,78 +1,94 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **✅ OK TO DOWNLOAD candidate TIF — selector review before upload**
+## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
-- **Download (candidate):** [docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif](docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif)
-  · SHA-256 `562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21` · 60,000 binary dots, float32, all values in [0, 1]
-- **Note to paste (107 chars):** `E3 DEM scarp curvature+coherence only (E2 gates falsified); dotted 60000 excl>3px sep2.8; holdout-validated`
-- **Submit:** uploading is a separate human *selector* step — full-registry scan +
-  weekly-cap check first (see [submission guide](docs/executive-summary.html)).
-  This project uploaded nothing; **no organizer score exists for this file.**
-- [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Run card (amended, with erratum)](evidence/run_card_e3_amended.json)
-- [Results](docs/results.html) · [H33 forensic analysis](docs/h33-analysis.md) · [Hypotheses E1–E3](docs/hypotheses-e3.md)
+A unique, format-validated competition TIFF is published:
+`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
+**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
+`negative` on the pre-registered target-like gate. No weekly slot was used.
+
+- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
+- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
+- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
-- **Session start:** read this README, the retained brief below, AGENTS.md and HANDOFF.md.
+- **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## What was done (3 experiments, budget exhausted)
+## What was measured this session
 
-Shared `vendor/gems57` evaluator/writer/validator/uniqueness tools are byte-pinned
-and unmodified ([verification](evidence/template_verification.json)). Data were
-restored from SHA-pinned public owner mirrors (consistency only, not organizer
-authentication). Official problem/about pages were retrieved 2026-10-20 and match
-the tools (DTI α=0.2, β=0.8, R=300 m; float32 [0,1], EPSG:32611).
+Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
+alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
+bootstrap. Exactly 37,654 binary dots are emitted, all
+off-catalogue.
 
-1. **E1 (negative):** magnetic-edge termination — continuous HOLDOUT-DTI 0.0102,
-   below random. Archived in `evidence/history/e1-contact-termination-20261020/`.
-2. **E2 (negative):** DEM scarp × geodetic strain × shallow-cover — dotted
-   HOLDOUT-DTI 0.0598; gates falsified (cover direction wrong).
-3. **E3 (promote-to-selector):** DEM scarp curvature alone — **HOLDOUT-DTI:
-   0.0943**, 95% CI [0.0782, 0.1109],
-   11,437 withheld positives, evaluator
-   `gems57-pooled-hide-v2` (seed-40 hide-and-recover; beats matched random
-   0.0607 with paired CI excluding 0). Holdout is a falsification gate, **not**
-   a predicted leaderboard score — the H33 champion itself scores 0.0043 on
-   E2 catalogue-recovery folds. Uniqueness vs H33: forward overlap 0.342,
-   Jaccard 0.0142, Spearman 0.0198 (63 hash-verified rasters checked; full
-   862-raster scan remains a selector step; literal gate fires vacuously on
-   5 saturating covering fields — see Limitations). The family-reported H33
-   0.2778 has no organizer receipt here; no "beat it" claim is made.
+| Instrument | Candidate | H33 reference | Result |
+|---|---:|---:|---|
+| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
+| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
 
-Why H33 scored: sparse dotted emission + catalogue-flank pruning is
-metric-efficient (preserves kernel coverage, cuts penalised mass) — conditional
-algebra on top of a multi-layer ranking, detailed in the forensic analysis.
-E3 attacks the ranking side with an independent scarp-curvature signal
-(AUC ≈0.60–0.61 on two untouched fold sets) and the same efficiency lessons
-(binary dots, 2.8 px spacing, off-catalogue, zeros export fixing [0,1] errors).
+Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
+is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
+21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
+artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+
+**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
+overlap 0.312 (limit 0.70); worst Spearman 0.050
+(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
+whose halo covers the whole footprint — which is why the two-direction test was adopted.
+
+## Two fixes to the shared tool (reported, not silently forked)
+
+1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
+   registry surface blocks every candidate.
+2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
+   halos cover 100 % of the footprint would otherwise block every candidate.
+
+Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
+`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
 
 ## Reproduce
 
 ```bash
-python -m venv .venv
-.venv/bin/pip install -r requirements.lock
-bash scripts/download_competition_data.sh  # pinned mirrors (gh); see HANDOFF for git-sparse fallback
-.venv/bin/python scripts/build_site.py
-.venv/bin/python scripts/build_readme.py
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
-.venv/bin/python scripts/validate_submission.py docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif
 ```
 
-Experiment drivers refuse reruns (manifest guards); do not delete manifests to
-tune. `scripts/complete_e3_release.py` is the disclosed erratum completion
-(SHA-verified reproduction), not a fourth experiment.
+`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
+(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
+`evidence/history/phase1_negative/`.
 
-## Own the outcome
+## Next session
 
-Maximize P(Win) by protecting the slot: honest negatives, labelled numbers
-(HOLDOUT-DTI vs ORGANIZER-CONFIRMED), and selector discipline beat hopeful
-uploads. Next-session priorities are in HANDOFF.md.
+Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
+(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
+approach has been measured to its limit — see `docs/irregularities.md`.
 
 ## Complete retained project prompt
 
-Historical statements below are user-supplied requirements/claims, not verified
-results. No leaderboard value below becomes ORGANIZER-CONFIRMED by copying.
+Historical statements below are user-supplied requirements and claims, not verified results. No
+leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
+PROJECT_BRIEF.md is the source for this embedded copy.
 
 <details>
 <summary>Read the complete supplied project brief before every session</summary>
+
+
+## Parallel-session candidate E3 (scarp curvature) — selector must score it on B′ before choosing
+
+A second unique, format-validated TIFF from a parallel session is published:
+`docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif` (sha256 `562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21`),
+note (107 chars): `E3 DEM scarp curvature+coherence only (E2 gates falsified); dotted 60000 excl>3px sep2.8; holdout-validated`.
+DEM scarp-curvature ranking, 60,000 dots. Catalogue hide-and-recover
+(seed-40) HOLDOUT-DTI 0.0943 [0.0782, 0.1109]
+(11,437 withheld) — promoted to selector on that
+instrument, but **not yet scored on instrument B′**, so it does not supersede the
+Phase-4 verdict above. Score this exact TIF on B′ first. Evidence:
+`evidence/run_card_e3_amended.json` (with erratum; E2 gated variant negative).
+Site page: `docs/e3-candidate.html`. No slot used for either candidate.
 
 # User project prompt — retained as supplied
 

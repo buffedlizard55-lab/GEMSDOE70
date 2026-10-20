@@ -1,0 +1,48 @@
+{
+  "evidence_class": "PUBLICATION-INVENTORY",
+  "policy": "Every TIFF/ZIP in docs/ must appear here with a matching SHA-256; the build refuses anything else.",
+  "artifacts": [
+    {
+      "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+      "bytes": 126097,
+      "note": "this session (P4), published candidate; run card evidence/phase4/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.zip",
+      "sha256": "d04ed7d8ee360ec61f1e716a0fe5ec758329946ecac70695cafe5d8a0daf6039",
+      "bytes": 91298,
+      "note": "this session (P4), one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.json",
+      "sha256": "17916fdcd0bfd92c97283b847e6e4ef163e06b9efe7a6429c52247d00ca89fe1",
+      "bytes": 3457,
+      "note": "this session (P4), writer receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
+      "sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
+      "bytes": 107350,
+      "note": "parallel session (v2), preserved; verdict DO NOT SUBMIT in its own receipts"
+    },
+    {
+      "path": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.zip",
+      "sha256": "fe1b860591bd0557bfe016e67d17d6722f405896282c3a330a7be5d6116b666a",
+      "bytes": 58118,
+      "note": "parallel session (v2), preserved"
+    },
+    {
+      "path": "docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+      "sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
+      "bytes": 184165,
+      "note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
+    },
+    {
+      "path": "docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.zip",
+      "sha256": "5c23877dc4c9343fee9de700b21b96f93495b7c012f7b6f73e8b01aefb8f4ebe",
+      "bytes": 151585,
+      "note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
+    }
+  ]
+}

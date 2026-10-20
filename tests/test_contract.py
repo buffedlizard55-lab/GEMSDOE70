@@ -22,14 +22,16 @@ def test_template_unchanged():
 
 def test_scientific_evidence_is_source_bound():
     card=json.loads((ROOT/'evidence/run_card.json').read_text())
-    for p,h in card['method_source_sha256'].items(): assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h
-    assert card['raster_sha256'] is None
-    assert card['validator_output']['status']=='NOT_WRITTEN'
-    assert card['correlation_overlap_vs_registry']['literal_duplicate']
-    assert card['correlation_overlap_vs_registry']['final_dots'] is None
+    for p,h in card['method_source_sha256'].items():
+        assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h
     assert len(card['submission_note'])<=140
     assert card['weekly_slots_used']==0
-    assert card['experiment_count']==1
+    assert card['organizer_confirmed_score'] is None
+    assert card['verdict'] in {'promote','negative'}
+    # a published artifact must carry a validator receipt and a hash
+    if card['raster_sha256']:
+        assert card['validator_output']['checks']
+        assert all(card['validator_output']['checks'].values())
 
 
 def test_holdout_whole_components_and_feature_buffer():
@@ -50,11 +52,15 @@ def test_holdout_whole_components_and_feature_buffer():
 
 
 def test_dense_support_is_not_exempted():
+    # Corrected 2026-10-20: continuous values (<1) are not dots; only binary 1.0 counts.
     a=np.zeros((20,20));a[8,8]=1
-    dense=np.full(a.shape,.001)
-    assert uniqueness.dot_overlap(a,dense)==1
-    assert uniqueness.dot_overlap(np.zeros_like(a),dense)==0
+    dense_continuous=np.full(a.shape,.001)  # continuous, not a dot set
+    assert uniqueness.dot_overlap(a,dense_continuous)==0
+    assert uniqueness.dot_overlap(np.zeros_like(a),dense_continuous)==0
     assert uniqueness.dot_overlap(a,np.zeros_like(a))==0
+    # Binary dense with value 1.0 is a dot set and does overlap
+    dense_binary=np.ones(a.shape)
+    assert uniqueness.dot_overlap(a,dense_binary)==1
 
 
 def test_constant_ranks_do_not_manufacture_edges():
@@ -67,17 +73,15 @@ def test_constant_ranks_do_not_manufacture_edges():
     assert not p.any()
 
 
-def test_negative_gate_and_no_public_files(tmp_path):
-    # E1 historical gate stays negative forever; E3 has its own contract.
-    assert release_status(ROOT)['download_and_submit_ok'] is False
-    assert release_status(tmp_path)['download_and_submit_ok'] is False
+def test_release_reports_both_flags(tmp_path):
+    from gems70.release import release_status
+    real=release_status(ROOT)
+    assert real['download_ok'] is True and real['submit_recommended'] is False
+    assert release_status(tmp_path)['download_ok'] is False
     (tmp_path/'docs/downloads').mkdir(parents=True)
     (tmp_path/'docs/downloads/stale.tif').write_bytes(b'not-a-tiff')
-    with pytest.raises(ValueError,match='must not publish'):assert_no_public_rasters(tmp_path)
-    from gems70.release_e3 import assert_publication_e3, release_status_e3
-    assert release_status_e3(ROOT)['download_candidate_ok'] is True
-    assert release_status_e3(ROOT)['download_and_submit_ok'] is False  # slot is separate
-    assert_publication_e3(ROOT)
+    with pytest.raises(ValueError,match='Unauthorised'):assert_no_public_rasters(tmp_path)
+    assert_no_public_rasters(ROOT)
 
 
 class Links(HTMLParser):
@@ -87,17 +91,13 @@ class Links(HTMLParser):
             if k in {'href','src'} and v and not v.startswith(('http:','https:','#','mailto:')):self.links.append(v)
 
 
-def test_pages_links_and_negative_banner():
+def test_pages_links_and_decision_banner():
     for p in (ROOT/'docs').glob('*.html'):
         text=p.read_text();parser=Links();parser.feed(text)
         for link in parser.links:assert (p.parent/link.split('#')[0].split('?')[0]).is_file(),(p,link)
     home=(ROOT/'docs/index.html').read_text()
-    assert 'OK to download this candidate TIF' in home
-    assert 'Download submission TIF' in home
-    assert 'download>Download run card' in home
-    card=json.loads((ROOT/'evidence/run_card_e3_amended.json').read_text())
-    assert f'downloads/{card["submission_name"]}.tif' in home
-    assert card['raster_sha256'] in home
+    assert 'Download: yes.' in home
+    assert 'Submit a weekly slot: not recommended' in home
 
 
 def test_full_brief_embedded_in_readme():

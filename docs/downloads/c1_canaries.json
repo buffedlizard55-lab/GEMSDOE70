@@ -1,0 +1,50 @@
+{
+  "rtp": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.5099239258205689,
+    "inverse_auc": 0.4900760741794311,
+    "withheld_positive_pixels": 11425,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "proximity": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.7474038376367615,
+    "inverse_auc": 0.25259616236323845,
+    "withheld_positive_pixels": 11425,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "alignment": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.5177836866520787,
+    "inverse_auc": 0.48221631334792125,
+    "withheld_positive_pixels": 11425,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "magnetic_gradient": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.5292520439824945,
+    "inverse_auc": 0.4707479560175055,
+    "withheld_positive_pixels": 11425,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "coherence": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.46402430021881835,
+    "inverse_auc": 0.5359756997811816,
+    "withheld_positive_pixels": 11425,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "magnetic_coherence": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.5147732708971553,
+    "inverse_auc": 0.4852267291028447,
+    "withheld_positive_pixels": 11425,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  }
+}

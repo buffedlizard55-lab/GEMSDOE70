@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>E3 scarp candidate · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="e3-candidate.html">E3 scarp candidate</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><div class="eyebrow">PARALLEL-SESSION CANDIDATE E3</div>
+<h1>Scarp-curvature candidate — score it on B′ before choosing.</h1>
+<p class="lead"><strong>Download: yes.</strong> <code>downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif</code>
+(60,000 dots, SHA-256 <code>562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21</code>).
+<strong>Slot decision: selector-owned.</strong> E3 was promoted on catalogue
+hide-and-recover only and has <strong>not</strong> been scored on instrument B′;
+the Phase-4 candidate above remains the only B′-scored option (negative there).
+Do not upload either file until E3 is B′-scored and the weekly cap is checked.</p>
+<div class="actions">
+<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif" download>Download E3 TIFF</a>
+<a class="button secondary" href="downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.zip" download>Download one-TIFF ZIP</a>
+<a class="button secondary" href="downloads/run_card_e3_amended.json">E3 run card + erratum</a></div>
+<p class="small">Note (107/140 chars): <code>E3 DEM scarp curvature+coherence only (E2 gates falsified); dotted 60000 excl&gt;3px sep2.8; holdout-validated</code></p>
+<h2>Catalogue holdout (seed-40, untouched folds)</h2>
+<p>HOLDOUT-DTI 0.0943 [0.0782, 0.1109] · 11,437 withheld ·
+gems57-pooled-hide-v2. E2 gated variant was falsified first (negative deliverable).</p>
+<div class="table-wrap"><table><caption>E3 dotted arms at the selected cell</caption><thead><tr><th>Arm</th><th>DTI</th><th>95% CI</th><th>Positives</th></tr></thead><tbody><tr><td>scarp_dotted</td><td>0.0943</td><td>[0.0782, 0.1109]</td><td>11,437</td></tr><tr><td>slope19_dotted</td><td>0.0480</td><td>[0.0357, 0.0604]</td><td>11,437</td></tr><tr><td>joint_ctrl_dotted</td><td>0.0754</td><td>[0.0557, 0.0926]</td><td>11,437</td></tr><tr><td>random_dotted</td><td>0.0607</td><td>[0.0534, 0.0680]</td><td>11,437</td></tr></tbody></table></div>
+<h2>Uniqueness vs H33 (63 hash-verified rasters, saturation-adjusted)</h2>
+<p>Forward overlap 0.342 ·
+Jaccard 0.0142 ·
+Spearman 0.0198.
+Full inventory (862) scan remains a selector step. Literal readings are in the receipt.</p>
+<h2>On-disk validator</h2>
+<div class="table-wrap"><table><caption>Shared validator on the published E3 bytes.</caption><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody><tr><td>single_band</td><td>pass</td></tr><tr><td>dtype_float32</td><td>pass</td></tr><tr><td>dimensions_3730x3292</td><td>pass</td></tr><tr><td>crs_epsg_32611</td><td>pass</td></tr><tr><td>transform_matches_sample_submission</td><td>pass</td></tr><tr><td>no_nan_anywhere</td><td>pass</td></tr><tr><td>no_inf_anywhere</td><td>pass</td></tr><tr><td>no_sentinel_values</td><td>pass</td></tr><tr><td>range_0_1_guaranteed</td><td>pass</td></tr><tr><td>min_ge_0</td><td>pass</td></tr><tr><td>max_le_1</td><td>pass</td></tr><tr><td>in_footprint_all_finite</td><td>pass</td></tr><tr><td>in_footprint_range_0_1</td><td>pass</td></tr><tr><td>outside_footprint_zero</td><td>pass</td></tr><tr><td>zero_dots_on_mapped_catalogue</td><td>pass</td></tr></tbody></table></div>
+<p><a href="downloads/holdout_e3.json">Holdout</a> ·
+<a href="downloads/final_uniqueness_e3.json">Uniqueness</a> ·
+<a href="downloads/validator_e3.json">Writer receipt</a></p></main>
+<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
+<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

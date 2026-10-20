@@ -113,15 +113,27 @@ def release_status_e3(root):
 
 
 def released_filenames(root):
-    """Exact public raster filenames allowed under docs/downloads (may be empty)."""
+    """Public raster filenames allowed under docs/downloads: the hash-bound
+    E3 pair plus every inventoried raster/archive from parallel sessions
+    (registry/published_artifacts.json is the shared source of truth)."""
+    root = Path(root)
+    names = set()
     try:
         card = _load(root, "evidence/run_card_e3_amended.json")
         if card.get("verdict") == "promote" and card.get("raster_sha256"):
             name = card["submission_name"]
-            return {f"{name}.tif", f"{name}.zip"}
+            names |= {f"{name}.tif", f"{name}.zip"}
     except (OSError, ValueError, KeyError, TypeError):
         pass
-    return set()
+    try:
+        inv = json.loads((root / "registry/published_artifacts.json").read_text())
+        for rec in inv.get("artifacts", []):
+            p = rec.get("path", "")
+            if p.startswith("docs/downloads/") and p.lower().endswith((".tif", ".tiff", ".zip")):
+                names.add(Path(p).name)
+    except (OSError, ValueError, KeyError, TypeError):
+        pass
+    return names
 
 
 def assert_publication_e3(root):

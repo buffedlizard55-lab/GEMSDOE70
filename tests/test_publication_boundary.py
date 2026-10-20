@@ -36,7 +36,7 @@ def test_symlink_cannot_bypass_artifact_guard(tmp_path, kind):
         target.mkdir()
         (target/'unsafe.tif').write_bytes(b'TIFF')
     (docs/'innocent.txt').symlink_to(target, target_is_directory=kind == 'directory')
-    with pytest.raises(ValueError, match='must not publish'):
+    with pytest.raises(ValueError, match='Unauthorised'):
         assert_no_public_rasters(tmp_path)
 
 

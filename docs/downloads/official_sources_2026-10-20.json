@@ -1,0 +1,58 @@
+{
+  "generated_utc": "2026-10-20",
+  "method": "fetch_page of each URL on 2026-10-20; quotes copied from the fetched text; no other source used for these claims",
+  "items": [
+    {
+      "id": "competition-home",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/",
+      "quotes": [
+        "Competition End Date: Dec. 3, 2026, 11:59 p.m. UTC",
+        "1. Click the \"Compete!\" button in the sidebar on the competition homepage to enroll in the competition.",
+        "6. Click “Submit” in the sidebar, and then “Make new submission”. You’re in!",
+        "provided that you or your team possess the necessary licenses to use the data for this challenge. All data used must be shareable with the challenge organizers to allow for independent result verification."
+      ],
+      "note": "The data tab returns a login redirect (checked separately)."
+    },
+    {
+      "id": "competition-problem",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "quotes": [
+        "you will submit a GeoTIFF file containing your predictions for **all** faults in the region.",
+        "Your submission is in the same projected coordinate reference system as the training data (projected coordinate system for UTM zone 11N, EPSG 32611)",
+        "Your submission is at the same resolution as the training data (100m)",
+        "Your submission has the same bounds as the training data, and data outside the bounds is null or nan.",
+        "Your submission contains a single layer with datatype of 32-bit float (`float32`) with values between 0 and 1 indicating the confidence or probability of fault presence, with higher values indicating higher probability.",
+        "A sample submission that predicts total fault absence is provided for your reference on the data download page."
+      ],
+      "note": "Metric: alpha = 0.2, beta = 0.8, triangular kernel with range R = 300 m (3 pixels at 100 m)."
+    },
+    {
+      "id": "competition-rules-pdf",
+      "url": "https://www.nlr.gov/docs/fy26osti/96647.pdf",
+      "retrieved_via": "fetch_page; redirected to https://docs.nlr.gov/docs/fy26osti/96647.pdf; document dated SEPTEMBER 2026",
+      "quotes": [
+        "§1.3: An individual prize competitor (who is not competing as a member of a group) must be a U.S. citizen or permanent resident.",
+        "§1.3: Private entities must be incorporated in and maintain a primary place of business in the United States.",
+        "§3.2: You can make multiple submissions, subject to the limits specified on the competition website (three submissions per week).",
+        "§3.2: you must indicate in the narrative (not included in the word count) the extent to which, if any, you used generative AI technology and how you used it",
+        "§3.4: By the submission deadline, you must select only one set of predictions to use as your final submission for the final evaluation and ranking.",
+        "§3.5: Before the end of the competition, you must choose only one submission for evaluation across both prize rounds.",
+        "A.1: You must post the final content of your submission or upload the submission form online by 5:00 p.m. ET on the prize submission deadline date before the prize’s phase submission period closes. Late submissions or any other form of submission may be rejected."
+      ],
+      "note": "§1.2 Key Dates only refers to the competition website. The rules do not repeat the date 2026-12-03; the competition page gives it."
+    },
+    {
+      "id": "competition-rules-herox",
+      "url": "https://www.herox.com/GEMSPrize/resource/2274",
+      "quotes": [
+        "GEMS Prize Official Rules: https://www.nlr.gov/docs/fy26osti/96647.pdf"
+      ],
+      "note": "Linked from the DrivenData rules page, which itself only links here."
+    }
+  ],
+  "discrepancies": [
+    "Deadline: competition page says 11:59 p.m. UTC on Dec. 3, 2026; rules A.1 require posting by 5:00 p.m. ET (22:00 UTC in December) on the deadline date. Plan to the earlier cutoff.",
+    "Problem page describes sample_submission.tif as 'total fault absence', but the local sample has 60,988 cells equal to 1.0 (measured in an earlier session). Treat sample as format-only.",
+    "Problem page says data outside bounds is 'null or nan'; the shared writer uses 0 outside the footprint. Validator behaviour on zeros is not confirmed."
+  ]
+}

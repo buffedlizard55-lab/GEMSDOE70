@@ -1,27 +1,66 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Overview · GEMSDOE70</title><meta name="description" content="Unique candidate GeoTIFF ready to download. Holdout-validated DEM scarp-curvature faults; selector review before upload.">
-<link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
-<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><section class="go" aria-labelledby="status"><div class="eyebrow">SUBMISSION READINESS — READ FIRST</div>
-<h1 id="status">✅ OK to download this candidate TIF.</h1>
-<p><strong>Download:</strong> <code>gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif</code> (60,000 dots, float32, all values in [0, 1] — locally validated).
-<strong>Submit:</strong> uploading is a human <em>selector</em> decision — complete the two checks in the yellow box on the
-<a href="executive-summary.html">submission guide</a> first (full-registry scan + weekly cap). This project has not uploaded anything and no organizer score exists for this file.</p>
-<div class="actions"><a class="button primary" href="downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif" download>⬇ Download submission TIF</a>
-<a class="button secondary" href="downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.zip" download>⬇ Download one-TIF ZIP</a>
-<a class="button secondary" href="run-card.json" download>Download run card (JSON)</a></div>
-<p class="small">File name to upload: <code>gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif</code> (or the ZIP containing only it).<br>
-Note to paste (107 characters): <code>E3 DEM scarp curvature+coherence only (E2 gates falsified); dotted 60000 excl&gt;3px sep2.8; holdout-validated</code><br>
-SHA-256: <code>562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS FILE IS</div><h2>Fresh eyes on old scarps.</h2>
-<p>Binary fault-scarp dots from 100 m detrended-elevation curvature (slope × profile curvature × structure-tensor coherence), placed off-catalogue with 2.8 px spacing. Two gated variants (magnetic termination; scarp×strain×cover) were falsified first and are kept as negative deliverables. No previous submission was copied: worst non-saturating registry overlap is 0.488.</p></section><div class="metrics"><section><div class="eyebrow">E3 DOTTED · HOLDOUT-DTI</div><div class="number">0.0943</div>
-<p>95% CI [0.0782, 0.1109] · random control 0.0607</p></section>
-<section><div class="eyebrow">UNIQUENESS VS H33 CHAMPION</div><div class="number">0.34</div><p>forward overlap 0.342, Jaccard 0.0142, Spearman 0.0198 (gates: overlap ≤0.70, ρ ≤0.90)</p></section>
-<section><div class="eyebrow">COMPETITION ACTIVITY</div><div class="number">No upload</div><p>3 experiments (budget exhausted). 0 weekly slots used.</p></section></div>
-<p class="caption">HOLDOUT-DTI · gems57-pooled-hide-v2 · 11,437 withheld positive pixels. Spatial-cluster bootstrap CI conditional on catalogue folds — not a leaderboard interval or score. The live champion scores near-zero on this catalogue-recovery instrument (see Results), so holdout falsifies weak rankings but does not predict live DTI.</p><section class="warn"><h2>Before spending a weekly slot (selector checklist)</h2>
-<ol><li>Complete the full 862-raster registry uniqueness scan (this session checked 63 hash-verified rasters including the champion lineage; the literal overlap gate still fires vacuously on 5 saturating covering fields — see Limitations).</li>
-<li>Check remaining weekly allowance and current rules on the official submission page, and remember one selected submission is rescored in the Final Prize Round.</li></ol>
-<p>Then follow the <a href="executive-summary.html">step-by-step submission guide</a>. Keep the organizer receipt with the SHA-256 above — only that receipt can create an ORGANIZER-CONFIRMED score.</p></section>
-<div class="columns"><section class="panel"><h2>Why did H33 score 0.2778?</h2><p>Forensics show an efficient sparse field plus catalogue-flank pruning — emission efficiency under the distance-weighted Tversky metric, not a new detector. The value is family-reported, with no organizer receipt here.</p><a href="h33-analysis.html">Read the forensic analysis →</a></section>
-<section class="panel"><h2>Can this beat it?</h2><p>Unknown until an organizer receipt exists. E3 has independent ranking evidence (AUC ≈0.61 on two untouched fold sets) and a distinct dot field, but catalogue-recovery holdout cannot predict live off-catalogue performance.</p><a href="results.html">See all holdout numbers →</a></section></div>
-<section><h2>Audit trail</h2><ul><li><a href="hypotheses.html">Preregistered hypotheses (E1–E3)</a></li><li><a href="sources.html">Official sources &amp; provenance</a></li><li><a href="irregularities.html">Limitations, erratum &amp; next steps</a></li></ul></section></main><footer>Evidence before leaderboard claims. No competition upload performed by this project.
-<a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Overview · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="e3-candidate.html">E3 scarp candidate</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop" aria-labelledby="decision">
+<div class="eyebrow">SUBMISSION STATUS</div>
+<h1 id="decision">Verified file · not promoted</h1>
+<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
+passes every shared-validator check, and its SHA-256 is recorded below.</p>
+<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
+<strong>negative</strong>: the pre-registered target-like gate (instrument B′) is
+negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
+not a validated improvement.</p>
+<div class="actions">
+<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download>Download submission TIFF</a>
+<a class="button secondary" href="downloads/gems70-p4-stratified-halo-37654-20261020.zip" download>Download one-TIFF ZIP</a>
+<a class="button secondary" href="submission.html">How to submit</a>
+</div>
+<p class="small">Name: <code>gems70-p4-stratified-halo-37654-20261020</code> · Note (108/140 chars):
+<code>P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
+<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
+<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
+pre-registered experiments and published the best candidate. Two instruments favour it, one does
+not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+</section><div class="metrics">
+<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
+<div class="number">0.0730</div>
+<p>[0.0667, 0.0790] · 11,321 withheld catalogue pixels</p></section>
+<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
+<div class="number">0.0812</div>
+<p>[0.0723, 0.0900] · SGMC proxy outside the duplication band</p></section>
+<section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
+<div class="number">0.31</div>
+<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ 0.050</p></section></div>
+<div class="columns">
+<section class="panel"><h2>Why it is downloadable</h2>
+<p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
+transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
+Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
+lattice reaches 1.00 by construction and is reported separately).</p>
+<a href="results.html">Full evidence →</a></section>
+<section class="panel"><h2>Why it is not promoted</h2>
+<p>On instrument B′ the candidate scores 0.0812 versus H33's
+0.0938 (paired Δ -0.0126,
+95% CI [-0.0241, -0.0018]). The pre-registered rule requires a
+positive lower bound. It does not hold.</p>
+<a href="hypotheses.html">Why this rule →</a></section></div>
+<section class="panel"><h2>Second candidate from a parallel session (E3 scarp curvature)</h2>
+<p>An independent lane published a DEM scarp-curvature TIFF (60,000 dots) with catalogue-holdout
+HOLDOUT-DTI 0.0943. It has <strong>not</strong> been scored on instrument B′. The selector's next
+step is to B′-score that exact TIF before any weekly slot is spent on either candidate.</p>
+<a href="e3-candidate.html">E3 candidate, evidence and download →</a></section>
+<section><h2>What is measured and what is not</h2>
+<p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue
+components and measures catalogue recovery; instrument B/B′ uses USGS SGMC faults minus the
+catalogue as a proxy for newly mapped faults. Every number is labelled, and no projection is
+presented as a leaderboard score.</p>
+<ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
+<li><a href="results.html">All three experiments, ablations and canaries</a></li>
+<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section></main>
+<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
+<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

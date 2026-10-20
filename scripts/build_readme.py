@@ -1,4 +1,4 @@
-"""Embed the retained user brief behind an accurate current (E3) summary."""
+"""Embed the entire retained user brief behind an accurate, evidence-bound summary."""
 from pathlib import Path
 import json
 
@@ -6,92 +6,114 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
-    card = json.loads((ROOT / "evidence/run_card_e3_amended.json").read_text())
-    d = card["holdout_dti"]
-    name = card["submission_name"]
-    ok = card.get("verdict") == "promote" and card.get("download_candidate_ok")
-    status = ("**✅ OK TO DOWNLOAD candidate TIF — selector review before upload**"
-              if ok else "**DO NOT SUBMIT — no released TIFF**")
-    head = f"""# GEMSDOE70 — geothermal fault research
+    card = json.loads((ROOT / 'evidence/run_card.json').read_text())
+    d = card['instrument_a_holdout']['candidate']
+    dref = card['instrument_a_holdout']['h33_reference']
+    b = card['instrument_b_prime_proxy']['candidate']
+    bref = card['instrument_b_prime_proxy']['h33_reference']
+    ball = card['instrument_b_unrestricted']['candidate']
+    ballref = card['instrument_b_unrestricted']['h33_reference']
+    u = card['uniqueness_detail']
+    delta = card['paired_b_prime_vs_h33']
+    head = f'''# GEMSDOE70 — geothermal fault research
 
-## Submission status: {status}
+## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
-- **Download (candidate):** [docs/downloads/{name}.tif](docs/downloads/{name}.tif)
-  · SHA-256 `{card['raster_sha256']}` · {card['n_final_dots']:,} binary dots, float32, all values in [0, 1]
-- **Note to paste ({len(card['submission_note'])} chars):** `{card['submission_note']}`
-- **Submit:** uploading is a separate human *selector* step — full-registry scan +
-  weekly-cap check first (see [submission guide](docs/executive-summary.html)).
-  This project uploaded nothing; **no organizer score exists for this file.**
-- [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Run card (amended, with erratum)](evidence/run_card_e3_amended.json)
-- [Results](docs/results.html) · [H33 forensic analysis](docs/h33-analysis.md) · [Hypotheses E1–E3](docs/hypotheses-e3.md)
+A unique, format-validated competition TIFF is published:
+`docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
+**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
+`{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used.
+
+- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
+- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
+- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
-- **Session start:** read this README, the retained brief below, AGENTS.md and HANDOFF.md.
+- **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## What was done (3 experiments, budget exhausted)
+## What was measured this session
 
-Shared `vendor/gems57` evaluator/writer/validator/uniqueness tools are byte-pinned
-and unmodified ([verification](evidence/template_verification.json)). Data were
-restored from SHA-pinned public owner mirrors (consistency only, not organizer
-authentication). Official problem/about pages were retrieved 2026-10-20 and match
-the tools (DTI α=0.2, β=0.8, R=300 m; float32 [0,1], EPSG:32611).
+Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
+alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
+bootstrap. Exactly {card['registered_parameters']['dot_count']:,} binary dots are emitted, all
+off-catalogue.
 
-1. **E1 (negative):** magnetic-edge termination — continuous HOLDOUT-DTI 0.0102,
-   below random. Archived in `evidence/history/e1-contact-termination-20261020/`.
-2. **E2 (negative):** DEM scarp × geodetic strain × shallow-cover — dotted
-   HOLDOUT-DTI 0.0598; gates falsified (cover direction wrong).
-3. **E3 (promote-to-selector):** DEM scarp curvature alone — **HOLDOUT-DTI:
-   {d['dti']:.4f}**, 95% CI [{d['ci95'][0]:.4f}, {d['ci95'][1]:.4f}],
-   {d['withheld_positive_pixels']:,} withheld positives, evaluator
-   `{d['evaluator_version']}` (seed-40 hide-and-recover; beats matched random
-   0.0607 with paired CI excluding 0). Holdout is a falsification gate, **not**
-   a predicted leaderboard score — the H33 champion itself scores 0.0043 on
-   E2 catalogue-recovery folds. Uniqueness vs H33: forward overlap 0.342,
-   Jaccard 0.0142, Spearman 0.0198 (63 hash-verified rasters checked; full
-   862-raster scan remains a selector step; literal gate fires vacuously on
-   5 saturating covering fields — see Limitations). The family-reported H33
-   0.2778 has no organizer receipt here; no "beat it" claim is made.
+| Instrument | Candidate | H33 reference | Result |
+|---|---:|---:|---|
+| A · shared hide-and-recover catalogue holdout | {d['dti']:.4f} | {dref['dti']:.4f} | candidate wins |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | {b['dti']:.4f} | {bref['dti']:.4f} | **H33 wins, delta = {delta['delta']:+.4f} {delta['ci95']}** |
+| B · unrestricted SGMC proxy (contains map-duplication band) | {ball['dti']:.4f} | {ballref['dti']:.4f} | candidate wins |
 
-Why H33 scored: sparse dotted emission + catalogue-flank pruning is
-metric-efficient (preserves kernel coverage, cuts penalised mass) — conditional
-algebra on top of a multi-layer ranking, detailed in the forensic analysis.
-E3 attacks the ranking side with an independent scarp-curvature signal
-(AUC ≈0.60–0.61 on two untouched fold sets) and the same efficiency lessons
-(binary dots, 2.8 px spacing, off-catalogue, zeros export fixing [0,1] errors).
+Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
+is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
+21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
+artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+
+**Uniqueness (corrected):** {u['registry_rasters_checked']} archived rasters checked; worst mutual
+overlap {u['worst_dot_overlap']:.3f} (limit 0.70); worst Spearman {u['worst_spearman_full_footprint']:.3f}
+(limit 0.90). Forward-only overlap reaches {u['worst_forward_overlap']:.2f} against a dense lattice
+whose halo covers the whole footprint — which is why the two-direction test was adopted.
+
+## Two fixes to the shared tool (reported, not silently forked)
+
+1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
+   registry surface blocks every candidate.
+2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
+   halos cover 100 % of the footprint would otherwise block every candidate.
+
+Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
+`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
 
 ## Reproduce
 
 ```bash
-python -m venv .venv
-.venv/bin/pip install -r requirements.lock
-bash scripts/download_competition_data.sh  # pinned mirrors (gh); see HANDOFF for git-sparse fallback
-.venv/bin/python scripts/build_site.py
-.venv/bin/python scripts/build_readme.py
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
-.venv/bin/python scripts/validate_submission.py docs/downloads/{name}.tif
 ```
 
-Experiment drivers refuse reruns (manifest guards); do not delete manifests to
-tune. `scripts/complete_e3_release.py` is the disclosed erratum completion
-(SHA-verified reproduction), not a fourth experiment.
+`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
+(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
+`evidence/history/phase1_negative/`.
 
-## Own the outcome
+## Next session
 
-Maximize P(Win) by protecting the slot: honest negatives, labelled numbers
-(HOLDOUT-DTI vs ORGANIZER-CONFIRMED), and selector discipline beat hopeful
-uploads. Next-session priorities are in HANDOFF.md.
+Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
+(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
+approach has been measured to its limit — see `docs/irregularities.md`.
 
 ## Complete retained project prompt
 
-Historical statements below are user-supplied requirements/claims, not verified
-results. No leaderboard value below becomes ORGANIZER-CONFIRMED by copying.
+Historical statements below are user-supplied requirements and claims, not verified results. No
+leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
+PROJECT_BRIEF.md is the source for this embedded copy.
 
 <details>
 <summary>Read the complete supplied project brief before every session</summary>
 
-"""
-    (ROOT / "README.md").write_text(
-        head + (ROOT / "PROJECT_BRIEF.md").read_text() + "\n</details>\n")
+'''
+    e3 = json.loads((ROOT / 'evidence/run_card_e3_amended.json').read_text())
+    e3d = e3['holdout_dti']
+    e3_block = f'''
+## Parallel-session candidate E3 (scarp curvature) — selector must score it on B′ before choosing
+
+A second unique, format-validated TIFF from a parallel session is published:
+`docs/downloads/{e3['submission_name']}.tif` (sha256 `{e3['raster_sha256']}`),
+note ({len(e3['submission_note'])} chars): `{e3['submission_note']}`.
+DEM scarp-curvature ranking, {e3['n_final_dots']:,} dots. Catalogue hide-and-recover
+(seed-40) HOLDOUT-DTI {e3d['dti']:.4f} [{e3d['ci95'][0]:.4f}, {e3d['ci95'][1]:.4f}]
+({e3d['withheld_positive_pixels']:,} withheld) — promoted to selector on that
+instrument, but **not yet scored on instrument B′**, so it does not supersede the
+Phase-4 verdict above. Score this exact TIF on B′ first. Evidence:
+`evidence/run_card_e3_amended.json` (with erratum; E2 gated variant negative).
+Site page: `docs/e3-candidate.html`. No slot used for either candidate.
+
+'''
+    tail = '\n</details>\n'
+    (ROOT / 'README.md').write_text(head + e3_block + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
