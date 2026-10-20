@@ -15,13 +15,17 @@ def status():
     result = release_status(ROOT)
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
     download_ok = bool(result['download_ok'])
+    review = json.loads((ROOT / 'evidence/review/run_card.json').read_text())
     return {**result,
-            'status': ('DOWNLOADABLE — NOT PROMOTED' if download_ok and not result['submit_recommended']
+            'status': ('REVIEW ONLY — LITERAL LANE STOP' if result.get('literal_lane_status', {}).get('stop_required')
+                       else 'DOWNLOADABLE — NOT PROMOTED' if download_ok and not result['submit_recommended']
                        else 'PROMOTED' if result['submit_recommended'] else 'BLOCKED'),
             'download_available': download_ok,
-            'generated_tif': result.get('artifact') if download_ok else None,
+            'generated_tif': None,  # this review generated no new raster
+            'archived_tif_available_for_review': result.get('artifact') if download_ok else None,
             'approved_for_weekly_slot': bool(result['submit_recommended']),
-            'scientific_experiments_run': card.get('experiment_count'),
+            'scientific_experiments_run': review.get('new_scientific_experiments', 0),
+            'historical_experiment_count': card.get('experiment_count'),
             'submission_slots_used': card.get('weekly_slots_used'),
             'template_integrity_ok': check_template()['ok']}
 

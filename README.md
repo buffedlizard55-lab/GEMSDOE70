@@ -1,99 +1,81 @@
 # GEMSDOE70 — geothermal fault research
 
-> **CURRENT REVIEW: DO NOT SUBMIT.** The archived Phase-4 file fails the prompt's literal
-> one-way overlap gate (four witnesses in 62 archived rasters, maximum overlap 1.00).
-> Download is for review only. No new candidate was generated; no slot used.
-> Historical mutual-overlap clearance below is not clearance under the current prompt.
-> [Current review](reports/literal-protocol-review.md) · [Current run card](evidence/literal_protocol_review.json).
+## CURRENT REVIEW: DO NOT SUBMIT — literal lane stop
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+**Download: yes, existing archived TIFFs for review only. Submit: NO.**
+No new protocol-compliant TIFF was generated in this review; no new geological experiment or
+weekly slot was used. This does **not** fulfill the requested new-submission deliverable.
+The current negative run card is [here](evidence/review/run_card.json).
 
-**CURRENT PROTOCOL STOP:** The historical candidate exceeds forward overlap against four
-registry rasters. No new TIFF generated; no slot used. Missing single-method lane paragraph.
-See [current review](docs/protocol-review.md). Mutual overlap does not satisfy the current prompt.
+- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/)
+- [Executive summary / exact submission workflow](docs/executive-summary.html)
+- [Download archived P4 TIFF — DO NOT SUBMIT](docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif)
+- [Fresh literal-protocol audit](evidence/review/literal_protocol_audit.json)
+- [Four ranked hypotheses / source table / limitations](docs/protocol-review.md)
+- [H33 analysis — measured geometry, not a verified leaderboard explanation](docs/h33-analysis.md)
+- [Handoff](HANDOFF.md)
+- **Session start:** read this README, the complete retained brief below, AGENTS.md and HANDOFF.md.
 
-A historical, format-validated TIFF is published for review only:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`negative` on the pre-registered target-like gate. No weekly slot was used.
+## What this review verified
 
-- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
-- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
-- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
-- **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
+The previous mutual-overlap gate weakened the prompt's **forward**-overlap rule without approval.
+Current policy applies the literal rule to shared-tool measurements; it does not change the
+metric, writer or frozen historical evidence. All six published final TIFFs have measured forward
+overlap **1.0** against the pinned binary lattice, exceeding **0.70**. They are duplicates under
+the prompt's rule, even though their bytes differ. Small rank correlation does not cancel overlap.
 
-## What was measured this session
+Fresh REGISTRY-MEASUREMENT: halo coverage **99.871327268%**,
+not the previously asserted 100%. There are **6,649 uncovered footprint cells**. At the prior
+handoff's fixed **37,654-dot mass**, even the minimum possible overlap is
+**0.823418495**, still a stop. This does not prove
+impossibility at every smaller mass. We did not optimize a boundary-only loophole.
 
-Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
-alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
-bootstrap. Exactly 37,654 binary dots are emitted, all
-off-catalogue.
+All six existing TIFFs pass shared local format checks (single-band float32, finite [0,1],
+CRS/shape/transform matching the pinned sample); that is not portal acceptance or uniqueness.
+The previous canonical P4 card and historical receipts remain frozen and superseded for current
+policy by `evidence/review/run_card.json`.
 
-| Instrument | Candidate | H33 reference | Result |
-|---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
+## Scientific outcome and next session
 
-Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
-is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
-21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
-artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+No new HOLDOUT-DTI or ORGANIZER-CONFIRMED score exists from this review. The historical P4
+HOLDOUT-DTI is 0.07304 [0.06674, 0.07899], evaluator `gems57-pooled-hide-v2`, 11,321 withheld
+catalogue positives. Its SGMC proxy gate was already negative. H33's reported 0.2778 and the
+conflicting leader values in the brief lack authenticated submission-page receipts here.
 
-**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
-(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
-whose halo covers the whole footprint — which is why the two-direction test was adopted.
+The prior handoff's supervised within-halo ranking remains deferred. Four ranked, specific
+hypotheses and their non-fault mimics are in the review. Resolve the literal-gate conflict by a
+separately authorized protocol, then validate one candidate using nested spatial splits, canaries,
+a matched current-best baseline and the shared evaluator/writer. Do not silently reintroduce a
+mutual-overlap exemption, and do not spend a weekly slot before an independent selector decision.
 
-## Two fixes to the shared tool (reported, not silently forked)
-
-1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
-   registry surface blocks every candidate.
-2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
-   halos cover 100 % of the footprint would otherwise block every candidate.
-
-Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
-`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
-
-## Reproduce
+## Reproduce this review (CPU; does not generate a TIFF)
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
-.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
-git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
-.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/review_literal_protocol.py --fetch
+.venv/bin/python scripts/build_site.py
+.venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
+.venv/bin/python scripts/audit_pages.py
 ```
 
-`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
-(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
-`evidence/history/phase1_negative/`.
-
-## Next session
-
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+The witness fetch uses the configured GitHub connection and immutable revision/SHA pins. It lands
+in ignored `.cache/`, not Git. Data bridge files already in the repo supply the reference geometry.
+Official reference README/notebook were re-fetched via GitHub API. Other official hosts and the
+authenticated submission page were not accessible within this session's outbound allowlist; live
+cap, eligibility and organizer acceptance remain unverified. GPU is preferred, not required by the
+organizer reference. `scripts/prepare_data.py` advertised in the historical prompt is absent.
 
 ## Complete retained project prompt
 
-Historical statements below are user-supplied requirements and claims, not verified results. No
-leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
-PROJECT_BRIEF.md is the source for this embedded copy.
+Historical statements below are user-supplied requirements and claims, not verified results.
+PROJECT_BRIEF.md is preserved verbatim and embedded in full. The current prompt's substantive
+requirements are retained there; the current active branch is recorded in HANDOFF.md.
 
 <details>
 <summary>Read the complete supplied project brief before every session</summary>
 
-
-## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET
-
-Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818] (beats random, loses to D28 0.0919) → negative. File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` (selector-review only; complete corrected uniqueness scan pending). Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).
-
-## Parallel E3 scarp lane (PR #17) — selector must score it on B′ before choosing
-
-DEM scarp-curvature ranking, 60,000 dots: catalogue HOLDOUT-DTI 0.0943 [0.0782, 0.1109] (11,437 withheld, seed-40) → promote-to-selector on that instrument only; **B′ not yet scored**. File `docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif` (sha256 `562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21`), note (107 chars): `E3 DEM scarp curvature+coherence only (E2 gates falsified); dotted 60000 excl>3px sep2.8; holdout-validated`. Evidence: `evidence/run_card_e3_amended.json` (erratum-completed; gated E2 negative); frozen drivers renamed `scripts/run_experiment_e{2,3}_scarp.py` at merge (byte-identical; canonical paths hold the PR #16 lane's drivers). Site page: `docs/e3-candidate.html`. No slot used for any candidate.
 # User project prompt — retained as supplied
 
 Read this at the beginning of every session. Scores and access statements below are user-supplied claims, not current verified facts. Execution status and verified evidence belong in README.md and evidence/, not by silently rewriting this historical brief.

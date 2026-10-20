@@ -1,3 +1,5 @@
+> **Current review:** see [protocol-review.html](protocol-review.html) for four ranked untested conjectures and the literal lane stop. Tables below retain historical preregistrations, not current uniqueness approval.
+
 # Preregistered hypotheses — 2026-10-20 (Phase 2: after protocol fix)
 
 Written before Phase-2 experiments. These are geological hypotheses, **not established discoveries or predicted scores**. Phase 1 (magnetic-edge termination at gravity-supported basement boundary) was negative: HOLDOUT-DTI 0.01019 (95% CI 0.00606–0.01504) on 11,321 withheld positives, worse than random sparse control 0.04717. The literal uniqueness gate that stopped Phase 1 was a protocol bug (finite >0 counted continuous probabilities as dense dot sets); see `evidence/upstream_fix_report.md`. This phase uses the corrected binary-dot definition.

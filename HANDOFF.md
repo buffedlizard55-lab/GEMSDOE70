@@ -1,3 +1,40 @@
+# Current handoff — literal protocol review, arena/9d9f624f-gemsdoe70
+
+This note supersedes older submission-approval language below, not the frozen scientific evidence.
+
+- **DO NOT SUBMIT.** New current card: `evidence/review/run_card.json`; new measured audit:
+  `evidence/review/literal_protocol_audit.json`. All six published final TIFFs have forward overlap
+  1.0 with the pinned binary `calib_r13lattice_00904.tif` witness. No new TIFF, experiment or slot.
+- The inherited "100% halo coverage" claim was false: fresh coverage is 0.9987132726822701,
+  leaving 6649 cells uncovered. At fixed mass 37654, the minimum possible overlap is still
+  0.8234184947150369 > 0.70. Do not generalize the proof to every smaller mass.
+- Vendor metric/evaluator/writer/uniqueness bytes and Phase1–4 / E2 / E3 / scarp E3 receipts are
+  preserved. `src/gems70/protocol.py` applies literal thresholds to shared measurements; no mutual
+  exemption is authorized. Both historical audit CLI and release API use this adapter.
+- Parallel main advanced during the review (including scarp E3, PR17). Integration preserved
+  that artifact and its hash pins, all incoming scientific tests and publication guards.
+- Website: current review-only banner everywhere, real executive summary, current measured
+  run-card links, ranked research queue and conservative H33 analysis. The default public
+  `docs/run-card.json` is the new negative card; old P4 evidence stays at its historical path.
+- Official organizer GitHub README/notebook re-fetched. Other official hosts, portal auth, live
+  weekly cap and score receipts remain unavailable this session. Upstream issue creation was
+  denied integration permission; report retained in `evidence/review/upstream-policy-report.md`.
+
+Next: resolve explicit protocol authorization before another fixed-mass experiment; quantify SGMC
+redigitization overlap; then evaluate the first residual-ranking hypothesis with nested spatial
+validation, feature-alone canaries and a matched current-best baseline. No boundary-only loophole
+experiment or new slot without the separate selector gates. Reproduce this review with
+`python scripts/review_literal_protocol.py --fetch`, builders, pytest and audit_pages.
+
+
+Latest integration: PR #28 H70 conductive-breach archive and PR #24 protocol audit preserved.
+Canonical `evidence/run_card.json` remains H70 as set by that session; P4 builders/audits now
+read `evidence/phase4/run_card.json` explicitly. The new measured review card remains
+`evidence/review/run_card.json`. All six artifacts directly fail the binary-witness forward rule.
+Integrated suite: 212 passed (three upstream affine deprecation warnings).
+
+---
+
 # Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
 
 Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.

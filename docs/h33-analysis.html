@@ -3,123 +3,82 @@
 <title>Why H33 scored · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="e3-candidate.html">E3 scarp candidate</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a> · <a href="supplemental-protocol-review.html">Supplemental hypotheses and fresh format audit</a> · <a href="current_protocol_review.json">Supplemental JSON card</a>.</section><section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
-<p>Download for review only. The archived Phase-4 TIFF fails the requested one-way
-3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
-are not clearance under the current prompt. No new TIFF was generated in this review.</p>
-<p><a href="protocol-review.html">Current protocol review and next steps</a> · <a href="research-review.html">Research and source review</a> ·
-<a href="literal-protocol-review.json">Current JSON run card</a></p></section><h1>Why the archived H33 field scored 0.2778 — and what it takes to beat it</h1>
-<p><strong>Evidence class:</strong> DATA-MEASUREMENT of the archived bytes, plus user-supplied historical scores.
-The 0.2778 value has <strong>no organizer receipt in this repository</strong>; it is the user's report. Nothing
-below converts it into an ORGANIZER-CONFIRMED score.</p>
-<h2>What the file actually is</h2>
-<p><code>evidence/h33_audit.json</code> recomputes the archived GeoTIFF byte-for-byte:</p>
+<span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
+<strong>DO NOT SUBMIT — literal protocol stop.</strong> Archived TIFFs are downloadable for review only.
+The current literal forward-overlap gate fails. <a href="protocol-review.html">Current audit</a> ·
+<a href="downloads/review_run_card.json">Current negative run card</a>.
+Historical receipts below are not current submission approval.</aside><h1>H33: measured geometry, plausible metric benefit, unproven causation</h1>
+<p><strong>The reported leaderboard value 0.2778 is user-supplied, not ORGANIZER-CONFIRMED.</strong>
+There is no authenticated submission-page receipt for it in this repository. Conflicting leader
+values in the retained brief cannot establish the current leader or predict a new score.</p>
+<h2>What the archived bytes show</h2>
+<p>The historical byte audit (<code>evidence/h33_audit.json</code>, linked below) reports:</p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th style="text-align: right;">Positive pixels</th>
-<th>Measured relation to its predecessor</th>
+<th>Archived raster</th>
+<th style="text-align: right;">Binary dots</th>
+<th>Relationship</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>D28 (<code>dotted-d2-8</code>)</td>
+<td>D28</td>
 <td style="text-align: right;">44,090</td>
-<td>Poisson 300 m dots, minimum catalogue distance 1 px</td>
+<td>sparse off-catalogue field</td>
 </tr>
 <tr>
 <td>H27</td>
 <td style="text-align: right;">40,199</td>
-<td>exactly the 3,891 D28 dots at <strong>1 px</strong> removed</td>
+<td>D28 with 3,891 dots at 1 pixel from the catalogue removed; no additions</td>
 </tr>
 <tr>
 <td>H33 B2</td>
 <td style="text-align: right;">37,654</td>
-<td>exactly the 2,545 H27 dots at <strong>√2 or 2 px</strong> removed</td>
+<td>H27 with 2,545 dots at sqrt(2) or 2 pixels removed; no additions</td>
 </tr>
 </tbody>
 </table>
-<p>So H33 is not a detector. It is a <strong>uniform sparse sample of the 0.2–3 km halo around the mapped
-faults, with the two closest shells deleted</strong>. Nine in ten of its dots lie more than 300 m from any
-mapped trace (median 1.97 km).</p>
-<h2>Why that might score well — a metric-based hypothesis</h2>
-<p>With <code>DTI = T / (T + 0.2·(S − M) + 0.8·(N − T))</code>, where <code>T</code> sums a triangular kernel over <strong>truth</strong>
-cells, <code>S</code> sums the emitted mass and <code>M</code> sums each dot's nearest-truth credit:</p>
+<p>H33's median catalogue distance is 1,964.69m; 5.77% of its dots lie within 300m of a mapped
+trace. This establishes a sparse halo-sampling geometry and exact subset relationships. It does
+<strong>not</strong> establish how much of the reported score comes from geometry, geological information or
+properties of hidden labels. Calling H33 a newly learned fault detector is unsupported; calling it
+necessarily geology-free is also stronger than the lineage audit alone proves.</p>
+<h2>Why the geometry could help</h2>
+<p>For the shared local DTI implementation,
+<code>DTI = T / (T + 0.2*(S-M) + 0.8*(N-T))</code>.
+Here <code>T</code> sums distance-weighted truth coverage, <code>S</code> is emitted mass, <code>M</code> is nearest-truth credit
+at prediction cells, and <code>N</code> is truth count. The 300m triangular kernel makes concentrated,
+redundant predictions potentially less efficient than well-spaced coverage. Deleting dots that
+obtain little hidden-truth credit can reduce false-positive cost. These are plausible explanations
+for the user-reported changes, <strong>not a controlled causal explanation of the organizer score</strong>.
+Sparse spacing alone does not guarantee improvement: dropping a useful dot can reduce recall.</p>
+<h2>What the local comparison actually says</h2>
+<p>Historical <strong>HOLDOUT-DTI</strong>, evaluator <code>gems57-pooled-hide-v2</code>, 11,321 withheld catalogue positives:
+P4 0.07304, 95% CI [0.06674, 0.07899], versus H33 0.00370, CI [0.00304, 0.00450].
+This measures recovery of hidden catalogue segments, not the organizer's newly mapped faults.
+A large win here does not imply a leaderboard win.</p>
+<p>The separate historical <strong>SGMC PROXY-DTI</strong> B′ comparison uses 59,937 proxy-positive pixels at
+least 3 pixels from the catalogue: P4 0.08116, CI [0.07235, 0.09002], versus H33 0.09377,
+CI [0.08375, 0.10403]. Paired delta −0.01261, CI [−0.02407, −0.00180]. This proxy is not a
+catalogue holdout or an organizer score. Nearby SGMC/QFaults traces can be re-digitizations;
+removing a narrow band does not establish independence.</p>
+<h2>Can a new method beat the reported 0.2778?</h2>
+<p>Possibly, but no current result demonstrates it. The deferred supervised residual-ranking lane
+could contribute new information beyond emission geometry. It needs nested spatial validation,
+feature-alone canaries, a matched current-best baseline, and the literal uniqueness gates first.
+The fresh review found that all published TIFFs fail the current prompt's forward-overlap gate;
+no new TIFF was generated after that stop. We will not prune, rename or jitter H33 to call it unique.</p>
 <ul>
-<li><code>T</code> saturates at 1 per truth cell; <code>M</code> and <code>S</code> scale with the number of dots. Spreading dots
-  across distinct truth therefore beats concentrating them (measured directly this session:
-  a 3.6-px-spaced damage-zone field scored 0.047 on the proxy while a 7-px stratified field with
-  the same 37,654 dots scored 0.081).</li>
-<li>A dot closer than ~2 px to a mapped fault buys <code>S</code> and almost no <code>T</code>, under the hypothesis that masking known faults reduces nearby useful credit;
-  the hidden-truth spatial distribution is not available for verification. Deleting those
-  shells raised the reported live score twice (0.2708 → 0.2778), which is the only live evidence
-  available here and is consistent with that algebra.</li>
-</ul>
-<p>The audit establishes the emission geometry, not its causal contribution to the reported
-result. Neither the hidden-label distribution nor the fraction of performance attributable
-to geometry is identified by these experiments.</p>
-<h2>Can this be beaten? What the three experiments say</h2>
-<table>
-<thead>
-<tr>
-<th>Arm (37,654 binary dots)</th>
-<th style="text-align: right;">A: catalogue holdout</th>
-<th style="text-align: right;">B: SGMC proxy</th>
-<th style="text-align: right;">B′: proxy ≥ 3 px</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>H33 (archived reference)</td>
-<td style="text-align: right;">0.0037</td>
-<td style="text-align: right;">0.0906</td>
-<td style="text-align: right;">0.0938</td>
-</tr>
-<tr>
-<td>Exp 2: offset × tip × geophysics</td>
-<td style="text-align: right;">0.0591</td>
-<td style="text-align: right;">0.0432</td>
-<td style="text-align: right;">—</td>
-</tr>
-<tr>
-<td>Exp 3: damage-zone intensity</td>
-<td style="text-align: right;">0.0873</td>
-<td style="text-align: right;">0.1098</td>
-<td style="text-align: right;">0.0471</td>
-</tr>
-<tr>
-<td>Exp 4: stratified halo, weak tilt</td>
-<td style="text-align: right;">0.0730</td>
-<td style="text-align: right;">0.0948</td>
-<td style="text-align: right;">0.0812</td>
-</tr>
-</tbody>
-</table>
-<p>Readings:</p>
-<ol>
-<li><strong>Instrument A is the wrong instrument for this task.</strong> It withholds catalogue segments, so it
-   rewards placing dots beside mapped traces — the opposite of what the competition asks. Every
-   candidate beats H33 there by 20×, which says nothing about the leaderboard.</li>
-<li><strong>Instrument B is contaminated at short range.</strong> 12.5 % of SGMC-only pixels sit within 2 px of
-   the catalogue and 21.4 % within 3 px (7.5 % of the domain is that close). Those are largely the
-   same traces re-drawn, so B rewards exactly the band the live experiments penalised.</li>
-<li><strong>B′ removes that band.</strong> There H33 still wins by 13 % (Δ = −0.0126, 95 % CI [−0.0241, −0.0018]).
-   That is the honest negative and the reason this session's candidate is not promoted.</li>
-</ol>
-<h2>The defensible route to &gt;0.2778</h2>
-<p>The remaining headroom is <em>within-halo ranking</em>: a supervised model trained on the only population
-that resembles the hidden truth has to be built, not invented from geometry. Concretely, the next
-session should (a) train on the SGMC-off-catalogue proxy with leave-one-quadrant-out and a proper
-featurisation of the 19-band stack plus lidar-scarp and radiometric layers, (b) keep the coverage
-stratification that this session measured to be worth +70 % on B′ at fixed mass
-(0.047 → 0.081), and (c) spend one slot on the resulting file. These experiments do not establish a limit on geometry-based methods or identify the
-source of any leaderboard gap. No slot is authorized by this suggestion.</p>
-<h2>What we will not do</h2>
-<p>Rescale, jitter, rename or prune H33 and call it a new prediction. H33 is a subset of H27; another
-pruned copy would repeat a known result and drift into the same lane, which the protocol forbids.</p></main>
+<li><a href="downloads/h33_audit.json">Historical H33 byte audit</a></li>
+<li><a href="downloads/instrumentA_holdout.json">Historical HOLDOUT-DTI receipt, including evaluator/count/CI</a></li>
+<li><a href="downloads/instrumentB_prime.json">Historical B′ proxy receipt</a></li>
+<li><a href="protocol-review.html">Current literal-protocol audit and proposed research</a></li>
+<li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Organizer fault-detection reference</a></li>
+</ul></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/phase4_run_card.json">Historical P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
 <a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
