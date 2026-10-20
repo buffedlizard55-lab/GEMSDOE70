@@ -29,7 +29,7 @@ The [four ranked preregistered hypotheses](hypotheses.html) already name layers,
 
 1. **Inventory and reproduction:** read the retained brief, handoff, scientific receipts and publication code; installed locked dependencies; ran the existing software suite and independently reproduced the blocking witness audit.
 2. **Defect correction:** addressed the root-Pages exposure gap without altering shared scientific tools, quarantined bytes, prediction arrays, thresholds, or the stopped run. Regression coverage now checks actual publication boundaries rather than only download links.
-3. **Compliance and verification:** rebuild the evidence site/README deterministically, rerun the complete software suite and release gate, and check the real Jekyll output through CI before merge. Verification/deployment outcomes are recorded in the pull request and GitHub checks; this document does not assume a future CI or deployment success.
+3. **Compliance and verification:** rebuilt the evidence site/README deterministically and reran the complete software suite and release gate. The first real Jekyll-output check caught GitHub's automatically injected `assets/css/style.css`; the policy now permits only that exact generated stylesheet and its directories, not arbitrary repository assets. A regression test rejects any additional archived asset. Final local suite: **81 software tests passed**, with three existing Rasterio/Affine pending-deprecation warnings. These are software checks, not scientific scores. Verification/deployment outcomes are recorded in [PR #8](https://github.com/buffedlizard55-lab/GEMSDOE70/pull/8) and GitHub checks; this document does not assume a future CI or deployment success.
 
 ## Required next work, in order
 

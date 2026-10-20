@@ -77,6 +77,7 @@ python -m venv .venv
 bash scripts/download_competition_data.sh  # pinned public owner mirrors, not DrivenData auth
 .venv/bin/python scripts/build_site.py
 .venv/bin/python scripts/build_readme.py
+.venv/bin/python scripts/audit_pages.py
 .venv/bin/python -m pytest -q
 ```
 
