@@ -25,6 +25,7 @@
     "requirements.txt",
     "scripts",
     "src",
+    "submissions",
     "tests",
     "vendor"
   ]
