@@ -5,12 +5,16 @@
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
 <nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="e3-candidate.html">E3 scarp candidate</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a>.</section><section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
-<p>Download for review only. The archived Phase-4 TIFF fails the requested one-way
-3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
-are not clearance under the current prompt. No new TIFF was generated in this review.</p>
+<p>Download existing TIFFs for review only. The historical P4 candidate and the merged parallel
+E3 candidate both have forward-overlap witnesses under the current prompt. E3's saturation-adjusted
+clearance and P4's historical mutual-overlap clearance are not substitutes. The inherited
+862-entry inventory is not fully checked. No TIFF was generated in this review.</p>
 <p><a href="protocol-review.html">Current protocol review and next steps</a> · <a href="research-review.html">Research and source review</a> ·
 <a href="literal-protocol-review.json">Current JSON run card</a></p></section><h1>Preregistered hypotheses — 2026-10-20 (Phase 2: after protocol fix)</h1>
-<p>Written before Phase-2 experiments. These are geological hypotheses, <strong>not established discoveries or predicted scores</strong>. Phase 1 (magnetic-edge termination at gravity-supported basement boundary) was negative: HOLDOUT-DTI 0.01019 (95% CI 0.00606–0.01504) on 11,321 withheld positives, worse than random sparse control 0.04717. The literal uniqueness gate that stopped Phase 1 was a protocol bug (finite &gt;0 counted continuous probabilities as dense dot sets); see <code>evidence/upstream_fix_report.md</code>. This phase uses the corrected binary-dot definition.</p>
+<p>Written before Phase-2 experiments. These are geological hypotheses, <strong>not established discoveries or predicted scores</strong>. Phase 1 (magnetic-edge termination at gravity-supported basement boundary) was negative: HOLDOUT-DTI 0.01019 (95% CI 0.00606–0.01504) on 11,321 withheld positives, worse than random sparse control 0.04717. The literal uniqueness gate that stopped Phase 1 was then treated as a protocol bug (finite &gt;0 counted continuous probabilities as dense dot sets); see <code>evidence/upstream_fix_report.md</code>. The current user instruction explicitly restores the stricter forward-only stop, so that historical mutual/saturation adjustment is not current clearance.</p>
+<blockquote>
+<p><strong>Current-state note:</strong> this document's Phase-2 “untried” table and cache-availability statements are historical preregistration context. Later E2/E3 lanes have run, and the full <code>.cache/data</code> stack is absent from this checkout. The current candidate/status decision and the remaining genuinely untested ideas are in <code>docs/protocol-review.md</code>; do not treat this historical table as a current lane assignment.</p>
+</blockquote>
 <h2>Why H33 scored 0.2778 and how to beat it — PhD-level analysis</h2>
 <p><strong>What H33 actually is (DATA-MEASUREMENT, not ORGANIZER-CONFIRMED score):</strong><br />
 <code>evidence/h33_audit.json</code> shows D2.8 → H27 → H33 B2 is <em>pure catalogue-flank pruning</em>, not a new detector:

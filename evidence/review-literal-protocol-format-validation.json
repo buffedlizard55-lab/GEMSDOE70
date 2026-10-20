@@ -4,7 +4,7 @@
   "approved_for_weekly_slot": false,
   "warning": "Format checks do not establish novelty, geological accuracy, improvement, or organizer acceptance.",
   "sample_comparison": {
-    "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+    "path": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
     "bytes": 126097,
     "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
     "bands": 1,
@@ -53,7 +53,7 @@
     "validation_class": "local on-disk template/range check; not organizer upload acceptance"
   },
   "shared_validator": {
-    "file": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
     "bytes": 126097,
     "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
     "meta": {

@@ -1,6 +1,8 @@
 # Preregistered hypotheses — 2026-10-20 (Phase 2: after protocol fix)
 
-Written before Phase-2 experiments. These are geological hypotheses, **not established discoveries or predicted scores**. Phase 1 (magnetic-edge termination at gravity-supported basement boundary) was negative: HOLDOUT-DTI 0.01019 (95% CI 0.00606–0.01504) on 11,321 withheld positives, worse than random sparse control 0.04717. The literal uniqueness gate that stopped Phase 1 was a protocol bug (finite >0 counted continuous probabilities as dense dot sets); see `evidence/upstream_fix_report.md`. This phase uses the corrected binary-dot definition.
+Written before Phase-2 experiments. These are geological hypotheses, **not established discoveries or predicted scores**. Phase 1 (magnetic-edge termination at gravity-supported basement boundary) was negative: HOLDOUT-DTI 0.01019 (95% CI 0.00606–0.01504) on 11,321 withheld positives, worse than random sparse control 0.04717. The literal uniqueness gate that stopped Phase 1 was then treated as a protocol bug (finite >0 counted continuous probabilities as dense dot sets); see `evidence/upstream_fix_report.md`. The current user instruction explicitly restores the stricter forward-only stop, so that historical mutual/saturation adjustment is not current clearance.
+
+> **Current-state note:** this document's Phase-2 “untried” table and cache-availability statements are historical preregistration context. Later E2/E3 lanes have run, and the full `.cache/data` stack is absent from this checkout. The current candidate/status decision and the remaining genuinely untested ideas are in `docs/protocol-review.md`; do not treat this historical table as a current lane assignment.
 
 ## Why H33 scored 0.2778 and how to beat it — PhD-level analysis
 

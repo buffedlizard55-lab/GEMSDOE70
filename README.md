@@ -1,21 +1,24 @@
 # GEMSDOE70 — geothermal fault research
 
-> **CURRENT REVIEW: DO NOT SUBMIT.** The archived Phase-4 file fails the prompt's literal
-> one-way overlap gate (four witnesses in 62 archived rasters, maximum overlap 1.00).
-> Download is for review only. No new candidate was generated; no slot used.
-> Historical mutual-overlap clearance below is not clearance under the current prompt.
-> [Current review](reports/literal-protocol-review.md) · [Current run card](evidence/literal_protocol_review.json).
+> **CURRENT REVIEW: DO NOT SUBMIT EITHER TIFF.** P4 has 4 literal
+> forward-overlap witnesses in 62 archived rasters. The merged parallel E3 candidate has
+> 5 witnesses at both surface and final-dot stages (maximum 1.00);
+> its 63 locally checked rasters do not cover the inherited 862-entry inventory. Saturation-adjusted clearance
+> does not override the prompt. Existing TIFFs are for review only; this review generated none and
+> used no slot. [Current review](docs/protocol-review.md) · [Current JSON run card](evidence/literal_protocol_review.json).
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## Submission status: **DOWNLOAD FOR REVIEW ONLY — DO NOT SUBMIT**
 
-**CURRENT PROTOCOL STOP:** The historical candidate exceeds forward overlap against four
-registry rasters. No new TIFF generated; no slot used. Missing single-method lane paragraph.
-See [current review](docs/protocol-review.md). Mutual overlap does not satisfy the current prompt.
+**CURRENT PROTOCOL STOP:** The P4 and E3 candidates fail the literal forward-overlap rule. Other
+archived review TIFFs are not cleared for this prompt either. P4's historical mutual-overlap
+clearance is not current clearance; E3's saturation-adjusted result is also not clearance. No new
+TIFF or experiment was generated in this review. The merged E3 lane
+reports three experiments and has not been scored on B′. See the [current protocol review](docs/protocol-review.md).
 
-A historical, format-validated TIFF is published for review only:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`negative` on the pre-registered target-like gate. No weekly slot was used.
+**Download: yes, for inspection only. Submit: no.** The older P4 TIFF remains at
+`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`); the merged E3
+candidate and its strict re-audit are linked below. No organizer-confirmed score or weekly slot is
+reported.
 
 - [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
 - [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
@@ -73,9 +76,11 @@ git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSD
 
 ## Next session
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+Resolve the literal forward-overlap rule with the selector, obtain the complete registry and an
+explicit single-lane assignment, then re-check the remaining experiment budget. Do not run another
+model, generate a new TIFF, or use a weekly slot while either candidate has a literal witness or the
+registry scope is incomplete. E3's B′ score is unreported and its candidate still fails the current
+uniqueness rule; these facts do not authorize bypassing the stop.
 
 ## Complete retained project prompt
 
@@ -93,7 +98,7 @@ Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818
 
 ## Parallel E3 scarp lane (PR #17) — selector must score it on B′ before choosing
 
-DEM scarp-curvature ranking, 60,000 dots: catalogue HOLDOUT-DTI 0.0943 [0.0782, 0.1109] (11,437 withheld, seed-40) → promote-to-selector on that instrument only; **B′ not yet scored**. File `docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif` (sha256 `562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21`), note (107 chars): `E3 DEM scarp curvature+coherence only (E2 gates falsified); dotted 60000 excl>3px sep2.8; holdout-validated`. Evidence: `evidence/run_card_e3_amended.json` (erratum-completed; gated E2 negative); frozen drivers renamed `scripts/run_experiment_e{2,3}_scarp.py` at merge (byte-identical; canonical paths hold the PR #16 lane's drivers). Site page: `docs/e3-candidate.html`. No slot used for any candidate.
+DEM scarp-curvature ranking, 60,000 dots: catalogue HOLDOUT-DTI 0.0943 [0.0782, 0.1109] (11,437 withheld, seed-40) → promote-to-selector on that instrument only; **B′ not yet scored**. File `docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif` (sha256 `562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21`), note (107 chars): `E3 DEM scarp curvature+coherence only (E2 gates falsified); dotted 60000 excl>3px sep2.8; holdout-validated`. Strict current-prompt audit: 5 forward witnesses in both surface and final-dot checks (worst 1.00); the 63 locally checked rasters do not cover the inherited 862-entry inventory. DO NOT SUBMIT; review download only. Evidence: `evidence/run_card_e3_amended.json` (erratum-completed; gated E2 negative); frozen drivers renamed `scripts/run_experiment_e{2,3}_scarp.py` at merge (byte-identical; canonical paths hold the PR #16 lane's drivers). Site page: `docs/e3-candidate.html`. No slot used for any candidate.
 # User project prompt — retained as supplied
 
 Read this at the beginning of every session. Scores and access statements below are user-supplied claims, not current verified facts. Execution status and verified evidence belong in README.md and evidence/, not by silently rewriting this historical brief.

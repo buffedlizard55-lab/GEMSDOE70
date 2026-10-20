@@ -46,9 +46,10 @@ def frame(title, body):
     review = load('evidence/literal_protocol_review.json', {})
     if review.get('correlation_overlap_vs_registry', {}).get('stop'):
         body = ('''<section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
-<p>Download for review only. The archived Phase-4 TIFF fails the requested one-way
-3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
-are not clearance under the current prompt. No new TIFF was generated in this review.</p>
+<p>Download existing TIFFs for review only. The historical P4 candidate and the merged parallel
+E3 candidate both have forward-overlap witnesses under the current prompt. E3's saturation-adjusted
+clearance and P4's historical mutual-overlap clearance are not substitutes. The inherited
+862-entry inventory is not fully checked. No TIFF was generated in this review.</p>
 <p><a href="protocol-review.html">Current protocol review and next steps</a> · <a href="research-review.html">Research and source review</a> ·
 <a href="literal-protocol-review.json">Current JSON run card</a></p></section>''' + body)
     nav = ''.join(f'<a href="{h}">{esc(t)}</a>' for h, t in NAV)
@@ -88,7 +89,7 @@ def main():
     if review:
         (DOCS / 'literal-protocol-review.json').write_text(json.dumps(review, indent=2) + '\n')
         import markdown
-        text = (ROOT / 'reports/literal-protocol-review.md').read_text()
+        text = (ROOT / 'docs/protocol-review.md').read_text()
         (DOCS / 'protocol-review.html').write_text(frame('Current protocol review', markdown.markdown(text, extensions=['tables'])))
     name = card['submission_name']
     sha = card['raster_sha256']
@@ -364,45 +365,49 @@ always reported.</p>
     e3 = load('evidence/run_card_e3_amended.json', {})
     if e3:
         e3h = load('evidence/holdout_e3.json', {})
-        e3u = load('evidence/final_uniqueness_e3.json', {})
         e3v = (load('evidence/validator_e3.json', {}) or {}).get('validator') or {}
         e3name = e3['submission_name']
         e3d = e3['holdout_dti']
-        h33row = {}
-        for r in (e3u.get('audit') or {}).get('rows', []):
-            if str(r.get('submission', '')).endswith('GEMSDOE32__h33-2-b2-zeros.tif'):
-                h33row = r
         e3rows = instrument_rows(e3h) if e3h else []
         e3checks = [[esc(k), 'pass' if v else 'FAIL']
                     for k, v in (e3v.get('checks') or {}).items()]
+        e3literal = review.get('correlation_overlap_vs_registry', {})
+        e3surface = review.get('preplacement_surface_audit', {})
+        e3_witness_rows = [[esc(r.get('submission', '')), f"{r.get('forward_overlap', float('nan')):.6f}"]
+                           for r in e3literal.get('witnesses', [])]
         e3page = f"""<div class="eyebrow">PARALLEL-SESSION CANDIDATE E3 (SCARP LANE)</div>
-<h1>Scarp-curvature candidate — score it on B′ before choosing.</h1>
-<p class="lead"><strong>Download: yes.</strong> <code>downloads/{esc(e3name)}.tif</code>
+<h1>Scarp-curvature candidate — DO NOT SUBMIT.</h1>
+<p class="lead"><strong>Download: yes, for review only.</strong> <code>downloads/{esc(e3name)}.tif</code>
 ({e3['n_final_dots']:,} dots, SHA-256 <code>{esc(e3['raster_sha256'])}</code>).
-<strong>Slot decision: selector-owned.</strong> E3 was promoted on catalogue
-hide-and-recover only and has <strong>not</strong> been scored on instrument B′;
-the Phase-4 candidate remains the only B′-scored option (negative there).
-Do not upload either file until E3 is B′-scored and the weekly cap is checked.
+<strong>Submit: NO under the current literal forward-overlap rule.</strong> The lane's
+saturation-adjusted gate is not the prompt's gate. The inherited 862-entry inventory is not fully scanned;
+E3 is also not scored on B′ and no weekly cap or slot receipt is verified.
 (Not to be confused with the PR #16 lane's negative depth-step E3.)</p>
 <div class="actions">
-<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(e3name)}.tif" download>Download E3 TIFF</a>
-<a class="button secondary" href="downloads/{esc(e3name)}.zip" download>Download one-TIFF ZIP</a>
+<a class="button" style="background:#8b1e2d;color:#fff" href="downloads/{esc(e3name)}.tif" download>Download E3 for review only — DO NOT SUBMIT</a>
+<a class="button secondary" href="downloads/{esc(e3name)}.zip" download>Download one-TIFF ZIP for review</a>
 <a class="button secondary" href="downloads/run_card_e3_amended.json">E3 run card + erratum</a></div>
 <p class="small">Note ({len(e3['submission_note'])}/140 chars): <code>{esc(e3['submission_note'])}</code></p>
 <h2>Catalogue holdout (seed-40, untouched folds)</h2>
 <p>HOLDOUT-DTI {e3d['dti']:.4f} {ci(e3d)} · {e3d['withheld_positive_pixels']:,} withheld ·
-{e3d['evaluator_version']}. The same lane's gated E2 variant was falsified first (negative).</p>
+{e3d['evaluator_version']}. This is catalogue recovery, not organizer truth or a leaderboard score;
+B′ remains unscored.</p>
 {table(['Arm', 'DTI', '95% CI', 'Positives'], e3rows, 'E3 dotted arms at the selected cell')}
-<h2>Uniqueness vs H33 (63 hash-verified rasters, saturation-adjusted)</h2>
-<p>Forward overlap {h33row.get('my_dots_within_3px_of_theirs', float('nan')):.3f} ·
-Jaccard {h33row.get('jaccard_dot_sets', float('nan')):.4f} ·
-Spearman {h33row.get('spearman_full_footprint', float('nan')):.4f}.
-Full inventory (862) scan remains a selector step. Literal readings are in the receipt.</p>
-<h2>On-disk validator</h2>
-{table(['Check', 'Result'], e3checks, 'Shared validator on the published E3 bytes.')}
+<h2>Literal prompt uniqueness: FAIL at both surface and final-dot stages</h2>
+<p>Surface audit: {len(e3surface.get('witnesses', []))} forward-overlap witnesses.
+Final-dot audit: {len(e3literal.get('witnesses', []))} witnesses; the worst forward overlap is
+{max((r.get('forward_overlap', 0.0) for r in e3literal.get('witnesses', [])), default=0.0):.3f}.
+Four final witnesses are binary-dot rasters. The corrected saturation/Jaccard result is not a
+substitute for the user's strict one-way rule. Only 63 local rasters were checked; the inherited
+862-entry inventory remains incomplete.</p>
+{table(['Registry raster', 'Candidate dots within 3 px'], e3_witness_rows,
+       'Strict forward-only witnesses; REGISTRY-MEASUREMENTS, not scores')}
+<h2>Fresh on-disk format validator</h2>
+{table(['Check', 'Result'], e3checks, 'Shared validator on the published E3 bytes; not uniqueness or organizer acceptance.')}
 <p><a href="downloads/holdout_e3.json">Holdout</a> ·
 <a href="downloads/final_uniqueness_e3.json">Uniqueness</a> ·
-<a href="downloads/validator_e3.json">Writer receipt</a></p>"""
+<a href="downloads/validator_e3.json">Writer receipt</a> ·
+<a href="literal-protocol-review.json">Current strict JSON run card</a></p>"""
         (DOCS / 'e3-candidate.html').write_text(frame('E3 scarp candidate', e3page))
 
     # ------------------------------------------------------------------ markdown

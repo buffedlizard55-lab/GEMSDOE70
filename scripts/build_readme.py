@@ -7,6 +7,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
+    review = json.loads((ROOT / 'evidence/literal_protocol_review.json').read_text())
+    e3_literal = review['correlation_overlap_vs_registry']
+    p4_literal = review['previous_p4_review']['correlation_overlap_vs_registry']
+    e3_witness_count = len(e3_literal['witnesses'])
+    e3_worst_overlap = max((r['forward_overlap'] for r in e3_literal['witnesses']), default=0.0)
     d = card['instrument_a_holdout']['candidate']
     dref = card['instrument_a_holdout']['h33_reference']
     b = card['instrument_b_prime_proxy']['candidate']
@@ -17,22 +22,25 @@ def main():
     delta = card['paired_b_prime_vs_h33']
     head = f'''# GEMSDOE70 — geothermal fault research
 
-> **CURRENT REVIEW: DO NOT SUBMIT.** The archived Phase-4 file fails the prompt's literal
-> one-way overlap gate (four witnesses in 62 archived rasters, maximum overlap 1.00).
-> Download is for review only. No new candidate was generated; no slot used.
-> Historical mutual-overlap clearance below is not clearance under the current prompt.
-> [Current review](reports/literal-protocol-review.md) · [Current run card](evidence/literal_protocol_review.json).
+> **CURRENT REVIEW: DO NOT SUBMIT EITHER TIFF.** P4 has {len(p4_literal['witnesses'])} literal
+> forward-overlap witnesses in 62 archived rasters. The merged parallel E3 candidate has
+> {e3_witness_count} witnesses at both surface and final-dot stages (maximum {e3_worst_overlap:.2f});
+> its 63 locally checked rasters do not cover the inherited 862-entry inventory. Saturation-adjusted clearance
+> does not override the prompt. Existing TIFFs are for review only; this review generated none and
+> used no slot. [Current review](docs/protocol-review.md) · [Current JSON run card](evidence/literal_protocol_review.json).
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## Submission status: **DOWNLOAD FOR REVIEW ONLY — DO NOT SUBMIT**
 
-**CURRENT PROTOCOL STOP:** The historical candidate exceeds forward overlap against four
-registry rasters. No new TIFF generated; no slot used. Missing single-method lane paragraph.
-See [current review](docs/protocol-review.md). Mutual overlap does not satisfy the current prompt.
+**CURRENT PROTOCOL STOP:** The P4 and E3 candidates fail the literal forward-overlap rule. Other
+archived review TIFFs are not cleared for this prompt either. P4's historical mutual-overlap
+clearance is not current clearance; E3's saturation-adjusted result is also not clearance. No new
+TIFF or experiment was generated in this review. The merged E3 lane
+reports three experiments and has not been scored on B′. See the [current protocol review](docs/protocol-review.md).
 
-A historical, format-validated TIFF is published for review only:
-`docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`{card['verdict']}` on the pre-registered target-like gate. No weekly slot was used.
+**Download: yes, for inspection only. Submit: no.** The older P4 TIFF remains at
+`docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`); the merged E3
+candidate and its strict re-audit are linked below. No organizer-confirmed score or weekly slot is
+reported.
 
 - [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
 - [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
@@ -90,9 +98,11 @@ git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSD
 
 ## Next session
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+Resolve the literal forward-overlap rule with the selector, obtain the complete registry and an
+explicit single-lane assignment, then re-check the remaining experiment budget. Do not run another
+model, generate a new TIFF, or use a weekly slot while either candidate has a literal witness or the
+registry scope is incomplete. E3's B′ score is unreported and its candidate still fails the current
+uniqueness rule; these facts do not authorize bypassing the stop.
 
 ## Complete retained project prompt
 
@@ -131,8 +141,11 @@ PROJECT_BRIEF.md is the source for this embedded copy.
                    f"that instrument only; **B′ not yet scored**. File "
                    f"`docs/downloads/{_e3['submission_name']}.tif` (sha256 `{_e3['raster_sha256']}`), "
                    f"note ({len(_e3['submission_note'])} chars): `{_e3['submission_note']}`. "
-                   f"Evidence: `evidence/run_card_e3_amended.json` (erratum-completed; gated E2 "
-                   f"negative); frozen drivers renamed `scripts/run_experiment_e{{2,3}}_scarp.py` "
+                   f"Strict current-prompt audit: {len(e3_literal['witnesses'])} forward witnesses in "
+                   f"both surface and final-dot checks (worst {e3_worst_overlap:.2f}); the 63 locally "
+                   f"checked rasters do not cover the inherited 862-entry inventory. DO NOT SUBMIT; review "
+                   f"download only. Evidence: `evidence/run_card_e3_amended.json` (erratum-completed; "
+                   f"gated E2 negative); frozen drivers renamed `scripts/run_experiment_e{{2,3}}_scarp.py` "
                    f"at merge (byte-identical; canonical paths hold the PR #16 lane's drivers). "
                    f"Site page: `docs/e3-candidate.html`. No slot used for any candidate.\n")
     (ROOT / 'README.md').write_text(head + e2_note + e3_note + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)

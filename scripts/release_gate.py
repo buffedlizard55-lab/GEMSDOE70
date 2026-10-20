@@ -15,8 +15,11 @@ def status():
     result = release_status(ROOT)
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
     download_ok = bool(result['download_ok'])
+    literal_stop = any('Current literal one-way uniqueness audit requires STOP' in reason
+                       for reason in result.get('reasons', []))
     return {**result,
-            'status': ('DOWNLOADABLE — NOT PROMOTED' if download_ok and not result['submit_recommended']
+            'status': ('REVIEW DOWNLOAD ONLY — DO NOT SUBMIT' if download_ok and literal_stop
+                       else 'DOWNLOADABLE — NOT PROMOTED' if download_ok and not result['submit_recommended']
                        else 'PROMOTED' if result['submit_recommended'] else 'BLOCKED'),
             'download_available': download_ok,
             'generated_tif': result.get('artifact') if download_ok else None,

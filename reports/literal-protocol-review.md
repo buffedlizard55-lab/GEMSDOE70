@@ -1,5 +1,10 @@
 # Current review — 2026-10-20: DO NOT SUBMIT
 
+> **Post-PR #17 update:** this report began as a P4-only review. The merged parallel E3 candidate
+> is now also present. Its adjusted gate is not the current prompt's rule; the latest combined,
+> hash-linked review and strict E3 surface/final audit are in `docs/protocol-review.md` and
+> `evidence/literal_protocol_review.json`. Both existing TIFFs are for review only; submit neither.
+
 **Download archived TIFFs for review only. No new submission was generated in this session.**
 The request for a new, protocol-cleared TIFF is not fulfilled: a stop condition takes precedence
 over manufacturing another file. No weekly slot used. This is a negative deliverable, not a promotion.

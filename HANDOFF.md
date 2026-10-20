@@ -1,4 +1,10 @@
-# Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
+# Handoff — 2026-10-20 (historical session notes; see current update below)
+
+> **Current operational decision:** after merged PR #17 and the strict re-audit, neither P4 nor E3
+> is authorized for submission. Read the opening of `README.md`, `docs/protocol-review.md`, and
+> `evidence/literal_protocol_review.json` before following any older next-session plans in this file.
+> The current user's one-way forward-overlap stop overrides historical mutual/saturation-adjusted
+> clearances. No experiment or weekly slot was used in the current review.
 
 Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
 
@@ -108,3 +114,30 @@ HOLDOUT-DTI 0.0943 [0.0782, 0.1109], seed-40/11,437 withheld). Candidate
 `evidence/run_card_e3_amended.json`). **Not yet scored on instrument B′** — selector's next step.
 Frozen drivers live at `scripts/run_experiment_e2_scarp.py` / `run_experiment_e3_scarp.py`
 (byte-identical rename; PR #16 owns canonical paths). Do not rerun.
+
+## Current strict re-audit after PR #17 merge — 2026-10-20
+
+This section supersedes the older P4-only literal review and the earlier invitation to score E3 on
+B′ before choosing. E3's two-phase uniqueness gate classified dense/saturating fields using an
+adjusted rule; the current user instruction does not authorize that exception.
+
+- **P4:** four forward-overlap witnesses in its 62-raster archived audit; maximum 1.0. No recorded
+  pre-placement surface audit.
+- **E3:** five forward witnesses at both surface and final-dot stages, including four binary-dot
+  registry rasters; maximum 1.0. The receipts cover 63 locally available rasters, not the inherited
+  862-entry inventory. Strict outcome: **STOP / DO NOT SUBMIT**, even though the parallel card says
+  `promote` under its adjusted gate.
+- **E3 catalogue holdout:** HOLDOUT-DTI 0.0943224, 95% CI [0.0782398, 0.1109296], 11,437
+  withheld positives, `gems57-pooled-hide-v2`, seed 40. B′ is not scored; this is not an organizer
+  score. The current published TIFF format revalidated locally (finite [0,1], EPSG:32611,
+  3730×3292, matching transform), but format validation is not uniqueness clearance.
+- Download both existing artifacts for review only if useful; submit neither. No weekly cap/receipt
+  or organizer-confirmed score was obtained. The E3 lane reports 3/3 experiments; no further run
+  or candidate generation was authorized here. The full 19-band cache is absent locally; no restore
+  or external-data fetch was attempted.
+- The current four-item untried-hypothesis queue and current source limitations are in
+  `docs/protocol-review.md`. The top proposed new idea has not been evaluated on holdout; E3 does
+  not validate it. Resolve the literal protocol and assign one lane before any further work.
+- Current combined run card: `evidence/literal_protocol_review.json`. Current decision page:
+  `docs/protocol-review.html`. CLI/help fix: `scripts/registry_scan.py` now uses argparse; its
+  evidence-only comparator does not clear the strict prompt gate.

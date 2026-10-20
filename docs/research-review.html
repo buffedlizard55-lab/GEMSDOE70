@@ -5,104 +5,197 @@
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
 <nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="e3-candidate.html">E3 scarp candidate</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong> Historical mutual-overlap clearance does not satisfy the current forward-overlap rule. <a href="protocol-review.html">Current review and blockers</a>.</section><section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
-<p>Download for review only. The archived Phase-4 TIFF fails the requested one-way
-3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
-are not clearance under the current prompt. No new TIFF was generated in this review.</p>
+<p>Download existing TIFFs for review only. The historical P4 candidate and the merged parallel
+E3 candidate both have forward-overlap witnesses under the current prompt. E3's saturation-adjusted
+clearance and P4's historical mutual-overlap clearance are not substitutes. The inherited
+862-entry inventory is not fully checked. No TIFF was generated in this review.</p>
 <p><a href="protocol-review.html">Current protocol review and next steps</a> · <a href="research-review.html">Research and source review</a> ·
-<a href="literal-protocol-review.json">Current JSON run card</a></p></section><h1>Current protocol review — 2026-10-20</h1>
-<h2>Download for review: YES. Submit: NO. New TIFF generated: NO.</h2>
-<p>The latest prompt requires <strong>forward</strong> dot overlap at most 70%, not mutual overlap.
-The immutable Phase-4 audit has four counterexamples: <code>calib_r13lattice_00904.tif</code>
-(1.0), <code>r11_greedy_mp.tif</code> (0.8069262229776385), <code>r13_lattice_s5_00904.tif</code>
-(1.0), and <code>r14_union_tips10_lat6.tif</code> (0.7803686195357731).
-These are REGISTRY-MEASUREMENTS, not DTI scores. Dense lattices explain the
-failure but do not authorize changing the user's rule. This run logs a duplicate
-and stops before any new placement or model experiment. A hash-distinct TIFF is
-not necessarily unique under the requested overlap rule.</p>
-<p>The supplied prompt says “single method paragraph below” but supplies none.
-No lane is silently assigned. Historical mutual-rule evidence is preserved,
-not rewritten as though it had used the current protocol. The shared evaluator,
-writer, and uniqueness implementation are unchanged in this review. The release
-policy additionally enforces the user's literal gate on the recorded rows.</p>
-<h2>Why H33 performed well: evidence versus inference</h2>
-<p>The archived byte audit (<code>evidence/h33_audit.json</code>) shows removal of successive
-near-catalogue shells from a sparse predecessor, not a newly trained detector.
-The triangular-distance metric plausibly rewards sparse coverage and penalizes
-redundant emission. But neither that algebra nor a handful of historical submissions
-identifies the causal reason for a hidden-label result. Prior prose asserting that
-“most” of the result is geometry, that a particular proxy is the hidden truth, or
-that geometry is exhausted overstates the evidence. Those are hypotheses, not
-verified conclusions. Beating H33 remains possible, not demonstrated here.</p>
-<p>The prompt's historical scores and conflicting leaderboard claims lack a
-submission-page receipt in this review; none is ORGANIZER-CONFIRMED. No new
-leaderboard score or projection is reported. The actual task is fault prediction;
-a fault candidate is not evidence of a geothermal vent or a productive reservoir.</p>
-<h2>Ranked research backlog (not experiments or an assigned lane)</h2>
-<p>Expected improvement is qualitative and unvalidated. These combinations were not
-found among the reviewed method descriptions; novelty across every external repo
-is <strong>not</strong> established. They are not declared viable until data metadata and
-availability have been checked in the chosen lane.</p>
+<a href="literal-protocol-review.json">Current JSON run card</a></p></section><h1>Current protocol review — 2026-10-20, after PR #17 merge</h1>
+<h2>Decision: existing E3 download for review only — DO NOT SUBMIT</h2>
+<p><strong>Download E3 for review: yes. Submit E3: no. New TIFF generated in this review: no. Weekly slots used: 0.</strong>
+The E3 scarp-curvature TIFF was added by the already-merged parallel PR #17; this review did not
+create it. Its lane-specific amended receipt says <code>promote</code> under a saturation-adjusted uniqueness
+rule, but the current user instruction is stricter and is not satisfied. The literal forward-only
+stop wins; do not use the adjusted result to authorize a submission.</p>
+<p>The E3 artifact is easy to retrieve from
+<a href="downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif"><code>docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif</code></a>
+(or the <a href="downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.zip">one-TIFF ZIP</a>) <strong>for inspection only</strong>.
+Its SHA-256 is <code>562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21</code>.
+The current site warning and JSON run card both say <strong>DO NOT SUBMIT</strong>.</p>
+<h2>E3 holdout and strict uniqueness re-audit</h2>
+<p>The merged E3 hypothesis is <strong>DEM scarp curvature alone</strong>: strike-coherent curvature steps in the
+100 m detrended-elevation band, with tensor coherence, and rank-ordered 2.8-pixel dotted emission.
+Named non-fault mimics are lake-shoreline or fluvial-terrace risers and road cuts.</p>
+<p>E3's archived catalogue holdout is <strong>HOLDOUT-DTI</strong>, evaluator <code>gems57-pooled-hide-v2</code>,
+0.0943224, 95% CI [0.0782398, 0.1109296], 11,437 withheld positives (untouched seed-40 folds).
+Its paired <strong>HOLDOUT-DTI</strong> difference from the matched random dotted control is +0.0336652,
+95% CI [0.0176636, 0.0491208], with the same 11,437 withheld positives. These are catalogue-recovery
+measurements, <strong>not</strong> leaderboard scores or proof of transfer to hidden organizer faults. The E3
+receipt says its B′ off-catalogue proxy has not been scored. No score is ORGANIZER-CONFIRMED here.</p>
+<p>I re-read the archived surface and final-dot rows using the user's literal rule:
+<strong>Spearman &gt; 0.90 OR more than 70% of candidate support within 3 pixels of one registry raster</strong>.
+Both stages record five forward-overlap witnesses. The final-dot stage includes four binary-dot
+rasters, so the stop is not solely an artifact of comparing to a continuous surface:</p>
 <table>
 <thead>
 <tr>
-<th>Priority / cost</th>
-<th>Hypothesis and specific inputs</th>
-<th>Signature and missing-fault rationale</th>
-<th>Non-fault mimic / distinction</th>
+<th>Registry raster</th>
+<th style="text-align: right;">E3 final-dot forward overlap</th>
+<th>Outcome</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1 / medium</td>
-<td>Cross-channel displaced marker matching: cached RTP and detrended elevation</td>
-<td>Match parallel marker profiles across a candidate discontinuity; consistent lateral displacement could locate an unmapped cross-fault</td>
-<td>Drainage capture or depositional truncation; tests signed displacement rather than edge strength or endpoint proximity</td>
+<td><code>calib_r13lattice_00904.tif</code></td>
+<td style="text-align: right;">1.000000</td>
+<td>stop</td>
 </tr>
 <tr>
-<td>2 / medium</td>
-<td>Terrain-conditioned radiometric residual: cached GeoDAWN K/Th and detrended elevation</td>
-<td>Remove lithology/terrain trends within training blocks, seek narrow residual gradients corroborated by RTP; alteration may reveal concealed conduits</td>
-<td>Primary lithology, soil moisture, flight-line leveling; residual anomaly rather than raw ratio concordance</td>
+<td><code>r11_greedy_mp.tif</code></td>
+<td style="text-align: right;">0.946783</td>
+<td>stop</td>
 </tr>
 <tr>
-<td>3 / high</td>
-<td>Opposed magnetic marker terminations: RTP, horizontal/vertical magnetic derivatives</td>
-<td>Pair interrupted magnetic bands with consistent offset and continuation; concealed displacement may have no mapped scarp</td>
-<td>Dike termination or remanence; paired marker reconstruction rather than generic analytic-signal ridge</td>
+<td><code>r13_lattice_s5_00904.tif</code></td>
+<td style="text-align: right;">1.000000</td>
+<td>stop</td>
+</tr>
+<tr>
+<td><code>r14_union_tips10_lat6.tif</code></td>
+<td style="text-align: right;">0.760400</td>
+<td>stop</td>
+</tr>
+<tr>
+<td><code>17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif</code></td>
+<td style="text-align: right;">1.000000</td>
+<td>stop under the literal receipt; continuous-surface support is also disclosed</td>
 </tr>
 </tbody>
 </table>
-<p>No new external data is required conceptually for these candidates, but cache
-restoration, exact band descriptions, units and provenance are prerequisites.
-These are proposals, not verified geological discoveries. Do not run them until
-a single lane is assigned and the literal uniqueness stop is resolved explicitly.
-No submission slot should be used without beating a preregistered compatible
-holdout best, per-feature leakage canaries, and complete surface/final audits.</p>
-<h2>Sources and access limitations</h2>
+<p>The source E3 pipeline classifies several fields as saturating and applies a Jaccard/saturation
+adjustment. That explains why its adjusted gate differs; it does <strong>not</strong> change the requested
+one-way threshold. Rank correlation does not exceed 0.90 in these rows, but the overlap arm alone
+fires. The surface-stage strict audit also has five witnesses. These are REGISTRY-MEASUREMENTS,
+not scores or proof that two geological predictions are identical.</p>
+<p>The vendored uniqueness comparator remains different from its pinned template
+(<code>registry/template_pin.json</code> records <code>all_identical: false</code>). This review reinterprets frozen
+rows under the user's explicit threshold; it does not treat the patched comparator as authoritative,
+and it does not maintain a private replacement. Reconcile any shared-tool change once in the common
+template and report it there; do not use that process to weaken the current prompt stop.</p>
+<p>The E3 receipts checked 63 locally available rasters and explicitly state that the inherited
+862-entry inventory is incomplete. The full registry scope is not certified. For E3, the surface receipt's decoded
+float32 hash matches its run card; the final-dot receipt's decoded hash matches a fresh decode of the
+published TIFF. The published TIFF's SHA also matches the run card and the fresh local validator.
+The separate literal audit is in <code>evidence/literal_protocol_review.json</code>.</p>
+<p>The older Phase-4 (P4) TIFF is also format-valid for inspection, but its archived full scan has
+four forward-overlap witnesses among 62 rasters, including overlap 1.0. Its pre-placement surface
+audit is missing. It is <strong>not</strong> a fallback unique submission. The parallel E2 alluvial-step lane is
+also not a fallback: its negative catalogue result is HOLDOUT-DTI 0.0646483, 95% CI
+[0.0486899, 0.0818097], 11,321 withheld positives, evaluator <code>gems57-pooled-hide-v2</code>; it lost to
+D28 and its earlier uniqueness evidence covered only a disclosed subset. The P4 and E3 downloads
+discussed here are for review only; no artifact in this repo is cleared for a weekly slot under the
+current prompt.</p>
+<h2>Fresh E3 format check</h2>
+<p>Fresh local validation of the published E3 bytes passed: one float32 band; EPSG:32611; shape
+3730×3292; transform <code>[100, 0, 243350, 0, -100, 4508550]</code>; all 12,279,160 cells finite;
+zero NaN and infinity; values in [0,1]; 60,000 positive dots; zero positive cells outside the
+footprint or on mapped catalogue faults. This is a file-format/range check only, not uniqueness,
+scientific validity, B′ performance, organizer acceptance, or slot authorization. Receipt:
+<code>evidence/review-e3-format-validation.json</code>.</p>
+<h2>H33 explanation and evidence boundary</h2>
+<p>The archived byte audit and metric algebra support a plausible explanation for H33's reported
+0.2778: sparse, off-catalogue emission can retain pooled kernel credit while reducing redundant
+mass, especially near masked known faults. That is not verified causation. Hidden labels, controlled
+organizer ablations, a submission-page receipt, and a fresh live leaderboard read are unavailable.
+The 0.2778 value remains <strong>unconfirmed</strong>; user-reported or owner-reported values are not treated as
+ORGANIZER-CONFIRMED. Fault prediction also does not demonstrate a geothermal vent, permeability,
+fluid temperature, or commercial resource.</p>
+<h2>Ranked hypotheses not yet tried in the inspected local methods</h2>
+<p>Qualitative expected-improvement rank only—not projected DTI. These are not an assigned lane and
+must not be run while the literal stop remains unresolved. They differ from the completed E1/E2/E3
+methods identified below; novelty across private or uninspected repositories is not claimed.
+All use bands in the existing 19-band stack, so no additional external dataset is required. The
+full stack is <strong>not</strong> present in this checkout (<code>.cache/data</code> is absent); <code>scripts/restore_data.py</code>
+can reconstruct hash-pinned owner-mirror inputs, but mirror integrity is not organizer
+authentication. No restore or experiment was run for this review.</p>
+<table>
+<thead>
+<tr>
+<th>Rank / expected DTI improvement</th>
+<th>Layers</th>
+<th>Physical signature</th>
+<th>Why a catalogue omission is plausible</th>
+<th>Named non-fault mimic</th>
+<th>Difference from inspected repo methods</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1 — highest conditional gain / low compute, high scientific uncertainty</strong></td>
+<td><code>geod_dilaterate</code> (band 8), <code>geod_2ndinv</code> (4), <code>depth_to_base_surf</code> (15), <code>iso_grav_anom</code> (13)</td>
+<td>Along-gravity-tangent termination of a basement-depth ramp, weighted by positive dilatation and strain invariant; no DEM scarp required</td>
+<td>Basin fill can hide a blind normal fault that offsets a basement ramp and localizes extensional deformation</td>
+<td>Sedimentary onlap or paleovalley; transient volcanic inflation</td>
+<td>E1 tested magnetic-edge termination; P2 used a scalar geophysical gate with catalogue continuation; E2/E3 tested DEM scarp fields. The strain-gradient/ramp-termination operator itself was not found in those implementations</td>
+<td>Low CPU; existing stack. Coarse/smooth strain may erase 300 m-scale localization</td>
+</tr>
+<tr>
+<td><strong>2 — high conditional gain / low compute, medium-high confounding</strong></td>
+<td><code>cond_surf</code> (17), <code>rtp</code> (2), <code>iso_grav_anom</code> (13)</td>
+<td>Conductivity gradient crossing, rather than paralleling, a gravity-supported truncated magnetic contact</td>
+<td>Buried hydrothermal alteration or a fluid pathway can mark an unmapped fault without a surface trace</td>
+<td>Saline basin brine or clay-rich paleolake margin</td>
+<td>Existing H32-family conductivity/magnetic products used co-located ridge agreement; this directional cross-contact breach operator was not found in the reviewed E1/E2/E3 code</td>
+<td>Low CPU; existing stack. Conductivity resolution and brine confounding are substantial</td>
+</tr>
+<tr>
+<td><strong>3 — medium conditional gain / low compute, high confounding</strong></td>
+<td><code>tc</code> (6), <code>tmi_hg</code> (3), <code>tmi_vg</code> (9), with <code>rtp</code> (2) as context</td>
+<td>Persistent tilt-derivative zero-contours; a reproducible lateral phase jump or termination at a gravity/contact boundary</td>
+<td>A buried displacement may interrupt a weak magnetic contact without a topographic scarp</td>
+<td>Gradational lithologic contact or remanence boundary</td>
+<td>E1 used unsigned magnetic/tilt amplitude and along-strike termination; H2-like methods used unsigned analytic-signal/ridge strength. Zero-contour persistence/phase continuity is a different transform, not a proven improvement</td>
+<td>Low CPU; existing stack. Weak-contact and derivative-noise risk</td>
+</tr>
+<tr>
+<td><strong>4 — lower conditional gain / low compute, medium confounding</strong></td>
+<td><code>iso_grav_anom_slope</code> (5), <code>iso_grav_anom_hg</code> (18), <code>det_elev</code> (12), <code>det_elev_slope</code> (19)</td>
+<td>Gravity-slope edge with low detrended-elevation slope (a gravity/topography non-correlation guardrail)</td>
+<td>A basement fault under alluvium may produce a gravity step without a preserved surface scarp</td>
+<td>Erosional pediment or buried paleochannel</td>
+<td>E1 used gravity as support for a magnetic edge; E3 used DEM curvature alone. A cross-channel gravity-versus-topography guardrail was not found in those methods</td>
+<td>Low CPU; existing stack. Gravity/basement inversion priors are non-independent</td>
+</tr>
+</tbody>
+</table>
+<p>The top-ranked new hypothesis has <strong>not</strong> been evaluated on the spatially blocked holdout. The E3
+HOLDOUT-DTI result belongs to a different DEM-scarp hypothesis and cannot validate it. Before any
+future run: obtain an explicit single-lane assignment, resolve the one-way uniqueness protocol,
+run feature-alone leakage canaries (AUC &gt;0.90 means stop), use whole-segment buffered hide-and-recover
+with visible-only catalogue features and exact visible-fault masking, compare against the current
+best on identical folds, and require both surface and final-dot uniqueness plus the shared writer
+and validator. No weekly slot before those gates.</p>
+<h2>Official sources, data availability, and next work</h2>
 <ul>
-<li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Official reference solution</a>:
-  README fetched this review and stored in <code>evidence/review-20261020/</code>.
-  It explicitly supports CPU training; the prompt's “GPU needed” claim is not a
-  universal requirement. GPU acceleration can still be desirable.</li>
-<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Organizer problem description</a>,
-  <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">submission/data page</a>,
-  <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">rules PDF</a>: manual-review links,
-  not freshly verified in this review. Network host restrictions prevent direct access.</li>
-<li><a href="https://github.com/buffedlizard55-lab/GEMSDOE32">H33 repository</a>: owner research,
-  not an organizer receipt. Prior byte audit retained; no new causal validation.</li>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Organizer competition problem</a>,
+  <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">format/data page</a>,
+  and <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>:
+  linked for manual review; not live-fetched in this sandbox.</li>
+<li><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN release</a>,
+  DOI <code>10.5066/P93LGLVQ</code>: recorded in the repo source manifest; not needed by the four proposals
+  above and not re-verified by a live request in this review.</li>
+<li><a href="https://gdr.openei.org/submissions/1391">DOE GDR INGENIOUS record</a>: a reference to mapped fault
+  and spring information, not used as a prediction feature here.</li>
+<li><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Organizer reference solution</a>:
+  official code mirror, distinct from the organizer's hidden labels and score receipt.</li>
 </ul>
-<p>No DrivenData upload or authentication was attempted. Weekly cap is unverified;
-this review uses no slots. No exhaustive line-by-line scientific verification of
-all linked repositories is claimed.</p>
-<h2>Three review passes</h2>
-<ol>
-<li>Reviewed handoff, release policy, immutable audit and existing download inventory;
-   found the forward/mutual conflict and stopped modeling.</li>
-<li>Fixed release authorization: stale promotion flag no longer bypasses failed
-   canaries, verdict, scientific gates or literal registry checks. Added mutation tests.</li>
-<li>Rebuilt the site/README, checked tests and artifact format, and documented
-   what remains blocked. Historical TIFF stays downloadable for education only.</li>
-</ol></main>
+<p>The immediate next action is protocol/selector resolution, not another experiment: the prompt's
+forward stop conflicts with the repository's saturation-adjusted interpretation and both existing
+candidates have literal witnesses. The 2026-10-20 parallel E3 lane reports 3/3 experiments used;
+this review ran zero experiments and used zero slots. Reconcile any protocol change explicitly,
+obtain the complete registry and official slot-cap/receipt through authorized channels, then assign
+one lane. Do not upload either current TIFF.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·

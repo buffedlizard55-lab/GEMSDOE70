@@ -1,73 +1,184 @@
 {
   "evidence_class": "PROMPT-PROTOCOL-REVIEW",
-  "hypothesis": "Protocol audit of the archived coverage-stratified halo candidate; no new experiment",
-  "mechanism": "Sparse coverage may reduce redundant truth-cell credit; this is not proof of geothermal activity",
-  "non_fault_mimic": "Depositional basin margins correlated with mapped-fault habitat",
+  "hypothesis": "DEM scarp curvature alone (slope x profile-curvature x tensor coherence) localises unmapped fault scarps",
+  "mechanism": "Strike-coherent curvature steps in 100m detrended elevation; rank-ordered 2.8px dotted emission off-catalogue; E2 strain/cover gates falsified and removed",
+  "non_fault_mimic": "Lake-shoreline or fluvial terrace riser; road cut",
   "holdout_dti": {
-    "instrument_a": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.0943224265801671,
+    "ci95": [
+      0.07823978274866633,
+      0.1109296257279242
+    ],
+    "withheld_positive_pixels": 11437,
+    "tpw": 1990.0643792278292,
+    "fpw": 57754.576733881215,
+    "fnw": 9446.93562077217,
+    "stage": "dotted emission rule on untouched seed-40 hide-and-recover folds",
+    "selected_budget": 60000,
+    "selected_exclusion_px": 3,
+    "random_control_dti": 0.06065719644741824,
+    "paired_delta_vs_random": {
       "evidence_class": "HOLDOUT-DTI",
       "evaluator_version": "gems57-pooled-hide-v2",
-      "dti": 0.07304229212058164,
+      "delta": 0.03366523013274886,
       "ci95": [
-        0.06673987703804156,
-        0.07899496967047342
+        0.017663581705057566,
+        0.04912080595393615
       ],
-      "withheld_positive_pixels": 11321,
-      "provenance": "Archived phase4 instrument A; not rerun this session"
+      "withheld_positive_pixels": 11437
     },
-    "instrument_b_prime": {
-      "evidence_class": "HOLDOUT-DTI",
-      "evaluator_version": "gems57-pooled-hide-v2",
-      "dti": 0.08116240066330835,
-      "ci95": [
-        0.07234947587460432,
-        0.09002008521926923
-      ],
-      "withheld_positive_pixels": 59937,
-      "provenance": "Archived phase4 instrument B-prime proxy; not rerun this session"
-    }
+    "transfer_caveat": "Catalogue-recovery surrogate; H33 live champion scores 0.0043 on E2 folds - holdout falsifies weak rankings but does not predict live DTI.",
+    "provenance": "Merged PR #17 archived E3 seed-40 holdout; not recomputed this review"
   },
   "correlation_overlap_vs_registry": {
-    "rule": "spearman > 0.90 OR candidate dots within 3 px > 0.70",
+    "rule": "Spearman > 0.90 OR candidate dots within 3 px > 0.70 (forward-only)",
     "duplicate": true,
     "stop": true,
-    "complete_accessible_scan": true,
+    "complete_accessible_scan": false,
+    "registry_rasters_expected": 63,
+    "registry_rasters_checked": 63,
     "invalid_rows": [],
     "witnesses": [
       {
-        "submission": "calib_r13lattice_00904.tif",
-        "spearman": -0.0004249861963070003,
+        "submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "spearman": 0.00039323355095309705,
         "forward_overlap": 1.0
       },
       {
-        "submission": "r11_greedy_mp.tif",
-        "spearman": -0.003451535346305423,
-        "forward_overlap": 0.8069262229776385
+        "submission": "registry/rasters/r11_greedy_mp.tif",
+        "spearman": -0.0031032259699540175,
+        "forward_overlap": 0.9467833333333333
       },
       {
-        "submission": "r13_lattice_s5_00904.tif",
-        "spearman": -0.0004249861963070003,
+        "submission": "registry/rasters/r13_lattice_s5_00904.tif",
+        "spearman": 0.00039323355095309705,
         "forward_overlap": 1.0
       },
       {
-        "submission": "r14_union_tips10_lat6.tif",
-        "spearman": 0.013011438060611235,
-        "forward_overlap": 0.7803686195357731
+        "submission": "registry/rasters/r14_union_tips10_lat6.tif",
+        "spearman": -0.0030835941956159417,
+        "forward_overlap": 0.7604
+      },
+      {
+        "submission": "docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+        "spearman": -0.001629847529001997,
+        "forward_overlap": 1.0
       }
     ],
-    "registry_rasters_checked": 62
+    "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only.",
+    "source_errors": [
+      "Legacy list has no complete-inventory certificate; diagnostic only"
+    ]
   },
   "preplacement_surface_audit": {
-    "status": "not_recorded_for_phase4_candidate",
-    "required_by_prompt": true,
-    "cleared": false,
-    "note": "The archived P4 audit covers final dots; no pre-placement surface receipt was found."
+    "rule": "Spearman > 0.90 OR candidate dots within 3 px > 0.70 (forward-only)",
+    "duplicate": true,
+    "stop": true,
+    "complete_accessible_scan": false,
+    "registry_rasters_expected": 63,
+    "registry_rasters_checked": 63,
+    "invalid_rows": [],
+    "witnesses": [
+      {
+        "submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "spearman": -0.00025673930751395557,
+        "forward_overlap": 1.0
+      },
+      {
+        "submission": "registry/rasters/r11_greedy_mp.tif",
+        "spearman": -0.01984474862288766,
+        "forward_overlap": 0.7366126071611946
+      },
+      {
+        "submission": "registry/rasters/r13_lattice_s5_00904.tif",
+        "spearman": -0.00025673930751395557,
+        "forward_overlap": 1.0
+      },
+      {
+        "submission": "registry/rasters/r14_union_tips10_lat6.tif",
+        "spearman": 0.01045043756767494,
+        "forward_overlap": 0.7630813918119073
+      },
+      {
+        "submission": "docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+        "spearman": 0.19395469312267172,
+        "forward_overlap": 1.0
+      }
+    ],
+    "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only.",
+    "source_errors": [
+      "Legacy list has no complete-inventory certificate; diagnostic only"
+    ],
+    "receipt": "evidence/surface_uniqueness_e3.json",
+    "decoded_surface_sha256": "0ac9df4edc7c0c8783ae2a7ff1015ab8e7da9918670b8a148d2c3869ce5ee10a",
+    "hash_linked_to_receipt": true,
+    "candidate_clear": false
   },
-  "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+  "final_dot_audit": {
+    "rule": "Spearman > 0.90 OR candidate dots within 3 px > 0.70 (forward-only)",
+    "duplicate": true,
+    "stop": true,
+    "complete_accessible_scan": false,
+    "registry_rasters_expected": 63,
+    "registry_rasters_checked": 63,
+    "invalid_rows": [],
+    "witnesses": [
+      {
+        "submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "spearman": 0.00039323355095309705,
+        "forward_overlap": 1.0
+      },
+      {
+        "submission": "registry/rasters/r11_greedy_mp.tif",
+        "spearman": -0.0031032259699540175,
+        "forward_overlap": 0.9467833333333333
+      },
+      {
+        "submission": "registry/rasters/r13_lattice_s5_00904.tif",
+        "spearman": 0.00039323355095309705,
+        "forward_overlap": 1.0
+      },
+      {
+        "submission": "registry/rasters/r14_union_tips10_lat6.tif",
+        "spearman": -0.0030835941956159417,
+        "forward_overlap": 0.7604
+      },
+      {
+        "submission": "docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+        "spearman": -0.001629847529001997,
+        "forward_overlap": 1.0
+      }
+    ],
+    "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only.",
+    "source_errors": [
+      "Legacy list has no complete-inventory certificate; diagnostic only"
+    ],
+    "receipt": "evidence/final_uniqueness_e3.json",
+    "decoded_tiff_sha256": "74c7f7357d467fe220944c9a91df23936fe8633c675b65b500fbb61235798aee",
+    "hash_linked_to_receipt": true,
+    "candidate_clear": false
+  },
+  "adjusted_lane_receipts": {
+    "surface_duplicate_adjusted": true,
+    "final_duplicate_adjusted": false,
+    "governs_user_prompt": false,
+    "reconciliation": "Saturation-adjusted/Jaccard exclusions are not a substitute for the prompt's one-way >0.70 forward stop."
+  },
+  "registry_scope": {
+    "locally_checked": 63,
+    "local_expected": 63,
+    "complete_accessible_scan": false,
+    "inherited_inventory_count": 862,
+    "full_registry_scan_complete": false,
+    "scope_note": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+  },
+  "raster_sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
   "validator_output": {
-    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-    "bytes": 126097,
-    "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+    "bytes": 184165,
+    "sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
     "meta": {
       "crs": "EPSG:32611",
       "shape": [
@@ -95,8 +206,8 @@
     "n_infinite": 0,
     "min": 0.0,
     "max": 1.0,
-    "mean": 0.0030664964579045773,
-    "emitted_positive_pixels": 37654,
+    "mean": 0.004886327777057886,
+    "emitted_positive_pixels": 60000,
     "checks": {
       "single_band": true,
       "dtype_float32": true,
@@ -117,13 +228,13 @@
     "all_checks_passed": true,
     "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
     "on_catalogue_positive_pixels": 0,
-    "in_footprint_positive_pixels": 37654,
-    "footprint_fraction": 0.007286874781441169
+    "in_footprint_positive_pixels": 60000,
+    "footprint_fraction": 0.011611315846562654
   },
   "sample_comparison": {
-    "path": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-    "bytes": 126097,
-    "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "path": "/home/user/GEMSDOE70/docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+    "bytes": 184165,
+    "sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
     "bands": 1,
     "dtype": "float32",
     "crs": "EPSG:32611",
@@ -161,27 +272,448 @@
     "n_nan": 0,
     "min": 0.0,
     "max": 1.0,
-    "mean": 0.0030664964579045773,
-    "n_nonzero": 37654,
-    "mass": 37654.0,
+    "mean": 0.004886327777057886,
+    "n_nonzero": 60000,
+    "mass": 60000.0,
     "mass_outside_footprint": 0,
     "problems": [],
     "ok": true,
     "validation_class": "local on-disk template/range check; not organizer upload acceptance"
   },
-  "validator_provenance": "Fresh local shared-validator run on archived TIFF bytes during this review; not organizer acceptance",
-  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
-  "submission_note": "P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence",
-  "submission_note_chars": 108,
-  "review_note": "Archived review only. Literal one-way overlap gate fails; DO NOT SUBMIT. No new candidate generated.",
+  "validator_receipt": {
+    "evidence_class": "LOCAL-FORMAT-VALIDATION-NOT-ORGANIZER-ACCEPTANCE",
+    "artifact_sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
+    "approved_for_weekly_slot": false,
+    "warning": "Format checks do not establish novelty, geological accuracy, improvement, or organizer acceptance.",
+    "sample_comparison": {
+      "path": "/home/user/GEMSDOE70/docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+      "bytes": 184165,
+      "sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.004886327777057886,
+      "n_nonzero": 60000,
+      "mass": 60000.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    "shared_validator": {
+      "file": "/home/user/GEMSDOE70/docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+      "bytes": 184165,
+      "sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
+      "meta": {
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "dtype": "float32",
+        "count": 1,
+        "nodata": null,
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "profile_compress": "deflate"
+      },
+      "band_description": [
+        null
+      ],
+      "n_finite": 12279160,
+      "n_nan": 0,
+      "n_infinite": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.004886327777057886,
+      "emitted_positive_pixels": 60000,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "dimensions_3730x3292": true,
+        "crs_epsg_32611": true,
+        "transform_matches_sample_submission": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "no_sentinel_values": true,
+        "range_0_1_guaranteed": true,
+        "min_ge_0": true,
+        "max_le_1": true,
+        "in_footprint_all_finite": true,
+        "in_footprint_range_0_1": true,
+        "outside_footprint_zero": true,
+        "zero_dots_on_mapped_catalogue": true
+      },
+      "all_checks_passed": true,
+      "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+      "on_catalogue_positive_pixels": 0,
+      "in_footprint_positive_pixels": 60000,
+      "footprint_fraction": 0.011611315846562654
+    },
+    "local_format_pass": true
+  },
+  "validator_provenance": "Fresh local shared-validator run on merged E3 TIFF bytes; not organizer acceptance",
+  "submission_name": "gems70e3-scarpcurv-60k-ex3-20261020-zeros",
+  "submission_note": "E3 DEM scarp curvature+coherence only (E2 gates falsified); dotted 60000 excl>3px sep2.8; holdout-validated",
+  "submission_note_chars": 107,
   "verdict": "negative",
   "download_ok": true,
   "download_ok_for_review": true,
   "submit_recommended": false,
   "submit_ok": false,
+  "candidate_origin": "Parallel E3 lane from merged PR #17; no experiment run in this review",
   "new_candidate_generated": false,
-  "experiments_this_session": 0,
+  "experiments_this_review": 0,
+  "parallel_experiment_count": 3,
   "weekly_slots_used": 0,
-  "limitation": "No single method paragraph assigns this session a lane. Stop on existing duplicate witness; do not invent a new lane.",
-  "source_receipt": "evidence/phase4/uniqueness.json"
+  "instrument_b_prime_status": "not scored in the E3 receipt",
+  "organizer_score": null,
+  "organizer_score_status": "NOT-REPORTED; no organizer submission-page receipt is present",
+  "previous_p4_review": {
+    "candidate_origin": "Historical Phase-4 artifact already in the repository",
+    "hypothesis": "H-P4-1 coverage-stratified halo sample with weak damage tilt and tip kernel",
+    "mechanism": "one dot per 7x7-px stratum at the stratum maximum of (1+0.8*exp(-(d-2.4)/6))*(0.7+0.3*tip), 5-px NMS, band 2.4-32 px",
+    "non_fault_mimic": "Depositional basin margins correlated with mapped-fault habitat",
+    "holdout_dti": {
+      "instrument_a": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.07304229212058164,
+        "ci95": [
+          0.06673987703804156,
+          0.07899496967047342
+        ],
+        "withheld_positive_pixels": 11321,
+        "provenance": "Archived phase4 instrument A; not rerun this review"
+      },
+      "instrument_b_prime": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "dti": 0.08116240066330835,
+        "ci95": [
+          0.07234947587460432,
+          0.09002008521926923
+        ],
+        "withheld_positive_pixels": 59937,
+        "provenance": "Archived phase4 instrument B-prime proxy; not rerun this review"
+      }
+    },
+    "correlation_overlap_vs_registry": {
+      "rule": "Spearman > 0.90 OR candidate dots within 3 px > 0.70 (forward-only)",
+      "duplicate": true,
+      "stop": true,
+      "complete_accessible_scan": true,
+      "registry_rasters_expected": 62,
+      "registry_rasters_checked": 62,
+      "invalid_rows": [],
+      "witnesses": [
+        {
+          "submission": "calib_r13lattice_00904.tif",
+          "spearman": -0.0004249861963070003,
+          "forward_overlap": 1.0
+        },
+        {
+          "submission": "r11_greedy_mp.tif",
+          "spearman": -0.003451535346305423,
+          "forward_overlap": 0.8069262229776385
+        },
+        {
+          "submission": "r13_lattice_s5_00904.tif",
+          "spearman": -0.0004249861963070003,
+          "forward_overlap": 1.0
+        },
+        {
+          "submission": "r14_union_tips10_lat6.tif",
+          "spearman": 0.013011438060611235,
+          "forward_overlap": 0.7803686195357731
+        }
+      ],
+      "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only.",
+      "source_errors": []
+    },
+    "preplacement_surface_audit": {
+      "status": "not_recorded_for_phase4_candidate",
+      "required_by_prompt": true,
+      "cleared": false,
+      "note": "The archived P4 receipt covers final dots; no pre-placement surface receipt was found."
+    },
+    "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "validator_output": {
+      "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+      "bytes": 126097,
+      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+      "meta": {
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "dtype": "float32",
+        "count": 1,
+        "nodata": null,
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "profile_compress": "deflate"
+      },
+      "band_description": [
+        null
+      ],
+      "n_finite": 12279160,
+      "n_nan": 0,
+      "n_infinite": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0030664964579045773,
+      "emitted_positive_pixels": 37654,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "dimensions_3730x3292": true,
+        "crs_epsg_32611": true,
+        "transform_matches_sample_submission": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "no_sentinel_values": true,
+        "range_0_1_guaranteed": true,
+        "min_ge_0": true,
+        "max_le_1": true,
+        "in_footprint_all_finite": true,
+        "in_footprint_range_0_1": true,
+        "outside_footprint_zero": true,
+        "zero_dots_on_mapped_catalogue": true
+      },
+      "all_checks_passed": true,
+      "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+      "on_catalogue_positive_pixels": 0,
+      "in_footprint_positive_pixels": 37654,
+      "footprint_fraction": 0.007286874781441169
+    },
+    "sample_comparison": {
+      "path": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+      "bytes": 126097,
+      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0030664964579045773,
+      "n_nonzero": 37654,
+      "mass": 37654.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    "validator_receipt": {
+      "evidence_class": "LOCAL-FORMAT-VALIDATION-NOT-ORGANIZER-ACCEPTANCE",
+      "artifact_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+      "approved_for_weekly_slot": false,
+      "warning": "Format checks do not establish novelty, geological accuracy, improvement, or organizer acceptance.",
+      "sample_comparison": {
+        "path": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+        "bytes": 126097,
+        "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+        "bands": 1,
+        "dtype": "float32",
+        "crs": "EPSG:32611",
+        "width": 3292,
+        "height": 3730,
+        "bounds": [
+          243350.0,
+          4135550.0,
+          572550.0,
+          4508550.0
+        ],
+        "ref_bounds": [
+          243350.0,
+          4135550.0,
+          572550.0,
+          4508550.0
+        ],
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "blocksize": [
+          256,
+          256
+        ],
+        "fixture_grid": false,
+        "has_validity_mask": false,
+        "nan_pixels": 0,
+        "infinity_pixels": 0,
+        "n_nan": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.0030664964579045773,
+        "n_nonzero": 37654,
+        "mass": 37654.0,
+        "mass_outside_footprint": 0,
+        "problems": [],
+        "ok": true,
+        "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+      },
+      "shared_validator": {
+        "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+        "bytes": 126097,
+        "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+        "meta": {
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "dtype": "float32",
+          "count": 1,
+          "nodata": null,
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "profile_compress": "deflate"
+        },
+        "band_description": [
+          null
+        ],
+        "n_finite": 12279160,
+        "n_nan": 0,
+        "n_infinite": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.0030664964579045773,
+        "emitted_positive_pixels": 37654,
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+        "on_catalogue_positive_pixels": 0,
+        "in_footprint_positive_pixels": 37654,
+        "footprint_fraction": 0.007286874781441169
+      },
+      "local_format_pass": true
+    },
+    "validator_provenance": "Fresh local shared-validator run on archived P4 TIFF bytes; not organizer acceptance",
+    "submission_name": "gems70-p4-stratified-halo-37654-20261020",
+    "submission_note": "P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence",
+    "submission_note_chars": 108,
+    "verdict": "negative",
+    "download_ok_for_review": true,
+    "submit_recommended": false,
+    "source_receipts": [
+      "evidence/phase4/uniqueness.json",
+      "evidence/run_card.json"
+    ]
+  },
+  "limitation": "No single method paragraph assigns this review a lane. E3 is a parallel archived candidate, fails the literal forward stop, and does not authorize another experiment or a weekly slot.",
+  "source_receipts": [
+    "evidence/run_card_e3_amended.json",
+    "evidence/surface_uniqueness_e3.json",
+    "evidence/final_uniqueness_e3.json",
+    "evidence/validator_e3.json",
+    "evidence/phase4/uniqueness.json",
+    "evidence/run_card.json"
+  ]
 }
