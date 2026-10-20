@@ -85,13 +85,16 @@ def build_blocked_site(review):
     """Render only stop/review pages when literal protocol evidence blocks release."""
     DOCS.mkdir(parents=True, exist_ok=True)
     (DOCS / 'literal-protocol-review.json').write_text(json.dumps(review, indent=2) + '\n')
+    current = load('evidence/current_protocol_review.json')
+    if current is not None:
+        (DOCS / 'current_protocol_review.json').write_text(json.dumps(current, indent=2) + '\n')
     import markdown
     report = (ROOT / 'reports/literal-protocol-review.md').read_text()
     (DOCS / 'protocol-review.html').write_text(
         frame('Current protocol review', markdown.markdown(report, extensions=['tables'])))
     stop = '''<section class="stop"><div class="eyebrow">RELEASE DECISION</div>
 <h1>STOP — no TIFF cleared for download or submission</h1>
-<p>Do not download or submit any historical artifact. Previously exposed TIFF/ZIP files are quarantined for audit only. The literal one-way 3-pixel overlap rule fails on the archived candidate; no new candidate was generated and no slot was used.</p>
+<p><strong>Current protocol: DO NOT SUBMIT.</strong> Do not download or submit any historical artifact. Previously exposed TIFF/ZIP files are quarantined for audit only. The literal one-way 3-pixel overlap rule fails on the archived candidate; no new candidate was generated and no slot was used.</p>
 <p><a href="protocol-review.html">Read the literal-protocol review and ranked research queue</a> · <a href="submission.html">Submission requirements and status</a>.</p></section>'''
     pages = {
         'index.html': stop + '<h2>Release gate</h2><p>Local format validation is not uniqueness clearance or organizer acceptance. No local candidate score is an organizer-confirmed score.</p>',
@@ -106,7 +109,9 @@ def build_blocked_site(review):
         title = name.removesuffix('.html').replace('-', ' ').title()
         (DOCS / name).write_text(frame(title, body))
     redirect = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=protocol-review.html"><title>GEMSDOE70 — DO NOT SUBMIT</title></head><body><p>DO NOT SUBMIT — no TIFF cleared. <a href="protocol-review.html">Review status</a>.</p></body></html>'
-    for name in ('executive-summary.html', 'e3-candidate.html', 'research-review.html'):
+    (DOCS / 'executive-summary.html').write_text(
+        '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=submission.html"><title>GEMSDOE70 — DO NOT SUBMIT</title></head><body><p>DO NOT SUBMIT — no TIFF cleared. <a href="submission.html">Review status</a>.</p></body></html>')
+    for name in ('e3-candidate.html', 'research-review.html', 'supplemental-protocol-review.html'):
         (DOCS / name).write_text(redirect)
     print('Rendered fail-closed publication pages; no downloads or candidate metrics published.')
 

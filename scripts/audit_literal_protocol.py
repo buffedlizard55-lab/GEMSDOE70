@@ -38,11 +38,9 @@ def literal_gate(audit):
 
 def main():
     audit = json.loads((ROOT / 'evidence/phase4/uniqueness.json').read_text())
-    old = json.loads((ROOT / 'evidence/run_card.json').read_text())
+    old = json.loads((ROOT / 'evidence/phase4/run_card.json').read_text())
     gate = literal_gate(audit)
-    artifact = ROOT / old['artifact']
-    if not artifact.is_file():
-        artifact = ROOT / 'quarantine/published-downloads-2026-10-20' / Path(old['artifact']).name
+    artifact = ROOT / 'quarantine/published-downloads-2026-10-20' / (old['submission_name'] + '.tif')
     sha = hashlib.sha256(artifact.read_bytes()).hexdigest()
     if sha != old['raster_sha256'] or sha != audit['candidate_file_sha256']:
         raise ValueError('Archived candidate and uniqueness receipt are not hash-linked')

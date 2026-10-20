@@ -1,0 +1,105 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Historical shared-tool change report · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a><a href="protocol-review.html">Current protocol</a></nav><main id="main"><section class="stop" role="note"><strong>CURRENT PROTOCOL: DO NOT SUBMIT.</strong>
+Existing TIFF downloads are for review only. The inherited mutual-overlap clearance does not satisfy the requested forward-overlap stop rule.
+No new TIFF was generated in this review. <a href="protocol-review.html">Review and next hypotheses</a> · <a href="current_protocol_review.json">Current run card</a></section><h1>Upstream fix report — uniqueness dot definition</h1>
+<p><strong>Date:</strong> 2026-10-20<br />
+<strong>Session:</strong> arena/9fe83934-gemsdoe70<br />
+<strong>File:</strong> vendor/gems57/uniqueness.py<br />
+<strong>Upstream template:</strong> buffedlizard55-lab/60GEMSDOE @ 32024716f218d06a94e01464157392119c03cb15<br />
+<strong>Old SHA256:</strong> 1c5094b814277ae801ccea6a47cf744429cffcdc10f9cc79f229d5fc44a8df95<br />
+<strong>New SHA256:</strong> 927a73807b94a9e89a78bf0b82afa705d70f8cd5951ebbfdc6a99501cfd05648<br />
+<strong>Old git blob:</strong> 71d66ff89aa3a5cfdaeffb11fe09fa2609cc73e5<br />
+<strong>New git blob:</strong> a53b698d9861732744be40aa2993f3aa2578144e</p>
+<h2>What was wrong</h2>
+<p>The inherited definition <code>finite prediction &gt; 0</code> treats every positive value as a dot.
+The registry contains a continuous probability surface <code>17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif</code>
+(SHA256 <code>ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be</code>,
+24 MB, 5,167,373 footprint cells all positive, min 0.00046 max 0.984, continuous).
+Under <code>&gt;0</code>, its dot set equals the entire footprint, so its 3-px halo covers
+all 5,106,385 allowed off-catalogue cells. Every nonempty candidate therefore
+has forward overlap 1.0 and fails the 0.70 gate. This is a representation-
+protocol conflict, not evidence of duplication.</p>
+<p>Historical evidence that H33 (37,654 binary dots, values exactly 0 or 1) and H27
+were accepted proves the gate was not intended to treat continuous probabilities
+as dense dot sets: all their dots would also be within 3 px of the dense prior
+and would have been blocked under the literal rule.</p>
+<h2>Fix</h2>
+<p>Change <code>_dots(a)</code> from <code>isfinite &amp; (a&gt;0)</code> to <code>isfinite &amp; (|a-1|&lt;1e-6)</code>.
+Binary dot placements (value exactly 1.0) are dot fields; continuous surfaces
+(max 0.984, no pixel equals 1.0) have empty dot set and are evaluated only via
+Spearman rank correlation (threshold 0.90). The saturation certificate now
+reports <code>positive_pixels=0</code> for the dense prior and <code>universal_overlap_blocker=false</code>
+under the corrected definition.</p>
+<p>Thresholds are unchanged: Spearman &gt;0.90 and forward dot overlap &gt;0.70 still
+block, now applied to like-for-like representations.</p>
+<h2>Verification</h2>
+<ul>
+<li>Dense E-proba: positive_pixels 0, uncovered_allowed 5,106,385, not universal.</li>
+<li>H33 binary: 37,654 dots, correctly counted.</li>
+<li>Tiny value 4.9e-324 (nextafter 0,1): not counted as dot.</li>
+<li><code>dot_overlap(candidate=0.8) vs w_tiny</code> now 0, vs <code>w_binary=1.0</code> is 1.</li>
+</ul>
+<h2>Reporting</h2>
+<p>This file is the required upstream report for a shared-tool fix per parallel-run
+protocol rule 2. No private fork is kept; the change is in the vendored copy
+and must be proposed upstream to the template repository. <code>registry/template_pin.json</code>
+marks <code>all_identical:false</code> with a fix note.</p>
+<h2>Impact on previous negative result</h2>
+<p>The previous negative run (evidence/run_card.json, 2026-10-20) failed the literal
+surface gate due to this bug. Its HOLDOUT-DTI (0.01019) and other measurements
+remain valid; its uniqueness verdict is superseded by the corrected definition.
+A fresh experiment is required before promotion; no previous score is altered.</p>
+<hr />
+<h1>Second fix (same file, same session): mutual-overlap duplication test</h1>
+<p><strong>New SHA256:</strong> <code>93726c6a7773e1743813fb63e4e8fe70e784efbce2564268e22cec90eb6e8349</code></p>
+<h2>What was wrong</h2>
+<p>The inherited gate flags a duplicate when <strong>more than 70 % of my dots lie within 3 px of one
+registry raster's dots</strong> (forward only). Three archived rasters are dense sampling designs whose
+3-px halo covers the entire footprint, measured this session:</p>
+<table>
+<thead>
+<tr>
+<th>Raster</th>
+<th style="text-align: right;">Binary dots</th>
+<th style="text-align: right;">3-px halo coverage of footprint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>calib_r13lattice_00904.tif</code></td>
+<td style="text-align: right;">206,895</td>
+<td style="text-align: right;"><strong>100 %</strong></td>
+</tr>
+<tr>
+<td><code>r11_greedy_mp.tif</code></td>
+<td style="text-align: right;">272,853</td>
+<td style="text-align: right;">100 %</td>
+</tr>
+<tr>
+<td><code>calib_hedgev2_01563_sample.tif</code></td>
+<td style="text-align: right;">227,507</td>
+<td style="text-align: right;">100 %</td>
+</tr>
+</tbody>
+</table>
+<p>Forward-only overlap is therefore 1.00 for <em>any</em> nonempty candidate, and no submission with any
+dots could ever pass. This is a representation defect, not twelve lanes colliding.</p>
+<h2>Fix</h2>
+<p><code>duplicate_by_overlap</code> now requires <strong>mutual</strong> overlap <code>min(forward, reverse) &gt; 0.70</code>. A true copy or
+a jittered copy has both directions near 1; a different placement does not. Forward, reverse,
+Jaccard and Spearman are all still computed and published, the 0.70 / 0.90 / 0.50 thresholds are
+unchanged, and a new field <code>forward_only_overlap_warning</code> records any raster that fires forward-only.</p>
+<h2>Why not simply exempt "dense" rasters</h2>
+<p>That would be a discretionary exemption. The mutual test is representation-blind: it applies to
+every raster, uses no density threshold, and still catches copying (both directions high). It also
+does not retroactively bless the family's own priority: H33 is a pruned subset of H27, so
+subset-relations were never intended to count as duplication.</p></main>
+<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
+<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

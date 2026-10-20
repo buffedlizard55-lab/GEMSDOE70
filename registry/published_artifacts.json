@@ -1,6 +1,6 @@
 {
   "evidence_class": "PUBLICATION-INVENTORY",
-  "policy": "No TIFF or ZIP is currently authorized for public download. Quarantined historical artifacts are recorded outside this publication inventory; only JSON review receipts may remain under docs/downloads, which is excluded from the published Pages output.",
+  "policy": "No TIFF or ZIP is currently authorized for public download. Quarantined historical artifacts are recorded outside this publication inventory; docs/downloads is excluded from published Pages output.",
   "artifacts": [
     {
       "path": "docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.json",

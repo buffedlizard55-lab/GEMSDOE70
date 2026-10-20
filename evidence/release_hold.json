@@ -11,7 +11,8 @@
     "the 62-raster public inventory is not complete for private or uncommitted artifacts",
     "historical mutual-overlap clearance did not satisfy the literal prompt threshold",
     "public-facing candidate names and receipts conflict",
-    "all previously exposed GeoTIFF/ZIP files are quarantined for audit only"
+    "all previously exposed GeoTIFF/ZIP files are quarantined for audit only",
+    "H70-A archived comparison covers only two registry rasters and has no cleared complete-inventory or surface-stage audit"
   ],
   "quarantine_directory": "quarantine/published-downloads-2026-10-20",
   "review": "reports/literal-protocol-review.md"

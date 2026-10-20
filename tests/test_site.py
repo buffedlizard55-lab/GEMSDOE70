@@ -37,7 +37,7 @@ def test_no_prediction_rasters_are_public():
     for p in (ROOT / 'docs').rglob('*'):
         assert not (p.is_file() and p.suffix.lower() in {'.tif', '.tiff', '.zip'}), p
     manifest = json.loads((ROOT / 'quarantine/published-downloads-2026-10-20/manifest.json').read_text())
-    assert len(manifest['files']) >= 9
+    assert len(manifest['files']) >= 11
 
 
 def test_decision_is_explicit_on_the_landing_page():

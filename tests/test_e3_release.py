@@ -25,6 +25,8 @@ def test_global_literal_protocol_hold_blocks_e3_release():
     assert status["slot_authorized"] is False
     assert status["checks"]["global_release_hold"] is False
     assert any('literal one-way overlap rule' in reason for reason in status['reasons'])
+    from gems70.release_e3 import released_filenames
+    assert released_filenames(ROOT) == set()
 
 
 def test_tif_bytes_revalidate_independently():

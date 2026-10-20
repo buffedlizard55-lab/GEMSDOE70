@@ -14,6 +14,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
+from .protocol import strict_gate
 
 
 def valid_canary(canary):
@@ -50,6 +51,8 @@ def release_status(root):
     if isinstance(hold, dict) and hold.get('verdict') == 'negative':
         return {
             'verdict': 'negative',
+            'review_only': True,
+            'current_forward_protocol_ok': False,
             'download_ok': False,
             'submit_recommended': False,
             'download_and_submit_ok': False,
@@ -123,7 +126,14 @@ def release_status(root):
     if current_review and current_review.get('correlation_overlap_vs_registry', {}).get('stop') is True:
         submit = False
         reasons.append('Current literal one-way uniqueness audit requires STOP; review download only.')
+    protocol = strict_gate(audit or {})
+    protocol_ok = not protocol['stop_required']
+    if not protocol_ok:
+        submit = False
+        reasons.append('Current forward-overlap protocol requires STOP; archive download is review-only.')
     return {
+        'current_forward_protocol_ok': protocol_ok,
+        'review_only': not protocol_ok,
         'verdict': (card or {}).get('verdict', 'negative'),
         'download_ok': download_ok,
         'submit_recommended': submit,

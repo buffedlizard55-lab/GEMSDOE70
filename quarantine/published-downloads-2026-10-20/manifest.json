@@ -1,60 +1,61 @@
 {
   "evidence_class": "QUARANTINE-MANIFEST",
-  "reason": "Literal one-way 3 px overlap stop; no TIFF is authorized for download/submission. Preserved for audit only.",
+  "reason": "Literal one-way overlap stop and incomplete registry clearance. Audit-only; no file cleared for download or submission.",
   "files": [
     {
       "file": "gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
-      "sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
       "bytes": 107350,
-      "prior_note": "parallel session (v2), preserved; verdict DO NOT SUBMIT in its own receipts"
+      "sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d"
     },
     {
       "file": "gems70-discordance-corridor-v1-20261020-7f3a9c2e.zip",
-      "sha256": "fe1b860591bd0557bfe016e67d17d6722f405896282c3a330a7be5d6116b666a",
       "bytes": 58118,
-      "prior_note": "parallel session (v2), preserved"
+      "sha256": "fe1b860591bd0557bfe016e67d17d6722f405896282c3a330a7be5d6116b666a"
     },
     {
       "file": "gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif",
-      "sha256": "91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c",
       "bytes": 130071,
-      "prior_note": "parallel E2 alluvial-step lane, selector-review only DO NOT SUBMIT YET; card evidence/e2/run_card.json"
+      "sha256": "91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c"
     },
     {
       "file": "gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.zip",
-      "sha256": "975e8975ef678cb177855951e9a551ca0a66cbf38d467574af52b91499e34161",
       "bytes": 90770,
-      "prior_note": "parallel E2 lane, one-TIFF ZIP"
+      "sha256": "975e8975ef678cb177855951e9a551ca0a66cbf38d467574af52b91499e34161"
+    },
+    {
+      "file": "gems70-h70-conductive-breach-37654-20261020.tif",
+      "bytes": 135849,
+      "sha256": "fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88"
+    },
+    {
+      "file": "gems70-h70-conductive-breach-37654-20261020.zip",
+      "bytes": 101794,
+      "sha256": "5d6e79be1d747a2f26a2e67182b9184e5db6ddc892ce01af1398a974a699609a"
     },
     {
       "file": "gems70-p4-stratified-halo-37654-20261020.tif",
-      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
       "bytes": 126097,
-      "prior_note": "this session (P4), published candidate; run card evidence/phase4/run_card.json"
+      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7"
     },
     {
       "file": "gems70-p4-stratified-halo-37654-20261020.zip",
-      "sha256": "d04ed7d8ee360ec61f1e716a0fe5ec758329946ecac70695cafe5d8a0daf6039",
       "bytes": 91298,
-      "prior_note": "this session (P4), one-TIFF ZIP"
+      "sha256": "d04ed7d8ee360ec61f1e716a0fe5ec758329946ecac70695cafe5d8a0daf6039"
     },
     {
       "file": "gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
-      "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
       "bytes": 498152,
-      "prior_note": "parallel H2 session (PR #18), blocked diagnostic, NOT a submission; card evidence/history/h2_stepover_negative/run_card.json"
+      "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881"
     },
     {
       "file": "gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
-      "sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
       "bytes": 184165,
-      "prior_note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
+      "sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21"
     },
     {
       "file": "gems70e3-scarpcurv-60k-ex3-20261020-zeros.zip",
-      "sha256": "5c23877dc4c9343fee9de700b21b96f93495b7c012f7b6f73e8b01aefb8f4ebe",
       "bytes": 151585,
-      "prior_note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
+      "sha256": "5c23877dc4c9343fee9de700b21b96f93495b7c012f7b6f73e8b01aefb8f4ebe"
     }
   ]
 }
