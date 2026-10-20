@@ -20,7 +20,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           OPENBLAS_NUM_THREADS: '1'
-        run: python scripts/review_literal_protocol.py --fetch
+        run: python scripts/review_literal_protocol.py --fetch --verify
       - name: Build evidence-driven site
         run: python scripts/build_site.py && python scripts/build_readme.py
       - name: Test metric, protocol, writer and site contracts

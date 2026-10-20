@@ -172,3 +172,21 @@ def test_generator_refuses_witness_drift_before_writing_receipts(tmp_path, monke
     with pytest.raises(ValueError, match='SHA-256 mismatch'):
         mod.run()
     assert not (tmp_path / 'evidence/review/run_card.json').exists()
+
+
+def test_receipt_verification_tolerates_only_non_gate_crossing_spearman_noise():
+    import runpy
+    verify = runpy.run_path(str(ROOT / 'scripts/review_literal_protocol.py'))['verify_receipt']
+    verify({'spearman_full_footprint': -.0004249861963070026},
+           {'spearman_full_footprint': -.0004249861963087325})
+    for actual, stored in [
+        ({'spearman_full_footprint': .9000000000001}, {'spearman_full_footprint': .9}),
+        ({'spearman_full_footprint': float('nan')}, {'spearman_full_footprint': .1}),
+        ({'my_dots_within_3px_of_theirs': .7}, {'my_dots_within_3px_of_theirs': .70000000001}),
+        ({'count': 37654}, {'count': 37655}),
+        ({'sha256': 'x'}, {'sha256': 'y'}),
+        ({'stop_required': False}, {'stop_required': True}),
+        ({'a': True}, {'a': 1}),
+    ]:
+        with pytest.raises(ValueError, match='Receipt drift'):
+            verify(actual, stored)

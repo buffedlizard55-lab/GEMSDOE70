@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 import subprocess
 import sys
@@ -31,7 +32,32 @@ def dump(path, obj):
     path.write_text(json.dumps(obj, indent=2, allow_nan=False) + '\n')
 
 
-def run(fetch=False):
+def verify_receipt(actual, recorded, path='receipt'):
+    """Exact receipt comparison except harmless cross-CPU Spearman summation noise.
+
+    Never tolerate a threshold crossing, boolean/identity, count, hash or overlap
+    difference. The actual gate was evaluated at full precision before this check.
+    """
+    key = path.rsplit('.', 1)[-1]
+    rho = key in {'spearman_full_footprint', 'worst_spearman_full_footprint'}
+    if (rho and type(actual) in (int, float) and type(recorded) in (int, float)
+            and math.isfinite(actual) and math.isfinite(recorded)
+            and (actual > .90) == (recorded > .90)
+            and math.isclose(actual, recorded, rel_tol=1e-11, abs_tol=1e-12)):
+        return
+    if isinstance(actual, dict) and isinstance(recorded, dict) and actual.keys() == recorded.keys():
+        for k in actual:
+            verify_receipt(actual[k], recorded[k], path + '.' + k)
+        return
+    if isinstance(actual, list) and isinstance(recorded, list) and len(actual) == len(recorded):
+        for i, (a, b) in enumerate(zip(actual, recorded)):
+            verify_receipt(a, b, path + '.' + str(i))
+        return
+    if type(actual) is not type(recorded) or actual != recorded:
+        raise ValueError('Receipt drift at ' + path)
+
+
+def run(fetch=False, verify=False):
     path = ROOT / CACHE_PATH
     if fetch and not path.exists():
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -96,7 +122,10 @@ def run(fetch=False):
         'scope': 'One positive binary witness suffices to reject, not to certify uniqueness. No full-registry or new-surface rank-correlation claim.',
     }
     out = ROOT / 'evidence/review'
-    dump(out / 'literal_protocol_audit.json', result)
+    if verify:
+        verify_receipt(result, json.loads((out / 'literal_protocol_audit.json').read_text()))
+    else:
+        dump(out / 'literal_protocol_audit.json', result)
     p4 = next(r for r in results if '-p4-' in r['artifact'])
     historical = json.loads((ROOT / 'evidence/phase4/run_card.json').read_text())
     holdout = historical['instrument_a_holdout']['candidate']
@@ -131,7 +160,10 @@ def run(fetch=False):
         'weekly_slots_used': 0, 'new_scientific_experiments': 0,
         'organizer_confirmed_score': None,
     }
-    dump(out / 'run_card.json', card)
+    if verify:
+        verify_receipt(card, json.loads((out / 'run_card.json').read_text()))
+    else:
+        dump(out / 'run_card.json', card)
     print(json.dumps({'stop_required': True, 'archived_files_checked': len(results),
                       'covered_fraction': cert['covered_allowed_fraction'],
                       'new_rasters_generated': 0, 'verdict': 'negative'}, indent=2))
@@ -141,4 +173,6 @@ def run(fetch=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--fetch', action='store_true', help='Fetch only the pinned binary witness if absent')
-    run(parser.parse_args().fetch)
+    parser.add_argument('--verify', action='store_true', help='Recompute and verify stored receipts without overwriting their full-precision measurements')
+    args = parser.parse_args()
+    run(args.fetch, args.verify)

@@ -58,3 +58,9 @@ policy APIs delegate to one implementation. Fresh audit expanded to **six** fina
 forward overlap 1.0, still zero new experiments/rasters/slots by this review. The expanded integrated
 suite passes **212 tests**. The earlier three remote checks for commit b1d530a succeeded, including
 real Jekyll safety build; the final integrated commit is checked again on PR #29.
+
+CI additionally exposed cross-CPU Spearman summation differences of roughly 1e-15 in the regenerated
+review JSON; actual gates and all 212 tests still passed. The audit's `--verify` mode now recomputes
+without overwriting the original full-precision receipt and tolerates only Spearman differences
+within abs 1e-12 / rel 1e-11, never a 0.90 threshold crossing. Hashes, counts, overlap, booleans and
+all other receipt fields remain exact. No metric values or thresholds were changed or rounded.
