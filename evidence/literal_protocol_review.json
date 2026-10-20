@@ -1,0 +1,114 @@
+{
+  "hypothesis": "Protocol audit of the archived coverage-stratified halo candidate; no new experiment",
+  "mechanism": "Sparse coverage avoids redundant truth-cell credit; not proof of geothermal activity",
+  "non_fault_mimic": "Depositional basin margins correlated with mapped-fault habitat",
+  "holdout": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.07304229212058164,
+    "ci95": [
+      0.06673987703804156,
+      0.07899496967047342
+    ],
+    "withheld_positive_pixels": 11321,
+    "provenance": "Archived phase4 instrument A, not rerun this session"
+  },
+  "correlation_overlap_vs_registry": {
+    "rule": "spearman > 0.90 OR candidate dots within 3 px > 0.70",
+    "duplicate": true,
+    "stop": true,
+    "complete_accessible_scan": true,
+    "invalid_rows": [],
+    "witnesses": [
+      {
+        "submission": "calib_r13lattice_00904.tif",
+        "spearman": -0.0004249861963070003,
+        "forward_overlap": 1.0
+      },
+      {
+        "submission": "r11_greedy_mp.tif",
+        "spearman": -0.003451535346305423,
+        "forward_overlap": 0.8069262229776385
+      },
+      {
+        "submission": "r13_lattice_s5_00904.tif",
+        "spearman": -0.0004249861963070003,
+        "forward_overlap": 1.0
+      },
+      {
+        "submission": "r14_union_tips10_lat6.tif",
+        "spearman": 0.013011438060611235,
+        "forward_overlap": 0.7803686195357731
+      }
+    ],
+    "registry_rasters_checked": 62
+  },
+  "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+  "validator_output": {
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+    "bytes": 126097,
+    "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "emitted_positive_pixels": 37654,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 37654,
+    "footprint_fraction": 0.007286874781441169
+  },
+  "validator_provenance": "Archived shared-validator receipt; not a new data restoration",
+  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
+  "note": "No file cleared. Archived TIFF quarantined for audit only; literal one-way overlap gate fails. DO NOT SUBMIT.",
+  "verdict": "negative",
+  "download_ok": false,
+  "submit_recommended": false,
+  "new_candidate_generated": false,
+  "experiments_this_session": 0,
+  "weekly_slots_used": 0,
+  "limitation": "No single method paragraph assigns this session a lane. Stop on existing duplicate witness; do not invent a new lane.",
+  "source_receipt": "evidence/phase4/uniqueness.json"
+}

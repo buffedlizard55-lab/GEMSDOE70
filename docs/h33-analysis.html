@@ -1,119 +1,17 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Why H33 scored · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<title>H33 Analysis · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Why the archived H33 field scored 0.2778 — and what it takes to beat it</h1>
-<p><strong>Evidence class:</strong> DATA-MEASUREMENT of the archived bytes, plus user-supplied historical scores.
-The 0.2778 value has <strong>no organizer receipt in this repository</strong>; it is the user's report. Nothing
-below converts it into an ORGANIZER-CONFIRMED score.</p>
-<h2>What the file actually is</h2>
-<p><code>evidence/h33_audit.json</code> recomputes the archived GeoTIFF byte-for-byte:</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th style="text-align: right;">Positive pixels</th>
-<th>Measured relation to its predecessor</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>D28 (<code>dotted-d2-8</code>)</td>
-<td style="text-align: right;">44,090</td>
-<td>Poisson 300 m dots, minimum catalogue distance 1 px</td>
-</tr>
-<tr>
-<td>H27</td>
-<td style="text-align: right;">40,199</td>
-<td>exactly the 3,891 D28 dots at <strong>1 px</strong> removed</td>
-</tr>
-<tr>
-<td>H33 B2</td>
-<td style="text-align: right;">37,654</td>
-<td>exactly the 2,545 H27 dots at <strong>√2 or 2 px</strong> removed</td>
-</tr>
-</tbody>
-</table>
-<p>So H33 is not a detector. It is a <strong>uniform sparse sample of the 0.2–3 km halo around the mapped
-faults, with the two closest shells deleted</strong>. Nine in ten of its dots lie more than 300 m from any
-mapped trace (median 1.97 km).</p>
-<h2>Why that scores well — the metric algebra</h2>
-<p>With <code>DTI = T / (T + 0.2·(S − M) + 0.8·(N − T))</code>, where <code>T</code> sums a triangular kernel over <strong>truth</strong>
-cells, <code>S</code> sums the emitted mass and <code>M</code> sums each dot's nearest-truth credit:</p>
-<ul>
-<li><code>T</code> saturates at 1 per truth cell; <code>M</code> and <code>S</code> scale with the number of dots. Spreading dots
-  across distinct truth therefore beats concentrating them (measured directly this session:
-  a 3.6-px-spaced damage-zone field scored 0.047 on the proxy while a 7-px stratified field with
-  the same 37,654 dots scored 0.081).</li>
-<li>A dot closer than ~2 px to a mapped fault buys <code>S</code> and almost no <code>T</code>, because the scorer masks
-  known faults pixel-exactly and the hidden truth does not hug the mapped trace. Deleting those
-  shells raised the reported live score twice (0.2708 → 0.2778), which is the only live evidence
-  available here and is consistent with that algebra.</li>
-</ul>
-<p>The consequence: most of H33's 0.2778 is <strong>emission geometry</strong>, not geological inference. The
-residual 0.16 to the 0.44 leader requires knowing <em>where inside the halo</em> the new traces are.</p>
-<h2>Can this be beaten? What the three experiments say</h2>
-<table>
-<thead>
-<tr>
-<th>Arm (37,654 binary dots)</th>
-<th style="text-align: right;">A: catalogue holdout</th>
-<th style="text-align: right;">B: SGMC proxy</th>
-<th style="text-align: right;">B′: proxy ≥ 3 px</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>H33 (archived reference)</td>
-<td style="text-align: right;">0.0037</td>
-<td style="text-align: right;">0.0906</td>
-<td style="text-align: right;">0.0938</td>
-</tr>
-<tr>
-<td>Exp 2: offset × tip × geophysics</td>
-<td style="text-align: right;">0.0591</td>
-<td style="text-align: right;">0.0432</td>
-<td style="text-align: right;">—</td>
-</tr>
-<tr>
-<td>Exp 3: damage-zone intensity</td>
-<td style="text-align: right;">0.0873</td>
-<td style="text-align: right;">0.1098</td>
-<td style="text-align: right;">0.0471</td>
-</tr>
-<tr>
-<td>Exp 4: stratified halo, weak tilt</td>
-<td style="text-align: right;">0.0730</td>
-<td style="text-align: right;">0.0948</td>
-<td style="text-align: right;">0.0812</td>
-</tr>
-</tbody>
-</table>
-<p>Readings:</p>
-<ol>
-<li><strong>Instrument A is the wrong instrument for this task.</strong> It withholds catalogue segments, so it
-   rewards placing dots beside mapped traces — the opposite of what the competition asks. Every
-   candidate beats H33 there by 20×, which says nothing about the leaderboard.</li>
-<li><strong>Instrument B is contaminated at short range.</strong> 12.5 % of SGMC-only pixels sit within 2 px of
-   the catalogue and 21.4 % within 3 px (7.5 % of the domain is that close). Those are largely the
-   same traces re-drawn, so B rewards exactly the band the live experiments penalised.</li>
-<li><strong>B′ removes that band.</strong> There H33 still wins by 13 % (Δ = −0.0126, 95 % CI [−0.0241, −0.0018]).
-   That is the honest negative and the reason this session's candidate is not promoted.</li>
-</ol>
-<h2>The defensible route to &gt;0.2778</h2>
-<p>The remaining headroom is <em>within-halo ranking</em>: a supervised model trained on the only population
-that resembles the hidden truth has to be built, not invented from geometry. Concretely, the next
-session should (a) train on the SGMC-off-catalogue proxy with leave-one-quadrant-out and a proper
-featurisation of the 19-band stack plus lidar-scarp and radiometric layers, (b) keep the coverage
-stratification that this session measured to be worth +70 % on B′ at fixed mass
-(0.047 → 0.081), and (c) spend one slot on the resulting file. Geometry alone has been measured to
-its limit here; the leaderboard gap is information, not spacing.</p>
-<h2>What we will not do</h2>
-<p>Rescale, jitter, rename or prune H33 and call it a new prediction. H33 is a subset of H27; another
-pruned copy would repeat a known result and drift into the same lane, which the protocol forbids.</p></main>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
+<p>No TIFF is authorized for download or submission. The archived Phase-4 TIFF fails the requested one-way
+3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
+are not clearance under the current prompt. Archived files are quarantined for audit only.</p>
+<p><a href="protocol-review.html">Current protocol review and next steps</a> ·
+<a href="literal-protocol-review.json">Current JSON run card</a></p></section><section class="stop"><div class="eyebrow">RELEASE DECISION</div>
+<h1>STOP — no TIFF cleared for download or submission</h1>
+<p>Do not download or submit any historical artifact. Previously exposed TIFF/ZIP files are quarantined for audit only. The literal one-way 3-pixel overlap rule fails on the archived candidate; no new candidate was generated and no slot was used.</p>
+<p><a href="protocol-review.html">Read the literal-protocol review and ranked research queue</a> · <a href="submission.html">Submission requirements and status</a>.</p></section><p>The archived H33 analysis supports a plausible pruning/metric interaction explanation, not a causal claim. The user-reported 0.2778 is not organizer-confirmed.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
+</footer></body></html>

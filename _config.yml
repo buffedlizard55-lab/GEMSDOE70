@@ -16,6 +16,7 @@
     "assets",
     "data",
     "docs/*.md",
+    "docs/downloads",
     "evidence",
     "pyproject.toml",
     "quarantine",

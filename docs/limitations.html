@@ -4,78 +4,14 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Limitations, irregularities and next-session work</h1>
-<h2>Two shared-tool defects were found and fixed this session</h2>
-<ol>
-<li><strong>Dot definition.</strong> <code>uniqueness._dots</code> counted every finite positive value as a dot, so any
-   nonempty candidate "duplicated" the archived continuous surface <code>E-proba-multiscale</code>
-   (sha256 <code>ab0a0a62…</code>, positive on all 5,167,373 footprint cells). Fixed to binary dots
-   (<code>|value − 1| &lt; 1e-6</code>). Reported in <code>evidence/upstream_fix_report.md</code>.</li>
-<li><strong>Forward-only overlap.</strong> A duplicate must coincide in both directions. Measuring this session:
-   <code>calib_r13lattice_00904</code> (206,895 dots), <code>r11_greedy_mp</code> (272,853) and
-   <code>calib_hedgev2_01563_sample</code> (227,507) each have a 3-px halo covering <strong>100 %</strong> of the footprint,
-   so forward-only overlap is 1.00 for <em>any</em> nonempty candidate. The gate now requires
-   <code>min(forward, reverse) &gt; 0.70</code>; both directions and Jaccard are always reported, ρ &gt; 0.90 still
-   applies to every raster, and no threshold was changed. Three archived submissions — not one —
-   triggered the old rule, which is why this is a representation defect rather than duplication.</li>
-</ol>
-<p>Both fixes are in <code>vendor/gems57/uniqueness.py</code>; <code>registry/template_pin.json</code> records the new hash
-with <code>all_identical: false</code>. They must be proposed upstream to the shared template.</p>
-<h2>What is not established</h2>
-<ul>
-<li><strong>No organizer receipt.</strong> 0.2778 and 0.44 are user-supplied historical values. No score on this
-  site is ORGANIZER-CONFIRMED. The portal was not reachable from this sandbox.</li>
-<li><strong>Neither instrument is the hidden truth.</strong> Instrument A withholds catalogue components (measures
-  catalogue recovery, biased against the task). Instrument B/B′ uses SGMC faults minus the
-  catalogue (an independent state compilation, but partially a re-drawing of the same traces).
-  They disagree, and the disagreement is reported rather than averaged.</li>
-<li><strong>The candidate is not promoted.</strong> On B′, H33 wins by 13 % with a CI excluding zero. The
-  pre-registered rule therefore returns <code>negative</code>, even though instrument A and unrestricted B
-  favour the candidate.</li>
-<li><strong>Registry scope.</strong> Uniqueness was checked against the 62 single-band 100 m rasters archived in
-  <code>buffedlizard55-lab/60GEMSDOE/registry/rasters</code>, not against every private or uncommitted file.
-  Zero Spearman exceedances (max 0.05) and zero mutual-overlap exceedances were found.</li>
-<li><strong>Geophysical fields are weak.</strong> Feature-alone AUCs on withheld catalogue segments were
-  0.46–0.57. The four-field gate hurt both instruments and was removed after Experiment 2; this is
-  recorded, not hidden.</li>
-</ul>
-<h2>Next session, in priority order</h2>
-<ol>
-<li><strong>Supervised within-halo ranking.</strong> Train on the SGMC-off-catalogue proxy with leave-one-quadrant-out;
-   features: 19-band stack, lidar-scarp (12 bands), GeoDAWN radiometrics (K/Th/U/TC and ratios),
-   catalogue geometry (distance, side, host length, tip position), plus the measured coverage
-   stratification. Report A and B′ with the same bootstrap. This is the only path with information
-   the geometry does not already contain.</li>
-<li><strong>Calibrate the proxy.</strong> Quantify how much of SGMC-only support is a re-drawing of QFaults
-   (buffer tests at 1–6 px) and, if possible, obtain a genuinely independent additional-fault set
-   (e.g. Nevada Bureau of Mines county maps, published INGENIOUS trace exports).</li>
-<li><strong>Upstream the two uniqueness fixes</strong> as a PR to the shared template and re-run its test suite.</li>
-<li><strong>Selector step.</strong> If a future candidate clears both gates, promote one slot within the weekly
-   cap and record the returned score as ORGANIZER-CONFIRMED.</li>
-</ol>
-<h2>Repository-level risks</h2>
-<ul>
-<li><code>docs/downloads/</code> now contains exactly one TIFF/ZIP pair, authorised by the run card;
-  <code>release.assert_no_public_rasters</code> rejects anything else, including symlinks.</li>
-<li>Large inputs (<code>training_features.tif</code>, the registry clone) live outside Git; restore commands are
-  in the README. Published evidence is small JSON.</li>
-<li>The published TIFF is binary 0/1 with no nodata tag; outside-footprint cells are 0, which the
-  shared validator and the sample comparison both accept.</li>
-</ul>
-<h2>Parallel-session candidate (merged 2026-10-20)</h2>
-<p>A concurrent branch added <code>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</code>
-(24,872 binary dots, sha256 recorded in <code>registry/published_artifacts.json</code>, verdict
-<code>DO NOT SUBMIT</code> in its own receipts). It is preserved and inventoried but is not the file this
-run card selects; the landing page points only at the P4 artifact. Both files are hash-pinned by
-<code>release.assert_no_public_rasters</code>, so neither can be silently replaced. Its narrative pages were
-moved to <code>reports/archive/concurrent-v2/</code> to avoid two contradictory download instructions in the
-published tree.</p>
-<h2>Parallel E2/E3 lane (integrated PR #16, 2026-10-20)</h2>
-<ul>
-<li>E2 alluvial-step and E3 depth-step are additional negatives (see <code>docs/preregistration-e2.md</code>, <code>evidence/e2|e3/</code>). E2 bytes are published for selector review under <code>docs/publication-amendment-e2.md</code>; submit remains NO. E2 uniqueness used pre-fix R1 subset definitions — not directly comparable to the corrected 62-raster mutual audit until rerun.</li>
-<li>Bridge <code>sample_submission.tif</code> positives are exactly the catalogue (60,988 px), not an all-zero sample; footprint use only. Two-round expanded-label composition and known-fault masking remain unverified from fetched organizer text.</li>
-</ul></main>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
+<p>No TIFF is authorized for download or submission. The archived Phase-4 TIFF fails the requested one-way
+3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
+are not clearance under the current prompt. Archived files are quarantined for audit only.</p>
+<p><a href="protocol-review.html">Current protocol review and next steps</a> ·
+<a href="literal-protocol-review.json">Current JSON run card</a></p></section><section class="stop"><div class="eyebrow">RELEASE DECISION</div>
+<h1>STOP — no TIFF cleared for download or submission</h1>
+<p>Do not download or submit any historical artifact. Previously exposed TIFF/ZIP files are quarantined for audit only. The literal one-way 3-pixel overlap rule fails on the archived candidate; no new candidate was generated and no slot was used.</p>
+<p><a href="protocol-review.html">Read the literal-protocol review and ranked research queue</a> · <a href="submission.html">Submission requirements and status</a>.</p></section><p>Key blockers: incomplete authorization for a new lane, protocol conflict, no current organizer receipt, and no refreshed official source checks.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
+</footer></body></html>

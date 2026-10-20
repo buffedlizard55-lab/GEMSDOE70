@@ -1,36 +1,52 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **STOP — no file cleared**
+> **CURRENT DECISION: DO NOT DOWNLOAD OR SUBMIT.** The archived Phase-4 candidate fails the
+> literal one-way 3-pixel overlap rule: 4 witnesses among 62 accessible registry rasters; maximum forward overlap 1.000.
+> The accessible inventory is not claimed to include private or uncommitted artifacts. All
+> previously exposed TIFF/ZIP files are quarantined for audit only. No new candidate was generated;
+> no competition slot was used. [Protocol review](reports/literal-protocol-review.md) ·
+> [Release-integrity review](reports/review-release-integrity-2026-10-20.md).
 
-Do **not** download or submit any current artifact. Previously exposed TIFF/ZIP files have been moved out of the Pages tree into `quarantine/published-downloads-2026-10-20/` for audit only. No submission slot was used. This is a negative release decision; there is no organizer-confirmed score for a local candidate.
+## What is and is not established
 
-- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission status](docs/submission.html)
-- [Release-integrity review and JSON run card](reports/review-release-integrity-2026-10-20.md)
-- [Historical H33 analysis](docs/h33-analysis.md) · [Project hypotheses](docs/hypotheses.md)
-- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
-- **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
+- **HOLDOUT-DTI** (archived, not rerun): evaluator `gems57-pooled-hide-v2`, 0.073042,
+  95% CI [0.066740, 0.078995],
+  11,321 withheld positives. This is catalogue hide-and-recover,
+  not the organizer's hidden-label score.
+- **REGISTRY-MEASUREMENT:** the literal candidate-dot overlap rule is exceeded by archived registry
+  rasters. This is a protocol stop, not a claim of byte-identical or geologically equivalent fields.
+- **ORGANIZER-CONFIRMED score:** none recorded for a local candidate. The user-reported historical
+  H33 score is not confirmed by a submission receipt here.
+- **Submission file:** none is cleared. Quarantine artifacts are preserved only for audit; local
+  format validation cannot waive the uniqueness stop.
 
-## Why publication is blocked
+The archived H33 audit suggests that pruning near-catalogue prediction mass can improve a
+kernel-weighted Tversky objective by reducing redundant truth-cell credit and false-positive mass.
+That is a plausible mechanism, not a causal finding about the hidden competition score. H33 is a
+fault-prediction artifact; it does not establish geothermal vents, permeability, temperature, or
+commercial potential.
 
-The recorded evidence does not form a consistent release chain: candidate filenames differ among the README, public pages and run cards; `evidence/run_card_v2.json` says promotion is allowed while recording empty registry measurements; and `evidence/surface_uniqueness.json` marks its scan incomplete with one checked-raster forward overlap of 1.0. Per the literal parallel-run rule, this is a stop condition. Format validation alone cannot resolve it. No new experiment, score or current leaderboard claim is made by this review.
+## Next steps
 
-## Next session
+Resolve the literal-overlap protocol with the selector before any new experiment; assign one lane;
+use cached, hash-pinned features and shared evaluator/writer; run leakage canaries and buffered
+spatial holdout; then complete the registry audit before and after placement. Only a candidate
+passing every gate may reach the separate slot-selection step.
 
-Resolve the protocol's surface-correlation / dot-overlap semantics in the shared template without weakening thresholds; freeze a single lane, preregister one hypothesis and untouched holdout; check all feature-only leakage canaries; then run a complete hash-bound registry audit before considering any output. Only a future candidate clearing all gates may reach a separate slot selector.
+## Session startup
+
+Read this README, the complete retained prompt below, `AGENTS.md`, and `HANDOFF.md` at the start of
+each session. Negative results are deliverables. Do not treat source links or local receipts as
+proof of fresh official retrieval or organizer acceptance.
 
 ## Complete retained project prompt
 
-Historical statements below are user-supplied requirements and claims, not verified results. No
-leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
-PROJECT_BRIEF.md is the source for this embedded copy.
+Historical statements in the prompt below are user-supplied requirements and claims, not verified
+results. Current measurements and release decisions are documented above and in `evidence/`.
 
 <details>
 <summary>Read the complete supplied project brief before every session</summary>
 
-
-## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET
-
-Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818] (beats random, loses to D28 0.0919) → negative. File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` (selector-review only; complete corrected uniqueness scan pending). Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).
 # User project prompt — retained as supplied
 
 Read this at the beginning of every session. Scores and access statements below are user-supplied claims, not current verified facts. Execution status and verified evidence belong in README.md and evidence/, not by silently rewriting this historical brief.

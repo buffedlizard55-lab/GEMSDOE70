@@ -36,7 +36,7 @@ def test_real_card_separates_download_from_promotion():
     assert result['download_and_submit_ok'] is False
     assert result['verdict'] == 'negative'
     assert result['artifact_sha256'] is None
-    assert any('incomplete scan' in r for r in result['reasons'])
+    assert any('literal one-way overlap rule' in r for r in result['reasons'])
 
 
 def test_missing_or_corrupt_artifact_is_closed(tmp_path):

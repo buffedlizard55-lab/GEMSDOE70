@@ -1,42 +1,17 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Submit a file · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<title>Submission · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><div class="eyebrow">SUBMISSION GUIDE</div>
-<h1>How to submit this file — and what the number will mean.</h1>
-<p class="lead"><strong>The file:</strong> <code>downloads/gems70-p4-stratified-halo-37654-20261020.tif</code>
-(126,097 bytes, SHA-256 <code>0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7</code>).
-A one-TIFF ZIP of the same file is provided for portals that ask for it. Upload exactly one of them.</p>
-<section class="panel"><h2>Decision, stated plainly</h2>
-<ul>
-<li><strong>Download:</strong> yes — the file is unique, format-validated and reproducible.</li>
-<li><strong>Upload a weekly slot:</strong> not recommended. Verdict <code>negative</code>.
-Our target-like proxy says it is 12.6% below H33; our catalogue holdout says it is 20× above it.
-Neither is the hidden truth. This is a defensible test, not a validated win.</li>
-<li><strong>Never</strong> upload the ZIP and the TIFF as two different submissions.</li></ul></section>
-<section><h2>Steps</h2><ol class="steps">
-<li>Open the competition <em>New submission</em> page (DrivenData competition 306).</li>
-<li>Choose <code>gems70-p4-stratified-halo-37654-20261020.tif</code> (or the matching <code>.zip</code>, which contains only that TIFF).</li>
-<li>Paste the note exactly as below (one line, 108 characters).</li>
-<li>Submit and keep the receipt: filename, SHA-256, timestamp and the score the portal returns.</li>
-<li>Record the returned score as ORGANIZER-CONFIRMED — nothing on this site may be relabelled as one.</li>
-</ol>
-<p><code>P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence</code></p></section>
-<section><h2>Why the earlier portal error happened</h2>
-<p>“Predicted values must be in range [0, 1]” is raised by the portal's own range check. The shared
-writer refuses non-finite, negative or &gt;1 values instead of clipping them, then re-reads the file
-from disk. This file is all-finite with values in exactly {0, 1}. We cannot inspect the earlier
-rejected upload, so we do not claim to know its specific defect.</p></section>
-<section><h2>On-disk validator receipt</h2>
-<p>Every check below was recomputed from the published bytes by the shared template validator.</p>
-<div class="table-wrap"><table><caption>Shared validator, all checks must pass.</caption><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody><tr><td>single_band</td><td>pass</td></tr><tr><td>dtype_float32</td><td>pass</td></tr><tr><td>dimensions_3730x3292</td><td>pass</td></tr><tr><td>crs_epsg_32611</td><td>pass</td></tr><tr><td>transform_matches_sample_submission</td><td>pass</td></tr><tr><td>no_nan_anywhere</td><td>pass</td></tr><tr><td>no_inf_anywhere</td><td>pass</td></tr><tr><td>no_sentinel_values</td><td>pass</td></tr><tr><td>range_0_1_guaranteed</td><td>pass</td></tr><tr><td>min_ge_0</td><td>pass</td></tr><tr><td>max_le_1</td><td>pass</td></tr><tr><td>in_footprint_all_finite</td><td>pass</td></tr><tr><td>in_footprint_range_0_1</td><td>pass</td></tr><tr><td>outside_footprint_zero</td><td>pass</td></tr><tr><td>zero_dots_on_mapped_catalogue</td><td>pass</td></tr></tbody></table></div>
-<p class="small">Validator class: local format/range preflight; not organizer acceptance or uniqueness clearance.</p></section>
-<section><h2>Uniqueness receipt</h2>
-<p>mutual min(forward,reverse) &gt; 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.</p>
-<div class="table-wrap"><table><caption>Corrected binary-dot definition; forward-only overlap with a dense sampling grid is uninformative.</caption><thead><tr><th>Measurement</th><th>Value</th></tr></thead><tbody><tr><td>Rasters checked</td><td>62</td></tr><tr><td>Duplicate count (mutual rule)</td><td>0</td></tr><tr><td>Worst mutual overlap</td><td>0.3119 (calib_h25ctx_01280.tif)</td></tr><tr><td>Worst forward-only overlap</td><td>1.0000 (calib_r13lattice_00904.tif)</td></tr><tr><td>Worst Spearman ρ</td><td>0.0500</td></tr><tr><td>Inventory scope</td><td>62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive</td></tr></tbody></table></div></section></main>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
+<p>No TIFF is authorized for download or submission. The archived Phase-4 TIFF fails the requested one-way
+3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
+are not clearance under the current prompt. Archived files are quarantined for audit only.</p>
+<p><a href="protocol-review.html">Current protocol review and next steps</a> ·
+<a href="literal-protocol-review.json">Current JSON run card</a></p></section><section class="stop"><div class="eyebrow">RELEASE DECISION</div>
+<h1>STOP — no TIFF cleared for download or submission</h1>
+<p>Do not download or submit any historical artifact. Previously exposed TIFF/ZIP files are quarantined for audit only. The literal one-way 3-pixel overlap rule fails on the archived candidate; no new candidate was generated and no slot was used.</p>
+<p><a href="protocol-review.html">Read the literal-protocol review and ranked research queue</a> · <a href="submission.html">Submission requirements and status</a>.</p></section><h2>Future requirements</h2><ol><li>Resolve protocol ambiguity with the selector.</li><li>Use one assigned method lane and preregister the split and method.</li><li>Run leakage canaries and buffered holdout with DTI, evaluator version, withheld count and CI.</li><li>Audit the complete registry before and after placement; obey the literal one-way thresholds.</li><li>Only then write and validate one exact-format TIFF; selector approval remains separate.</li></ol><p>The earlier portal range error cannot be diagnosed without the rejected upload bytes.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
+</footer></body></html>

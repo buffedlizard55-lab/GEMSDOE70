@@ -94,3 +94,12 @@ def test_project_pages_mount_is_resolved_against_site(tmp_path):
     (tmp_path / 'index.html').write_text(
         'DO NOT SUBMIT <a href="/GEMSDOE70/docs/index.html">Current site</a>')
     assert check_output(tmp_path)['built_output_ok']
+
+
+def test_quarantined_review_bytes_are_not_published(tmp_path):
+    safe_output(tmp_path)
+    rel = 'docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif'
+    assert not (ROOT / rel).exists()
+    assert (ROOT / 'quarantine/published-downloads-2026-10-20' /
+            'gems70-p4-stratified-halo-37654-20261020.tif').is_file()
+    assert check_output(tmp_path)['raster_downloads'] == 0

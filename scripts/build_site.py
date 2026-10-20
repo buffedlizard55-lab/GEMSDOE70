@@ -42,7 +42,19 @@ def ci(d):
 
 
 def frame(title, body):
+    review = load('evidence/literal_protocol_review.json', {})
+    if review.get('correlation_overlap_vs_registry', {}).get('stop'):
+        body = ('''<section role="alert" class="card"><h1>DO NOT SUBMIT — literal protocol stop</h1>
+<p>No TIFF is authorized for download or submission. The archived Phase-4 TIFF fails the requested one-way
+3-pixel overlap rule. Historical “unique” claims below use a different, mutual rule and
+are not clearance under the current prompt. Archived files are quarantined for audit only.</p>
+<p><a href="protocol-review.html">Current protocol review and next steps</a> ·
+<a href="literal-protocol-review.json">Current JSON run card</a></p></section>''' + body)
     nav = ''.join(f'<a href="{h}">{esc(t)}</a>' for h, t in NAV)
+    footer_links = ('' if review.get('correlation_overlap_vs_registry', {}).get('stop') else
+                    '<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> · '
+                    '<a href="downloads/instrumentA_holdout.json">Instrument A</a> · '
+                    '<a href="downloads/instrumentB_prime.json">Instrument B′</a>')
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{esc(title)} · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
@@ -51,9 +63,7 @@ def frame(title, body):
 <span class="edition">PHASE 4 · 2026-10-20</span></header>
 <nav aria-label="Main">{nav}</nav><main id="main">{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>'''
+{footer_links}</footer></body></html>'''
 
 
 def table(headers, rows, caption=None):
@@ -71,10 +81,49 @@ def instrument_rows(d):
             for k, v in d['scores'].items()]
 
 
+def build_blocked_site(review):
+    """Render only stop/review pages when literal protocol evidence blocks release."""
+    DOCS.mkdir(parents=True, exist_ok=True)
+    (DOCS / 'literal-protocol-review.json').write_text(json.dumps(review, indent=2) + '\n')
+    import markdown
+    report = (ROOT / 'reports/literal-protocol-review.md').read_text()
+    (DOCS / 'protocol-review.html').write_text(
+        frame('Current protocol review', markdown.markdown(report, extensions=['tables'])))
+    stop = '''<section class="stop"><div class="eyebrow">RELEASE DECISION</div>
+<h1>STOP — no TIFF cleared for download or submission</h1>
+<p>Do not download or submit any historical artifact. Previously exposed TIFF/ZIP files are quarantined for audit only. The literal one-way 3-pixel overlap rule fails on the archived candidate; no new candidate was generated and no slot was used.</p>
+<p><a href="protocol-review.html">Read the literal-protocol review and ranked research queue</a> · <a href="submission.html">Submission requirements and status</a>.</p></section>'''
+    pages = {
+        'index.html': stop + '<h2>Release gate</h2><p>Local format validation is not uniqueness clearance or organizer acceptance. No local candidate score is an organizer-confirmed score.</p>',
+        'submission.html': stop + '<h2>Future requirements</h2><ol><li>Resolve protocol ambiguity with the selector.</li><li>Use one assigned method lane and preregister the split and method.</li><li>Run leakage canaries and buffered holdout with DTI, evaluator version, withheld count and CI.</li><li>Audit the complete registry before and after placement; obey the literal one-way thresholds.</li><li>Only then write and validate one exact-format TIFF; selector approval remains separate.</li></ol><p>The earlier portal range error cannot be diagnosed without the rejected upload bytes.</p>',
+        'results.html': stop + '<p>No new experiment was run in this review. Archived scores and receipts remain historical evidence only.</p>',
+        'hypotheses.html': stop + '<p>See the ranked, conditional cache-based hypotheses in the protocol review. They are not authorized to execute until the lane and protocol conflict are resolved.</p>',
+        'h33-analysis.html': stop + '<p>The archived H33 analysis supports a plausible pruning/metric interaction explanation, not a causal claim. The user-reported 0.2778 is not organizer-confirmed.</p>',
+        'limitations.html': stop + '<p>Key blockers: incomplete authorization for a new lane, protocol conflict, no current organizer receipt, and no refreshed official source checks.</p>',
+        'sources.html': stop + '<p>Official manual-review links: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">rules</a>, <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem</a>, <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data</a>, <a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a>, <a href="https://gdr.openei.org/submissions/1391">DOE INGENIOUS</a>, and <a href="https://github.com/drivendataorg/gems-prize-reference-solution">organizer reference</a>. These external sources were not fetched in this review.</p>',
+    }
+    for name, body in pages.items():
+        title = name.removesuffix('.html').replace('-', ' ').title()
+        (DOCS / name).write_text(frame(title, body))
+    (DOCS / 'executive-summary.html').write_text(
+        '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=submission.html"><title>GEMSDOE70 — DO NOT SUBMIT</title></head><body><p>DO NOT SUBMIT — no TIFF cleared. <a href="submission.html">Review status</a>.</p></body></html>')
+    print('Rendered fail-closed publication pages; no downloads or candidate metrics published.')
+
+
 def main():
+    review = load('evidence/literal_protocol_review.json', {})
+    if review.get('correlation_overlap_vs_registry', {}).get('stop'):
+        build_blocked_site(review)
+        return
     card = load('evidence/run_card.json', {})
     if not card:
         raise SystemExit('evidence/run_card.json missing; run the experiment first')
+    review = load('evidence/literal_protocol_review.json', {})
+    if review:
+        (DOCS / 'literal-protocol-review.json').write_text(json.dumps(review, indent=2) + '\n')
+        import markdown
+        text = (ROOT / 'reports/literal-protocol-review.md').read_text()
+        (DOCS / 'protocol-review.html').write_text(frame('Current protocol review', markdown.markdown(text, extensions=['tables'])))
     name = card['submission_name']
     sha = card['raster_sha256']
     val = card.get('validator_output') or {}
@@ -141,12 +190,13 @@ def main():
     decision = f'''<section class="{tone}" aria-labelledby="decision">
 <div class="eyebrow">SUBMISSION STATUS</div>
 <h1 id="decision">{esc(headline)}</h1>
-<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
-passes every shared-validator check, and its SHA-256 is recorded below.</p>
-<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
-<strong>{esc(card['verdict'])}</strong>: the pre-registered target-like gate (instrument B′) is
-negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
-not a validated improvement.</p>
+<p><strong>Download: yes — format-validated for review.</strong> The uniqueness check covers
+62 archived registry rasters only, not every private or uncommitted raster. Local validation does
+not establish organizer acceptance.</p>
+<p><strong>Competition submission: NO — not recommended.</strong> The pre-registered target-like
+gate (instrument B′) is negative, so improvement is not demonstrated. Verdict:
+<strong>{esc(card['verdict'])}</strong>; no weekly slot has been used. The historical 0.2778 figure
+is not an organizer-confirmed score in this project.</p>
 <div class="actions">
 <a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download submission TIFF</a>
 <a class="button secondary" href="downloads/{esc(name)}.zip" download>Download one-TIFF ZIP</a>
@@ -364,14 +414,14 @@ as a predictor.</li></ul>
 <h2>Receipts</h2>
 <p><a href="downloads/data_receipt.json">Input SHA-256 pins</a> ·
 <a href="downloads/template_verification.json">Shared-template verification</a> ·
-<a href="downloads/upstream_fix_report.md">Upstream fix report</a></p>'''
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/evidence/upstream_fix_report.md">Upstream fix report</a></p>'''
     (DOCS / 'sources.html').write_text(frame('Sources', src_page))
 
     # Root entry point (repository-root Pages keeps working).
     (ROOT / 'index.html').write_text(
         '<!doctype html><html lang="en"><head><meta charset="utf-8">'
         '<meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70</title>'
-        '</head><body><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
+        '</head><body><p>DO NOT SUBMIT — review only.</p><p><a href="docs/index.html">Open the GEMSDOE70 evidence site</a></p>'
         '</body></html>\n')
     (DOCS / '.nojekyll').touch()
     # Backwards-compatible entry points; they must not carry stale claims.
@@ -381,7 +431,7 @@ as a predictor.</li></ul>
         (DOCS / old).write_text(
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<meta http-equiv="refresh" content="0;url={target}"><title>GEMSDOE70</title>'
-            f'</head><body><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
+            f'</head><body><p>DO NOT SUBMIT — review only.</p><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
     (DOCS / 'status.json').unlink(missing_ok=True)
     # keep a root-level copy so older pages that link run-card.json still resolve
     (DOCS / 'run-card.json').write_text((ROOT / 'evidence/run_card.json').read_text())

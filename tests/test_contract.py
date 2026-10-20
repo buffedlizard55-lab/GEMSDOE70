@@ -78,7 +78,7 @@ def test_release_reports_both_flags(tmp_path):
     real=release_status(ROOT)
     assert real['download_ok'] is False and real['submit_recommended'] is False
     assert real['download_and_submit_ok'] is False
-    assert any('incomplete scan' in reason for reason in real['reasons'])
+    assert any('literal one-way overlap rule' in reason for reason in real['reasons'])
     assert release_status(tmp_path)['download_ok'] is False
     (tmp_path/'docs/downloads').mkdir(parents=True)
     (tmp_path/'docs/downloads/stale.tif').write_bytes(b'not-a-tiff')
@@ -99,7 +99,7 @@ def test_pages_links_and_decision_banner():
         for link in parser.links:assert (p.parent/link.split('#')[0].split('?')[0]).is_file(),(p,link)
     home=(ROOT/'docs/index.html').read_text()
     assert 'STOP — no TIFF cleared for download or submission' in home
-    assert 'Do not submit them' in home
+    assert 'Do not download or submit any historical artifact' in home
     assert 'Download submission TIFF' not in home
 
 

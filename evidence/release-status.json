@@ -7,10 +7,11 @@
   "artifact_sha256": null,
   "submission_name": null,
   "reasons": [
-    "evidence/run_card_v2.json has empty registry measurements while asserting promotion",
-    "evidence/surface_uniqueness.json records an incomplete scan and 1.0 forward dot overlap",
+    "literal one-way overlap rule exceeds 70 percent on four accessible registry rasters, including 1.0 forward overlap",
+    "the 62-raster public inventory is not complete for private or uncommitted artifacts",
+    "historical mutual-overlap clearance did not satisfy the literal prompt threshold",
     "public-facing candidate names and receipts conflict",
-    "all previously exposed GeoTIFF/ZIP files are quarantined pending a complete independent release audit"
+    "all previously exposed GeoTIFF/ZIP files are quarantined for audit only"
   ],
   "notes": [
     "No artifact is cleared; quarantined files are audit-only."
