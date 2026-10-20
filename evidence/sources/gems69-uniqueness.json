@@ -1,0 +1,55 @@
+{
+ "evidence_class": "REGISTRY-MEASUREMENT",
+ "generated_utc": "20261020T183408Z",
+ "my_file": "submissions/h69-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif",
+ "my_dots": 31994,
+ "my_sha256": "be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7",
+ "registry_scope": "registry/prior_rasters.json (751 unique blobs, 2026-10-11 family census)",
+ "rho_limit": 0.9,
+ "overlap_limit": 0.7,
+ "n_registry_blobs": 751,
+ "n_compared": 750,
+ "n_errors": 1,
+ "worst_abs_spearman": 0.15442722757041327,
+ "worst_rho_entry": {
+  "blob": "157813953405ef61d7f8e98cadd48bf3df2c5900",
+  "stratum": "dotlike",
+  "their_dots": 37654,
+  "rho": 0.15442722757041327,
+  "dot_overlap_3px": 0.23204350815777958,
+  "pixel_agreement": 0.9952330615449265
+ },
+ "worst_dot_overlap_all": {
+  "blob": "e6433f57238b38a142192af9a531a8c7934ed111",
+  "stratum": "universal",
+  "their_dots": 5167373,
+  "rho": 0.04675895600273334,
+  "dot_overlap_3px": 1.0,
+  "pixel_agreement": 0.5792421468569511
+ },
+ "worst_dot_overlap_dotlike": {
+  "blob": "dd5dffe559c70eca07cd8498cd6c237691af83b3",
+  "stratum": "dotlike",
+  "their_dots": 103347,
+  "rho": 0.013024738662811371,
+  "dot_overlap_3px": 0.6194286428705382,
+  "pixel_agreement": 0.9892026001778623
+ },
+ "n_exact_pixel_agreement_9999": 0,
+ "literal_gate": {
+  "rho_ok": true,
+  "overlap_ok": false
+ },
+ "stratified_gate": {
+  "dotlike_overlap_ok": true,
+  "note": "universal soft surfaces and dense rasters overlap ANY sparse dot field by construction; family precedent GEMSDOE63/64 treats them as a registry-structure condition, reported separately from the dotlike lane-drift gate"
+ },
+ "errors": [
+  {
+   "blob": "a97c7b2a513225c9f9f2b35736afe5abf4d2a491",
+   "err": "shape 32x48",
+   "stratum": "error"
+  }
+ ],
+ "seconds": 401.4
+}

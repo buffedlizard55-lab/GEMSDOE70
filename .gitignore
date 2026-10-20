@@ -1,0 +1,10 @@
+.cache/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+build/
+dist/
+submissions/
+data/external/
+data/training_features.tif

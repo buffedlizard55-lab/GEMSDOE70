@@ -1,0 +1,35 @@
+name: Verify evidence and negative release gate
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Reproduce immutable-witness audit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/audit.py
+      - run: python scripts/make_run_card.py
+      - run: python scripts/release_gate.py --expect-negative
+      - run: python scripts/build_site.py
+      - run: python -m pytest -q --junitxml=evidence/ci-tests.xml
+      - name: Retain audit, not a competition submission
+        uses: actions/upload-artifact@v4
+        with:
+          name: negative-audit-evidence
+          path: |
+            evidence/preflight.json
+            evidence/run_card.json
+            evidence/release-status.json
+            evidence/ci-tests.xml
