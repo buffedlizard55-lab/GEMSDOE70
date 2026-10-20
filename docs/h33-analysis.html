@@ -3,7 +3,7 @@
 <title>Why H33 scored · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<span class="edition">PHASE 5 · 2026-10-20</span></header>
 <nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Why the archived H33 field scored 0.2778 — and what it takes to beat it</h1>
 <p><strong>Evidence class:</strong> DATA-MEASUREMENT of the archived bytes, plus user-supplied historical scores.
 The 0.2778 value has <strong>no organizer receipt in this repository</strong>; it is the user's report. Nothing
@@ -112,7 +112,28 @@ stratification that this session measured to be worth +70 % on B′ at fixed mas
 its limit here; the leaderboard gap is information, not spacing.</p>
 <h2>What we will not do</h2>
 <p>Rescale, jitter, rename or prune H33 and call it a new prediction. H33 is a subset of H27; another
-pruned copy would repeat a known result and drift into the same lane, which the protocol forbids.</p></main>
+pruned copy would repeat a known result and drift into the same lane, which the protocol forbids.</p>
+<h2>Phase 5 update — how much headroom is left, with the assumptions written out</h2>
+<p>Two live points from the same family constrain the hidden-truth size. H27 (40,199 dots,
+including the 1 px shell) scored <strong>0.2708</strong>; H33 (37,654 dots, the 1 px and sqrt(2)/2 px shells
+deleted) scored <strong>0.2778</strong>. If the deleted 2,545 dots carried ~0 kernel credit against the hidden
+truth, then <code>DTI = T/D</code> with <code>D = 0.2*(T + n - M) + 0.8*|G|</code> gives <code>D2 = 19,690</code>, <code>T = 5,470</code>,
+and <code>0.8*|G| = 6,690 + 0.2*M</code>. With <code>M</code> (dots with non-zero truth credit) of order 1,500, the
+implied hidden truth is <code>|G| ~ 8,700 px</code> (870 km of new trace) and H33 recalls ~63 % of it.
+<strong>This is a back-of-envelope estimate with two assumptions (k = 0 for the deleted shells,
+M ~ 1,500); it is not a measurement and must not be quoted as a score.</strong></p>
+<p>The marginal rule for adding a non-redundant dot is <code>k &gt; alpha * DTI = 0.2 * 0.2778 = 0.056</code>.
+A random dot in the 0.2-3.2 km halo earns roughly 0.1-0.2 expected kernel credit, so H33's
+<em>density</em> is close to optimal; adding 37,000 more dots raises <code>T</code> by less than it raises the
+<code>0.2*(n - M)</code> term. The open lever is therefore not more dots but <strong>better-ranked dots</strong>: with the
+same 37,654 dots, raising <code>T</code> from 5,470 to ~8,700 (covering the truth that is already inside the
+halo) would put the score near 0.44 — exactly the leader's public value. That is an arithmetic
+target, not a result.</p>
+<p>Phase 5 acts on this: it keeps H33's halo geometry and dot count and replaces the uniform draw
+with an out-of-fold ranker. On the halo surrogate (instrument C) the emission scores 0.1472
+against H33's 0.0952 and P4's 0.1177, paired delta +0.0520 [+0.0398, +0.0639]. Whether that
+ranking transfers to the hidden truth is the one thing this repository cannot test; the live
+receipt is the test.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·

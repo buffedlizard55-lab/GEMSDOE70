@@ -1,0 +1,13 @@
+{
+  "count": 37654,
+  "block_px": 5,
+  "nms_px": 4.0,
+  "median_distance_px": 12.529964447021484,
+  "occupied_200px_blocks": 155,
+  "gate_median_range": [
+    8.0,
+    24.0
+  ],
+  "gate_blocks": 130,
+  "passed": true
+}

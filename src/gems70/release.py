@@ -46,9 +46,12 @@ def _load(root, rel):
 def release_status(root):
     """Report the published candidate's status without ever inventing a score."""
     root = Path(root)
-    card = _load(root, 'evidence/phase4/run_card.json')
-    canaries = _load(root, 'evidence/phase2/canaries.json')
-    audit = _load(root, 'evidence/phase4/uniqueness.json')
+    card = _load(root, 'evidence/run_card.json') or _load(root, 'evidence/phase4/run_card.json')
+    canaries = (_load(root, 'evidence/phase5/canaries.json')
+                or _load(root, 'evidence/phase2/canaries.json'))
+    audit = (_load(root, 'evidence/phase5/uniqueness.json')
+             or _load(root, 'evidence/phase4/uniqueness.json'))
+    canary_table = (canaries or {}).get('single_feature_auc', canaries or {})
     reasons, notes = [], []
     download_ok = False
     submit = False
@@ -74,13 +77,21 @@ def release_status(root):
         if not audit or audit.get('unique') is not True or int(audit.get('duplicate_count', 1)) != 0:
             reasons.append('Uniqueness is not cleared under the corrected mutual-overlap rule.')
             download_ok = False
-        if not canaries or not all(valid_canary(c) for c in canaries.values()):
+        gates = card.get('gates')
+        if gates:
+            failed = [k for k, v in gates.items() if not v]
+            if failed:
+                reasons.append('Failed gates: ' + ', '.join(failed))
+        else:
+            if not card.get('gate_a_candidate_ge_h33'):
+                reasons.append('Candidate did not match H33 on instrument A.')
+            if not card.get('gate_b_prime_candidate_gt_h33_significant'):
+                reasons.append("Candidate did not beat H33 on instrument B' with a 95% CI above zero.")
+        if not canary_table or not all(valid_canary(c) for c in canary_table.values()
+                                       if isinstance(c, dict)):
             reasons.append('Feature-alone leakage evidence is missing or fails.')
-        submit = bool(card.get('download_and_submit_ok') is True and download_ok)
-        if not card.get('gate_a_candidate_ge_h33'):
-            reasons.append("Candidate did not match H33 on instrument A.")
-        if not card.get('gate_b_prime_candidate_gt_h33_significant'):
-            reasons.append("Candidate did not beat H33 on instrument B' with a 95% CI above zero.")
+        submit = bool(card.get('download_and_submit_ok') is True and download_ok
+                      and (not gates or all(gates.values())))
         notes.append('A downloadable, validated file is not a validated leaderboard improvement.')
     return {
         'verdict': (card or {}).get('verdict', 'negative'),

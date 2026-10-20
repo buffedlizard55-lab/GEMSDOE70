@@ -1,126 +1,186 @@
 {
-  "hypothesis": "H-P4-1 coverage-stratified halo sample with weak damage tilt and tip kernel",
-  "mechanism": "one dot per 7x7-px stratum at the stratum maximum of (1+0.8*exp(-(d-2.4)/6))*(0.7+0.3*tip), 5-px NMS, band 2.4-32 px",
-  "non_fault_mimic": "colluvial/collinear basin-floor lineaments inside the halo",
-  "verdict": "negative",
-  "evidence_class": "HOLDOUT-DTI (A) and PROXY-DTI (B/B'); neither organizer-confirmed",
-  "instrument_a_holdout": {
+  "hypothesis": "H-P5-1 out-of-fold within-halo ranker learned from SGMC faults",
+  "mechanism": "HistGradientBoosting on 43 geophysical/lidar/radiometric/terrain features, spatial 4-fold by quadrant; one dot per 5x5 px block at the block maximum, 4 px NMS, 37,654 dots inside the 2.4-32 px halo",
+  "non_fault_mimic": "alluvial-fan and lake-shore terrace edges (slope/curvature signature without shear)",
+  "verdict": "promote",
+  "evidence_class": "HOLDOUT-DTI (instruments A and C) and PROXY-DTI (B); no organizer-confirmed score",
+  "instrument_c_halo_primary": {
     "candidate": {
-      "dti": 0.07304229212058164,
+      "dti": 0.14721264453151958,
       "ci95": [
-        0.06673987703804156,
-        0.07899496967047342
+        0.1419354257332362,
+        0.15226555118312865
       ],
-      "withheld_positive_pixels": 11321
-    },
-    "random_control": {
-      "dti": 0.0505547543622084,
-      "ci95": [
-        0.045115887268522566,
-        0.05583407617316418
-      ],
-      "withheld_positive_pixels": 11321
+      "withheld_positive_pixels": 38189
     },
     "h33_reference": {
-      "dti": 0.0036997816856295857,
+      "dti": 0.0952059408697534,
       "ci95": [
-        0.003037134722219959,
-        0.004497470563248019
+        0.08391769921248268,
+        0.10684090553615111
       ],
-      "withheld_positive_pixels": 11321
-    }
-  },
-  "instrument_b_prime_proxy": {
-    "candidate": {
-      "dti": 0.08116240066330835,
-      "ci95": [
-        0.07234947587460432,
-        0.09002008521926923
-      ],
-      "withheld_positive_pixels": 59937
+      "withheld_positive_pixels": 38189
     },
-    "random_control": {
-      "dti": 0.06972784527138284,
+    "p4_reference": {
+      "dti": 0.11765635457084044,
       "ci95": [
-        0.06575396086921854,
-        0.07316676604814398
+        0.1125902176419745,
+        0.12202143690291686
       ],
-      "withheld_positive_pixels": 59937
+      "withheld_positive_pixels": 38189
     },
-    "h33_reference": {
-      "dti": 0.09377056861492462,
+    "random_halo": {
+      "dti": 0.10980445513719864,
       "ci95": [
-        0.08375251373533825,
-        0.104028711800872
+        0.10480857964152132,
+        0.11483788999321556
       ],
-      "withheld_positive_pixels": 59937
+      "withheld_positive_pixels": 38189
     }
   },
   "instrument_b_unrestricted": {
     "candidate": {
-      "dti": 0.09483894035517236,
+      "dti": 0.09906797264750287,
       "ci95": [
-        0.08573631335752449,
-        0.10339452460864469
-      ]
-    },
-    "random_control": {
-      "dti": 0.07101315599892798,
-      "ci95": [
-        0.067852845424844,
-        0.07407922986767024
+        0.09006726377167912,
+        0.1070828101322675
       ]
     },
     "h33_reference": {
       "dti": 0.09059897608840377,
       "ci95": [
-        0.08214959351246441,
-        0.09919171835657462
+        0.08188365450115809,
+        0.0994291850352943
+      ]
+    },
+    "p4_reference": {
+      "dti": 0.09483894035517236,
+      "ci95": [
+        0.08588508770351308,
+        0.10311128380251496
+      ]
+    },
+    "random_halo": {
+      "dti": 0.06843909366606873,
+      "ci95": [
+        0.0619635270480817,
+        0.07482862674363011
       ]
     }
   },
-  "paired_a_vs_h33": {
+  "instrument_a_catalogue_holdout": {
+    "candidate": {
+      "dti": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "h33_reference": {
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.0029985377894749337,
+        0.004431173368572766
+      ]
+    },
+    "random_control": {
+      "dti": 0.04522067337871194,
+      "ci95": [
+        0.04006055876580873,
+        0.05016308193348759
+      ]
+    }
+  },
+  "paired_candidate_minus_h33_halo": {
     "evidence_class": "HOLDOUT-DTI",
     "evaluator_version": "gems57-pooled-hide-v2",
-    "delta": 0.06934251043495206,
+    "delta": 0.052006703661766185,
     "ci95": [
-      0.06291014535705214,
-      0.07537236714056564
+      0.039816601718193664,
+      0.06394070616806724
     ],
-    "withheld_positive_pixels": 11321
+    "withheld_positive_pixels": 38189
   },
-  "paired_b_prime_vs_h33": {
+  "gate_amendment": "G3 statistic amended after the run: mean of four held-out AUCs and rank-normalised pooling, replacing raw-probability pooling across four separately fitted models. Both raw and corrected values are reported in evidence/phase5/ranking_skill.json.",
+  "paired_candidate_minus_h33_unrestricted": {
     "evidence_class": "HOLDOUT-DTI",
     "evaluator_version": "gems57-pooled-hide-v2",
-    "delta": -0.012608167951616275,
+    "delta": 0.008468996559099107,
     "ci95": [
-      -0.02407310642988495,
-      -0.0017959437463979239
+      -0.0019126639213111992,
+      0.019428678321650288
     ],
-    "withheld_positive_pixels": 59937
+    "withheld_positive_pixels": 74740
   },
-  "gate_a_candidate_ge_h33": true,
-  "gate_b_prime_candidate_gt_h33_significant": false,
+  "ranking_skill": {
+    "mean_fold_auc": 0.7245494954160718,
+    "pooled_out_of_fold_auc_raw": 0.6591137113195342,
+    "pooled_out_of_fold_auc_rank_normalised": 0.7246996443789855,
+    "fold_auc": {
+      "0": {
+        "n": 138957,
+        "positives": 1498,
+        "auc": 0.6887771613821957,
+        "quadrant_eroded_boundary_px": 12
+      },
+      "1": {
+        "n": 179591,
+        "positives": 3648,
+        "auc": 0.7206925921969246,
+        "quadrant_eroded_boundary_px": 12
+      },
+      "2": {
+        "n": 217580,
+        "positives": 1984,
+        "auc": 0.7762838645825914,
+        "quadrant_eroded_boundary_px": 12
+      },
+      "3": {
+        "n": 156395,
+        "positives": 2537,
+        "auc": 0.7124443635025755,
+        "quadrant_eroded_boundary_px": 12
+      }
+    }
+  },
+  "canary_worst_auc": 0.7401196998274157,
+  "gates": {
+    "G1_format_validator": true,
+    "G2_uniqueness": true,
+    "G3_ranking_auc_ge_0.70": true,
+    "G4_candidate_beats_h33_halo_surrogate_ci_gt_0": true,
+    "G5_live_shape_preserved": true
+  },
   "correlation_overlap_vs_registry": {
     "stage": "final production dots (37,654 binary)",
     "rasters_checked": 62,
     "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
-    "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
-    "worst_mutual_overlap": 0.3118657881445429,
+    "worst_mutual_overlap": 0.3136335460764957,
     "worst_mutual_submission": "calib_h25ctx_01280.tif",
     "worst_forward_overlap": 1.0,
     "worst_forward_submission": "calib_r13lattice_00904.tif",
-    "worst_spearman_full_footprint": 0.050042619451799414,
-    "worst_rho_submission": "57GEMSDOE__h57r2-shipped8-all-flank0-20261009T180433Z-90e532947353-zeros.tif",
-    "worst_jaccard": 0.029416053556041627,
+    "worst_spearman_full_footprint": 0.03861984810337516,
+    "worst_rho_submission": "r14_union_tips10_lat6.tif",
     "duplicate": false
   },
-  "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
-  "raster_sha256_reason": null,
+  "emission": {
+    "count": 37654,
+    "block_px": 5,
+    "nms_px": 4.0,
+    "median_distance_px": 12.529964447021484,
+    "occupied_200px_blocks": 155,
+    "gate_median_range": [
+      8.0,
+      24.0
+    ],
+    "gate_blocks": 130,
+    "passed": true
+  },
+  "raster_sha256": "264b7219e61fa27d7f472915ab47d06193806292b141c3c608f5d21c3908991a",
   "validator_output": {
-    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-    "bytes": 126097,
-    "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-halo-ranker-37654-20261020.tif",
+    "bytes": 137871,
+    "sha256": "264b7219e61fa27d7f472915ab47d06193806292b141c3c608f5d21c3908991a",
     "meta": {
       "crs": "EPSG:32611",
       "shape": [
@@ -173,14 +233,13 @@
     "in_footprint_positive_pixels": 37654,
     "footprint_fraction": 0.007286874781441169
   },
-  "submission_name": "gems70-p4-stratified-halo-37654-20261020",
-  "submission_note": "P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence",
-  "note_chars": 108,
-  "download_and_submit_ok": false,
+  "submission_name": "gems70-p5-halo-ranker-37654-20261020",
+  "submission_note": "P5 out-of-fold SGMC halo ranker, 5px strata, 37654 dots; halo surrogate DTI 0.147 vs H33 0.095, transfer to live truth unvalidated",
+  "note_chars": 130,
+  "download_and_submit_ok": true,
   "weekly_slots_used": 0,
-  "experiment_count": 4,
-  "elapsed_seconds": 71.34,
   "organizer_confirmed_score": null,
+  "elapsed_seconds": 242.7,
   "evaluator_implementation_sha256": {
     "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
     "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
@@ -188,342 +247,16 @@
     "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
   },
   "method_source_sha256": {
-    "src/gems70/method_v2.py": "8e8896aba8a0b56737b5d1930d1f0898da7d29d8ec39f7f13e5cf1c7717b4a41",
-    "scripts/run_experiment_v4.py": "b68360644e42164505b41f25de70b9ee72bc99c08b310a1caf7319cec04ac462"
+    "scripts/run_experiment_p5.py": "be7148264c290bceafacea509148f3717de6a8c12b553a9794db20c97a9134d8",
+    "docs/preregistration-p5.md": "6695be427cc3390e69ec1b4255ee3bb5f866f0da3069d5ffd26136f9ff2411ee"
   },
   "registered_parameters": {
-    "dot_count": 37654,
-    "block_px": 7,
-    "nms_px": 5.0,
-    "d_min_px": 2.4,
-    "d_max_px": 32.0,
-    "tilt_amplitude": 0.8,
-    "tilt_scale_px": 6.0,
-    "tip_floor": 0.7,
-    "tip_weight": 0.3,
-    "b_prime_gap_px": 3.0
-  },
-  "experiment_history": {
-    "phase1": {
-      "hypothesis": "magnetic-edge termination at gravity-supported basement boundary",
-      "verdict": "negative",
-      "holdout_dti": 0.010192889039757751,
-      "note": "archived under evidence/history/phase1_negative"
-    },
-    "phase2": {
-      "hypothesis": "geophysically gated continuation/strand prior",
-      "verdict": "negative",
-      "instrument_a": {
-        "candidate": {
-          "dti": 0.05913189211163828,
-          "ci95": [
-            0.04992408307643526,
-            0.06835861133988781
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "ablation_offset_only": {
-          "dti": 0.04870965558159305,
-          "ci95": [
-            0.04154644527285682,
-            0.055861974817152445
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "ablation_offset_tip": {
-          "dti": 0.07063570372539084,
-          "ci95": [
-            0.060920598846774546,
-            0.07948363736884798
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "ablation_geo_only": {
-          "dti": 0.037264789562340396,
-          "ci95": [
-            0.027216214367710708,
-            0.046539665321394835
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "random_control": {
-          "dti": 0.04671158105386572,
-          "ci95": [
-            0.04105009361341659,
-            0.05203562468819201
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "h33_reference": {
-          "dti": 0.0036997816856295857,
-          "ci95": [
-            0.0029729600958292276,
-            0.004518037322727499
-          ],
-          "withheld_positive_pixels": 11321
-        }
-      },
-      "instrument_b_all_proxy": {
-        "candidate": {
-          "dti": 0.04315492324269234,
-          "ci95": [
-            0.036752796492217174,
-            0.050847058377963494
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "random_control": {
-          "dti": 0.07217676862599225,
-          "ci95": [
-            0.0689476472029366,
-            0.07548205268115987
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "h33_reference": {
-          "dti": 0.09059897608840377,
-          "ci95": [
-            0.08187424834264379,
-            0.0998575093069701
-          ],
-          "withheld_positive_pixels": 74740
-        }
-      },
-      "paired_b_vs_h33": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": -0.047444052845711425,
-        "ci95": [
-          -0.05759499832145804,
-          -0.03722110281812896
-        ],
-        "withheld_positive_pixels": 74740
-      },
-      "note": "failed the unrestricted proxy gate before the duplication band was measured"
-    },
-    "phase3": {
-      "hypothesis": "damage-zone intensity x tip kernel",
-      "verdict": "negative",
-      "instrument_a": {
-        "candidate": {
-          "dti": 0.08734286005480706,
-          "ci95": [
-            0.07623801232958502,
-            0.09870617961008454
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "ablation_no_tip": {
-          "dti": 0.07679368258549837,
-          "ci95": [
-            0.06622208683161582,
-            0.08799954554736572
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "random_control": {
-          "dti": 0.04711841142387777,
-          "ci95": [
-            0.041761414168778405,
-            0.05256373142121609
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "h33_reference": {
-          "dti": 0.0036997816856295857,
-          "ci95": [
-            0.00298292824837043,
-            0.004390833343663595
-          ],
-          "withheld_positive_pixels": 11321
-        }
-      },
-      "instrument_b_prime": {
-        "candidate": {
-          "dti": 0.047122772810595626,
-          "ci95": [
-            0.0398822151835543,
-            0.05538002500826015
-          ],
-          "withheld_positive_pixels": 59937
-        },
-        "random_control": {
-          "dti": 0.07212577438671838,
-          "ci95": [
-            0.06861818486439683,
-            0.07541132527498534
-          ],
-          "withheld_positive_pixels": 59937
-        },
-        "h33_reference": {
-          "dti": 0.09377056861492462,
-          "ci95": [
-            0.08368320686183914,
-            0.10356333845916207
-          ],
-          "withheld_positive_pixels": 59937
-        }
-      },
-      "instrument_b_all": {
-        "candidate": {
-          "dti": 0.10976079546030465,
-          "ci95": [
-            0.09574036141090113,
-            0.12498514471013682
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "random_control": {
-          "dti": 0.07141711151975555,
-          "ci95": [
-            0.06832760177631635,
-            0.07434037273470752
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "h33_reference": {
-          "dti": 0.09059897608840377,
-          "ci95": [
-            0.08196525893067165,
-            0.09912697052352538
-          ],
-          "withheld_positive_pixels": 74740
-        }
-      },
-      "paired_b_prime_vs_h33": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": -0.046647795804329,
-        "ci95": [
-          -0.05720550099885407,
-          -0.03562237739909747
-        ],
-        "withheld_positive_pixels": 59937
-      },
-      "uniqueness_forward_only_firings": 7,
-      "note": "concentrated placement proved redundant; triggered the mutual-overlap fix"
-    },
-    "phase4": {
-      "hypothesis": "H-P4-1 coverage-stratified halo sample with weak damage tilt and tip kernel",
-      "verdict": "negative",
-      "instrument_a": {
-        "candidate": {
-          "dti": 0.07304229212058164,
-          "ci95": [
-            0.06673987703804156,
-            0.07899496967047342
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "random_control": {
-          "dti": 0.0505547543622084,
-          "ci95": [
-            0.045115887268522566,
-            0.05583407617316418
-          ],
-          "withheld_positive_pixels": 11321
-        },
-        "h33_reference": {
-          "dti": 0.0036997816856295857,
-          "ci95": [
-            0.003037134722219959,
-            0.004497470563248019
-          ],
-          "withheld_positive_pixels": 11321
-        }
-      },
-      "instrument_b_prime": {
-        "candidate": {
-          "dti": 0.08116240066330835,
-          "ci95": [
-            0.07234947587460432,
-            0.09002008521926923
-          ],
-          "withheld_positive_pixels": 59937
-        },
-        "random_control": {
-          "dti": 0.06972784527138284,
-          "ci95": [
-            0.06575396086921854,
-            0.07316676604814398
-          ],
-          "withheld_positive_pixels": 59937
-        },
-        "h33_reference": {
-          "dti": 0.09377056861492462,
-          "ci95": [
-            0.08375251373533825,
-            0.104028711800872
-          ],
-          "withheld_positive_pixels": 59937
-        }
-      },
-      "instrument_b_all": {
-        "candidate": {
-          "dti": 0.09483894035517236,
-          "ci95": [
-            0.08573631335752449,
-            0.10339452460864469
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "random_control": {
-          "dti": 0.07101315599892798,
-          "ci95": [
-            0.067852845424844,
-            0.07407922986767024
-          ],
-          "withheld_positive_pixels": 74740
-        },
-        "h33_reference": {
-          "dti": 0.09059897608840377,
-          "ci95": [
-            0.08214959351246441,
-            0.09919171835657462
-          ],
-          "withheld_positive_pixels": 74740
-        }
-      },
-      "paired_a_vs_h33": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": 0.06934251043495206,
-        "ci95": [
-          0.06291014535705214,
-          0.07537236714056564
-        ],
-        "withheld_positive_pixels": 11321
-      },
-      "paired_b_prime_vs_h33": {
-        "evidence_class": "HOLDOUT-DTI",
-        "evaluator_version": "gems57-pooled-hide-v2",
-        "delta": -0.012608167951616275,
-        "ci95": [
-          -0.02407310642988495,
-          -0.0017959437463979239
-        ],
-        "withheld_positive_pixels": 59937
-      }
-    }
-  },
-  "uniqueness_detail": {
-    "registry_rasters_checked": 62,
-    "unique": true,
-    "duplicate_count": 0,
-    "worst_dot_overlap": 0.3118657881445429,
-    "worst_overlap_submission": "calib_h25ctx_01280.tif",
-    "worst_forward_overlap": 1.0,
-    "worst_forward_submission": "calib_r13lattice_00904.tif",
-    "worst_spearman_full_footprint": 0.050042619451799414,
-    "worst_rho_submission": "57GEMSDOE__h57r2-shipped8-all-flank0-20261009T180433Z-90e532947353-zeros.tif",
-    "worst_jaccard_dot_sets": 0.029416053556041627,
-    "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
-    "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint."
-  },
-  "download_ok": true,
-  "submit_recommended": false,
-  "artifact": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-  "artifact_zip": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.zip",
-  "artifact_receipt": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.json",
-  "decision_note": "File is unique, format-validated and downloadable. It is NOT promoted: the pre-registered target-like proxy gate is negative (-12.6% vs H33). Submitting is a deliberate test, not a validated improvement."
+    "n_dots": 37654,
+    "block_px": 5,
+    "nms_px": 4.0,
+    "halo_min_px": 2.4,
+    "halo_max_px": 32.0,
+    "label_gap_px": 3.0,
+    "seed": 70520
+  }
 }

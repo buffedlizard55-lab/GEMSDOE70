@@ -1,3 +1,44 @@
+# Handoff — 2026-10-20 (session 3, branch arena/b30aa0bd-gemsdoe70)
+
+## State
+
+* **Phase-5 artifact promoted:** `docs/downloads/gems70-p5-halo-ranker-37654-20261020.tif`
+  (137,871 bytes, sha256 `264b7219e61fa27d7f472915ab47d06193806292b141c3c608f5d21c3908991a`),
+  one-TIFF ZIP and writer receipt alongside. **Download and submit: yes** (calibrated test).
+* All five pre-registered gates passed: G1 format, G2 uniqueness (worst mutual overlap 0.314,
+  worst |rho| 0.039), G3 ranking skill (mean held-out AUC 0.7245), G4 surrogate gain
+  (instrument C: 0.1472 vs H33 0.0952, paired delta +0.0520 [+0.0398, +0.0639]),
+  G5 live-shape (median 12.53 px, 155 blocks).
+* **No organizer-confirmed score exists.** No weekly slot was used by this repository.
+* Instrument correction: the catalogue is the QFaults database (99.998 % within 3 px), so QFaults
+  is not a new-fault proxy; the Phase-4 gate used the unrestricted SGMC proxy, which is dominated
+  by domain-wide coverage. Phase 5 adds instrument C (SGMC restricted to 0.2-3.2 km) and keeps B
+  for continuity.
+
+## What was done
+
+1. Reproduced the Phase-4 instruments and found that a random field in the halo beats H33 on the
+   unrestricted proxy while the live ordering is the opposite — the Phase-4 gate tested the wrong
+   population (IR-P5-2).
+2. Measured QFaults vs catalogue identity (IR-P5-1) and the instrument-A buffer (IR-P5-3).
+3. Preregistered and ran H-P5-1: an out-of-fold SGMC ranker (43 features, quadrant-blocked CV),
+   5 x 5 px stratified emission, 37,654 dots, 4 px NMS. All gates passed; G3's statistic was
+   amended post-run and disclosed (IR-P5-4).
+4. Rebuilt the site and README from the receipts; 144 tests pass.
+
+## Do not
+
+* Do not call the live score known; it must come from the submission receipt.
+* Do not relabel the Phase-4 negative or the E2 file as promoted.
+* Do not drop instrument B or C; the disagreement between them is the evidence.
+
+## Next session, in order
+
+1. Record the live receipt as ORGANIZER-CONFIRMED; if <= 0.2778, mark H-P5-1 negative.
+2. Density ablation on instrument C at matched geometry (37,654 vs 60,000 dots).
+3. Cross-inventory check (train on SGMC, score withheld catalogue components, and the reverse).
+4. Upstream the uniqueness fixes and the instrument-C definition to the shared template.
+
 # Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
 
 Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.

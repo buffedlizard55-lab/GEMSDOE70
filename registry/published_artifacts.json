@@ -55,6 +55,24 @@
       "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
       "bytes": 498152,
       "note": "parallel H2 session (PR #18), blocked diagnostic, NOT a submission; card evidence/history/h2_stepover_negative/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-halo-ranker-37654-20261020.tif",
+      "sha256": "264b7219e61fa27d7f472915ab47d06193806292b141c3c608f5d21c3908991a",
+      "bytes": 137871,
+      "note": "Phase-5 promoted halo-ranker candidate; run card evidence/phase5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-halo-ranker-37654-20261020.zip",
+      "sha256": "0e5ddbfb3e2e0002931ba34fb0690a47a171ca20956eed3d868d33eada8269a8",
+      "bytes": 102610,
+      "note": "Phase-5 one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-halo-ranker-37654-20261020.json",
+      "sha256": "da5fca649442e95348eac52ef42680880dda71aa12884cae2fa2659997349aab",
+      "bytes": 3470,
+      "note": "Phase-5 writer/validator receipt"
     }
   ]
 }

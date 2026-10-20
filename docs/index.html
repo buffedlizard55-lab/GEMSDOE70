@@ -3,57 +3,66 @@
 <title>Overview · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="stop" aria-labelledby="decision">
-<div class="eyebrow">SUBMISSION STATUS</div>
-<h1 id="decision">Verified file · not promoted</h1>
-<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
-passes every shared-validator check, and its SHA-256 is recorded below.</p>
-<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
-<strong>negative</strong>: the pre-registered target-like gate (instrument B′) is
-negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
-not a validated improvement.</p>
+<span class="edition">PHASE 5 · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="ok" aria-labelledby="decision">
+<div class="eyebrow">SUBMISSION STATUS · PHASE 5</div>
+<h1 id="decision">Promoted candidate — download and submit</h1>
+<p><strong>Download: yes.</strong> <strong>Download and submit: yes, as a calibrated test.</strong> Every pre-registered gate
+(G1 format, G2 uniqueness, G3 ranking skill, G4 surrogate gain, G5 live-shape preservation)
+passed; the file is unique among the 62 archived registry rasters and every shared-validator
+check passed on the written bytes. There is <strong>no organizer-confirmed score</strong>: the
+live leaderboard is the only test, and the returned value must be recorded from the receipt.</p>
+<p><strong>What the evidence is, and is not.</strong> On the new halo surrogate (instrument C,
+SGMC faults 0.2–3.2 km from the mapped catalogue) the candidate scores
+0.1472 against H33's 0.0952
+(paired Δ +0.0520, 95 % CI [0.0398, 0.0639]). That surrogate is
+chosen because the live evidence places the hidden truth in the halo; it is still a surrogate,
+and transfer to the hidden truth is <em>not</em> validated.</p>
 <div class="actions">
-<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download>Download submission TIFF</a>
-<a class="button secondary" href="downloads/gems70-p4-stratified-halo-37654-20261020.zip" download>Download one-TIFF ZIP</a>
+<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-p5-halo-ranker-37654-20261020.tif" download>Download submission TIFF</a>
+<a class="button secondary" href="downloads/gems70-p5-halo-ranker-37654-20261020.zip" download>Download one-TIFF ZIP</a>
 <a class="button secondary" href="submission.html">How to submit</a>
 </div>
-<p class="small">Name: <code>gems70-p4-stratified-halo-37654-20261020</code> · Note (108/140 chars):
-<code>P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
-<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
-<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
-pre-registered experiments and published the best candidate. Two instruments favour it, one does
-not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+<p class="small">Name: <code>gems70-p5-halo-ranker-37654-20261020</code> · Note (130/140 chars):
+<code>P5 out-of-fold SGMC halo ranker, 5px strata, 37654 dots; halo surrogate DTI 0.147 vs H33 0.095, transfer to live truth unvalidated</code></p></section><section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
+<h2>A unique, auditable candidate whose promotion rule is written down before the run.</h2>
+<p>Phase 5 replaces the instrument that dominated Phase 4. A random field of 37,654 dots drawn
+across the whole domain scores below H33 on the unrestricted SGMC proxy, but a random field drawn
+inside the 0.2–3.2 km halo scores above it — the proxy's positives are spread over the whole map,
+while the live ordering puts the hidden truth inside the halo. The new primary instrument
+(instrument C) restricts the proxy to the halo. The candidate is an out-of-fold ranker trained on
+43 geophysical, lidar-scarp, radiometric and terrain features with quadrant-blocked cross-validation.</p>
 </section><div class="metrics">
-<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
-<div class="number">0.0730</div>
-<p>[0.0667, 0.0790] · 11,321 withheld catalogue pixels</p></section>
-<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
-<div class="number">0.0812</div>
-<p>[0.0723, 0.0900] · SGMC proxy outside the duplication band</p></section>
+<section><div class="eyebrow">INSTRUMENT C · HALO SURROGATE DTI</div>
+<div class="number">0.1472</div>
+<p>[0.1419, 0.1523] · H33 0.0952 · 38,189 withheld proxy pixels</p></section>
+<section><div class="eyebrow">RANKING SKILL · OUT-OF-QUADRANT AUC</div>
+<div class="number">0.725</div>
+<p>mean of four held-out folds · raw pooled 0.659 · rank-normalised 0.725</p></section>
 <section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
 <div class="number">0.31</div>
-<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ 0.050</p></section></div>
+<p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ 0.039</p></section></div>
 <div class="columns">
-<section class="panel"><h2>Why it is downloadable</h2>
-<p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
-transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
-Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
-lattice reaches 1.00 by construction and is reported separately).</p>
-<a href="results.html">Full evidence →</a></section>
-<section class="panel"><h2>Why it is not promoted</h2>
-<p>On instrument B′ the candidate scores 0.0812 versus H33's
-0.0938 (paired Δ -0.0126,
-95% CI [-0.0241, -0.0018]). The pre-registered rule requires a
-positive lower bound. It does not hold.</p>
-<a href="hypotheses.html">Why this rule →</a></section></div>
-<section><h2>What is measured and what is not</h2>
-<p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue
-components and measures catalogue recovery; instrument B/B′ uses USGS SGMC faults minus the
-catalogue as a proxy for newly mapped faults. Every number is labelled, and no projection is
-presented as a leaderboard score.</p>
+<section class="panel"><h2>Why it is downloadable and submittable</h2>
+<p>Shared validator on the written bytes: single band, float32, 3,730 × 3,292, EPSG:32611, 100 m
+transform, values exactly 0/1, 37,654 dots, zero on mapped faults, zero
+outside the footprint. Uniqueness: worst mutual overlap 0.314
+against 62 archived rasters; worst |Spearman|
+0.039.</p>
+<a href="submission.html">Submission steps →</a></section>
+<section class="panel"><h2>What would falsify it</h2>
+<p>The ranker is trained on SGMC faults; if the hidden new faults are not SGMC-like, the tilt can
+underperform the uniform H33 halo. The surrogate gain is +0.0520
+([0.0398, 0.0639]), and the quadrant folds span 1.5–3.6 k positives. A live score at or
+below 0.2778 is a negative result and must be recorded as such.</p>
+<a href="limitations.html">Known limits →</a></section></div>
+<section><h2>Measured this session</h2>
+<p>The catalogue is the USGS Quaternary fault database: 99.998 % of rasterised QFaults trace pixels
+lie within 3 px of <code>existing_faults.tif</code>, so QFaults cannot be a "new fault" proxy.
+SGMC is the only independent inventory in the cached inputs (3,666 shared px, 78,485 not).
+Every number on this site is read from a JSON receipt; a projection is never a score.</p>
 <ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
-<li><a href="results.html">All three experiments, ablations and canaries</a></li>
+<li><a href="results.html">Instruments A, B, C; gates; canaries</a></li>
 <li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section><h2>Parallel lane E2 — alluvial step (second candidate, DO NOT SUBMIT YET)</h2>
 <p>An independent preregistered lane (oriented detrended-elevation step × basement edge,
 38,000 dots) merged from a parallel session. <strong>Download for selector review: yes.

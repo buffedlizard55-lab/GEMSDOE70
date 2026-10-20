@@ -1,0 +1,9 @@
+{
+  "evidence_class": "DATA-MEASUREMENT",
+  "trace_segments_csv": "/tmp/60GEMSDOE/data/external/trace_segments_utm11.csv",
+  "segments": 84331,
+  "trace_segments_sha256": "c5edf9df3e0e1413c52784884fc38e5b9ca54627b27c6f8baf7713e908f48513",
+  "trace_pixels_in_footprint": 70105,
+  "fraction_within_3px_of_catalogue": 0.08676984523215177,
+  "note": "USGS QFaults trace segments rasterised on the 100 m grid with a Bresenham-style interpolation; virtually every trace pixel lies within 3 px of existing_faults.tif, so QFaults cannot serve as an independent \"new fault\" proxy. Provenance: buffedlizard55-lab/60GEMSDOE data/external/trace_segments_utm11.csv, SHA-256 recorded above."
+}

@@ -3,7 +3,7 @@
 <title>Limitations · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<span class="edition">PHASE 5 · 2026-10-20</span></header>
 <nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Limitations, irregularities and next-session work</h1>
 <h2>Two shared-tool defects were found and fixed this session</h2>
 <ol>
@@ -74,7 +74,37 @@ published tree.</p>
 <ul>
 <li>E2 alluvial-step and E3 depth-step are additional negatives (see <code>docs/preregistration-e2.md</code>, <code>evidence/e2|e3/</code>). E2 bytes are published for selector review under <code>docs/publication-amendment-e2.md</code>; submit remains NO. E2 uniqueness used pre-fix R1 subset definitions — not directly comparable to the corrected 62-raster mutual audit until rerun.</li>
 <li>Bridge <code>sample_submission.tif</code> positives are exactly the catalogue (60,988 px), not an all-zero sample; footprint use only. Two-round expanded-label composition and known-fault masking remain unverified from fetched organizer text.</li>
-</ul></main>
+</ul>
+<h2>Phase 5 irregularities (2026-10-20)</h2>
+<p><strong>IR-P5-1 — the catalogue is the Quaternary fault database.</strong> Rasterising all 84,331 QFaults trace
+segments (<code>60GEMSDOE/data/external/trace_segments_utm11.csv</code>, SHA-256 in the receipt) puts
+99.998 % of their in-footprint pixels within 3 px of <code>existing_faults.tif</code>
+(<code>evidence/phase5/qfaults_catalogue_overlap.json</code>). QFaults is therefore not an independent
+"new fault" inventory and cannot be used as a proxy. SGMC is the only independent inventory in
+the cached inputs (3,666 shared pixels, 78,485 not).</p>
+<p><strong>IR-P5-2 — the Phase-4 promotion gate was dominated by domain-wide coverage.</strong> On the
+unrestricted SGMC proxy, a random field spread over the whole valid domain is a strong competitor
+because the proxy's positives are spread over the whole domain, while the live ordering places
+the hidden truth in the halo (H33-family 0.26-0.28 vs domain-wide lattices ~0.09). The Phase-4
+negative verdict is therefore about the <em>instrument</em>, not necessarily about the candidate. Phase 5
+restricts the proxy to the halo (instrument C) and reports B for continuity only.</p>
+<p><strong>IR-P5-3 — instrument A cannot compare halo emissions.</strong> The shared catalogue holdout masks a
+3 px buffer around each withheld trace (<code>masked_known</code> = visible + buffer; 49,667 px vs 48,340
+visible). A global halo emission that starts at 2.4 px from the full catalogue has no active dot
+inside the buffer and scores 0.0000 on A, while H33 (built per fold from the visible faults)
+scores 0.0037. Instrument A is reported but is not a gate for this emission family.</p>
+<p><strong>IR-P5-4 — G3 statistic amended after the run.</strong> The preregistration pooled probabilities from
+four independently fitted fold models; the raw pooled AUC (0.6591) is lower than every individual
+fold AUC (0.689, 0.721, 0.776, 0.712) because the four models are not calibrated to each other.
+The gate is evaluated on the mean fold AUC (0.7245) with the rank-normalised pooled AUC (0.7247)
+as a cross-check; the raw value is reported. This is a disclosed post-run amendment
+(<code>docs/preregistration-p5.md</code>, A1), not a silent change.</p>
+<p><strong>IR-P5-5 — transfer to the hidden truth is unvalidated.</strong> SGMC is a compilation of state
+geologic maps at mixed scales, not a map of newly discovered geothermal faults. The ranker's
+largest permutation effect is <code>det_elev_slope</code> (0.374), a feature that alluvial-fan and lake-shore
+terrace edges also produce; the single-feature canary AUC is 0.740 (below the 0.90 leakage stop,
+but the mimic is real). A live score at or below 0.2778 falsifies the hypothesis and must be
+recorded as a negative result.</p></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·

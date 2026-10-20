@@ -1,0 +1,262 @@
+{
+  "hypothesis": "H-P5-1 out-of-fold within-halo ranker learned from SGMC faults",
+  "mechanism": "HistGradientBoosting on 43 geophysical/lidar/radiometric/terrain features, spatial 4-fold by quadrant; one dot per 5x5 px block at the block maximum, 4 px NMS, 37,654 dots inside the 2.4-32 px halo",
+  "non_fault_mimic": "alluvial-fan and lake-shore terrace edges (slope/curvature signature without shear)",
+  "verdict": "promote",
+  "evidence_class": "HOLDOUT-DTI (instruments A and C) and PROXY-DTI (B); no organizer-confirmed score",
+  "instrument_c_halo_primary": {
+    "candidate": {
+      "dti": 0.14721264453151958,
+      "ci95": [
+        0.1419354257332362,
+        0.15226555118312865
+      ],
+      "withheld_positive_pixels": 38189
+    },
+    "h33_reference": {
+      "dti": 0.0952059408697534,
+      "ci95": [
+        0.08391769921248268,
+        0.10684090553615111
+      ],
+      "withheld_positive_pixels": 38189
+    },
+    "p4_reference": {
+      "dti": 0.11765635457084044,
+      "ci95": [
+        0.1125902176419745,
+        0.12202143690291686
+      ],
+      "withheld_positive_pixels": 38189
+    },
+    "random_halo": {
+      "dti": 0.10980445513719864,
+      "ci95": [
+        0.10480857964152132,
+        0.11483788999321556
+      ],
+      "withheld_positive_pixels": 38189
+    }
+  },
+  "instrument_b_unrestricted": {
+    "candidate": {
+      "dti": 0.09906797264750287,
+      "ci95": [
+        0.09006726377167912,
+        0.1070828101322675
+      ]
+    },
+    "h33_reference": {
+      "dti": 0.09059897608840377,
+      "ci95": [
+        0.08188365450115809,
+        0.0994291850352943
+      ]
+    },
+    "p4_reference": {
+      "dti": 0.09483894035517236,
+      "ci95": [
+        0.08588508770351308,
+        0.10311128380251496
+      ]
+    },
+    "random_halo": {
+      "dti": 0.06843909366606873,
+      "ci95": [
+        0.0619635270480817,
+        0.07482862674363011
+      ]
+    }
+  },
+  "instrument_a_catalogue_holdout": {
+    "candidate": {
+      "dti": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ]
+    },
+    "h33_reference": {
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.0029985377894749337,
+        0.004431173368572766
+      ]
+    },
+    "random_control": {
+      "dti": 0.04522067337871194,
+      "ci95": [
+        0.04006055876580873,
+        0.05016308193348759
+      ]
+    }
+  },
+  "paired_candidate_minus_h33_halo": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.052006703661766185,
+    "ci95": [
+      0.039816601718193664,
+      0.06394070616806724
+    ],
+    "withheld_positive_pixels": 38189
+  },
+  "gate_amendment": "G3 statistic amended after the run: mean of four held-out AUCs and rank-normalised pooling, replacing raw-probability pooling across four separately fitted models. Both raw and corrected values are reported in evidence/phase5/ranking_skill.json.",
+  "paired_candidate_minus_h33_unrestricted": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.008468996559099107,
+    "ci95": [
+      -0.0019126639213111992,
+      0.019428678321650288
+    ],
+    "withheld_positive_pixels": 74740
+  },
+  "ranking_skill": {
+    "mean_fold_auc": 0.7245494954160718,
+    "pooled_out_of_fold_auc_raw": 0.6591137113195342,
+    "pooled_out_of_fold_auc_rank_normalised": 0.7246996443789855,
+    "fold_auc": {
+      "0": {
+        "n": 138957,
+        "positives": 1498,
+        "auc": 0.6887771613821957,
+        "quadrant_eroded_boundary_px": 12
+      },
+      "1": {
+        "n": 179591,
+        "positives": 3648,
+        "auc": 0.7206925921969246,
+        "quadrant_eroded_boundary_px": 12
+      },
+      "2": {
+        "n": 217580,
+        "positives": 1984,
+        "auc": 0.7762838645825914,
+        "quadrant_eroded_boundary_px": 12
+      },
+      "3": {
+        "n": 156395,
+        "positives": 2537,
+        "auc": 0.7124443635025755,
+        "quadrant_eroded_boundary_px": 12
+      }
+    }
+  },
+  "canary_worst_auc": 0.7401196998274157,
+  "gates": {
+    "G1_format_validator": true,
+    "G2_uniqueness": true,
+    "G3_ranking_auc_ge_0.70": true,
+    "G4_candidate_beats_h33_halo_surrogate_ci_gt_0": true,
+    "G5_live_shape_preserved": true
+  },
+  "correlation_overlap_vs_registry": {
+    "stage": "final production dots (37,654 binary)",
+    "rasters_checked": 62,
+    "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
+    "worst_mutual_overlap": 0.3136335460764957,
+    "worst_mutual_submission": "calib_h25ctx_01280.tif",
+    "worst_forward_overlap": 1.0,
+    "worst_forward_submission": "calib_r13lattice_00904.tif",
+    "worst_spearman_full_footprint": 0.03861984810337516,
+    "worst_rho_submission": "r14_union_tips10_lat6.tif",
+    "duplicate": false
+  },
+  "emission": {
+    "count": 37654,
+    "block_px": 5,
+    "nms_px": 4.0,
+    "median_distance_px": 12.529964447021484,
+    "occupied_200px_blocks": 155,
+    "gate_median_range": [
+      8.0,
+      24.0
+    ],
+    "gate_blocks": 130,
+    "passed": true
+  },
+  "raster_sha256": "264b7219e61fa27d7f472915ab47d06193806292b141c3c608f5d21c3908991a",
+  "validator_output": {
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-halo-ranker-37654-20261020.tif",
+    "bytes": 137871,
+    "sha256": "264b7219e61fa27d7f472915ab47d06193806292b141c3c608f5d21c3908991a",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "emitted_positive_pixels": 37654,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 37654,
+    "footprint_fraction": 0.007286874781441169
+  },
+  "submission_name": "gems70-p5-halo-ranker-37654-20261020",
+  "submission_note": "P5 out-of-fold SGMC halo ranker, 5px strata, 37654 dots; halo surrogate DTI 0.147 vs H33 0.095, transfer to live truth unvalidated",
+  "note_chars": 130,
+  "download_and_submit_ok": true,
+  "weekly_slots_used": 0,
+  "organizer_confirmed_score": null,
+  "elapsed_seconds": 242.7,
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "method_source_sha256": {
+    "scripts/run_experiment_p5.py": "be7148264c290bceafacea509148f3717de6a8c12b553a9794db20c97a9134d8",
+    "docs/preregistration-p5.md": "6695be427cc3390e69ec1b4255ee3bb5f866f0da3069d5ffd26136f9ff2411ee"
+  },
+  "registered_parameters": {
+    "n_dots": 37654,
+    "block_px": 5,
+    "nms_px": 4.0,
+    "halo_min_px": 2.4,
+    "halo_max_px": 32.0,
+    "label_gap_px": 3.0,
+    "seed": 70520
+  }
+}

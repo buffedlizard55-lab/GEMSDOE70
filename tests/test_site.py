@@ -44,7 +44,10 @@ def test_every_published_artifact_is_inventoried():
 
 
 def test_decision_is_explicit_on_the_landing_page():
+    import json as _json
+    card = _json.loads((ROOT / 'evidence/run_card.json').read_text())
     home = (ROOT / 'docs/index.html').read_text()
     assert 'Download: yes.' in home
-    assert 'Submit a weekly slot: not recommended' in home
+    assert ('Submit a weekly slot: not recommended' in home) is (not card['download_and_submit_ok'])
+    assert ('Download and submit: yes' in home) is bool(card['download_and_submit_ok'])
     assert 'Download submission TIFF' in home

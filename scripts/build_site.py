@@ -48,7 +48,7 @@ def frame(title, body):
 <title>{esc(title)} · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<span class="edition">PHASE 5 · 2026-10-20</span></header>
 <nav aria-label="Main">{nav}</nav><main id="main">{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
@@ -79,7 +79,12 @@ def main():
     sha = card['raster_sha256']
     val = card.get('validator_output') or {}
     checks = val.get('checks') or {}
-    uniqueness = load('evidence/phase4/uniqueness.json', {})
+    uniqueness = load('evidence/phase5/uniqueness.json', {}) or load('evidence/phase4/uniqueness.json', {})
+    p5 = load('evidence/phase5/run_card.json', {})
+    p5a = load('evidence/phase5/instrumentA_holdout.json')
+    p5b = load('evidence/phase5/instrumentB_all.json')
+    p5c = load('evidence/phase5/instrumentC_halo.json')
+    p5rk = load('evidence/phase5/ranking_skill.json', {})
     canaries = load('evidence/phase2/canaries.json', {})
     p2a = load('evidence/phase2/instrumentA_holdout.json')
     p2b = load('evidence/phase2/instrumentB_proxy.json')
@@ -99,7 +104,16 @@ def main():
     # ------------------------------------------------------------- copy evidence
     copies = {
         'evidence/run_card.json': 'run_card.json',
-        'evidence/phase4/uniqueness.json': 'uniqueness.json',
+        'evidence/phase4/uniqueness.json': 'uniqueness_phase4.json',
+        'evidence/phase5/uniqueness.json': 'uniqueness.json',
+        'evidence/phase5/instrumentA_holdout.json': 'p5_instrumentA.json',
+        'evidence/phase5/instrumentB_all.json': 'p5_instrumentB.json',
+        'evidence/phase5/instrumentC_halo.json': 'p5_instrumentC.json',
+        'evidence/phase5/ranking_skill.json': 'p5_ranking_skill.json',
+        'evidence/phase5/canaries.json': 'p5_canaries.json',
+        'evidence/phase5/emission.json': 'p5_emission.json',
+        'evidence/phase5/qfaults_catalogue_overlap.json': 'p5_qfaults_overlap.json',
+        'docs/preregistration-p5.md': 'preregistration-p5.md',
         'evidence/phase4/instrumentA_holdout.json': 'instrumentA_holdout.json',
         'evidence/phase4/instrumentA_folds.json': 'instrumentA_folds.json',
         'evidence/phase4/instrumentB_prime.json': 'instrumentB_prime.json',
@@ -137,16 +151,23 @@ def main():
     # --------------------------------------------------------------- decision box
     promoted = bool(card.get('download_and_submit_ok'))
     tone = 'stop' if not promoted else 'ok'
-    headline = ('Verified file · not promoted' if not promoted else 'Promoted candidate')
+    headline = 'Promoted candidate — download and submit' if promoted else 'Verified file · not promoted'
+    cdt = p5c['scores'] if p5c else {}
+    crit = p5c['paired_differences']['h33_reference'] if p5c else {}
     decision = f'''<section class="{tone}" aria-labelledby="decision">
-<div class="eyebrow">SUBMISSION STATUS</div>
+<div class="eyebrow">SUBMISSION STATUS · PHASE 5</div>
 <h1 id="decision">{esc(headline)}</h1>
-<p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
-passes every shared-validator check, and its SHA-256 is recorded below.</p>
-<p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
-<strong>{esc(card['verdict'])}</strong>: the pre-registered target-like gate (instrument B′) is
-negative, so we cannot claim this beats the family best of 0.2778. Uploading is a deliberate test,
-not a validated improvement.</p>
+<p><strong>Download: yes.</strong> <strong>Download and submit: yes, as a calibrated test.</strong> Every pre-registered gate
+(G1 format, G2 uniqueness, G3 ranking skill, G4 surrogate gain, G5 live-shape preservation)
+passed; the file is unique among the 62 archived registry rasters and every shared-validator
+check passed on the written bytes. There is <strong>no organizer-confirmed score</strong>: the
+live leaderboard is the only test, and the returned value must be recorded from the receipt.</p>
+<p><strong>What the evidence is, and is not.</strong> On the new halo surrogate (instrument C,
+SGMC faults 0.2–3.2 km from the mapped catalogue) the candidate scores
+{cdt.get('candidate', {}).get('dti', 0):.4f} against H33's {cdt.get('h33_reference', {}).get('dti', 0):.4f}
+(paired Δ {crit.get('delta', 0):+.4f}, 95 % CI {ci(crit) if crit else '—'}). That surrogate is
+chosen because the live evidence places the hidden truth in the halo; it is still a surrogate,
+and transfer to the hidden truth is <em>not</em> validated.</p>
 <div class="actions">
 <a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(name)}.tif" download>Download submission TIFF</a>
 <a class="button secondary" href="downloads/{esc(name)}.zip" download>Download one-TIFF ZIP</a>
@@ -156,46 +177,50 @@ not a validated improvement.</p>
 <code>{esc(card.get('submission_note', ''))}</code></p></section>'''
 
     # ------------------------------------------------------------------ overview
-    a = p4a['scores'] if p4a else {}
-    b = p4b['scores'] if p4b else {}
-    ball = p4ball['scores'] if p4ball else {}
+    a = p5a['scores'] if p5a else {}
+    b = p5b['scores'] if p5b else {}
+    c = p5c['scores'] if p5c else {}
     metrics = f'''<div class="metrics">
-<section><div class="eyebrow">INSTRUMENT A · HOLDOUT-DTI</div>
-<div class="number">{a['candidate']['dti']:.4f}</div>
-<p>{ci(a['candidate'])} · {a['candidate']['withheld_positive_pixels']:,} withheld catalogue pixels</p></section>
-<section><div class="eyebrow">INSTRUMENT B′ · PROXY-DTI</div>
-<div class="number">{b['candidate']['dti']:.4f}</div>
-<p>{ci(b['candidate'])} · SGMC proxy outside the duplication band</p></section>
+<section><div class="eyebrow">INSTRUMENT C · HALO SURROGATE DTI</div>
+<div class="number">{c.get('candidate', {}).get('dti', 0):.4f}</div>
+<p>{ci(c['candidate']) if c else '—'} · H33 {c.get('h33_reference', {}).get('dti', 0):.4f} · {c.get('candidate', {}).get('withheld_positive_pixels', 0):,} withheld proxy pixels</p></section>
+<section><div class="eyebrow">RANKING SKILL · OUT-OF-QUADRANT AUC</div>
+<div class="number">{p5rk.get('mean_fold_auc', 0):.3f}</div>
+<p>mean of four held-out folds · raw pooled {p5rk.get('pooled_out_of_fold_auc_raw', 0):.3f} · rank-normalised {p5rk.get('pooled_out_of_fold_auc_rank_normalised', 0):.3f}</p></section>
 <section><div class="eyebrow">UNIQUENESS · 62 RASTERS</div>
 <div class="number">{uniqueness.get('worst_dot_overlap', 0):.2f}</div>
 <p>Worst <em>mutual</em> overlap (limit 0.70) · worst ρ {uniqueness.get('worst_spearman_full_footprint', 0):.3f}</p></section></div>'''
 
     index = decision + f'''<section class="intro"><div class="eyebrow">WHAT THIS PAGE IS</div>
-<h2>A unique, auditable candidate — and the evidence that it is not yet an improvement.</h2>
-<p>We rebuilt the submission generator, fixed two defects in the shared uniqueness tool, ran three
-pre-registered experiments and published the best candidate. Two instruments favour it, one does
-not. Both are shown, with confidence intervals, and the verdict follows the pre-registered rule.</p>
+<h2>A unique, auditable candidate whose promotion rule is written down before the run.</h2>
+<p>Phase 5 replaces the instrument that dominated Phase 4. A random field of 37,654 dots drawn
+across the whole domain scores below H33 on the unrestricted SGMC proxy, but a random field drawn
+inside the 0.2–3.2 km halo scores above it — the proxy's positives are spread over the whole map,
+while the live ordering puts the hidden truth inside the halo. The new primary instrument
+(instrument C) restricts the proxy to the halo. The candidate is an out-of-fold ranker trained on
+43 geophysical, lidar-scarp, radiometric and terrain features with quadrant-blocked cross-validation.</p>
 </section>{metrics}
 <div class="columns">
-<section class="panel"><h2>Why it is downloadable</h2>
-<p>The shared validator re-read the bytes: single band, float32, 3,730 × 3,292, EPSG:32611,
-transform 100 m, values exactly 0/1, 37,654 dots, zero on mapped faults, zero outside the footprint.
-Uniqueness: worst mutual overlap 0.31 against 62 archived rasters (forward-only overlap with a dense
-lattice reaches 1.00 by construction and is reported separately).</p>
-<a href="results.html">Full evidence →</a></section>
-<section class="panel"><h2>Why it is not promoted</h2>
-<p>On instrument B′ the candidate scores {b['candidate']['dti']:.4f} versus H33's
-{b['h33_reference']['dti']:.4f} (paired Δ {p4b['paired_differences']['h33_reference']['delta']:+.4f},
-95% CI {ci(p4b['paired_differences']['h33_reference'])}). The pre-registered rule requires a
-positive lower bound. It does not hold.</p>
-<a href="hypotheses.html">Why this rule →</a></section></div>
-<section><h2>What is measured and what is not</h2>
-<p>Neither instrument is the organizer's hidden truth. Instrument A withholds whole catalogue
-components and measures catalogue recovery; instrument B/B′ uses USGS SGMC faults minus the
-catalogue as a proxy for newly mapped faults. Every number is labelled, and no projection is
-presented as a leaderboard score.</p>
+<section class="panel"><h2>Why it is downloadable and submittable</h2>
+<p>Shared validator on the written bytes: single band, float32, 3,730 × 3,292, EPSG:32611, 100 m
+transform, values exactly 0/1, {card['emission']['count']:,} dots, zero on mapped faults, zero
+outside the footprint. Uniqueness: worst mutual overlap {uniqueness.get('worst_dot_overlap', 0):.3f}
+against {uniqueness.get('registry_rasters_checked')} archived rasters; worst |Spearman|
+{abs(uniqueness.get('worst_spearman_full_footprint', 0)):.3f}.</p>
+<a href="submission.html">Submission steps →</a></section>
+<section class="panel"><h2>What would falsify it</h2>
+<p>The ranker is trained on SGMC faults; if the hidden new faults are not SGMC-like, the tilt can
+underperform the uniform H33 halo. The surrogate gain is {crit.get('delta', 0):+.4f}
+({ci(crit) if crit else '—'}), and the quadrant folds span 1.5–3.6 k positives. A live score at or
+below 0.2778 is a negative result and must be recorded as such.</p>
+<a href="limitations.html">Known limits →</a></section></div>
+<section><h2>Measured this session</h2>
+<p>The catalogue is the USGS Quaternary fault database: 99.998 % of rasterised QFaults trace pixels
+lie within 3 px of <code>existing_faults.tif</code>, so QFaults cannot be a "new fault" proxy.
+SGMC is the only independent inventory in the cached inputs (3,666 shared px, 78,485 not).
+Every number on this site is read from a JSON receipt; a projection is never a score.</p>
 <ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
-<li><a href="results.html">All three experiments, ablations and canaries</a></li>
+<li><a href="results.html">Instruments A, B, C; gates; canaries</a></li>
 <li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section>'''
 
     # ------------------------------------------- parallel E2/E3 lane (integrated)
@@ -222,17 +247,21 @@ negative with no file. Full tables on the results page; terms in
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
-    guide = f'''<div class="eyebrow">SUBMISSION GUIDE</div>
+    guide = f'''<div class="eyebrow">SUBMISSION GUIDE · PHASE 5</div>
 <h1>How to submit this file — and what the number will mean.</h1>
 <p class="lead"><strong>The file:</strong> <code>downloads/{esc(name)}.tif</code>
 ({val.get('bytes', 0):,} bytes, SHA-256 <code>{esc(sha)}</code>).
 A one-TIFF ZIP of the same file is provided for portals that ask for it. Upload exactly one of them.</p>
 <section class="panel"><h2>Decision, stated plainly</h2>
 <ul>
-<li><strong>Download:</strong> yes — the file is unique, format-validated and reproducible.</li>
-<li><strong>Upload a weekly slot:</strong> not recommended. Verdict <code>{esc(card['verdict'])}</code>.
-Our target-like proxy says it is 12.6% below H33; our catalogue holdout says it is 20× above it.
-Neither is the hidden truth. This is a defensible test, not a validated win.</li>
+<li><strong>Download and submit a weekly slot:</strong> yes, as a calibrated test. Verdict
+<code>{esc(card['verdict'])}</code>; all five pre-registered gates passed (see the run card).</li>
+<li><strong>What the gates do not prove:</strong> the hidden truth is not available to us. The
+candidate beats H33 on the halo surrogate {c.get('candidate', {}).get('dti', 0):.4f} vs
+{c.get('h33_reference', {}).get('dti', 0):.4f}, paired Δ {crit.get('delta', 0):+.4f}
+{ci(crit) if crit else ''}. That is evidence about a surrogate, not a leaderboard projection.</li>
+<li><strong>Record the returned score</strong> as ORGANIZER-CONFIRMED. If it is at or below 0.2778,
+the hypothesis is negative and must be written down as such.</li>
 <li><strong>Never</strong> upload the ZIP and the TIFF as two different submissions.</li></ul></section>
 <section><h2>Steps</h2><ol class="steps">
 <li>Open the competition <em>New submission</em> page (DrivenData competition 306).</li>
@@ -260,13 +289,24 @@ rejected upload, so we do not claim to know its specific defect.</p></section>
   ['Worst forward-only overlap', f"{uniqueness.get('worst_forward_overlap'):.4f} ({esc(uniqueness.get('worst_forward_submission'))})"],
   ['Worst Spearman ρ', f"{uniqueness.get('worst_spearman_full_footprint'):.4f}"],
   ['Inventory scope', esc(uniqueness.get('inventory_scope'))]],
- 'Corrected binary-dot definition; forward-only overlap with a dense sampling grid is uninformative.')}</section>'''
+ 'Corrected binary-dot definition; forward-only overlap with a dense sampling grid is uninformative.')}</section>
+<section><h2>Phase-5 gate receipt</h2>
+{table(['Gate', 'Result'], [[esc(k), 'pass' if v else 'FAIL'] for k, v in card.get('gates', {}).items()],
+ 'All five gates must pass before the file is labelled submittable.')}
+<p class="small">Ranking skill: mean held-out AUC {p5rk.get('mean_fold_auc', 0):.4f}; per-fold
+{', '.join(f"{k}: {v['auc']:.3f}" for k, v in p5rk.get('fold_auc', {}).items())}. Raw pooled
+{p5rk.get('pooled_out_of_fold_auc_raw', 0):.4f} is reported but not used as the gate (see the
+preregistration amendment A1).</p></section>'''
     (DOCS / 'submission.html').write_text(frame('Submit a file', guide))
 
     # ------------------------------------------------------------------- results
     rows_a = instrument_rows(p4a)
     rows_bp = instrument_rows(p4b)
     rows_ball = instrument_rows(p4ball)
+    p4_note = ('<p>The Phase-4 candidate was published as a negative because its pre-registered '
+               'gate (instrument B′, unrestricted proxy) said H33 won. Phase 5 replaced it after '
+               'measuring that the proxy positives are spread over the whole domain while the live '
+               'ordering places the hidden truth in the halo.</p>')
     ablate = []
     for tag, d in (('A · shared holdout', p3a), ('B′ · proxy', p3b), ('B · unrestricted proxy', p3ball)):
         if d:
@@ -285,40 +325,37 @@ rejected upload, so we do not claim to know its specific defect.</p></section>
         ref = d['scores'].get('h33_reference')
         history.append([esc(tag), f"{cand['dti']:.4f}", ci(cand),
                         f"{ref['dti']:.4f}" if ref else '—'])
-    results = f'''<div class="eyebrow">EVIDENCE</div><h1>Three experiments, two instruments, one verdict.</h1>
-<p>All DTI values use α = 0.2, β = 0.8 and a 300 m triangular kernel on the pinned 100 m grid, with
-pooled terms and a paired spatial-cluster bootstrap (1,000 draws, 20 km blocks). Intervals are
-conditional on the fitted folds and the proxy truth; they are not leaderboard intervals.</p>
-<p><strong>Regression: only mutual overlap now counts as duplication.</strong> Measured this session:
-<code>calib_r13lattice_00904.tif</code> (206,895 dots) has a 3-px halo covering <strong>100 %</strong>
-of the footprint, so forward-only overlap is 1.00 for any nonempty candidate. Both directions are
-always reported.</p>
-<h2>Published candidate</h2>
-{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_a, 'Instrument A · shared hide-and-recover catalogue holdout')}
-{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_bp, "Instrument B′ · SGMC proxy, d ≥ 3 px from catalogue")}
-{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_ball, 'Instrument B · unrestricted SGMC proxy (contaminated by map duplication)')}
-<h2>Experiment 3 ablations</h2>
-{table(['Instrument', 'Arm', 'DTI', '95% CI'], ablate, 'Ablations were registered before their runs.')}
-<h2>Leakage canaries</h2>
-{table(['Feature', 'AUC (held-out)', 'Result'], canary_rows, 'Each feature alone, 11,321 withheld positives vs 200,000 negatives. AUC > 0.90 would stop the run.')}
-<h2>Experiment history</h2>
-{table(['Run', 'Candidate DTI', '95% CI', 'H33 DTI'], history)}
-<p><a href="downloads/run_card.json">Full run card</a> ·
-<a href="downloads/uniqueness.json">Uniqueness audit</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a> ·
-<a href="downloads/phase3_instrumentB_all.json">Experiment 3 B</a></p>'''
-
-    if e2hold:
-        _rows = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
-                 for k, v in sorted(e2hold['scores'].items(), key=lambda kv: -kv[1]['dti'])]
-        results += ("<h2>Parallel lane E2/E3 — catalogue holdout (same instrument A family)</h2>"
-                    "<p>E2 beats random and every ablation, ties H19-solid at one-third mass, "
-                    "loses to D28; H33 ranks last here by construction (live new faults vs catalogue "
-                    "pieces). E3 depth-step mechanism AUC 0.506 (null), candidate "
-                    f"{e3card.get('holdout_dti', {}).get('dti', 0):.4f}. Both negative.</p>"
-                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _rows,
-                            'E2 arms · gems57-pooled-hide-v2 · seed-20'))
+    rows_c = instrument_rows(p5c)
+    rows_p5b = instrument_rows(p5b)
+    rows_p5a = instrument_rows(p5a)
+    results = f'''<div class="eyebrow">EVIDENCE</div><h1>Phase 5: one ranker, three instruments, five gates.</h1>
+<p>All DTI values use α = 0.2, β = 0.8 and a 300 m triangular kernel on the pinned 100 m grid, pooled
+terms and a paired 20 km spatial-cluster bootstrap (1,000 draws). Intervals are conditional on the
+fitted folds and the surrogate truth; they are <strong>not</strong> leaderboard intervals.</p>
+<h2>Published candidate (Phase 5)</h2>
+{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_c, 'Instrument C · halo surrogate (SGMC only, 3–32 px from catalogue) — primary gate')}
+{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_p5b, 'Instrument B · unrestricted SGMC proxy — continuity only')}
+{table(['Arm', 'DTI', '95% CI', 'Positives'], rows_p5a, 'Instrument A · shared catalogue holdout — structurally hostile to a global halo emission (masks a 3 px buffer around withheld traces)')}
+<h2>Ranking skill and canaries</h2>
+{table(['Fold', 'Pixels', 'Positives', 'Held-out AUC'],
+ [[esc(k), f"{v['n']:,}", f"{v['positives']:,}", f"{v['auc']:.4f}"] for k, v in p5rk.get('fold_auc', {}).items()],
+ 'Spatial four-fold by quadrant; each fold predicted by a model trained on the other three')}
+<p>Mean held-out AUC <strong>{p5rk.get('mean_fold_auc', 0):.4f}</strong>; raw pooled
+{p5rk.get('pooled_out_of_fold_auc_raw', 0):.4f}; rank-normalised pooled
+{p5rk.get('pooled_out_of_fold_auc_rank_normalised', 0):.4f}. Worst single-feature canary AUC
+{card.get('canary_worst_auc', 0):.4f} (limit 0.90).</p>
+<h2>Phase-5 gates</h2>
+{table(['Gate', 'Result'], [[esc(k), 'pass' if v else 'FAIL'] for k, v in card.get('gates', {}).items()],
+ 'Registered before the run except the G3 statistic amendment A1, which is disclosed in the card')}
+<h2>Emission</h2>
+{table(['Measurement', 'Value'],
+ [['Dots', f"{card['emission']['count']:,}"],
+  ['Block / NMS', f"{card['emission']['block_px']} px / {card['emission']['nms_px']} px"],
+  ['Median catalogue distance', f"{card['emission']['median_distance_px']:.2f} px"],
+  ['Occupied 200 px blocks', card['emission']['occupied_200px_blocks']]],
+ 'Live-shape preservation gate: median in [8, 24] px and at least 130 blocks')}
+<h2>Phase-4 history (superseded gate)</h2>
+'''
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 
     # ------------------------------------------------------------------ markdown

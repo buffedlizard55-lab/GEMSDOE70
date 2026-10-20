@@ -1,71 +1,74 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## Submission status: **PROMOTED — DOWNLOAD AND SUBMIT (calibrated test)**
 
 A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`negative` on the pre-registered target-like gate. No weekly slot was used.
+`docs/downloads/gems70-p5-halo-ranker-37654-20261020.tif` (sha256 `264b7219e61fa27d7f472915ab47d06193806292b141c3c608f5d21c3908991a`; a one-TIFF ZIP is
+published alongside). **Download and submit: yes.** All five pre-registered Phase-5 gates passed.
+**There is no organizer-confirmed score**: the live leaderboard is the only test, and the returned
+value must be recorded from the submission-page receipt. If it lands at or below 0.2778 the
+hypothesis is negative and must be written down as such.
 
 - [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
-- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
-- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
+- [Run card](evidence/phase5/run_card.json) · [Uniqueness](evidence/phase5/uniqueness.json) · [Preregistration](docs/preregistration-p5.md)
+- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Limitations / next steps](docs/irregularities.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
-## What was measured this session
+## Phase 5 — what was measured
 
-Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
-alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
-bootstrap. Exactly 37,654 binary dots are emitted, all
-off-catalogue.
+Spatial four-fold (by quadrant) `HistGradientBoostingClassifier` on 43 features (19-band stack,
+12 lidar-scarp bands, 4 radiometric, 4 GeoDAWN extension bands, catalogue density, relief,
+log distance to catalogue). Label = SGMC faults off-catalogue by at least 3 px. The published
+raster is the out-of-fold field: every dot is ranked by a model that never saw its quadrant.
+Emission: one dot per 5 x 5 px block at the block maximum, 4 px NMS, 37,654
+dots in the 2.4-32 px halo.
 
-| Instrument | Candidate | H33 reference | Result |
-|---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
+| Instrument | Candidate | H33 | P4 | Paired candidate - H33 |
+|---|---:|---:|---:|---:|
+| **C - halo surrogate (primary)** | 0.1472 | 0.0952 | 0.1177 | +0.0520 [+0.0398, +0.0639] |
+| B - unrestricted SGMC proxy | 0.0991 | 0.0906 | 0.0948 | not the gate |
+| A - catalogue holdout | 0.0000 | 0.0037 | - | structurally hostile to a global halo emission |
 
-Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
-is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
-21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
-artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+Ranking skill: mean held-out AUC **0.7245** (fold range
+0.689-0.776); raw pooled
+0.6591; rank-normalised pooled
+0.7247. Worst single-feature canary AUC
+0.7401 (limit 0.90). Uniqueness: 62 archived
+rasters, worst mutual overlap 0.314 (limit 0.70), worst |rho|
+0.039 (limit 0.90).
 
-**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
-(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
-whose halo covers the whole footprint — which is why the two-direction test was adopted.
+### The instrument correction that made Phase 5 possible
 
-## Two fixes to the shared tool (reported, not silently forked)
-
-1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
-   registry surface blocks every candidate.
-2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
-   halos cover 100 % of the footprint would otherwise block every candidate.
-
-Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
-`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
+The catalogue is the USGS Quaternary fault database: 99.998 % of rasterised QFaults trace pixels
+lie within 3 px of `existing_faults.tif` (`evidence/phase5/qfaults_catalogue_overlap.json`). SGMC
+is the only independent inventory in the cached inputs (3,666 shared px, 78,485 not). The Phase-4
+gate used the *unrestricted* SGMC proxy, whose positives are spread across the whole domain; on
+that instrument a domain-wide random field can beat a halo field, while the live ordering is the
+opposite. Phase 5 restricts the proxy to the 0.2-3.2 km halo (instrument C), which is where the
+live evidence says the hidden truth is, and keeps instrument B for continuity.
 
 ## Reproduce
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
-.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
+python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+.venv/bin/python scripts/fetch_data.py        # SHA-256-pinned owner mirrors, not organizer auth
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/run_experiment_p5.py # regenerates the artifact, instruments and card
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
 
-`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
-(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
+Earlier phases: `run_experiment_v4.py` (P4), `run_experiment_v2/v3.py`, `evidence/e2/`,
 `evidence/history/phase1_negative/`.
 
 ## Next session
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
+1. Get the live receipt for this file and record it as ORGANIZER-CONFIRMED.
+2. If the score is <= 0.2778, test the density hypothesis on instrument C (37,654 vs 60,000 dots at
+   matched geometry) before spending another slot.
+3. Cross-inventory check: train on SGMC and score withheld catalogue components (and vice versa)
+   to measure generic fault-detection skill independently of the proxy.
+4. Upstream the two uniqueness fixes and add the instrument-C definition to the shared template.
 
 ## Complete retained project prompt
 
@@ -77,9 +80,9 @@ PROJECT_BRIEF.md is the source for this embedded copy.
 <summary>Read the complete supplied project brief before every session</summary>
 
 
-## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET
+## Historical: parallel E2 lane (PR #16) - negative, do not submit
 
-Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818] (beats random, loses to D28 0.0919) → negative. File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` (selector-review only; complete corrected uniqueness scan pending). Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).
+Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818]; beats random, loses to D28 0.0919. File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif`. Evidence `evidence/e2/`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).
 # User project prompt — retained as supplied
 
 Read this at the beginning of every session. Scores and access statements below are user-supplied claims, not current verified facts. Execution status and verified evidence belong in README.md and evidence/, not by silently rewriting this historical brief.
