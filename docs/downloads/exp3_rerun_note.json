@@ -1,0 +1,5 @@
+{
+  "note": "First invocation crashed before any arm was scored (KeyError: eager dict.get default for missing fold key 'visible' in the shared evaluator call). No DTI, CI, or gate outcome was observed. The crash-manifest was removed and the one-line fold fix applied; this is crash recovery, not tuning on reported folds.",
+  "removed_manifest_started_utc": "2026-10-20T22:2xZ-crash (no scores file written)",
+  "fix": "added 'visible' key to the evaluation fold dict"
+}

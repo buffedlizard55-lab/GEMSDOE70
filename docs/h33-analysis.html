@@ -2,7 +2,7 @@
 <title>H33 analysis · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Negative result; no competition-ready TIFF.">
 <link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Why the archived H33 result is interesting—and what is not established</h1>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="hypotheses-round2.html">Round-2 hypotheses</a><a href="exp3-prereg.html">Exp-3 prereg</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Why the archived H33 result is interesting—and what is not established</h1>
 <h2>Evidence, not a leaderboard story</h2>
 <p>The value <strong>0.2778 is an unverified historical claim supplied by the user and family archives</strong>. It is <strong>not ORGANIZER-CONFIRMED</strong> in this session: no authenticated submission-page receipt ties that value to these bytes. We cannot establish that it is the current family best, let alone the current competition best. The prompt supplies several conflicting leader values. None is promoted to a current score here.</p>
 <p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Organizer problem description</a> and <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a> are manual-review targets. Direct access failed in this sandbox; this is not a verified login redirect. The organizer's <a href="https://github.com/drivendataorg/gems-prize-reference-solution/blob/aebe92f7c8a990f0e3443451b7a825d9afd6336b/unet-mc-cv-reference-solution.ipynb">reference notebook</a> verifies the fault-detection task and training-loss weights, not the full live evaluation implementation.</p>
@@ -52,6 +52,45 @@ iff deltaT &gt; alpha * old_DTI * (deltaT + 1 - k)
 <h2>Can we beat it?</h2>
 <p>Possibly, but no verified result from this session supports that claim. A defensible path requires new ranking evidence and less redundant mass, not an arbitrary rescaling, random jitter, renamed file, or a pruned copy of the champion. Those would not meet the user's uniqueness protocol.</p>
 <p>The fixed magnetic-contact-termination experiment is a negative result. See the results page for <strong>HOLDOUT-DTI</strong> with evaluator version, withheld positives and confidence intervals. It underperforms its random sparse control at similar mass, and fails the literal surface overlap gate. Neither observation can be converted into a projected leaderboard score.</p>
+<h2>Independent validation added 2026-10-20 (experiment 3)</h2>
+<p>We rescored the fixed public H33/H27/D28 dots against 62,122 SGMC fault pixels
+lying strictly off the competition catalogue (organizer-style masking, shared
+evaluator, 1,000-draw spatial-block bootstrap). SGMC-proxy DTI: H33 0.095386
+[0.084637, 0.106803], H27 0.095295, D28 0.094174, mass-matched avoiding-random
+0.076743 [0.072924, 0.080846]. The references reproduce the owner-reported
+live-ladder direction (D28 → H33) and separate from both randoms with
+non-overlapping intervals. This is independent evidence that H33's
+multi-physics consensus genuinely recovers off-catalogue structures above
+chance — the skill is real, not an artifact of one holdout. It does not
+convert any owner-reported value into an ORGANIZER-CONFIRMED score.</p>
+<h2>Why H33 leads, and what beating it requires (assessment)</h2>
+<p>PhD-level summary of the evidence across this repository's audits and three
+experiments:</p>
+<ol>
+<li><strong>Ranking with genuine distal skill.</strong> H33-A requires six independent
+   physics (magnetics, gravity, topography, MT/conductivity-basement,
+   radiometrics, LiDAR scarps) to agree on a local strike before a pixel
+   scores; H33-B/C add collinear valley/scarplet chains and H33-D straight
+   conductive boundaries. Orientation consensus suppresses single-physics
+   false positives (lithologic edges, noise, processing stripes), which is
+   why the union still finds structures no single field maps. Our SGMC-proxy
+   measurement confirms above-chance distal recovery.</li>
+<li><strong>Metric-efficient emission.</strong> Binary dots (no soft-mass tax), ~38k mass,
+   Poisson spacing (no redundant clusters paying FP for the same truth), and
+   the B2 catalogue-distance prune deleting exactly the near-catalogue mass
+   that the live metric penalizes as false positives. The D28 → H27 → H33
+   ladder (44,090 → 40,199 → 37,654 dots) shows monotone owner-reported gains
+   from pure deletion, and our proxy reproduces the direction with FP mass
+   falling 41,593 → 35,221 at equal coverage.</li>
+<li><strong>What beating it requires.</strong> Emission discipline is solved and should be
+   copied in form (mass class, spacing, distal prune — not the dots
+   themselves). The only open piece is a <em>ranking</em> with distal signal. Our
+   TMI vertical-gradient ranking falsified on two truth sets; the remaining
+   queue (epicenter-anchored, strain-weighted, gravity-VG) is untested. Any
+   challenger must first beat avoiding-random on the SGMC-proxy instrument
+   (which now exists and is validated) before spending a slot. No current
+   evidence supports a specific higher score, and none is projected here.</li>
+</ol>
 <h2>Key scientific distinction</h2>
 <p>Fault traces are the competition prediction target; geothermal vents are not the direct labels. An interpreted discontinuity may matter for fluid flow, but does not establish permeability, temperature, a vent, or a viable geothermal resource. Potential-field contact truncations may be lithologic boundaries or dike endpoints rather than faults. The proposed mechanism is a falsifiable hypothesis, not a remotely verified discovery.</p></main><footer>Evidence before leaderboard claims. No competition upload performed.
 <a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>

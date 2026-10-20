@@ -1,0 +1,10 @@
+{
+  "evidence_class": "REGISTRY-MEASUREMENT-PARTIAL-ADDENDUM",
+  "note": "supplementary only; verdict already negative",
+  "file": "GEMSDOE52 h60-cotrain-candidate.tif",
+  "sha256": "59abe557302c158463911f388bcf2ec7edafc511e6948f431f3fee339f947333",
+  "their_dots": 37654,
+  "sparse": true,
+  "spearman_full_footprint": 0.0022396652377598544,
+  "overlap_final_dots": 0.16692105263157894
+}

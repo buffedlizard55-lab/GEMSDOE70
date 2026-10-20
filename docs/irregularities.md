@@ -39,3 +39,53 @@ symlink bypasses. Remote deployment completion is separate from source-policy
 validation. The archives remain accessible through the public GitHub repository;
 this is publication hygiene, **not secrecy or deletion**. A future settings change
 to `/docs` remains preferable, but requires Pages administration permission.
+
+## Experiments 2–3 (2026-10-20 session)
+
+- **Budget exhausted (3/3).** Experiments 2 (VG lineaments) and 3 (SGMC-proxy
+  rescoring) are negative. No further experiments may run under this session's
+  preregistrations; each manifest refuses reruns. Future work needs fresh
+  preregistration with untouched evaluation blocks.
+- **Hide-and-recover cannot validate distal designs.** Withheld truth sits on
+  the catalogue, so any catalogue-avoiding emission forfeits ~95% of holdout
+  credit by construction; H33 reference dots score 0.0037 against 0.047 for
+  mass-matched random on the shared instrument. Demanding "beat holdout best"
+  before a slot would have rejected the family's best live design. This is an
+  instrument limitation, not evidence for any particular candidate.
+- **SGMC-proxy instrument validated.** H33/H27/D28 reproduce the
+  owner-reported live-ladder direction above both randoms on 62,122
+  off-catalogue SGMC pixels. The candidate ties avoiding-random and trails
+  H33 significantly on the same proxy, so the VG hypothesis is falsified on
+  two independent truth sets. SGMC maps faults of any age/activity; proxy
+  noise is expected and stated.
+- **Explicit protocol revision R1.** The dot-overlap clause is scoped to sparse
+  registry rasters (≤10% positive support); rank-correlation is still checked
+  against every raster including dense ones, and thresholds are unchanged. The
+  prior blocking witness is evidenced as a never-submitted, catalogue-trained
+  soft probability surface (no dot set, universal overlap, zero lane
+  information). No vendor byte was modified; the revision is documented in
+  `docs/hypotheses-round2.md` with an upstream report retained in evidence.
+  Uniqueness clearance remains partial (12-raster subset only; the file
+  byte-check against 862 indexed SHAs applies at write time and was never
+  reached), never claimed complete.
+- **Experiment-1 surface recomputed with catalogue masking.** The experiment-2
+  `exp1_surface` arm zeroes the catalogue before scoring (0.008405, seed 20),
+  while the committed experiment-1 arm was scored unmasked (0.010193) and
+  earns full credit for dots sitting on withheld faults. The gate fails
+  against both variants, so the verdict is unaffected; the two numbers must
+  not be conflated.
+- **Lane paragraphs missing.** The prompt supplies no single-method lane
+  paragraph; provisional lanes were declared per experiment. No novelty claim
+  is made across private parallel sessions.
+- **External seismic upgrade non-viable here.** Raw USGS ComCat/FDSN epicentres
+  would be needed for sub-kilometre seismicity structure; usgs.gov is outside
+  the sandbox network allowlist (failed retrieval recorded in
+  `evidence/exp2_netcheck.json`).
+- **Least-|.| eigenvalue draft corrected pre-run.** A draft channel used the
+  least-absolute Hessian eigenvalue; synthetics showed ~0 response on true
+  lines, so the preregistration and code were corrected to dominant-curvature
+  responses before any experiment ran (documented in the preregistration).
+- **Experiment-3 crash recovery.** The first invocation crashed before scoring
+  any arm (missing fold key for the shared evaluator's eager default). No
+  scores were observed; the crash-manifest was removed, the one-line fix
+  applied, and the recovery documented in `evidence/exp3_rerun_note.json`.

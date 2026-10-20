@@ -1,0 +1,15 @@
+{
+  "started_utc": "2026-10-20T22:15:28.533251+00:00",
+  "experiment_count": 2,
+  "maximum_experiments": 3,
+  "maximum_seconds": 7200,
+  "preregistration": "docs/hypotheses-round2.md",
+  "preregistration_sha256": "95b1a8c592ea07fb633222f182e37d269235e2f0efa1a5fa787dc11f81b8defd",
+  "source_sha256": {
+    "src/gems70/method_exp2.py": "33b8c0d37cc02dabd291bd785baa44ebe45fec7fd1e1c4b25b9e755bc61ee885",
+    "scripts/run_experiment_exp2.py": "6fcf6d42fb6cca1b03eaedf30b62dc24f6519c2e1da14d5cdb1e21c44216959b"
+  },
+  "rng_seed": 70071,
+  "bootstrap_seed": 70071,
+  "submission_name": "gems70-vgshallow-h1-B2-38k"
+}

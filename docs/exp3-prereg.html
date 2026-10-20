@@ -1,0 +1,75 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exp-3 prereg · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Negative result; no competition-ready TIFF.">
+<link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="hypotheses-round2.html">Round-2 hypotheses</a><a href="exp3-prereg.html">Exp-3 prereg</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Experiment-3 preregistration — 2026-10-20 (SGMC distal-truth rescoring)</h1>
+<p>Third and final experiment of the protocol budget. No new ranking is trained,
+tuned, or emitted here: fixed dot sets from experiment 2 and the public
+archives are rescored against an independent off-catalogue proxy truth.</p>
+<h2>Motivation (from experiment-2 evidence)</h2>
+<p>On the shared hide-and-recover holdout, withholding truth that sits ON the
+catalogue, every catalogue-avoiding design collapses: H33 reference dots score
+0.0037/0.0044 while mass-matched unconstrained random scores 0.047/0.051
+(HOLDOUT-DTI, seeds 20/71). The family's best live design (owner-report
+0.2778) ranks below random on this instrument, so the instrument cannot
+validate distal discovery designs in either direction. Experiment 3 tests the
+same fixed dots against faults an independent public map records OFF the
+competition catalogue.</p>
+<h2>Proxy truth (measured before this preregistration, fixed here)</h2>
+<ul>
+<li>Source: <code>derived_sgmc_faults_100m_u8.tif</code>, GEMSDOE24 commit
+  <code>07345ea0604953d7efb858d9cfbc21e20c7aca0b</code>, SHA-256
+  <code>643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0</code>
+  (verified), grid-matched to the competition grid (verified), binary {0,1}.</li>
+<li>Manifest provenance (quoted): "derived from USGS SGMC geologic-map faults
+  (proxy only; not used in the factorial)".</li>
+<li>Truth definition (fixed): SGMC-positive pixels with
+  distance-to-competition-catalogue &gt; 3 px: <strong>62,122 pixels</strong> (of 83,593
+  on-footprint SGMC pixels; only 3,978 sit on the catalogue). Floor: the run
+  stops as inconclusive if truth has fewer than 1,000 pixels (satisfied).</li>
+<li>Masked-known: the FULL competition catalogue (organizer-style masking).</li>
+<li>Limit (stated): SGMC maps faults of any age/activity, while the hidden live
+  truth presumably emphasizes geothermal-relevant structures; the proxy is
+  noisy by construction. Gate A exists to test whether it still ranks live
+  designs correctly. SGMC licensing/lineage beyond the quoted manifest note is
+  not independently verified here.</li>
+</ul>
+<h2>Fixed arms (no new emission)</h2>
+<ul>
+<li><code>candidate</code>: experiment-2 dots RECOMPUTED by <code>src/gems70/method_exp2.py</code>
+  (byte-pinned by the experiment-2 manifest; the run aborts if the pinned SHA
+  differs). Deterministic by construction; assert 38,000 dots.</li>
+<li><code>h33</code>, <code>h27</code>, <code>d28</code>: public archive bytes (SHAs c55bafc4…, 2fc94a38…,
+  3e78737f…, grid-verified in experiment 2).</li>
+<li><code>random_avoiding</code>, <code>random_unconstrained</code>: fresh mass-matched (38,000)
+  controls, <code>numpy.random.default_rng(70073)</code> (fixed here); avoiding uses
+  catalogue-distance &gt; 2 on the experiment-2 valid domain, unconstrained uses
+  the valid domain.</li>
+<li>Domain asymmetry (stated): references span the full footprint while the
+  candidate/controls live on the 12 px-eroded valid domain (96.6% of the
+  footprint). References are kept byte-intact; the asymmetry slightly favors
+  them and is not hidden.</li>
+</ul>
+<h2>Fixed scoring</h2>
+<ul>
+<li>One whole-footprint evaluation per arm with the shared byte-pinned
+  <code>evaluate_holdout.evaluate</code>: region = footprint, masked_known = full
+  catalogue, truth = SGMC-distal. Bootstrap: shared <code>pooled_summary</code>,
+  1,000 draws, seed 70073 (fixed here).</li>
+<li>Gate A (instrument validation): H33 beats D28 AND H33 beats
+  random_avoiding, both with non-overlapping 95% CIs (reproduces the
+  owner-reported live ladder direction D28 0.26 → H33 0.2778 on the proxy).</li>
+<li>Gate B (candidate signal): candidate beats random_avoiding with
+  non-overlapping 95% CIs.</li>
+<li>PROMOTE (write the submission via the shared writer, then byte-check)
+  if and only if A ∧ B hold, reusing experiment 2's already-measured gates
+  (canaries clean, artifact rule passed, rho &lt; 0.90, sparse overlap &lt; 0.70,
+  byte-uniqueness vs the 862 index at write time, shared-validator receipt).
+  Any failure, or the truth floor failing, yields negative with no file.</li>
+<li>Submission name/note rule from the round-2 preregistration is reused
+  (deterministic name <code>gems70-vgshallow-h1-B2-38k</code>).</li>
+</ul>
+<h2>Budget</h2>
+<p>Experiment 3 of 3. No further experiments after this run regardless of
+outcome. No competition upload and no weekly-slot decision is made here.</p></main><footer>Evidence before leaderboard claims. No competition upload performed.
+<a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>

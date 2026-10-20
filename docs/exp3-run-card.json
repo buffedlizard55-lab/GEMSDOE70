@@ -1,0 +1,14 @@
+{
+  "experiment": 3,
+  "hypothesis": "Experiment-2 VG dots tested on SGMC distal proxy truth",
+  "mechanism": "Fixed-dot rescoring; no new emission",
+  "non_fault_mimic": "SGMC inactive-fault traces (proxy noise)",
+  "verdict": "negative",
+  "gates": {
+    "gateA_instrument": false,
+    "gateB_signal": false
+  },
+  "weekly_slots_used": 0,
+  "elapsed_seconds": 30.42,
+  "organizer_confirmed_score": null
+}

@@ -1,6 +1,21 @@
-# Handoff — 2026-10-20
+# Handoff — 2026-10-20 (experiments 2–3 session)
 
 Read README.md and PROJECT_BRIEF.md at session start.
+
+**NEGATIVE. DO NOT SUBMIT. No eligible TIFF exists. Budget 3/3 exhausted.**
+
+This session ran experiments 2 (TMI vertical-gradient lineaments, preregistered
+in docs/hypotheses-round2.md) and 3 (SGMC distal-truth rescoring, preregistered
+in docs/exp3-prereg.md). Both are negative with no file written; manifests
+refuse reruns. Key durable assets for future sessions: the validated SGMC-proxy
+instrument (H33/H27/D28 reproduce the live-ladder direction above randoms on
+62,122 off-catalogue SGMC pixels), the 300 m band-smoothness table ruling out
+strain/ieq localizers, explicit revision R1 with retained upstream report, and
+the untested queue (hypotheses 2–5). Any future experiment needs fresh
+preregistration, untouched blocks, and a lane paragraph. Full log:
+reports/session-2026-10-20-exp2-exp3.md.
+
+## Prior handoff (experiment-1 session, retained)
 
 **NEGATIVE. DO NOT SUBMIT. No eligible TIFF exists.**
 

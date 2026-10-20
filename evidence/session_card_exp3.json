@@ -1,0 +1,121 @@
+{
+  "evidence_class": "SESSION-CARD",
+  "protocol_section": 5,
+  "compiled_utc": "2026-10-20T22:29:28.918752+00:00",
+  "compiler": "scripts/compile_session_cards.py",
+  "hypothesis": "Experiment-2 VG dots tested on SGMC distal proxy truth",
+  "mechanism": "Fixed-dot rescoring; no new emission",
+  "non_fault_mimic": "SGMC inactive-fault traces (proxy noise)",
+  "holdout_dti": {
+    "evidence_class": "SGMC-PROXY-DTI",
+    "candidate": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.07552408925830893,
+      "ci95": [
+        0.061886933804447174,
+        0.08884555028946768
+      ],
+      "withheld_positive_pixels": 62122,
+      "tpw": 4366.380534215255,
+      "fpw": 36217.66105514269,
+      "fnw": 57755.61946578479
+    },
+    "paired_differences_vs_candidate": {
+      "h33": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": -0.019862025346516418,
+        "ci95": [
+          -0.03525728246114071,
+          -0.005911388688212266
+        ],
+        "withheld_positive_pixels": 62122
+      },
+      "h27": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": -0.019770766121337408,
+        "ci95": [
+          -0.035168743638218765,
+          -0.005921888797778213
+        ],
+        "withheld_positive_pixels": 62122
+      },
+      "d28": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": -0.018650339902884727,
+        "ci95": [
+          -0.033892299569011644,
+          -0.004980426000868117
+        ],
+        "withheld_positive_pixels": 62122
+      },
+      "random_unconstrained": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.003635182442759441,
+        "ci95": [
+          -0.011402846515040506,
+          0.018715492431729236
+        ],
+        "withheld_positive_pixels": 62122
+      },
+      "random_avoiding": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": -0.001219403512449882,
+        "ci95": [
+          -0.01679606278866147,
+          0.013978135758629452
+        ],
+        "withheld_positive_pixels": 62122
+      }
+    },
+    "truth": {
+      "source": "GEMSDOE24@07345ea:data/external/derived_sgmc_faults_100m_u8.tif",
+      "sha256": "643cbe992ef4ba37588fb469163ed8291e3ceb23d6c1f78a3cfaa462430c2da0",
+      "definition": "SGMC-positive with catalogue-distance > 3 px",
+      "n_truth": 62122,
+      "masked_known": "full competition catalogue (organizer-style)",
+      "caveat": "SGMC maps faults of any age/activity; proxy noise expected. Gate A tests whether the proxy ranks the live ladder."
+    }
+  },
+  "correlation_overlap_vs_registry": {
+    "stage": "final dots (binary 38,000) + surface stage reported in subset file",
+    "rasters_checked": 11,
+    "registry_complete": false,
+    "max_abs_spearman": 0.011180231543400511,
+    "max_sparse_overlap": [
+      "g17A",
+      0.3685263157894737
+    ],
+    "overlap_vs_h33": 0.21363157894736842,
+    "dense_witness_overlap_reported_not_gated": 1.0,
+    "scope": "Preregistered 9-file subset + 3 supplementary; NOT a complete 862-raster scan. Dense rasters: rho-gated only (revision R1); pre-R1 literal overlap reported in overlap_surface_stage."
+  },
+  "correlation_overlap_note": "Same fixed dots as experiment 2; uniqueness measured once and reused.",
+  "raster_sha256": null,
+  "raster_sha256_reason": "No submission TIFF written (negative verdict).",
+  "validator_output": {
+    "submission_tiff": null,
+    "status": "NOT_WRITTEN",
+    "pre_export_array_checks": {
+      "no_nan_inside_footprint": true,
+      "all_values_finite": true,
+      "values_in_0_1": true,
+      "shape_matches": true,
+      "zero_on_catalogue": true,
+      "zero_outside_footprint": true,
+      "n_dots": 38000
+    },
+    "crs_shape_transform_file_match": null,
+    "reason": "Array checks on rederived deterministic dots (verified identical to run time); not a TIFF validator receipt."
+  },
+  "validator_note": "Same fixed dots as experiment 2.",
+  "submission_name": "gems70-vgshallow-h1-B2-38k-NOT-RELEASED",
+  "submission_note": "VG-line H1 B2 38k dots; SGMC-proxy-negative; DO NOT SUBMIT.",
+  "verdict": "negative",
+  "run_card": "evidence/exp3_run_card.json"
+}

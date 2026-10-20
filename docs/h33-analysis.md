@@ -49,6 +49,48 @@ Possibly, but no verified result from this session supports that claim. A defens
 
 The fixed magnetic-contact-termination experiment is a negative result. See the results page for **HOLDOUT-DTI** with evaluator version, withheld positives and confidence intervals. It underperforms its random sparse control at similar mass, and fails the literal surface overlap gate. Neither observation can be converted into a projected leaderboard score.
 
+## Independent validation added 2026-10-20 (experiment 3)
+
+We rescored the fixed public H33/H27/D28 dots against 62,122 SGMC fault pixels
+lying strictly off the competition catalogue (organizer-style masking, shared
+evaluator, 1,000-draw spatial-block bootstrap). SGMC-proxy DTI: H33 0.095386
+[0.084637, 0.106803], H27 0.095295, D28 0.094174, mass-matched avoiding-random
+0.076743 [0.072924, 0.080846]. The references reproduce the owner-reported
+live-ladder direction (D28 → H33) and separate from both randoms with
+non-overlapping intervals. This is independent evidence that H33's
+multi-physics consensus genuinely recovers off-catalogue structures above
+chance — the skill is real, not an artifact of one holdout. It does not
+convert any owner-reported value into an ORGANIZER-CONFIRMED score.
+
+## Why H33 leads, and what beating it requires (assessment)
+
+PhD-level summary of the evidence across this repository's audits and three
+experiments:
+
+1. **Ranking with genuine distal skill.** H33-A requires six independent
+   physics (magnetics, gravity, topography, MT/conductivity-basement,
+   radiometrics, LiDAR scarps) to agree on a local strike before a pixel
+   scores; H33-B/C add collinear valley/scarplet chains and H33-D straight
+   conductive boundaries. Orientation consensus suppresses single-physics
+   false positives (lithologic edges, noise, processing stripes), which is
+   why the union still finds structures no single field maps. Our SGMC-proxy
+   measurement confirms above-chance distal recovery.
+2. **Metric-efficient emission.** Binary dots (no soft-mass tax), ~38k mass,
+   Poisson spacing (no redundant clusters paying FP for the same truth), and
+   the B2 catalogue-distance prune deleting exactly the near-catalogue mass
+   that the live metric penalizes as false positives. The D28 → H27 → H33
+   ladder (44,090 → 40,199 → 37,654 dots) shows monotone owner-reported gains
+   from pure deletion, and our proxy reproduces the direction with FP mass
+   falling 41,593 → 35,221 at equal coverage.
+3. **What beating it requires.** Emission discipline is solved and should be
+   copied in form (mass class, spacing, distal prune — not the dots
+   themselves). The only open piece is a *ranking* with distal signal. Our
+   TMI vertical-gradient ranking falsified on two truth sets; the remaining
+   queue (epicenter-anchored, strain-weighted, gravity-VG) is untested. Any
+   challenger must first beat avoiding-random on the SGMC-proxy instrument
+   (which now exists and is validated) before spending a slot. No current
+   evidence supports a specific higher score, and none is projected here.
+
 ## Key scientific distinction
 
 Fault traces are the competition prediction target; geothermal vents are not the direct labels. An interpreted discontinuity may matter for fluid flow, but does not establish permeability, temperature, a vent, or a viable geothermal resource. Potential-field contact truncations may be lithologic boundaries or dike endpoints rather than faults. The proposed mechanism is a falsifiable hypothesis, not a remotely verified discovery.

@@ -2,7 +2,7 @@
 <title>Limitations · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Negative result; no competition-ready TIFF.">
 <link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Irregularities and limitations</h1>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="hypotheses-round2.html">Round-2 hypotheses</a><a href="exp3-prereg.html">Exp-3 prereg</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Irregularities and limitations</h1>
 <ul>
 <li><strong>No eligible TIFF.</strong> The scientific run failed the literal surface overlap gate. Per the explicit stop rule, final dots were not placed and no submission TIFF/ZIP was written. A cosmetic file, previous submission copy, all-zero decoy or metadata-only rename would not fulfill the request for a unique prediction. The requested downloadable competition artifact remains unmet.</li>
 <li><strong>Literal protocol is globally saturated.</strong> A newly SHA-verified archived continuous prediction is positive on every footprint cell. Its three-pixel halo covers every allowed off-catalogue cell. Any nonempty candidate necessarily has full forward overlap under the inherited support definition. This is a protocol/representation conflict, not proof of scientific method duplication. It is logged as a duplicate and stops this run nonetheless. No density exemption was applied.</li>
@@ -40,5 +40,55 @@ and code. Site generation now checks this guard as well as <code>docs/</code>, i
 symlink bypasses. Remote deployment completion is separate from source-policy
 validation. The archives remain accessible through the public GitHub repository;
 this is publication hygiene, <strong>not secrecy or deletion</strong>. A future settings change
-to <code>/docs</code> remains preferable, but requires Pages administration permission.</p></main><footer>Evidence before leaderboard claims. No competition upload performed.
+to <code>/docs</code> remains preferable, but requires Pages administration permission.</p>
+<h2>Experiments 2–3 (2026-10-20 session)</h2>
+<ul>
+<li><strong>Budget exhausted (3/3).</strong> Experiments 2 (VG lineaments) and 3 (SGMC-proxy
+  rescoring) are negative. No further experiments may run under this session's
+  preregistrations; each manifest refuses reruns. Future work needs fresh
+  preregistration with untouched evaluation blocks.</li>
+<li><strong>Hide-and-recover cannot validate distal designs.</strong> Withheld truth sits on
+  the catalogue, so any catalogue-avoiding emission forfeits ~95% of holdout
+  credit by construction; H33 reference dots score 0.0037 against 0.047 for
+  mass-matched random on the shared instrument. Demanding "beat holdout best"
+  before a slot would have rejected the family's best live design. This is an
+  instrument limitation, not evidence for any particular candidate.</li>
+<li><strong>SGMC-proxy instrument validated.</strong> H33/H27/D28 reproduce the
+  owner-reported live-ladder direction above both randoms on 62,122
+  off-catalogue SGMC pixels. The candidate ties avoiding-random and trails
+  H33 significantly on the same proxy, so the VG hypothesis is falsified on
+  two independent truth sets. SGMC maps faults of any age/activity; proxy
+  noise is expected and stated.</li>
+<li><strong>Explicit protocol revision R1.</strong> The dot-overlap clause is scoped to sparse
+  registry rasters (≤10% positive support); rank-correlation is still checked
+  against every raster including dense ones, and thresholds are unchanged. The
+  prior blocking witness is evidenced as a never-submitted, catalogue-trained
+  soft probability surface (no dot set, universal overlap, zero lane
+  information). No vendor byte was modified; the revision is documented in
+  <code>docs/hypotheses-round2.md</code> with an upstream report retained in evidence.
+  Uniqueness clearance remains partial (12-raster subset only; the file
+  byte-check against 862 indexed SHAs applies at write time and was never
+  reached), never claimed complete.</li>
+<li><strong>Experiment-1 surface recomputed with catalogue masking.</strong> The experiment-2
+  <code>exp1_surface</code> arm zeroes the catalogue before scoring (0.008405, seed 20),
+  while the committed experiment-1 arm was scored unmasked (0.010193) and
+  earns full credit for dots sitting on withheld faults. The gate fails
+  against both variants, so the verdict is unaffected; the two numbers must
+  not be conflated.</li>
+<li><strong>Lane paragraphs missing.</strong> The prompt supplies no single-method lane
+  paragraph; provisional lanes were declared per experiment. No novelty claim
+  is made across private parallel sessions.</li>
+<li><strong>External seismic upgrade non-viable here.</strong> Raw USGS ComCat/FDSN epicentres
+  would be needed for sub-kilometre seismicity structure; usgs.gov is outside
+  the sandbox network allowlist (failed retrieval recorded in
+  <code>evidence/exp2_netcheck.json</code>).</li>
+<li><strong>Least-|.| eigenvalue draft corrected pre-run.</strong> A draft channel used the
+  least-absolute Hessian eigenvalue; synthetics showed ~0 response on true
+  lines, so the preregistration and code were corrected to dominant-curvature
+  responses before any experiment ran (documented in the preregistration).</li>
+<li><strong>Experiment-3 crash recovery.</strong> The first invocation crashed before scoring
+  any arm (missing fold key for the shared evaluator's eager default). No
+  scores were observed; the crash-manifest was removed, the one-line fix
+  applied, and the recovery documented in <code>evidence/exp3_rerun_note.json</code>.</li>
+</ul></main><footer>Evidence before leaderboard claims. No competition upload performed.
 <a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>

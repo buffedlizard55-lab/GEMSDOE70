@@ -5,24 +5,27 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def main():
     card=json.loads((ROOT/'evidence/run_card.json').read_text())
+    card2=json.loads((ROOT/'evidence/exp2_run_card.json').read_text())
+    card3=json.loads((ROOT/'evidence/exp3_run_card.json').read_text())
     d=card['holdout_dti']
+    d2a=card2['holdout_dti']['seed20']
+    d2b=card2['holdout_dti']['seed71']
+    s3=json.loads((ROOT/'evidence/exp3_holdout.json').read_text())['scores']['candidate']
     head=f'''# GEMSDOE70 — geothermal fault research
 
 ## Submission status: **DO NOT SUBMIT — no eligible TIFF**
 
-The fixed contact-termination experiment failed the literal surface uniqueness gate.
-Final dot placement and submission export stopped. **No previous submission was
-copied, renamed or advertised as a new prediction. No weekly slot was used.**
-The requested unique downloadable competition TIFF is **not fulfilled**; the
-protocol's verified dense-prior blocker makes it impossible for any nonempty
-candidate to pass its current literal support rule. A negative result is retained
+Three budgeted experiments are negative and the experiment budget (3/3) is
+exhausted. **No previous submission was copied, renamed or advertised as a new
+prediction. No weekly slot was used.** The requested unique downloadable
+competition TIFF is **not fulfilled**; honest negative evidence is retained
 instead of an unsafe download.
 
 - [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission guide](docs/executive-summary.html)
-- [Run card](evidence/run_card.json) · [Measured results](evidence/holdout.json)
-- [H33 forensic analysis](docs/h33-analysis.md) · [Four preregistered hypotheses](docs/hypotheses.md)
+- [Run cards](docs/results.html): [exp 1](evidence/run_card.json) · [exp 2](evidence/exp2_run_card.json) · [exp 3](evidence/exp3_run_card.json)
+- [H33 forensic analysis](docs/h33-analysis.md) · [Round-1 hypotheses](docs/hypotheses.md) · [Round-2 hypotheses](docs/hypotheses-round2.md) · [Exp-3 preregistration](docs/exp3-prereg.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
-- [Follow-up review and release-safety fixes](reports/review-followup-2026-10-20.md)
+- [Session report: exps 2–3](reports/session-2026-10-20-exp2-exp3.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
 ## What was verified
@@ -64,6 +67,25 @@ promising a higher score. Conflicting leaderboard values in the prompt remain
 unverified. Official non-GitHub pages failed access here; we do not call that a
 verified login redirect.
 
+## Experiments 2–3 (this session, budget exhausted)
+
+Experiment 2 tested shallow magnetic lineaments from the TMI vertical gradient
+(Hessian centerlines, both polarities, OR contact ridges; NMS-thinned; 38,000
+binary dots with spacing and a catalogue-distance prune). Leakage canaries were
+clean on two seeds and the 12-raster uniqueness subset passed (max sparse
+overlap 0.369; Spearman ≤ 0.011). **HOLDOUT-DTI:** seed 20: {d2a['dti']:.6f},
+95% CI [{d2a['ci95'][0]:.6f}, {d2a['ci95'][1]:.6f}]; seed 71: {d2b['dti']:.6f},
+95% CI [{d2b['ci95'][0]:.6f}, {d2b['ci95'][1]:.6f}] — statistically tied with
+the mass-matched catalogue-avoiding random on both seeds. Negative: no signal.
+
+Experiment 3 rescored the fixed dots against 62,122 SGMC fault pixels lying
+off the competition catalogue. The H33/H27/D28 references reproduce the
+owner-reported live-ladder direction above both randoms, which validates the
+proxy; the candidate ties avoiding-random (SGMC-proxy DTI {s3['dti']:.6f}, 95%
+CI [{s3['ci95'][0]:.6f}, {s3['ci95'][1]:.6f}]) and trails H33 significantly
+(paired −0.0199, CI excludes 0). Negative: the VG hypothesis is falsified on
+two independent truth sets. No submission was written by any run.
+
 ## Reproduce the workbench
 
 ```bash
@@ -75,12 +97,14 @@ bash scripts/download_competition_data.sh  # pinned public owner mirrors, not Dr
 .venv/bin/python -m pytest -q
 ```
 
-`run_experiment.py` is the preserved one-experiment implementation; it deliberately
-refuses a second attempt when its manifest already exists. Do not delete the
-manifest to tune on reported holdout blocks. `build_submission.py` exits with a
-clear blocked status, never creates a decoy TIFF. The shared writer's real
-TIFF/one-TIFF-ZIP round trip, range rejection and no-overwrite behavior are tested
-with temporary synthetic fixtures only. No synthetic fixture is published.
+`run_experiment.py`, `run_experiment_exp2.py` and `run_experiment_exp3.py` are the
+preserved implementations; each deliberately refuses a second attempt when its
+manifest already exists. Do not delete manifests to tune on reported holdout
+blocks. `build_submission.py` exits with a clear blocked status, never creates a
+decoy TIFF. The shared writer's real TIFF/one-TIFF-ZIP round trip, range rejection
+and no-overwrite behavior are tested with temporary synthetic fixtures only. No
+synthetic fixture is published. The experiment budget (3/3) is exhausted; future
+work needs a fresh preregistered run with untouched evaluation blocks.
 
 The static Pages site reports evidence; it does not train or generate in-browser.
 A fresh reviewed scientific run, resolved protocol, complete two-stage audit and

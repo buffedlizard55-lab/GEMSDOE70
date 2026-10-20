@@ -1,0 +1,255 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Round-2 hypotheses · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Negative result; no competition-ready TIFF.">
+<link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="hypotheses-round2.html">Round-2 hypotheses</a><a href="exp3-prereg.html">Exp-3 prereg</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Round-2 hypotheses — 2026-10-20 (preregistration for experiment 2)</h1>
+<p>Five geological hypotheses not tried in this repository. All use ONLY the 19
+provided competition bands already restored and SHA-verified in <code>.cache/data</code>
+(training_features.tif <code>4371c82e…23bc5</code>). No new external data is required for
+any of them. Ranks are qualitative (no numeric score projections are made).</p>
+<h2>Measurements that constrain the ranking (DATA-MEASUREMENT, this session)</h2>
+<p>300 m-lag (3 px) autocorrelation over the 5,167,373-pixel footprint, per band:</p>
+<table>
+<thead>
+<tr>
+<th>Band</th>
+<th>lag-3 corr</th>
+<th>Band</th>
+<th>lag-3 corr</th>
+<th>Band</th>
+<th>lag-3 corr</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tmi_vg (9)</td>
+<td>0.6259</td>
+<td>tmi_hg (3)</td>
+<td>0.8086</td>
+<td>det_elev_slope (19)</td>
+<td>0.8018</td>
+</tr>
+<tr>
+<td>tmi (14)</td>
+<td>0.9515</td>
+<td>rtp (2)</td>
+<td>0.9550</td>
+<td>tc (6)</td>
+<td>0.9742</td>
+</tr>
+<tr>
+<td>deq_n100a15 (10)</td>
+<td>0.9757</td>
+<td>iso_grav_anom_vg (11)</td>
+<td>0.9821</td>
+<td>det_elev (12)</td>
+<td>0.9914</td>
+</tr>
+<tr>
+<td>iso_grav_anom_slope (5)</td>
+<td>0.9912</td>
+<td>mag_anom (1)</td>
+<td>0.9952</td>
+<td>iso_grav_anom_hg (18)</td>
+<td>0.9958</td>
+</tr>
+<tr>
+<td>cond_surf (17)</td>
+<td>0.9967</td>
+<td>depth_to_base_surf (15)</td>
+<td>0.9981</td>
+<td>iso_grav_anom (13)</td>
+<td>0.9988</td>
+</tr>
+<tr>
+<td>geod_dilaterate (8)</td>
+<td>0.9995</td>
+<td>geod_shearrate (7)</td>
+<td>0.9998</td>
+<td>ieq_n100a15 (16)</td>
+<td>0.9998</td>
+</tr>
+<tr>
+<td>geod_2ndinv (4)</td>
+<td>0.9999</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Consequences (fixed before any round-2 evaluation):</p>
+<ul>
+<li>Geodetic strain and ieq carry no 300 m structure (lag-3 corr ≥ 0.9995). They
+  are rejected as fault-scale localizers. This reproduces the H33-E finding
+  (GEMSDOE32 <code>src/gems32/h33.py</code>: ieq 0.9935-correlated at 3 km lag) and extends
+  it to all three strain bands. Smooth bands may only enter as regional
+  allocation weights, never as ridge detectors.</li>
+<li>A dedicated TMI vertical-gradient lineament detector is untried: H33-A uses
+  rtp/tmi/mag_anom but no tmi_vg/tmi_hg channel (verified in
+  <code>build_h33a</code>); GEMSDOE32 derived channels use bands {2,12,13,14,15,17} only
+  (verified in <code>features.py:need</code>); experiment 1 used rtp/gravity/basement.</li>
+<li>Registry filename search over all 862 unique rasters: zero filenames mention
+  vertical-gradient/VG detectors; six mention strain (including 62GEMSDOE's
+  440-dot strain submission, owner-report 0.0000), one mentions proba (the
+  17GEMSDOE soft intermediate). Strain-as-localizer is both taken and
+  negatively evidenced; VG is open.</li>
+</ul>
+<h2>The five hypotheses</h2>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Hypothesis / layers</th>
+<th>Physical signature / transform</th>
+<th>Why a catalogue omission is plausible</th>
+<th>Named non-fault mimic</th>
+<th>Difference from implemented work</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First</td>
+<td>Shallow magnetic lineaments: <code>tmi_vg</code> (band 9)</td>
+<td>Sato/Frangi Hessian centerlines of VG accepting both polarities, OR NMS ridge of VG gradient magnitude (contact edges); NMS-thinned; sparse top-k dots with spacing + catalogue-distance prune</td>
+<td>VG suppresses deep regional sources, so a fault juxtaposing shallow magnetized volcanics draws a sharp VG line while staying invisible in RTP and leaving no surface scarp under cover</td>
+<td>Lava-flow margin, paleochannel magnetic lag, or E-W/N-S survey-leveling residual (checked by orientation diagnostic vs GeoDAWN N90°E flight lines)</td>
+<td>No VG detector in H33-A..D, no VG derived channel in champion features, E1 used RTP termination × gravity × basement; H69/H70-C are relay/radiometric lanes</td>
+<td>Low: one band, CPU</td>
+</tr>
+<tr>
+<td>Second</td>
+<td>Epicenter-anchored VG lineaments: <code>deq_n100a15</code> (10) + <code>tmi_vg</code> (9)</td>
+<td>Local minima of distance-to-earthquake (epicenters) required to sit on/near a first-hypothesis VG centerline; dots at the anchored intersections</td>
+<td>Microseismicity on a blind fault marks what mapping missed; the VG line proves a through-going structure rather than a point source</td>
+<td>Quarry blast, volcanic swarm (no quarry map in hand: stated limit)</td>
+<td>No family lane uses deq; H33-E declined ieq without testing deq</td>
+<td>Medium: minima detection + association</td>
+</tr>
+<tr>
+<td>Third</td>
+<td>Strain-corridor allocation prior: <code>geod_2ndinv</code>/<code>geod_shearrate</code> (4/7) × first-hypothesis skeleton</td>
+<td>Broad 2nd-invariant/shear weights reallocate the fixed dot budget toward high-strain corridors; the skeleton still localizes</td>
+<td>Active blind faults concentrate where present-day strain is highest</td>
+<td>Aseismic creep, magmatic/hydrologic deformation</td>
+<td>Smooth bands used only as weights (never ridges); differs from 62/37/39/51 strain localizers</td>
+<td>Low given the first</td>
+</tr>
+<tr>
+<td>Fourth</td>
+<td>Shallow density lineaments: <code>iso_grav_anom_vg</code> (11)</td>
+<td>Same centerline detector as the first hypothesis applied to gravity VG</td>
+<td>Basin-bounding step faults in cover carry a density contrast but no scarp</td>
+<td>Buried channel, basement topography</td>
+<td>E1 used horizontal gravity gradient magnitude/direction, not the VG band</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Fifth</td>
+<td>100 m slope-break scarps: <code>det_elev_slope</code> (19)</td>
+<td>NMS ridge of detrended-elevation slope, thinned centerlines</td>
+<td>Subtle or eroded scarps missed at mapping scale</td>
+<td>Fluvial terrace, lithologic bench</td>
+<td>100 m competition-grid slope, not external 1 m LiDAR/10 m DEM scarp products; highest lane-collision risk, ranked last</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<p>No hypothesis needs new external data. The H33-E upgrade (raw USGS ComCat/FDSN
+epicentres plus nodal-plane strikes) is explicitly NOT proposed here: usgs.gov
+is outside this sandbox's network allowlist (verified by allowlist inspection
+plus a failed direct retrieval attempt recorded in the experiment log), so
+obtainability fails and the idea stays non-viable for this session.</p>
+<h2>Provisional lane paragraph (experiment 2)</h2>
+<p>The supplied prompt contains no identifiable single-method lane paragraph
+(continued irregularity IR-LANE-02). Provisional narrow lane for experiment 2:
+<strong>shallow-magnetic-contact lineaments from TMI vertical-gradient Hessian
+centerlines (both polarities) OR'd with VG-gradient-magnitude contact ridges,
+NMS-thinned, sparse top-k binary emission with 2 px spacing and a
+catalogue-distance-greater-than-2 px prune.</strong> Only the first hypothesis is
+tested. Hypotheses 2–5 are a research queue, not extra experiments.</p>
+<h2>Fixed experiment-2 specification (frozen before running)</h2>
+<ul>
+<li>Inputs: band 9 (<code>tmi_vg</code>); footprint/catalogue geometry only (no catalogue
+  values enter any ranking transform).</li>
+<li>Fill NaN by nearest-neighbor from the ORIGINAL finite domain, smooth σ=1,
+  then erode the output support by 12 px AFTER filtering (repairs the
+  boundary-fill limitation noted against experiment 1).</li>
+<li>Channel A: <code>|dominant Hessian eigenvalue|</code> of VG (both polarities:
+  linear highs and lows), σ ∈ {1.2, 2.5}, pixel-wise max over scales.
+  Synthetic-verified: a 3 px amplitude-5 line scores 1.88 vs 1.02 noise max.
+  (An earlier draft used the least-|.| eigenvalue; synthetics showed it
+  responds ~0 on true lines, so it was replaced BEFORE any run.)</li>
+<li>Channel B: concave-down-only dominant eigenvalue of <code>|∇VG|</code> (contact edges
+  are gradmag maxima), same scales. Synthetic-verified: 0.24 on a contact
+  step vs 0.01 background.</li>
+<li>Score: <code>max(rank01(A), rank01(B))</code> over the valid domain (fixed equal OR).</li>
+<li>Skeleton: 8-connected non-maximum suppression of score, <code>score &gt; 0</code>.</li>
+<li>Orientation diagnostic: structure-tensor line direction at the EMITTED DOT
+  locations (full-skeleton rose also reported); STOP as artifact-suspect
+  (negative) if more than 50% of emitted dots falls within ±10° of E-W
+  (GeoDAWN primary flight heading N90°E; Area 1 at 200 m, Area 2 at 400 m
+  spacing; ties N-S at 2000 m — see the mirrored GeoDAWN report). Dots are
+  the submitted artifact, so the gate binds them, not the noisy skeleton.</li>
+<li>Emission: skeleton ranked by score desc; greedy take with ≥2.0 px spacing
+  from taken dots, distance-to-catalogue &gt; 2 px, on-footprint, off-catalogue;
+  cap 38,000 binary dots at 1.0, zeros elsewhere (finite everywhere; avoids the
+  reported portal range error class).</li>
+<li>Holdout: shared <code>buffered_component_draw</code> + <code>evaluate_holdout</code> (byte-pinned
+  template, unchanged), seeds 20 (comparability with experiment 1) and 71
+  (fresh untouched blocks), both fixed here before running.</li>
+<li>Arms per seed: candidate, ablation-A, ablation-B, ablation-no-prune,
+  experiment-1 candidate recomputed from <code>src/gems70/method.py</code> (same-split
+  scientific best), mass-matched random unconstrained (E1 style),
+  mass-matched random catalogue-avoiding (fair comparator), H33 dots
+  (<code>c55bafc4…</code>, reference only).</li>
+<li>Canaries: raw <code>tmi_vg</code>, channel A, channel B, combined score — each alone,
+  both seeds; <code>max(AUC, 1−AUC) &gt; 0.90</code> stops the run as suspected leakage.</li>
+</ul>
+<h2>Promotion decision rule (all must hold, else negative with no download)</h2>
+<ol>
+<li>Canaries clean on both seeds.</li>
+<li>Candidate beats the recomputed experiment-1 surface on seed 20
+   (non-overlapping 95% CIs; conservative, stated).</li>
+<li>Candidate beats mass-matched catalogue-avoiding random on BOTH seeds
+   (non-overlapping 95% CIs).</li>
+<li>E-W artifact rule passes.</li>
+<li>Candidate file bytes absent from all 862 indexed registry SHAs.</li>
+<li>Spearman &lt; 0.90 vs every checked raster (dense or sparse).</li>
+<li>Forward 3 px dot overlap &lt; 0.70 vs every checked SPARSE raster
+   (positive support ≤ 10% of footprint; all verified submissions sit ≤ 3.35%,
+   so any cutoff in (3.35%, 100%) gives identical verdicts — no tuning).</li>
+<li>Shared-validator receipt plus single-TIFF ZIP round trip on the exact bytes.</li>
+</ol>
+<h2>Explicit protocol revision R1 (scope clarification, not a threshold change)</h2>
+<p>The 0.90/0.70 thresholds are unchanged and no vendor byte is modified. The
+dot-overlap clause is scoped to sparse registry rasters (≤10% positive
+support); rank-correlation continues to be checked against every raster
+including dense ones. Grounds, all evidenced: (a) the prior blocking witness
+is a never-submitted soft HistGB probability surface trained on dilated
+catalogue labels (17GEMSDOE sidecar: value range [0.00046, 0.984], no zeros;
+<code>submission_meta.json</code> names F-ensemble, not E-proba, as latest), so it has no
+dot set and cannot discriminate lanes by overlap; (b) excluding it from
+overlap cannot weaken lane protection, because universal overlap carries zero
+lane information; (c) rho against it is retained, so catalogue-memorization
+rebuilds are still caught. The pre-R1 literal overlap number is still computed
+and reported for transparency. Upstream report retained in evidence.</p>
+<h2>Budget</h2>
+<p>Experiment 2 of at most 3; experiment compute tracked against the 2-hour
+protocol budget. No competition upload and no weekly-slot decision is made
+here; slot selection stays a separate step for the operator.</p>
+<h2>Fixed randomness and artifact naming (amended before any run)</h2>
+<ul>
+<li>All experiment-2 stochastic sampling (canary negative draws, mass-matched
+  random controls) uses <code>numpy.random.default_rng(70071)</code>.</li>
+<li>Holdout bootstrap draws use the shared evaluator default (<code>seed=520810</code>
+  inside <code>pooled_summary</code> unless overridden to 70071 — fixed here: 70071).</li>
+<li>Deterministic submission name: <code>gems70-vgshallow-h1-B2-38k</code> (no timestamp;
+  reruns producing identical bytes are caught by the writer's no-overwrite
+  rule and the registry byte check). Note template (≤140 chars, filled from
+  measurements at write time):
+  <code>VG-line H1 B2 38k dots; holdout-DTI s20 X [lo,hi] s71 Y [lo,hi]; fmt-valid</code>.</li>
+</ul></main><footer>Evidence before leaderboard claims. No competition upload performed.
+<a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>

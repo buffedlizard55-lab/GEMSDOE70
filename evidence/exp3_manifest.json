@@ -1,0 +1,14 @@
+{
+  "started_utc": "2026-10-20T22:21:05.343925+00:00",
+  "experiment_count": 3,
+  "maximum_experiments": 3,
+  "maximum_seconds": 7200,
+  "preregistration": "docs/exp3-prereg.md",
+  "preregistration_sha256": "069990b8bf354070b772c7ed7673d3c07e4f8ab32245664fe182a0600792dc8b",
+  "source_sha256": {
+    "scripts/run_experiment_exp3.py": "27146cb96e12bf5d3b7089552caba1907b3e180b7bf8e092e667b283f3d26632"
+  },
+  "method_exp2_sha256": "33b8c0d37cc02dabd291bd785baa44ebe45fec7fd1e1c4b25b9e755bc61ee885",
+  "rng_seed": 70073,
+  "bootstrap_seed": 70073
+}

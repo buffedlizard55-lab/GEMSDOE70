@@ -1,0 +1,7 @@
+{
+  "check": "USGS ComCat/FDSN obtainability for H33-E-style sub-km seismicity upgrade",
+  "url": "https://earthquake.usgs.gov/fdsnws/event/1/query?format=text&limit=1",
+  "method": "curl -m 10 from sandbox",
+  "result": "connection failed (000); usgs.gov outside sandbox network allowlist (github.com, codeload.github.com, api.github.com, registry.npmjs.org, pypi.org, files.pythonhosted.org only)",
+  "conclusion": "NOT obtainable this session; seismic-catalog upgrade correctly excluded from viable hypotheses"
+}
