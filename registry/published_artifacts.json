@@ -55,6 +55,42 @@
       "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
       "bytes": 498152,
       "note": "parallel H2 session (PR #18), blocked diagnostic, NOT a submission; card evidence/history/h2_stepover_negative/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif",
+      "sha256": "e1982061f8ebbafcbd290e7383340306170a0df04a999905702f505f06ddabc9",
+      "bytes": 129039,
+      "note": "session 3 E1 proxy-trained ranking; pre-registered gate promote, VETOED by calibration diagnostic; DO NOT SUBMIT; card evidence/s3/run_card.json (TIFF)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.zip",
+      "sha256": "e11bde13a9f095200d02e2ff63115024b38dcffa1fa445e24807376e7b04c15f",
+      "bytes": 89711,
+      "note": "session 3 E1 proxy-trained ranking; pre-registered gate promote, VETOED by calibration diagnostic; DO NOT SUBMIT; card evidence/s3/run_card.json (one-TIFF ZIP)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.json",
+      "sha256": "5140d97ff0aaf409f86c3e990e9b8ca1365cc403f90c00b7538bcc4b76546126",
+      "bytes": 3636,
+      "note": "session 3 E1 proxy-trained ranking; pre-registered gate promote, VETOED by calibration diagnostic; DO NOT SUBMIT; card evidence/s3/run_card.json (writer receipt)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif",
+      "sha256": "41099fcd8cc1e81605383183266d829e8504964044435b876d8d4f5d6d14a2fc",
+      "bytes": 132735,
+      "note": "session 3 E2 marginal-matched ranking; verdict negative; DO NOT SUBMIT; card evidence/s3/e2/run_card.json (TIFF)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.zip",
+      "sha256": "e25dc0e51272e36e2fb8e19ea08282be47ac2069c98370daafbd85ae4a8722ae",
+      "bytes": 94237,
+      "note": "session 3 E2 marginal-matched ranking; verdict negative; DO NOT SUBMIT; card evidence/s3/e2/run_card.json (one-TIFF ZIP)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.json",
+      "sha256": "6c0c4979f038a3308a30266b3c59aead9374fff7d1e0b675845bebee32543a7a",
+      "bytes": 3569,
+      "note": "session 3 E2 marginal-matched ranking; verdict negative; DO NOT SUBMIT; card evidence/s3/e2/run_card.json (writer receipt)"
     }
   ]
 }

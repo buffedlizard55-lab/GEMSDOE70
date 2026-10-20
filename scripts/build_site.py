@@ -19,7 +19,8 @@ DOWN = DOCS / 'downloads'
 
 NAV = [('index.html', 'Overview'), ('submission.html', 'Submit a file'),
        ('results.html', 'Evidence'), ('hypotheses.html', 'Hypotheses'),
-       ('h33-analysis.html', 'Why H33 scored'), ('sources.html', 'Sources'),
+       ('h33-analysis.html', 'Why H33 scored'), ('s3-findings.html', 'Session 3'),
+       ('sources.html', 'Sources'),
        ('limitations.html', 'Limitations')]
 
 
@@ -48,7 +49,7 @@ def frame(title, body):
 <title>{esc(title)} · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
+<span class="edition">SESSION 3 · 2026-10-20</span></header>
 <nav aria-label="Main">{nav}</nav><main id="main">{body}</main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
@@ -128,19 +129,75 @@ def main():
         'evidence/e3/holdout.json': 'e3_holdout.json',
         'evidence/e3/canaries.json': 'e3_canaries.json',
         'evidence/leaderboard_read.json': 'leaderboard_read.json',
+        'evidence/s3/run_card.json': 's3_run_card.json',
+        'evidence/s3/run_card_raw.json': 's3_run_card_raw.json',
+        'evidence/s3/proxy_calibration.json': 's3_proxy_calibration.json',
+        'evidence/s3/terrain_marginals.json': 's3_terrain_marginals.json',
+        'evidence/s3/canaries.json': 's3_canaries.json',
+        'evidence/s3/instrumentB_prime.json': 's3_instrumentB_prime.json',
+        'evidence/s3/instrumentA_holdout.json': 's3_instrumentA_holdout.json',
+        'evidence/s3/uniqueness.json': 's3_uniqueness.json',
+        'evidence/s3/surface_uniqueness.json': 's3_surface_uniqueness.json',
+        'evidence/s3/loqo_folds.json': 's3_loqo_folds.json',
+        'evidence/s3/e2/run_card.json': 's3e2_run_card.json',
+        'evidence/s3/e2/instrumentB_prime.json': 's3e2_instrumentB_prime.json',
+        'evidence/s3/e2/instrumentA_holdout.json': 's3e2_instrumentA_holdout.json',
+        'evidence/s3/e2/uniqueness.json': 's3e2_uniqueness.json',
+        'evidence/s3/e2/strata.json': 's3e2_strata.json',
     }
     for src, dst in copies.items():
         s = ROOT / src
         if s.is_file():
             shutil.copyfile(s, DOWN / dst)
 
+    # ------------------------------------------------------- session 3 banner (latest)
+    s3 = load('evidence/s3/run_card.json', {})
+    s3e2 = load('evidence/s3/e2/run_card.json', {})
+    s3cal = load('evidence/s3/proxy_calibration.json', {})
+    s3_banner = ''
+    if s3 and s3e2 and s3cal:
+        e2pub_ = load('evidence/e2/publication.json', {})
+        tm_ = {r['label']: r for r in load('evidence/s3/terrain_marginals.json', {}).get('rows', [])}
+        e1_steep = tm_.get('S3-E1 (this session)', {}).get('frac_steep_top_quartile', float('nan'))
+        go_steep = tm_.get('gate_ortho (reported 0.2376)', {}).get('frac_steep_top_quartile', float('nan'))
+        d1 = s3['paired_b_prime']['h33_reference']
+        d2 = s3e2['paired_b_prime']['random_stratified']
+        files = [
+            (Path(s3['artifact']).name, 'Session 3 · E1 proxy-trained ranking', 'yes', 'NO',
+             f"passed its pre-registered proxy gate (B′ Δ vs H33 {d1['delta']:+.4f}, CI {ci(d1)}) but is "
+             f"<strong>vetoed</strong>: the proxy does not track the live board (ρ = {s3cal['spearman_live_vs_b_prime']:.2f}) "
+             f"and {100 * e1_steep:.0f} % of its dots sit in the steepest terrain quartile; the live-tested gate_ortho "
+             f"file ({100 * go_steep:.0f} % steep) was reported at 0.2376, below H33."),
+            (Path(s3e2['artifact']).name, 'Session 3 · E2 marginal-matched ranking', 'yes', 'NO',
+             f"negative: within H33's distance × slope strata the model does not beat random placement "
+             f"(B′ Δ {d2['delta']:+.4f}, CI {ci(d2)})."),
+            (f'{name}.tif', 'Session 2 · P4 stratified halo', 'yes', 'NO',
+             'negative on its pre-registered proxy gate (details below).'),
+        ]
+        if e2pub_.get('file'):
+            files.append((e2pub_['file'], 'Parallel lane · E2 alluvial step', 'review only', 'NO',
+                          'negative; selector-review file from a parallel session.'))
+        frows = [[f'<a href="downloads/{esc(f)}" download><code>{esc(f)}</code></a>', esc(lab), dl,
+                  f'<strong>{sub}</strong>', why] for f, lab, dl, sub, why in files]
+        s3_banner = f'''<section class="stop" aria-labelledby="s3">
+<div class="eyebrow">LATEST · SESSION 3 · SUBMISSION DECISION</div>
+<h1 id="s3">No file on this site is recommended for a weekly slot.</h1>
+<p><strong>Every file below downloads and passes the shared validator</strong> (single band, float32,
+3730 × 3292, EPSG:32611, values exactly 0/1, no NaN) and is unique against 62 archived rasters.
+<strong>None is evidence of a score above 0.2778</strong>, so uploading any of them would be a test,
+not an expected improvement. Weekly slots used by this project: 0.</p>
+{table(['File', 'What it is', 'Download', 'Submit', 'Why'], frows, 'Download vs submit, per file')}
+<p class="small">Session 3 details, calibration table and receipts: <a href="s3-findings.html">Session 3 findings</a> ·
+<a href="downloads/s3_run_card.json">E1 run card</a> · <a href="downloads/s3e2_run_card.json">E2 run card</a> ·
+<a href="downloads/s3_proxy_calibration.json">calibration receipt</a></p></section>'''
+
     # --------------------------------------------------------------- decision box
     promoted = bool(card.get('download_and_submit_ok'))
     tone = 'stop' if not promoted else 'ok'
     headline = ('Verified file · not promoted' if not promoted else 'Promoted candidate')
     decision = f'''<section class="{tone}" aria-labelledby="decision">
-<div class="eyebrow">SUBMISSION STATUS</div>
-<h1 id="decision">{esc(headline)}</h1>
+<div class="eyebrow">SESSION 2 · SUBMISSION STATUS</div>
+<h2 id="decision">Session 2 file (P4): {esc(headline)}</h2>
 <p><strong>Download: yes.</strong> The file is unique among the 62 archived registry rasters,
 passes every shared-validator check, and its SHA-256 is recorded below.</p>
 <p><strong>Submit a weekly slot: not recommended by our evidence.</strong> The verdict is
@@ -218,11 +275,20 @@ complete-registry scan is still pending. HOLDOUT-DTI {_d['dti']:.4f} {ci(_d)} ·
 <code>{esc(e2card.get('submission_note'))}</code>. E3 (depth-step) in the same lane family is
 negative with no file. Full tables on the results page; terms in
 <code>docs/publication-amendment-e2.md</code>.</p></section>"""
-    (DOCS / 'index.html').write_text(frame('Overview', index + e2_section))
+    (DOCS / 'index.html').write_text(frame('Overview', s3_banner + index + e2_section))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
-    guide = f'''<div class="eyebrow">SUBMISSION GUIDE</div>
+    s3_guide = ''
+    if s3:
+        s3_guide = f'''<section class="stop"><div class="eyebrow">READ FIRST · SESSION 3</div>
+<h2>Current recommendation: do not spend a weekly slot on any file here.</h2>
+<p>The two Session 3 files carry <code>DO-NOT-SUBMIT</code> in their names on purpose. If you still
+choose to upload one as an experiment, use the steps below with that file's own name and note
+(E1 note: <code>{esc(s3.get('submission_note', ''))}</code>; E2 note:
+<code>{esc(s3e2.get('submission_note', ''))}</code>), and record the portal's score as
+ORGANIZER-CONFIRMED in a new receipt. See <a href="s3-findings.html">Session 3 findings</a>.</p></section>'''
+    guide = s3_guide + f'''<div class="eyebrow">SUBMISSION GUIDE</div>
 <h1>How to submit this file — and what the number will mean.</h1>
 <p class="lead"><strong>The file:</strong> <code>downloads/{esc(name)}.tif</code>
 ({val.get('bytes', 0):,} bytes, SHA-256 <code>{esc(sha)}</code>).
@@ -319,12 +385,26 @@ always reported.</p>
                     f"{e3card.get('holdout_dti', {}).get('dti', 0):.4f}. Both negative.</p>"
                     + table(['Arm', 'DTI', '95% CI', 'Positives'], _rows,
                             'E2 arms · gems57-pooled-hide-v2 · seed-20'))
+    if s3 and s3e2:
+        s3b = load('evidence/s3/instrumentB_prime.json')
+        s3e2b = load('evidence/s3/e2/instrumentB_prime.json')
+        s3a = load('evidence/s3/instrumentA_holdout.json')
+        results = ('<h2>Session 3 — supervised proxy ranking (E1, E2)</h2>'
+                   '<p>Pre-registered in <code>docs/preregistration-s3.md</code> and '
+                   '<code>docs/preregistration-s3-e2.md</code>. Out-of-fold (leave-one-quadrant-out) B′ scores. '
+                   'E1 verdict: pre-registered rule promote, final negative (calibration veto). E2: negative.</p>'
+                   + table(['Arm', 'DTI', '95% CI', 'Positives'], instrument_rows(s3b), 'S3-E1 · Instrument B′ (OOF)')
+                   + table(['Arm', 'DTI', '95% CI', 'Positives'], instrument_rows(s3a), 'S3-E1 · Instrument A (diagnostic)')
+                   + table(['Arm', 'DTI', '95% CI', 'Positives'], instrument_rows(s3e2b),
+                           'S3-E2 · Instrument B′ (s3_e1_candidate row is the in-sample production file; not comparable)')
+                   + '<p><a href="s3-findings.html">Calibration table and full discussion →</a></p>' + results)
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 
     # ------------------------------------------------------------------ markdown
     import markdown
     for src, dst, title in [('docs/hypotheses.md', 'hypotheses.html', 'Hypotheses'),
                             ('docs/h33-analysis.md', 'h33-analysis.html', 'Why H33 scored'),
+                            ('docs/s3-findings.md', 's3-findings.html', 'Session 3'),
                             ('docs/irregularities.md', 'limitations.html', 'Limitations')]:
         text = (ROOT / src).read_text()
         body = markdown.markdown(text, extensions=['tables'])

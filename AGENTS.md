@@ -18,3 +18,10 @@
 ## Parallel-lane addendum (2026-10-20, PR #16)
 - E2/E3 evidence and cards (`evidence/e2|e3/`) are frozen like Phase 1-4. The E2 review TIFF is inventoried but never promoted; `release.candidate_status().submit_ok` stays False until selector gates in `docs/publication-amendment-e2.md` are recorded.
 - E2 uniqueness numbers predate the mutual-overlap fix (R1 subset audit). Re-audit E2 under the corrected rule before comparing uniqueness across lanes.
+
+## Session-3 addendum (2026-10-20)
+- `evidence/s3/` (E1, E2, calibration, terrain marginals) is frozen. E1's raw script card is
+  `evidence/s3/run_card_raw.json`; the final card adds a conservative post-hoc veto. Never reverse a
+  veto into a promotion without a new pre-registered, live-calibrated test.
+- No offline instrument in this repo is calibrated to the live board (`evidence/s3/proxy_calibration.json`).
+  Any future promotion must first show its gate orders the scored archive files like the live board.

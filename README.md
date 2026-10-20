@@ -1,6 +1,20 @@
 # GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+## Latest — Session 3: **no file is recommended for a weekly slot**
+
+| File | Download | Submit | Why |
+|---|---|---|---|
+| [`gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif`](docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif) | yes | **NO** | E1 proxy-trained ranking: passed its pre-registered proxy gate (B′ Δ vs H33 +0.0300, 95 % CI [+0.0034, +0.0557]) but **vetoed**: the proxy does not track the live board (Spearman -0.28, n = 18) and the gain is confounded with steep terrain |
+| [`gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif`](docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif) | yes | **NO** | E2 marginal-matched ranking: negative (B′ Δ vs random-within-strata +0.0075, CI [-0.0186, +0.0327]) |
+| [`gems70-p4-stratified-halo-37654-20261020.tif`](docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif) | yes | **NO** | Session 2 P4: negative on its proxy gate (below) |
+
+All files: single band, float32, 3730 × 3292, EPSG:32611, values exactly 0/1, no NaN, unique vs 62
+archived rasters. No number here is organizer-confirmed; weekly slots used: 0. Details:
+[Session 3 findings](docs/s3-findings.md) · [E1 card](evidence/s3/run_card.json) ·
+[E2 card](evidence/s3/e2/run_card.json) · [calibration](evidence/s3/proxy_calibration.json) ·
+preregistrations [S3](docs/preregistration-s3.md), [S3-E2](docs/preregistration-s3-e2.md).
+
+## Session 2 submission status: **DOWNLOADABLE — NOT PROMOTED**
 
 A unique, format-validated competition TIFF is published:
 `docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).

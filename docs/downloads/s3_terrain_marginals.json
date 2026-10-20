@@ -1,0 +1,134 @@
+{
+  "evidence_class": "DATA-MEASUREMENT (descriptive; live scores are owner/user-reported)",
+  "steep_definition": "topo_10m_derived_100m_u8 band 1 (slope_p90) u8 code > 115.0 (footprint 75th pct)",
+  "rows": [
+    {
+      "label": "S3-E1 (this session)",
+      "file": "gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif",
+      "sha256": "e1982061f8ebbafcbd290e7383340306170a0df04a999905702f505f06ddabc9",
+      "dots": 37654,
+      "d_px_quantiles_5_25_50_75_95": [
+        3.1622776601683795,
+        9.848857801796104,
+        21.213203435596427,
+        39.319206502675,
+        72.89718787443039
+      ],
+      "frac_d_le_6px": 0.15992988792691348,
+      "frac_d_le_15px": 0.37350613480639505,
+      "frac_steep_top_quartile": 0.6360280448292346
+    },
+    {
+      "label": "S3-E2 (this session)",
+      "file": "gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif",
+      "sha256": "41099fcd8cc1e81605383183266d829e8504964044435b876d8d4f5d6d14a2fc",
+      "dots": 37654,
+      "d_px_quantiles_5_25_50_75_95": [
+        3.605551275463989,
+        9.0,
+        20.223748416156685,
+        43.139309220245984,
+        81.83520025025906
+      ],
+      "frac_d_le_6px": 0.15961119668561108,
+      "frac_d_le_15px": 0.4007011207308652,
+      "frac_steep_top_quartile": 0.21591331598236574
+    },
+    {
+      "label": "H33 (reported 0.2778)",
+      "file": "dotted_b2_prune_02778.tif",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "dots": 37654,
+      "d_px_quantiles_5_25_50_75_95": [
+        3.0,
+        8.06225774829855,
+        19.6468827043885,
+        42.44997055358225,
+        81.88406438373708
+      ],
+      "frac_d_le_6px": 0.18061826100812664,
+      "frac_d_le_15px": 0.4160248579168216,
+      "frac_steep_top_quartile": 0.19931481383119987
+    },
+    {
+      "label": "H27 (reported 0.2708)",
+      "file": "dotted_d2_8_02708.tif",
+      "sha256": "ab02300152248fdda04e988e2cd2a0c13f35eec42fcf670a15e8b76b19e24a73",
+      "dots": 40199,
+      "d_px_quantiles_5_25_50_75_95": [
+        2.0,
+        6.708203932499369,
+        17.69180601295413,
+        40.2554339366955,
+        80.62567775525858
+      ],
+      "frac_d_le_6px": 0.23249334560561208,
+      "frac_d_le_15px": 0.4529963431926167,
+      "frac_steep_top_quartile": 0.19779098982561755
+    },
+    {
+      "label": "D28 (reported 0.2600)",
+      "file": "dotted_d2_8_02600.tif",
+      "sha256": "3e78737f0da8dd2ca66cc6caac0ce8eeefcd6715707f8d1bd3091845cd9bcc30",
+      "dots": 44090,
+      "d_px_quantiles_5_25_50_75_95": [
+        1.0,
+        4.47213595499958,
+        15.0,
+        37.05401462729781,
+        78.91767862779544
+      ],
+      "frac_d_le_6px": 0.30022680880018143,
+      "frac_d_le_15px": 0.5012701292810161,
+      "frac_steep_top_quartile": 0.1959401224767521
+    },
+    {
+      "label": "gate_ortho (reported 0.2376)",
+      "file": "GEMSDOE49__gate_ortho_w0.25-40k.tif",
+      "sha256": "3722e26fbf9129874be1fb8c687825803952c57ef1154ed0a21029596bc412f1",
+      "dots": 40000,
+      "d_px_quantiles_5_25_50_75_95": [
+        3.1622776601683795,
+        7.615773105863909,
+        19.209372712298546,
+        38.948684188300895,
+        78.03204469959762
+      ],
+      "frac_d_le_6px": 0.199825,
+      "frac_d_le_15px": 0.422,
+      "frac_steep_top_quartile": 0.47545
+    },
+    {
+      "label": "anderson PINN (reported 0.2750)",
+      "file": "GEMSDOE36__anderson-geothermal-pinn-38854.tif",
+      "sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+      "dots": 38854,
+      "d_px_quantiles_5_25_50_75_95": [
+        3.0,
+        8.06225774829855,
+        19.235384061671343,
+        41.7612260356422,
+        81.39410298049853
+      ],
+      "frac_d_le_6px": 0.1810881762495496,
+      "frac_d_le_15px": 0.419133165182478,
+      "frac_steep_top_quartile": 0.20664539043599114
+    },
+    {
+      "label": "P4 (session 2, unscored)",
+      "file": "gems70-p4-stratified-halo-37654-20261020.tif",
+      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+      "dots": 37654,
+      "d_px_quantiles_5_25_50_75_95": [
+        2.8284271247461903,
+        3.1622776601683795,
+        12.041594578792296,
+        18.35755975068582,
+        24.331050121192877
+      ],
+      "frac_d_le_6px": 0.2929303659637754,
+      "frac_d_le_15px": 0.6273968237106283,
+      "frac_steep_top_quartile": 0.2600520529027461
+    }
+  ]
+}

@@ -3,8 +3,8 @@
 <title>Why H33 scored · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Why the archived H33 field scored 0.2778 — and what it takes to beat it</h1>
+<span class="edition">SESSION 3 · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="s3-findings.html">Session 3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Why the archived H33 field scored 0.2778 — and what it takes to beat it</h1>
 <p><strong>Evidence class:</strong> DATA-MEASUREMENT of the archived bytes, plus user-supplied historical scores.
 The 0.2778 value has <strong>no organizer receipt in this repository</strong>; it is the user's report. Nothing
 below converts it into an ORGANIZER-CONFIRMED score.</p>
@@ -112,7 +112,29 @@ stratification that this session measured to be worth +70 % on B′ at fixed mas
 its limit here; the leaderboard gap is information, not spacing.</p>
 <h2>What we will not do</h2>
 <p>Rescale, jitter, rename or prune H33 and call it a new prediction. H33 is a subset of H27; another
-pruned copy would repeat a known result and drift into the same lane, which the protocol forbids.</p></main>
+pruned copy would repeat a known result and drift into the same lane, which the protocol forbids.</p>
+<h2>Session 3 addendum — calibration against the live board (see <code>docs/s3-findings.md</code>)</h2>
+<p>Evidence class: owner/user-reported live scores for 18 archived rasters, re-scored offline here
+(<code>evidence/s3/proxy_calibration.json</code>, <code>evidence/s3/terrain_marginals.json</code>). None is
+organizer-confirmed.</p>
+<ul>
+<li><strong>Neither offline instrument predicts the live ordering.</strong> Spearman(live, B′) = −0.28 and
+  Spearman(live, A) = −0.64 (n = 18). The dense lattice <code>r13</code> has the best B′ (0.252) and the worst
+  live score (0.0904): B′'s proxy truth is large (≈ 60 k px), so it rewards dense coverage that the
+  live truth punishes.</li>
+<li><strong>What the live board did reward, descriptively.</strong> Among ≈ 37–44 k-dot files, the reported live
+  score rose as dots within ≈ 2 px of mapped faults were removed (share of dots within 6 px:
+  D28 0.300 → H27 0.232 → H33 0.181; scores 0.2600 → 0.2708 → 0.2778). The one file that
+  concentrated dots in steep terrain (GEMSDOE49 gate_ortho, 47.5 % in the steepest slope quartile
+  versus H33's 19.9 %) scored 0.2376 despite the highest B′ in its size class.</li>
+<li><strong>Answer to "why H33 is the family best".</strong> It is the best-spaced (2.83 px minimum), terrain-
+  neutral sample of the 0.3–8 km band around mapped faults with the nearest shells removed. It
+  carries no physical information; its edge over its siblings is emission geometry.</li>
+<li><strong>Can we beat 0.2778?</strong> Not with evidence available today. Our supervised model concentrates in
+  bedrock terrain (the named mimic) and, once terrain and distance are matched to H33, adds no
+  significant information on the proxy (E2). Beating H33 needs an instrument that tracks the live
+  board first — that is the next session's top task.</li>
+</ul></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
 <a href="downloads/instrumentA_holdout.json">Instrument A</a> ·

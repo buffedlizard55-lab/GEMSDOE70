@@ -1,0 +1,8 @@
+{
+  "stage": "production rank surface before placement",
+  "rasters_checked": 62,
+  "worst_spearman_full_footprint": 0.0753097299014113,
+  "worst_rho_submission": "h60_officialstack_50k.tif",
+  "rho_limit": 0.9,
+  "duplicate_by_rho": false
+}

@@ -15,9 +15,29 @@ def main():
     ballref = card['instrument_b_unrestricted']['h33_reference']
     u = card['uniqueness_detail']
     delta = card['paired_b_prime_vs_h33']
+    s3 = json.loads((ROOT / 'evidence/s3/run_card.json').read_text())
+    s3e2 = json.loads((ROOT / 'evidence/s3/e2/run_card.json').read_text())
+    cal = json.loads((ROOT / 'evidence/s3/proxy_calibration.json').read_text())
+    d1 = s3['paired_b_prime']['h33_reference']
+    d2 = s3e2['paired_b_prime']['random_stratified']
+    s3_block = f'''## Latest — Session 3: **no file is recommended for a weekly slot**
+
+| File | Download | Submit | Why |
+|---|---|---|---|
+| [`{Path(s3['artifact']).name}`]({s3['artifact']}) | yes | **NO** | E1 proxy-trained ranking: passed its pre-registered proxy gate (B′ Δ vs H33 {d1['delta']:+.4f}, 95 % CI [{d1['ci95'][0]:+.4f}, {d1['ci95'][1]:+.4f}]) but **vetoed**: the proxy does not track the live board (Spearman {cal['spearman_live_vs_b_prime']:.2f}, n = {cal['n']}) and the gain is confounded with steep terrain |
+| [`{Path(s3e2['artifact']).name}`]({s3e2['artifact']}) | yes | **NO** | E2 marginal-matched ranking: negative (B′ Δ vs random-within-strata {d2['delta']:+.4f}, CI [{d2['ci95'][0]:+.4f}, {d2['ci95'][1]:+.4f}]) |
+| [`{card['submission_name']}.tif`](docs/downloads/{card['submission_name']}.tif) | yes | **NO** | Session 2 P4: negative on its proxy gate (below) |
+
+All files: single band, float32, 3730 × 3292, EPSG:32611, values exactly 0/1, no NaN, unique vs 62
+archived rasters. No number here is organizer-confirmed; weekly slots used: 0. Details:
+[Session 3 findings](docs/s3-findings.md) · [E1 card](evidence/s3/run_card.json) ·
+[E2 card](evidence/s3/e2/run_card.json) · [calibration](evidence/s3/proxy_calibration.json) ·
+preregistrations [S3](docs/preregistration-s3.md), [S3-E2](docs/preregistration-s3-e2.md).
+
+'''
     head = f'''# GEMSDOE70 — geothermal fault research
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+{s3_block}## Session 2 submission status: **DOWNLOADABLE — NOT PROMOTED**
 
 A unique, format-validated competition TIFF is published:
 `docs/downloads/{card['submission_name']}.tif` (sha256 `{card['raster_sha256']}`).
