@@ -140,7 +140,25 @@ PROJECT_BRIEF.md is the source for this embedded copy.
                    f"negative); frozen drivers renamed `scripts/run_experiment_e{{2,3}}_scarp.py` "
                    f"at merge (byte-identical; canonical paths hold the PR #16 lane's drivers). "
                    f"Site page: `docs/e3-candidate.html`. No slot used for any candidate.\n")
-    (ROOT / 'README.md').write_text(head + e2_note + e3_note + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
+    p5_note = ''
+    p5p = ROOT / 'evidence/phase5/run_card.json'
+    if p5p.is_file():
+        import json as _json5
+        _p5 = _json5.loads(p5p.read_text())
+        _pa = _p5['instrument_a_holdout']['candidate']
+        _pb = _p5['instrument_b_prime_proxy']['candidate']
+        p5_note = (f"\n## Parallel P5 analytic-signal lane (this branch, arena/97660a79-gemsdoe70) — DO NOT SUBMIT\n\n"
+                   f"Analytic-signal halo 7px, 37,654 dots, `tmi_hg`+`tmi_vg` rank in 2.4–32 px halo with tip kernel. HOLDOUT-DTI A {_pa['dti']:.4f} [{_pa['ci95'][0]:.4f},{_pa['ci95'][1]:.4f}] vs H33 0.0037 win; **B′ {_pb['dti']:.4f} [{_pb['ci95'][0]:.4f},{_pb['ci95'][1]:.4f}] vs 0.0938 H33 win Δ { _p5['paired_b_prime_vs_h33']['delta']:+.4f} {_p5['paired_b_prime_vs_h33']['ci95']} → negative**, no slot. Uniqueness: 62 rasters worst mutual 0.30 (limit 0.70) worst ρ 0.042; forward 1.00 vs dense lattice `calib_r13lattice_00904.tif` (literal duplicate, review only). File `docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif` (sha256 `{_p5['raster_sha256']}`, 149,414 bytes, ZIP `bf61cacc...`). Evidence `evidence/phase5/` (run_card, instrument holds, uniqueness, canaries), method `src/gems70/method_p5.py`. Hypotheses.md now ranks 5 candidates (H-2 tested P5, H-3 radiometric GeoDAWN already fetched 36+26 MB, H-4 lidar scarp 36 MB, H-5 conductive breach, H-6 basement curvature) with preregistered validation rule; h33-analysis.md PhD-level byte audit + metric algebra. Under literal forward rule, P5 is duplicate (as is H70 and P4) — download for review only.\n")
+    h70_note = ''
+    h70p = ROOT / 'evidence/h70/run_card.json'
+    if h70p.is_file():
+        import json as _json70
+        _h70 = _json70.loads(h70p.read_text())
+        _ha = _h70['instrument_a_holdout']['candidate']
+        _hb = _h70['instrument_b_prime_proxy']['candidate']
+        h70_note = (f"\n## Parallel H70 conductive-breach lane (arena/0aa117f9-gemsdoe70, PR #28) — DO NOT SUBMIT\n\n"
+                    f"H70-A conductive breach × analytic magnetics, 7px strata, 37,654 dots off-cat; HOLDOUT-DTI A {_ha['dti']:.4f} [{_ha['ci95'][0]:.4f},{_ha['ci95'][1]:.4f}] vs H33 0.0037 win; B′ {_hb['dti']:.4f} [{_hb['ci95'][0]:.4f},{_hb['ci95'][1]:.4f}] vs 0.0953 H33 win Δ {_h70['paired_b_prime_vs_h33']['delta']:+.4f} {_h70['paired_b_prime_vs_h33']['ci95']} → negative. File `docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif` (sha256 `{_h70['raster_sha256']}`, 184,165 bytes). Evidence `evidence/h70/`.\n")
+    (ROOT / 'README.md').write_text(head + e2_note + e3_note + p5_note + h70_note + (ROOT / 'PROJECT_BRIEF.md').read_text() + tail)
 
 
 if __name__ == '__main__':
