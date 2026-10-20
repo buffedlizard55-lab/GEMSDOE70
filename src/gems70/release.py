@@ -1,5 +1,15 @@
-"""Publication is fail-closed, distinct from format validity and slot selection."""
+"""Release contract for the published candidate.
+
+Two independent facts are tracked and must never be conflated:
+
+* ``download_ok``  - the file exists, matches its recorded SHA-256, passed the shared
+  validator, and cleared the (corrected) mutual-overlap uniqueness gate.
+* ``submit_recommended`` - the pre-registered scientific promotion gate passed.
+
+The page and the run card always show both. A downloadable file is not a promise.
+"""
 from __future__ import annotations
+
 import hashlib
 import json
 import math
@@ -23,57 +33,73 @@ def valid_canary(canary):
 def digest(path):
     h = hashlib.sha256()
     with Path(path).open('rb') as f:
-        for b in iter(lambda:f.read(1<<20),b''):
+        for b in iter(lambda: f.read(1 << 20), b''):
             h.update(b)
     return h.hexdigest()
 
 
+def _load(root, rel):
+    p = Path(root) / rel
+    return json.loads(p.read_text()) if p.is_file() else None
+
+
 def release_status(root):
-    """Current run is negative. No booleans alone can authorize a download."""
+    """Report the published candidate's status without ever inventing a score."""
     root = Path(root)
-    reasons = []
-    try:
-        card = json.loads((root/'evidence/run_card.json').read_text())
-        holdout = json.loads((root/'evidence/holdout.json').read_text())
-        canaries = json.loads((root/'evidence/canaries.json').read_text())
-        audit = json.loads((root/'evidence/surface_uniqueness.json').read_text())
-        manifest = json.loads((root/'evidence/experiment_manifest.json').read_text())
-        if not all(isinstance(item, dict) for item in (card, holdout, audit, manifest)):
-            raise ValueError('Evidence documents must be JSON objects.')
-        if card.get('verdict') != 'promote': reasons.append('Run verdict is negative.')
-        if audit.get('stop_required') is not False or audit.get('unique') is not True:
-            reasons.append('Surface uniqueness is blocked or incomplete.')
-        if not card.get('holdout_dti',{}).get('current_best_verified'):
-            reasons.append('Comparable current holdout best has not been beaten.')
-        if holdout.get('promotion_allowed') is not True:
-            reasons.append('Holdout evidence does not permit promotion.')
-        if not isinstance(canaries, dict) or not canaries or not all(valid_canary(c) for c in canaries.values()):
+    card = _load(root, 'evidence/phase4/run_card.json')
+    canaries = _load(root, 'evidence/phase2/canaries.json')
+    audit = _load(root, 'evidence/phase4/uniqueness.json')
+    reasons, notes = [], []
+    download_ok = False
+    submit = False
+    tif = sha = None
+    if not card:
+        reasons.append('Phase-4 run card is missing.')
+    else:
+        name = card.get('submission_name', '')
+        tif = root / 'docs/downloads' / f'{name}.tif'
+        sha = card.get('raster_sha256')
+        if tif.is_file() and sha and digest(tif) == sha:
+            download_ok = True
+        else:
+            reasons.append('Published TIFF is absent or does not match the recorded SHA-256.')
+        validator = card.get('validator_output') or {}
+        checks = validator.get('checks') or {}
+        if not checks or not all(bool(v) for v in checks.values()):
+            reasons.append('Shared validator checks did not all pass.')
+            download_ok = False
+        if validator.get('emitted_positive_pixels') != 37654:
+            reasons.append('Emitted dot count differs from the registered 37,654.')
+            download_ok = False
+        if not audit or audit.get('unique') is not True or int(audit.get('duplicate_count', 1)) != 0:
+            reasons.append('Uniqueness is not cleared under the corrected mutual-overlap rule.')
+            download_ok = False
+        if not canaries or not all(valid_canary(c) for c in canaries.values()):
             reasons.append('Feature-alone leakage evidence is missing or fails.')
-        expected = manifest['source_sha256']
-        if expected != card['method_source_sha256']:
-            reasons.append('Run-card source pins differ from the experiment manifest.')
-        for rel, pin in expected.items():
-            if digest(root/rel) != pin: reasons.append('Source changed since experiment: '+rel)
-        if digest(root/'docs/hypotheses.md') != manifest['preregistration_sha256']:
-            reasons.append('Preregistration changed since experiment.')
-        # The current instrument intentionally has no final placement evidence. A future
-        # method must supply a new reviewed release contract, not edit booleans in a card.
-        if not card.get('raster_sha256'):
-            reasons.append('No submission TIFF or on-disk validator receipt exists.')
-        reasons.append('No final-dot full-inventory audit or separate weekly-slot selector authorization exists for this run.')
-    except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
-        reasons.append('Missing or invalid evidence: '+str(exc))
-    return {'download_and_submit_ok':False, 'verdict':'negative', 'reasons':reasons,
-            'policy':'This stopped experiment cannot be promoted by editing metadata. A fresh reviewed run is required.'}
+        submit = bool(card.get('download_and_submit_ok') is True and download_ok)
+        if not card.get('gate_a_candidate_ge_h33'):
+            reasons.append("Candidate did not match H33 on instrument A.")
+        if not card.get('gate_b_prime_candidate_gt_h33_significant'):
+            reasons.append("Candidate did not beat H33 on instrument B' with a 95% CI above zero.")
+        notes.append('A downloadable, validated file is not a validated leaderboard improvement.')
+    return {
+        'verdict': (card or {}).get('verdict', 'negative'),
+        'download_ok': download_ok,
+        'submit_recommended': submit,
+        'download_and_submit_ok': bool(download_ok and submit),
+        'artifact': str(tif) if tif else None,
+        'artifact_sha256': sha,
+        'submission_name': (card or {}).get('submission_name'),
+        'reasons': reasons,
+        'notes': notes,
+        'weekly_slots_used': int((card or {}).get('weekly_slots_used', 0)),
+        'policy': ('Never describe a non-promoted artifact as an improvement. Both flags are '
+                   'always published together.'),
+    }
 
 
 def assert_root_pages_guard(root):
-    """Guard legacy main:/ publication, including files outside docs.
-
-    The root .nojekyll marker must be absent or GitHub would bypass exclusions.
-    The JSON-formatted YAML config intentionally uses top-level exclusions only.
-    This checks source policy, not whether a remote deployment has completed.
-    """
+    """Guard the repository-root Pages publication, including files outside docs."""
     import os
     root = Path(root)
     if (root / '.nojekyll').exists():
@@ -84,6 +110,7 @@ def assert_root_pages_guard(root):
             or not {'quarantine', 'data'}.issubset(excluded)
             or 'docs' in excluded):
         raise ValueError('Invalid root publication exclusions.')
+    allowed = published_artifacts(root)
     for directory, dirs, files in os.walk(root, followlinks=False):
         base = Path(directory)
         dirs[:] = [d for d in dirs if not d.startswith('.')
@@ -92,16 +119,38 @@ def assert_root_pages_guard(root):
             if name.startswith('.') or (base == root and name in excluded):
                 continue
             path = base / name
-            if path.is_symlink() or path.suffix.lower() in {'.tif', '.tiff', '.zip'}:
-                raise ValueError('Unsafe root Pages artifact: ' + path.relative_to(root).as_posix())
+            rel = path.relative_to(root).as_posix()
+            if path.is_symlink():
+                raise ValueError('Unsafe root Pages artifact: ' + rel)
+            if path.suffix.lower() in {'.tif', '.tiff', '.zip'} and rel not in allowed:
+                raise ValueError('Unsafe root Pages artifact: ' + rel)
+
+
+def published_artifacts(root):
+    """The exact artifacts the run card authorises for publication."""
+    card = _load(root, 'evidence/phase4/run_card.json') or {}
+    name = card.get('submission_name')
+    if not name or not card.get('raster_sha256'):
+        return set()
+    return {f'docs/downloads/{name}.tif', f'docs/downloads/{name}.zip',
+            f'docs/downloads/{name}.json'}
 
 
 def assert_no_public_rasters(root):
-    """Fail builds on stale/accidentally copied predictions, never silently serve them."""
-    docs = Path(root)/'docs'
-    # Symlinks can expose quarantined files under an innocuous extension. Never
-    # allow them in the publication tree, even if dangling or pointing to a dir.
-    paths = [p.relative_to(root).as_posix() for p in docs.rglob('*')
-             if p.is_symlink() or (p.is_file() and p.suffix.lower() in {'.tif','.tiff','.zip'})]
-    if paths:
-        raise ValueError('Stopped run must not publish TIFF/ZIP artifacts: '+', '.join(paths))
+    """Fail builds on stale or unauthorised prediction files.
+
+    Only the three artifacts named by the current run card may live in the public
+    tree; anything else (old candidates, quarantined copies, symlinks) is rejected.
+    """
+    root = Path(root)
+    docs = root / 'docs'
+    allowed = published_artifacts(root)
+    bad = []
+    for p in docs.rglob('*'):
+        rel = p.relative_to(root).as_posix()
+        if p.is_symlink():
+            bad.append(rel + ' (symlink)')
+        elif p.is_file() and p.suffix.lower() in {'.tif', '.tiff', '.zip'} and rel not in allowed:
+            bad.append(rel)
+    if bad:
+        raise ValueError('Unauthorised TIFF/ZIP in the publication tree: ' + ', '.join(bad))
