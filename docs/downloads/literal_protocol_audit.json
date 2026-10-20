@@ -1049,6 +1049,133 @@
         "in_footprint_positive_pixels": 60000,
         "footprint_fraction": 0.011611315846562654
       }
+    },
+    {
+      "artifact": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif",
+      "raster_sha256": "0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931",
+      "shared_measurements": {
+        "my_file": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif",
+        "evidence_class": "REGISTRY-MEASUREMENT",
+        "my_dots": 37654,
+        "candidate_decoded_sha256": "8c5a30aed6a86ab99af768b30c4bb76c80b41878781f46ceb0f6d43689c2db02",
+        "candidate_file_sha256": "0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931",
+        "rho_limit": 0.9,
+        "overlap_limit": 0.7,
+        "jaccard_limit": 0.5,
+        "registry_rasters_expected": 1,
+        "registry_rasters_checked": 1,
+        "complete_accessible_scan": true,
+        "missing_or_invalid": 0,
+        "source_errors": [],
+        "worst_spearman_full_footprint": 0.0005615195716705443,
+        "worst_rho_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_dot_overlap": 0.2102950772130791,
+        "worst_overlap_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "worst_forward_overlap": 1.0,
+        "worst_forward_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "overlap_definition": "mutual min(forward,reverse) > 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.",
+        "worst_jaccard_dot_sets": 0.006403476643360097,
+        "worst_jaccard_submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "byte_unique_among_checked": true,
+        "pixel_unique_among_checked": true,
+        "duplicate_count": 0,
+        "unique": true,
+        "rows": [
+          {
+            "repo": "60GEMSDOE",
+            "submission": "registry/rasters/calib_r13lattice_00904.tif",
+            "file": "/tmp/60GEMSDOE/registry/rasters/calib_r13lattice_00904.tif",
+            "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+            "decoded_sha256": "3140ac4bcfca3d20dc2684c1efb7d8b770d9f861ac3f1869e360b0451970cfec",
+            "their_dots": 206895,
+            "my_dots_within_3px_of_theirs": 1.0,
+            "their_dots_within_3px_of_mine": 0.2102950772130791,
+            "mutual_overlap": 0.2102950772130791,
+            "spearman_full_footprint": 0.0005615195716705443,
+            "jaccard_dot_sets": 0.006403476643360097,
+            "identical_bytes": false,
+            "identical_decoded_predictions": false,
+            "duplicate_by_rho": false,
+            "duplicate_by_overlap": false,
+            "forward_only_overlap_warning": true,
+            "duplicate_by_jaccard": false
+          }
+        ],
+        "jaccard_diagnostic_only": true,
+        "verdict": "promote-to-selector-only",
+        "stop_required": false,
+        "candidate_rank_variation": true,
+        "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+      },
+      "literal_lane_status": {
+        "policy": "literal-forward-v1",
+        "overlap_limit": 0.7,
+        "rho_limit": 0.9,
+        "stop_required": true,
+        "protocol_unique": false,
+        "complete_scan": true,
+        "duplicate_witnesses": [
+          "registry/rasters/calib_r13lattice_00904.tif"
+        ],
+        "invalid_rows": [],
+        "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+      },
+      "validator_output": {
+        "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif",
+        "bytes": 150877,
+        "sha256": "0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931",
+        "meta": {
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "dtype": "float32",
+          "count": 1,
+          "nodata": null,
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "profile_compress": "deflate"
+        },
+        "band_description": [
+          null
+        ],
+        "n_finite": 12279160,
+        "n_nan": 0,
+        "n_infinite": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "mean": 0.0030664964579045773,
+        "emitted_positive_pixels": 37654,
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        },
+        "all_checks_passed": true,
+        "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+        "on_catalogue_positive_pixels": 0,
+        "in_footprint_positive_pixels": 37654,
+        "footprint_fraction": 0.007286874781441169
+      }
     }
   ],
   "fixed_dot_budget": 37654,
@@ -1059,5 +1186,7 @@
   "weekly_slots_used": 0,
   "surface_stage": "Stopped before a new candidate surface: at the fixed 37654-dot mass, at most 6649 dots can escape this witness halo, so every placement exceeds 70% forward overlap. Not a universal proof at smaller masses.",
   "final_stage": "Existing archived final TIFFs re-audited only; no new final dots placed.",
-  "scope": "One positive binary witness suffices to reject, not to certify uniqueness. No full-registry or new-surface rank-correlation claim."
+  "scope": "One positive binary witness suffices to reject, not to certify uniqueness. No full-registry or new-surface rank-correlation claim.",
+  "amended_utc": "2026-10-20T23:59:00Z",
+  "amendment_note": "P5-HGB lane (arena/9fff0647): row appended for the new archived final TIFF after the parallel-lane merge; same pinned lattice witness, same literal policy. The frozen rows above are unchanged."
 }

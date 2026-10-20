@@ -1,0 +1,282 @@
+{
+  "evidence_class": "LEAKAGE-CANARY",
+  "instrument_a_truth": {
+    "mag_anom": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5155337675558697,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "rtp": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5222208771309955,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tmi_hg": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5293231832435298,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "geod_2ndinv": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5605780430174013,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "iso_grav_anom_slope": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5200231920766717,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tc": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.46797618849924916,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "geod_shearrate": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5598085217736949,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "geod_dilaterate": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5112751885875806,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tmi_vg": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.48630796970232315,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "deq_n100a15": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5308537247151311,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "iso_grav_anom_vg": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5138340181962724,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "det_elev": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5142764002738274,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "iso_grav_anom": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.463594065895239,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tmi": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.513688352398198,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "depth_to_base_surf": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.524422335041074,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "ieq_n100a15": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5363690667785531,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "cond_surf": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.485633243308895,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "iso_grav_anom_hg": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.4924322157936578,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "det_elev_slope": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5646174216058651,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "d_vis": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5052885955304302,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tip_u": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5048394837028531,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tip_v": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.4963191367812031,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "_stop_rule": "any feature AUC > 0.90 vs instrument-A withheld truth"
+  },
+  "proxy_labels": {
+    "mag_anom": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5215907234844206,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "rtp": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5200103946440046,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tmi_hg": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.49281458253979116,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "geod_2ndinv": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.46352483105649445,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "iso_grav_anom_slope": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.4415397204188868,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tc": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.38117212545132706,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "geod_shearrate": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.4644547552382501,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "geod_dilaterate": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.44991956153032914,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tmi_vg": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5022248755478725,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "deq_n100a15": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.4735886219382967,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "iso_grav_anom_vg": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.46465881052750346,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "det_elev": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.6618341586867014,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "iso_grav_anom": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.6103703575874421,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tmi": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.529823016527178,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "depth_to_base_surf": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.35957443080459517,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "ieq_n100a15": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.471814929824303,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "cond_surf": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5305393652352666,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "iso_grav_anom_hg": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.49143219296034957,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "det_elev_slope": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.7340152444140653,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "d_vis": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.482027626353115,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tip_u": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.46651184077248725,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "tip_v": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.5100096395922135,
+      "suspected_leakage": false,
+      "stop_rule": "auc > 0.9 against instrument-A withheld truth"
+    },
+    "_note": "label-structure disclosure: proxy positives hug the catalogue, so geometry features can rank them without any physics; reported, not a stop rule"
+  },
+  "model_oof": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.6410763345116852,
+    "suspected_leakage": false,
+    "stop_rule": "auc > 0.9 against instrument-A withheld truth",
+    "description": "LOQO out-of-fold model AUC vs SGMC proxy labels (band domain)"
+  },
+  "stop": false,
+  "registered_stop": "feature AUC > 0.90 vs A-truth, or OOF model AUC > 0.90"
+}

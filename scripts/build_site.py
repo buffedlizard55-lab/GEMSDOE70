@@ -778,6 +778,10 @@ not portal acceptance. See the <a href="submission.html">detailed validator and 
     # keep a root-level copy so older pages that link run-card.json still resolve
     (DOCS / 'run-card.json').write_text((ROOT / 'evidence/review/run_card.json').read_text())
     # Phase-1 receipts keep their historical names only under the archived prefix.
+    # Jekyll converts docs/downloads/*.md into HTML and breaks the Pages audit;
+    # the upstream report is published as .txt only. Remove any stale .md copy.
+    for stale_md in DOWN.glob('*.md'):
+        stale_md.unlink()
     for stale in ('holdout.json', 'holdout_folds.json', 'holdout_split.json',
                   'registry_saturation.json', 'surface_uniqueness.json',
                   'experiment_manifest.json'):

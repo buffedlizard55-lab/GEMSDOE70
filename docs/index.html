@@ -41,14 +41,14 @@ feature-valid interior cells. No discrete final dots were placed.</p>
 <p class="small">Name: <code>gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT</code> · Note (120/140 characters,
 <strong>not an upload instruction</strong>): <code>P5 magnetic width and cover, SGMC LOQO proxy; continuous review map. Literal dot overlap blocks promotion; DO NOT SUBMIT</code> ·
 SHA-256 <code>30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a</code>.</p></section><section class="stop" aria-labelledby="decision">
-<div class="eyebrow">PRIOR 8-ARCHIVE REVIEW · STILL BLOCKED</div>
+<div class="eyebrow">PRIOR 9-ARCHIVE REVIEW · STILL BLOCKED</div>
 <h2 id="decision">Older files: DO NOT SUBMIT — literal protocol stop</h2>
 <p><strong>Download: yes — format-validated for review.</strong> For forensic review only.
 <strong>Competition submission: NO — not recommended.</strong>
 The witness scan is sufficient to reject, but covers not every private or uncommitted raster.
-These are 8 <em>prior</em> archived dot files, not protocol-compliant submissions.
+These are 9 <em>prior</em> archived dot files, not protocol-compliant submissions.
 <strong>Submit a weekly slot: not recommended; blocked by your protocol.</strong></p>
-<p>All 8 prior dot TIFFs have forward overlap 1.00 against a verified binary registry lattice
+<p>All 9 prior dot TIFFs have forward overlap 1.00 against a verified binary registry lattice
 (limit 0.70). Mutual overlap is not an authorized exemption. The previous review generated no
 new TIFF; P5 above is a separate subsequent negative continuous experiment. No slot was used.</p>
 <div class="actions">
@@ -110,7 +110,27 @@ SHA-256 <code>8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2</
 <a class="button secondary" href="downloads/e5_run_card.json" download>E5 run card</a></div>
 <p class="small">Name: <code>gems70-e5-supervised-loqo-37654-20261020</code> · Note (95/140):
 <code>E5 supervised LOQO within-halo ranking on SGMC proxy, 37654 binary dots; HOLDOUT+PROXY evidence</code>. Negative results are deliverables: supervised ranking
-halved P4's B′ deficit but did not beat uniform halo sampling. Full tables on the results page.</p></section><section><h2>Parallel lane E2 — alluvial step (second candidate, DO NOT SUBMIT YET)</h2>
+halved P4's B′ deficit but did not beat uniform halo sampling. Full tables on the results page.</p></section><section><h2>P5-HGB — supervised within-halo ranking on the 19-band stack (verdict: negative — DO NOT SUBMIT)</h2>
+<p>Preregistered in <code>docs/hypotheses.md</code> (P5-HGB lane addendum) before the run: a
+HistGradientBoosting ranker over the 19-band physics stack + visible-catalogue geometry, trained on
+the SGMC off-catalogue proxy with leave-one-quadrant-out (OOF AUC 0.641),
+emitted through the P4 stratified design at fixed mass 37,654 (3,067 dots by the pre-score top-up
+amendment). <strong>Download for review: yes. Submit a weekly slot: NO</strong> — on the
+pre-registered target-like gate B′ it scores 0.0793 [0.0714, 0.0874] vs H33
+0.0938 (paired &Delta; -0.0145, 95% CI [-0.0243, -0.0039]: negative) and is
+statistically indistinguishable from the pure-geometry P4 halo (&Delta; -0.0019,
+[-0.0060, 0.0024]). Instrument A 0.0822 [0.0753, 0.0886] beats random
+0.0531. No leakage canary fired (worst A-truth feature AUC
+0.565); contamination disclosed: 31.9% of A-truth pixels within
+3 px of proxy pixels. Uniqueness: 62 rasters, worst mutual
+0.301, worst &rho; 0.015; forward 1.00
+vs dense lattices — the standing literal stop applies to this lane as to every dot-field lane.
+Scientific reading: <em>the proxy, not the learner, is the ceiling</em>. Values exactly 0/1, no NaN.
+SHA-256 <code>0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931</code>.</p>
+<div class="actions"><a class="button secondary" href="downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif" download>Download P5-HGB TIFF (review only — DO NOT SUBMIT)</a>
+<a class="button secondary" href="downloads/p5hgb_run_card.json" download>P5-HGB run card</a></div>
+<p class="small">Name: <code>gems70-p5-halo-rank-hgb-37654-20261020</code> · Note (119/140):
+<code>P5 supervised within-halo ranking: HGB on 19-band stack + catalogue geometry, LOQO on SGMC proxy; 37654 stratified dots</code>. Evidence <code>evidence/p5hgb/</code>.</p></section><section><h2>Parallel lane E2 — alluvial step (second candidate, DO NOT SUBMIT YET)</h2>
 <p>An independent preregistered lane (oriented detrended-elevation step × basement edge,
 38,000 dots) merged from a parallel session. <strong>Download for forensic review: yes.
 Submit: NO</strong> — its frozen bars failed (D28 catalogue-holdout best not beaten) and the
@@ -126,7 +146,7 @@ negative with no file. Full tables on the results page; terms in
 <div class="actions"><a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.tif" download>Download P5 review TIFF</a>
 <a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.zip" download>Download P5 ZIP</a>
 <a class="button secondary" href="downloads/gems70-p5-analytic-halo-37654-20261020.json" download>P5 receipt</a></div>
-<p class="small">Name: <code>gems70-p5-analytic-halo-37654-20261020</code> · Note (93/140): <code>P5 analytic-signal halo 7px, 37654 dots, hg+vg rank in 2.4-32px band; dual-instrument holdout</code> · SHA-256 <code>aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4</code> · Evidence <code>evidence/phase5/</code> · Hypotheses <code>docs/hypotheses.md</code> now ranks 5 candidates (H-2 tested, H-3 radiometric already fetched, H-4 lidar scarp, H-5 conductive breach, H-6 basement curvature).</p></section><h2>8 frozen prior dot TIFFs — forensic review only</h2><div class="table-wrap"><table><thead><tr><th>Archive</th><th>Download</th><th>Local format</th><th>Forward overlap (limit 0.70)</th></tr></thead><tbody><tr><td>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</td><td><a href="downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif</td><td><a href="downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-e5-supervised-loqo-37654-20261020.tif</td><td><a href="downloads/gems70-e5-supervised-loqo-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-h70-conductive-breach-37654-20261020.tif</td><td><a href="downloads/gems70-h70-conductive-breach-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-p4-stratified-halo-37654-20261020.tif</td><td><a href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-p5-analytic-halo-37654-20261020.tif</td><td><a href="downloads/gems70-p5-analytic-halo-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif</td><td><a href="downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif</td><td><a href="downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr></tbody></table></div></main>
+<p class="small">Name: <code>gems70-p5-analytic-halo-37654-20261020</code> · Note (93/140): <code>P5 analytic-signal halo 7px, 37654 dots, hg+vg rank in 2.4-32px band; dual-instrument holdout</code> · SHA-256 <code>aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4</code> · Evidence <code>evidence/phase5/</code> · Hypotheses <code>docs/hypotheses.md</code> now ranks 5 candidates (H-2 tested, H-3 radiometric already fetched, H-4 lidar scarp, H-5 conductive breach, H-6 basement curvature).</p></section><h2>9 frozen prior dot TIFFs — forensic review only</h2><div class="table-wrap"><table><thead><tr><th>Archive</th><th>Download</th><th>Local format</th><th>Forward overlap (limit 0.70)</th></tr></thead><tbody><tr><td>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</td><td><a href="downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif</td><td><a href="downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-e5-supervised-loqo-37654-20261020.tif</td><td><a href="downloads/gems70-e5-supervised-loqo-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-h70-conductive-breach-37654-20261020.tif</td><td><a href="downloads/gems70-h70-conductive-breach-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-p4-stratified-halo-37654-20261020.tif</td><td><a href="downloads/gems70-p4-stratified-halo-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-p5-analytic-halo-37654-20261020.tif</td><td><a href="downloads/gems70-p5-analytic-halo-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif</td><td><a href="downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif</td><td><a href="downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr><tr><td>gems70-p5-halo-rank-hgb-37654-20261020.tif</td><td><a href="downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif" download>Download for review — DO NOT SUBMIT</a></td><td>pass</td><td>1.0</td></tr></tbody></table></div></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/p5_run_card.json">New P5 negative card</a> ·
 <a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·

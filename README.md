@@ -37,6 +37,22 @@ clear the other gate. No weekly slot was used; no organizer submission receipt e
   [Literal overlap witness](evidence/p5/literal_blocker.json)
 - **Session start:** read this README, the complete retained brief below, AGENTS.md and HANDOFF.md.
 
+### Parallel lane P5-HGB (session 3): supervised within-halo ranking — negative, review only
+
+[Evidence](evidence/p5hgb/) · [Run card](evidence/p5hgb/run_card.json) ·
+[TIFF — DO NOT SUBMIT](docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif) ·
+[One-TIFF ZIP](docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.zip).
+Preregistered in `docs/hypotheses.md` (P5-HGB lane addendum) before the run: HistGradientBoosting
+over the 19-band stack + visible-catalogue geometry, trained on the SGMC off-catalogue proxy with
+leave-one-quadrant-out (OOF AUC 0.641), emitted through the P4 stratified design at fixed mass
+37,654. HOLDOUT-DTI A 0.0822 [0.0753, 0.0886] (random 0.0531); PROXY-DTI B′ LOQO 0.0793
+[0.0714, 0.0874] vs H33 0.0938 — the pre-registered gate fails (Δ −0.0145 [−0.0243, −0.0039]) and
+the candidate is indistinguishable from the geometric P4 halo (Δ −0.0019 [−0.0060, +0.0024]).
+**The proxy, not the learner, is the ceiling.** No canary fired (worst A-truth feature AUC 0.565);
+contamination disclosed (31.9% of A-truth pixels within 3 px of proxy pixels). Uniqueness: 62
+rasters, worst mutual 0.301, worst ρ 0.015; the standing literal forward-overlap stop applies as to
+every dot-field lane. No slot used.
+
 ### Reproduce or verify P5 (CPU; no slot, no automatic promotion)
 
 ```bash
@@ -57,9 +73,9 @@ not copied from a P5 submission. See [official problem](https://www.drivendata.o
 [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and),
 [DOE rules](https://docs.nlr.gov/docs/fy26osti/96647.pdf).
 
-## PRIOR REVIEW (8 archived dot files): DO NOT SUBMIT — literal lane stop
+## PRIOR REVIEW (9 archived dot files): DO NOT SUBMIT — literal lane stop
 
-**Download: yes, 8 older archived TIFFs for review only. Submit: NO.**
+**Download: yes, 9 older archived TIFFs for review only. Submit: NO.**
 That *prior* review generated no new protocol-compliant TIFF, geological experiment or slot.
 P5 above is a later, separate research-only negative, not a promoted competition submission.
 The frozen prior-review negative run card is [here](evidence/review/run_card.json).
@@ -77,7 +93,7 @@ The frozen prior-review negative run card is [here](evidence/review/run_card.jso
 
 The previous mutual-overlap gate weakened the prompt's **forward**-overlap rule without approval.
 Current policy applies the literal rule to shared-tool measurements; it does not change the
-metric, writer or frozen historical evidence. The 8 historically reviewed dot TIFFs have measured forward
+metric, writer or frozen historical evidence. The 9 historically reviewed dot TIFFs have measured forward
 overlap **1.0** against the pinned binary lattice, exceeding **0.70**. They are duplicates under
 the prompt's rule, even though their bytes differ. Small rank correlation does not cancel overlap.
 
@@ -87,7 +103,7 @@ handoff's fixed **37,654-dot mass**, even the minimum possible overlap is
 **0.823418495**, still a stop. This does not prove
 impossibility at every smaller mass. We did not optimize a boundary-only loophole.
 
-All 8 reviewed dot TIFFs pass shared local format checks (single-band float32, finite [0,1],
+All 9 reviewed dot TIFFs pass shared local format checks (single-band float32, finite [0,1],
 CRS/shape/transform matching the pinned sample); that is not portal acceptance or uniqueness.
 The previous canonical P4 card and historical receipts remain frozen and superseded for current
 policy by `evidence/review/run_card.json`.
