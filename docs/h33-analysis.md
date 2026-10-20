@@ -57,3 +57,12 @@ no new TIFF was generated after that stop. We will not prune, rename or jitter H
 - [Historical B′ proxy receipt](downloads/instrumentB_prime.json)
 - [Current literal-protocol audit and proposed research](protocol-review.html)
 - [Organizer fault-detection reference](https://github.com/drivendataorg/gems-prize-reference-solution)
+
+## P6 dual-horizon LOQO scarp–rad–basement & SGMC buffer diagnosis (`evidence/p6_dualhorizon/`)
+
+In parallel lane P6 (`arena/c6a19d32-gemsdoe70`, `docs/downloads/gems70-p5-dualhorizon-37654-20261020.tif`), we tested whether expanding the horizon beyond `d_cat <= 32 px` (since `35.9%` of `SGMC B′` pixels and `34.0%` of H33's dots lie at `d_cat > 32 px`) and ranking pixels within `7×7` or `5×5` strata using 10 m 3DEP breaklines + 1 m LiDAR scarps + GeoDAWN radiometric ratios could beat H33 on `Instrument B′`:
+- **Exp 5.1 (`H-P5-1`, LOQO supervised `7×7`, `5.0 px` NMS):** `A = 0.0775` `[0.0695, 0.0848]`, `B′ = 0.1250` `[0.1211, 0.1288]` (+33.3% over H33 `0.0938`).
+- **Exp 5.2 (`H-P5-2`, unsupervised 10m-3DEP breakline + LiDAR scarp + rad `7×7`, `5.0 px` NMS):** `A = 0.0774` `[0.0698, 0.0849]`, `B′ = 0.1201` `[0.1137, 0.1260]` (+28.1% over H33 with zero SGMC training).
+- **Exp 5.3 (`H-P5-3`, submodular dual-horizon `5×5`, `3.2 px` NMS):** `A = 0.0790` `[0.0688, 0.0900]`, `B′ = 0.1440` `[0.1319, 0.1558]` (+53.5% over H33, paired Δ `+0.0502` `[+0.0339, +0.0663]`), `B′′ (d ≥ 6 px) = 0.1234` `[0.1118, 0.1359]` (vs H33 `0.0850`).
+- **Why P6 is still held fail-closed (`download_ok = true`, `submit_recommended = false`):** (1) Paired Instrument A gain over P4 (`+0.0059`) has a 95% CI straddling zero (`[-0.0050, +0.0163]`); (2) our `1–20 px` SGMC buffer/slope audit ([receipt](downloads/sgmc_buffer_audit.json)) shows `SGMC B′` sits in steep bedrock ranges (`median slope = 13.42°` vs Quaternary catalogue `5.55°`, where sibling SGMC-promoted submissions `GEMSDOE49 = 0.1304` and `GEMSDOE68 = 0.0680` regressed live); and (3) literal forward overlap against the dense lattice is `1.00` (worst mutual overlap `0.4230 <= 0.70`, worst Spearman `0.0300 <= 0.90`).
+

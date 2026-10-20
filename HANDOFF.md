@@ -223,3 +223,14 @@ consistency against cached reference metadata, not organizer acceptance.
 - Reproduce: audit_current_protocol.py, build_site.py, build_readme.py, pytest; no data download needed.
 
 Integration: main advanced concurrently with PRs adding a separate E3 scarp artifact and a literal-protocol review. All those frozen receipts, artifacts, tests and drivers were retained. This session's four conditional hypotheses and fresh P4 format card are supplemental (`docs/supplemental-protocol-review.html`), not a replacement for the concurrent review or an authorization of E3.
+
+## P6 dual-horizon LOQO scarp–rad–basement lane & SGMC 1–20 px buffer audit (`arena/c6a19d32-gemsdoe70`, 2026-10-20)
+
+- **Artifact published (review only, DO NOT SUBMIT):** `docs/downloads/gems70-p5-dualhorizon-37654-20261020.tif` (`146,736` bytes, SHA-256 `bb014897052c478ca2f4690920e4d863fa2a6b810a05a15d8e33e129cc76de84`, `37,654` binary `1.0` dots, `0` on-catalogue dots), plus `.zip` and `.json` registered in `registry/published_artifacts.json`.
+- **Verdict: negative (`download_ok = true`, `submit_recommended = false`).**
+  - Instrument A (`HOLDOUT-DTI`, `11,321` withheld positives): `Exp 5.3` `0.0790` `[0.0688, 0.0900]` vs P4 `0.0730` (Δ `+0.0059` `[-0.0050, +0.0163]`) and H33 `0.0037`.
+  - Instrument B′ (`PROXY-DTI`, `SGMC d >= 3 px`, `59,937` positives, LOQO): `Exp 5.3` `0.1440` `[0.1319, 0.1558]` vs H33 `0.0938` (Δ `+0.0502` `[+0.0339, +0.0663]`, +53.5%) and P4 `0.0812` (+77.4%). `Exp 5.1` (LOQO `7×7`) scores `0.1250`; `Exp 5.2` (unsupervised 10m-3DEP breakline + LiDAR scarp + rad `7×7`) scores `0.1201`.
+  - Instrument B′′ (`PROXY-DTI`, `SGMC d >= 6 px`, `52,767` positives): `Exp 5.3` `0.1234` `[0.1118, 0.1359]` vs H33 `0.0850` (Δ `+0.0384` `[+0.0217, +0.0553]`).
+  - SGMC vs QFaults buffer calibration (`1..20 px`, `evidence/p6_dualhorizon/sgmc_buffer_audit.json`) and E2 62-raster mutual re-audit (`evidence/p6_dualhorizon/e2_mutual_uniqueness.json`) recorded.
+  - Held fail-closed because paired Instrument A vs P4 CI straddles zero, SGMC B′ sits at `13.42°` median slope vs Quaternary catalogue `5.55°`, and literal forward overlap vs the dense lattice is `1.00` (worst mutual overlap `0.4230 <= 0.70`, worst Spearman `0.0300 <= 0.90`). No weekly slot used.
+
