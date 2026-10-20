@@ -88,24 +88,26 @@ def run(fetch=False, verify=False):
     lower_bound = max(0.0, 1 - cert['uncovered_allowed_pixels'] / budget)
     if lower_bound <= .70:
         raise ValueError('fixed-mass blockage not established; do not force a stop')
-    inventory = json.loads((ROOT / 'registry/published_artifacts.json').read_text())
+    quarantine = ROOT / 'quarantine/published-downloads-2026-10-20'
+    manifest = json.loads((quarantine / 'manifest.json').read_text())
     index = [{'repo': REPO, 'submission': WITNESS_PATH, 'file': str(path), 'sha256': WITNESS_SHA}]
     results = []
-    for item in inventory['artifacts']:
-        if not item['path'].endswith('.tif'):
+    for item in manifest['files']:
+        if not item['file'].lower().endswith(('.tif', '.tiff')):
             continue
-        tif = ROOT / item['path']
+        tif = quarantine / item['file']
         if digest(tif) != item['sha256']:
-            raise ValueError('archived artifact SHA-256 mismatch: ' + item['path'])
+            raise ValueError('quarantined artifact SHA-256 mismatch: ' + item['file'])
+        public_path = 'docs/downloads/' + item['file']
         audit = uniqueness.compare_to_registry(tif, index, g.footprint, expected_grid=expected)
         # Strip machine-specific locations from the reproducible receipt.
-        audit['my_file'] = item['path']
+        audit['my_file'] = public_path
         for row in audit['rows']:
             row['file'] = CACHE_PATH
         lane = literal_lane_status(audit)
         val = validate.validate(tif, g.footprint, g.catalogue)
-        val['file'] = item['path']
-        results.append({'artifact': item['path'], 'raster_sha256': item['sha256'],
+        val['file'] = public_path
+        results.append({'artifact': public_path, 'raster_sha256': item['sha256'],
                         'shared_measurements': audit, 'literal_lane_status': lane,
                         'validator_output': val})
     source = f'https://github.com/{REPO}/blob/{REF}/{WITNESS_PATH}'
@@ -152,7 +154,7 @@ def run(fetch=False, verify=False):
         'validator_output': None,
         'archived_p4': {'artifact': p4['artifact'], 'raster_sha256': p4['raster_sha256'],
                         'validator_output': p4['validator_output'],
-                        'download_ok_for_review': True, 'protocol_unique': False,
+                        'download_ok_for_review': False, 'protocol_unique': False,
                         'submit_recommended': False},
         'submission_name': 'gems70-literal-lane-review-20261020-NO-SUBMISSION',
         'submission_note': 'Negative preflight: fixed-mass overlap exceeds literal gate against binary registry lattice. No new TIFF or slot.',
