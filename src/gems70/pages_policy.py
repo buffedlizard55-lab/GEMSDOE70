@@ -44,7 +44,12 @@ def check_output(site: Path) -> dict:
         rel = path.relative_to(site)
         if path.is_symlink():
             violations.append(f'{rel}: symlink')
-        if rel.parts[0] not in PUBLIC_ROOTS:
+        # GitHub's legacy Jekyll builder injects the default theme stylesheet
+        # even though repository assets/ is excluded. Permit only that exact
+        # generated CSS path and its directories, never arbitrary assets/ files.
+        theme_css = rel.as_posix() == 'assets/css/style.css' and path.is_file()
+        theme_dir = rel.as_posix() in {'assets', 'assets/css'} and path.is_dir()
+        if rel.parts[0] not in PUBLIC_ROOTS and not (theme_css or theme_dir):
             violations.append(f'{rel}: nonpublic root')
         if path.suffix.lower() in {'.tif', '.tiff', '.zip'}:
             violations.append(f'{rel}: stopped-run raster/archive')

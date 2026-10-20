@@ -66,3 +66,14 @@ def test_empty_or_bannerless_output_rejected(tmp_path):
     (tmp_path / 'docs/index.html').write_text('READY TO SUBMIT')
     with pytest.raises(ValueError, match='negative banner'):
         check_output(tmp_path)
+
+
+def test_github_generated_theme_css_only_is_allowed(tmp_path):
+    safe_output(tmp_path)
+    css = tmp_path / 'assets/css/style.css'
+    css.parent.mkdir(parents=True)
+    css.write_text('/* GitHub default theme */')
+    assert check_output(tmp_path)['built_output_ok']
+    (tmp_path / 'assets/archived.html').write_text('unsafe private page')
+    with pytest.raises(ValueError, match='nonpublic root'):
+        check_output(tmp_path)
