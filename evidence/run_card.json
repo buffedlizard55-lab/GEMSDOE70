@@ -1,30 +1,48 @@
 {
-  "hypothesis": "Magnetic-edge termination at a gravity-supported basement boundary",
-  "mechanism": "Along-gravity-tangent change of magnetic edge amplitude, weighted by gravity edge and basement normal gradient",
-  "non_fault_mimic": "Volcanic dike termination or intrusive lithologic contact",
-  "hypothesis_status": "Provisional lane: method paragraph absent from supplied prompt",
+  "hypothesis": "Stepover-relay dilation propensity: unmapped cross-faults nucleate where visible catalogue lineament endpoints pair across small stepovers, weighted by RTP magnetic edge amplitude",
+  "mechanism": "Endpoint pairs from different visible catalogue components within 1.2 km dilate into an off-catalogue corridor (6 px), smoothed and multiplied by RTP gradient magnitude; rank-transformed, upper-2% sparsified surface",
+  "non_fault_mimic": "Volcanic intrusive contact endpoints, line-leveling artifacts, depositional pinchouts",
+  "hypothesis_status": "Tested this session; research-queue candidate H-1",
   "verdict": "negative",
   "stop_reason": "duplicate",
   "holdout_dti": {
     "evidence_class": "HOLDOUT-DTI",
     "evaluator_version": "gems57-pooled-hide-v2",
-    "dti": 0.010192889039757751,
+    "dti": 0.023034226000900448,
     "ci95": [
-      0.006062085930570772,
-      0.01504164485152884
+      0.01423844923386256,
+      0.0321326819658628
     ],
     "withheld_positive_pixels": 11321,
-    "tpw": 189.76122960484457,
-    "fpw": 47611.3439180494,
-    "fnw": 11131.238770395157,
+    "tpw": 412.48042736043743,
+    "fpw": 43839.93971202534,
+    "fnw": 10908.519572639567,
     "stage": "continuous pre-placement surface, not final dots",
     "current_best_verified": false
+  },
+  "canaries": {
+    "stepover_feature": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.6595855443423725,
+      "inverse_auc": 0.3404144556576275,
+      "withheld_positive_pixels": 11321,
+      "negative_sample_pixels": 200000,
+      "suspected_leakage": false
+    },
+    "rtp_edge": {
+      "evidence_class": "LEAKAGE-CANARY",
+      "auc": 0.534255466831552,
+      "inverse_auc": 0.465744533168448,
+      "withheld_positive_pixels": 11321,
+      "negative_sample_pixels": 200000,
+      "suspected_leakage": false
+    }
   },
   "correlation_overlap_vs_registry": {
     "stage": "surface before final placement",
     "rasters_checked": 1,
     "registry_complete": false,
-    "spearman": 0.036308180143609856,
+    "spearman": 0.1727214302134486,
     "overlap_within_3px": 1.0,
     "witness": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
     "witness_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
@@ -32,29 +50,35 @@
     "final_dots": null,
     "final_dots_reason": "Not placed: literal surface stop rule."
   },
-  "raster_sha256": null,
-  "raster_sha256_reason": "No submission TIFF written after surface gate stop.",
-  "surface_decoded_float32_sha256": "8c9592811e91062e3001b4469a7a7ddbe758965f0208a629c44749a9a78fd70a",
+  "raster_sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
+  "raster_sha256_reason": "Diagnostic surface GeoTIFF in docs/downloads; format-validated locally, blocked by the literal overlap gate, not organizer-accepted, not a submission.",
+  "diagnostic_tiff": "docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+  "diagnostic_tiff_bytes": 498152,
   "validator_output": {
-    "submission_tiff": null,
-    "status": "NOT_WRITTEN",
+    "submission_tiff": "gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+    "status": "LOCALLY_FORMAT-VALIDATED-BLOCKED-BY-GATE",
+    "format_report_ok": true,
+    "all_checks_passed": true,
     "pre_export_array_checks": {
       "no_nan_inside_footprint": true,
       "all_values_finite": true,
       "values_in_0_1": true,
       "shape_matches": true,
-      "zero_on_catalogue": true,
-      "zero_outside_footprint": true
+      "zero_on_catalogue_export": true,
+      "zero_outside_footprint_export": true,
+      "format_report_ok": true,
+      "local_validation_all_checks_passed": true
     },
-    "crs_shape_transform_file_match": null,
-    "reason": "Array checks are not a TIFF validator receipt; no output file exists."
+    "crs_shape_transform_file_match": true,
+    "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
+    "bytes": 498152,
+    "reason": "Local format/range checks pass; uniqueness gate fired (duplicate), so the file is explicitly not releasable as a submission."
   },
-  "submission_name": "gems70-contact-termination-e1-20261020-NOT-RELEASED",
-  "submission_note": "Magnetic-edge termination on gravity/basement boundaries; negative surface gate; DO NOT SUBMIT.",
+  "submission_name": "gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT",
+  "submission_note": "Stepover-relay dilation diagnostic surface; literal registry overlap gate fired 1.00 > 0.70; holdout DTI negative; DO NOT SUBMIT.",
   "download_and_submit_ok": false,
   "weekly_slots_used": 0,
-  "experiment_count": 1,
-  "elapsed_seconds": 40.87,
+  "experiment_count": 2,
   "organizer_confirmed_score": null,
   "evaluator_implementation_sha256": {
     "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
@@ -63,7 +87,8 @@
     "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
   },
   "method_source_sha256": {
-    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
-    "scripts/run_experiment.py": "80afcb2d3ea851344e99bd7cca262e7fe9410c0b91534cb06b012623c1d572b5"
+    "scripts/finalize_stepover.py": "12d224af7ab02fe30e02a1899f51ccb6196e9851eb196128d0b437063d6ea928",
+    "scripts/run_hypothesis_stepover.py": "c2d2d4ae996696476a79957136b36bb58909460b6d1be48907d7a70e892134a3",
+    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374"
   }
 }

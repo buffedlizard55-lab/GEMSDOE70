@@ -23,13 +23,16 @@ def test_template_unchanged():
 def test_scientific_evidence_is_source_bound():
     card=json.loads((ROOT/'evidence/run_card.json').read_text())
     for p,h in card['method_source_sha256'].items(): assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h
-    assert card['raster_sha256'] is None
-    assert card['validator_output']['status']=='NOT_WRITTEN'
+    assert isinstance(card['raster_sha256'], str) and card['raster_sha256']
+    assert card['validator_output']['status']=='LOCALLY_FORMAT-VALIDATED-BLOCKED-BY-GATE'
+    assert card['validator_output']['all_checks_passed'] is True
+    assert len(card['submission_name'])<=140 and len(card['submission_note'])<=140
+    assert card['download_and_submit_ok'] is False
     assert card['correlation_overlap_vs_registry']['literal_duplicate']
     assert card['correlation_overlap_vs_registry']['final_dots'] is None
     assert len(card['submission_note'])<=140
     assert card['weekly_slots_used']==0
-    assert card['experiment_count']==1
+    assert card['experiment_count']==2
 
 
 def test_holdout_whole_components_and_feature_buffer():
@@ -69,6 +72,7 @@ def test_constant_ranks_do_not_manufacture_edges():
 
 def test_negative_gate_and_no_public_files(tmp_path):
     assert release_status(ROOT)['download_and_submit_ok'] is False
+    assert release_status(ROOT)['download_available'] is False
     assert release_status(tmp_path)['download_and_submit_ok'] is False
     (tmp_path/'docs/downloads').mkdir(parents=True)
     (tmp_path/'docs/downloads/stale.tif').write_bytes(b'not-a-tiff')

@@ -58,8 +58,9 @@ def test_release_is_negative_and_has_no_artifact():
     r=status()
     assert r['verdict']=='negative'
     assert not r['download_available'] and not r['approved_for_weekly_slot']
-    assert r['generated_tif'] is None
-    assert r['scientific_experiments_run']==1
+    assert r['diagnostic_tif'] == 'docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif'
+    assert r['download_blocked_reason']
+    assert r['scientific_experiments_run']==2
     assert r['submission_slots_used']==0
 
 

@@ -32,7 +32,7 @@ components were hidden with a feature-context buffer and spatial erosion, visibl
 faults were masked pixel-exactly, and weighted metric terms were pooled before a
 paired spatial-cluster bootstrap.
 
-**HOLDOUT-DTI:** 0.010193, 95% CI [0.006062, 0.015042],
+**HOLDOUT-DTI:** 0.023034, 95% CI [0.014238, 0.032133],
 11,321 withheld positive pixels, evaluator
 `gems57-pooled-hide-v2`. This is the continuous pre-placement surface, not final
 dots and not a leaderboard score. It underperforms the random sparse control;
@@ -40,7 +40,7 @@ no same-split current-best claim is made. See the full receipt for controls and
 paired intervals.
 
 **REGISTRY-MEASUREMENT:** one decisive, SHA-verified continuous prior covers the
-whole footprint. Surface Spearman is 0.036308;
+whole footprint. Surface Spearman is 0.172721;
 three-pixel forward support overlap is 1.0, above the literal 0.70 stop threshold.
 The [saturation certificate](evidence/registry_saturation.json) proves this blocks
 every nonempty off-catalogue candidate under the inherited support definition.

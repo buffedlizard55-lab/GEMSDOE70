@@ -1,0 +1,90 @@
+{
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "alpha": 0.2,
+  "beta": 0.8,
+  "triangular_radius_m": 300.0,
+  "pooled": true,
+  "scores": {
+    "candidate": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.023034226000900448,
+      "ci95": [
+        0.01423844923386256,
+        0.0321326819658628
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 412.48042736043743,
+      "fpw": 43839.93971202534,
+      "fnw": 10908.519572639567
+    },
+    "rtp_edge": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.007669550900507758,
+      "ci95": [
+        0.003635408155604512,
+        0.012186010634411232
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 143.97078865457996,
+      "fpw": 48430.71176148565,
+      "fnw": 11177.029211345422
+    },
+    "random_control": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.04716966782388043,
+      "ci95": [
+        0.042287278422940805,
+        0.05092065556778939
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 888.2700499139368,
+      "fpw": 47984.641678880915,
+      "fnw": 10432.72995008606
+    }
+  },
+  "best_comparable_control": "random_control",
+  "paired_differences": {
+    "rtp_edge": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.01536467510039269,
+      "ci95": [
+        0.00854707417851436,
+        0.02145080230255097
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "random_control": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": -0.02413544182297998,
+      "ci95": [
+        -0.03350417058430625,
+        -0.014109565012451142
+      ],
+      "withheld_positive_pixels": 11321
+    }
+  },
+  "bootstrap": {
+    "method": "paired physical spatial-cluster percentile",
+    "clusters": 159,
+    "draws": 1000,
+    "seed": 70020,
+    "confidence": 0.95,
+    "caveat": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+  },
+  "implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "interpretation": "Continuous pre-placement surface HOLDOUT-DTI, not final dots, not organizer-confirmed.",
+  "current_holdout_best_comparable": null,
+  "promotion_allowed": false,
+  "promotion_blocker": "No current-best implementation rerun on this identical split; literal overlap gate stops before placement regardless of holdout."
+}

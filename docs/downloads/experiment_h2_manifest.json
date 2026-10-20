@@ -1,0 +1,11 @@
+{
+  "started_utc": "2026-10-20T21:56:49.755784+00:00",
+  "experiment_count": 2,
+  "maximum_experiments": 3,
+  "maximum_seconds": 7200,
+  "hypothesis": "stepover-relay dilation propensity (catalogue-gap cross faults)",
+  "source_sha256": {
+    "scripts/run_hypothesis_stepover.py": "075f3ebfa2d7fcc0d247565f2598785637f7dc9105fd0109d6ba872fdad403ac",
+    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374"
+  }
+}

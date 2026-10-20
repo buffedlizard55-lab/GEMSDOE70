@@ -14,7 +14,8 @@ from gems70.release import digest
 def main():
     card=json.loads((ROOT/'evidence/run_card.json').read_text())
     assert card['verdict']=='negative'
-    assert card['raster_sha256'] is None
+    assert isinstance(card['raster_sha256'], str) and card['raster_sha256']
+    assert card['download_and_submit_ok'] is False
     assert card['holdout_dti']['evidence_class']=='HOLDOUT-DTI'
     for rel,pin in card['method_source_sha256'].items():
         if digest(ROOT/rel)!=pin: raise ValueError('scientific source changed: '+rel)

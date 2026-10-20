@@ -6,8 +6,12 @@
     "Surface uniqueness is blocked or incomplete.",
     "Comparable current holdout best has not been beaten.",
     "Holdout evidence does not permit promotion.",
-    "No submission TIFF or on-disk validator receipt exists.",
+    "Run-card source pins differ from the experiment manifest.",
+    "Preregistration changed since experiment.",
     "No final-dot full-inventory audit or separate weekly-slot selector authorization exists for this run."
   ],
-  "policy": "This stopped experiment cannot be promoted by editing metadata. A fresh reviewed run is required."
+  "policy": "This stopped experiment cannot be promoted by editing metadata. A fresh reviewed run is required.",
+  "diagnostic_tif": "docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
+  "download_available": false,
+  "download_blocked_reason": "Literal uniqueness gate fired on the generated surface (100% forward overlap with the SHA-verified dense prior); holdout DTI below the random-sparse control; no organizer-confirmed score."
 }

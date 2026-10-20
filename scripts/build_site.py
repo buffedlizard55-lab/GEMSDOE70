@@ -32,25 +32,33 @@ def main():
     assert_no_public_rasters(ROOT)
     card=json.loads((ROOT/'evidence/run_card.json').read_text())
     hold=json.loads((ROOT/'evidence/holdout.json').read_text())
-    canaries=json.loads((ROOT/'evidence/canaries.json').read_text())
+    hold_path = ROOT/'evidence'/'holdout_stepover.json'
+    hold = json.loads((hold_path if hold_path.is_file() else ROOT/'evidence'/'holdout.json').read_text())
+    can_path = ROOT/'evidence'/'canaries_stepover.json'
+    canaries = json.loads((can_path if can_path.is_file() else ROOT/'evidence'/'canaries.json').read_text())
     sources=json.loads((ROOT/'registry/sources.json').read_text())
     health=json.loads((ROOT/'evidence/source_health.json').read_text())
     gate=release_status(ROOT)
     DOCS.mkdir(exist_ok=True)
     downloads=DOCS/'downloads'; downloads.mkdir(exist_ok=True)
-    for name in ['run_card.json','holdout.json','holdout_split.json','holdout_folds.json','canaries.json',
+    for name in ['run_card.json','holdout_stepover.json','holdout_folds_stepover.json','canaries_stepover.json',
+                 'surface_uniqueness_stepover.json','registry_saturation_stepover.json',
+                 'experiment_h2_manifest.json','holdout.json','holdout_split.json','holdout_folds.json','canaries.json',
                  'surface_uniqueness.json','registry_saturation.json','h33_audit.json','data_receipt.json',
                  'template_verification.json','source_health.json','experiment_manifest.json']:
-        shutil.copyfile(ROOT/'evidence'/name,downloads/name)
+        src = ROOT/'evidence'/name
+        if src.is_file():
+            shutil.copyfile(src,downloads/name)
     shutil.copyfile(ROOT/'evidence/run_card.json',DOCS/'run-card.json')
     (DOCS/'status.json').write_text(json.dumps(gate,indent=2)+'\n')
     (DOCS/'sources.json').write_text(json.dumps(sources,indent=2)+'\n')
     d=card['holdout_dti']; ci=d['ci95']
     evidence_label=f'HOLDOUT-DTI · {html.escape(d["evaluator_version"])} · {d["withheld_positive_pixels"]:,} withheld positive pixels'
-    status='''<section class="stop" aria-labelledby="status"><div class="eyebrow">SUBMISSION READINESS</div><h1 id="status">Do not submit this run.</h1>
-<p>No eligible TIFF is available. The surface failed the literal uniqueness gate, so final dot placement and GeoTIFF export were stopped.</p>
-<div class="actions"><button disabled aria-describedby="stop-note">Submission TIFF unavailable</button><a class="button secondary" href="run-card.json" download>Download run card (JSON)</a></div>
-<p id="stop-note" class="small">This JSON is evidence, not a competition submission. No previous submission has been renamed or republished.</p></section>'''
+    diag = card.get('diagnostic_tiff') or ''
+    # Page-relative href: these pages are served from docs/, so drop the docs/ prefix.
+    diag_href = (diag[len('docs/'):] if diag.startswith('docs/') else diag) + '?blocked'
+    status = ('''<section class="stop" aria-labelledby="status"><div class="eyebrow">SUBMISSION READINESS</div><h1 id="status">Do not submit this run.</h1><p>A unique diagnostic surface was generated but the literal uniqueness gate fired on it (forward three-pixel overlap 1.00 with a SHA-verified dense prior; gate limit 70%), so the GeoTIFF is explicitly <strong>NOT OK to download for submission</strong> — inspection only. Holdout HOLDOUT-DTI is below the random-sparse control and no organizer-confirmed score exists. No weekly slot was used.</p><div class="actions"><a class="button blocked" href="'''
+    + diag_href + '" download>Download diagnostic surface (inspection only — BLOCKED for submission)</a><a class="button secondary" href="run-card.json" download>Download run card (JSON)</a></div><p id="stop-note" class="small">The GeoTIFF is locally format-valid (single-band float32, EPSG:32611, 3730x3292, pinned geotransform, all finite, values in [0,1], zero on mapped faults and outside the footprint) but is not a competition submission and must not be uploaded. No previous submission has been renamed or republished. Submission TIFF unavailable — this run is blocked; no eligible TIFF exists.</p></section>"')
     metrics=f'''<div class="metrics"><section><div class="eyebrow">CONTINUOUS SURFACE · HOLDOUT-DTI</div><div class="number">{d['dti']:.5f}</div><p>95% CI [{ci[0]:.5f}, {ci[1]:.5f}]</p></section>
 <section><div class="eyebrow">REGISTRY MEASUREMENT</div><div class="number">100%</div><p>Forward overlap with a verified dense prior. Literal gate limit: 70%.</p></section>
 <section><div class="eyebrow">COMPETITION ACTIVITY</div><div class="number">No upload</div><p>One fixed experiment. No weekly slot consumed.</p></section></div>'''

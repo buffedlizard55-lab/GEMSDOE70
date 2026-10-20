@@ -32,6 +32,11 @@ def test_site_rebuild_has_no_tiff_download_or_broken_local_link():
 
 
 def test_no_scientific_artifact_is_published():
+    # One explicitly blocked diagnostics-only surface is allowed under
+    # docs/downloads: name ends in BLOCKED-DO-NOT-SUBMIT.tif and the run card
+    # marks download_and_submit_ok: false with reasons. Nothing else may publish.
+    blocked = {p.name for p in (ROOT/'docs'/'downloads').rglob('*BLOCKED-DO-NOT-SUBMIT.tif')}
     for parent in ['docs','assets','evidence']:
         for suffix in ['*.tif','*.zip']:
-            assert not list((ROOT/parent).rglob(suffix))
+            for pth in (ROOT/parent).rglob(suffix):
+                assert pth.suffix.lower() == '.tif' and pth.name in blocked, pth
