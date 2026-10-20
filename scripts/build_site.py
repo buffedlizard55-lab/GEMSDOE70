@@ -1,111 +1,191 @@
-"""Deterministic, evidence-driven GitHub Pages site; negative runs never offer TIFFs."""
+"""Deterministic evidence-driven Pages site (E1 archived + E2 review candidate + E3).
+
+Submit status is fail-closed: the only public TIFF/ZIP allowed is the
+hash-pinned E2 selector-review artifact, bannered DO NOT SUBMIT YET.
+"""
 from pathlib import Path
 import html
 import json
-import re
 import shutil
 import sys
 import markdown
-ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'src'))
-from gems70.release import release_status, assert_no_public_rasters
-DOCS=ROOT/'docs'
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+from gems70.release import candidate_status, assert_review_rasters  # noqa: E402
+
+DOCS = ROOT / "docs"
 
 
 def md(path):
-    return markdown.markdown(path.read_text(),extensions=['tables','fenced_code'])
+    return markdown.markdown(path.read_text(), extensions=["tables", "fenced_code"])
 
 
-def frame(title,body):
-    links=[('index.html','Overview'),('executive-summary.html','Submission guide'),('results.html','Results'),
-           ('hypotheses.html','Hypotheses'),('h33-analysis.html','H33 analysis'),('sources.html','Sources'),('irregularities.html','Limitations')]
-    nav=''.join(f'<a href="{url}">{label}</a>' for url,label in links)
+def frame(title, body, desc="Auditable geothermal fault research. Unique candidate for selector review; DO NOT SUBMIT YET."):
+    links = [("index.html", "Overview"), ("executive-summary.html", "Submission guide"),
+             ("results.html", "Results"), ("hypotheses.html", "Hypotheses"),
+             ("h33-analysis.html", "H33 analysis"), ("sources.html", "Sources"),
+             ("irregularities.html", "Limitations")]
+    nav = "".join(f'<a href="{url}">{label}</a>' for url, label in links)
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{html.escape(title)} · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Negative result; no competition-ready TIFF.">
+<title>{html.escape(title)} · GEMSDOE70</title><meta name="description" content="{html.escape(desc)}">
 <link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
-<nav aria-label="Main">{nav}</nav><main id="main">{body}</main><footer>Evidence before leaderboard claims. No competition upload performed.
-<a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>'''
+<nav aria-label="Main">{nav}</nav><main id="main">{body}</main><footer>Evidence before leaderboard claims. No competition upload performed by this repo.
+<a href="run-card-e2.json">E2 run card</a> · <a href="sources.html">Provenance</a></footer></body></html>'''
+
+
+def score_table(hold):
+    rows = "".join(
+        f'<tr><th scope="row">{html.escape(n)}</th><td>HOLDOUT-DTI</td><td>{r["dti"]:.6f}</td>'
+        f'<td>[{r["ci95"][0]:.6f}, {r["ci95"][1]:.6f}]</td></tr>'
+        for n, r in sorted(hold["scores"].items(), key=lambda kv: -kv[1]["dti"]))
+    return f'''<div class="table-wrap"><table><caption>Same evaluator, folds, masks and withheld positives; pooled terms, paired spatial bootstrap.</caption>
+<thead><tr><th>Arm</th><th>Evidence class</th><th>DTI</th><th>95% CI</th></tr></thead><tbody>{rows}</tbody></table></div>'''
 
 
 def main():
-    assert_no_public_rasters(ROOT)
-    card=json.loads((ROOT/'evidence/run_card.json').read_text())
-    hold=json.loads((ROOT/'evidence/holdout.json').read_text())
-    canaries=json.loads((ROOT/'evidence/canaries.json').read_text())
-    sources=json.loads((ROOT/'registry/sources.json').read_text())
-    health=json.loads((ROOT/'evidence/source_health.json').read_text())
-    gate=release_status(ROOT)
+    assert_review_rasters(ROOT)
+    st = candidate_status(ROOT)
+    e1 = json.loads((ROOT / "evidence/run_card.json").read_text())
+    e2 = json.loads((ROOT / "evidence/e2/run_card.json").read_text())
+    e3 = json.loads((ROOT / "evidence/e3/run_card.json").read_text())
+    h2 = json.loads((ROOT / "evidence/e2/holdout.json").read_text())
+    h3 = json.loads((ROOT / "evidence/e3/holdout.json").read_text())
+    c2 = json.loads((ROOT / "evidence/e2/canaries.json").read_text())
+    pub = json.loads((ROOT / "evidence/e2/publication.json").read_text())
+    lb = json.loads((ROOT / "evidence/leaderboard_read.json").read_text())
+    sources = json.loads((ROOT / "registry/sources.json").read_text())
     DOCS.mkdir(exist_ok=True)
-    downloads=DOCS/'downloads'; downloads.mkdir(exist_ok=True)
-    for name in ['run_card.json','holdout.json','holdout_split.json','holdout_folds.json','canaries.json',
-                 'surface_uniqueness.json','registry_saturation.json','h33_audit.json','data_receipt.json',
-                 'template_verification.json','source_health.json','experiment_manifest.json']:
-        shutil.copyfile(ROOT/'evidence'/name,downloads/name)
-    shutil.copyfile(ROOT/'evidence/run_card.json',DOCS/'run-card.json')
-    (DOCS/'status.json').write_text(json.dumps(gate,indent=2)+'\n')
-    (DOCS/'sources.json').write_text(json.dumps(sources,indent=2)+'\n')
-    d=card['holdout_dti']; ci=d['ci95']
-    evidence_label=f'HOLDOUT-DTI · {html.escape(d["evaluator_version"])} · {d["withheld_positive_pixels"]:,} withheld positive pixels'
-    status='''<section class="stop" aria-labelledby="status"><div class="eyebrow">SUBMISSION READINESS</div><h1 id="status">Do not submit this run.</h1>
-<p>No eligible TIFF is available. The surface failed the literal uniqueness gate, so final dot placement and GeoTIFF export were stopped.</p>
-<div class="actions"><button disabled aria-describedby="stop-note">Submission TIFF unavailable</button><a class="button secondary" href="run-card.json" download>Download run card (JSON)</a></div>
-<p id="stop-note" class="small">This JSON is evidence, not a competition submission. No previous submission has been renamed or republished.</p></section>'''
-    metrics=f'''<div class="metrics"><section><div class="eyebrow">CONTINUOUS SURFACE · HOLDOUT-DTI</div><div class="number">{d['dti']:.5f}</div><p>95% CI [{ci[0]:.5f}, {ci[1]:.5f}]</p></section>
-<section><div class="eyebrow">REGISTRY MEASUREMENT</div><div class="number">100%</div><p>Forward overlap with a verified dense prior. Literal gate limit: 70%.</p></section>
-<section><div class="eyebrow">COMPETITION ACTIVITY</div><div class="number">No upload</div><p>One fixed experiment. No weekly slot consumed.</p></section></div>'''
-    overview=status+f'''<section class="intro"><div class="eyebrow">A NEGATIVE RESULT, FULLY ACCOUNTED FOR</div><h2>Test the geology. Protect the submission.</h2>
-<p>We tested whether magnetic contact terminations along gravity-supported basement boundaries could reveal faults hidden beneath cover. The fixed ranking did not establish useful recovery and cannot pass the current literal overlap protocol.</p></section>{metrics}
-<p class="caption">{evidence_label}. Confidence interval is a conditional spatial-block bootstrap, not a leaderboard interval. No final dots were evaluated.</p>
-<div class="columns"><section class="panel"><h2>Why no download?</h2><p>A prior continuous raster is positive on the whole footprint. With the inherited positive-support definition of “dots,” every nonempty candidate overlaps it. We measured this conflict rather than waive it.</p><a href="results.html">See the stop certificate →</a></section>
-<section class="panel"><h2>What about the H33 result?</h2><p>The archived field is an efficient sparse prediction followed by catalogue-flank pruning, not a new trained detector. Its reported historical score has no organizer receipt here.</p><a href="h33-analysis.html">Read the forensic analysis →</a></section></div>
-<section><h2>Reproducible, not speculative</h2><p>The numerical stack was restored from pinned mirrors. The shared evaluator and writer remain byte-identical to the template. Every raw input and derived feature received a leakage canary.</p>
-<ul><li><a href="hypotheses.html">Four preregistered geological hypotheses</a></li><li><a href="sources.html">Auditable sources and retrieval status</a></li><li><a href="irregularities.html">Limitations and next-session priorities</a></li></ul></section>'''
-    (DOCS/'index.html').write_text(frame('Overview',overview))
-    guide=status+'''<section><h2>How a future eligible submission works</h2><p><strong>Do not use this negative run.</strong> The workflow below applies only after a fresh candidate passes every scientific and publication gate. This static website reports precomputed evidence; it does not train a model in your browser.</p>
-<ol class="steps"><li><strong>Check the readiness banner.</strong> Only a released artifact may receive a TIFF download link. A valid format alone does not mean it is unique or worth a competition slot.</li>
-<li><strong>Verify scientific clearance.</strong> Feature canaries, same-split current-best improvement, a complete pre-placement surface audit and final-dot audit must pass. The present experiment fails and stops before the last step.</li>
-<li><strong>Package with the shared writer.</strong> A single-band float32 GeoTIFF must match the sample CRS, shape and geotransform. The writer rejects non-finite/out-of-range values rather than silently clipping them; this project also sets outside-footprint values to zero.</li>
-<li><strong>Validate exact file bytes.</strong> Reopen the TIFF, verify range, footprint and mapped-fault masking, and record its SHA-256. A ZIP must contain exactly one TIFF. Our shared writer checks that round trip.</li>
-<li><strong>Obtain separate slot selection.</strong> Check the current submission page's rules and remaining weekly allowance; it is not known in this sandbox. Local candidate promotion does not authorize an upload.</li>
-<li><strong>Upload only the released TIFF or one-TIFF ZIP.</strong> At the official competition site, open New submission, choose the file and copy its short identifying note. A JSON report, HTML page or PDF is not the prediction file.</li>
-<li><strong>Keep the organizer receipt.</strong> Only an actual submission-page receipt can establish an ORGANIZER-CONFIRMED score. Save filename, hash, time, note and receipt together.</li></ol>
-<h2>About “Predicted values must be in range [0, 1]”</h2><p>The earlier rejected file is not available for forensic inspection here, so its exact fault is unknown. Potential failures include raw unnormalized features, negative nodata sentinels, NaN/Inf or values above one. The shared writer rejects all these before publishing. We do not claim NaN was the cause of your portal error.</p>
-<h2>Reference grid — mirror-relative measurement</h2><p>EPSG:32611; 3,730 rows × 3,292 columns; affine transform [100, 0, 243350, 0, -100, 4508550]. These match the SHA-pinned sample mirror, not an independently authenticated new organizer download.</p>
-<h2>This run's reserved identity (not a released submission)</h2>'''+f'<p><code>{html.escape(card["submission_name"])}</code></p><p>Note ({len(card["submission_note"])} characters): <code>{html.escape(card["submission_note"])}</code></p>'+'''
-<p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Official competition</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official problem and format</a>. These pages could not be retrieved here; review current requirements before a future upload.</p></section>'''
-    (DOCS/'executive-summary.html').write_text(frame('Submission guide',guide))
-    rows=''.join(f'<tr><th scope="row">{html.escape(n)}</th><td>HOLDOUT-DTI</td><td>{r["dti"]:.6f}</td><td>[{r["ci95"][0]:.6f}, {r["ci95"][1]:.6f}]</td></tr>' for n,r in hold['scores'].items())
-    aucrows=''.join(f'<tr><th scope="row">{html.escape(n)}</th><td>{r["auc"]:.6f}</td><td>{"STOP" if r["suspected_leakage"] else "No threshold alarm"}</td></tr>' for n,r in canaries.items())
-    delta=hold['paired_differences']['random_control']
-    results=f'''<div class="eyebrow">MEASURED RESULTS</div><h1>Evidence, including the failure.</h1><p>{evidence_label}. Continuous pre-placement surfaces only; not final dots.</p>
-<div class="table-wrap"><table><caption>Same evaluator, same withheld positives and masks; pooled terms, then bootstrap.</caption><thead><tr><th>Arm</th><th>Evidence class</th><th>DTI</th><th>95% CI</th></tr></thead><tbody>{rows}</tbody></table></div>
-<p>Candidate-minus-random HOLDOUT-DTI difference: {delta['delta']:.6f}, 95% paired CI [{delta['ci95'][0]:.6f}, {delta['ci95'][1]:.6f}], with {d['withheld_positive_pixels']:,} withheld positives, evaluator {d['evaluator_version']}. The candidate is materially worse on this instrument. No comparable current-best implementation was available; none is claimed beaten.</p>
-<p>The random control uses the same positive-cell count and fixed half-intensity, giving similar—not exactly equal—mass. It is a spatial spread diagnostic, not a tuned submission or proof that random prediction will score well on hidden labels.</p>
-<h2>Leakage canaries</h2><p>LEAKAGE-CANARY AUC, not DTI or leaderboard scores. Each feature alone: {d['withheld_positive_pixels']:,} withheld positive pixels and 200,000 sampled negatives. We also checked the inverse ranking. Neither direction exceeded the 0.90 alarm threshold. This does not prove absence of every possible leakage mechanism.</p>
-<div class="table-wrap"><table><thead><tr><th>Feature</th><th>AUC</th><th>Result</th></tr></thead><tbody>{aucrows}</tbody></table></div>
-<h2>Uniqueness stop certificate</h2><p>REGISTRY-MEASUREMENT: exact surface Spearman correlation with the checked witness is {card['correlation_overlap_vs_registry']['spearman']:.6f}; forward three-pixel support overlap is 1.0. The literal threshold is exceeded.</p>
-<p>The witness is positive on all 5,167,373 footprint cells. All 5,106,385 off-catalogue allowed cells are covered by its three-pixel halo; zero are uncovered. One verified counterexample suffices to reject uniqueness, while one comparison can never certify uniqueness. The inherited inventory is historical, not a fresh complete organizer registry.</p>
-<p><a href="downloads/surface_uniqueness.json">Surface audit</a> · <a href="downloads/registry_saturation.json">Universal-blocker certificate</a> · <a href="downloads/holdout.json">Full holdout / paired intervals</a> · <a href="downloads/canaries.json">Canaries</a> · <a href="run-card.json">Run card</a></p>
-<h2>Validator status: NOT WRITTEN</h2><p>The in-memory surface is finite, in range, correctly shaped, zero outside the footprint and zero on mapped faults. There is no TIFF validator receipt, file SHA-256, or final-dot audit because export and placement were stopped. Surface decoded-array SHA-256 is not a file hash.</p>'''
-    (DOCS/'results.html').write_text(frame('Results',results))
-    for name,title in [('hypotheses','Hypotheses'),('h33-analysis','H33 analysis'),('irregularities','Limitations')]:
-        (DOCS/f'{name}.html').write_text(frame(title,md(DOCS/f'{name}.md')))
-    sourcerows=''.join(f'<tr><th scope="row"><a href="{html.escape(s["url"])}">{html.escape(s["id"])}</a></th><td>{html.escape(s["authority"])}</td><td>{html.escape(s["status"])}</td><td>{html.escape(s["claim"])}<br><small>{html.escape(s["limit"])}</small></td></tr>' for s in sources)
-    srcpage=f'''<div class="eyebrow">AUDITABLE KNOWLEDGE</div><h1>Know what the evidence can say.</h1><p>GitHub reference content was retrieved. Official sites outside this environment's network allowlist were not verified live. A working HTTP endpoint does not verify a scientific claim, a license, or a competition result.</p>
-<p>Availability last checked: <time>{html.escape(health['generated_utc'])}</time>. The current leaderboard is <strong>unverified</strong>, not an up-to-date claimed score feed.</p><div class="table-wrap"><table><thead><tr><th>Source</th><th>Authority</th><th>Session status</th><th>Claim and limit</th></tr></thead><tbody>{sourcerows}</tbody></table></div>
-<h2>Data and implementation receipts</h2><p><a href="downloads/data_receipt.json">Input checksums</a> · <a href="downloads/template_verification.json">Unmodified shared template verification</a> · <a href="downloads/source_health.json">HTTP health checks</a> · <a href="sources.json">Source ledger</a></p>
-<h2>Research knowledge</h2><p>Potential-field edge changes are hypotheses about rock-property discontinuities, not verified fault slip. Magnetization changes, intrusive contacts, depositional boundaries and acquisition/leveling residuals are named alternatives. Gravity and basement depth may share inversion assumptions. No claim of new geothermal vents is made.</p>
-<p>The complete original user brief and its historical result list are retained in the repository README and PROJECT_BRIEF.md. The analysis is deliberately scoped: it does not claim that every linked website, score or scientific source has been independently verified.</p>'''
-    (DOCS/'sources.html').write_text(frame('Sources',srcpage))
-    (DOCS/'.nojekyll').touch()
-    (ROOT/'index.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70</title></head><body><h1>GEMSDOE70: DO NOT SUBMIT</h1><p>No eligible TIFF. <a href="docs/index.html">Open the research workbench and submission status</a>.</p></body></html>\n')
-    # Keep historical root entry points working without serving stale run claims.
-    redirects={'executive-summary':'executive-summary','research':'hypotheses',
-               'requirements':'irregularities','review':'irregularities',
-               'run-card':'results','sources':'sources'}
-    for old,target in redirects.items():
-        (ROOT/f'{old}.html').write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="0;url=docs/{target}.html"><title>GEMSDOE70 — DO NOT SUBMIT</title></head><body><h1>DO NOT SUBMIT</h1><p>This historical entry point now links to the current evidence. <a href="docs/{target}.html">Continue to the current workbench</a>.</p></body></html>\n')
-    print('Built site. No eligible TIFF; no prediction files published.')
+    downloads = DOCS / "downloads"
+    downloads.mkdir(exist_ok=True)
+    for src, dst in [
+        ("evidence/run_card.json", "e1_run_card.json"), ("evidence/holdout.json", "e1_holdout.json"),
+        ("evidence/canaries.json", "e1_canaries.json"),
+        ("evidence/e2/run_card.json", "e2_run_card.json"), ("evidence/e2/holdout.json", "e2_holdout.json"),
+        ("evidence/e2/canaries.json", "e2_canaries.json"),
+        ("evidence/e2/holdout_confirm_seed21.json", "e2_confirm_seed21.json"),
+        ("evidence/e2/surface_uniqueness.json", "e2_surface_uniqueness.json"),
+        ("evidence/e2/final_uniqueness.json", "e2_final_uniqueness.json"),
+        ("evidence/e2/publication.json", "e2_publication.json"),
+        ("evidence/e2/validator.json", "e2_validator.json"),
+        ("evidence/e3/run_card.json", "e3_run_card.json"), ("evidence/e3/holdout.json", "e3_holdout.json"),
+        ("evidence/e3/canaries.json", "e3_canaries.json"),
+        ("evidence/e3/final_uniqueness.json", "e3_final_uniqueness.json"),
+        ("evidence/h33_audit.json", "h33_audit.json"), ("evidence/data_receipt.json", "data_receipt.json"),
+        ("evidence/leaderboard_read.json", "leaderboard_read.json"),
+    ]:
+        shutil.copyfile(ROOT / src, downloads / dst)
+    shutil.copyfile(ROOT / "evidence/e2/run_card.json", DOCS / "run-card-e2.json")
+    shutil.copyfile(ROOT / "evidence/run_card.json", DOCS / "run-card.json")
+    # session merged view: frozen E2 card + publication receipt (card itself untouched)
+    merged = {**e2, "publication_amendment": "docs/publication-amendment-e2.md",
+              "raster_sha256_published": pub["sha256"], "raster_file": pub["file"],
+              "validator_output_published": pub["validate"],
+              "download_ok_for_selector_review": st["download_ok_for_selector_review"],
+              "submit_ok": False}
+    (DOCS / "run-card-e2-published.json").write_text(json.dumps(merged, indent=2) + "\n")
+    shutil.copyfile(DOCS / "run-card-e2-published.json", downloads / "e2_run_card_published.json")
+    (DOCS / "status.json").write_text(json.dumps(st, indent=2) + "\n")
+    (DOCS / "sources.json").write_text(json.dumps(sources, indent=2) + "\n")
 
-if __name__=='__main__':main()
+    f = html.escape(st["file"]); z = html.escape(st["zip_file"])
+    name = html.escape(st["submission_name"]); note = html.escape(st["submission_note"])
+    d2 = e2["holdout_dti"]; ci = d2["ci95"]
+    cand = f'''<section class="stop" aria-labelledby="status"><div class="eyebrow">SUBMISSION READINESS — READ FIRST</div>
+<h1 id="status">DO NOT SUBMIT YET.</h1>
+<p><strong>Download for selector review: YES.</strong> A unique candidate GeoTIFF is available below so the selector can run the complete registry scan and slot decision.
+<strong>Submit to DrivenData: NO</strong> — promotion bars failed (D28 catalogue-holdout best not beaten). Submitting now would spend a slot on an unpromoted candidate.</p>
+<div class="actions"><a class="button" href="downloads/{f}" download>⬇ Download candidate TIFF (review only)</a>
+<a class="button secondary" href="downloads/{z}" download>ZIP (single TIFF)</a>
+<a class="button secondary" href="run-card-e2-published.json" download>Run card (JSON)</a></div>
+<p><strong>File:</strong> <code>{f}</code><br><strong>SHA-256:</strong> <code>{html.escape(st["sha256"] or "")}</code><br>
+<strong>Submission name (if selector ever approves):</strong> <code>{name}</code><br>
+<strong>Note to paste ({len(st["submission_note"] or "")} characters):</strong> <code>{note}</code></p>
+<p class="small">Single band · float32 · EPSG:32611 · 100 m · 3730×3292 · 38,000 dots · every cell finite · values in [0,1] · 0 on catalogue · no nodata tag. Local validator PASS — not organizer acceptance. Exact conditions to flip to “submit” are in the <a href="executive-summary.html">submission guide</a>.</p></section>'''
+    metrics = f'''<div class="metrics"><section><div class="eyebrow">E2 DOTS · HOLDOUT-DTI</div><div class="number">{d2["dti"]:.5f}</div><p>95% CI [{ci[0]:.5f}, {ci[1]:.5f}] · beats random, loses to D28 (0.09192)</p></section>
+<section><div class="eyebrow">UNIQUENESS (7-RASTER SUBSET, R1)</div><div class="number">ρ ≤ 0.039</div><p>Worst R1 overlap 0.443 (limit 0.70). Complete scan still required.</p></section>
+<section><div class="eyebrow">PUBLIC LEADER AT READ 2026-10-20</div><div class="number">0.4413</div><p>Organizer page read; family H33 0.2778 is user-reported, no receipt here.</p></section></div>'''
+    overview = cand + f'''<section class="intro"><div class="eyebrow">UNIQUE CANDIDATE, HONEST VERDICT</div><h2>New geology. No borrowed dots.</h2>
+<p>E2 ranks blind basin faults by an oriented alluvial elevation step guided by magnetic strike — a lane not used by H33/H19-5 — and shares only 797 exact pixels (2.1%) with H33. It recovers withheld catalogue faults far better than random, but the incumbent dotted ranking still recovers them better, so this session does not promote it. E3 (magnetic depth-step) and archived E1 are also negative. Negative results are deliverables.</p></section>{metrics}
+<p class="caption">HOLDOUT-DTI · {html.escape(d2["evaluator_version"])} · {d2["withheld_positive_pixels"]:,} withheld positive pixels · catalogue hide-and-recover, not hidden live faults and not a leaderboard score. On this instrument H33 itself scores 0.00370 (below random) — see why in the <a href="h33-analysis.html">H33 analysis</a> before ranking any far-field field by catalogue recovery alone.</p>
+<div class="columns"><section class="panel"><h2>Why download if not submit?</h2><p>Candidate generation and slot selection are separate steps. The selector needs exact bytes for the complete registry scan, R1 acknowledgment and cap check listed in the guide.</p><a href="executive-summary.html">Exact submission steps →</a></section>
+<section class="panel"><h2>Why did H33 lead the family?</h2><p>Strong ranking + kernel-scale thinning + catalogue-flank pruning: emission efficiency, not a new detector. The same table shows what beating 0.2778 — and 0.4413 — actually requires.</p><a href="h33-analysis.html">Forensic analysis →</a></section></div>
+<section><h2>Reproducible, not speculative</h2><p>Pinned mirror stack, byte-identical shared evaluator/writer, per-feature leakage canaries, paired bootstrap intervals, from-scratch recomputation matched the experiment mask byte-for-byte before writing.</p>
+<ul><li><a href="results.html">E1/E2/E3 measured results</a></li><li><a href="hypotheses.html">Ranked hypotheses + frozen E2/E3 preregistration</a></li><li><a href="irregularities.html">Limitations, irregularities, next steps</a></li></ul></section>'''
+    (DOCS / "index.html").write_text(frame("Overview", overview))
+
+    guide = f'''<div class="eyebrow">EXECUTIVE SUMMARY</div><h1>How a submission happens — exactly.</h1>
+<section class="stop"><h2>Current status: DO NOT SUBMIT YET</h2><p>Download-for-review is YES; submitting is NO until every selector condition below is recorded. This page tells you precisely what “ready” would mean so there is no ambiguity at the portal.</p></section>
+<h2>The candidate (selector-review only)</h2>
+<p><strong>File:</strong> <code>{f}</code> · <a href="downloads/{f}" download>Download TIFF</a> · <a href="downloads/{z}" download>Download ZIP</a><br>
+<strong>SHA-256:</strong> <code>{html.escape(st["sha256"] or "")}</code><br>
+<strong>Unique name:</strong> <code>{name}</code><br>
+<strong>Note (paste verbatim if ever approved, {len(st["submission_note"] or "")}/140 chars):</strong><br><code>{note}</code></p>
+<h2>Selector conditions (all required before any upload)</h2><ol class="steps">
+<li><strong>Complete registry scan.</strong> Run R1 uniqueness (rho ≤ 0.90, overlap ≤ 0.70) against the complete accessible inventory (862 inherited-index rasters or fresher), on surface and final dots. This session checked a disclosed 7-raster subset only.</li>
+<li><strong>Acknowledge protocol revision R1</strong> for dense continuous registry surfaces (<a href="hypotheses.html">text in preregistration bundle</a>; repo file <code>docs/protocol-revision-uniqueness.md</code>). If R1 is rejected, never submit this file.</li>
+<li><strong>Check the live cap.</strong> Open the official submission page, confirm remaining weekly allowance and current rules. This repo does not know your remaining slots and used none.</li>
+<li><strong>Accept the holdout result in writing.</strong> E2 did not beat D28 on catalogue holdout; no live score is predicted. Keep that acceptance with the receipt.</li></ol>
+<h2>Portal steps (only after all conditions above)</h2><ol class="steps">
+<li>Go to the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">official competition</a> → <strong>New submission</strong>.</li>
+<li><strong>File to submit:</strong> choose the downloaded <code>.tif</code> above (or the <code>.zip</code> containing that single TIFF). Verify the SHA-256 of your local copy matches this page before uploading.</li>
+<li><strong>Note (optional):</strong> paste the note verbatim. It distinguishes this candidate from every prior family file.</li>
+<li>Submit once. <strong>Save the organizer receipt</strong> (score, time, filename) — only that receipt can create an ORGANIZER-CONFIRMED score. Report it back with the SHA-256.</li>
+<li>Remember the two-round structure: one selected submission is rescored after expert label expansion. Do not assume round-1 flank pruning is free in round 2 (see H33 analysis caveat).</li></ol>
+<h2>“Predicted values must be in range [0, 1]” — why this file passes local checks</h2>
+<p>That portal error fires when any read value (or a nodata sentinel such as −3.4e38 from the feature stack) lies outside [0,1]. This candidate was written by the shared writer, which <em>rejects</em> non-finite/out-of-range arrays instead of clipping, then re-read from disk: all 12,279,160 cells finite, min 0.0, max 1.0, no NaN/Inf/sentinels, no nodata tag, single-band float32, EPSG:32611, transform [100, 0, 243350, 0, −100, 4508550]. Receipts: <a href="downloads/e2_validator.json">validator</a> · <a href="downloads/e2_publication.json">publication + recomputation match</a>. Local PASS is not organizer acceptance.</p>
+<h2>What this site cannot do</h2><p>It does not train in-browser, does not know your slot balance, and does not confirm live scores. Public leader at last read (2026-10-20): 0.4413 — recheck live before deciding.</p>'''
+    (DOCS / "executive-summary.html").write_text(frame("Submission guide", guide))
+
+    aucrows = "".join(
+        f'<tr><th scope="row">{html.escape(n)}</th><td>{r["auc"]:.4f}</td><td>{"STOP" if r["suspected_leakage"] else "No alarm"}</td></tr>'
+        for n, r in c2.items())
+    results = f'''<div class="eyebrow">MEASURED RESULTS</div><h1>Evidence, including the failures.</h1>
+<h2>E2 — alluvial step (primary, seed-20)</h2><p>HOLDOUT-DTI · {html.escape(d2["evaluator_version"])} · {d2["withheld_positive_pixels"]:,} withheld positives. Candidate dots beat random (paired Δ +0.02222, CI [+0.00786, +0.03721]) and every ablation, tie H19-solid at one-third mass, lose to D28 (Δ −0.02727, CI [−0.04349, −0.01128]). Confirmatory seed-21 candidate 0.06557 (see downloads). Verdict: <strong>negative — DO NOT SUBMIT YET</strong>.</p>{score_table(h2)}
+<p>Reference caveat: H33/D28/H19 fields used full-catalogue knowledge; values are same-instrument references, not clean generalization. H33 scoring last here measures instrument mismatch (live new faults vs catalogue pieces), not H33 live quality.</p>
+<h2>E2 leakage canaries (AUC, not DTI)</h2><div class="table-wrap"><table><thead><tr><th>Feature alone</th><th>AUC</th><th>Result</th></tr></thead><tbody>{aucrows}</tbody></table></div>
+<h2>E3 — magnetic depth-step (contingent)</h2><p>Mechanism canary AUC 0.5062 (null); candidate HOLDOUT-DTI {e3["holdout_dti"]["dti"]:.5f} carried by its basement-edge partner. Negative; no file published.</p>{score_table(h3)}
+<h2>E1 — contact termination (archived)</h2><p>Continuous-surface HOLDOUT-DTI {e1["holdout_dti"]["dti"]:.5f}, worse than its random control; stopped at the literal dense-prior gate. Preserved untouched in <a href="downloads/e1_run_card.json">E1 run card</a>.</p>
+<h2>Uniqueness + format receipts (E2)</h2><p>Final dots: worst Spearman {e2["correlation_overlap_vs_registry"]["final_worst_spearman"]:.4f}, worst R1 overlap {e2["correlation_overlap_vs_registry"]["final_r1_worst_overlap"]:.4f} (7-raster subset); literal dense overlap 1.0 published as degenerate (R1). Exact shared pixels with H33: 797/38,000. <a href="downloads/e2_final_uniqueness.json">Final audit</a> · <a href="downloads/e2_surface_uniqueness.json">Surface audit</a> · <a href="downloads/e2_validator.json">Validator</a> · <a href="downloads/e2_publication.json">Publication</a></p>'''
+    (DOCS / "results.html").write_text(frame("Results", results))
+
+    hyp = md(DOCS / "hypotheses.md") + "<hr>" + md(DOCS / "preregistration-e2.md") + "<hr>" + md(DOCS / "protocol-revision-uniqueness.md") + "<hr>" + md(DOCS / "publication-amendment-e2.md")
+    (DOCS / "hypotheses.html").write_text(frame("Hypotheses", hyp))
+    (DOCS / "h33-analysis.html").write_text(frame("H33 analysis", md(DOCS / "h33-analysis.md")))
+    (DOCS / "irregularities.html").write_text(frame("Limitations", md(DOCS / "irregularities.md")))
+
+    srows = "".join(
+        f'<tr><th scope="row"><a href="{html.escape(s["url"])}">{html.escape(s["id"])}</a></th><td>{html.escape(s["authority"])}</td>'
+        f'<td>{html.escape(s["status"])}</td><td>{html.escape(s["claim"])}<br><small>{html.escape(s["limit"])}</small></td></tr>'
+        for s in sources)
+    lbrows = "".join(
+        f'<tr><td>{r["rank"]}</td><td>{html.escape(r["participant"])}</td><td>{r["best_public_dw_tversky"]:.4f}</td></tr>'
+        for r in lb["top_rows_at_read"])
+    srcpage = f'''<div class="eyebrow">AUDITABLE KNOWLEDGE</div><h1>Know what the evidence can say.</h1>
+<p>Organizer problem/about/leaderboard pages were fetched 2026-10-20 in this session. Mirror hashes prove consistency, not organizer authentication. No score below is ORGANIZER-CONFIRMED for this repo (no submission receipt).</p>
+<h2>Public leaderboard at read (organizer page)</h2><div class="table-wrap"><table><thead><tr><th>Rank</th><th>Participant</th><th>Best public DW-Tversky</th></tr></thead><tbody>{lbrows}</tbody></table></div>
+<p><a href="downloads/leaderboard_read.json">Leaderboard read receipt</a> · <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Live leaderboard (recheck before deciding)</a></p>
+<div class="table-wrap"><table><thead><tr><th>Source</th><th>Authority</th><th>Session status</th><th>Claim and limit</th></tr></thead><tbody>{srows}</tbody></table></div>
+<h2>Receipts</h2><p><a href="downloads/data_receipt.json">Input checksums</a> · <a href="downloads/e2_validator.json">Candidate validator</a> · <a href="sources.json">Source ledger</a></p>
+<h2>Research note</h2><p>Fault traces are the prediction target — not geothermal vents. A step or depth discontinuity can be a terrace, shoreline, intrusive contact or processing artefact; named mimics travel with every hypothesis. No vent, temperature, permeability or resource claim is made.</p>'''
+    (DOCS / "sources.html").write_text(frame("Sources", srcpage))
+    (DOCS / ".nojekyll").touch()
+    (ROOT / "index.html").write_text(
+        '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE70</title></head><body>'
+        '<h1>GEMSDOE70: DO NOT SUBMIT YET — candidate for selector review</h1>'
+        '<p><a href="docs/index.html">Open status, candidate download and submission guide</a>.</p></body></html>\n')
+    redirects = {"executive-summary": "executive-summary", "research": "hypotheses",
+                 "requirements": "irregularities", "review": "irregularities",
+                 "run-card": "results", "sources": "sources"}
+    for old, target in redirects.items():
+        (ROOT / f"{old}.html").write_text(
+            f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+            f'<meta http-equiv="refresh" content="0;url=docs/{target}.html"><title>GEMSDOE70 — DO NOT SUBMIT YET</title></head><body>'
+            f'<h1>DO NOT SUBMIT YET</h1><p>Selector-review candidate only. <a href="docs/{target}.html">Continue to current evidence</a>.</p></body></html>\n')
+    print("Built site. E2 review candidate linked as DO NOT SUBMIT YET; submit_ok=false.")
+
+
+if __name__ == "__main__":
+    main()

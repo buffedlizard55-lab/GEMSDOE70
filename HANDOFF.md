@@ -1,82 +1,37 @@
-# Handoff — 2026-10-20
+# Handoff — 2026-10-20 (E2/E3 session)
 
-Read README.md and PROJECT_BRIEF.md at session start.
+Read README.md, PROJECT_BRIEF.md, AGENTS.md, docs/preregistration-e2.md first.
 
-**NEGATIVE. DO NOT SUBMIT. No eligible TIFF exists.**
+**DO NOT SUBMIT YET. Unique candidate exists for selector review; verdict negative.**
 
-The checkout started with only an eleven-byte README. Pinned numerical features,
-sample and catalogue were restored from public owner mirrors into `.cache/data`.
-No organizer-authenticated identity, current leaderboard receipt or weekly-cap
-state is available. The notebook reference was retrieved from the official
-DrivenData GitHub repository. No GPU was required for this fixed CPU hypothesis.
+Candidate: `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif`
+SHA-256 `91f3dac071a87dc6258b907f5971987b2a8cf0f94e45e008badd8e09522c9d6c`, 38,000 dots,
+name `GEMSDOE70-E2-alluvial-step-38000`. Local validator PASS (all-finite [0,1],
+EPSG:32611 3730x3292, 0 on catalogue). No slot used; no organizer score exists.
 
-One preregistered contact-termination experiment ran. Every raw and transformed
-feature received an AUC leakage canary and shared HOLDOUT-DTI. Whole mapped
-components were withheld with a real three-pixel feature-context buffer, spatially
-eroded quadrants and pixel-exact known-fault masking. No catalogue predictor was
-used. The continuous surface is worse than its random sparse control; current
-holdout best was not independently rerun. See evidence/holdout.json.
+Two preregistered experiments ran (budget used: 2 of max 3 this session; ~2 min compute each):
+E2 alluvial step HOLDOUT-DTI 0.06465 [0.04869,0.08181] (11,321 withheld, gems57-pooled-hide-v2)
+beats random/ablations, loses to D28 0.09192 → promotion bars failed. E3 depth-step null
+(AUC 0.506) → negative. E1 archived negative unchanged. Do not rerun/tune any of them
+(manifests refuse; folds are reported).
 
-The surface passed numerical array checks but failed the literal overlap gate.
-A SHA-verified 17GEMSDOE continuous prediction covers every footprint cell; its
-halo leaves no off-catalogue allowed cell uncovered. No nonempty candidate can
-pass the inherited literal support rule against it. **Do not silently exempt it.**
-Only this decisive witness was compared; an incomplete scan cannot certify
-uniqueness, but a duplicate witness suffices to stop. Final dots were not placed,
-no submission writer was invoked for the scientific run, and no slot was used.
-The shared writer's TIFF/ZIP behavior is tested only with synthetic temporary
-unit-test fixtures, never published as competition predictions.
+Uniqueness: 7-raster subset under explicit revision R1 (docs/protocol-revision-uniqueness.md).
+Final dots worst rho 0.039, worst R1 overlap 0.443; literal dense overlap 1.0 published as
+degenerate. Complete 862-raster scan + R1 acknowledgment + weekly-cap check + written
+acceptance are selector prerequisites (docs/publication-amendment-e2.md, submission guide).
+Upstream _dots issue filing denied by integration; report in evidence/, not claimed filed.
 
-`vendor/gems57` is unchanged from 60GEMSDOE commit
-`32024716f218d06a94e01464157392119c03cb15`; evidence/template_verification.json
-compares both SHA-256 and upstream git blob identities. A false bound in the
-metric's explanatory docstring was identified, but executable coverage arithmetic
-is correct. Cross-repo issue creation was denied; see evidence/upstream_metric_report.md.
+Key calibration: on this catalogue instrument H33 (user-reported live 0.2778) scores 0.00370,
+below random. Catalogue holdout must not rank far-field fields for live value either way.
+Public leader read 2026-10-20: 0.4413 (evidence/leaderboard_read.json). Two-round label
+composition and known-fault masking remain unverified — see H33 addendum before any slot.
 
-Next session must resolve the protocol representation conflict and missing lane
-assignment before new science. A fresh ranking needs untouched evaluation blocks,
-comparable current-best validation and complete pre-placement/final-dot audits.
-Never tune the present fixed hypothesis after seeing its holdout.
+Next session priorities: (1) selector completes full R1 scan or rejects candidate in writing;
+(2) resolve masking/final-round ambiguity from organizer text/forum before spending;
+(3) new ranking must raise top-mass credit density (beat D28 on catalogue recovery AND retain
+far-field placement) — do not chase holdout with catalogue-hugging supervised fits;
+(4) ComCat microseismicity lane needs an out-of-sandbox fetch (named in preregistration).
 
-Publication is intentionally fail-closed for this stopped experiment. The static
-site cannot generate or train a TIFF in-browser. A fresh reviewed scientific run
-and release contract are prerequisites to connecting the validated shared writer
-to a real one-click artifact; editing run-card booleans is not sufficient.
-
-Commands:
-
-```
-python -m venv .venv
-.venv/bin/pip install -r requirements.lock
-bash scripts/download_competition_data.sh
-.venv/bin/python scripts/build_site.py
-.venv/bin/python scripts/build_readme.py
-.venv/bin/python -m pytest -q
-```
-
-Do not rerun scripts/run_experiment.py: its existing experiment manifest makes it
-refuse a second attempt. Data are reconstructible; large caches are ignored and
-not committed. Source-health refresh is separate from scientific validation.
-
-## Concurrent-main integration
-
-Main advanced through PRs 1 and 2 while this session ran. Their reports, audit
-helpers, bridge fixtures and tests are retained. The earlier review-only run card,
-README and handoff are archived in evidence/history/parallel-review2. Canonical
-publication scripts use the measured one-experiment card; the legacy card command
-now verifies it rather than overwrite it. Root historical HTML paths redirect to
-the current workbench. The combined suite passes 68 tests (three upstream
-Rasterio/Affine pending-deprecation warnings). No unrelated candidate PR is
-endorsed by this integration.
-
-## Concurrent H70-C publication quarantine
-
-Main subsequently advanced through PRs 4 and 5, advertising a second session's
-H70-C TIFF as ready. Inspection found explicit simulated/placeholder holdout
-values in generation source and a one-raster H33 comparison, not full literal
-uniqueness clearance. All source, claims and files are preserved with hashes in
-quarantine/concurrent-h70c and evidence/concurrent_h70c_quarantine.json; none is
-endorsed or linked as a submission. Source text is retained, not executed. The
-canonical site remains negative. No additional scientific experiment was run.
-
-Final suite after adding quarantine hash/publication coverage: **69 tests pass**.
+Commands: venv + requirements.lock; bash scripts/download_competition_data.sh;
+.venv/bin/python scripts/build_site.py; scripts/build_readme.py; pytest -q;
+scripts/validate_submission.py <candidate.tif>.

@@ -1,9 +1,9 @@
 # Session start contract
 
-1. Read README.md and the complete PROJECT_BRIEF.md before any new work.
-2. Read HANDOFF.md, evidence/run_card.json, and docs/irregularities.md.
-3. Do not rerun the stopped experiment, tune its held-out folds, edit evidence to promote it, or copy archived TIFFs into downloads.
-4. Keep vendor/gems57 byte-identical to the pinned shared template. Fix shared defects upstream, never with a private metric or exemption.
-5. The literal registry support rule currently blocks every nonempty candidate. Do not exempt continuous predictions without an explicit protocol revision.
-6. Use the assigned Arena branch only. Weekly competition-slot selection is separate from candidate generation.
-7. Winning means honest evidence and good resource allocation. Own the outcome: a measured negative is preferable to a false score or unsafe download.
+1. Read README.md, PROJECT_BRIEF.md, HANDOFF.md, docs/preregistration-e2.md and evidence/e2/run_card.json before work.
+2. E1/E2/E3 are frozen. Do not rerun, retune, or edit their evidence/cards to promote them. New science needs a new preregistration and untouched folds.
+3. Keep vendor/gems57 byte-identical to the pinned template. Report shared defects upstream (evidence/upstream_*); never fork metric/writer silently.
+4. The only public TIFF/ZIP allowed is the hash-pinned E2 review artifact (DO-NOT-SUBMIT). candidate_status().submit_ok stays False until a selector records: complete R1 scan, R1 acknowledgment, cap check, written acceptance.
+5. Label every number HOLDOUT-DTI (evaluator, withheld N, CI) or ORGANIZER-CONFIRMED (receipt). User-reported family scores are neither. Catalogue holdout anti-ranks H33 — never project it to live.
+6. Use the assigned Arena branch only. Slot selection is separate from candidate generation.
+7. Own the outcome: maximize P(win) with honest evidence. A measured negative outranks a false green light.

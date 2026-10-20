@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hypotheses · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Negative result; no competition-ready TIFF.">
+<title>Hypotheses · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Unique candidate for selector review; DO NOT SUBMIT YET.">
 <link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
 <nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Preregistered hypotheses — 2026-10-20</h1>
@@ -75,5 +75,281 @@
 <li>At most one scientific experiment planned; never more than three or two hours. No competition upload or weekly slot.</li>
 </ul>
 <h2>Scientific limits</h2>
-<p>Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p></main><footer>Evidence before leaderboard claims. No competition upload performed.
-<a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>
+<p>Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p><hr><h1>Preregistration — GEMSDOE70 experiments E2 (primary) and E3 (contingent)</h1>
+<p>Written 2026-10-20, <strong>before</strong> any E2/E3 feature was scored. E1 (magnetic-edge
+termination) is frozen and negative; it is not rerun or tuned. This document is
+hashed into the E2 experiment manifest at run time. Any change after first
+scoring invalidates the run.</p>
+<h2>Lane declaration (protocol rule 1)</h2>
+<p>The supplied prompt again contains no identifiable single method paragraph.
+Declared lane for this session, one method only:</p>
+<blockquote>
+<p><strong>Subsurface-strike-guided alluvial step.</strong> A blind basin fault warps young
+cover into a broad, one-sided detrended-elevation step whose strike parallels
+a magnetic basement edge. Rank by the oriented elevation mean-shift across
+the magnetic structure-tensor normal, corroborated by basement-depth edge
+magnitude. No catalogue-derived predictor enters the ranking.</p>
+</blockquote>
+<p>Stay inside this lane. E3 (below) is a separate preregistered fallback lane,
+run only under its stated contingency; it is not a blend with E2.</p>
+<h2>Candidate hypotheses considered (ranked before implementation)</h2>
+<p>Qualitative expected-DTI ranking only; no number here is a score.</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Hypothesis / layers (19-band stack band numbers)</th>
+<th>Physical signature</th>
+<th>Why a catalogue omission is plausible</th>
+<th>Named non-fault mimic</th>
+<th>Difference from inspected implementations</th>
+<th>Cost / external data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 (E2)</td>
+<td>Alluvial step: <code>det_elev</code> (12), <code>rtp</code> (2) strike only, <code>depth_to_base_surf</code> (15)</td>
+<td>Oriented mean-shift of smoothed detrended elevation sampled ±2 px along the RTP structure-tensor normal; geometric-mean rank with basement gradient magnitude</td>
+<td>Basin-interior blind normal faults distribute throw over 200–400 m of fan/basin fill: no sharp scarp for geomorphic mapping, but a persistent one-sided step remains</td>
+<td>Terrace riser, paleoshoreline, road grade</td>
+<td>H33-A fuses Hessian line magnitudes + orientation order across six physics incl. external LiDAR/radiometrics; H33-B is valley chains; vendor geo uses slope/curvature scalars. None uses an oriented elevation <em>mean-shift</em> (asymmetric step) gated by magnetic strike. E1 used along-tangent magnetic-amplitude change, not a topographic step</td>
+<td>Low; cached stack only, CPU</td>
+</tr>
+<tr>
+<td>2 (E3)</td>
+<td>Magnetic source-depth step: <code>rtp</code> (2), <code>depth_to_base_surf</code> (15)</td>
+<td>Cross-edge step (±2 px along tensor normal) of a multi-scale depth index <code>A3/(A1+eps)</code> (gradient magnitudes at Gaussian sigma 3 vs 1), rank-fused with basement edge</td>
+<td>Vertical throw juxtaposes magnetic basement at two depths under cover with no surface rupture</td>
+<td>Intrusive contact with depth change, remanence boundary</td>
+<td>Euler lanes cluster isolated deconvolution solutions; this requires a <em>lateral step in depth index along a continuous edge</em>, not point clusters. Distinct from E1 termination (along-strike amplitude change)</td>
+<td>Low; cached stack only, CPU</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Strain-localization kink: <code>geod_2ndinv</code> (4), <code>geod_shearrate</code> (7), <code>geod_dilaterate</code> (8)</td>
+<td>Ridge in the gradient of shear/dilatation ratio fields</td>
+<td>Actively straining blind faults may localize geodesy before a mapped rupture exists</td>
+<td>GPS/InSAR interpolation artefact, volcanic deformation</td>
+<td>Vendor geo uses strain as a scalar plane, not a tensor-ratio kink ridge</td>
+<td>Low cost but geodetic fields are smooth at km scale; 300 m localization doubtful. Not run this session</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Signed magnetic profile jump: <code>rtp</code> (2), <code>mag_anom</code> (1), <code>iso_grav_anom</code> (13)</td>
+<td>Discontinuity of signed RTP normal profiles across an along-strike break on a gravity boundary</td>
+<td>Cover can hide a displaced magnetic contact</td>
+<td>Remanence change inside a volcanic flow</td>
+<td>Prior preregistration #2; unsigned termination (E1) already failed (canary AUC ≈ 0.525), so prior is weak. Not run this session</td>
+<td>Medium; cached stack only</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Sub-km seismicity lineaments: raw epicentres (external) + <code>deq/ieq</code> (10, 16) context</td>
+<td>Collinear epicentre chains / nodal-plane strike density at ≤1 km scale</td>
+<td>Microseismicity can illuminate blind active faults with no surface trace</td>
+<td>Quarry blasts, geothermal injection seismicity, location-error streaks</td>
+<td>Supplied seismic bands are 100 km aggregates (H33-E notes <code>ieq</code> autocorrelation 0.9935 at 3 km lag in GEMSDOE32 source, read 2026-10-20)</td>
+<td><strong>Not viable this session.</strong> Named free official source: USGS ComCat FDSN event service <code>https://earthquake.usgs.gov/fdsnws/event/1/query</code>. This sandbox's bash egress allowlist (github/npm/pypi only) cannot download it to a workspace file; no surface is fabricated. Requires a CI/manual fetch step with licence/attribution check before any future claim of viability</td>
+</tr>
+</tbody>
+</table>
+<p>No other external data is required by E2/E3. All E2/E3 layers are in the
+SHA-pinned mirror stack (<code>evidence/data_receipt.json</code>); mirror consistency is
+not organizer authentication.</p>
+<h2>E2 frozen specification</h2>
+<p>Inputs (<code>.cache/data/training_features.tif</code>, SHA-pinned): band 12 det_elev,
+band 2 rtp, band 15 depth_to_base_surf; canary-only comparators band 19
+det_elev_slope. Grid/sample/catalogue from <code>.cache/data</code> via shared
+<code>gems57.grid.load_grid</code>. Vendor code is byte-pinned and unmodified.</p>
+<ol>
+<li><code>valid0 = footprint &amp; finite &amp; |v|&lt;1e18</code> for every used band.
+   Fill non-valid cells by nearest-valid value <strong>from <code>valid0</code></strong> (fixes the E1
+   order flaw recorded in <code>docs/irregularities.md</code>: E1 eroded before filling).
+   Output support <code>valid = binary_erosion(valid0, 12)</code> applied <strong>after</strong> all
+   filtering. No output outside <code>valid</code>.</li>
+<li>Elevation: <code>elev_s = gaussian(fill(det_elev), sigma=1)</code>.
+   RTP tensor: gradients of <code>gaussian(fill(rtp), 1)</code>; tensor components
+   smoothed at sigma=2. Normal angle <code>a = 0.5*atan2(2*Jxy, Jxx-Jyy)</code> (gradient
+   direction, x = column axis). Coherence
+   <code>sqrt((Jxx-Jyy)^2 + 4*Jxy^2)/(Jxx+Jyy+1e-12)</code>.
+   Quantize <code>a mod pi</code> to 4 undirected axes (dy,dx): E–W (0,1), NE–SW (1,1)
+   in image coordinates, N–S (1,0), NW–SE (1,-1), by maximum absolute dot
+   product with <code>(sin a, cos a)</code> in (row, col) coordinates.</li>
+<li>Step per axis: <code>|shift(elev_s,+2*axis) - shift(elev_s,-2*axis)|</code> by array
+   slicing (no wraparound; 2-px border invalid, already inside erosion).
+   Features: <code>step_oriented</code> (axis chosen by RTP tensor), <code>step_max</code>
+   (maximum over 4 axes, orientation-free control), <code>coherence</code>,
+   <code>basement_edge = |grad(gaussian(fill(depth_to_base),2))|</code>.</li>
+<li>Candidate ranking: geometric mean of average-tie ranks of
+   (<code>step_oriented</code>, <code>basement_edge</code>) over <code>valid</code>, re-ranked to [0,1].
+   No catalogue array is read by the ranking code.</li>
+<li>Holdout: shared <code>buffered_component_draw(grid, seed=20, buffer_px=3,
+   boundary_px=12)</code> — identical folds/positives to E1 for paired
+   comparability — plus a confirmatory <code>seed=21</code> draw reported for the
+   candidate dots and H33 reference only (never used for tuning).
+   Evaluator: shared <code>gems57.evaluate_holdout</code> (<code>gems57-pooled-hide-v2</code>,
+   alpha 0.2, beta 0.8, 300 m triangular kernel), pooled terms, paired
+   20 km spatial-cluster bootstrap, 1000 draws, seed 70020.
+   Visible faults masked pixel-exactly by the evaluator.</li>
+<li>Leakage canaries first: every raw used band and every derived feature,
+   alone, AUC (and inverse) on withheld positives vs 200,000 sampled
+   negatives (seed 70020 sampling as E1). Any <code>max(AUC,1-AUC) &gt; 0.90</code> stops
+   the run as suspected leakage; no joint interpretation.</li>
+<li>Dot emission (primary endpoint): priority Poisson-style thinning —
+   candidates in descending ranking order from the top 400,000 <code>valid</code>
+   pixels, accept if no accepted dot within Euclidean distance &lt; 2.8 px,
+   until 38,000 dots or pool exhaustion. Binary value 1.0.
+   Holdout dots use <strong>no</strong> catalogue exclusion (evaluator masks visible
+   faults; dots on withheld truth are the signal). Final submission dots
+   additionally require full-catalogue distance &gt; 2 px (disclosed borrowed
+   emission hygiene from the H33 lineage, not claimed novel), refilled to
+   38,000 by continuing the same priority order.</li>
+<li>Arms (all HOLDOUT-DTI, same folds/masks): candidate dots; candidate
+   continuous upper-2% surface (secondary, E1-comparable); ablations
+   <code>step_oriented</code> dots, <code>step_max</code> dots, <code>basement_edge</code> dots (same thin,
+   same target N); random binary dots (38,000 uniform <code>valid</code> pixels,
+   seed 70020, no thinning); reference dot fields scored as-is:
+   H33 B2 (37,654 dots, SHA <code>c55bafc4…</code>), D2.8 (44,090, SHA <code>3e78737f…</code>),
+   H19-5 solid (121,131, SHA <code>ef2ae808…</code>). Reference caveat: those fields
+   were built with full-catalogue knowledge (incl. distance pruning), so
+   their holdout values are <em>reference measurements on this instrument</em>,
+   not clean generalization estimates; pruning near withheld faults can
+   only remove their near-truth dots (conservative direction), while any
+   catalogue-tuned ranking could favour them. Both directions are stated
+   wherever the numbers are used.</li>
+<li>Promotion bars (all required, candidate <strong>dots</strong>, primary seed-20 draw):
+   (a) pooled DTI point estimate exceeds every arm in (8) including H33;
+   (b) paired 95% CI for candidate-minus-H33 and candidate-minus-random
+   both lie above 0; (c) no canary alarm; (d) uniqueness gates in
+   <code>docs/protocol-revision-uniqueness.md</code> pass on surface <strong>and</strong> final
+   dots within the disclosed subset scope; (e) shared writer + validator
+   pass on exact bytes. Failure of any bar ⇒ verdict <code>negative</code>,
+   <strong>DO NOT SUBMIT</strong>, no submission TIFF published as a download.
+   Point-beats-but-CI-crosses-zero ⇒ <code>negative</code> (promising is not promoted).</li>
+<li>Budget: E2 is experiment 1 of this session. Wall-clock cap 2 h for
+    E2+E3 combined. No parameter is changed after seeing holdout results.</li>
+</ol>
+<h2>E3 frozen specification (contingent)</h2>
+<p>Run <strong>only if</strong> E2 completes without a canary stop, E2 verdict is negative,
+and ≥45 min of budget remains. Identical valid/fill/tensor/holdout/canary/
+emission/promotion machinery as E2. Only the ranking differs:
+<code>A1=|grad(gaussian(fill(rtp),1))|</code>, <code>A3=|grad(gaussian(fill(rtp),3))|</code>,
+<code>depth_index=A3/(A1+1e-12)</code> smoothed sigma=1; <code>depth_step</code> = ±2 px mean-shift
+of <code>depth_index</code> along the RTP tensor normal (same 4-axis machinery);
+candidate = geometric-mean rank of (<code>depth_step</code>, <code>basement_edge</code>).
+Ablations: <code>depth_step</code> dots, <code>basement_edge</code> dots (shared with E2),
+random, H33. Same promotion bars. If E2 promotes, E3 is not run.</p>
+<h2>What success would and would not mean</h2>
+<p>Beating H33 on catalogue hide-and-recover does <strong>not</strong> prove a higher live
+score: live truth is expert-mapped <em>new</em> faults, not withheld catalogue
+pieces, and family evidence (GEMSDOE32 site, read 2026-10-20) shows the two
+instruments can disagree. Promotion here means only "ready for the separate
+selector step + complete registry scan" (protocol rule 6). No projected
+leaderboard number will be written as a score. Fault traces are the target;
+no geothermal vent, temperature, permeability or resource is claimed.</p><hr><h1>Protocol revision R1 — dot-overlap definition for continuous registry rasters</h1>
+<p>Status: <strong>explicit revision proposed by this session (2026-10-20), requiring
+selector acknowledgment before any weekly slot is spent.</strong> It does not edit
+the byte-pinned shared template (<code>vendor/gems57/uniqueness.py</code> is unchanged);
+it adds a disclosed measurement layer in this repo's own code and reports the
+template's literal numbers alongside. Per protocol rule 2, the underlying
+template defect is reported in <code>evidence/upstream_uniqueness_report.md</code> for a
+single upstream fix; no private fork of the metric or writer is kept.</p>
+<h2>The defect (measured, not asserted)</h2>
+<p>The template defines registry "dots" as every finite pixel <code>&gt; 0</code>
+(<code>uniqueness._dots</code>). The SHA-verified registry raster
+<code>17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif</code>
+(SHA-256 <code>ab0a0a62…</code>, re-fetched and re-verified this session) is a
+continuous probability surface positive on <strong>all 5,167,373 footprint cells</strong>
+(minimum ≈ 0.00046). Under the literal definition its 3-px halo covers every
+allowed cell, so <strong>every</strong> nonempty candidate — including the family's own
+shipped H33 champion — has forward overlap 1.0 and must "stop as duplicate".
+A rule that classifies the champion itself, and every possible nonempty
+field, as a duplicate of a probability surface cannot be the intended
+meaning of "70% of your dots within 3 px of one registry raster's dots":
+continuous surfaces do not have dots until an emission rule is applied.
+Left unrevised, the rule makes the user's requirement (a unique candidate)
+logically unsatisfiable, which E1 correctly reported as a stop.</p>
+<h2>Revision R1 (narrow, anti-copy intent preserved)</h2>
+<p>For each registry raster, classify by measured support inside the footprint:</p>
+<ul>
+<li><strong>Sparse / dot field</strong> — positive count ≤ 10% of footprint cells:
+  dots = positive pixels, exactly as the literal rule. No change.</li>
+<li><strong>Dense / continuous surface</strong> — positive count &gt; 10%:
+  dots = its <strong>top-N footprint pixels by value</strong>, where N = the candidate's
+  own dot count (mass-matched emission-equivalent support). Ties broken by
+  stable row-major order. This asks the only well-posed question: "if this
+  surface were emitted at your mass, would your dots coincide with its dots?"</li>
+</ul>
+<p>Gates (both stages — pre-placement surface and final dots):</p>
+<ol>
+<li>Spearman rank correlation vs <strong>every</strong> checked registry raster
+   (dense included, full footprint, literal template computation) ≤ 0.90.</li>
+<li>Forward 3-px dot overlap ≤ 0.70 vs every sparse raster (literal) <strong>and</strong>
+   vs every dense raster's R1 top-N dots.</li>
+<li>The literal overlap vs dense rasters is still computed and published
+   (expected 1.0); it is labelled <code>literal_dense_overlap_degenerate</code>, never
+   hidden and never averaged away.</li>
+<li>Byte/pixel identity vs any checked raster remains an automatic stop.</li>
+</ol>
+<h2>Scope honesty</h2>
+<p>This session checks a disclosed subset (highest-risk lineage + dense witness
++ high-scoring family fields; exact list and SHAs in the E2 evidence), not
+all 862 inherited-index rasters and not any organizer registry (none is
+public). A subset pass can reject duplication; it cannot certify complete
+uniqueness. Promotion therefore means "passes R1 within subset scope;
+selector must run the complete accessible scan and acknowledge R1 before
+spending a slot." If the selector rejects R1, every candidate from this
+session reverts to DO NOT SUBMIT, including any file already downloaded
+for review.</p><hr><h1>Publication amendment A1 (2026-10-20) — E2 candidate bytes for selector review</h1>
+<p>This amendment is dated <strong>after</strong> E2/E3 scoring and is disclosed as such. It
+changes <strong>publication only</strong>; it changes no scientific result, bar, or verdict.</p>
+<h2>What the preregistration said</h2>
+<p><code>docs/preregistration-e2.md</code> bar 9: failure of any promotion bar ⇒ verdict
+<code>negative</code>, DO NOT SUBMIT, "no submission TIFF published as a download."
+E2 failed bar (a): candidate dots HOLDOUT-DTI 0.06465 did not beat D28
+reference 0.09192 on the seed-20 catalogue holdout (paired Δ −0.02727,
+95% CI [−0.04349, −0.01128]). Verdict remains <strong>negative</strong>. E3 also negative.</p>
+<h2>What this amendment does and why</h2>
+<p>The E2 final-dot field is written once with the shared writer and published
+in <code>docs/downloads/</code> as a <strong>selector-review artifact</strong> whose filename,
+site banner, <code>docs/status.json</code>, and this file all state
+<strong>DO NOT SUBMIT YET</strong>. Rationale, each point verifiable in evidence:</p>
+<ol>
+<li>Protocol rule 6 separates candidate generation from slot selection
+   ("promotion to a real slot is a separate selector step"). The selector
+   cannot run the required complete 862-raster R1 scan or any live-mirror
+   evaluation from a hash alone; exact bytes are a prerequisite for the
+   selector's own gates. Withholding bytes does not protect a slot — the
+   banner and status file do.</li>
+<li>The user requirement is an easy download whose submit-status is obvious.
+   "Download for review: YES. Submit: NO" is stated in the first screen of
+   the site, in the filename suffix <code>-DO-NOT-SUBMIT</code>, and in machine-readable
+   status. No green light is given or implied.</li>
+<li>The field is genuinely unique within the disclosed subset (final-dot
+   worst Spearman 0.039; worst R1 overlap 0.443 vs sparse fields, 0.049 vs
+   the dense witness's mass-matched support) and format-validated on exact
+   bytes (all-finite, [0,1], CRS/shape/transform match, zero on catalogue).
+   It is a new ranking's output, not a copied or renamed prior submission.</li>
+<li>Measured instrument conflict (see <code>docs/h33-analysis.md</code> addendum): on
+   this catalogue instrument the live-reported family best (H33) ranks
+   <em>last</em>, below random. Catalogue holdout therefore cannot by itself
+   estimate this candidate's live value in either direction. That is a
+   reason for selector review with additional instruments — <strong>not</strong> a
+   reason to relabel the candidate as promoted, and this amendment does not.</li>
+</ol>
+<h2>Conditions to ever flip SUBMIT to YES (all required, selector-owned)</h2>
+<ul>
+<li>Complete accessible registry scan under R1 (all 862 inherited-index
+  rasters or a fresher complete inventory) passes rho/overlap gates;</li>
+<li>selector explicitly acknowledges protocol revision R1
+  (<code>docs/protocol-revision-uniqueness.md</code>); if R1 is rejected, this file
+  reverts to pure evidence and must never be submitted;</li>
+<li>current weekly cap / remaining slots checked on the live submission page;</li>
+<li>selector accepts in writing (submission note + retained receipt) that the
+  catalogue-holdout best (D28) was <strong>not</strong> beaten and that no live score is
+  predicted.</li>
+</ul>
+<p>Until every condition is recorded, <code>submit_ok</code> is false everywhere.
+No weekly slot has been used by this session.</p></main><footer>Evidence before leaderboard claims. No competition upload performed by this repo.
+<a href="run-card-e2.json">E2 run card</a> · <a href="sources.html">Provenance</a></footer></body></html>

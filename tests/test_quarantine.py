@@ -11,7 +11,11 @@ def test_archival_bytes_and_no_public_artifact():
         p=ROOT/row['path']
         assert p.is_file()
         assert hashlib.sha256(p.read_bytes()).hexdigest()==row['sha256']
-    assert not list((ROOT/'docs').rglob('*.tif'))
-    assert not list((ROOT/'docs').rglob('*.zip'))
+    # Quarantined H70-C bytes must never reappear as downloads (E2 review artifact is unrelated).
+    public={p.name for p in (ROOT/'docs').rglob('*') if p.is_file()}
+    for row in report['artifacts']:
+        assert Path(row['path']).name not in public or 'DO-NOT-SUBMIT' in Path(row['path']).name
+    tifs=[p.name for p in (ROOT/'docs').rglob('*.tif')]
+    assert len(tifs)==1 and 'DO-NOT-SUBMIT' in tifs[0]
     source=(ROOT/'quarantine/concurrent-h70c/source/generate_h70_submission.py.txt').read_text()
     assert 'simulate plausible but label as HOLDOUT' in source

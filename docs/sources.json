@@ -13,9 +13,9 @@
     "id": "competition-problem",
     "authority": "organizer",
     "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
-    "status": "not-retrieved-this-session",
-    "claim": "Manual review target for metric, submission format, footprint and rules.",
-    "limit": "Network access failed; do not describe this as a verified login redirect."
+    "status": "verified-content-fetched-2026-10-20",
+    "claim": "Problem description fetched 2026-10-20: DW-Tversky alpha 0.2 beta 0.8, 300m triangular kernel; GeoTIFF float32 EPSG:32611 100m values in [0,1]; two-round prize structure with private new-fault test set then expanded labels.",
+    "limit": "Fetched text does not state known-fault masking in scoring or whether expanded labels include the known catalogue; data page still requires login."
   },
   {
     "id": "competition-data",
@@ -29,9 +29,9 @@
     "id": "leaderboard",
     "authority": "organizer",
     "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
-    "status": "not-retrieved-this-session",
-    "claim": "Manual review target for current standings.",
-    "limit": "Conflicting user-reported leaders are not resolved or represented as organizer-confirmed."
+    "status": "verified-read-2026-10-20",
+    "claim": "Public leaderboard read 2026-10-20: #1 0.4413 (xiaofanhu); see evidence/leaderboard_read.json.",
+    "limit": "Public split only, moving target; no GEMSDOE70 organizer receipt. Family 0.2778 remains user-reported."
   },
   {
     "id": "competition-report",

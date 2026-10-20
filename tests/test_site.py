@@ -32,6 +32,11 @@ def test_site_rebuild_has_no_tiff_download_or_broken_local_link():
 
 
 def test_no_scientific_artifact_is_published():
-    for parent in ['docs','assets','evidence']:
+    # Exactly one pinned E2 review TIFF+ZIP in docs; none anywhere else.
+    import json
+    pub=json.loads((ROOT/'evidence/e2/publication.json').read_text())
+    docs_rasters={p.name for p in (ROOT/'docs').rglob('*') if p.suffix.lower() in {'.tif','.tiff','.zip'}}
+    assert docs_rasters=={pub['file'],pub['zip_file']}
+    for parent in ['assets','evidence']:
         for suffix in ['*.tif','*.zip']:
             assert not list((ROOT/parent).rglob(suffix))

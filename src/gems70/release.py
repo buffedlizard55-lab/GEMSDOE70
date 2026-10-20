@@ -57,3 +57,71 @@ def assert_no_public_rasters(root):
              if p.is_file() and p.suffix.lower() in {'.tif','.tiff','.zip'}]
     if paths:
         raise ValueError('Stopped run must not publish TIFF/ZIP artifacts: '+', '.join(paths))
+
+
+def candidate_status(root):
+    """E2 selector-review status. Download-for-review is distinct from submit.
+
+    Returns submit_ok=False unconditionally in this instrument: slot selection,
+    the complete registry scan and R1 acknowledgment are separate selector
+    steps (docs/publication-amendment-e2.md). Any missing/mismatched evidence
+    fails closed to download_ok_for_selector_review=False as well.
+    """
+    root = Path(root)
+    out = {"download_ok_for_selector_review": False, "submit_ok": False,
+           "download_and_submit_ok": False, "verdict": "negative",
+           "status": "DO NOT SUBMIT YET — selector-review candidate only",
+           "reasons": [], "file": None, "sha256": None, "zip_file": None,
+           "submission_name": None, "submission_note": None, "weekly_slots_used": 0}
+    try:
+        card = json.loads((root / "evidence/e2/run_card.json").read_text())
+        pub = json.loads((root / "evidence/e2/publication.json").read_text())
+        val = json.loads((root / "evidence/e2/validator.json").read_text())
+        path = root / "docs" / "downloads" / pub["file"]
+        out["file"] = pub["file"]
+        out["zip_file"] = pub.get("zip_file")
+        out["submission_name"] = card.get("submission_name")
+        out["submission_note"] = card.get("submission_note")
+        if card.get("verdict") != "negative":
+            out["reasons"].append("E2 frozen verdict is not the recorded negative.")
+        if not pub.get("recomputation_matches_experiment"):
+            out["reasons"].append("Candidate bytes were not verified against recomputation.")
+        if not val.get("local_format_pass"):
+            out["reasons"].append("Local format validation did not pass.")
+        if not path.is_file():
+            out["reasons"].append("Candidate TIFF missing on disk.")
+        else:
+            out["sha256"] = digest(path)
+            if out["sha256"] != pub.get("sha256") or out["sha256"] != val.get("artifact_sha256"):
+                out["reasons"].append("On-disk TIFF hash differs from publication/validator receipts.")
+        out["reasons"].append(
+            "Promotion bars failed (D28 holdout best not beaten); complete registry scan, "
+            "R1 acknowledgment, weekly-cap check and separate selector authorization are still required.")
+        out["download_ok_for_selector_review"] = bool(
+            card.get("verdict") == "negative"
+            and pub.get("recomputation_matches_experiment")
+            and val.get("local_format_pass")
+            and out["sha256"] is not None
+            and out["sha256"] == pub.get("sha256") == val.get("artifact_sha256"))
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        out["reasons"].append("Missing or invalid E2 evidence: " + str(exc))
+    return out
+
+
+def assert_review_rasters(root):
+    """Only the hash-pinned E2 review artifact (TIFF+ZIP) may be public."""
+    root = Path(root)
+    pub_path = root / "evidence/e2/publication.json"
+    allowed = set()
+    if pub_path.is_file():
+        pub = json.loads(pub_path.read_text())
+        allowed = {pub["file"], pub["zip_file"]}
+    docs = root / "docs"
+    found = {p.name for p in docs.rglob("*")
+             if p.is_file() and p.suffix.lower() in {".tif", ".tiff", ".zip"}}
+    extra = sorted(found - allowed)
+    if extra:
+        raise ValueError("unapproved public raster artifacts: " + ", ".join(extra))
+    missing = sorted(allowed - found)
+    if missing:
+        raise ValueError("pinned review artifacts missing from docs: " + ", ".join(missing))

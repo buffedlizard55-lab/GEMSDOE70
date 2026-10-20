@@ -1,0 +1,38 @@
+valid(eroded) 4989581
+features computed
+canary rtp 0.5176
+canary basement 0.5243
+canary depth_index 0.4918
+canary depth_step 0.5062
+canary depth_step_max 0.5091
+canary basement_edge 0.5394
+thinned depth_step 38000
+thinned basement_edge 38000
+candidate_dots evaluated
+candidate_surface evaluated
+depth_step_dots evaluated
+basement_edge_dots evaluated
+random_dots evaluated
+h33_ref evaluated
+d28_ref evaluated
+h19solid_ref evaluated
+final dots 38000
+audits done
+bars {'a_point_beats_every_arm': False, 'b_ci_vs_h33_above_0': True, 'b_ci_vs_random_above_0': False, 'c_no_canary_alarm': True, 'd_surface_rho_ok_subset': True, 'd_surface_r1_overlap_ok_subset': True, 'd_final_rho_ok_subset': True, 'd_final_r1_overlap_ok_subset': True} best_other d28_ref
+{
+  "verdict": "negative",
+  "candidate_dti": 0.05054272482285654,
+  "h33_dti": 0.0036997816856295857,
+  "d28_dti": 0.09192198709430605,
+  "random_dti": 0.04242525742520503,
+  "bars": {
+    "a_point_beats_every_arm": false,
+    "b_ci_vs_h33_above_0": true,
+    "b_ci_vs_random_above_0": false,
+    "c_no_canary_alarm": true,
+    "d_surface_rho_ok_subset": true,
+    "d_surface_r1_overlap_ok_subset": true,
+    "d_final_rho_ok_subset": true,
+    "d_final_r1_overlap_ok_subset": true
+  }
+}

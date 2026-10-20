@@ -52,3 +52,69 @@ The fixed magnetic-contact-termination experiment is a negative result. See the 
 ## Key scientific distinction
 
 Fault traces are the competition prediction target; geothermal vents are not the direct labels. An interpreted discontinuity may matter for fluid flow, but does not establish permeability, temperature, a vent, or a viable geothermal resource. Potential-field contact truncations may be lithologic boundaries or dike endpoints rather than faults. The proposed mechanism is a falsifiable hypothesis, not a remotely verified discovery.
+
+## Addendum 2026-10-20 (E2 session) — same-instrument holdout vs reported live
+
+New measurements this session (`evidence/e2/holdout.json`, evaluator
+`gems57-pooled-hide-v2`, seed-20 buffered whole-component draw, 11,321 withheld
+positive pixels, identical folds/masks for every arm). All values below are
+**HOLDOUT-DTI** except the middle column, which reproduces user/family reports
+verbatim with no organizer receipt in this repo.
+
+| Field (dots) | Reported live (USER-REPORTED, no receipt) | HOLDOUT-DTI on catalogue recovery [95% CI] |
+|---|---:|---:|
+| H33 B2 (37,654) | 0.2778 | 0.00370 [0.00300, 0.00441] |
+| D2.8 dotted H19-5 (44,090) | 0.2600 | 0.09192 [0.07885, 0.10474] |
+| H19-5 solid (121,131) | 0.1922 | 0.06546 [0.05587, 0.07558] |
+| E2 alluvial-step dots (38,000) | — never submitted — | 0.06465 [0.04869, 0.08181] |
+| Random dots (38,000) | — | 0.04243 [0.03702, 0.04735] |
+
+Read line by line, this table is the single most important calibration fact in
+the repo:
+
+1. **Thinning helps on both instruments** (solid → dotted: live-reported
+   0.1922 → 0.2600; holdout 0.0655 → 0.0919). Removing kernel-redundant mass
+   raises credit per dot; the marginal bar for one more non-redundant dot is
+   `k > alpha*DTI ≈ 0.2*0.26 ≈ 0.052` (exact two-sided form in the main text).
+2. **Catalogue-flank pruning (D2.8 → H33) helps live-reported (+0.0178) and
+   destroys catalogue holdout (0.0919 → 0.0037, below random).** This is
+   expected once the targets are distinguished: live truth is expert-mapped
+   *new* faults, so dots hugging the known catalogue earn ~no credit and
+   pruning them is pure gain; holdout truth *is* catalogue pieces, so the
+   same pruning deletes near-truth dots and the far-field remainder (median
+   1.96 km from the catalogue) cannot recover withheld traces. Any claim of
+   the form "X beats H33 on catalogue holdout, therefore X beats 0.2778 live"
+   is false; random dots also beat H33 on this instrument by 11×.
+3. **Why H33 plausibly earned its reported live value** (conditional on the
+   user report): it combines (i) the family's strongest ranking surface
+   (H19-5 multiline-corroborated), (ii) Poisson-style thinning to kernel
+   scale so each dot buys nearly independent 300 m coverage, (iii) deletion
+   of the 6,436 lowest-expected-credit catalogue-flank dots (D2.8→B2 total),
+   raising mean credit/dot, and (iv) binary amplitude with all-finite zeros
+   export (format safety, not score). No new detector was trained for B2;
+   the gain is emission efficiency on an already-good ranking.
+4. **Can a new field beat 0.2778 live?** Only with higher credit density at
+   comparable mass: a ranking whose top ~38k thinned dots land within 300 m
+   of *new* faults more often than H19-5's do. Pruning alone is exhausted
+   (B2 already removes the flank; further cuts remove coverage). The public
+   leader read this session is **0.4413** (`evidence/leaderboard_read.json`,
+   organizer page read 2026-10-20) — about 1.59× the reported H33 value, so
+   the required credit-density gain to lead is large. E2's novel ranking
+   ties H19-solid efficiency at one-third the mass on catalogue recovery but
+   loses to dotted D2.8 there (Δ −0.0273, CI entirely negative); its live
+   value is unknown and no projection is made.
+5. **Two-round caveat (unresolved, selector must note):** the organizer
+   problem page (fetched 2026-10-20) says one selected GeoTIFF is scored
+   first against private *new* faults, then rescored against an *expanded*
+   label set after expert review of all submissions. Whether the expanded
+   set includes the known catalogue itself is not stated in the fetched
+   text. The family-wide zero-on-catalogue + flank-prune strategy is
+   optimal for round 1 as described; if round 2 includes known faults in
+   `G`, the same strategy forfeits that coverage. A single file must serve
+   both rounds, so this ambiguity is a first-order strategic risk, flagged
+   here rather than resolved by assumption.
+6. **Bridge irregularity:** `data/bridge/sample_submission.tif` is *not* the
+   all-zero sample described on the problem page — measured this session, its
+   positive pixels are exactly the 60,988 catalogue pixels (identical support
+   to `existing_faults.tif`). Only its finite-cell footprint is used. Never
+   submit the bridge sample as a prediction.

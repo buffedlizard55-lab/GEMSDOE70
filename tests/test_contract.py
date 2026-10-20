@@ -8,7 +8,7 @@ from scipy import ndimage as ndi
 from types import SimpleNamespace
 from gems57 import holdout, uniqueness
 from gems70 import method
-from gems70.release import release_status, assert_no_public_rasters
+from gems70.release import release_status, assert_no_public_rasters, candidate_status, assert_review_rasters
 ROOT=Path(__file__).resolve().parents[1]
 
 
@@ -68,12 +68,21 @@ def test_constant_ranks_do_not_manufacture_edges():
 
 
 def test_negative_gate_and_no_public_files(tmp_path):
+    # E1 gate remains fail-closed forever.
     assert release_status(ROOT)['download_and_submit_ok'] is False
     assert release_status(tmp_path)['download_and_submit_ok'] is False
     (tmp_path/'docs/downloads').mkdir(parents=True)
     (tmp_path/'docs/downloads/stale.tif').write_bytes(b'not-a-tiff')
     with pytest.raises(ValueError,match='must not publish'):assert_no_public_rasters(tmp_path)
-    assert_no_public_rasters(ROOT)
+    # E2: exactly the hash-pinned review artifact may be public; submit stays NO.
+    assert_review_rasters(ROOT)
+    st=candidate_status(ROOT)
+    assert st['submit_ok'] is False and st['download_and_submit_ok'] is False
+    assert st['download_ok_for_selector_review'] is True
+    assert st['verdict']=='negative' and st['weekly_slots_used']==0
+    assert hashlib.sha256((ROOT/'docs/downloads'/st['file']).read_bytes()).hexdigest()==st['sha256']
+    assert 'DO-NOT-SUBMIT' in st['file']
+    assert candidate_status(tmp_path)['download_ok_for_selector_review'] is False
 
 
 class Links(HTMLParser):
@@ -88,10 +97,12 @@ def test_pages_links_and_negative_banner():
         text=p.read_text();parser=Links();parser.feed(text)
         for link in parser.links:assert (p.parent/link.split('#')[0].split('?')[0]).is_file(),(p,link)
     home=(ROOT/'docs/index.html').read_text()
-    assert 'Do not submit this run.' in home
-    assert 'Submission TIFF unavailable' in home
-    assert 'download>Download run card' in home
-    assert 'href="downloads/' not in home or '.tif"' not in home
+    assert 'DO NOT SUBMIT YET' in home
+    assert 'Download for selector review: YES' in home
+    assert 'Submit to DrivenData: NO' in home
+    st=candidate_status(ROOT)
+    assert f'href="downloads/{st["file"]}"' in home
+    assert 'DO-NOT-SUBMIT' in st['file']
 
 
 def test_full_brief_embedded_in_readme():

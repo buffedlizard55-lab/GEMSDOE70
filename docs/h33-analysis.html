@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>H33 analysis · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Negative result; no competition-ready TIFF.">
+<title>H33 analysis · GEMSDOE70</title><meta name="description" content="Auditable geothermal fault research. Unique candidate for selector review; DO NOT SUBMIT YET.">
 <link rel="stylesheet" href="assets/site.css"></head><body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a><span class="edition">RESEARCH WORKBENCH / OCT 2026</span></header>
 <nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="results.html">Results</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">H33 analysis</a><a href="sources.html">Sources</a><a href="irregularities.html">Limitations</a></nav><main id="main"><h1>Why the archived H33 result is interesting—and what is not established</h1>
@@ -53,5 +53,97 @@ iff deltaT &gt; alpha * old_DTI * (deltaT + 1 - k)
 <p>Possibly, but no verified result from this session supports that claim. A defensible path requires new ranking evidence and less redundant mass, not an arbitrary rescaling, random jitter, renamed file, or a pruned copy of the champion. Those would not meet the user's uniqueness protocol.</p>
 <p>The fixed magnetic-contact-termination experiment is a negative result. See the results page for <strong>HOLDOUT-DTI</strong> with evaluator version, withheld positives and confidence intervals. It underperforms its random sparse control at similar mass, and fails the literal surface overlap gate. Neither observation can be converted into a projected leaderboard score.</p>
 <h2>Key scientific distinction</h2>
-<p>Fault traces are the competition prediction target; geothermal vents are not the direct labels. An interpreted discontinuity may matter for fluid flow, but does not establish permeability, temperature, a vent, or a viable geothermal resource. Potential-field contact truncations may be lithologic boundaries or dike endpoints rather than faults. The proposed mechanism is a falsifiable hypothesis, not a remotely verified discovery.</p></main><footer>Evidence before leaderboard claims. No competition upload performed.
-<a href="run-card.json">Machine-readable run card</a> · <a href="sources.html">Provenance</a></footer></body></html>
+<p>Fault traces are the competition prediction target; geothermal vents are not the direct labels. An interpreted discontinuity may matter for fluid flow, but does not establish permeability, temperature, a vent, or a viable geothermal resource. Potential-field contact truncations may be lithologic boundaries or dike endpoints rather than faults. The proposed mechanism is a falsifiable hypothesis, not a remotely verified discovery.</p>
+<h2>Addendum 2026-10-20 (E2 session) — same-instrument holdout vs reported live</h2>
+<p>New measurements this session (<code>evidence/e2/holdout.json</code>, evaluator
+<code>gems57-pooled-hide-v2</code>, seed-20 buffered whole-component draw, 11,321 withheld
+positive pixels, identical folds/masks for every arm). All values below are
+<strong>HOLDOUT-DTI</strong> except the middle column, which reproduces user/family reports
+verbatim with no organizer receipt in this repo.</p>
+<table>
+<thead>
+<tr>
+<th>Field (dots)</th>
+<th style="text-align: right;">Reported live (USER-REPORTED, no receipt)</th>
+<th style="text-align: right;">HOLDOUT-DTI on catalogue recovery [95% CI]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H33 B2 (37,654)</td>
+<td style="text-align: right;">0.2778</td>
+<td style="text-align: right;">0.00370 [0.00300, 0.00441]</td>
+</tr>
+<tr>
+<td>D2.8 dotted H19-5 (44,090)</td>
+<td style="text-align: right;">0.2600</td>
+<td style="text-align: right;">0.09192 [0.07885, 0.10474]</td>
+</tr>
+<tr>
+<td>H19-5 solid (121,131)</td>
+<td style="text-align: right;">0.1922</td>
+<td style="text-align: right;">0.06546 [0.05587, 0.07558]</td>
+</tr>
+<tr>
+<td>E2 alluvial-step dots (38,000)</td>
+<td style="text-align: right;">— never submitted —</td>
+<td style="text-align: right;">0.06465 [0.04869, 0.08181]</td>
+</tr>
+<tr>
+<td>Random dots (38,000)</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">0.04243 [0.03702, 0.04735]</td>
+</tr>
+</tbody>
+</table>
+<p>Read line by line, this table is the single most important calibration fact in
+the repo:</p>
+<ol>
+<li><strong>Thinning helps on both instruments</strong> (solid → dotted: live-reported
+   0.1922 → 0.2600; holdout 0.0655 → 0.0919). Removing kernel-redundant mass
+   raises credit per dot; the marginal bar for one more non-redundant dot is
+   <code>k &gt; alpha*DTI ≈ 0.2*0.26 ≈ 0.052</code> (exact two-sided form in the main text).</li>
+<li><strong>Catalogue-flank pruning (D2.8 → H33) helps live-reported (+0.0178) and
+   destroys catalogue holdout (0.0919 → 0.0037, below random).</strong> This is
+   expected once the targets are distinguished: live truth is expert-mapped
+   <em>new</em> faults, so dots hugging the known catalogue earn ~no credit and
+   pruning them is pure gain; holdout truth <em>is</em> catalogue pieces, so the
+   same pruning deletes near-truth dots and the far-field remainder (median
+   1.96 km from the catalogue) cannot recover withheld traces. Any claim of
+   the form "X beats H33 on catalogue holdout, therefore X beats 0.2778 live"
+   is false; random dots also beat H33 on this instrument by 11×.</li>
+<li><strong>Why H33 plausibly earned its reported live value</strong> (conditional on the
+   user report): it combines (i) the family's strongest ranking surface
+   (H19-5 multiline-corroborated), (ii) Poisson-style thinning to kernel
+   scale so each dot buys nearly independent 300 m coverage, (iii) deletion
+   of the 6,436 lowest-expected-credit catalogue-flank dots (D2.8→B2 total),
+   raising mean credit/dot, and (iv) binary amplitude with all-finite zeros
+   export (format safety, not score). No new detector was trained for B2;
+   the gain is emission efficiency on an already-good ranking.</li>
+<li><strong>Can a new field beat 0.2778 live?</strong> Only with higher credit density at
+   comparable mass: a ranking whose top ~38k thinned dots land within 300 m
+   of <em>new</em> faults more often than H19-5's do. Pruning alone is exhausted
+   (B2 already removes the flank; further cuts remove coverage). The public
+   leader read this session is <strong>0.4413</strong> (<code>evidence/leaderboard_read.json</code>,
+   organizer page read 2026-10-20) — about 1.59× the reported H33 value, so
+   the required credit-density gain to lead is large. E2's novel ranking
+   ties H19-solid efficiency at one-third the mass on catalogue recovery but
+   loses to dotted D2.8 there (Δ −0.0273, CI entirely negative); its live
+   value is unknown and no projection is made.</li>
+<li><strong>Two-round caveat (unresolved, selector must note):</strong> the organizer
+   problem page (fetched 2026-10-20) says one selected GeoTIFF is scored
+   first against private <em>new</em> faults, then rescored against an <em>expanded</em>
+   label set after expert review of all submissions. Whether the expanded
+   set includes the known catalogue itself is not stated in the fetched
+   text. The family-wide zero-on-catalogue + flank-prune strategy is
+   optimal for round 1 as described; if round 2 includes known faults in
+   <code>G</code>, the same strategy forfeits that coverage. A single file must serve
+   both rounds, so this ambiguity is a first-order strategic risk, flagged
+   here rather than resolved by assumption.</li>
+<li><strong>Bridge irregularity:</strong> <code>data/bridge/sample_submission.tif</code> is <em>not</em> the
+   all-zero sample described on the problem page — measured this session, its
+   positive pixels are exactly the 60,988 catalogue pixels (identical support
+   to <code>existing_faults.tif</code>). Only its finite-cell footprint is used. Never
+   submit the bridge sample as a prediction.</li>
+</ol></main><footer>Evidence before leaderboard claims. No competition upload performed by this repo.
+<a href="run-card-e2.json">E2 run card</a> · <a href="sources.html">Provenance</a></footer></body></html>

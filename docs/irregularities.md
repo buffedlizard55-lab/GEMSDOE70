@@ -22,3 +22,34 @@
 3. Use the archived negative evidence to reject the present fixed ranking. A fresh preregistered idea must use untouched evaluation blocks and satisfy the budget; do not tune this experiment on its reported holdout.
 4. Verify scientific literature/data licensing from official sources when network access permits. The research queue is not a list of verified discoveries.
 5. Only after a successful complete surface audit: place final dots, repeat the complete literal registry audit, invoke the shared writer, validate the exact bytes, bind the receipt/hash and publish a one-click file. Weekly-slot selection remains separate.
+
+## Addendum 2026-10-20 (E2/E3 session)
+
+- **E2/E3 both negative for slot promotion.** E2 (alluvial step) HOLDOUT-DTI
+  0.06465 beats random and each ablation but loses to D28 reference 0.09192;
+  E3 (depth step) mechanism canary AUC 0.506 (null), candidate 0.05054 driven
+  by its basement-edge partner. Frozen bars in `docs/preregistration-e2.md`
+  were applied as written. No tuning followed.
+- **Publication amendment A1** (`docs/publication-amendment-e2.md`) publishes
+  E2 bytes for selector review under DO-NOT-SUBMIT-YET status. This deviates
+  from the preregistration's no-publication sentence on publication only;
+  verdicts, bars and numbers are unchanged. If the selector rejects the
+  amendment or revision R1, the file must never be submitted.
+- **Catalogue holdout anti-ranks the live-reported champion** (H33 last,
+  below random; see H33 addendum). Do not use catalogue HOLDOUT-DTI alone to
+  rank far-field discovery fields for live value in either direction.
+- **Bridge sample is the catalogue**, not an all-zero sample (60,988 positives,
+  exact support match). Footprint use only.
+- **Uniqueness scope is a 7-raster subset** under revision R1, not the complete
+  862-raster inherited inventory and not any organizer registry. Complete scan
+  + R1 acknowledgment remain selector prerequisites. Upstream issue filing was
+  denied by the integration (`Resource not accessible by integration`);
+  report retained in `evidence/upstream_uniqueness_report.md`, not claimed filed.
+- **Live pages now retrieved:** organizer problem page, about page and public
+  leaderboard were fetched 2026-10-20 (leader 0.4413 at read). Data-download
+  identity, weekly cap, known-fault masking in scoring, and final-round label
+  composition remain unverified from fetched text.
+- **E3 valid-mask note:** E3 intersected all four E2 bands for `valid0` to keep
+  the identical eroded domain (4,989,581 px, matches E2), although its ranking
+  uses only rtp/basement. Conservative and comparability-preserving; recorded
+  in `scripts/run_experiment_e3.py`.
