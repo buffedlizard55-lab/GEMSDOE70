@@ -80,3 +80,25 @@ endorsed or linked as a submission. Source text is retained, not executed. The
 canonical site remains negative. No additional scientific experiment was run.
 
 Final suite after adding quarantine hash/publication coverage: **69 tests pass**.
+
+## Current branch review — arena/9560f995-gemsdoe70
+
+Read docs/session-review.md for the latest review, not the historical parallel
+reports. No new scientific experiment was run. The unchanged measured run card
+remains negative; the fresh content-addressed witness audit reproduced the stop.
+
+The Pages API showed legacy `main:/` publication with root `.nojekyll`, exposing
+an archive/data direct-URL risk even though docs contained no download link.
+The attempt to switch source to `/docs` returned 403 (integration permission).
+Fallback: remove ONLY the root `.nojekyll`, add root Jekyll exclusions for all
+nonpublic paths, and enforce public-root classification in `audit_pages.py`.
+The nested `docs/.nojekyll` is retained for compatibility; it does not bypass the
+root build. CI builds the actual legacy-root Jekyll source using GitHub's pinned
+build action and inspects its output for private roots, rasters/ZIPs and symlinks.
+Do not restore the root marker or publish quarantine. Quarantine bytes remain
+unchanged and publicly auditable in GitHub; this is not a secrecy boundary.
+
+Deployment requires a successful main Pages build. See the PR/checks for actual
+build and merge receipts. Keep the experimental preregistration/source pins and
+scientific receipts unchanged. Resolve the protocol/lane/current-best blockers
+before any new candidate, rather than manufacturing a download.

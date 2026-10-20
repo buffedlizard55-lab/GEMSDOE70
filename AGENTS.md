@@ -7,3 +7,4 @@
 5. The literal registry support rule currently blocks every nonempty candidate. Do not exempt continuous predictions without an explicit protocol revision.
 6. Use the assigned Arena branch only. Weekly competition-slot selection is separate from candidate generation.
 7. Winning means honest evidence and good resource allocation. Own the outcome: a measured negative is preferable to a false score or unsafe download.
+8. Read docs/session-review.md. GitHub Pages uses the repository root; never restore root .nojekyll or bypass _config.yml exclusions. Run scripts/audit_pages.py and inspect the actual Jekyll output in CI.

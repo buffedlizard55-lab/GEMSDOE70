@@ -13,8 +13,22 @@ instead of an unsafe download.
 - [Research site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Submission guide](docs/executive-summary.html)
 - [Run card](evidence/run_card.json) · [Measured results](evidence/holdout.json)
 - [H33 forensic analysis](docs/h33-analysis.md) · [Four preregistered hypotheses](docs/hypotheses.md)
+- [Latest repository review / Pages safeguards](docs/session-review.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
+
+## Latest review: publication boundary
+
+The current session independently reproduced the dense-registry blocker without
+rerunning or tuning the scientific experiment. It found Pages configured to serve
+`main:/`, making the old root `.nojekyll` unsafe for quarantined content. The root
+bypass is removed and `_config.yml` excludes private research/data/archive paths.
+`audit_pages.py` and a pinned GitHub Jekyll build check the actual publication
+boundary, including unlinked artifacts. An attempted API change to `/docs` was
+denied (HTTP 403); no settings change is claimed. These exclusions take effect
+only after a successful main-branch Pages build. Archived bytes remain available
+in GitHub for forensic review, not as endorsed submissions. No new scientific
+experiment or competition upload was performed in this review.
 
 ## What was verified
 

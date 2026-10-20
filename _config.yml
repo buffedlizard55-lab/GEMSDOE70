@@ -1,0 +1,28 @@
+{
+  "exclude": [
+    ".cache",
+    ".github",
+    ".venv",
+    "AGENTS.md",
+    "HANDOFF.md",
+    "LICENSE",
+    "PROJECT_BRIEF.md",
+    "PROMPT.md",
+    "README.md",
+    "_config.yml",
+    "_site",
+    "assets",
+    "data",
+    "evidence",
+    "pyproject.toml",
+    "quarantine",
+    "registry",
+    "reports",
+    "requirements.lock",
+    "requirements.txt",
+    "scripts",
+    "src",
+    "tests",
+    "vendor"
+  ]
+}
