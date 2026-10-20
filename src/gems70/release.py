@@ -2,7 +2,22 @@
 from __future__ import annotations
 import hashlib
 import json
+import math
 from pathlib import Path
+
+
+def valid_canary(canary):
+    """Reject nonfinite, boolean, out-of-range or malformed AUC evidence."""
+    if not isinstance(canary, dict):
+        return False
+    auc = canary.get('auc')
+    return (
+        canary.get('suspected_leakage') is False
+        and type(auc) in (int, float)
+        and math.isfinite(auc)
+        and 0 <= auc <= 1
+        and max(auc, 1 - auc) <= .90
+    )
 
 
 def digest(path):
@@ -23,6 +38,8 @@ def release_status(root):
         canaries = json.loads((root/'evidence/canaries.json').read_text())
         audit = json.loads((root/'evidence/surface_uniqueness.json').read_text())
         manifest = json.loads((root/'evidence/experiment_manifest.json').read_text())
+        if not all(isinstance(item, dict) for item in (card, holdout, audit, manifest)):
+            raise ValueError('Evidence documents must be JSON objects.')
         if card.get('verdict') != 'promote': reasons.append('Run verdict is negative.')
         if audit.get('stop_required') is not False or audit.get('unique') is not True:
             reasons.append('Surface uniqueness is blocked or incomplete.')
@@ -30,7 +47,7 @@ def release_status(root):
             reasons.append('Comparable current holdout best has not been beaten.')
         if holdout.get('promotion_allowed') is not True:
             reasons.append('Holdout evidence does not permit promotion.')
-        if not canaries or any(c.get('suspected_leakage') is not False or max(c['auc'],1-c['auc']) > .90 for c in canaries.values()):
+        if not isinstance(canaries, dict) or not canaries or not all(valid_canary(c) for c in canaries.values()):
             reasons.append('Feature-alone leakage evidence is missing or fails.')
         expected = manifest['source_sha256']
         if expected != card['method_source_sha256']:
@@ -44,7 +61,7 @@ def release_status(root):
         if not card.get('raster_sha256'):
             reasons.append('No submission TIFF or on-disk validator receipt exists.')
         reasons.append('No final-dot full-inventory audit or separate weekly-slot selector authorization exists for this run.')
-    except (OSError, ValueError, KeyError, TypeError) as exc:
+    except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
         reasons.append('Missing or invalid evidence: '+str(exc))
     return {'download_and_submit_ok':False, 'verdict':'negative', 'reasons':reasons,
             'policy':'This stopped experiment cannot be promoted by editing metadata. A fresh reviewed run is required.'}

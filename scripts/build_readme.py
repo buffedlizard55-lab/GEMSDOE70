@@ -22,6 +22,7 @@ instead of an unsafe download.
 - [Run card](evidence/run_card.json) · [Measured results](evidence/holdout.json)
 - [H33 forensic analysis](docs/h33-analysis.md) · [Four preregistered hypotheses](docs/hypotheses.md)
 - [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
+- [Follow-up review and release-safety fixes](reports/review-followup-2026-10-20.md)
 - **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
 
 ## What was verified

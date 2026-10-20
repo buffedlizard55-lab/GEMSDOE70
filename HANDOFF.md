@@ -80,3 +80,18 @@ endorsed or linked as a submission. Source text is retained, not executed. The
 canonical site remains negative. No additional scientific experiment was run.
 
 Final suite after adding quarantine hash/publication coverage: **69 tests pass**.
+
+## Follow-up review on arena/75897427-gemsdoe70
+
+No new scientific experiment or eligible TIFF; the duplicate stop still applies.
+Reproduced `scripts/audit.py` from the content-addressed registry witness: universal
+support and minimum overlap 1.0 confirmed, with no change to committed evidence.
+Hardened negative-release CLI assertions and invalid/nonfinite canary diagnostics;
+shared template and frozen experiment sources remain unchanged. See
+`reports/review-followup-2026-10-20.md` for the three-pass review and limitations.
+
+Local verification: `.venv/bin/python -m pytest -q` — **100 passed**, three existing
+Rasterio/Affine pending-deprecation warnings. The expected-negative gate exits zero;
+the default gate and build-submission command exit two intentionally. Neither is
+submission authorization. GitHub Pages configuration was verified as enabled from
+main at `/`; deployment of this branch depends on merge and the Pages build.
