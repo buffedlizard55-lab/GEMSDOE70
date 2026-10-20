@@ -1,9 +1,19 @@
 # GEMSDOE70 — geothermal fault research
 
+> **CURRENT REVIEW: DO NOT SUBMIT.** The archived Phase-4 file fails the prompt's literal
+> one-way overlap gate (four witnesses in 62 archived rasters, maximum overlap 1.00).
+> Download is for review only. No new candidate was generated; no slot used.
+> Historical mutual-overlap clearance below is not clearance under the current prompt.
+> [Current review](reports/literal-protocol-review.md) · [Current run card](evidence/literal_protocol_review.json).
+
 ## Submission status: **DOWNLOADABLE — NOT PROMOTED**
 
-A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif` (sha256 `fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88`).
+**CURRENT PROTOCOL STOP:** The historical candidate exceeds forward overlap against four
+registry rasters. No new TIFF generated; no slot used. Missing single-method lane paragraph.
+See [current review](docs/protocol-review.md). Mutual overlap does not satisfy the current prompt.
+
+A historical, format-validated TIFF is published for review only:
+`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
 **Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
 `negative` on the pre-registered target-like gate. No weekly slot was used.
 
@@ -22,18 +32,18 @@ off-catalogue.
 
 | Instrument | Candidate | H33 reference | Result |
 |---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0709 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0793 | 0.0953 | **H33 wins, delta = -0.0160 [-0.02718049103902757, -0.004737767848247423]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0945 | 0.0923 | candidate wins |
+| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
+| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
+| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
 
 Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
 is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
 21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
 artifact is published but not promoted. Nothing here is an organizer-confirmed score.
 
-**Uniqueness (corrected):** 2 archived rasters checked; worst mutual
-overlap 0.198 (limit 0.70); worst Spearman 0.002
-(limit 0.90). Forward-only overlap reaches 0.20 against a dense lattice
+**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
+overlap 0.312 (limit 0.70); worst Spearman 0.050
+(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
 whose halo covers the whole footprint — which is why the two-direction test was adopted.
 
 ## Two fixes to the shared tool (reported, not silently forked)
@@ -80,6 +90,10 @@ PROJECT_BRIEF.md is the source for this embedded copy.
 ## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET
 
 Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818] (beats random, loses to D28 0.0919) → negative. File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` (selector-review only; complete corrected uniqueness scan pending). Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).
+
+## Parallel E3 scarp lane (PR #17) — selector must score it on B′ before choosing
+
+DEM scarp-curvature ranking, 60,000 dots: catalogue HOLDOUT-DTI 0.0943 [0.0782, 0.1109] (11,437 withheld, seed-40) → promote-to-selector on that instrument only; **B′ not yet scored**. File `docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif` (sha256 `562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21`), note (107 chars): `E3 DEM scarp curvature+coherence only (E2 gates falsified); dotted 60000 excl>3px sep2.8; holdout-validated`. Evidence: `evidence/run_card_e3_amended.json` (erratum-completed; gated E2 negative); frozen drivers renamed `scripts/run_experiment_e{2,3}_scarp.py` at merge (byte-identical; canonical paths hold the PR #16 lane's drivers). Site page: `docs/e3-candidate.html`. No slot used for any candidate.
 # User project prompt — retained as supplied
 
 Read this at the beginning of every session. Scores and access statements below are user-supplied claims, not current verified facts. Execution status and verified evidence belong in README.md and evidence/, not by silently rewriting this historical brief.
