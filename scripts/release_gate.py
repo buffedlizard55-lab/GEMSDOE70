@@ -16,7 +16,8 @@ def status():
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
     download_ok = bool(result['download_ok'])
     return {**result,
-            'status': ('DOWNLOADABLE — NOT PROMOTED' if download_ok and not result['submit_recommended']
+            'status': ('REVIEW ONLY — LITERAL LANE STOP' if result.get('literal_lane_status', {}).get('stop_required')
+                       else 'DOWNLOADABLE — NOT PROMOTED' if download_ok and not result['submit_recommended']
                        else 'PROMOTED' if result['submit_recommended'] else 'BLOCKED'),
             'download_available': download_ok,
             'generated_tif': result.get('artifact') if download_ok else None,

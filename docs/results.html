@@ -3,19 +3,24 @@
 <title>Evidence · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><div class="eyebrow">EVIDENCE</div><h1>Three experiments, two instruments, one verdict.</h1>
+<span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<aside class="stop"><strong>DO NOT SUBMIT.</strong> Archived TIFFs are downloadable for review only.
+The current literal forward-overlap gate fails. <a href="protocol-review.html">Current audit</a> ·
+<a href="downloads/review_run_card.json">Current negative run card</a>.
+Historical receipts below are not current submission approval.</aside><div class="eyebrow">EVIDENCE</div><h1>Three experiments, two instruments, one verdict.</h1>
 <p>All DTI values use α = 0.2, β = 0.8 and a 300 m triangular kernel on the pinned 100 m grid, with
 pooled terms and a paired spatial-cluster bootstrap (1,000 draws, 20 km blocks). Intervals are
 conditional on the fitted folds and the proxy truth; they are not leaderboard intervals.</p>
-<p><strong>Regression: only mutual overlap now counts as duplication.</strong> Measured this session:
-<code>calib_r13lattice_00904.tif</code> (206,895 dots) has a 3-px halo covering <strong>100 %</strong>
-of the footprint, so forward-only overlap is 1.00 for any nonempty candidate. Both directions are
-always reported.</p>
+<p><strong>Historical results, not a current uniqueness pass.</strong> Fresh measurement:
+<code>calib_r13lattice_00904.tif</code> has halo coverage 99.871327%, not 100%. All four
+archived final TIFFs have forward overlap 1.00. The literal policy therefore stops the lane.</p>
+<p>Evaluator for catalogue HOLDOUT-DTI: gems57-pooled-hide-v2. SGMC tables below are separately
+labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed scores.</p>
 <h2>Published candidate</h2>
 <div class="table-wrap"><table><caption>Instrument A · shared hide-and-recover catalogue holdout</caption><thead><tr><th>Arm</th><th>DTI</th><th>95% CI</th><th>Positives</th></tr></thead><tbody><tr><td>candidate</td><td>0.0730</td><td>[0.0667, 0.0790]</td><td>11,321</td></tr><tr><td>random_control</td><td>0.0506</td><td>[0.0451, 0.0558]</td><td>11,321</td></tr><tr><td>h33_reference</td><td>0.0037</td><td>[0.0030, 0.0045]</td><td>11,321</td></tr></tbody></table></div>
 <div class="table-wrap"><table><caption>Instrument B′ · SGMC proxy, d ≥ 3 px from catalogue</caption><thead><tr><th>Arm</th><th>DTI</th><th>95% CI</th><th>Positives</th></tr></thead><tbody><tr><td>candidate</td><td>0.0812</td><td>[0.0723, 0.0900]</td><td>59,937</td></tr><tr><td>random_control</td><td>0.0697</td><td>[0.0658, 0.0732]</td><td>59,937</td></tr><tr><td>h33_reference</td><td>0.0938</td><td>[0.0838, 0.1040]</td><td>59,937</td></tr></tbody></table></div>
-<div class="table-wrap"><table><caption>Instrument B · unrestricted SGMC proxy (contaminated by map duplication)</caption><thead><tr><th>Arm</th><th>DTI</th><th>95% CI</th><th>Positives</th></tr></thead><tbody><tr><td>candidate</td><td>0.0948</td><td>[0.0857, 0.1034]</td><td>74,740</td></tr><tr><td>random_control</td><td>0.0710</td><td>[0.0679, 0.0741]</td><td>74,740</td></tr><tr><td>h33_reference</td><td>0.0906</td><td>[0.0821, 0.0992]</td><td>74,740</td></tr></tbody></table></div>
+<div class="table-wrap"><table><caption>SGMC PROXY-DTI B · unrestricted (possible map duplication)</caption><thead><tr><th>Arm</th><th>DTI</th><th>95% CI</th><th>Positives</th></tr></thead><tbody><tr><td>candidate</td><td>0.0948</td><td>[0.0857, 0.1034]</td><td>74,740</td></tr><tr><td>random_control</td><td>0.0710</td><td>[0.0679, 0.0741]</td><td>74,740</td></tr><tr><td>h33_reference</td><td>0.0906</td><td>[0.0821, 0.0992]</td><td>74,740</td></tr></tbody></table></div>
 <h2>Experiment 3 ablations</h2>
 <div class="table-wrap"><table><caption>Ablations were registered before their runs.</caption><thead><tr><th>Instrument</th><th>Arm</th><th>DTI</th><th>95% CI</th></tr></thead><tbody><tr><td>A · shared holdout</td><td>candidate</td><td>0.0873</td><td>[0.0762, 0.0987]</td></tr><tr><td>A · shared holdout</td><td>ablation_no_tip</td><td>0.0768</td><td>[0.0662, 0.0880]</td></tr><tr><td>A · shared holdout</td><td>random_control</td><td>0.0471</td><td>[0.0418, 0.0526]</td></tr><tr><td>A · shared holdout</td><td>h33_reference</td><td>0.0037</td><td>[0.0030, 0.0044]</td></tr><tr><td>B′ · proxy</td><td>candidate</td><td>0.0471</td><td>[0.0399, 0.0554]</td></tr><tr><td>B′ · proxy</td><td>random_control</td><td>0.0721</td><td>[0.0686, 0.0754]</td></tr><tr><td>B′ · proxy</td><td>h33_reference</td><td>0.0938</td><td>[0.0837, 0.1036]</td></tr><tr><td>B · unrestricted proxy</td><td>candidate</td><td>0.1098</td><td>[0.0957, 0.1250]</td></tr><tr><td>B · unrestricted proxy</td><td>random_control</td><td>0.0714</td><td>[0.0683, 0.0743]</td></tr><tr><td>B · unrestricted proxy</td><td>h33_reference</td><td>0.0906</td><td>[0.0820, 0.0991]</td></tr></tbody></table></div>
 <h2>Leakage canaries</h2>

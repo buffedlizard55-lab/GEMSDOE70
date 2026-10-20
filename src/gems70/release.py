@@ -3,7 +3,7 @@
 Two independent facts are tracked and must never be conflated:
 
 * ``download_ok``  - the file exists, matches its recorded SHA-256, passed the shared
-  validator, and cleared the (corrected) mutual-overlap uniqueness gate.
+  validator. This authorizes forensic download only, not uniqueness or upload.
 * ``submit_recommended`` - the pre-registered scientific promotion gate passed.
 
 The page and the run card always show both. A downloadable file is not a promise.
@@ -14,6 +14,8 @@ import hashlib
 import json
 import math
 from pathlib import Path
+
+from .protocol import literal_lane_status
 
 
 def valid_canary(canary):
@@ -50,6 +52,7 @@ def release_status(root):
     canaries = _load(root, 'evidence/phase2/canaries.json')
     audit = _load(root, 'evidence/phase4/uniqueness.json')
     reasons, notes = [], []
+    lane = literal_lane_status(audit)
     download_ok = False
     submit = False
     tif = sha = None
@@ -71,12 +74,19 @@ def release_status(root):
         if validator.get('emitted_positive_pixels') != 37654:
             reasons.append('Emitted dot count differs from the registered 37,654.')
             download_ok = False
-        if not audit or audit.get('unique') is not True or int(audit.get('duplicate_count', 1)) != 0:
-            reasons.append('Uniqueness is not cleared under the corrected mutual-overlap rule.')
-            download_ok = False
-        if not canaries or not all(valid_canary(c) for c in canaries.values()):
+        audit_bound = bool(audit and audit.get('candidate_file_sha256') == sha)
+        if not audit_bound or not lane['protocol_unique']:
+            reasons.append('Literal forward-overlap lane gate is not cleared; mutual overlap is not an exemption.')
+        canaries_ok = bool(canaries and isinstance(canaries, dict)
+                           and all(valid_canary(c) for c in canaries.values()))
+        if not canaries_ok:
             reasons.append('Feature-alone leakage evidence is missing or fails.')
-        submit = bool(card.get('download_and_submit_ok') is True and download_ok)
+        # Every prerequisite is an actual gate, not just a printed reason.
+        submit = bool(card.get('download_and_submit_ok') is True and download_ok
+                      and card.get('verdict') == 'promote' and audit_bound
+                      and lane['protocol_unique'] and canaries_ok
+                      and card.get('gate_a_candidate_ge_h33') is True
+                      and card.get('gate_b_prime_candidate_gt_h33_significant') is True)
         if not card.get('gate_a_candidate_ge_h33'):
             reasons.append("Candidate did not match H33 on instrument A.")
         if not card.get('gate_b_prime_candidate_gt_h33_significant'):
@@ -85,6 +95,9 @@ def release_status(root):
     return {
         'verdict': (card or {}).get('verdict', 'negative'),
         'download_ok': download_ok,
+        'download_scope': 'archived negative; forensic review only',
+        'protocol_unique': lane['protocol_unique'],
+        'literal_lane_status': lane,
         'submit_recommended': submit,
         'download_and_submit_ok': bool(download_ok and submit),
         'artifact': str(tif) if tif else None,
@@ -143,7 +156,7 @@ def published_artifacts(root):
 def assert_no_public_rasters(root):
     """Fail builds on stale or unauthorised prediction files.
 
-    Only the three artifacts named by the current run card may live in the public
+    Only the hash-inventoried artifacts may live in the public
     tree; anything else (old candidates, quarantined copies, symlinks) is rejected.
     """
     root = Path(root)

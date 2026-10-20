@@ -1,3 +1,8 @@
+> **Historical preregistrations below, not current viability claims.** The current review and four
+> newly ranked conjectures are in [protocol-review.html](protocol-review.html). No new experiment
+> was run after its literal lane stop. Some old narrative band numbers and novelty claims are
+> inconsistent with the final merged code; use the corrected metadata table in the current review.
+
 # Preregistered hypotheses — 2026-10-20
 
 Written before the experiment. These are geological hypotheses, **not established discoveries or predicted scores**. This checkout originally had no implementation. Novelty is relative to that checkout and inspected GEMSDOE32/60/69 code, not an exhaustive claim across private parallel sessions.
