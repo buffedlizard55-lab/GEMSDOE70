@@ -67,10 +67,41 @@ def release_status(root):
             'policy':'This stopped experiment cannot be promoted by editing metadata. A fresh reviewed run is required.'}
 
 
+def assert_root_pages_guard(root):
+    """Guard legacy main:/ publication, including files outside docs.
+
+    The root .nojekyll marker must be absent or GitHub would bypass exclusions.
+    The JSON-formatted YAML config intentionally uses top-level exclusions only.
+    This checks source policy, not whether a remote deployment has completed.
+    """
+    import os
+    root = Path(root)
+    if (root / '.nojekyll').exists():
+        raise ValueError('Root .nojekyll bypasses publication exclusions.')
+    config = json.loads((root / '_config.yml').read_text())
+    excluded = config.get('exclude', [])
+    if (not isinstance(excluded, list) or not all(isinstance(x, str) for x in excluded)
+            or not {'quarantine', 'data'}.issubset(excluded)
+            or 'docs' in excluded):
+        raise ValueError('Invalid root publication exclusions.')
+    for directory, dirs, files in os.walk(root, followlinks=False):
+        base = Path(directory)
+        dirs[:] = [d for d in dirs if not d.startswith('.')
+                   and not (base == root and d in excluded)]
+        for name in dirs + files:
+            if name.startswith('.') or (base == root and name in excluded):
+                continue
+            path = base / name
+            if path.is_symlink() or path.suffix.lower() in {'.tif', '.tiff', '.zip'}:
+                raise ValueError('Unsafe root Pages artifact: ' + path.relative_to(root).as_posix())
+
+
 def assert_no_public_rasters(root):
     """Fail builds on stale/accidentally copied predictions, never silently serve them."""
     docs = Path(root)/'docs'
+    # Symlinks can expose quarantined files under an innocuous extension. Never
+    # allow them in the publication tree, even if dangling or pointing to a dir.
     paths = [p.relative_to(root).as_posix() for p in docs.rglob('*')
-             if p.is_file() and p.suffix.lower() in {'.tif','.tiff','.zip'}]
+             if p.is_symlink() or (p.is_file() and p.suffix.lower() in {'.tif','.tiff','.zip'})]
     if paths:
         raise ValueError('Stopped run must not publish TIFF/ZIP artifacts: '+', '.join(paths))

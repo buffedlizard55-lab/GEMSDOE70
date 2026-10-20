@@ -41,3 +41,13 @@ Official manual-review links: [competition and rules](https://www.drivendata.org
 4. Only after all scientific gates pass, perform complete surface and final-dot inventory audits, shared-writer export, exact-byte validation, hash binding and separate weekly-slot selection. Publish a download only then.
 
 No GPU, new external data, or submission slot was used for this software review. Static Pages is a report, not a model-training backend. Network access and organizer-account access remain limited. The explicit stop instruction prevents completing the urgent TIFF request safely; a decoy or quarantined file would not satisfy it.
+
+## Concurrent-main integration
+
+The initial PR merge was rejected because main advanced concurrently. Integrated
+`origin/main` at `37b37b9` on the assigned branch, retaining both handoff sections
+and the new root-Pages publication protections. Those protections remove root
+`.nojekyll`, use Jekyll exclusions and block symlink exposure of archived TIFFs.
+Combined suite: **117 passed**, three existing warnings. No stopped-run science
+or registry rule changed. The Pages source remains root; a built API status alone
+is not a certification that historical unsafe files were never publicly served.

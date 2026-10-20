@@ -95,3 +95,16 @@ Rasterio/Affine pending-deprecation warnings. The expected-negative gate exits z
 the default gate and build-submission command exit two intentionally. Neither is
 submission authorization. GitHub Pages configuration was verified as enabled from
 main at `/`; deployment of this branch depends on merge and the Pages build.
+
+## Follow-up source-boundary review
+
+Pages API reports `main:/`, and updating it to `/docs` is denied (403 integration
+permission). Removed root `.nojekyll`, added Jekyll `_config.yml` exclusions, and
+added a root-tree guard plus symlink-bypass tests. Do not restore root `.nojekyll`:
+it bypasses those exclusions. The public GitHub archives are still public; this is
+not redaction. `scripts/check_pages.py` is read-only unless `--configure` is passed.
+See reports/followup-publication-review-20261020.md. No new scientific run or slot.
+
+Integrated concurrent main `37b37b9` after PR #7's first merge was rejected.
+Preserved root-Pages exclusions and all publication-boundary tests. Combined final
+suite: **117 passed**, three existing warnings; no additional scientific run.
