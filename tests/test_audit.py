@@ -54,12 +54,12 @@ def test_shared_overlap_radius_is_inclusive_euclidean():
     assert uniqueness.dot_overlap(mine,theirs)==0
 
 
-def test_release_is_negative_and_has_no_artifact():
+def test_release_is_negative_with_bound_research_artifact():
     r=status()
     assert r['verdict']=='negative'
-    assert not r['download_available'] and not r['approved_for_weekly_slot']
-    assert r['generated_tif'] is None
-    assert r['scientific_experiments_run']==1
+    assert r['download_available'] and not r['download_and_submit_ok'] and not r['approved_for_weekly_slot']
+    assert r['generated_tif']=='gems70-fusion-dotted-37654-20261020.tif'
+    assert r['scientific_experiments_run']==3
     assert r['submission_slots_used']==0
 
 

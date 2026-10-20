@@ -13,8 +13,10 @@ from gems70.release import release_status
 def status():
     result=release_status(ROOT)
     card=json.loads((ROOT/'evidence/run_card.json').read_text())
-    return {**result,'status':'BLOCKED — DO NOT SUBMIT','generated_tif':None,
-            'download_available':False,'approved_for_weekly_slot':False,
+    tif=ROOT/card['raster_file'] if card.get('raster_file') else None
+    return {**result,'status':'OK TO SUBMIT' if result['download_and_submit_ok'] else 'BLOCKED — DO NOT SUBMIT (research download only)',
+            'generated_tif':tif.name if tif else None,
+            'download_available':bool(result.get('download_research_ok')),'approved_for_weekly_slot':False,
             'scientific_experiments_run':card['experiment_count'],
             'submission_slots_used':card['weekly_slots_used'],
             'template_integrity_ok':check_template()['ok']}

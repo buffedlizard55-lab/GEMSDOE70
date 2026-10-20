@@ -1,60 +1,158 @@
 {
-  "hypothesis": "Magnetic-edge termination at a gravity-supported basement boundary",
-  "mechanism": "Along-gravity-tangent change of magnetic edge amplitude, weighted by gravity edge and basement normal gradient",
-  "non_fault_mimic": "Volcanic dike termination or intrusive lithologic contact",
-  "hypothesis_status": "Provisional lane: method paragraph absent from supplied prompt",
+  "hypothesis": "H70-3A dual-detector rank fusion: supervised multi-physics HGB x unsupervised GEMSDOE49-architecture breakline detector (geometric mean of footprint ranks)",
+  "mechanism": "Out-of-fold HistGradientBoosting over 36 label-free features (cross-scale 1m/10m/100m scarps, potential fields, radiometrics, GDR1391 thermal density, strain/seismicity) fused by rank geometric mean with the multiscale topographic breakline x coherence x cross-gradient-orthogonality detector; dots placed by shared gems57 emit_decimated/emit_prefix at 37,654 dots, >2 px off catalogue",
+  "non_fault_mimic": "Anthropogenic (I-80/US-50/US-95, rail, canal) and Pleistocene Lake Lahontan paleoshoreline linear scarps that are also geophysically textured",
+  "hypothesis_status": "Experiment 3 of 3 (budget exhausted). Experiments 1 negative, 2 negative (gate hurt), 3 best point estimate but promotion gate failed.",
   "verdict": "negative",
-  "stop_reason": "duplicate",
+  "stop_reason": "holdout promotion gate not passed (paired 95% CI vs RawHGB_NoGate and vs GEMS49_OrthoGate cross zero); budget of 3 experiments exhausted",
   "holdout_dti": {
     "evidence_class": "HOLDOUT-DTI",
     "evaluator_version": "gems57-pooled-hide-v2",
-    "dti": 0.010192889039757751,
+    "dti": 0.09161315877394201,
     "ci95": [
-      0.006062085930570772,
-      0.01504164485152884
+      0.07488848117077676,
+      0.11105736675869819
     ],
-    "withheld_positive_pixels": 11321,
-    "tpw": 189.76122960484457,
-    "fpw": 47611.3439180494,
-    "fnw": 11131.238770395157,
-    "stage": "continuous pre-placement surface, not final dots",
-    "current_best_verified": false
+    "withheld_positive_pixels": 11520,
+    "tpw": 1503.171582028315,
+    "fpw": 34455.89366499764,
+    "fnw": 10016.828417971681,
+    "stage": "final dotted field (emit_decimated/emit_prefix), untouched seed-703 holdout",
+    "current_best_verified": false,
+    "promotion_allowed": false,
+    "paired_differences": {
+      "RawHGB_NoGate": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.007802454878722484,
+        "ci95": [
+          -0.0005725388146375291,
+          0.01621495916364463
+        ],
+        "withheld_positive_pixels": 11520
+      },
+      "Gated_H70_2A": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.021166156134646688,
+        "ci95": [
+          0.012973024674909598,
+          0.03040099046525528
+        ],
+        "withheld_positive_pixels": 11520
+      },
+      "GEMS49_OrthoGate": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.00894890842430715,
+        "ci95": [
+          -0.0011329623427333152,
+          0.01894143911287858
+        ],
+        "withheld_positive_pixels": 11520
+      },
+      "SingleBand_ElevSlope": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.07590966362344027,
+        "ci95": [
+          0.05800389274022248,
+          0.09536862684132703
+        ],
+        "withheld_positive_pixels": 11520
+      },
+      "GEMS70_E1_ContactTermination": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.05825795435825402,
+        "ci95": [
+          0.039537283506306274,
+          0.07864719978047842
+        ],
+        "withheld_positive_pixels": 11520
+      },
+      "Random_Sparse_Control": {
+        "evidence_class": "HOLDOUT-DTI",
+        "evaluator_version": "gems57-pooled-hide-v2",
+        "delta": 0.04860235656343053,
+        "ci95": [
+          0.031844968572499445,
+          0.06694517595915427
+        ],
+        "withheld_positive_pixels": 11520
+      }
+    },
+    "all_scores": {
+      "candidate": 0.09161315877394201,
+      "RawHGB_NoGate": 0.08381070389521952,
+      "Gated_H70_2A": 0.07044700263929532,
+      "GEMS49_OrthoGate": 0.08266425034963486,
+      "SingleBand_ElevSlope": 0.01570349515050173,
+      "GEMS70_E1_ContactTermination": 0.03335520441568799,
+      "Random_Sparse_Control": 0.04301080221051148
+    }
+  },
+  "prior_experiment_holdout_dti": {
+    "experiment_2_candidate": 0.07828993089487506,
+    "experiment_2_note": "H70-2A gated candidate on seed-702; gate significantly hurt vs NoGate ablation; not retuned.",
+    "experiment_1": "H70-E1 contact termination: HOLDOUT-DTI 0.010193 [0.006062, 0.015042], 11321 withheld px (archived evidence/history/exp1_contact_termination)."
   },
   "correlation_overlap_vs_registry": {
-    "stage": "surface before final placement",
-    "rasters_checked": 1,
-    "registry_complete": false,
-    "spearman": 0.036308180143609856,
-    "overlap_within_3px": 1.0,
-    "witness": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
-    "witness_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
-    "literal_duplicate": true,
-    "final_dots": null,
-    "final_dots_reason": "Not placed: literal surface stop rule."
-  },
-  "raster_sha256": null,
-  "raster_sha256_reason": "No submission TIFF written after surface gate stop.",
-  "surface_decoded_float32_sha256": "8c9592811e91062e3001b4469a7a7ddbe758965f0208a629c44749a9a78fd70a",
-  "validator_output": {
-    "submission_tiff": null,
-    "status": "NOT_WRITTEN",
-    "pre_export_array_checks": {
-      "no_nan_inside_footprint": true,
-      "all_values_finite": true,
-      "values_in_0_1": true,
-      "shape_matches": true,
-      "zero_on_catalogue": true,
-      "zero_outside_footprint": true
+    "stage": "surface before placement AND final dots",
+    "rasters_checked": 940,
+    "registry_complete_accessible_scan": true,
+    "surface": {
+      "spearman_worst": 0.6085190530186994,
+      "overlap_within_3px_literal": 1.0,
+      "like_for_like_duplicate": true
     },
-    "crs_shape_transform_file_match": null,
-    "reason": "Array checks are not a TIFF validator receipt; no output file exists."
+    "final_dots": {
+      "spearman_worst": 0.12050648591784155,
+      "overlap_within_3px_dot_fields_worst": 0.9999203271896744,
+      "worst_overlap_submission": "13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+      "like_for_like_duplicate": true,
+      "literal_overlap_worst": 1.0
+    },
+    "literal_reading_note": "Literal positive-support reading fires vs whole-footprint continuous priors by construction (saturation certificate in uniqueness3.json); like-for-like dot-field reading is the operative lane test, reported alongside, thresholds unchanged."
   },
-  "submission_name": "gems70-contact-termination-e1-20261020-NOT-RELEASED",
-  "submission_note": "Magnetic-edge termination on gravity/basement boundaries; negative surface gate; DO NOT SUBMIT.",
+  "raster_sha256": "83b711a20b518eb89040456f70e6d750d3d361536390df198184c4d2818b9c74",
+  "raster_file": "docs/downloads/gems70-fusion-dotted-37654-20261020.tif",
+  "surface_decoded_float32_sha256": "2d777b741daaa95f30fa2eec3f8b97e9fbb3c766f3870d7905f6f33d6cd50189",
+  "dots_decoded_sha256": "4d176f06875e5667f4d6f513ca513022cd0e5be8a1e792a4217c48d4508b80e0",
+  "validator_output": {
+    "submission_tiff": "gems70-fusion-dotted-37654-20261020.tif",
+    "status": "PASS",
+    "all_checks_passed": true,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "no_nan_inside_footprint": true,
+    "values_in_0_1": true,
+    "crs_shape_transform_file_match": true,
+    "emitted_positive_pixels": 37654,
+    "on_catalogue_positive_pixels": 0
+  },
+  "submission_name": "gems70-fusion-dotted-37654-20261020",
+  "submission_note": "GEMSDOE70 H70-3A fusion | rank-geomean supervised HGB x GEMSDOE49-arch detector, 37654 dots >2px off-catalogue; DO NOT SUBMIT - see site",
   "download_and_submit_ok": false,
+  "download_research_ok": true,
   "weekly_slots_used": 0,
-  "experiment_count": 1,
-  "elapsed_seconds": 40.87,
+  "experiment_count": 3,
+  "elapsed_seconds": 505.4,
   "organizer_confirmed_score": null,
   "evaluator_implementation_sha256": {
     "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
@@ -63,7 +161,12 @@
     "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
   },
   "method_source_sha256": {
+    "src/gems70/method2.py": "7267c909613d1bc95f6cd7e84636cb7700dbf1467d5c5dbe719d27d5ea3b6fe9",
     "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
-    "scripts/run_experiment.py": "80afcb2d3ea851344e99bd7cca262e7fe9410c0b91534cb06b012623c1d572b5"
-  }
+    "scripts/run_experiment3.py": "92a6b0d78a90f56e81b7403e11e7a7733781415eb186343fe3fb610e2558ad71"
+  },
+  "release_reasons": [
+    "Holdout promotion gate failed: candidate did not beat RawHGB_NoGate and GEMS49_OrthoGate with paired 95% CI > 0 on untouched seed-703 blocks.",
+    "Uniqueness gate failed: final-dots worst like-for-like 3px dot-field overlap 1.000 > 0.70 (worst vs 13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif); the fusion includes the GEMSDOE49-architecture detector, and 0.896 of its dots lie within 3px of GEMSDOE49's own 40k dots \u2014 lane drift into the parent detector by construction. Worst |Spearman| is only 0.121 and exact-cell Jaccard <= 0.055, but the protocol's 3px rule is the operative test and it fires."
+  ]
 }

@@ -1,5 +1,25 @@
 # Irregularities and limitations
 
+## Session 2 update (2026-10-20, Experiments 2–3)
+
+- **Unique TIFF exists but is DO NOT SUBMIT.** `gems70-fusion-dotted-37654-20261020.tif` (SHA-256 in run card) is a genuinely new byte/dot field (worst full-footprint |Spearman| 0.121 vs 940 registry rasters; exact-cell Jaccard ≤ 0.055), format-validated on exact bytes. It failed two independent gates, so it is published for learning/reproduction only.
+- **Holdout gate failed (Exp 3).** Fusion candidate HOLDOUT-DTI 0.09161 [0.07489, 0.11106] (11,520 withheld px, seed 703) vs RawHGB_NoGate Δ +0.00780 [−0.00057, +0.01621] and vs GEMSDOE49-architecture Δ +0.00895 [−0.00113, +0.01894]: CIs cross zero; preregistered rule required CI > 0 vs every key comparator.
+- **Uniqueness gate failed (Exp 3).** 89.6% of fusion dots lie within 3 px of GEMSDOE49's own 40k detector dots (> 0.70 protocol limit): fusing with a parent detector drifts into its lane at the 300 m kernel scale, even though exact cells and ranks differ. 125 of 877 dot-field-classified registry rasters exceed 0.70 forward overlap, including near-universal lattice/continuous fields — the literal reading remains saturated (see Exp-1 certificate), but the GEMSDOE49-parent firing is genuine and sufficient to stop.
+- **Exp 2 gate hurt.** The corroboration gate + road factor significantly reduced DTI vs the raw model (Δ −0.01025 [−0.01794, −0.00239], seed 702). It was not retuned; Exp 3 was preregistered separately and validated on untouched seed-703 blocks. Budget of 3 experiments is exhausted.
+- **Two technical OOM reruns (no tuning).** Experiment 2's runner died twice at the 3.8 GB sandbox RAM ceiling before any holdout score existed (only leakage canaries had been produced); crashed manifests are archived (`evidence/experiment2_manifest.crashed-oom*.json`) and the memory-lean rerun used identical features/seed/budgets.
+- **Protocol representation note.** The shared template's `two_phase_summary` separates dot fields from continuous surfaces; we report literal and like-for-like readings side by side with unchanged thresholds (0.90 / 0.70). No threshold was altered, and the candidate fails the like-for-like reading anyway.
+- **No organizer-confirmed score.** Every leaderboard number in the brief (0.2778 family best; 0.3195/0.3774/0.4413 leaders) remains user/owner-reported without an organizer receipt in this repo. Nothing here is projected to beat 0.2778.
+
+## Next session, in priority order (supersedes the list below where it conflicts)
+
+1. Do not submit the Exp-3 TIFF and do not rerun/tune Experiments 1–3 on their reported blocks (seeds 20/702/703 are spent).
+2. A fresh idea must avoid fusing with a single parent detector at kernel scale (lane drift is now measured, not hypothetical): e.g. a ranking whose dots are demonstrably >3 px-distinct from every parent family, checked pre-placement.
+3. The binding constraint is comparator significance: raw supervised and unsupervised detectors are statistically indistinguishable on catalogue-recovery holdout. A materially different signal (e.g. OPERA DISP-S1 InSAR, blocked here by egress) needs an official-source fetch path first.
+4. Only after holdout CI > 0 vs all comparators AND like-for-like uniqueness pass: weekly-slot selection (separate step; none used).
+
+---
+
+
 - **No eligible TIFF.** The scientific run failed the literal surface overlap gate. Per the explicit stop rule, final dots were not placed and no submission TIFF/ZIP was written. A cosmetic file, previous submission copy, all-zero decoy or metadata-only rename would not fulfill the request for a unique prediction. The requested downloadable competition artifact remains unmet.
 - **Literal protocol is globally saturated.** A newly SHA-verified archived continuous prediction is positive on every footprint cell. Its three-pixel halo covers every allowed off-catalogue cell. Any nonempty candidate necessarily has full forward overlap under the inherited support definition. This is a protocol/representation conflict, not proof of scientific method duplication. It is logged as a duplicate and stops this run nonetheless. No density exemption was applied.
 - **Concurrent unsafe readiness claims quarantined.** While this PR was being prepared, other sessions merged H70-C TIFFs and a READY TO SUBMIT site into main. The preserved generation source explicitly says it will “simulate plausible but label as HOLDOUT” and contains placeholder holdout numbers and hardcoded canary claims; these are not accepted as measurements. Its greedy uniqueness check uses only H33, not the universal dense witness. The source, documents and artifacts are retained under `quarantine/concurrent-h70c`, with hashes in `evidence/concurrent_h70c_quarantine.json`, removed from website downloads and not endorsed. This is a separate session's artifact, not an additional experiment run here.

@@ -1,82 +1,48 @@
-# Handoff — 2026-10-20
+# Handoff — 2026-10-20 (Session 2)
 
 Read README.md and PROJECT_BRIEF.md at session start.
 
-**NEGATIVE. DO NOT SUBMIT. No eligible TIFF exists.**
+**NEGATIVE. DO NOT SUBMIT. A unique research TIFF exists; it failed both gates.**
 
-The checkout started with only an eleven-byte README. Pinned numerical features,
-sample and catalogue were restored from public owner mirrors into `.cache/data`.
-No organizer-authenticated identity, current leaderboard receipt or weekly-cap
-state is available. The notebook reference was retrieved from the official
-DrivenData GitHub repository. No GPU was required for this fixed CPU hypothesis.
+## What was delivered
 
-One preregistered contact-termination experiment ran. Every raw and transformed
-feature received an AUC leakage canary and shared HOLDOUT-DTI. Whole mapped
-components were withheld with a real three-pixel feature-context buffer, spatially
-eroded quadrants and pixel-exact known-fault masking. No catalogue predictor was
-used. The continuous surface is worse than its random sparse control; current
-holdout best was not independently rerun. See evidence/holdout.json.
+- **Unique TIFF (research download only):** `docs/downloads/gems70-fusion-dotted-37654-20261020.tif`
+  (+ one-TIFF `.zip` + validator JSON), 37,654 dots >2 px off catalogue, written once by
+  `scripts/build_submission3.py` through the shared `vendor/gems57` writer; validator PASS on
+  exact bytes; SHA-256 bound in `evidence/run_card.json`. The site banner says
+  **DO NOT SUBMIT — research download only** in exactly those terms.
+- **Why 0.2778 happened:** H33 = 44,090-dot field pruned to 37,654 by catalogue distance
+  (SHA-verified, `evidence/h33_audit.json`); under α=0.2/β=0.8/300 m DTI, deleting
+  catalogue-hugging dots is pure emission-efficiency gain. No organizer receipt exists here
+  for 0.2778 or any leaderboard value; none is claimed beaten.
 
-The surface passed numerical array checks but failed the literal overlap gate.
-A SHA-verified 17GEMSDOE continuous prediction covers every footprint cell; its
-halo leaves no off-catalogue allowed cell uncovered. No nonempty candidate can
-pass the inherited literal support rule against it. **Do not silently exempt it.**
-Only this decisive witness was compared; an incomplete scan cannot certify
-uniqueness, but a duplicate witness suffices to stop. Final dots were not placed,
-no submission writer was invoked for the scientific run, and no slot was used.
-The shared writer's TIFF/ZIP behavior is tested only with synthetic temporary
-unit-test fixtures, never published as competition predictions.
+## Experiments (3/3 budget exhausted — do not rerun or tune on spent blocks)
 
-`vendor/gems57` is unchanged from 60GEMSDOE commit
-`32024716f218d06a94e01464157392119c03cb15`; evidence/template_verification.json
-compares both SHA-256 and upstream git blob identities. A false bound in the
-metric's explanatory docstring was identified, but executable coverage arithmetic
-is correct. Cross-repo issue creation was denied; see evidence/upstream_metric_report.md.
+| Exp | Design | Holdout (evaluator gems57-pooled-hide-v2) | Verdict |
+|---|---|---|---|
+| 1 (archived) | Magnetic contact termination, unsupervised | 0.010193 [0.006062, 0.015042], 11,321 px, seed 20 | negative |
+| 2 H70-2A | 36-feature OOF HGB + corroboration gate + road factor, dotted | candidate 0.078290 [0.060545, 0.095591], 11,358 px, seed 702; gate hurt (NoGate 0.088542, Δ −0.01025 CI<0) | negative |
+| 3 H70-3A | Rank-geomean fusion: raw HGB × GEMSDOE49-architecture detector | candidate 0.091610 [0.074890, 0.111060], 11,520 px, seed 703 (untouched); Δ vs RawHGB +0.00780 [−0.00057, +0.01621], Δ vs G49-arch +0.00895 [−0.00113, +0.01894] | negative (CI gate) |
 
-Next session must resolve the protocol representation conflict and missing lane
-assignment before new science. A fresh ranking needs untouched evaluation blocks,
-comparable current-best validation and complete pre-placement/final-dot audits.
-Never tune the present fixed hypothesis after seeing its holdout.
+Canaries passed in every experiment (max feature |AUC−0.5| ≤ 0.125). Exp-2 runner OOM-crashed
+twice pre-results at the 3.8 GB ceiling; crashed manifests archived, identical-science rerun.
 
-Publication is intentionally fail-closed for this stopped experiment. The static
-site cannot generate or train a TIFF in-browser. A fresh reviewed scientific run
-and release contract are prerequisites to connecting the validated shared writer
-to a real one-click artifact; editing run-card booleans is not sufficient.
+## Uniqueness (940 SHA-verified rasters, 71 repos + quarantined H70-C)
 
-Commands:
+Final dots: worst |Spearman| 0.121, exact-cell Jaccard ≤ 0.055 — but **0.896 of dots within
+3 px of GEMSDOE49's own 40k dots (> 0.70 limit)**: fusion with a parent detector is lane
+drift at kernel scale. Literal reading also saturated by continuous/lattice priors (Exp-1
+certificate). Both readings published in `evidence/uniqueness3.json`; thresholds unchanged.
 
-```
-python -m venv .venv
-.venv/bin/pip install -r requirements.lock
-bash scripts/download_competition_data.sh
-.venv/bin/python scripts/build_site.py
-.venv/bin/python scripts/build_readme.py
-.venv/bin/python -m pytest -q
-```
+## Hard rules for next session
 
-Do not rerun scripts/run_experiment.py: its existing experiment manifest makes it
-refuse a second attempt. Data are reconstructible; large caches are ignored and
-not committed. Source-health refresh is separate from scientific validation.
+1. Do not submit the Exp-3 TIFF; do not delete experiment manifests to rerun/tune spent seeds (20/702/703).
+2. New science needs a fresh preregistration, untouched blocks, and a ranking demonstrably
+   >3 px-distinct from parent detector families (checked on the surface before placement).
+3. `vendor/gems57` remains byte-identical. Data restore is codeload-based (0 REST calls):
+   `bash scripts/download_competition_data.sh`; registry resync: `scripts/sync_full_registry.py`.
+4. Weekly-slot selection is a separate step; zero slots used. Only an organizer receipt
+   creates an ORGANIZER-CONFIRMED score.
 
-## Concurrent-main integration
-
-Main advanced through PRs 1 and 2 while this session ran. Their reports, audit
-helpers, bridge fixtures and tests are retained. The earlier review-only run card,
-README and handoff are archived in evidence/history/parallel-review2. Canonical
-publication scripts use the measured one-experiment card; the legacy card command
-now verifies it rather than overwrite it. Root historical HTML paths redirect to
-the current workbench. The combined suite passes 68 tests (three upstream
-Rasterio/Affine pending-deprecation warnings). No unrelated candidate PR is
-endorsed by this integration.
-
-## Concurrent H70-C publication quarantine
-
-Main subsequently advanced through PRs 4 and 5, advertising a second session's
-H70-C TIFF as ready. Inspection found explicit simulated/placeholder holdout
-values in generation source and a one-raster H33 comparison, not full literal
-uniqueness clearance. All source, claims and files are preserved with hashes in
-quarantine/concurrent-h70c and evidence/concurrent_h70c_quarantine.json; none is
-endorsed or linked as a submission. Source text is retained, not executed. The
-canonical site remains negative. No additional scientific experiment was run.
-
-Final suite after adding quarantine hash/publication coverage: **69 tests pass**.
+Commands: `bash scripts/download_competition_data.sh` · `.venv/bin/python scripts/build_site.py` ·
+`.venv/bin/python scripts/build_readme.py` · `.venv/bin/python -m pytest -q`

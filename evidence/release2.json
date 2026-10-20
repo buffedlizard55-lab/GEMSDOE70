@@ -1,0 +1,10 @@
+{
+  "download_and_submit_ok": false,
+  "download_research_ok": true,
+  "verdict": "negative",
+  "reasons": [
+    "Holdout promotion gate failed: candidate did not beat RawHGB_NoGate and GEMS49_OrthoGate with paired 95% CI > 0 on untouched seed-703 blocks.",
+    "Uniqueness gate failed: final-dots worst like-for-like 3px dot-field overlap 1.000 > 0.70 (worst vs 13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif); the fusion includes the GEMSDOE49-architecture detector, and 0.896 of its dots lie within 3px of GEMSDOE49's own 40k dots \u2014 lane drift into the parent detector by construction. Worst |Spearman| is only 0.121 and exact-cell Jaccard <= 0.055, but the protocol's 3px rule is the operative test and it fires."
+  ],
+  "policy": "OK-TO-SUBMIT requires holdout promotion + like-for-like uniqueness + validator on exact bytes. This run fails the holdout gate; TIFF is a research download only. Weekly-slot selection is separate and no slot was used."
+}

@@ -23,13 +23,20 @@ def test_template_unchanged():
 def test_scientific_evidence_is_source_bound():
     card=json.loads((ROOT/'evidence/run_card.json').read_text())
     for p,h in card['method_source_sha256'].items(): assert hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h
-    assert card['raster_sha256'] is None
-    assert card['validator_output']['status']=='NOT_WRITTEN'
-    assert card['correlation_overlap_vs_registry']['literal_duplicate']
-    assert card['correlation_overlap_vs_registry']['final_dots'] is None
+    # Exp-3 research TIFF is hash-bound to the card; verdict stays negative.
+    assert card['verdict']=='negative'
+    assert card['download_and_submit_ok'] is False
+    assert card['download_research_ok'] is True
+    assert hashlib.sha256((ROOT/card['raster_file']).read_bytes()).hexdigest()==card['raster_sha256']
+    assert card['validator_output']['all_checks_passed'] is True
+    u=card['correlation_overlap_vs_registry']
+    assert u['rasters_checked']==940
+    assert u['final_dots']['like_for_like_duplicate'] is True
+    assert u['final_dots']['overlap_within_3px_dot_fields_worst']>0.70
     assert len(card['submission_note'])<=140
     assert card['weekly_slots_used']==0
-    assert card['experiment_count']==1
+    assert card['experiment_count']==3
+    assert card['organizer_confirmed_score'] is None
 
 
 def test_holdout_whole_components_and_feature_buffer():
@@ -68,12 +75,14 @@ def test_constant_ranks_do_not_manufacture_edges():
 
 
 def test_negative_gate_and_no_public_files(tmp_path):
-    assert release_status(ROOT)['download_and_submit_ok'] is False
+    st=release_status(ROOT)
+    assert st['download_and_submit_ok'] is False
+    assert st['download_research_ok'] is True
     assert release_status(tmp_path)['download_and_submit_ok'] is False
     (tmp_path/'docs/downloads').mkdir(parents=True)
     (tmp_path/'docs/downloads/stale.tif').write_bytes(b'not-a-tiff')
-    with pytest.raises(ValueError,match='must not publish'):assert_no_public_rasters(tmp_path)
-    assert_no_public_rasters(ROOT)
+    with pytest.raises(ValueError):assert_no_public_rasters(tmp_path)
+    assert_no_public_rasters(ROOT)  # published TIFF is exactly the hash-bound card artifact
 
 
 class Links(HTMLParser):
@@ -88,10 +97,10 @@ def test_pages_links_and_negative_banner():
         text=p.read_text();parser=Links();parser.feed(text)
         for link in parser.links:assert (p.parent/link.split('#')[0].split('?')[0]).is_file(),(p,link)
     home=(ROOT/'docs/index.html').read_text()
-    assert 'Do not submit this run.' in home
-    assert 'Submission TIFF unavailable' in home
+    assert 'DO NOT SUBMIT' in home
+    assert 'research download only' in home
     assert 'download>Download run card' in home
-    assert 'href="downloads/' not in home or '.tif"' not in home
+    assert 'downloads/gems70-fusion-dotted-37654-20261020.tif' in home
 
 
 def test_full_brief_embedded_in_readme():
