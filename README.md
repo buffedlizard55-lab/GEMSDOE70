@@ -858,3 +858,12 @@ Do not stop after the first pass. Each pass must build on the previous one. Befo
 Go ahead and create a pull request and then merge the pull request onto the main. Make suggestions for what work still needs to be done and any limitations that is in the way of a successful project.  It should be worked on in this next session or the next session.  Work line by line verify everything no hallucinations.
 
 </details>
+
+## Session-2 lane (arena/9a895360): fusion TIFF — **DO NOT SUBMIT**
+
+Unique file `docs/downloads/gems70-fusion-dotted-37654-20261020.tif` (inventoried; card
+`evidence/s2_run_card.json`; findings `docs/s2-findings.md`). Best measured ranking of this
+lane (HOLDOUT-DTI 0.09161, seed-703 untouched blocks) but it failed the preregistered
+promotion gate (paired CIs vs its two parent detectors cross zero) and the uniqueness gate
+(0.896 of dots within 3 px of GEMSDOE49's own dots). Download for review only; no slot used,
+consistent with the all-lanes decision at the top of this README.

@@ -1,0 +1,79 @@
+[1/6] Loading label-free feature stack (band-by-band, memory-lean)...
+  features=36 footprint_px=5,167,373
+[2/6] Holdout draw seed=703 + leakage canaries...
+  canaries pass. max |AUC-0.5| = 0.12431636046006944
+[3/6] Out-of-fold supervised models (full + no-cross-scale)...
+  fold NW done (125s)
+  fold NE done (202s)
+  fold SW done (275s)
+  fold SE done (343s)
+[4/6] Final model on all visible catalogue + domain gate...
+[5/6] Comparator surfaces + dotted arms (one surface at a time)...
+  arm candidate evaluated (480s)
+  arm RawHGB_NoGate evaluated (483s)
+  arm Gated_H70_2A evaluated (486s)
+  arm GEMS49_OrthoGate evaluated (489s)
+  arm SingleBand_ElevSlope evaluated (493s)
+  arm GEMS70_E1_ContactTermination evaluated (503s)
+  arm Random_Sparse_Control evaluated (505s)
+[6/6] Final dots (full-footprint, >2px off catalogue)...
+{
+  "experiment_id": "H70-3A",
+  "seed": 703,
+  "elapsed_seconds": 505.4,
+  "candidate_holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.09161315877394201,
+    "ci95": [
+      0.07488848117077676,
+      0.11105736675869819
+    ],
+    "withheld_positive_pixels": 11520,
+    "tpw": 1503.171582028315,
+    "fpw": 34455.89366499764,
+    "fnw": 10016.828417971681
+  },
+  "promotion_allowed_holdout": false,
+  "final_dots": 37654,
+  "surface_decoded_float32_sha256": "2d777b741daaa95f30fa2eec3f8b97e9fbb3c766f3870d7905f6f33d6cd50189",
+  "dots_decoded_sha256": "4d176f06875e5667f4d6f513ca513022cd0e5be8a1e792a4217c48d4508b80e0",
+  "features": [
+    "elev_slope",
+    "topo_edge",
+    "topo_coh",
+    "mag_hg_log",
+    "mag_vg",
+    "mag_edge",
+    "grav_hg_abs",
+    "grav_edge",
+    "grav_slope",
+    "tc",
+    "basement_grad",
+    "cond_anom",
+    "rtp_anom",
+    "elev_anom",
+    "shear_abs",
+    "dil_abs",
+    "ieq_log",
+    "xgrad_align",
+    "lid_tect",
+    "lid_dipole",
+    "lid_step",
+    "lid_valid",
+    "open_dipole",
+    "lrm_grad",
+    "dem10_onesided3",
+    "dem10_onesided",
+    "dem10_steep",
+    "dem10_curv",
+    "dem10_slope_max",
+    "kth_anom",
+    "rad_grad",
+    "up150_grad",
+    "thermal_density",
+    "probe_density",
+    "paleo_density",
+    "road_dist"
+  ]
+}

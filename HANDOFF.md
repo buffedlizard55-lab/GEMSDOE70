@@ -266,3 +266,11 @@ consistency against cached reference metadata, not organizer acceptance.
 - Reproduce: audit_current_protocol.py, build_site.py, build_readme.py, pytest; no data download needed.
 
 Integration: main advanced concurrently with PRs adding a separate E3 scarp artifact and a literal-protocol review. All those frozen receipts, artifacts, tests and drivers were retained. This session's four conditional hypotheses and fresh P4 format card are supplemental (`docs/supplemental-protocol-review.html`), not a replacement for the concurrent review or an authorization of E3.
+
+## Session-2 lane (arena/9a895360, merged additively)
+
+Exp2 (seed 702, gate hurt) and Exp3 (seed 703, fusion 0.09161) both negative; unique TIFF
+`gems70-fusion-dotted-37654-20261020.tif` is DO NOT SUBMIT (holdout CI gate + 0.896 3-px
+overlap vs GEMSDOE49 parent). Card `evidence/s2_run_card.json`, findings `docs/s2-findings.md`,
+prereg `docs/s2-hypotheses.md` + `docs/hypotheses-exp3.md`, method `src/gems70/method_s2.py`.
+Spent seeds for this lane: 702/703 — do not retune. Zero slots used.
