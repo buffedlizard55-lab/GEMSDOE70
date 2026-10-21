@@ -40,11 +40,10 @@ def test_real_card_separates_download_from_promotion():
 
 
 def test_missing_or_corrupt_artifact_is_closed(tmp_path):
-    (tmp_path / 'evidence' / 'phase4').mkdir(parents=True)
+    (tmp_path / 'evidence').mkdir(parents=True)
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
     card['raster_sha256'] = '0' * 64
     (tmp_path / 'evidence/run_card.json').write_text(json.dumps(card))
-    (tmp_path / 'evidence/phase4/run_card.json').write_text(json.dumps(card))
     result = release_status(tmp_path)
     assert result['download_ok'] is False
     assert result['submit_recommended'] is False

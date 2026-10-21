@@ -62,6 +62,22 @@ clear the other gate. No weekly slot was used; no organizer submission receipt e
   [Literal overlap witness](evidence/p5/literal_blocker.json)
 - **Session start:** read this README, the complete retained brief below, AGENTS.md and HANDOFF.md.
 
+### Parallel lane P5-HGB (session 3): supervised within-halo ranking — negative, review only
+
+[Evidence](evidence/p5hgb/) · [Run card](evidence/p5hgb/run_card.json) ·
+[TIFF — DO NOT SUBMIT](docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif) ·
+[One-TIFF ZIP](docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.zip).
+Preregistered in `docs/hypotheses.md` (P5-HGB lane addendum) before the run: HistGradientBoosting
+over the 19-band stack + visible-catalogue geometry, trained on the SGMC off-catalogue proxy with
+leave-one-quadrant-out (OOF AUC 0.641), emitted through the P4 stratified design at fixed mass
+37,654. HOLDOUT-DTI A 0.0822 [0.0753, 0.0886] (random 0.0531); PROXY-DTI B′ LOQO 0.0793
+[0.0714, 0.0874] vs H33 0.0938 — the pre-registered gate fails (Δ −0.0145 [−0.0243, −0.0039]) and
+the candidate is indistinguishable from the geometric P4 halo (Δ −0.0019 [−0.0060, +0.0024]).
+**The proxy, not the learner, is the ceiling.** No canary fired (worst A-truth feature AUC 0.565);
+contamination disclosed (31.9% of A-truth pixels within 3 px of proxy pixels). Uniqueness: 62
+rasters, worst mutual 0.301, worst ρ 0.015; the standing literal forward-overlap stop applies as to
+every dot-field lane. No slot used.
+
 ### Reproduce or verify P5 (CPU; no slot, no automatic promotion)
 
 ```bash

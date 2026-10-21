@@ -12,7 +12,54 @@ rule; neither a local validator nor distinct bytes authorize a slot.
 <a href="p5.html">P5-cover negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
 <a href="downloads/p5_run_card.json">New P5 run card</a> ·
 <a href="downloads/review_run_card.json">Prior review card</a>.</aside><h1>Limitations and current next steps</h1>
-<h2>P5 addendum — new, format-valid research TIFF; competition submit NO</h2>
+<h2>Session 3, P5-HGB lane (2026-10-20): the supervised route measured to its ceiling</h2>
+<p>Experiment 5 (H-P5-1, preregistered in <code>docs/hypotheses.md</code>) trained a HistGradientBoosting
+classifier on the SGMC off-catalogue proxy (leave-one-quadrant-out) over the 19-band stack plus
+visible-catalogue geometry. <strong>Verdict: negative.</strong> The model learns the proxy (out-of-fold AUC
+0.641) but the emitted dots score B′ 0.0793 [0.0716, 0.0879] versus H33 0.0938 and P4 0.0812 —
+H33 wins the pre-registered gate (Δ −0.0145, CI [−0.0243, −0.0039]) and the candidate is
+statistically indistinguishable from the pure-geometry P4 halo (Δ −0.0019, CI [−0.0060,
++0.0024]). <strong>The ceiling is the label source, not the learner.</strong> Two implementation events are
+disclosed rather than hidden:</p>
+<ol>
+<li><strong>Emission amendment (pre-score).</strong> The registered stratified emission fell 3,067 dots short of
+   the fixed 37,654 mass on the spikier model surface (NMS collisions). Pass 2 of
+   <code>method_v5.stratified_dots</code> tops up from the best NMS-feasible <em>positive-score</em> cell of empty
+   strata; pass 1 remains byte-identical to Phase-4 (unit-tested). Amendment written into
+   <code>docs/hypotheses.md</code> before any DTI was computed.</li>
+<li><strong>Writer-caught defect.</strong> The first top-up implementation walked onto zero-score cells and
+   placed dots <strong>on the mapped catalogue</strong>; the shared writer rejected the artifact
+   (<code>positive prediction mass on the mapped catalogue</code>) before anything was published. Fixed with a
+   regression test (<code>test_stratified_dots_topup_never_uses_zero_score_cells</code>). This is the release
+   contract working as designed.</li>
+</ol>
+<p><strong>New measured facts:</strong> 31.9 % of instrument-A truth pixels lie within 3 px of proxy pixels (the
+SGMC re-draw contamination channel, now quantified); 63.7 % of B′ truth lies inside the 32-px halo
+band (the band caps reachable truth); worst feature AUC vs A-truth 0.565 (no leakage canary); the
+score surface cleared the 62-raster Spearman pre-check at ρ 0.096 and the final dots at mutual
+overlap 0.301 / ρ 0.015.</p>
+<h2>Revised next-session priorities (in order)</h2>
+<ol>
+<li><strong>Independent truth source.</strong> The SGMC proxy is now measured as the bottleneck. Quantify how
+   much of SGMC-only support re-draws QFaults (buffer tests 1–6 px), then obtain a genuinely
+   independent additional-fault set (Nevada Bureau of Mines county maps, published INGENIOUS trace
+   exports) before any further supervised attempt.</li>
+<li><strong>Band widening.</strong> 36.3 % of B′ truth lies beyond 32 px from the catalogue. A registered
+   experiment widening D_MAX (48/64 px) at fixed mass with the same stratified emission could
+   recover out-of-band truth; uniqueness must be re-checked (a wider domain raises exposure to the
+   dense lattice rasters).</li>
+<li><strong>Mass calibration.</strong> Every fixed-mass family member clusters at B′ 0.08–0.09. A registered
+   dot-count sweep (e.g. 25k / 37k / 50k) on the existing surface, scored only on B′ LOQO, would
+   measure the mass response without new modelling.</li>
+<li><strong>Upstream the two uniqueness fixes</strong> to the shared template and run its suite (still pending
+   from session 2).</li>
+<li><strong>Selector step unchanged.</strong> No weekly slot has been used by any session of this repository.</li>
+</ol>
+<h2>Repository-contract change this session (not a template change)</h2>
+<p><code>src/gems70/release.py</code> now reads the canonical <code>evidence/run_card.json</code> and resolves its phase
+receipts through the card's <code>phase_evidence</code> mapping (dot count from the card instead of a
+hard-coded 37,654). Fail-closed semantics are unchanged and covered by the same tests.</p>
+<h2>Two shared-tool defects were found and fixed (session 2)</h2>
 <p><strong>Download P5 for research:</strong> <a href="downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif">TIFF</a>
 · <a href="downloads/p5_run_card.json">machine-readable negative card</a>. The preregistered one-lane
 magnetic-width LOQO model ran after the older archive review, with one new TIFF and no weekly

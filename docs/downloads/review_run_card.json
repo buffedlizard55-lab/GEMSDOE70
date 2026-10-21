@@ -38,7 +38,7 @@
       "my_dots_within_3px_of_theirs": 1.0,
       "their_dots_within_3px_of_mine": 0.21055607917059377,
       "mutual_overlap": 0.21055607917059377,
-      "spearman_full_footprint": -0.0004249861963070026,
+      "spearman_full_footprint": -0.0004249861963070003,
       "jaccard_dot_sets": 0.006051555467792231,
       "identical_bytes": false,
       "identical_decoded_predictions": false,

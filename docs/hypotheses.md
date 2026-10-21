@@ -323,3 +323,77 @@ Written before running `scripts/run_experiment_dualhorizon.py`, executing the ha
 | **3 (tested: Exp 5.3)** | **H-P5-3 · Submodular Dual-Horizon Allocation (`5×5` Strata, `3.2 px` NMS, Full Off-Catalogue Horizon `d_cat >= 2.4 px`):** Combines the near-catalogue tip/host-length propagation envelope (`0.35 * env`) with the leave-one-quadrant-out multi-modal scarp–radiometric–basement ranker (`0.65 * p_oof_rank`) across the entire `d_cat >= 2.4 px` footprint | Replaces `7×7` (`700 m`) one-dot-per-block cap with `5×5` (`500 m`) strata and `3.2 px` (`320 m`) Euclidean NMS across the full `d_cat >= 2.4 px` domain, matching the empirical geometry of continuous fault traces (`5.19` catalogue px and `5.56` SGMC B′ px per occupied `7×7` block) | Captures both near-field fault-tip propagation/relay splays (`2.4 <= d_cat <= 24 px`) and the `35.9%` of unmapped range-block/intrabasin faults located at `d_cat > 32 px` (`A = 0.0790`, `B' = 0.1440`, `B'' = 0.1234`, +53.5% over H33 on B′) | Erosional range-front embayments in the far field and alluvial fan-head trenches in the near field | Tests submodular along-trace density (`5×5` strata, `3.2 px` NMS) and full-horizon (`d_cat >= 2.4 px`) allocation (`evidence/p6_dualhorizon/`) | Highest local DTI on both Instrument A (`0.0790`) and Instrument B′ (`0.1440`); Low-Medium CPU cost (~40 s) | Same verified `/tmp/60GEMSDOE/data/external/` stack as H-P5-1 and H-P5-2 |
 | **4 (research queue)** | **H-P5-4 · GDR 1391 Thermal Well / Geothermometer & 2 m Temperature-Probe Conduit Inversion:** `gdr_wellspring_in_footprint.csv` (`27,092` wells/springs), `cond_surf` (band 17), `ThK`/`UK` | Anisotropic strike-aligned conduit corridors linking thermal anomalies (`temp_c >= 30°C` or `geothermquartz_c >= 90°C`) to the nearest topographic/gravity breakline | Blind geothermal upflow zones in basin fill or step-overs where surface scarps were erased by playas or young alluvium | Lateral warm outflow plumes in permeable alluvial aquifers down-gradient from range-front fault recharge | Held in queue because `GEMSDOE71` tested a pure hydrothermal conduit lane and scored `0.0558` live due to spatial clustering around drilled prospects | Low-Moderate; Medium cost | DOE GDR Submission 1391 (`https://gdr.openei.org/submissions/1391`, DOI `10.15121/1881483`), verified present in `/tmp/60GEMSDOE/data/external/` |
 | **5 (research queue)** | **H-P5-5 · Fluvial $\chi$-Discontinuity & Knickpoint Alignment (`dem10_chi_100m_u8`):** `chan_n`, `knick_n`, `raised_n` from 10 m 3DEP drainage network $\chi$ integration | Strike-aligned bands of elevated fluvial knickpoints (`knick_n`) and raised channel reaches (`raised_n`) across adjacent drainage basins marking transient footwall uplift | Bedrock and piedmont normal faults whose interfluve scarps have diffused over $10^5\text{–}10^6$ yr still preserve transient knickpoint steps in crossing streams | Lithologic knickpoints at resistant basalt/welded-tuff ledges and pluvial lake base-level fall knickpoints | Held in queue because single-band canary AUCs on `dem10_chi_100m_u8` (`0.451–0.502`) are near-null at 100 m grid scale (`60GEMSDOE` scored `0.0351` live) | Low; Low cost | `dem10_chi_100m_u8.tif` derived from USGS 3DEP 10 m DEM, verified present in `/tmp/60GEMSDOE/data/external/` |
+---
+
+Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.
+
+## P5-HGB lane addendum (parallel session 3) — preregistered 2026-10-20 (before the run)
+
+Session priority from `HANDOFF.md`: supervised within-halo ranking. This is experiment 5 overall
+(in-session 1 of 3; budget 3 experiments / 2 hours). Written before any model was trained.
+
+### H-P5-1 supervised within-halo ranking on the SGMC off-catalogue proxy
+
+* **Hypothesis.** SGMC off-catalogue fault pixels (the B′ population: SGMC ∧ ¬catalogue ∧ footprint
+  ∧ d_catalogue ≥ 3 px) are separable from the halo background by a gradient-boosted model over the
+  cached 19-band physics stack plus visible-catalogue geometry, and that ranking transfers both to
+  catalogue-withheld segments (instrument A) and to spatially held-out quadrants (instrument B′
+  leave-one-quadrant-out). This is the "within-halo information" that `docs/h33-analysis.md`
+  identifies as the only route past emission geometry.
+* **Layers.** All 19 bands of `training_features.tif` (mag_anom, rtp, tmi_hg, geod_2ndinv,
+  iso_grav_anom_slope, tc, geod_shearrate, geod_dilaterate, tmi_vg, deq_n100a15, iso_grav_anom_vg,
+  det_elev, iso_grav_anom, tmi, depth_to_base_surf, ieq_n100a15, cond_surf, iso_grav_anom_hg,
+  det_elev_slope) plus three catalogue-geometry features (d = distance to visible catalogue, u, v =
+  along/across-strike tip kernels, all from `method_v2.tip_kernels`). 22 features, no others.
+* **Mechanism.** `sklearn.ensemble.HistGradientBoostingClassifier` (random_state 70520,
+  max_iter 300, learning_rate 0.06, max_leaf_nodes 31, min_samples_leaf 40, l2 1.0,
+  early_stopping True, validation_fraction 0.1). Training rows: all in-band proxy positives
+  (measured 38,757) + 150,000 uniform in-band negatives (seed 70521). Allowed domain = the P4 band:
+  valid ∧ ¬catalogue ∧ 2.4 ≤ d ≤ 32 px (measured 2,768,584 cells; 63.7 % of B′ truth lies inside it
+  — the band caps reachable truth and widening it is deliberately NOT part of this experiment).
+  Leave-one-quadrant-out over the shared `holdout.quadrant_ids` split: four models for evaluation,
+  one production model trained on all quadrants.
+* **Emission.** The measured P4 design, unchanged: one dot per 7×7-px stratum at the stratum
+  maximum of the model score, keep the best 37,654 strata, 5-px Euclidean NMS. Fixed mass 37,654
+  binary dots, zero on the catalogue, zero outside the footprint.
+* **Non-fault mimic (named).** SGMC cartographic generalization: mapper habit and digitization
+  conventions (line-work following map-unit contacts, section lines, or scanner artifacts) can be
+  learned as if geology. Such structure transfers to the proxy labels but not to organizer truth.
+* **Instruments and arms.** A: shared `buffered_component_draw` (seed 20, buffer 3 px, boundary
+  12 px), candidate scored with the production model but fold-visible geometry. B′/B: quadrant
+  regions eroded 12 px, candidate dots in quadrant k from LOQO model k (full-catalogue geometry,
+  matching its training). Arms: candidate, random control (37,654 uniform on valid ∧ ¬visible),
+  h33_reference, and p4_reference (the published Phase-4 TIFF, hash-pinned) so the run is compared
+  against the current holdout best family, not only H33.
+* **Canaries (rule 4).** (i) every feature alone vs instrument-A withheld truth — STOP if any AUC
+  > 0.90; (ii) every feature alone vs the proxy labels — reported, because it measures what the
+  model can memorize (d is expected to be high: proxy traces hug the catalogue; that is label
+  structure, not feature leakage, and is disclosed rather than hidden); (iii) LOQO out-of-fold
+  model AUC vs the proxy — STOP if > 0.90.
+* **Uniqueness (rule 1).** Surface Spearman vs the 62 archived registry rasters BEFORE placement
+  (stop if ρ > 0.90); final dot audit after writing (mutual 3-px overlap > 0.70 or ρ > 0.90 →
+  duplicate → negative, no promotion).
+* **Gates (verdict `promote` iff ALL hold).** gate A: candidate A-DTI ≥ H33 A-DTI; gate B′: paired
+  Δ vs H33 > 0 with 95 % CI lower bound > 0; uniqueness cleared; shared validator all checks pass.
+  Any failure → `negative`. Weekly slots remain 0; promotion to a real slot is a separate selector
+  step.
+* **Registered honesty constraints.** B′/B share the label source with training (LOQO spatial
+  split only) — they are PROXY-DTI (LOQO), partially in-sample; instrument A is the only
+  label-independent gate, which is why both gates are required. Instrument A itself has a
+  contamination channel: SGMC re-draws of withheld catalogue segments that sit ≥ 3 px from the
+  catalogue can appear in the training labels and within kernel range of A truth; the run measures
+  and discloses the fraction of A-truth pixels within 3 px of proxy pixels. Phase-4 measured the
+  supervised-free baseline at A 0.0730 / B′ 0.0812; H33 at A 0.0037 / B′ 0.0938.
+
+### P5-HGB implementation amendment (2026-10-20, before any score was seen)
+
+The registered emission ("one dot per 7×7-px stratum at the stratum maximum, best 37,654 strata,
+5-px NMS, fixed mass 37,654") is under-determined for a spiky surface: on the first execution the
+model surface allowed only 34,587 block-argmax dots under NMS (the Phase-4 smooth halo never hit
+this). The run stopped at the mass invariant before any evaluation. Amendment, fixed before any
+DTI was computed: pass 1 stays **byte-identical** to the Phase-4 operator (blocks in score order,
+dot at the stratum maximum when NMS-feasible); only if pass 1 places fewer than 37,654 dots does
+a second pass place one dot at the best NMS-feasible **positive-score** cell of the
+highest-scoring strata that remain empty (positive cells are exactly the allowed-domain cells, so
+every dot stays off-catalogue and inside the footprint). One dot per stratum and the fixed mass
+are preserved; no threshold, mass or domain changed. Disclosed in the run card as `emission_topup`.
