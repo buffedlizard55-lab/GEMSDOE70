@@ -127,6 +127,9 @@ def main():
             and p5_state['download_ok_for_review'] is True
             and p5['submit_recommended'] is False):
         raise SystemExit('P5 hash/validator/protocol review evidence missing; refusing stale publication')
+    hgb = load('evidence/p5hgb/run_card.json', {})
+    if not (hgb and hgb.get('raster_sha256')):
+        raise SystemExit('P5-HGB lane card missing; refusing stale publication')
 
     DOCS.mkdir(parents=True, exist_ok=True)
     DOWN.mkdir(parents=True, exist_ok=True)
@@ -198,6 +201,14 @@ def main():
         'evidence/e5/surface_uniqueness.json': 'e5_surface_uniqueness.json',
         'evidence/e5/uniqueness.json': 'e5_final_uniqueness.json',
         'evidence/e5/leaderboard_read.json': 'e5_leaderboard_read.json',
+        'evidence/p5hgb/run_card.json': 'p5hgb_run_card.json',
+        'evidence/p5hgb/canaries.json': 'p5hgb_canaries.json',
+        'evidence/p5hgb/uniqueness.json': 'p5hgb_uniqueness.json',
+        'evidence/p5hgb/uniqueness_delta.json': 'p5hgb_uniqueness_delta.json',
+        'evidence/p5hgb/surface_uniqueness.json': 'p5hgb_surface_uniqueness.json',
+        'evidence/p5hgb/instrumentA_holdout.json': 'p5hgb_instrumentA.json',
+        'evidence/p5hgb/instrumentB_prime.json': 'p5hgb_instrumentB_prime.json',
+        'evidence/p5hgb/instrumentB_all.json': 'p5hgb_instrumentB_all.json',
         'evidence/p6_dualhorizon/run_card.json': 'p6_dualhorizon_run_card.json',
         'evidence/p6_dualhorizon/canaries.json': 'p6_dualhorizon_canaries.json',
         'evidence/p6_dualhorizon/instrumentA_holdout.json': 'p6_dualhorizon_instrumentA.json',
@@ -488,6 +499,38 @@ SHA-256 <code>{esc(p6card['raster_sha256'])}</code>.</p>
 <a class="button secondary" href="downloads/e2_mutual_uniqueness.json" download>E2 62-raster audit</a></div>
 <p class="small">Name: <code>{esc(p6card['submission_name'])}</code> · Note ({p6card['note_chars']}/140):
 <code>{esc(p6card['submission_note'])}</code>.</p></section>"""
+    # --------------------------------------------- P5-HGB supervised lane (mine)
+    hgb_section = ''
+    if hgb and hgb.get('raster_sha256'):
+        _ha = hgb['instrument_a_holdout']
+        _hb = hgb['instrument_b_prime_proxy']
+        _hd = hgb['paired_b_prime_vs_h33']
+        _hp = hgb['paired_b_prime_vs_p4']
+        _hc = hgb['canaries']
+        _hu = hgb['uniqueness_detail']
+        hgb_section = f"""<section><h2>P5-HGB — supervised within-halo ranking on the 19-band stack (verdict: {esc(hgb['verdict'])} — DO NOT SUBMIT)</h2>
+<p>Preregistered in <code>docs/hypotheses.md</code> (P5-HGB lane addendum) before the run: a
+HistGradientBoosting ranker over the 19-band physics stack + visible-catalogue geometry, trained on
+the SGMC off-catalogue proxy with leave-one-quadrant-out (OOF AUC {_hc['model_oof_auc_vs_proxy']:.3f}),
+emitted through the P4 stratified design at fixed mass 37,654 (3,067 dots by the pre-score top-up
+amendment). <strong>Download for review: yes. Submit a weekly slot: NO</strong> — on the
+pre-registered target-like gate B′ it scores {_hb['candidate']['dti']:.4f} {ci(_hb['candidate'])} vs H33
+{_hb['h33_reference']['dti']:.4f} (paired &Delta; {_hd['delta']:+.4f}, 95% CI {ci(_hd)}: negative) and is
+statistically indistinguishable from the pure-geometry P4 halo (&Delta; {_hp['delta']:+.4f},
+{ci(_hp)}). Instrument A {_ha['candidate']['dti']:.4f} {ci(_ha['candidate'])} beats random
+{_ha['random_control']['dti']:.4f}. No leakage canary fired (worst A-truth feature AUC
+{_hc['worst_feature_auc_vs_a_truth']:.3f}); contamination disclosed: 31.9% of A-truth pixels within
+3 px of proxy pixels. Uniqueness: {_hu['registry_rasters_checked']} rasters, worst mutual
+{_hu['worst_dot_overlap']:.3f}, worst &rho; {_hu['worst_spearman_full_footprint']:.3f}; forward 1.00
+vs dense lattices — the standing literal stop applies to this lane as to every dot-field lane.
+Delta audit vs the 5 rasters published by parallel lanes: worst forward 0.510 (E5), worst
+&rho; 0.132 — not a duplicate under either rule. Scientific reading: <em>the proxy, not the
+learner, is the ceiling</em>. Values exactly 0/1, no NaN. SHA-256
+<code>{esc(hgb['raster_sha256'])}</code>.</p>
+<div class="actions"><a class="button secondary" href="downloads/{esc(hgb['submission_name'])}.tif" download>Download P5-HGB TIFF (review only — DO NOT SUBMIT)</a>
+<a class="button secondary" href="downloads/p5hgb_run_card.json" download>P5-HGB run card</a></div>
+<p class="small">Name: <code>{esc(hgb['submission_name'])}</code> · Note ({hgb['note_chars']}/140):
+<code>{esc(hgb['submission_note'])}</code>. Evidence <code>evidence/p5hgb/</code>.</p></section>"""
     archive_rows = [[esc(Path(r['artifact']).name),
         f'<a href="{esc(r["artifact"].removeprefix("docs/"))}" download>Download for review — DO NOT SUBMIT</a>',
         'pass' if r['validator_output']['all_checks_passed'] else 'FAIL',
@@ -495,7 +538,7 @@ SHA-256 <code>{esc(p6card['raster_sha256'])}</code>.</p>
         for r in review['archived_artifacts']]
     archives = f'<h2>{len(review["archived_artifacts"])} frozen prior dot TIFFs — forensic review only</h2>' + table(
         ['Archive', 'Download', 'Local format', 'Forward overlap (limit 0.70)'], archive_rows)
-    (DOCS / 'index.html').write_text(frame('Overview', index + p7_section + e6_section + s3_site.banner() + p6_section + e5_section + e2_section + p5_section + archives))
+    (DOCS / 'index.html').write_text(frame('Overview', index + e6_section + s3_site.banner() + p6_section + e5_section + hgb_section + e2_section + p5_section + archives))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
@@ -635,6 +678,30 @@ labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed score
                             'E5 instrument A · HOLDOUT-DTI · gems57-pooled-hide-v2')
                     + table(['Arm', 'DTI', '95% CI', 'Positives'], _rb,
                             "E5 instrument B′ · PROXY-DTI · SGMC proxy d ≥ 3 px"))
+    if hgb:
+        _ga = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+               for k, v in sorted(hgb['instrument_a_holdout'].items(),
+                                  key=lambda kv: -kv[1]['dti'])]
+        _gb = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
+               for k, v in sorted(hgb['instrument_b_prime_proxy'].items(),
+                                  key=lambda kv: -kv[1]['dti'])]
+        _gd = hgb['paired_b_prime_vs_h33']
+        _gp = hgb['paired_b_prime_vs_p4']
+        _gc = hgb['canaries']
+        results += ("<h2>Lane P5-HGB — supervised within-halo ranking on the 19-band stack "
+                    "(preregistered, negative)</h2>"
+                    "<p>HistGradientBoosting over 19 physics bands + visible-catalogue geometry, "
+                    "SGMC-proxy LOQO, OOF AUC "
+                    + f"{_gc['model_oof_auc_vs_proxy']:.3f}; worst A-truth feature AUC "
+                    + f"{_gc['worst_feature_auc_vs_a_truth']:.3f} (no canary fired). B′ paired Δ vs "
+                    + f"H33 {_gd['delta']:+.4f} {ci(_gd)} — gate fails; Δ vs P4 "
+                    + f"{_gp['delta']:+.4f} {ci(_gp)} — indistinguishable from the geometric halo. "
+                    + "A-truth/proxy contamination disclosed at 31.9% within 3 px. Verdict "
+                    + f"<code>{esc(hgb['verdict'])}</code>, no slot used.</p>"
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _ga,
+                            'P5-HGB instrument A · HOLDOUT-DTI · gems57-pooled-hide-v2 (label-independent)')
+                    + table(['Arm', 'DTI', '95% CI', 'Positives'], _gb,
+                            "P5-HGB instrument B′ · PROXY-DTI LOQO · SGMC proxy d ≥ 3 px"))
     if e6card:
         _ra6 = [[esc(k), f"{v['dti']:.4f}", ci(v), str(v['withheld_positive_pixels'])]
                 for k, v in sorted(e6card['instrument_a_holdout'].items(),

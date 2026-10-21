@@ -51,6 +51,24 @@
       "note": "E5 lane, one-TIFF ZIP"
     },
     {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.json",
+      "sha256": "37c2101497baeec72dcc6cea815f0f76b29b3e6445078b67e000241c2d9f66b3",
+      "bytes": 3445,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker), shared writer receipt; card evidence/e6/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif",
+      "sha256": "9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771",
+      "bytes": 152601,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker, 37,654 dots), scientific gates PASS (B-prime 0.1100 vs H33 0.0938, paired delta +0.0162 [+0.0045, +0.0270]; A 0.0710 vs H33 0.0037; mutual uniqueness ok), review-only under literal forward rule; card evidence/e6/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.zip",
+      "sha256": "f77fee7df72848478d5a7b82b44f1999d20aeb265939f5060478b02f050bfb88",
+      "bytes": 120996,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker), one-TIFF ZIP; card evidence/e6/run_card.json"
+    },
+    {
       "path": "docs/downloads/gems70-fusion-dotted-37654-20261020.tif",
       "sha256": "83b711a20b518eb89040456f70e6d750d3d361536390df198184c4d2818b9c74",
       "bytes": 128726,
@@ -153,6 +171,24 @@
       "note": "P6 dual-horizon lane, one-TIFF ZIP"
     },
     {
+      "path": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.json",
+      "sha256": "0a65bfd3d110081cc4adfba7d1cb00741bfa0192a2b3e8d1fa3dfe78ea3db0bc",
+      "bytes": 3474,
+      "note": "session 3 (P5), writer receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif",
+      "sha256": "0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931",
+      "bytes": 150877,
+      "note": "session 3 (P5) supervised within-halo ranking, published candidate; run card evidence/phase5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.zip",
+      "sha256": "a551e48e03e72240d8d0d75d845850eb4ba7f353cb8ebc961d3f65d6ababb56a",
+      "bytes": 118855,
+      "note": "session 3 (P5), one-TIFF ZIP"
+    },
+    {
       "path": "docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.json",
       "sha256": "5140d97ff0aaf409f86c3e990e9b8ca1365cc403f90c00b7538bcc4b76546126",
       "bytes": 3636,
@@ -205,42 +241,6 @@
       "sha256": "5c23877dc4c9343fee9de700b21b96f93495b7c012f7b6f73e8b01aefb8f4ebe",
       "bytes": 151585,
       "note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
-    },
-    {
-      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif",
-      "sha256": "9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771",
-      "bytes": 152601,
-      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker, 37,654 dots), scientific gates PASS (B-prime 0.1100 vs H33 0.0938, paired delta +0.0162 [+0.0045, +0.0270]; A 0.0710 vs H33 0.0037; mutual uniqueness ok), review-only under literal forward rule; card evidence/e6/run_card.json"
-    },
-    {
-      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.zip",
-      "sha256": "f77fee7df72848478d5a7b82b44f1999d20aeb265939f5060478b02f050bfb88",
-      "bytes": 120996,
-      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker), one-TIFF ZIP; card evidence/e6/run_card.json"
-    },
-    {
-      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.json",
-      "sha256": "37c2101497baeec72dcc6cea815f0f76b29b3e6445078b67e000241c2d9f66b3",
-      "bytes": 3445,
-      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker), shared writer receipt; card evidence/e6/run_card.json"
-    },
-    {
-      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.tif",
-      "sha256": "a8cef5bdbbc030cd6bdd59ea275e09e27edf87b4ee8068d3e8052bdff1cb9667",
-      "bytes": 150240,
-      "note": "P7 LOQO 49-feature within-halo ranker candidate (promote on mutual/holdout/proxy gates; review-only under literal forward rule); card evidence/p7/run_card.json"
-    },
-    {
-      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.zip",
-      "sha256": "0528f2809bf0208e46d36ddece74650aa14f4b3c8b7ca4bd3af4f9bd4b4c8e4d",
-      "bytes": 118468,
-      "note": "P7 LOQO within-halo ranker, one-TIFF ZIP"
-    },
-    {
-      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.json",
-      "sha256": "915fa941e37372b0bd3e8547d4c73ad4f07d892ee35a2dd2280cb0b8c632e4b6",
-      "bytes": 3484,
-      "note": "P7 LOQO within-halo ranker, writer receipt"
     }
   ]
 }

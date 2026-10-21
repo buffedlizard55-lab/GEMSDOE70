@@ -22,6 +22,13 @@ Read README.md, PROJECT_BRIEF.md, AGENTS.md, this file, `docs/s3-findings.md` an
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
 .venv/bin/python scripts/restore_data.py
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_experiment_v5.py   # ~11 min CPU; regenerates evidence/p5hgb/
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+.venv/bin/python -m pytest -q
+```
+
+=== S3 lane (parallel) ===
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE   # HEAD b99591e used
 .venv/bin/python scripts/run_experiment_s3.py        # ~25 min on 2 CPU / 3 GB
 .venv/bin/python scripts/proxy_calibration_s3.py     # ~1 min
@@ -74,7 +81,7 @@ untouched outer split, corroborate proxy labels and data rights, then assess liv
 Do not tune or submit the negative P5-cover file. Concurrent integration preserved two
 stronger but still negative and literal-duplicate lanes: E5 supervised LOQO
 (`evidence/e5/`, SGMC proxy B′ 0.0886) and P5 analytic dot halo
-(`evidence/phase5/`, SGMC proxy B′ 0.0766); neither is an organizer score or slot
+(`evidence/p5hgb/`, SGMC proxy B′ 0.0766); neither is an organizer score or slot
 approval. The P5-cover run remains a separate immutable continuous research TIFF.
 
 ---
@@ -113,9 +120,6 @@ Canonical `evidence/run_card.json` remains H70 as set by that session; P4 builde
 read `evidence/phase4/run_card.json` explicitly. The new measured review card remains
 `evidence/review/run_card.json`. All six artifacts directly fail the binary-witness forward rule.
 Integrated suite: 212 passed (three upstream affine deprecation warnings).
-
----
-
 # Handoff — 2026-10-20 (session 2, branch arena/9fe83934-gemsdoe70)
 
 Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
