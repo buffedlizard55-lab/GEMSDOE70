@@ -30,7 +30,7 @@ from sklearn.metrics import roc_auc_score
 from gems57 import evaluate_holdout, holdout, submission_writer, uniqueness
 from gems57.grid import load_grid, write_geotiff
 from gems70 import method_v2 as m2
-from gems70 import method_v5 as m5
+from gems70 import method_p7 as m5
 from restore_data import DATA, PINS, sha
 from run_experiment_v4 import cropped
 

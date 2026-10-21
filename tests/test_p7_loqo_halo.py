@@ -10,7 +10,7 @@ import pytest
 import rasterio
 
 from gems57 import grid
-from gems70 import method_v5 as m5
+from gems70 import method_p7 as m5
 from gems70.release import phase5_status, valid_canary
 
 ROOT = Path(__file__).resolve().parents[1]
