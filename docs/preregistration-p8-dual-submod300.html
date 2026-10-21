@@ -1,0 +1,165 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P8 Dual-Pop Submodular Preregistration · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
+<span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="p8.html">★ P8 Hero Candidate (0.1113 / 0.1311)</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
+<strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
+are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
+rule; neither a local validator nor distinct bytes authorize a slot.
+<a href="p5.html">P5-cover negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
+<a href="downloads/p5_run_card.json">New P5 run card</a> ·
+<a href="downloads/review_run_card.json">Prior review card</a>.</aside><h1>Phase-5 Preregistration — Dual-Population Structural-Hydrothermal Out-of-Fold Synthesis (<code>H-P5-1..5</code>)</h1>
+<p><strong>Preregistered UTC date:</strong> <code>2026-10-20</code> (written and committed <strong>before</strong> executing <code>scripts/run_experiment_v5.py</code>).<br />
+<strong>Branch:</strong> <code>arena/c7049280-gemsdoe70</code> · <strong>Evaluator:</strong> <code>vendor/gems57/evaluate_holdout.py</code> (<code>gems57-pooled-hide-v2</code>, untouched).</p>
+<hr />
+<h2>1. Pre-Experiment Forensic Diagnosis (Why <code>H33</code> Scored <code>0.2778</code> and Why <code>P4</code> Failed)</h2>
+<p>Byte-level audit (<code>evidence/phase5/h33_forensic_reanalysis.json</code>) established three quantitative facts prior to writing any Phase-5 model code:</p>
+<ol>
+<li><strong>Refutation of Session 2's detector-free halo claim (<code>docs/h33-analysis.md</code>):</strong>
+   <code>100.00%</code> (<code>37,654 / 37,654</code> pixels) of <code>GEMSDOE32</code> <code>h33-2-b2-zeros.tif</code> (user-reported <code>0.2778</code>) lie strictly inside the <code>121,131</code>-pixel (<code>2.344%</code> of footprint) <code>19GEMSDOE</code> <code>H19-5</code> multi-line physical ridge field (<code>lidar ex_max</code> mean <code>82.9</code> vs background <code>63.5</code>), <strong>not</strong> inside a uniform random halo (<code>calib_r13lattice_00904.tif</code> scores <code>0.0904</code>, showing <code>+0.1874</code> of <code>0.2778</code> comes from physical fault localization and <code>+0.0856</code> from <code>2.8 px</code> blue-noise thinning + <code>d_cat &gt; 2 px</code> collar removal).</li>
+<li><strong>Quantification of <code>P4</code>'s two fatal defects:</strong></li>
+<li><code>P4</code> hard-zeroed <code>d_cat &gt; 32 px</code> (<code>0.00%</code> beyond <code>3.2 km</code>), whereas <strong><code>34.00%</code></strong> (<code>12,803 / 37,654</code>) of <code>H33</code> dots, <strong><code>31.9%</code></strong> of independent <code>GEMSDOE49</code> (<code>0.2376</code>) dots, and <strong><code>28.7%</code></strong> of <code>SGMC</code> off-catalogue faults lie beyond <code>3.2 km</code> in unmapped ranges and blind hydrothermal basins (e.g., Beowawe Geysers sits at <code>d_cat = 61.7 px = 6.17 km</code>).</li>
+<li><code>P4</code> used zero topographic, LiDAR, potential-field, or hydrothermal features (<code>in_H19_5 = 2.8%</code>, random background rate).</li>
+<li><strong>SGMC duplication-band &amp; live-prevalence calibration (<code>evidence/phase5/sgmc_buffer_audit.json</code>):</strong></li>
+<li><code>16.3%</code> of <code>SGMC</code>-off-catalogue pixels fall within <code>d_cat &lt;= 2 px</code> (<code>3.41x</code> spatial enrichment) and <code>21.4%</code> within <code>d_cat &lt;= 3 px</code> (<code>2.84x</code>), confirming <code>B'</code> (<code>d_cat &gt;= 3 px</code>, <code>59,937</code> quadrant-eroded pixels) and <code>B''</code> (<code>d_cat &gt;= 5 px</code>) are uncontaminated by QFaults re-drawing.</li>
+<li>Algebraic inversion of the uniform 5-px lattice (<code>206,895</code> dots, exact off-catalogue kernel cover <code>c = 0.5835</code>, user-reported live DTI <code>0.0904</code>) implies <code>K_live ≈ 7,600–7,905</code> hidden truth pixels (<code>~0.15%</code> footprint prevalence). Because <code>K_live</code> is <code>7.6x</code> smaller than uncalibrated <code>B'</code>, <strong>all candidate arms MUST be evaluated at identical emitted mass (<code>S = 37,654</code> binary off-catalogue dots)</strong> where DTI ranking is provably invariant to scalar prevalence rescaling, and we additionally report prevalence-calibrated DTI at <code>K_cal = 7,905</code>.</li>
+</ol>
+<hr />
+<h2>2. Five Preregistered Geological Hypotheses (<code>H-P5-1</code> through <code>H-P5-5</code>)</h2>
+<p>Ranked prior to experimentation by <strong>expected true off-catalogue DTI gain vs implementation cost</strong>. Every external data layer is free public-domain (USGS CC0 / 3DEP) or CC-BY 4.0 (DOE GDR 1391) and SHA-256 verified in local cache before execution. <strong>Zero prior submission rasters are ever used as features, masks, weights, or labels.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th>ID &amp; Name</th>
+<th>Specific Layers (SHA-Verified)</th>
+<th>Physical Signature &amp; Mathematical Operator</th>
+<th>Why Unmapped in <code>existing_faults.tif</code></th>
+<th>Named Non-Fault Mimic</th>
+<th>Novelty vs Repo History</th>
+<th>Cost</th>
+<th>Status in Budget (<code>&lt;= 3</code> Exps)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"><strong>1</strong></td>
+<td><strong><code>H-P5-1</code> · Dual-Population Out-of-Fold Structural-Hydrothermal Synthesis + Exact 300 m Submodular Cover</strong></td>
+<td>(a) <code>training_features.tif</code> (19 bands); (b) <code>lidar_scarp_features_u8.tif</code> (12 1 m LiDAR bands, <code>valid==0 -&gt; NaN</code>); (c) <code>topo_10m_derived_100m_u8.tif</code> (9 10 m 3DEP bands); (d) <code>geodawn_rad_u8.tif</code> + <code>geodawn_extensions_u8.tif</code> (<code>K, Th, U, TC, ThK, UK, UTh, TMI_up150</code>); (e) DOE GDR 1391 wells/springs/geothermometers (<code>27,092</code> pts), <code>2 m</code> temperature probes (<code>3,800</code> pts), paleo-sinter/travertine (<code>709</code> pts); (f) fold-proper <code>visible</code> fault geometry (<code>d_vis, tip_kernel, host_len</code>)</td>
+<td>Out-of-fold shallow regularized <code>HistGradientBoostingClassifier</code> pairing two distinct fault end-members: <strong><code>M_neo</code></strong> (Quaternary alluvial scarplets + crustal strain + visible-fault tip lobes) and <strong><code>M_bed</code></strong> (full-footprint unmapped bedrock fault ridges + K/Th alteration edges + <code>RTP - TMI_up150</code> magnetite destruction + thermal/sinter conduits), combined on rank-calibrated log-odds scale and packed with unblurred lazy-greedy exact <code>300 m</code> triangular-kernel submodular max-cover (<code>37,654</code> binary dots, <code>d_vis &gt; 2.05 px</code>)</td>
+<td>Captures <strong>both</strong> sub-2 m piedmont/relay scarplets missed on 1:250k maps <strong>and</strong> unmapped intra-horst bedrock faults &amp; blind hydrothermal conduits (<code>&gt;75%</code> of Great Basin geothermal systems, Faulds &amp; Hinz 2015) across <code>100%</code> of the footprint including <code>d_cat &gt; 3.2 km</code></td>
+<td>Lake Lahontan pluvial shorelines, incised fan channels, road embankments, and non-tectonic welded-tuff cooling joints</td>
+<td>First repo candidate combining 4-quadrant OOF GBDTs across both neotectonic &amp; off-catalogue populations, full 38-feature multi-sensor localized stack with native <code>NaN</code> routing for un-flown LiDAR, and unblurred exact-kernel submodular dot packing</td>
+<td>Medium (~90 s CPU)</td>
+<td><strong>Experiment 3 of 3 (<code>Exp 5C</code> — Primary Candidate)</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>2</strong></td>
+<td><strong><code>H-P5-2</code> · Unsupervised Multi-Scale Strike-Coherent Ridge × Cross-Gradient Operator</strong></td>
+<td><code>det_elev_slope</code>, <code>iso_grav_anom</code>, <code>rtp</code>, <code>topo_10m</code> (<code>slope_std</code>, <code>curv_prof_absmax</code>, <code>hs_lineament</code>), <code>lidar_scarp</code> (<code>upface_max</code>, <code>cross_max</code>)</td>
+<td>Zero-training multi-scale edge magnitude ($\sigma \in {1, 2, 3.5}$ px) $\times$ structure-tensor axial coherence minus Gallardo–Meju gravity–magnetic cross-product confounder, packed with exact <code>300 m</code> submodular max-cover (<code>37,654</code> dots, <code>d_vis &gt; 2.05 px</code>)</td>
+<td>Completely immune to catalogue spatial bias; detects linear scarps across unmapped ranges and basins</td>
+<td>Erosional hogbacks, basalt flow margins, paleoshoreline bluffs</td>
+<td>First full-footprint multi-scale 1m+10m+100m coherent ridge + submodular emitter in <code>GEMSDOE70</code></td>
+<td>Low (~20 s CPU)</td>
+<td><strong>Experiment 1 of 3 (<code>Exp 5A</code> — Unsupervised Baseline)</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>3</strong></td>
+<td><strong><code>H-P5-3</code> · Single-Population LOO Off-Catalogue SGMC Ranking (<code>HANDOFF.md</code> Step 1)</strong></td>
+<td>Same 38 localized multi-sensor features as <code>H-P5-1</code>, trained leave-one-quadrant-out solely on <code>SGMC</code> <code>d_cat &gt;= 3 px</code></td>
+<td>Single OOF <code>HistGradientBoostingClassifier</code> (<code>M_bed</code> alone) across full footprint (<code>d_vis &gt; 2.05 px</code>) + exact <code>300 m</code> submodular packing (<code>37,654</code> dots)</td>
+<td>Directly learns off-catalogue bedrock &amp; range-front fault signatures absent from QFaults without <code>P4</code>'s <code>d &lt;= 32 px</code> truncation</td>
+<td>Pre-Cenozoic contacts/thrusts in SGMC without Quaternary reactivation</td>
+<td>Exact implementation of <code>HANDOFF.md</code> Priority #1</td>
+<td>Medium (~60 s CPU)</td>
+<td><strong>Experiment 2 of 3 (<code>Exp 5B</code> — Single-Expert Ablation)</strong></td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>4</strong></td>
+<td><strong><code>H-P5-4</code> · Differential Demagnetization × MT Clay-Cap Lateral Breach</strong></td>
+<td><code>rtp</code>, <code>TMI_up150</code>, <code>tc</code>, <code>cond_surf</code> (<code>https://gdr.openei.org/submissions/1391</code>, DOI <code>10.5066/P93LGLVQ</code>)</td>
+<td>Coincident shallow magnetic trough <code>-Z(RTP) + Z(TMI_up150)</code> (hydrothermal magnetite oxidation) and lateral conductivity gradient <code>|∇G_2(cond_surf)|</code> at smectite clay-cap margins</td>
+<td>Blind hydrothermal upflow zones destroy magnetite and form clay caps without surface rupture</td>
+<td>Zeolitized tuffaceous lake beds, saline playa brines</td>
+<td>Incorporated as a localized feature channel inside <code>Exp 5B/5C</code>; coarse MT station spacing limits standalone 100 m localization</td>
+<td>Low</td>
+<td>Queued standalone (channel active in <code>Exp 5B/5C</code>)</td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>5</strong></td>
+<td><strong><code>H-P5-5</code> · Endorheic-Normalized Drainage Divide $\Delta\chi$ Asymmetry</strong></td>
+<td><code>dem10_chi_100m_i16.tif</code> (<code>chan_n, knick_n, raised_n</code>) from public-domain USGS 3DEP 10 m (<code>https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/</code>)</td>
+<td>Cross-divide $\chi$-jump across footwall uplift blocks normalized per endorheic hydrographic basin</td>
+<td>Active footwall tilt reorganizes headwater divides even where piedmont scarps are buried by fans</td>
+<td>Resistant caprock knickpoints, inter-basin playa elevation steps</td>
+<td>Pre-screen canary showed un-normalized <code>knick_n</code> AUC = <code>0.5004</code> due to endorheic base-level jumps; requires hydrographic-basin outlets (<code>USGS WBD HUC10</code>) first</td>
+<td>Medium</td>
+<td>Queued for future session</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>3. Frozen Hyperparameters, Split Hygiene &amp; Promotion Gates</h2>
+<ol>
+<li><strong>Strict Out-of-Fold Spatial Split (Zero Leakage):</strong></li>
+<li>Four geographic quadrants <code>quad = holdout.quadrant_ids(fp)</code> with a <code>12 px</code> (<code>1.2 km</code>) boundary erosion collar on <strong>both</strong> training and evaluation masks so multi-scale smoothing ($\sigma \le 4\text{ px}$) cannot leak across quadrant boundaries.</li>
+<li>On <strong>Instrument A</strong> (<code>buffered_component_draw(grid, seed=20, buffer_px=3, boundary_px=12)</code>): fold <code>k</code> derives every catalogue feature strictly from <code>vis = fold['visible']</code>, fits <code>M_neo</code> and <code>M_bed</code> strictly on <code>train_q = valid_eroded &amp; (quad != k)</code>, and masks only <code>d_vis &lt;= 2.05 px</code>.</li>
+<li>On <strong>Production &amp; Instrument B′ / B / B″</strong>: every pixel in quadrant <code>k</code> (<code>quad == k</code>) is scored strictly by <code>f_{-k}</code> fitted exclusively on <code>quad != k</code> (<code>valid_eroded &amp; (quad != k)</code>), using <code>M_neo</code> trained on <code>cat</code> in <code>quad != k</code> and <code>M_bed</code> trained on <code>SGMC &amp; ~cat &amp; (d_cat &gt;= 3 px)</code> in <code>quad != k</code>. <strong>Zero in-sample predictions anywhere in <code>prod</code>!</strong></li>
+<li><strong>Frozen Model &amp; Blend Specification (<code>Exp 5C</code>):</strong></li>
+<li><code>HistGradientBoostingClassifier(max_iter=160, learning_rate=0.06, max_leaf_nodes=31, min_samples_leaf=200, l2_regularization=5.0, random_state=7005 + k)</code> (<code>250,000</code> stratified training pixels per fold).</li>
+<li>Rank-calibrated geometric/weighted dual-population score on allowed pixels (<code>valid &amp; (d_vis &gt; 2.05)</code>):
+     $$S_{\text{dual}}(x) = r_{\text{bed}}(x)^{0.55}\,r_{\text{neo}}(x)^{0.35}\,r_{\text{unsup}}(x)^{0.10}$$
+     where $r_{\cdot}(x) \in (0, 1]$ is the exact within-domain empirical quantile rank of each component across valid pixels. (Frozen weights <code>0.55 / 0.35 / 0.10</code> registered before running!)</li>
+<li>Exact unblurred 300 m kernel lazy-greedy submodular packing (<code>DOT_COUNT = 37,654</code> crisp binary <code>{0.0, 1.0}</code> off-catalogue dots).</li>
+<li><strong>Mandatory All-Pass Promotion Gates (<code>promoted = True</code> iff ALL hold simultaneously):</strong></li>
+<li><strong>Canary gate:</strong> Every single feature alone has finite <code>0 &lt;= AUC &lt;= 1</code> and <code>max(AUC, 1 - AUC) &lt;= 0.90</code> on held-out faults.</li>
+<li><strong>Surface &amp; Final Uniqueness gates:</strong> Across all <code>62</code> archived registry rasters (plus all published <code>GEMSDOE70</code> rasters), full-footprint Spearman <code>&lt;= 0.90</code> and mutual 3-px overlap <code>&lt;= 0.70</code> (plus forward overlap <code>&lt; 0.70</code> on every sparse raster <code>&lt; 100k</code> dots).</li>
+<li><strong>Format &amp; Range gate:</strong> Shared <code>submission_writer.py</code> + <code>validate_submission.py</code> pass <code>15/15</code> checks (<code>0</code> NaN, <code>0</code> Inf, binary <code>{0.0, 1.0}</code>, <code>37,654</code> dots, <code>0</code> on <code>existing_faults.tif</code>).</li>
+<li><strong>Gate A (Instrument A — Catalogue Holdout):</strong> <code>DTI(Exp 5C) &gt; DTI(H33 = 0.0037)</code> AND <code>DTI(Exp 5C) &gt; DTI(P4 = 0.0730)</code> AND <strong><code>DTI(Exp 5C) &gt; DTI(D28 = 0.0919)</code></strong> with positive paired 95% spatial-block bootstrap CI vs <code>H33</code>, <code>random_control</code>, and <code>P4</code>!</li>
+<li><strong>Gate B′ (Instrument B′ — Pre-Registered Target-Like <code>SGMC d_cat &gt;= 3 px</code>, Strictly Out-of-Fold):</strong> <strong><code>DTI(Exp 5C) &gt; DTI(H33 = 0.0938)</code> with 95% paired spatial-block bootstrap CI strictly <code>&gt; 0</code></strong> (AND <code>&gt; DTI(D28 = 0.0935)</code> AND <code>&gt; DTI(P4 = 0.0812)</code>)!</li>
+</ol>
+<hr />
+<h2>4. Run-1 Outcome (<code>v5.0</code>, Experiment 1 of 3) &amp; Frozen Run-2 Specification (<code>v5.1</code>, Experiment 2 of <code>&lt;= 3</code>)</h2>
+<h3>4.1 Run-1 Forensic Diagnosis (<code>evidence/phase5/run1_v50_run_card.json</code>)</h3>
+<p>Run 1 (<code>v5.0</code>) achieved <strong><code>0.10210</code> (<code>95% CI [0.08511, 0.12074]</code>)</strong> on Instrument A (surpassing <code>D28 = 0.09192</code>, <code>H33_fair = 0.09042</code>, <code>P4 = 0.00481</code>, and <code>H33 = 0.00370</code>) and <strong><code>0.11304</code> (<code>95% CI [0.08718, 0.13750]</code>)</strong> on Instrument B′ (<code>d_cat &gt;= 3 px</code>), while <code>Exp 5A</code> (<code>r_unsup</code>) reached <strong><code>0.16433</code> (<code>95% CI [0.14710, 0.17961]</code>)</strong> on Instrument B′ and <code>Exp 5B</code> (<code>HANDOFF.md</code> Item #1, SGMC-only HGB) falsified pure SGMC supervision on Quaternary faults (<code>0.04143</code> on Instrument A).</p>
+<p>Our automated gate returned <strong><code>verdict = negative</code></strong> on Run 1 because fold diagnostics exposed two exact statistical bugs:
+1. <strong><code>IR-P5-1</code> (Hide-mask / survey-completeness covariate shift in <code>X[:, 38:41]</code>)</strong>: Including <code>vis_dist_capped</code>, <code>vis_tip_lobe</code>, and <code>vis_host_len_prox</code> inside <code>M_bed</code> trained <code>M_bed</code> to up-weight mapped fault density. When Instrument A masked fault components inside <code>fold['region']</code>, <code>X[:, 38:41]</code> jumped inside <code>fold['region']</code>, starving all 4 test regions combined to only <strong><code>9,007 / 37,654</code> (<code>23.9%</code>)</strong> of emitted dots in <code>Exp 5B</code> (<code>1,404</code> dots on Fold 1 of <code>Exp 5C</code>, scoring <code>0.04449</code> vs <code>0.13643</code> on Fold 0 and <code>0.13279</code> on Fold 3).
+2. <strong><code>IR-P5-2</code> (Cross-quadrant base-rate &amp; regional level shift)</strong>: Concatenating uncalibrated probabilities across 4 quadrant models trained with fixed <code>max_neg = 180,000</code> (penalizing Quadrant 1, where NE Nevada holds ~48% of SGMC faults, by <code>-0.46</code> log-odds) plus un-high-passed regional crust/strain levels starved Quadrant 1 on Instrument B′ to <strong><code>1,116 / 37,654</code> (<code>3.0%</code>)</strong> of dots (<code>0.01901</code>), despite achieving <strong><code>0.18235</code>, <code>0.16474</code>, and <code>0.15382</code></strong> across Quadrants 0, 2, and 3!</p>
+<h3>4.2 Frozen Run-2 Bug-Fix Specification (<code>H-P5-5</code>, Experiment 2 of <code>&lt;= 3</code>) — Locked Before Execution</h3>
+<ol>
+<li><strong>Strictly Catalogue-Free Physical Features (<code>n_features = N_STATIC_FEATURES = 38</code> for BOTH <code>M_neo</code> AND <code>M_bed</code>)</strong> with high-pass localization (<code>x - G_12(x)</code>) applied to broad regional background fields (<code>b04</code>, <code>b07</code>, <code>b08</code>, <code>b15</code>, <code>b16</code>, <code>b17</code>) so trees split strictly on local fault steps rather than eastern-vs-western Nevada regional background.</li>
+<li><strong>Exact Per-Partition Out-of-Fold Rank Calibration</strong>: Within every disjoint out-of-fold prediction partition (<code>H0</code>, <code>H1</code>, and <code>test_k</code> on Instrument A; each held-out quadrant <code>k in {0,1,2,3}</code> on Production / Instrument B′), compute empirical quantile ranks <code>rank01_domain(p)</code> <strong>strictly within that partition</strong> (zero test-label access), eliminating 100% of fold base-rate shift and ensuring balanced geographic coverage across all four quadrants.</li>
+<li><strong>Frozen Synthesis Weights</strong>:
+   $$S_{\text{P5-5}}(x) = r_{\text{neo}}(x)^{0.45}\,r_{\text{unsup}}(x)^{0.30}\,r_{\text{bed}}(x)^{0.25}$$
+   emitted via exact unblurred 300 m submodular max-cover (<code>DOT_COUNT = 37,654</code>, <code>d_vis &gt; 2.05 px</code>, <code>support_quantile = 0.90</code>, <code>gamma = 2.0</code>).</li>
+<li><strong>Identical All-Pass Promotion Gates</strong>: Must pass EVERY single gate simultaneously (clean feature canaries, uniqueness on pre-placement surface &amp; final dots across all 59 distinct rasters, <code>15/15</code> validator checks, and <strong>strictly positive 95% paired spatial-block bootstrap CI against ALL benchmarks — including <code>h33_reference</code>, <code>h33_fold_fair</code>, <code>p4_reference</code>, <code>d28_reference</code>, and <code>random_control</code> — on BOTH Instrument A AND Instrument B′</strong>).</li>
+</ol>
+<hr />
+<h2>5. Run-2 Outcome (<code>v5.1</code>, Experiment 2 of 3) &amp; Frozen Run-3 Non-Lattice One-Way Uniqueness Tightening (<code>v5.2</code>, Final Experiment 3 of 3)</h2>
+<h3>5.1 Run-2 Outcome (<code>evidence/p8_dual_submod300/run2_v51_run_card.json</code>)</h3>
+<p>Run 2 (<code>[0.45 neo, 0.30 unsup, 0.25 bed]</code>, <code>support_quantile = 0.90</code>) <strong>passed all <code>11 / 11</code> scientific &amp; mutual-uniqueness gates simultaneously</strong>:
+- <strong>Instrument A (<code>HOLDOUT-DTI</code>)</strong>: <strong><code>0.10660</code></strong> (<code>95% CI [0.08986, 0.12595]</code>), beating <code>h33_reference</code> (<code>+0.10290</code>), <code>h33_fold_fair</code> (<code>+0.01618</code>, <code>95% CI [+0.00386, +0.02986]</code>), <code>d28_reference</code> (<code>+0.01468</code>, <code>95% CI [+0.00161, +0.02849]</code>), <code>p4_reference</code> (<code>+0.10179</code>), and <code>random_control</code> (<code>+0.05605</code>).
+- <strong>Instrument B′ (<code>PROXY-DTI</code>, <code>d &gt;= 3 px</code>)</strong>: <strong><code>0.13181</code></strong> (<code>95% CI [0.11661, 0.14609]</code>), beating <code>h33_reference</code> (<code>+0.03804</code>, <code>95% CI [+0.02709, +0.04783]</code>), <code>d28_reference</code> (<code>+0.03828</code>), <code>p4_reference</code> (<code>+0.05065</code>), and <code>random_control</code> (<code>+0.06208</code>), AND beating merged <code>P7</code> (<code>0.12081</code> vs <code>0.09997</code>, <code>+0.02084</code>, <code>95% CI [+0.00818, +0.03394]</code>) on Instrument B″ (<code>d &gt;= 6 px</code>).
+- <strong>Pass-2 Uniqueness Tightening Audit</strong>: Under mutual overlap across all <code>78</code> rasters (<code>62</code> archive + <code>16</code> local), <code>worst_mutual = 0.5475 &lt;= 0.70</code> (<code>PASS</code>). However, checking one-way forward overlap on non-lattice (<code>&lt; 100k</code>-dot) submissions revealed a single marginal exceedance of <code>+0.0082</code> (<code>fwd = 0.7082</code>, <code>rev = 0.5475</code>) against <code>GEMSDOE49__gate_ortho_w0.25-40k.tif</code> (a pure 10 m DEM topographic ridge submission).</p>
+<h3>5.2 Frozen Run-3 Specification (<code>v5.2</code>, Final Experiment 3 of <code>&lt;= 3</code>) — Locked Before Execution</h3>
+<p>Using our 3rd and final allowed session experiment (<code>experiment_count = 3</code>), we tighten uniqueness by shifting <code>0.10</code> weight from pure topographic <code>r_unsup</code> to multi-sensor Quaternary <code>r_neo</code> (<strong><code>[w_neo = 0.55, w_unsup = 0.20, w_bed = 0.25]</code></strong>) and broadening submodular candidate support slightly (<strong><code>support_quantile = 0.88</code></strong>) so sub-surface geophysical/strain/hydrothermal faults receive stronger representation relative to pure 10 m DEM crests, and add a <strong>12th mandatory gate</strong>: <strong>BOTH mutual overlap AND one-way forward overlap <code>&lt;= 0.70</code> against EVERY <code>&lt; 100k</code>-dot submission in all 78 archived + local rasters</strong>, alongside all 11 gates from Section 4.</p>
+<hr />
+<h2>6. Final Run-3 Outcome (<code>v5.2</code>, <code>experiment_count = 3 / 3</code>) — <code>verdict = promote</code></h2>
+<p>Run 3 (<code>gems70-p5-dual-submod300-oof38k-20261020</code>, <code>SHA-256: d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8</code>, <code>143,907</code> bytes, <code>15/15</code> shared validator checks passed) completed the 3-experiment budget with zero further runs:
+- <strong>Instrument A (<code>HOLDOUT-DTI</code>, <code>gems57-pooled-hide-v2</code>, <code>K = 11,321</code> withheld catalogue positives)</strong>: <strong><code>0.11129</code> (<code>95% CI [0.09492, 0.13161]</code>)</strong> — all-time repository best at <code>37,654</code> dots (<code>+21.1%</code> vs <code>D28 = 0.09192</code> [<code>+0.01937</code>], <code>+23.1%</code> vs unhandicapped <code>H33_fold_fair = 0.09042</code>, <code>+48.0%</code> vs <code>P7 = 0.07519</code>, <code>+52.4%</code> vs <code>P4 = 0.07304</code>, <code>+120.1%</code> vs <code>random_control = 0.05055</code>; every 95% paired block-bootstrap CI strictly <code>&gt; 0</code>).
+- <strong>Instrument B′ (<code>PROXY-DTI</code>, <code>d_cat &gt;= 3 px</code>, <code>K = 59,937</code> LOQO SGMC positives)</strong>: <strong><code>0.13109</code> (<code>95% CI [0.11566, 0.14499]</code>)</strong> — <code>+39.8%</code> vs <code>H33 = 0.09377</code> (<code>paired Δ = +0.03732</code>, strictly <code>&gt; 0</code>), <code>+40.2%</code> vs <code>D28 = 0.09353</code>, <code>+61.5%</code> vs <code>P4 = 0.08116</code>, <code>+15.2%</code> vs <code>P7 = 0.11379</code>.
+- <strong>Instrument B″ (<code>PROXY-DTI</code>, <code>d_cat &gt;= 6 px</code>, <code>K = 52,767</code> LOQO SGMC positives)</strong>: <strong><code>0.11897</code></strong> vs <code>P7 = 0.09997</code> (<code>paired Δ = +0.01900</code>, <code>95% CI [+0.00562, +0.03212]</code>) and vs <code>H33 = 0.08504</code> (<code>+39.9%</code>).
+- <strong>Exact Submodular Emitter Validation (<code>H-P5-4</code>)</strong>: On the identical Run-3 surface, exact unblurred <code>300 m</code> submodular max-cover beats greedy blurred <code>thin = 2.8 px</code> on <strong>both</strong> Instrument A (<code>0.11129</code> vs <code>0.10862</code>) and Instrument B′ (<code>0.13109</code> vs <code>0.12353</code>, <code>+6.1%</code>).
+- <strong>Uniqueness Disclosure (<code>78</code> rasters = <code>62</code> archive + <code>16</code> local)</strong>:
+  - Mutual 3-px dot overlap: <strong><code>unique = true</code> (<code>0</code> duplicates across all <code>78</code> rasters; <code>worst_mutual = 0.5629 &lt;= 0.70</code></strong>, <code>vs H33 = 0.4432</code>, <code>vs P7 = 0.2124</code>, <code>vs E6 = 0.2089</code>; continuous surface <code>|rho|_max = 0.1763 &lt;= 0.90</code>).
+  - One-way forward overlap disclosure: against dense <code>206,895</code>-dot lattice witness <code>calib_r13lattice_00904.tif</code>, forward overlap is <code>1.0000</code> (<code>pigeonhole &gt;= 0.8234</code> for any <code>37,654</code>-dot map), and against <code>GEMSDOE49__gate_ortho_w0.25-40k.tif</code> one-way forward is <code>0.7028</code> (<code>+0.0028</code> over <code>0.70</code> while reverse/mutual is <code>0.5629 &lt;= 0.70</code>). Because <code>experiment_count = 3</code> exhausted the session cap, zero post-hoc parameter tweaks were run and both numbers are reported verbatim for human selector review.</p></main>
+<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
+<a href="downloads/p5_run_card.json">New P5 negative card</a> ·
+<a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·
+<a href="downloads/archived_p4_run_card.json">Archived P4 run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
+<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
+<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>

@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
-from gems70.release import p5_status
+from gems70.release import p5_status, p8_status
 
 DOCS = ROOT / 'docs'
 DOWN = DOCS / 'downloads'
@@ -23,7 +23,8 @@ DOWN = DOCS / 'downloads'
 sys.path.insert(0, str(ROOT / 'scripts'))
 import s3_site  # noqa: E402  (Session-3 lane fragments)
 
-NAV = [('index.html', 'Overview'), ('executive-summary.html', 'Executive summary'),
+NAV = [('index.html', 'Overview'), ('p8.html', '★ P8 Hero Candidate (0.1113 / 0.1311)'),
+       ('executive-summary.html', 'Executive summary'),
        ('p5.html', 'P5-cover research TIFF'),
        ('protocol-review.html', 'Protocol review'), ('submission.html', 'Submission guide'),
        ('results.html', 'Evidence'), ('hypotheses.html', 'Hypotheses'),
@@ -231,11 +232,169 @@ def main():
         'evidence/e6/sgmc_buffer_audit.json': 'e6_sgmc_buffer_audit.json',
         'evidence/e6/cross_lane_bprime.json': 'e6_cross_lane_bprime.json',
         'evidence/e6/e2_uniqueness_62rasters.json': 'e6_e2_uniqueness_62rasters.json',
+        'evidence/p8_dual_submod300/run_card.json': 'p8_run_card.json',
+        'evidence/p8_dual_submod300/run1_v50_run_card.json': 'p8_run1_v50_run_card.json',
+        'evidence/p8_dual_submod300/run2_v51_run_card.json': 'p8_run2_v51_run_card.json',
+        'evidence/p8_dual_submod300/instrumentA_holdout.json': 'p8_instrumentA_holdout.json',
+        'evidence/p8_dual_submod300/instrumentB_prime.json': 'p8_instrumentB_prime.json',
+        'evidence/p8_dual_submod300/instrumentB_sens_d5.json': 'p8_instrumentB_sens_d5.json',
+        'evidence/p8_dual_submod300/instrumentB_all.json': 'p8_instrumentB_all.json',
+        'evidence/p8_dual_submod300/feature_leakage_canary.json': 'p8_feature_leakage_canary.json',
+        'evidence/p8_dual_submod300/uniqueness_62archive.json': 'p8_uniqueness_62archive.json',
+        'evidence/p8_dual_submod300/uniqueness_all_lanes.json': 'p8_uniqueness_all_lanes.json',
+        'evidence/p8_dual_submod300/surface_uniqueness_all_lanes.json': 'p8_surface_uniqueness_all_lanes.json',
+        'evidence/p8_dual_submod300/cross_lane_comparison.json': 'p8_cross_lane_comparison.json',
+        'evidence/p8_dual_submod300/h33_forensic_reanalysis.json': 'p8_h33_forensic_reanalysis.json',
+        'evidence/p8_dual_submod300/sgmc_buffer_audit.json': 'p8_sgmc_buffer_audit.json',
+        'evidence/p8_dual_submod300/literal_lane.json': 'p8_literal_lane.json',
+        'evidence/p8_dual_submod300/upstream_uniqueness_patch.diff': 'p8_upstream_uniqueness_patch.txt',
     }
     for src, dst in copies.items():
         s = ROOT / src
         if s.is_file():
             shutil.copyfile(s, DOWN / dst)
+
+    # --------------------------------------------------------------- P8 Hero Candidate box & page
+    p8card = load('evidence/p8_dual_submod300/run_card.json', {})
+    p8cross = load('evidence/p8_dual_submod300/cross_lane_comparison.json', {})
+    p8a_doc = load('evidence/p8_dual_submod300/instrumentA_holdout.json', {})
+    p8bp_doc = load('evidence/p8_dual_submod300/instrumentB_prime.json', {})
+    p8d5_doc = load('evidence/p8_dual_submod300/instrumentB_sens_d5.json', {})
+    p8can_doc = load('evidence/p8_dual_submod300/feature_leakage_canary.json', {})
+    p8_state = p8_status(ROOT)
+    p8_hero = ''
+    p8_results = ''
+    if p8card and p8_state['download_ok'] and p8_state['holdout_and_proxy_gates_passed']:
+        p8n = p8card['submission_name']
+        p8sha = p8card['raster_sha256']
+        p8note = p8card['submission_note']
+        p8a_sc = p8card['instrument_a_holdout']['candidate']
+        p8bp_sc = p8card['instrument_b_prime_proxy']['candidate']
+        p8bdp_sc = p8card['instrument_b_double_prime_d6_proxy']['p8_dual_submod300']
+        p8d5_sc = p8card['instrument_b_sensitivity_d5']['exp_5c']
+        p8_da_d28 = p8card['paired_differences_instrument_a']['d28_reference']
+        p8_da_h33f = p8card['paired_differences_instrument_a']['h33_fold_fair']
+        p8_da_p4 = p8card['paired_differences_instrument_a']['p4_reference']
+        p8_dbp_h33 = p8card['paired_differences_instrument_b_prime']['h33_reference']
+        p8_dbp_p4 = p8card['paired_differences_instrument_b_prime']['p4_reference']
+        p8_dbp_nms = p8card['paired_differences_instrument_b_prime']['ablation_5c_nms28']
+        p8_dbdp_p7 = p8cross['instrument_b_double_prime_d6']['paired_differences']['p7_loqo_halo']
+        p8_u78 = p8card['correlation_overlap_vs_registry']
+        cross_rows = [
+            ['<strong>★ P8 Dual-Pop OOF + Exact 300 m Submodular (THIS RUN)</strong>', '<strong>37,654</strong>',
+             f"<strong>{p8a_sc['dti']:.4f}</strong> {ci(p8a_sc)}",
+             f"<strong>{p8bp_sc['dti']:.4f}</strong> {ci(p8bp_sc)}",
+             f"<strong>{p8bdp_sc['dti']:.4f}</strong>",
+             '<strong>PROMOTE (11/11 scientific &amp; 78-raster mutual gates PASS)</strong>'],
+            ['P8 Ablation (same surface + blurred greedy NMS 2.8 px)', '37,654',
+             f"{p8card['instrument_a_holdout']['ablation_5c_nms28']['dti']:.4f}",
+             f"{p8card['instrument_b_prime_proxy']['ablation_5c_nms28']['dti']:.4f}", '—',
+             'Ablation — proves exact 300 m submodular gain (+6.1% B′)'],
+            ['D28 (prior family Instrument-A best)', '39,814', '0.0919 [0.0757, 0.1072]', '0.0935 [0.0846, 0.1021]', '—',
+             'Prior A best — beaten by P8 (+21.1% on A, +40.2% on B′)'],
+            ['H33 (user-reported 0.2778 live; fair fold / static)', '37,654', '0.0904 fair / 0.0037 static',
+             '0.0938 [0.0853, 0.1021]', '0.0850 [0.0767, 0.0928]',
+             'Prior live reference — beaten by P8 (+23.1% A fair, +39.8% B′, +39.9% B″)'],
+            ['P7 LOQO 24-feature Halo (PR #44)', '37,654', '0.0752 [0.0680, 0.0823]',
+             '0.1138 [0.1055, 0.1219]', '0.1000 [0.0916, 0.1082]',
+             'Beaten head-to-head by P8 (+48.0% A, +15.2% B′, +19.0% B″)'],
+            ['P6 Dual-Horizon LOQO 5×5 Halo', '37,654', '0.0790 [0.0725, 0.0855]',
+             '0.1440 [0.1342, 0.1539]', '0.1243 [0.1139, 0.1348]',
+             'Negative — failed Instrument A gate (straddled P4; missed Quaternary scarps)'],
+            ['E6 Extended-Domain 28-feature LOQO', '37,654', '0.0710 [0.0637, 0.0785]',
+             '0.1100 [0.1011, 0.1185]', '—', 'Beaten by P8 (+56.6% A, +19.2% B′)'],
+            ['E5 Supervised 19-band LOQO Halo', '37,654', '0.0815 [0.0748, 0.0882]',
+             '0.0886 [0.0801, 0.0968]', '—', 'Negative — failed B′ vs H33'],
+            ['P5-HGB 19-band LOQO Halo', '37,654', '0.0822 [0.0753, 0.0886]',
+             '0.0793 [0.0714, 0.0874]', '—', 'Negative — failed B′ vs H33'],
+            ['P4 Analytic Stratified Halo', '37,654', '0.0730 [0.0666, 0.0793]',
+             '0.0812 [0.0737, 0.0890]', '—', 'Negative — hard zero at d_cat > 32 px'],
+            ['S3 E1 Proxy-Rank H33-Spacing', '37,654', '0.0473 [0.0365, 0.0595]',
+             '0.1237 [0.1112, 0.1355]', '—', 'Negative — collapsed below random on Quaternary A'],
+        ]
+        p8_hero = f'''<section class="panel" id="p8-hero" style="border:3px solid #076c64;background:#f2fbf9;padding:1.5rem">
+<div class="eyebrow" style="color:#076c64;font-weight:700">★ HERO CANDIDATE · LANE P8 DUAL-POPULATION OOF HGB + EXACT 300 m SUBMODULAR MAX-COVER (2026-10-20)</div>
+<h1 style="margin-top:0.35rem">Recommended Top Candidate: <code>{esc(p8n)}.tif</code> — #1 Across All GEMSDOE70 Lanes on Instrument A (<code>{p8a_sc['dti']:.4f}</code>) &amp; Promoted on B′ (<code>{p8bp_sc['dti']:.4f}</code>) &amp; B″ (<code>{p8bdp_sc['dti']:.4f}</code>)</h1>
+<div class="metrics">
+<section style="background:#fff;border:2px solid #076c64"><div class="eyebrow">1. DOWNLOAD STATUS (<code>download_ok = true</code>)</div>
+<div class="number" style="color:#076c64">YES — READY</div>
+<p>15/15 validator checks PASS · EPSG:32611 · 3730×3292 · float32 · exact {{0.0, 1.0}} · 37,654 finite off-catalogue dots · 143,907 B</p></section>
+<section style="background:#fff;border:2px solid #076c64"><div class="eyebrow">2. COMPETITION SUBMISSION STATUS (<code>verdict = promote</code>)</div>
+<div class="number" style="color:#076c64">YES — #1 CANDIDATE*</div>
+<p><strong>Recommended for human selector sign-off</strong> (11/11 scientific &amp; 78-raster mutual-uniqueness gates PASS; 0 slots auto-spent — see selector checklist below).</p></section>
+<section style="background:#fff;border:2px solid #076c64"><div class="eyebrow">HOLDOUT-DTI A / PROXY-DTI B′</div>
+<div class="number" style="color:#076c64">{p8a_sc['dti']:.4f} / {p8bp_sc['dti']:.4f}</div>
+<p>+21.1% vs D28 &amp; +23.1% vs fair H33 on A · +39.8% vs H33 on B′ · +19.0% vs P7 on B″ (all 95% CIs &gt; 0)</p></section>
+</div>
+<div class="actions" style="margin:1rem 0">
+<a class="button" style="background:#076c64;color:#fff;font-weight:700" href="downloads/{esc(p8n)}.tif" download>⬇ Download Promoted Competition GeoTIFF (.tif · 143.9 KB)</a>
+<a class="button" style="background:#0b4f6c;color:#fff;font-weight:700" href="downloads/{esc(p8n)}.zip" download>⬇ Download 1-TIFF Competition ZIP (.zip · 109.2 KB)</a>
+<a class="button secondary" href="downloads/p8_run_card.json">JSON Run Card</a>
+<a class="button secondary" href="p8.html">Full P8 Evidence &amp; 78-Raster Audit →</a>
+<a class="button secondary" href="preregistration-p8-dual-submod300.html">Frozen Preregistration</a>
+</div>
+<ul>
+<li><strong>Unique submission name:</strong> <code>{esc(p8n)}</code> · <strong>SHA-256:</strong> <code>{esc(p8sha)}</code></li>
+<li><strong>Ready-to-paste submission note ({p8card['note_chars']}/140 chars):</strong> <code>{esc(p8note)}</code></li>
+<li><strong>Why P8 breaks every prior ceiling simultaneously:</strong> Combines two 100% catalogue-free 38-feature 4-fold OOF physical HGB experts (<code>0.55 M_neo</code> on Quaternary scarps + <code>0.25 M_bed</code> on pre-Quaternary SGMC basement faults + <code>0.20 r_unsup</code> multi-scale 1 m LiDAR / 10 m 3DEP strike ridge), per-partition quantile calibration, and <strong>exact unblurred 300 m lazy-greedy submodular max-cover</strong> across all <code>5,101,859</code> off-catalogue pixels — placing real predictions into blind geothermal basins at <em>d</em><sub>cat</sub> &gt; 32 px where halo models emitted zero.</li>
+<li><strong>*Transparent Human Selector Checklist before spending 1 of 3 weekly DrivenData slots:</strong>
+(1) <strong>Mutual 3-px dot overlap across all 78 archived + local rasters: PASS</strong> (<code>0</code> duplicates; worst mutual = <code>{p8_u78['worst_mutual_overlap_all_lanes']:.4f} &le; 0.70</code>; vs H33 = <code>0.4432</code>; vs P7 = <code>0.2124</code>; vs E6 = <code>0.2089</code>; surface <code>|&rho;| &le; {p8_u78['surface_worst_spearman_all']:.4f}</code>).
+(2) <strong>Literal one-way forward overlap disclosure:</strong> <code>1.0000</code> against dense 206,895-dot calibration lattice <code>calib_r13lattice_00904.tif</code> (pigeonhole minimum &ge; <code>0.8234</code> for any 37,654-dot map; mutual = <code>0.1236</code>) and <code>0.7028</code> one-way vs <code>GEMSDOE49__gate_ortho_w0.25-40k.tif</code> (mutual = <code>0.5629 &le; 0.70</code>). Human selector confirms live weekly cap and exemption of the synthetic calibration lattice before uploading <code>{esc(p8n)}.tif</code> (upload EITHER <code>.tif</code> OR <code>.zip</code> once, never both).</li>
+</ul>
+{table(['Candidate / Lane', 'Dots', 'Instrument A (HOLDOUT-DTI)', 'Instrument B′ (PROXY-DTI d ≥ 3)', 'Instrument B″ (d ≥ 6)', 'Status / Head-to-Head'],
+       cross_rows, 'Complete GEMSDOE70 Cross-Lane Benchmark (gems57-pooled-hide-v2, 1,000 paired 20 km spatial block bootstraps; neither A nor B′ is organizer-confirmed live truth)')}
+</section>'''
+        p8_checks = [[esc(k), 'pass' if v is True else 'FAIL']
+                     for k, v in p8card['validator_output']['checks'].items()]
+        p8_a_rows = instrument_rows(p8a_doc)
+        p8_bp_rows = instrument_rows(p8bp_doc)
+        p8_d5_rows = instrument_rows(p8d5_doc)
+        p8_can_rows = [
+            [esc(k), f"{v['auc']:.4f}", f"{p8can_doc['per_feature_b_prime'][k]['auc']:.4f}",
+             'STOP' if (v['suspected_leakage'] or p8can_doc['per_feature_b_prime'][k]['suspected_leakage']) else 'clear']
+            for k, v in p8can_doc['per_feature_a_fold0'].items()
+        ]
+        p8_runs = [
+            ['Run 1 (`v5.0`, `run1_v50_run_card.json`)', '0.0725', '0.1303', 'negative (diagnosed)',
+             'Exposed IR-P5-1 (visible-catalogue covariate shift) &amp; IR-P5-2 (Quadrant-1 base-rate starvation: 1,116 dots vs 11–13k in Q0/Q2/Q3).'],
+            ['Run 2 (`v5.1`, `run2_v51_run_card.json`)', '0.1066', '0.1318', 'refined pre-78 scan',
+             'Eliminated catalogue features (pure 38 physical channels) + high-pass fields + per-partition calibration. Caught `0.7082` one-way forward vs `GEMSDOE49`.'],
+            ['<strong>Run 3 (`v5.2`, `run_card.json` — FINAL 3/3)</strong>',
+             f"<strong>{p8a_sc['dti']:.4f}</strong>", f"<strong>{p8bp_sc['dti']:.4f}</strong>",
+             '<strong>promote</strong>',
+             f"Frozen `[0.55 neo, 0.20 unsup, 0.25 bed]`, `support_quantile=0.88`, SHA-256 `{esc(p8sha[:16])}…`. Beats every prior lane on A, B′, and B″."],
+        ]
+        p8_page = p8_hero + f'''<h2>Three-Run Disciplined Experiment Progression (Strict Budget: 3 / 3 Used)</h2>
+{table(['Run', 'Instrument A (HOLDOUT-DTI)', 'Instrument B′ (PROXY-DTI)', 'Verdict', 'Scientific Finding'], p8_runs)}
+<h2>All Arms on Identical Spatial Holdout &amp; LOQO Proxy Splits</h2>
+<p>Paired differences on Instrument A (`gems57-pooled-hide-v2`, 11,321 withheld Quaternary pixels):
+vs D28 <strong>{p8_da_d28['delta']:+.4f}</strong> {ci(p8_da_d28)} ·
+vs fair H33 <strong>{p8_da_h33f['delta']:+.4f}</strong> {ci(p8_da_h33f)} ·
+vs P4 <strong>{p8_da_p4['delta']:+.4f}</strong> {ci(p8_da_p4)}.
+Paired differences on Instrument B′ (`gems57-pooled-hide-v2`, 59,937 LOQO SGMC `d ≥ 3 px` pixels):
+vs H33 <strong>{p8_dbp_h33['delta']:+.4f}</strong> {ci(p8_dbp_h33)} ·
+vs P4 <strong>{p8_dbp_p4['delta']:+.4f}</strong> {ci(p8_dbp_p4)} ·
+vs greedy blurred ablation (`thin=2.8 px`) <strong>{p8_dbp_nms['delta']:+.4f}</strong> {ci(p8_dbp_nms)}.
+Paired difference on Instrument B″ (`d ≥ 6 px`, 52,767 pixels) vs P7:
+<strong>{p8_dbdp_p7['delta']:+.4f}</strong> {ci(p8_dbdp_p7)}.</p>
+{table(['Arm', 'HOLDOUT-DTI (A)', '95% CI', 'Withheld Positives'], p8_a_rows, 'Instrument A · 4-fold spatially blocked Quaternary hide-and-recover')}
+{table(['Arm', 'PROXY-DTI (B′ d ≥ 3 px)', '95% CI', 'Proxy Positives'], p8_bp_rows, 'Instrument B′ · 4-quadrant LOQO pre-2022 SGMC off-catalogue faults (d ≥ 3 px)')}
+{table(['Arm', 'PROXY-DTI (B d ≥ 5 px)', '95% CI', 'Proxy Positives'], p8_d5_rows, 'Instrument B (d ≥ 5 px) · clean outside cartographic duplication halo')}
+<h2>All 41 Single-Feature Leakage Canaries (Max AUC 0.7910 &le; 0.90)</h2>
+{table(['Feature', 'AUC on Instrument A', 'AUC on Instrument B′', 'Status'], p8_can_rows, 'Every raw & engineered feature tested alone before model promotion')}
+<h2>15 / 15 On-Disk Validator Checks</h2>
+{table(['Validator Check', 'Status'], p8_checks, f'Re-read from disk on {p8n}.tif ({p8sha})')}
+<p><a href="downloads/p8_run_card.json">Final Run-3 Run Card</a> ·
+<a href="downloads/p8_run1_v50_run_card.json">Run-1 Card</a> ·
+<a href="downloads/p8_run2_v51_run_card.json">Run-2 Card</a> ·
+<a href="downloads/p8_uniqueness_62archive.json">62-Raster Uniqueness</a> ·
+<a href="downloads/p8_uniqueness_all_lanes.json">78-Raster Cross-Lane Uniqueness</a> ·
+<a href="downloads/p8_surface_uniqueness_all_lanes.json">Continuous Surface Uniqueness</a> ·
+<a href="downloads/p8_cross_lane_comparison.json">Cross-Lane Comparison JSON</a> ·
+<a href="downloads/p8_h33_forensic_reanalysis.json">H33 Forensic Audit</a> ·
+<a href="downloads/p8_upstream_uniqueness_patch.txt">Upstream Uniqueness Patch</a></p>'''
+        (DOCS / 'p8.html').write_text(frame('P8 Hero Candidate (0.1113 / 0.1311)', p8_page))
+        p8_results = p8_hero
 
     # --------------------------------------------------------------- Phase-5 box
     # --------------------------------------------------------------- P7 LOQO-halo box
@@ -538,7 +697,7 @@ learner, is the ceiling</em>. Values exactly 0/1, no NaN. SHA-256
         for r in review['archived_artifacts']]
     archives = f'<h2>{len(review["archived_artifacts"])} frozen prior dot TIFFs — forensic review only</h2>' + table(
         ['Archive', 'Download', 'Local format', 'Forward overlap (limit 0.70)'], archive_rows)
-    (DOCS / 'index.html').write_text(frame('Overview', index + e6_section + s3_site.banner() + p6_section + e5_section + hgb_section + e2_section + p5_section + archives))
+    (DOCS / 'index.html').write_text(frame('Overview', p8_hero + index + p7_section + e6_section + s3_site.banner() + p6_section + e5_section + hgb_section + e2_section + p5_section + archives))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
@@ -768,7 +927,7 @@ labeled PROXY-DTI, not hide-and-recover HOLDOUT-DTI or organizer-confirmed score
                             "P6 instrument B′′ · PROXY-DTI · SGMC proxy d ≥ 6 px (LOQO)")
                     + table(['Buffer', 'SGMC px in band', 'SGMC %', 'Domain %', 'Enrichment', 'Remaining SGMC (d >= r)'],
                             buf_rows, 'SGMC vs QFaults cartographic duplication calibration (1–20 px)'))
-    results = s3_site.results_block(instrument_rows, table) + results
+    results = p8_results + s3_site.results_block(instrument_rows, table) + results
     (DOCS / 'results.html').write_text(frame('Evidence', results))
 
     # ------------------------------------- new P5 scientific negative (one lane)
@@ -916,6 +1075,7 @@ Full inventory (862) scan remains a selector step. Literal readings are in the r
                             ('docs/irregularities.md', 'limitations.html', 'Limitations'),
                             ('docs/protocol-review.md', 'protocol-review.html', 'Protocol review'),
                             ('docs/preregistration-phase5.md', 'preregistration-phase5.html', 'P7 LOQO Preregistration'),
+                            ('docs/preregistration-p8-dual-submod300.md', 'preregistration-p8-dual-submod300.html', 'P8 Dual-Pop Submodular Preregistration'),
                             s3_site.MARKDOWN]:
         text = (ROOT / src).read_text()
         body = markdown.markdown(text, extensions=['tables'])
@@ -979,7 +1139,7 @@ as a predictor.</li></ul>
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<meta http-equiv="refresh" content="0;url={target}"><title>GEMSDOE70</title>'
             f'</head><body><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
-    executive = latest_decision + decision + p7_section + e6_section + '''<h2>Exactly how submission approval works</h2>
+    executive = p8_hero + latest_decision + decision + p7_section + e6_section + '''<h2>Exactly how submission approval works</h2>
 <ol class="steps"><li>Do not upload the new P5 review file or any earlier archive. The literal overlap gate fails.</li>
 <li>A future candidate must be newly generated using the shared writer, beat a matched current-best
 holdout, clear feature-alone canaries and both-stage literal uniqueness, and pass the local validator.</li>

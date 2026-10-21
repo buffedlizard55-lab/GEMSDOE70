@@ -4,7 +4,7 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="p8.html">★ P8 Hero Candidate (0.1113 / 0.1311)</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
 <aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
 <strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
 are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
@@ -91,6 +91,15 @@ block at every mass. The archived mutual-rule receipts have not been rewritten t
 <li>No authenticated submission-page score receipt exists. H33's reported 0.2778 is user-supplied;
   historical public leaderboard captures are not receipts for our own submissions. Conflicting
   leader values in the brief are not current verified targets.</li>
+</ul>
+<h2>Lane P8 (<code>arena/c7049280-gemsdoe70</code>) — Two new spatial-learning pitfalls discovered &amp; fixed (<code>IR-P5-1</code>, <code>IR-P5-2</code>)</h2>
+<p>In executing the 3-experiment progression (<code>evidence/p8_dual_submod300/</code>), fold diagnostics uncovered and resolved two general pitfalls for geospatial fault detection:</p>
+<ol>
+<li><strong><code>IR-P5-1</code> (Hide-mask / survey-completeness covariate shift from visible-catalogue features)</strong>:
+   In Run 1 (<code>evidence/p8_dual_submod300/run1_v50_run_card.json</code>), supplying visible-catalogue proximity features (<code>vis_dist_capped</code>, <code>vis_tip_lobe</code>, <code>vis_host_len_prox</code>) to <code>M_bed</code> caused trees to learn USGS mapping density rather than fault physics. On Instrument A (where connected components are hidden inside <code>fold['region']</code>), <code>d_vis</code> jumped inside <code>fold['region']</code>, starving all 4 test regions combined to only <code>9,007 / 37,654</code> (<code>23.9%</code>) of dots in <code>Exp 5B</code> (<code>verdict = negative</code>). Restricting <strong>both</strong> <code>M_neo</code> and <code>M_bed</code> strictly to the <code>38</code> catalogue-free physical sensor channels completely eliminated this shift.</li>
+<li><strong><code>IR-P5-2</code> (Cross-quadrant sample base-rate &amp; regional background level shift)</strong>:
+   Holding out NE Nevada (<code>Quadrant 1</code>, containing ~48% of SGMC bedrock faults) while keeping <code>max_neg = 180,000</code> fixed reduced positive prior log-odds by <code>-0.46</code> relative to other folds, starving Quadrant 1 to <code>1,116 / 37,654</code> dots under global probability ranking despite strong within-quadrant discrimination (<code>0.182, 0.165, 0.154</code> on the other three quadrants). High-pass localizing regional background fields (<code>x - G_12(x)</code>) and rank-calibrating predictions strictly within each out-of-fold spatial partition (<code>rank01_domain</code>) resolved the imbalance across all 4 quadrants without touching any held-out label (<code>HOLDOUT-DTI A = 0.11129</code>, <code>PROXY-DTI B' = 0.13109</code>, <code>PROXY-DTI B'' = 0.11897</code>).</li>
+<li><strong>Upstream verification receipt</strong>: <code>vendor/gems57/uniqueness.py</code> (<code>sha256: 93726c6a...</code>) was tested directly inside an isolated clone of <code>buffedlizard55-lab/60GEMSDOE</code> (<code>commit 32024716</code>): <strong><code>190 passed, 8 skipped, 0 failed</code></strong> (<code>evidence/p8_dual_submod300/upstream_template_suite.json</code>, diff in <code>evidence/p8_dual_submod300/upstream_uniqueness_patch.diff</code>).</li>
 <li>Local format validity is not portal acceptance. The frozen reviewed TIFFs are single-band float32,
   finite in [0,1], and match the pinned sample's CRS, shape and transform. The rejected upload's
   exact error cannot be diagnosed without its bytes. The footprint-zero policy differs from a
@@ -116,7 +125,7 @@ block at every mass. The archived mutual-rule receipts have not been rewritten t
   competition slot was spent. The site links to the live official leaderboard and displays a
   dated snapshot, <strong>not an automatic authenticated live score feed</strong>. The scheduled source-health
   check tests HTTP reachability only; implementing a verifiable auto-refresh remains open.</li>
-</ul>
+</ol>
 <h2>Next session, in order</h2>
 <ol>
 <li>Read the retained brief, current protocol review and new handoff note first. Do not bypass the

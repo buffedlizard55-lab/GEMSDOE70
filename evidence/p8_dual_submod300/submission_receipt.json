@@ -1,15 +1,15 @@
 {
   "receipt": {
     "file": "gems70-p5-dual-submod300-oof38k-20261020.tif",
-    "sha256": "3d683fab75a8c557179de02ca9e0e273a1739998021a3e398bd90dda3598a1c4",
-    "bytes": 143771,
+    "sha256": "d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8",
+    "bytes": 143907,
     "submission_name": "gems70-p5-dual-submod300-oof38k-20261020",
     "note": "GEMSDOE70 P5: 4-fold OOF dual-pop HGB (SGMC d>=3 + Quat + 3DEP/LiDAR/GDR) + exact 300m submodular cover, 37654 binary off-cat dots.",
     "note_chars": 131,
     "validator": {
       "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif",
-      "bytes": 143771,
-      "sha256": "3d683fab75a8c557179de02ca9e0e273a1739998021a3e398bd90dda3598a1c4",
+      "bytes": 143907,
+      "sha256": "d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8",
       "meta": {
         "crs": "EPSG:32611",
         "shape": [
@@ -64,8 +64,8 @@
     },
     "template_report": {
       "path": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif",
-      "bytes": 143771,
-      "sha256": "3d683fab75a8c557179de02ca9e0e273a1739998021a3e398bd90dda3598a1c4",
+      "bytes": 143907,
+      "sha256": "d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8",
       "bands": 1,
       "dtype": "float32",
       "crs": "EPSG:32611",
@@ -112,7 +112,7 @@
       "validation_class": "local on-disk template/range check; not organizer upload acceptance"
     },
     "zip_file": "gems70-p5-dual-submod300-oof38k-20261020.zip",
-    "zip_sha256": "c9fcd7fd31ba5c2eb5c1517ad3ec23f7272ce4494e3e6818d73ca3f588d74387",
+    "zip_sha256": "fc6eec02fd78ab61df918d9020c406f0ac321ad748c83bdda72734f3b2cbb5df",
     "approved_for_weekly_slot": false,
     "promoted": false,
     "submission_slots_used": 0,
@@ -125,8 +125,8 @@
   },
   "validated": {
     "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif",
-    "bytes": 143771,
-    "sha256": "3d683fab75a8c557179de02ca9e0e273a1739998021a3e398bd90dda3598a1c4",
+    "bytes": 143907,
+    "sha256": "d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8",
     "meta": {
       "crs": "EPSG:32611",
       "shape": [

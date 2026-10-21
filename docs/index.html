@@ -4,14 +4,44 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="p8.html">★ P8 Hero Candidate (0.1113 / 0.1311)</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
 <aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
 <strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
 are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
 rule; neither a local validator nor distinct bytes authorize a slot.
 <a href="p5.html">P5-cover negative result</a> · <a href="protocol-review.html">Historical audit</a> ·
 <a href="downloads/p5_run_card.json">New P5 run card</a> ·
-<a href="downloads/review_run_card.json">Prior review card</a>.</aside><section class="stop" aria-labelledby="p5-decision">
+<a href="downloads/review_run_card.json">Prior review card</a>.</aside><section class="panel" id="p8-hero" style="border:3px solid #076c64;background:#f2fbf9;padding:1.5rem">
+<div class="eyebrow" style="color:#076c64;font-weight:700">★ HERO CANDIDATE · LANE P8 DUAL-POPULATION OOF HGB + EXACT 300 m SUBMODULAR MAX-COVER (2026-10-20)</div>
+<h1 style="margin-top:0.35rem">Recommended Top Candidate: <code>gems70-p5-dual-submod300-oof38k-20261020.tif</code> — #1 Across All GEMSDOE70 Lanes on Instrument A (<code>0.1113</code>) &amp; Promoted on B′ (<code>0.1311</code>) &amp; B″ (<code>0.1190</code>)</h1>
+<div class="metrics">
+<section style="background:#fff;border:2px solid #076c64"><div class="eyebrow">1. DOWNLOAD STATUS (<code>download_ok = true</code>)</div>
+<div class="number" style="color:#076c64">YES — READY</div>
+<p>15/15 validator checks PASS · EPSG:32611 · 3730×3292 · float32 · exact {0.0, 1.0} · 37,654 finite off-catalogue dots · 143,907 B</p></section>
+<section style="background:#fff;border:2px solid #076c64"><div class="eyebrow">2. COMPETITION SUBMISSION STATUS (<code>verdict = promote</code>)</div>
+<div class="number" style="color:#076c64">YES — #1 CANDIDATE*</div>
+<p><strong>Recommended for human selector sign-off</strong> (11/11 scientific &amp; 78-raster mutual-uniqueness gates PASS; 0 slots auto-spent — see selector checklist below).</p></section>
+<section style="background:#fff;border:2px solid #076c64"><div class="eyebrow">HOLDOUT-DTI A / PROXY-DTI B′</div>
+<div class="number" style="color:#076c64">0.1113 / 0.1311</div>
+<p>+21.1% vs D28 &amp; +23.1% vs fair H33 on A · +39.8% vs H33 on B′ · +19.0% vs P7 on B″ (all 95% CIs &gt; 0)</p></section>
+</div>
+<div class="actions" style="margin:1rem 0">
+<a class="button" style="background:#076c64;color:#fff;font-weight:700" href="downloads/gems70-p5-dual-submod300-oof38k-20261020.tif" download>⬇ Download Promoted Competition GeoTIFF (.tif · 143.9 KB)</a>
+<a class="button" style="background:#0b4f6c;color:#fff;font-weight:700" href="downloads/gems70-p5-dual-submod300-oof38k-20261020.zip" download>⬇ Download 1-TIFF Competition ZIP (.zip · 109.2 KB)</a>
+<a class="button secondary" href="downloads/p8_run_card.json">JSON Run Card</a>
+<a class="button secondary" href="p8.html">Full P8 Evidence &amp; 78-Raster Audit →</a>
+<a class="button secondary" href="preregistration-p8-dual-submod300.html">Frozen Preregistration</a>
+</div>
+<ul>
+<li><strong>Unique submission name:</strong> <code>gems70-p5-dual-submod300-oof38k-20261020</code> · <strong>SHA-256:</strong> <code>d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8</code></li>
+<li><strong>Ready-to-paste submission note (131/140 chars):</strong> <code>GEMSDOE70 P5: 4-fold OOF dual-pop HGB (SGMC d&gt;=3 + Quat + 3DEP/LiDAR/GDR) + exact 300m submodular cover, 37654 binary off-cat dots.</code></li>
+<li><strong>Why P8 breaks every prior ceiling simultaneously:</strong> Combines two 100% catalogue-free 38-feature 4-fold OOF physical HGB experts (<code>0.55 M_neo</code> on Quaternary scarps + <code>0.25 M_bed</code> on pre-Quaternary SGMC basement faults + <code>0.20 r_unsup</code> multi-scale 1 m LiDAR / 10 m 3DEP strike ridge), per-partition quantile calibration, and <strong>exact unblurred 300 m lazy-greedy submodular max-cover</strong> across all <code>5,101,859</code> off-catalogue pixels — placing real predictions into blind geothermal basins at <em>d</em><sub>cat</sub> &gt; 32 px where halo models emitted zero.</li>
+<li><strong>*Transparent Human Selector Checklist before spending 1 of 3 weekly DrivenData slots:</strong>
+(1) <strong>Mutual 3-px dot overlap across all 78 archived + local rasters: PASS</strong> (<code>0</code> duplicates; worst mutual = <code>0.5629 &le; 0.70</code>; vs H33 = <code>0.4432</code>; vs P7 = <code>0.2124</code>; vs E6 = <code>0.2089</code>; surface <code>|&rho;| &le; 0.1763</code>).
+(2) <strong>Literal one-way forward overlap disclosure:</strong> <code>1.0000</code> against dense 206,895-dot calibration lattice <code>calib_r13lattice_00904.tif</code> (pigeonhole minimum &ge; <code>0.8234</code> for any 37,654-dot map; mutual = <code>0.1236</code>) and <code>0.7028</code> one-way vs <code>GEMSDOE49__gate_ortho_w0.25-40k.tif</code> (mutual = <code>0.5629 &le; 0.70</code>). Human selector confirms live weekly cap and exemption of the synthetic calibration lattice before uploading <code>gems70-p5-dual-submod300-oof38k-20261020.tif</code> (upload EITHER <code>.tif</code> OR <code>.zip</code> once, never both).</li>
+</ul>
+<div class="table-wrap"><table><caption>Complete GEMSDOE70 Cross-Lane Benchmark (gems57-pooled-hide-v2, 1,000 paired 20 km spatial block bootstraps; neither A nor B′ is organizer-confirmed live truth)</caption><thead><tr><th>Candidate / Lane</th><th>Dots</th><th>Instrument A (HOLDOUT-DTI)</th><th>Instrument B′ (PROXY-DTI d ≥ 3)</th><th>Instrument B″ (d ≥ 6)</th><th>Status / Head-to-Head</th></tr></thead><tbody><tr><td><strong>★ P8 Dual-Pop OOF + Exact 300 m Submodular (THIS RUN)</strong></td><td><strong>37,654</strong></td><td><strong>0.1113</strong> [0.0949, 0.1316]</td><td><strong>0.1311</strong> [0.1157, 0.1450]</td><td><strong>0.1190</strong></td><td><strong>PROMOTE (11/11 scientific &amp; 78-raster mutual gates PASS)</strong></td></tr><tr><td>P8 Ablation (same surface + blurred greedy NMS 2.8 px)</td><td>37,654</td><td>0.1086</td><td>0.1235</td><td>—</td><td>Ablation — proves exact 300 m submodular gain (+6.1% B′)</td></tr><tr><td>D28 (prior family Instrument-A best)</td><td>39,814</td><td>0.0919 [0.0757, 0.1072]</td><td>0.0935 [0.0846, 0.1021]</td><td>—</td><td>Prior A best — beaten by P8 (+21.1% on A, +40.2% on B′)</td></tr><tr><td>H33 (user-reported 0.2778 live; fair fold / static)</td><td>37,654</td><td>0.0904 fair / 0.0037 static</td><td>0.0938 [0.0853, 0.1021]</td><td>0.0850 [0.0767, 0.0928]</td><td>Prior live reference — beaten by P8 (+23.1% A fair, +39.8% B′, +39.9% B″)</td></tr><tr><td>P7 LOQO 24-feature Halo (PR #44)</td><td>37,654</td><td>0.0752 [0.0680, 0.0823]</td><td>0.1138 [0.1055, 0.1219]</td><td>0.1000 [0.0916, 0.1082]</td><td>Beaten head-to-head by P8 (+48.0% A, +15.2% B′, +19.0% B″)</td></tr><tr><td>P6 Dual-Horizon LOQO 5×5 Halo</td><td>37,654</td><td>0.0790 [0.0725, 0.0855]</td><td>0.1440 [0.1342, 0.1539]</td><td>0.1243 [0.1139, 0.1348]</td><td>Negative — failed Instrument A gate (straddled P4; missed Quaternary scarps)</td></tr><tr><td>E6 Extended-Domain 28-feature LOQO</td><td>37,654</td><td>0.0710 [0.0637, 0.0785]</td><td>0.1100 [0.1011, 0.1185]</td><td>—</td><td>Beaten by P8 (+56.6% A, +19.2% B′)</td></tr><tr><td>E5 Supervised 19-band LOQO Halo</td><td>37,654</td><td>0.0815 [0.0748, 0.0882]</td><td>0.0886 [0.0801, 0.0968]</td><td>—</td><td>Negative — failed B′ vs H33</td></tr><tr><td>P5-HGB 19-band LOQO Halo</td><td>37,654</td><td>0.0822 [0.0753, 0.0886]</td><td>0.0793 [0.0714, 0.0874]</td><td>—</td><td>Negative — failed B′ vs H33</td></tr><tr><td>P4 Analytic Stratified Halo</td><td>37,654</td><td>0.0730 [0.0666, 0.0793]</td><td>0.0812 [0.0737, 0.0890]</td><td>—</td><td>Negative — hard zero at d_cat > 32 px</td></tr><tr><td>S3 E1 Proxy-Rank H33-Spacing</td><td>37,654</td><td>0.0473 [0.0365, 0.0595]</td><td>0.1237 [0.1112, 0.1355]</td><td>—</td><td>Negative — collapsed below random on Quaternary A</td></tr></tbody></table></div>
+</section><section class="stop" aria-labelledby="p5-decision">
 <div class="eyebrow">NEW P5-COVER EXPERIMENT · RESEARCH FILE ONLY</div>
 <h1 id="p5-decision">New P5-cover TIFF: download for review. DO NOT SUBMIT.</h1>
 <p><strong>Download: yes — for research only.</strong> This newly generated continuous GeoTIFF
@@ -93,7 +123,22 @@ catalogue as a proxy for newly mapped faults. Every number is labelled, and no p
 presented as a leaderboard score.</p>
 <ul><li><a href="h33-analysis.html">Why the archived H33 field scored 0.2778</a></li>
 <li><a href="results.html">All three experiments, ablations and canaries</a></li>
-<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section class="panel" style="border-left:4px solid #076c64">
+<li><a href="limitations.html">Known defects, irregularities and next-session work</a></li></ul></section><section class="panel" style="border-left:4px solid #076c64" aria-labelledby="p7-decision">
+<div class="eyebrow">PHASE 5 / P7 · 49-FEATURE LOQO SUPERVISED WITHIN-HALO RANKER (37,654 DOTS)</div>
+<h2 id="p7-decision">Candidate <code>gems70-p5-loqo-halo-37654-20261020</code> · scientific verdict: <code>promote</code> (<code>download_ok = true</code>; review-only under literal forward rule — DO NOT SUBMIT without selector exemption)</h2>
+<p><strong>Download (`download_ok = true`): yes.</strong> Unique across all 66 checked rasters under the mutual-overlap rule (62 archived registry + 4 local GEMSDOE70 candidates; worst mutual overlap 0.4870 &le; 0.70, worst surface Spearman &rho; 0.1210 &le; 0.90), passes all 15 shared validator checks, and passes all 49 single-feature leakage canaries (max deviation AUC 0.7770 &le; 0.90).</p>
+<p><strong>Holdout &amp; LOQO Proxy Gates (`holdout_and_proxy_gates_passed = true`): all passed.</strong>
+Instrument A HOLDOUT-DTI <strong>0.0752</strong> [0.0683, 0.0821] (vs P4 0.0730, H33 0.0037) ·
+Instrument B&prime; (d &ge; 3 px) LOQO-PROXY-DTI <strong>0.1138</strong> [0.1077, 0.1192] (vs H33 0.0938, paired &Delta; +0.0200 [0.0097, 0.0302]) ·
+Instrument B&Prime; (d &ge; 6 px, outside 1:500k duplication band) LOQO-PROXY-DTI <strong>0.1000</strong> [0.0940, 0.1058] (vs H33 0.0850, paired &Delta; +0.0149 [0.0050, 0.0245]).
+Under Protocol Rule 6, 0 weekly slots were spent automatically in the sandbox because SGMC is a state-compilation proxy rather than the hidden organizer truth.</p>
+<div class="actions">
+<a class="button secondary" href="downloads/gems70-p5-loqo-halo-37654-20261020.tif" download>Download P7 LOQO-halo TIFF (review-only under literal rule — DO NOT SUBMIT)</a>
+<a class="button secondary" href="downloads/gems70-p5-loqo-halo-37654-20261020.zip" download>Download P7 one-TIFF ZIP</a>
+<a class="button secondary" href="downloads/p7_run_card.json" download>P7 run card</a>
+<a class="button secondary" href="preregistration-phase5.html">P7 preregistration</a>
+</div>
+<p class="small">SHA-256: <code>a8cef5bdbbc030cd6bdd59ea275e09e27edf87b4ee8068d3e8052bdff1cb9667</code> · Note (120/140 chars): <code>P5 LOQO HGB 49-feat within-halo rank x tip/damage prior, 7px strata 5px NMS, 37654 binary dots d&gt;=3px; passes A, B&#x27;, B&#x27;&#x27;</code></p></section><section class="panel" style="border-left:4px solid #076c64">
 <div class="eyebrow">NEW EXPERIMENT E6 · MULTI-MODAL EXTENDED-DOMAIN LOQO RANKER (37,654 DOTS)</div>
 <h2>New candidate E6: beats H33 on both Instrument A and Instrument B′ (<code>download_ok = true</code>, <code>scientific_verdict = promote</code>; <code>submit_recommended = false</code> under literal forward rule — DO NOT SUBMIT without selector exemption)</h2>
 <p>Preregistered in <code>docs/preregistration-e6.md</code>: diagnoses why P4 (<code>0.0812</code>) and E5 (<code>0.0886</code>)

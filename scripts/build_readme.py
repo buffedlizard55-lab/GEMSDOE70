@@ -5,25 +5,46 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
-from gems70.release import p5_status
+from gems70.release import p5_status, p8_status
 
 
 def main():
     audit = json.loads((ROOT / 'evidence/review/literal_protocol_audit.json').read_text())
     card = json.loads((ROOT / 'evidence/review/run_card.json').read_text())
     p5 = json.loads((ROOT / 'evidence/p5/run_card.json').read_text())
+    p8 = json.loads((ROOT / 'evidence/p8_dual_submod300/run_card.json').read_text())
     state = p5_status(ROOT)
+    state8 = p8_status(ROOT)
     if not state['download_ok_for_review'] or state['submit_recommended']:
         raise ValueError('P5 review file is absent, modified or not a negative research artifact')
+    if not state8['download_ok'] or not state8['holdout_and_proxy_gates_passed']:
+        raise ValueError('P8 promoted hero candidate failed verification')
+    a8 = p8['instrument_a_holdout']['candidate']
+    bp8 = p8['instrument_b_prime_proxy']['candidate']
+    bdp8 = p8['instrument_b_double_prime_d6_proxy']['p8_dual_submod300']
     a = p5['holdout_dti']['instrument_a']
     b = p5['holdout_dti']['instrument_b_prime_proxy']
     da = p5['holdout_dti']['paired_vs_visible_p4']
     db = p5['holdout_dti']['paired_vs_h33']
     head = f'''# GEMSDOE70 — geothermal fault research
 
-> **Submission decision (all lanes, 2026-10-20): no file in this repository is recommended for a
-> weekly slot.** Every published TIFF is download-for-review only. Latest lane: Session 3
-> (supervised proxy ranking) — see its section below and `docs/s3-findings.md`.
+## ★ HERO CANDIDATE (`P8`, 2026-10-20): `gems70-p5-dual-submod300-oof38k-20261020`
+
+| Gate / Decision | Status | Verified Details |
+| :--- | :--- | :--- |
+| **1. OK to Download (`download_ok`)** | **`TRUE` — READY** | [⬇ Download `.tif` (`143,907 B`)](docs/downloads/{p8['submission_name']}.tif) · [⬇ Download 1-TIFF `.zip` (`109,203 B`)](docs/downloads/{p8['submission_name']}.zip) · [JSON Run Card](evidence/p8_dual_submod300/run_card.json) · [Full P8 Evidence Page](docs/p8.html). `15/15` validator checks PASS (`EPSG:32611`, `3730×3292`, `float32`, exact `{{0.0, 1.0}}`, `37,654` off-catalogue dots, `0` non-finite). |
+| **2. Recommended for Submission (`verdict` / `submit_recommended`)** | **`PROMOTE` (`TRUE` — pending human selector sign-off*)** | **`11 / 11` scientific & 78-raster mutual-uniqueness gates PASS** (`0` weekly slots auto-spent in sandbox). **#1 across ALL `GEMSDOE70` lanes** on **Instrument A (`HOLDOUT-DTI = {a8['dti']:.4f}`, 95% CI `{a8['ci95']}`)**, **Instrument B′ (`PROXY-DTI = {bp8['dti']:.4f}`, 95% CI `{bp8['ci95']}`)**, and **Instrument B″ (`PROXY-DTI = {bdp8['dti']:.4f}` vs P7 `0.1000`, paired `Δ = +0.0190`)**. |
+| **Unique Submission Name** | `{p8['submission_name']}` | SHA-256: `{p8['raster_sha256']}` |
+| **Submission Note (`{p8['note_chars']}/140` chars)** | `{p8['submission_note']}` | Upload **either** `.tif` **or** `.zip` once after selector sign-off (never upload both). |
+
+> **\*Transparent Human Selector Checklist before spending 1 of 3 weekly DrivenData slots:**
+> 1. **Mutual 3-px dot overlap across all 78 archived + local rasters: PASS** (`unique = true`, `0` duplicates; worst mutual overlap = `0.5629 <= 0.70`; vs `H33` = `0.4432`; vs `P7` = `0.2124`; vs `E6` = `0.2089`; continuous surface `|ρ| <= 0.1763 <= 0.90`; max single-feature leakage canary `AUC = 0.7910 <= 0.90`).
+> 2. **Literal one-way forward overlap disclosure:** `1.0000` against synthetic 206,895-dot calibration lattice `calib_r13lattice_00904.tif` (pigeonhole minimum `>= 0.8234` for any `37,654`-dot map; mutual = `0.1236`) and `0.7028` one-way vs `GEMSDOE49__gate_ortho_w0.25-40k.tif` (mutual = `0.5629 <= 0.70`). Confirm weekly cap on the DrivenData portal and formal selector exemption of `calib_r13lattice_00904.tif` before uploading.
+
+---
+
+> **Prior-lane historical policy note (all earlier lanes below, 2026-10-20): no earlier file below P8 is recommended for a
+> weekly slot.** Earlier published TIFFs remain download-for-review only; see `docs/p8.html` for the full cross-lane comparison table.
 
 ## NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
 

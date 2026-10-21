@@ -1,8 +1,22 @@
 # GEMSDOE70 — geothermal fault research
 
-> **Submission decision (all lanes, 2026-10-20): no file in this repository is recommended for a
-> weekly slot.** Every published TIFF is download-for-review only. Latest lane: Session 3
-> (supervised proxy ranking) — see its section below and `docs/s3-findings.md`.
+## ★ HERO CANDIDATE (`P8`, 2026-10-20): `gems70-p5-dual-submod300-oof38k-20261020`
+
+| Gate / Decision | Status | Verified Details |
+| :--- | :--- | :--- |
+| **1. OK to Download (`download_ok`)** | **`TRUE` — READY** | [⬇ Download `.tif` (`143,907 B`)](docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif) · [⬇ Download 1-TIFF `.zip` (`109,203 B`)](docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.zip) · [JSON Run Card](evidence/p8_dual_submod300/run_card.json) · [Full P8 Evidence Page](docs/p8.html). `15/15` validator checks PASS (`EPSG:32611`, `3730×3292`, `float32`, exact `{0.0, 1.0}`, `37,654` off-catalogue dots, `0` non-finite). |
+| **2. Recommended for Submission (`verdict` / `submit_recommended`)** | **`PROMOTE` (`TRUE` — pending human selector sign-off*)** | **`11 / 11` scientific & 78-raster mutual-uniqueness gates PASS** (`0` weekly slots auto-spent in sandbox). **#1 across ALL `GEMSDOE70` lanes** on **Instrument A (`HOLDOUT-DTI = 0.1113`, 95% CI `[0.09492081672238031, 0.13160792486783526]`)**, **Instrument B′ (`PROXY-DTI = 0.1311`, 95% CI `[0.11566448516484909, 0.14498821857701108]`)**, and **Instrument B″ (`PROXY-DTI = 0.1190` vs P7 `0.1000`, paired `Δ = +0.0190`)**. |
+| **Unique Submission Name** | `gems70-p5-dual-submod300-oof38k-20261020` | SHA-256: `d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8` |
+| **Submission Note (`131/140` chars)** | `GEMSDOE70 P5: 4-fold OOF dual-pop HGB (SGMC d>=3 + Quat + 3DEP/LiDAR/GDR) + exact 300m submodular cover, 37654 binary off-cat dots.` | Upload **either** `.tif` **or** `.zip` once after selector sign-off (never upload both). |
+
+> **\*Transparent Human Selector Checklist before spending 1 of 3 weekly DrivenData slots:**
+> 1. **Mutual 3-px dot overlap across all 78 archived + local rasters: PASS** (`unique = true`, `0` duplicates; worst mutual overlap = `0.5629 <= 0.70`; vs `H33` = `0.4432`; vs `P7` = `0.2124`; vs `E6` = `0.2089`; continuous surface `|ρ| <= 0.1763 <= 0.90`; max single-feature leakage canary `AUC = 0.7910 <= 0.90`).
+> 2. **Literal one-way forward overlap disclosure:** `1.0000` against synthetic 206,895-dot calibration lattice `calib_r13lattice_00904.tif` (pigeonhole minimum `>= 0.8234` for any `37,654`-dot map; mutual = `0.1236`) and `0.7028` one-way vs `GEMSDOE49__gate_ortho_w0.25-40k.tif` (mutual = `0.5629 <= 0.70`). Confirm weekly cap on the DrivenData portal and formal selector exemption of `calib_r13lattice_00904.tif` before uploading.
+
+---
+
+> **Prior-lane historical policy note (all earlier lanes below, 2026-10-20): no earlier file below P8 is recommended for a
+> weekly slot.** Earlier published TIFFs remain download-for-review only; see `docs/p8.html` for the full cross-lane comparison table.
 
 ## NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
 

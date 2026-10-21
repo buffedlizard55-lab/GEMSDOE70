@@ -181,10 +181,9 @@ def main() -> None:
 
     # 5. Update `evidence/p8_dual_submod300/run_card.json` cleanly with full 62 + all-lane uniqueness & hashes
     card = json.loads((E8 / "run_card.json").read_text())
-    nonlattice_rows = [
-        r for r in uq_all["rows"] if "lattice" not in r["submission"].lower()
-    ]
-    worst_nonlattice_fwd = max(r["my_dots_within_3px_of_theirs"] for r in nonlattice_rows)
+    sparse_rows = [r for r in uq_all["rows"] if r["their_dots"] < 100000]
+    worst_sparse_fwd_row = max(sparse_rows, key=lambda r: r["my_dots_within_3px_of_theirs"])
+    worst_nonlattice_fwd = worst_sparse_fwd_row["my_dots_within_3px_of_theirs"]
     by_sub = {r["submission"]: r for r in uq_all["rows"]}
 
     card["verdict"] = "promote"

@@ -160,8 +160,8 @@ def predict_fold_a(
     for part_mask in (other_v, h0_pred_v, test_v):
         r_uns[part_mask] = p5.rank01_domain(unsup_vec[part_mask])
 
-    # Frozen Run-2 weights locked at commit 1cd4823: (0.45 neo, 0.30 unsup, 0.25 bed)
-    s_dual = (r_neo ** 0.45) * (r_uns ** 0.30) * (r_bed ** 0.25)
+    # Frozen Run-3 weights locked at commit 1abca53: (0.55 neo, 0.20 unsup, 0.25 bed)
+    s_dual = (r_neo ** 0.55) * (r_uns ** 0.20) * (r_bed ** 0.25)
     return r_uns, r_bed, s_dual.astype(np.float32), d_vis
 
 
@@ -201,7 +201,7 @@ def predict_production_oof(
         r_neo[te_v] = p5.rank01_domain(m_neo_k.predict_proba(X_stat[te_v])[:, 1])
         r_uns[te_v] = p5.rank01_domain(unsup_vec[te_v])
 
-    s_dual = (r_neo ** 0.45) * (r_uns ** 0.30) * (r_bed ** 0.25)
+    s_dual = (r_neo ** 0.55) * (r_uns ** 0.20) * (r_bed ** 0.25)
     return r_uns, r_bed, s_dual.astype(np.float32), d_cat
 
 
@@ -403,9 +403,9 @@ def main() -> None:
         s_b = vec_to_2d(b_v, valid)
         s_c = vec_to_2d(d_v, valid)
 
-        dots_a, na = p5.submodular_pack_300m(s_a, allow_k, target_n=DOT_COUNT)
-        dots_b, nb = p5.submodular_pack_300m(s_b, allow_k, target_n=DOT_COUNT)
-        dots_c, nc = p5.submodular_pack_300m(s_c, allow_k, target_n=DOT_COUNT)
+        dots_a, na = p5.submodular_pack_300m(s_a, allow_k, target_n=DOT_COUNT, support_quantile=0.88)
+        dots_b, nb = p5.submodular_pack_300m(s_b, allow_k, target_n=DOT_COUNT, support_quantile=0.88)
+        dots_c, nc = p5.submodular_pack_300m(s_c, allow_k, target_n=DOT_COUNT, support_quantile=0.88)
         dots_nms, _ = m2.place_dots(
             ndi.gaussian_filter(s_c, sigma=1.0), allow_k, n=DOT_COUNT, radius_px=2.8
         )
@@ -461,9 +461,9 @@ def main() -> None:
     surf_5b = vec_to_2d(r_bed_prod, valid)
     surf_5c = vec_to_2d(s_dual_prod, valid)
 
-    dots_5a_b, n5a = p5.submodular_pack_300m(surf_5a, allow_prod, target_n=DOT_COUNT)
-    dots_5b_b, n5b = p5.submodular_pack_300m(surf_5b, allow_prod, target_n=DOT_COUNT)
-    dots_5c_b, n5c = p5.submodular_pack_300m(surf_5c, allow_prod, target_n=DOT_COUNT)
+    dots_5a_b, n5a = p5.submodular_pack_300m(surf_5a, allow_prod, target_n=DOT_COUNT, support_quantile=0.88)
+    dots_5b_b, n5b = p5.submodular_pack_300m(surf_5b, allow_prod, target_n=DOT_COUNT, support_quantile=0.88)
+    dots_5c_b, n5c = p5.submodular_pack_300m(surf_5c, allow_prod, target_n=DOT_COUNT, support_quantile=0.88)
     dots_nms_b, _ = m2.place_dots(
         ndi.gaussian_filter(surf_5c, sigma=1.0), allow_prod, n=DOT_COUNT, radius_px=2.8
     )
@@ -694,8 +694,9 @@ def main() -> None:
             f"PROXY-DTI (Instrument B'/B/B'', {evaluate_holdout.VERSION}); neither organizer-confirmed"
         ),
         "chosen_experiment": chosen_key,
-        "preregistration_commit": "1cd4823",
+        "preregistration_commit": "1abca53",
         "prior_run1_receipt": "evidence/p8_dual_submod300/run1_v50_run_card.json",
+        "prior_run2_receipt": "evidence/p8_dual_submod300/run2_v51_run_card.json",
         "promotion_gates": chosen_gates,
         "all_experiment_gates": {"exp_5c": gates_5c, "exp_5b": gates_5b, "exp_5a": gates_5a},
         "instrument_a_holdout": {
@@ -766,7 +767,7 @@ def main() -> None:
             promoted and validated and validated.get("all_checks_passed") and chosen_uq["all_pass"]
         ),
         "weekly_slots_used": 0,
-        "experiment_count": 2,
+        "experiment_count": 3,
         "elapsed_seconds": elapsed,
         "organizer_confirmed_score": None,
         "evaluator_implementation_sha256": evaluate_holdout.implementation_hashes(),
@@ -778,10 +779,10 @@ def main() -> None:
             "dot_count": DOT_COUNT,
             "collar_px": COLLAR_PX,
             "erosion_px": EROSION_PX,
-            "dual_weights_neo_unsup_bed": [0.45, 0.30, 0.25],
+            "dual_weights_neo_unsup_bed": [0.55, 0.20, 0.25],
             "n_static_physical_features": p5.N_STATIC_FEATURES,
             "per_partition_rank_calibration": True,
-            "submodular_support_quantile": 0.90,
+            "submodular_support_quantile": 0.88,
             "submodular_gamma": 2.0,
             "b_prime_gap_px": GAP_PRIME_PX,
         },

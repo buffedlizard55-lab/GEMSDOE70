@@ -82,3 +82,84 @@ def test_visible_features_depend_strictly_on_visible_mask():
     assert d1.shape == (50, 50)
     assert np.isfinite(X[:, 38:41]).all()
     assert X[:, 38].max() > 0.0
+
+
+def test_p8_promoted_artifact_hashes_validator_and_gates():
+    """End-to-end verification of P8 on-disk GeoTIFF, 1-TIFF ZIP, Run Card, and release gate."""
+    import hashlib
+    import json
+    from pathlib import Path
+    import zipfile
+    import rasterio
+
+    from gems70.release import p8_status
+
+    root = Path(__file__).resolve().parents[1]
+    st = p8_status(root)
+    assert st['verdict'] == 'promote'
+    assert st['download_ok'] is True
+    assert st['submit_recommended'] is True
+    assert st['holdout_and_proxy_gates_passed'] is True
+    assert st['literal_forward_witness_stop_required'] is True
+    assert st['weekly_slots_used'] == 0
+    assert st['reasons'] == []
+
+    card = json.loads((root / 'evidence/p8_dual_submod300/run_card.json').read_text())
+    assert card['experiment_count'] == 3
+    assert card['organizer_confirmed_score'] is None
+    assert len(card['submission_note']) <= 140
+    assert all(card['promotion_gates'].values())
+
+    tif = root / 'docs/downloads' / f"{card['submission_name']}.tif"
+    zpath = root / 'docs/downloads' / f"{card['submission_name']}.zip"
+    assert hashlib.sha256(tif.read_bytes()).hexdigest() == card['raster_sha256']
+    assert hashlib.sha256(zpath.read_bytes()).hexdigest() == card['zip_sha256']
+
+    with zipfile.ZipFile(zpath) as zf:
+        names = zf.namelist()
+        assert names == [f"{card['submission_name']}.tif"]
+        assert hashlib.sha256(zf.read(names[0])).hexdigest() == card['raster_sha256']
+
+    with rasterio.open(tif) as ds:
+        assert (ds.height, ds.width, ds.count) == (3730, 3292, 1)
+        assert ds.dtypes[0] == 'float32'
+        assert ds.crs.to_epsg() == 32611
+        arr = ds.read(1)
+        assert np.isfinite(arr).all()
+        assert set(np.unique(arr).tolist()) == {0.0, 1.0}
+        assert int((arr == 1.0).sum()) == 37654
+
+
+def test_p8_pooled_dti_identities_and_site_presence(tmp_path):
+    """Verify pooled TP/(TP+0.2*FP+0.8*FN) exactness, tamper fail-closed gate, and site pages."""
+    import json
+    from pathlib import Path
+    import shutil
+
+    from gems70.release import p8_status
+
+    root = Path(__file__).resolve().parents[1]
+    for fname in ('instrumentA_holdout.json', 'instrumentB_prime.json', 'instrumentB_sens_d5.json'):
+        doc = json.loads((root / 'evidence/p8_dual_submod300' / fname).read_text())
+        for arm, sc in doc['scores'].items():
+            recomputed = sc['tpw'] / (sc['tpw'] + 0.2 * sc['fpw'] + 0.8 * sc['fnw'])
+            assert abs(recomputed - sc['dti']) < 1e-12, (fname, arm, recomputed, sc['dti'])
+
+    for page in ('docs/index.html', 'docs/executive-summary.html', 'docs/p8.html',
+                 'docs/preregistration-p8-dual-submod300.html', 'README.md'):
+        txt = (root / page).read_text()
+        assert 'gems70-p5-dual-submod300-oof38k-20261020' in txt
+        assert 'd0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8' in txt
+
+    # Tampering with SHA-256 in run_card must fail closed immediately
+    ev = tmp_path / 'evidence/p8_dual_submod300'
+    ev.mkdir(parents=True)
+    for src in (root / 'evidence/p8_dual_submod300').glob('*.json'):
+        shutil.copyfile(src, ev / src.name)
+    bad = json.loads((ev / 'run_card.json').read_text())
+    bad['raster_sha256'] = '0' * 64
+    (ev / 'run_card.json').write_text(json.dumps(bad))
+    st_bad = p8_status(tmp_path)
+    assert st_bad['download_ok'] is False
+    assert st_bad['submit_recommended'] is False
+

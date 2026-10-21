@@ -85,4 +85,18 @@ Run 2 (`[0.45 neo, 0.30 unsup, 0.25 bed]`, `support_quantile = 0.90`) **passed a
 ### 5.2 Frozen Run-3 Specification (`v5.2`, Final Experiment 3 of `<= 3`) — Locked Before Execution
 Using our 3rd and final allowed session experiment (`experiment_count = 3`), we tighten uniqueness by shifting `0.10` weight from pure topographic `r_unsup` to multi-sensor Quaternary `r_neo` (**`[w_neo = 0.55, w_unsup = 0.20, w_bed = 0.25]`**) and broadening submodular candidate support slightly (**`support_quantile = 0.88`**) so sub-surface geophysical/strain/hydrothermal faults receive stronger representation relative to pure 10 m DEM crests, and add a **12th mandatory gate**: **BOTH mutual overlap AND one-way forward overlap `<= 0.70` against EVERY `< 100k`-dot submission in all 78 archived + local rasters**, alongside all 11 gates from Section 4.
 
+---
+
+## 6. Final Run-3 Outcome (`v5.2`, `experiment_count = 3 / 3`) — `verdict = promote`
+
+Run 3 (`gems70-p5-dual-submod300-oof38k-20261020`, `SHA-256: d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8`, `143,907` bytes, `15/15` shared validator checks passed) completed the 3-experiment budget with zero further runs:
+- **Instrument A (`HOLDOUT-DTI`, `gems57-pooled-hide-v2`, `K = 11,321` withheld catalogue positives)**: **`0.11129` (`95% CI [0.09492, 0.13161]`)** — all-time repository best at `37,654` dots (`+21.1%` vs `D28 = 0.09192` [`+0.01937`], `+23.1%` vs unhandicapped `H33_fold_fair = 0.09042`, `+48.0%` vs `P7 = 0.07519`, `+52.4%` vs `P4 = 0.07304`, `+120.1%` vs `random_control = 0.05055`; every 95% paired block-bootstrap CI strictly `> 0`).
+- **Instrument B′ (`PROXY-DTI`, `d_cat >= 3 px`, `K = 59,937` LOQO SGMC positives)**: **`0.13109` (`95% CI [0.11566, 0.14499]`)** — `+39.8%` vs `H33 = 0.09377` (`paired Δ = +0.03732`, strictly `> 0`), `+40.2%` vs `D28 = 0.09353`, `+61.5%` vs `P4 = 0.08116`, `+15.2%` vs `P7 = 0.11379`.
+- **Instrument B″ (`PROXY-DTI`, `d_cat >= 6 px`, `K = 52,767` LOQO SGMC positives)**: **`0.11897`** vs `P7 = 0.09997` (`paired Δ = +0.01900`, `95% CI [+0.00562, +0.03212]`) and vs `H33 = 0.08504` (`+39.9%`).
+- **Exact Submodular Emitter Validation (`H-P5-4`)**: On the identical Run-3 surface, exact unblurred `300 m` submodular max-cover beats greedy blurred `thin = 2.8 px` on **both** Instrument A (`0.11129` vs `0.10862`) and Instrument B′ (`0.13109` vs `0.12353`, `+6.1%`).
+- **Uniqueness Disclosure (`78` rasters = `62` archive + `16` local)**:
+  - Mutual 3-px dot overlap: **`unique = true` (`0` duplicates across all `78` rasters; `worst_mutual = 0.5629 <= 0.70`**, `vs H33 = 0.4432`, `vs P7 = 0.2124`, `vs E6 = 0.2089`; continuous surface `|rho|_max = 0.1763 <= 0.90`).
+  - One-way forward overlap disclosure: against dense `206,895`-dot lattice witness `calib_r13lattice_00904.tif`, forward overlap is `1.0000` (`pigeonhole >= 0.8234` for any `37,654`-dot map), and against `GEMSDOE49__gate_ortho_w0.25-40k.tif` one-way forward is `0.7028` (`+0.0028` over `0.70` while reverse/mutual is `0.5629 <= 0.70`). Because `experiment_count = 3` exhausted the session cap, zero post-hoc parameter tweaks were run and both numbers are reported verbatim for human selector review.
+
+
 

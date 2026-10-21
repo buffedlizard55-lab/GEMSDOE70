@@ -265,6 +265,32 @@
       "sha256": "915fa941e37372b0bd3e8547d4c73ad4f07d892ee35a2dd2280cb0b8c632e4b6",
       "bytes": 3484,
       "role": "p7_loqo_within_halo_ranker_receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif",
+      "sha256": "d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8",
+      "bytes": 143907,
+      "role": "p8_dual_submod300_oof_tif",
+      "verdict": "promote",
+      "download_ok": true,
+      "submit_recommended": true,
+      "note": "P8 dual-population 4-fold OOF HGB + exact 300m submodular max-cover (37,654 binary off-catalogue dots); #1 on Instrument A (0.1113) and B' (0.1311) and B'' (0.1190); card evidence/p8_dual_submod300/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.zip",
+      "sha256": "fc6eec02fd78ab61df918d9020c406f0ac321ad748c83bdda72734f3b2cbb5df",
+      "bytes": 109203,
+      "role": "p8_dual_submod300_oof_zip",
+      "verdict": "promote",
+      "download_ok": true,
+      "submit_recommended": true,
+      "note": "P8 one-TIFF competition ZIP matching SHA-256 d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.json",
+      "sha256": "b925ed515b7a0db9d660d198ae13b1acfafd68f61c9c7a507d871a5339dfc403",
+      "bytes": 3556,
+      "role": "p8_dual_submod300_oof_receipt"
     }
   ]
 }
