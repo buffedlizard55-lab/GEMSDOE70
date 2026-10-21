@@ -1,0 +1,17 @@
+[surface_before_placement] 0 checkpointed, 940 to go
+[surface_before_placement] 160/940 (120s)
+[surface_before_placement] 320/940 (227s)
+[surface_before_placement] 480/940 (341s)
+[surface_before_placement] 640/940 (471s)
+[surface_before_placement] 800/940 (586s)
+[surface_before_placement] 940/940 (685s)
+[surface_before_placement] literal_unique=False like_dup=True
+[final_dots] 0 checkpointed, 940 to go
+[final_dots] 160/940 (796s)
+[final_dots] 320/940 (900s)
+[final_dots] 480/940 (1016s)
+[final_dots] 640/940 (1140s)
+[final_dots] 800/940 (1255s)
+[final_dots] 940/940 (1356s)
+[final_dots] literal_unique=False like_dup=True
+WROTE evidence/uniqueness3.json

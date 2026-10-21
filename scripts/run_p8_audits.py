@@ -2,12 +2,12 @@
 """Reproducible pre-experiment audits for Session 3 / Phase 5 (HANDOFF items 2, 3, and E2 scan).
 
 Generates verifiable receipts without fitting or evaluating any new candidate:
-  1. evidence/phase5/sgmc_buffer_audit.json          — SGMC vs QFaults buffer curve (1..32 px)
-  2. evidence/phase5/e2_complete_62raster_uniqueness.json — Complete 62-raster mutual-overlap audit of E2
-  3. evidence/phase5/h33_forensic_reanalysis.json    — Byte-level proof that H33 is 100% inside H19-5
+  1. evidence/p8_dual_submod300/sgmc_buffer_audit.json          — SGMC vs QFaults buffer curve (1..32 px)
+  2. evidence/p8_dual_submod300/e2_complete_62raster_uniqueness.json — Complete 62-raster mutual-overlap audit of E2
+  3. evidence/p8_dual_submod300/h33_forensic_reanalysis.json    — Byte-level proof that H33 is 100% inside H19-5
                                                        and 34.0% beyond d_cat > 32 px (fixing Session 2's
                                                        misinterpretation in docs/h33-analysis.md)
-  4. evidence/phase5/upstream_uniqueness_patch.diff  — Exact diff against 60GEMSDOE/src/gems57/uniqueness.py
+  4. evidence/p8_dual_submod300/upstream_uniqueness_patch.diff  — Exact diff against 60GEMSDOE/src/gems57/uniqueness.py
 """
 from __future__ import annotations
 

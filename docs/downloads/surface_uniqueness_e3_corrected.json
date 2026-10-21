@@ -1,0 +1,49 @@
+{
+  "adjusted": {
+    "rule": "rho<=0.90 all; Jaccard<=0.50 + forward<=0.70 on non-saturating (dot) fields (prereg wording)",
+    "saturation_limit": 0.7,
+    "worst_forward_overlap_nonsaturating": 0.32727509431482943,
+    "worst_forward_overlap_nonsaturating_submission": "registry/rasters/h60_union_d2_75308.tif",
+    "adjusted_forward_firings": [],
+    "rho_firings": [],
+    "jaccard_firings_nonsaturating": [],
+    "saturating_fields": [
+      {
+        "submission": "registry/rasters/calib_r13lattice_00904.tif",
+        "covered_allowed_fraction": 0.9987243421716145,
+        "forward_overlap": 1.0,
+        "jaccard": 0.039927795539700814,
+        "spearman": -0.00025673930751395557
+      },
+      {
+        "submission": "registry/rasters/r11_greedy_mp.tif",
+        "covered_allowed_fraction": 0.7366226792535228,
+        "forward_overlap": 0.7366126071611946,
+        "jaccard": 0.04081099199463696,
+        "spearman": -0.01984474862288766
+      },
+      {
+        "submission": "registry/rasters/r13_lattice_s5_00904.tif",
+        "covered_allowed_fraction": 0.9987243421716145,
+        "forward_overlap": 1.0,
+        "jaccard": 0.039927795539700814,
+        "spearman": -0.00025673930751395557
+      },
+      {
+        "submission": "registry/rasters/r14_union_tips10_lat6.tif",
+        "covered_allowed_fraction": 0.7621148816628593,
+        "forward_overlap": 0.7630813918119073,
+        "jaccard": 0.03757418929438458,
+        "spearman": 0.01045043756767494
+      },
+      {
+        "submission": "docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+        "covered_allowed_fraction": 1.0,
+        "forward_overlap": 1.0,
+        "jaccard": 0.9543255344640303,
+        "spearman": 0.19395469312267172
+      }
+    ],
+    "duplicate_adjusted": false
+  }
+}

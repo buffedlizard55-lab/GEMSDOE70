@@ -23,10 +23,10 @@ from scipy import ndimage as ndi
 from gems57 import evaluate_holdout, holdout, submission_writer, uniqueness
 from gems57.grid import load_grid, write_geotiff
 from gems70 import method_v2 as m2
-from gems70 import phase5 as p5
+from gems70 import method_p8 as p5
 from restore_data import DATA, PINS, sha
 
-E = ROOT / "evidence/phase5"
+E = ROOT / "evidence/p8_dual_submod300"
 CACHE = ROOT / ".cache"
 CLONE = Path("/tmp/60GEMSDOE")
 EXT = CLONE / "data/external"
@@ -641,7 +641,7 @@ def main() -> None:
         "frac_gt_32px_blind_basins": float((d_chosen > 32.0).mean()),
     }
 
-    # Save modular Phase-5 receipts cleanly in evidence/phase5/ (NEVER modifying frozen phase2..phase4!)
+    # Save modular Phase-5 receipts cleanly in evidence/p8_dual_submod300/ (NEVER modifying frozen phase2..phase4!)
     dump(E / "instrumentA_holdout.json", sum_a_5c)
     dump(E / "instrumentA_folds.json", folds_a_out)
     dump(E / "instrumentB_prime.json", sum_bp_5c)
@@ -695,7 +695,7 @@ def main() -> None:
         ),
         "chosen_experiment": chosen_key,
         "preregistration_commit": "1cd4823",
-        "prior_run1_receipt": "evidence/phase5/run1_v50_run_card.json",
+        "prior_run1_receipt": "evidence/p8_dual_submod300/run1_v50_run_card.json",
         "promotion_gates": chosen_gates,
         "all_experiment_gates": {"exp_5c": gates_5c, "exp_5b": gates_5b, "exp_5a": gates_5a},
         "instrument_a_holdout": {
@@ -772,7 +772,7 @@ def main() -> None:
         "evaluator_implementation_sha256": evaluate_holdout.implementation_hashes(),
         "method_source_sha256": {
             p: sha(ROOT / p)
-            for p in ["src/gems70/phase5.py", "src/gems70/method_v2.py", "scripts/run_experiment_v5.py"]
+            for p in ["src/gems70/method_p8.py", "src/gems70/method_v2.py", "scripts/run_experiment_p8.py"]
         },
         "registered_parameters": {
             "dot_count": DOT_COUNT,

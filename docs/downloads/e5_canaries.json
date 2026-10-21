@@ -1,0 +1,107 @@
+{
+  "instrument_a_withheld_positive_pixels": 11321,
+  "proxy_prime_positive_pixels_in_band": 38757,
+  "stop_threshold_auc": 0.9,
+  "features": {
+    "mag_anom": {
+      "auc_instrument_a": 0.5099421060418692,
+      "auc_proxy_prime": 0.5222691001625513
+    },
+    "rtp": {
+      "auc_instrument_a": 0.5186537373023584,
+      "auc_proxy_prime": 0.5214553976700983
+    },
+    "tmi_hg": {
+      "auc_instrument_a": 0.5280133550481407,
+      "auc_proxy_prime": 0.49240662331965834
+    },
+    "geod_2ndinv": {
+      "auc_instrument_a": 0.5659191582015722,
+      "auc_proxy_prime": 0.45985329076037873
+    },
+    "iso_grav_anom_slope": {
+      "auc_instrument_a": 0.5231162995760091,
+      "auc_proxy_prime": 0.4374873246768326
+    },
+    "tc": {
+      "auc_instrument_a": 0.47092850476989667,
+      "auc_proxy_prime": 0.3698783693913357
+    },
+    "geod_shearrate": {
+      "auc_instrument_a": 0.5654657693666637,
+      "auc_proxy_prime": 0.46065643387001054
+    },
+    "geod_dilaterate": {
+      "auc_instrument_a": 0.5168796022877837,
+      "auc_proxy_prime": 0.4464799308512011
+    },
+    "tmi_vg": {
+      "auc_instrument_a": 0.48704304721314373,
+      "auc_proxy_prime": 0.5019949705214543
+    },
+    "deq_n100a15": {
+      "auc_instrument_a": 0.5366185690310044,
+      "auc_proxy_prime": 0.4704972697190185
+    },
+    "iso_grav_anom_vg": {
+      "auc_instrument_a": 0.5158913538998322,
+      "auc_proxy_prime": 0.46222896373558325
+    },
+    "det_elev": {
+      "auc_instrument_a": 0.5125291752053706,
+      "auc_proxy_prime": 0.6754255762829939
+    },
+    "iso_grav_anom": {
+      "auc_instrument_a": 0.4598005480964579,
+      "auc_proxy_prime": 0.620083927161545
+    },
+    "tmi": {
+      "auc_instrument_a": 0.5101473158289903,
+      "auc_proxy_prime": 0.531362825102562
+    },
+    "depth_to_base_surf": {
+      "auc_instrument_a": 0.5245310264110944,
+      "auc_proxy_prime": 0.34731456852955594
+    },
+    "ieq_n100a15": {
+      "auc_instrument_a": 0.5422984175426199,
+      "auc_proxy_prime": 0.4688665991304797
+    },
+    "cond_surf": {
+      "auc_instrument_a": 0.4786187302358449,
+      "auc_proxy_prime": 0.53391446080708
+    },
+    "iso_grav_anom_hg": {
+      "auc_instrument_a": 0.49279971601448636,
+      "auc_proxy_prime": 0.49088645728513564
+    },
+    "det_elev_slope": {
+      "auc_instrument_a": 0.5630039329564526,
+      "auc_proxy_prime": 0.7545956807802461
+    },
+    "analytic_signal": {
+      "auc_instrument_a": 0.5280118531931808,
+      "auc_proxy_prime": 0.4924050802435689
+    },
+    "gradmag_rtp": {
+      "auc_instrument_a": 0.5337410986220299,
+      "auc_proxy_prime": 0.4926118029646257
+    },
+    "gradmag_depth_to_base_surf": {
+      "auc_instrument_a": 0.537532062538645,
+      "auc_proxy_prime": 0.3994922897154063
+    },
+    "gradmag_iso_grav_anom": {
+      "auc_instrument_a": 0.5267706642522745,
+      "auc_proxy_prime": 0.4401285567123358
+    },
+    "d_cat": {
+      "auc_instrument_a": 0.0,
+      "auc_proxy_prime": 0.47549559963361454
+    },
+    "log1p_d_cat": {
+      "auc_instrument_a": 0.0,
+      "auc_proxy_prime": 0.47549559963361454
+    }
+  }
+}

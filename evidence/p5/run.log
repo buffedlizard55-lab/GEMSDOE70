@@ -1,0 +1,82 @@
+Literal dot-placement stop confirmed; continuing continuous-surface holdout only.
+proxy (unscored full mask) 62649
+LOQO quadrant 0 A/B' completed
+LOQO quadrant 1 A/B' completed
+LOQO quadrant 2 A/B' completed
+LOQO quadrant 3 A/B' completed
+{
+  "verdict": "negative",
+  "raster_sha256": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a",
+  "raster_path": "docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+  "holdout_dti": {
+    "instrument_a": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.012261896872041017,
+      "ci95": [
+        0.007525362402102077,
+        0.017652899299874254
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 173.95462263586575,
+      "fpw": 25475.043938340707,
+      "fnw": 11147.045377364133
+    },
+    "paired_vs_visible_p4": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": -0.06078039524854062,
+      "ci95": [
+        -0.06869402290922029,
+        -0.05215269960053514
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "instrument_b_prime_proxy": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.025423516361428998,
+      "ci95": [
+        0.018528422238356795,
+        0.033629285104751244
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 1344.0583191641003,
+      "fpw": 23241.62000772985,
+      "fnw": 58592.941680835924
+    },
+    "paired_vs_h33": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": -0.06834705225349563,
+      "ci95": [
+        -0.08194331910889527,
+        -0.05446790963256574
+      ],
+      "withheld_positive_pixels": 59937
+    }
+  },
+  "correlation_overlap_vs_registry": {
+    "stage": "final continuous production surface; no dot placement by preregistered literal stop",
+    "rasters_checked": 66,
+    "inventory_scope": "Archived 60GEMSDOE indexed rasters plus four locally published files; external/unindexed/private files not enumerated. Binary-dot checker reports zero dots for this continuous field; positive-support overlap is independent.",
+    "worst_spearman_full_footprint": 0.023162112298445472,
+    "worst_rho_submission": "https://github.com/buffedlizard55-lab/60GEMSDOE/tree/b99591eede63c6d45c8a896255b8cd34824fa00b/registry/rasters",
+    "binary_one_dots": 0,
+    "forward_overlap_positive_support_lattice": 1.0,
+    "literal_3px_forward_gate_passes": false,
+    "literal_witness_file": "calib_r13lattice_00904.tif",
+    "literal_witness_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "positive_support_pixels": 54512,
+    "shared_tool_dot_uniqueness": false,
+    "shared_tool_note": "Shared _dots uses exact-one binary definition, so zero dot overlap here is NOT a forward-overlap clearance."
+  },
+  "gate_results": {
+    "a_beats_visible_p4_significant": false,
+    "b_prime_beats_h33_significant": false,
+    "literal_dot_overlap_gate_passed": false,
+    "no_canary_alarm": true,
+    "no_surface_rho_alarm": true,
+    "local_format_validated": true
+  }
+}

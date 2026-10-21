@@ -1,0 +1,196 @@
+{
+  "evidence_class": "DATA-MEASUREMENT + PROXY-DTI",
+  "total_sgmc_in_footprint": 82151,
+  "sgmc_pixel_exact_on_catalogue": 3718,
+  "sgmc_off_catalogue_total": 78433,
+  "footprint_off_catalogue_total": 5106385,
+  "buffer_enrichment_curve": [
+    {
+      "buffer_px": 1,
+      "buffer_m": 100,
+      "sgmc_pixels_within_buffer": 7215,
+      "sgmc_fraction_within_buffer": 0.09198934122116965,
+      "domain_fraction_within_buffer": 0.02400856966327451,
+      "enrichment_ratio": 3.8315210989800925,
+      "sgmc_pixels_d_ge_r": 78433,
+      "sgmc_pixels_d_gt_r": 71218
+    },
+    {
+      "buffer_px": 2,
+      "buffer_m": 200,
+      "sgmc_pixels_within_buffer": 12760,
+      "sgmc_fraction_within_buffer": 0.16268662425254676,
+      "domain_fraction_within_buffer": 0.04769714778654567,
+      "enrichment_ratio": 3.4108250032182665,
+      "sgmc_pixels_d_ge_r": 68641,
+      "sgmc_pixels_d_gt_r": 65673
+    },
+    {
+      "buffer_px": 3,
+      "buffer_m": 300,
+      "sgmc_pixels_within_buffer": 16769,
+      "sgmc_fraction_within_buffer": 0.2138003136434919,
+      "domain_fraction_within_buffer": 0.07516197858171682,
+      "enrichment_ratio": 2.8445274815516752,
+      "sgmc_pixels_d_ge_r": 62649,
+      "sgmc_pixels_d_gt_r": 61664
+    },
+    {
+      "buffer_px": 4,
+      "buffer_m": 400,
+      "sgmc_pixels_within_buffer": 19343,
+      "sgmc_fraction_within_buffer": 0.24661813267374702,
+      "domain_fraction_within_buffer": 0.09858128597824097,
+      "enrichment_ratio": 2.5016729111058766,
+      "sgmc_pixels_d_ge_r": 59772,
+      "sgmc_pixels_d_gt_r": 59090
+    },
+    {
+      "buffer_px": 5,
+      "buffer_m": 500,
+      "sgmc_pixels_within_buffer": 21966,
+      "sgmc_fraction_within_buffer": 0.2800606887407086,
+      "domain_fraction_within_buffer": 0.12787715771529173,
+      "enrichment_ratio": 2.1900759583993987,
+      "sgmc_pixels_d_ge_r": 57613,
+      "sgmc_pixels_d_gt_r": 56467
+    },
+    {
+      "buffer_px": 6,
+      "buffer_m": 600,
+      "sgmc_pixels_within_buffer": 23660,
+      "sgmc_fraction_within_buffer": 0.30165874058113296,
+      "domain_fraction_within_buffer": 0.15015789056250164,
+      "enrichment_ratio": 2.00894364892247,
+      "sgmc_pixels_d_ge_r": 55098,
+      "sgmc_pixels_d_gt_r": 54773
+    },
+    {
+      "buffer_px": 8,
+      "buffer_m": 800,
+      "sgmc_pixels_within_buffer": 27001,
+      "sgmc_fraction_within_buffer": 0.34425560669616107,
+      "domain_fraction_within_buffer": 0.19624528898623977,
+      "enrichment_ratio": 1.7542108066619597,
+      "sgmc_pixels_d_ge_r": 51738,
+      "sgmc_pixels_d_gt_r": 51432
+    },
+    {
+      "buffer_px": 10,
+      "buffer_m": 1000,
+      "sgmc_pixels_within_buffer": 30311,
+      "sgmc_fraction_within_buffer": 0.3864572310124565,
+      "domain_fraction_within_buffer": 0.24443319491186036,
+      "enrichment_ratio": 1.5810341600771871,
+      "sgmc_pixels_d_ge_r": 48460,
+      "sgmc_pixels_d_gt_r": 48122
+    },
+    {
+      "buffer_px": 15,
+      "buffer_m": 1500,
+      "sgmc_pixels_within_buffer": 37426,
+      "sgmc_fraction_within_buffer": 0.4771715986893272,
+      "domain_fraction_within_buffer": 0.34930347006737644,
+      "enrichment_ratio": 1.36606601302096,
+      "sgmc_pixels_d_ge_r": 41238,
+      "sgmc_pixels_d_gt_r": 41007
+    },
+    {
+      "buffer_px": 20,
+      "buffer_m": 2000,
+      "sgmc_pixels_within_buffer": 44168,
+      "sgmc_fraction_within_buffer": 0.5631303150459628,
+      "domain_fraction_within_buffer": 0.442062241683696,
+      "enrichment_ratio": 1.273871102180433,
+      "sgmc_pixels_d_ge_r": 34404,
+      "sgmc_pixels_d_gt_r": 34265
+    }
+  ],
+  "dti_sensitivity_by_buffer": {
+    "d_ge_0px": {
+      "min_distance_px": 0,
+      "min_distance_m": 0,
+      "proxy_positive_pixels": 78433,
+      "dti": {
+        "candidate_exp5_3": 0.15033052078578013,
+        "exp5_1_sup_7x7": 0.13053314406511296,
+        "exp5_2_brk_7x7": 0.1265809515697314,
+        "p4_reference": 0.09278390195338454,
+        "h33_reference": 0.09127839557978852
+      }
+    },
+    "d_ge_1px": {
+      "min_distance_px": 1,
+      "min_distance_m": 100,
+      "proxy_positive_pixels": 78433,
+      "dti": {
+        "candidate_exp5_3": 0.15033052078578013,
+        "exp5_1_sup_7x7": 0.13053314406511296,
+        "exp5_2_brk_7x7": 0.1265809515697314,
+        "p4_reference": 0.09278390195338454,
+        "h33_reference": 0.09127839557978852
+      }
+    },
+    "d_ge_2px": {
+      "min_distance_px": 2,
+      "min_distance_m": 200,
+      "proxy_positive_pixels": 68641,
+      "dti": {
+        "candidate_exp5_3": 0.15467549983626291,
+        "exp5_1_sup_7x7": 0.13381495942735433,
+        "exp5_2_brk_7x7": 0.1293055390684239,
+        "p4_reference": 0.09246432538677783,
+        "h33_reference": 0.09720783586414672
+      }
+    },
+    "d_ge_3px": {
+      "min_distance_px": 3,
+      "min_distance_m": 300,
+      "proxy_positive_pixels": 62649,
+      "dti": {
+        "candidate_exp5_3": 0.1410342504789439,
+        "exp5_1_sup_7x7": 0.12217348833789451,
+        "exp5_2_brk_7x7": 0.11713248489394155,
+        "p4_reference": 0.07944265204119919,
+        "h33_reference": 0.09468564695108574
+      }
+    },
+    "d_ge_4px": {
+      "min_distance_px": 4,
+      "min_distance_m": 400,
+      "proxy_positive_pixels": 59772,
+      "dti": {
+        "candidate_exp5_3": 0.13058585262199682,
+        "exp5_1_sup_7x7": 0.11424548246287909,
+        "exp5_2_brk_7x7": 0.10902690378361081,
+        "p4_reference": 0.0714221046251691,
+        "h33_reference": 0.0912497248828452
+      }
+    },
+    "d_ge_5px": {
+      "min_distance_px": 5,
+      "min_distance_m": 500,
+      "proxy_positive_pixels": 57613,
+      "dti": {
+        "candidate_exp5_3": 0.1243207189899195,
+        "exp5_1_sup_7x7": 0.11005752104423498,
+        "exp5_2_brk_7x7": 0.10457791708807132,
+        "p4_reference": 0.06697822359304943,
+        "h33_reference": 0.08858215119393503
+      }
+    },
+    "d_ge_6px": {
+      "min_distance_px": 6,
+      "min_distance_m": 600,
+      "proxy_positive_pixels": 55098,
+      "dti": {
+        "candidate_exp5_3": 0.1211544415379053,
+        "exp5_1_sup_7x7": 0.10972017331400105,
+        "exp5_2_brk_7x7": 0.10439058473561065,
+        "p4_reference": 0.06590245521620586,
+        "h33_reference": 0.08568156723658375
+      }
+    }
+  },
+  "finding": "SGMC off-catalogue pixels are enriched 3.83x within 1 px and 3.41x within 2 px of QFaults due to 1:500k compilation jitter of the same range-front traces. Beyond 3-6 px enrichment settles toward ~2.0x. Exp 5.1, Exp 5.2 (unsupervised), and Exp 5.3 all beat H33 and P4 at every buffer threshold from d >= 0 px through d >= 6 px."
+}

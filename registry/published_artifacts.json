@@ -3,24 +3,6 @@
   "policy": "Every TIFF/ZIP in docs/ must appear here with a matching SHA-256; the build refuses anything else.",
   "artifacts": [
     {
-      "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
-      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
-      "bytes": 126097,
-      "note": "this session (P4), published candidate; run card evidence/phase4/run_card.json"
-    },
-    {
-      "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.zip",
-      "sha256": "d04ed7d8ee360ec61f1e716a0fe5ec758329946ecac70695cafe5d8a0daf6039",
-      "bytes": 91298,
-      "note": "this session (P4), one-TIFF ZIP"
-    },
-    {
-      "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.json",
-      "sha256": "17916fdcd0bfd92c97283b847e6e4ef163e06b9efe7a6429c52247d00ca89fe1",
-      "bytes": 3457,
-      "note": "this session (P4), writer receipt"
-    },
-    {
       "path": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
       "sha256": "d8ac9f2c4842bbc6ca0aabca43cb5237a6ec9c3d34418dbd551840430175059d",
       "bytes": 107350,
@@ -31,6 +13,12 @@
       "sha256": "fe1b860591bd0557bfe016e67d17d6722f405896282c3a330a7be5d6116b666a",
       "bytes": 58118,
       "note": "parallel session (v2), preserved"
+    },
+    {
+      "path": "docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.json",
+      "sha256": "ad334842d38691de6049fcad30515abcf5efab7119e3e39b4d39abfa4546c683",
+      "bytes": 3614,
+      "note": "parallel E2 lane, writer receipt"
     },
     {
       "path": "docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif",
@@ -45,16 +33,238 @@
       "note": "parallel E2 lane, one-TIFF ZIP"
     },
     {
-      "path": "docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.json",
-      "sha256": "ad334842d38691de6049fcad30515abcf5efab7119e3e39b4d39abfa4546c683",
-      "bytes": 3614,
-      "note": "parallel E2 lane, writer receipt"
+      "path": "docs/downloads/gems70-e5-supervised-loqo-37654-20261020.json",
+      "sha256": "55c4a7dbeb50aa1a1036648316d706976c6bc0127286d30ff7e9b7628c1fa708",
+      "bytes": 3443,
+      "note": "E5 lane, writer receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif",
+      "sha256": "8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2",
+      "bytes": 150815,
+      "note": "E5 supervised LOQO lane, review-only DO NOT SUBMIT (B-prime gate negative); card evidence/e5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e5-supervised-loqo-37654-20261020.zip",
+      "sha256": "56cf2b7a4b02a0b5cd7e4bd887a8910d6ae1beb5ccc59518f406834b2d6efba2",
+      "bytes": 118675,
+      "note": "E5 lane, one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.json",
+      "sha256": "37c2101497baeec72dcc6cea815f0f76b29b3e6445078b67e000241c2d9f66b3",
+      "bytes": 3445,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker), shared writer receipt; card evidence/e6/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif",
+      "sha256": "9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771",
+      "bytes": 152601,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker, 37,654 dots), scientific gates PASS (B-prime 0.1100 vs H33 0.0938, paired delta +0.0162 [+0.0045, +0.0270]; A 0.0710 vs H33 0.0037; mutual uniqueness ok), review-only under literal forward rule; card evidence/e6/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.zip",
+      "sha256": "f77fee7df72848478d5a7b82b44f1999d20aeb265939f5060478b02f050bfb88",
+      "bytes": 120996,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker), one-TIFF ZIP; card evidence/e6/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-fusion-dotted-37654-20261020.tif",
+      "sha256": "83b711a20b518eb89040456f70e6d750d3d361536390df198184c4d2818b9c74",
+      "bytes": 128726,
+      "note": "session-2 lane (arena/9a895360) H70-3A fusion; verdict DO NOT SUBMIT in evidence/s2/run_card.json (holdout CI gate + 0.896 3px overlap vs GEMSDOE49 parent)"
+    },
+    {
+      "path": "docs/downloads/gems70-fusion-dotted-37654-20261020.zip",
+      "sha256": "ba771f859fc38ca5d682576168507577077378da51c9a41a5383f8d4ceeed939",
+      "bytes": 91925,
+      "note": "session-2 lane (arena/9a895360) H70-3A fusion; verdict DO NOT SUBMIT in evidence/s2/run_card.json (holdout CI gate + 0.896 3px overlap vs GEMSDOE49 parent)"
+    },
+    {
+      "path": "docs/downloads/gems70-h70-conductive-breach-37654-20261020.json",
+      "sha256": "b3c8bbfde2d4117f6683181ea81544c670816852e27e0c69c91e1d1e72721621",
+      "bytes": 3459,
+      "note": "H70-A conductive breach, 37654 dots; run card evidence/h70/run_card.json (negative but unique, added during merge)"
+    },
+    {
+      "path": "docs/downloads/gems70-h70-conductive-breach-37654-20261020.tif",
+      "sha256": "fc49bd5e2a2a03930849bbe597d3aa4dc06419911e9c023fffaaf2016b207e88",
+      "bytes": 135849,
+      "note": "H70-A conductive breach, 37654 dots; run card evidence/h70/run_card.json (negative but unique, added during merge)"
+    },
+    {
+      "path": "docs/downloads/gems70-h70-conductive-breach-37654-20261020.zip",
+      "sha256": "5d6e79be1d747a2f26a2e67182b9184e5db6ddc892ce01af1398a974a699609a",
+      "bytes": 101794,
+      "note": "H70-A conductive breach, 37654 dots; run card evidence/h70/run_card.json (negative but unique, added during merge)"
+    },
+    {
+      "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.json",
+      "sha256": "17916fdcd0bfd92c97283b847e6e4ef163e06b9efe7a6429c52247d00ca89fe1",
+      "bytes": 3457,
+      "note": "P4 writer receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+      "bytes": 126097,
+      "note": "P4 coverage-stratified halo, published candidate; run card evidence/phase4/run_card.json; superseded by P5 but retained"
+    },
+    {
+      "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.zip",
+      "sha256": "d04ed7d8ee360ec61f1e716a0fe5ec758329946ecac70695cafe5d8a0daf6039",
+      "bytes": 91298,
+      "note": "P4 one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-analytic-halo-37654-20261020.json",
+      "sha256": "4e6867998a9470f21437ee472f32b9e3df0a24124d155b324187db4e18334604",
+      "bytes": 3431,
+      "note": "P5 writer receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif",
+      "sha256": "aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4",
+      "bytes": 149414,
+      "note": "P5 analytic-signal halo, current primary; run card evidence/phase5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-analytic-halo-37654-20261020.zip",
+      "sha256": "bf61cacc2630c63411ce4c1e486b4ef26bd16b5e1ce73e2376df4cba1444a139",
+      "bytes": 116726,
+      "note": "P5 one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.json",
+      "sha256": "3d5af89192d0829d2f9529b0bc32a346e8e875f758a780513fce69153021267f",
+      "bytes": 3664,
+      "note": "P5 LOQO magnetic-cover continuous research map; validated but negative on both holdouts and literal forward support. NOT a cleared competition submission; evidence/p5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+      "sha256": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a",
+      "bytes": 259128,
+      "note": "P5 LOQO magnetic-cover continuous research map; validated but negative on both holdouts and literal forward support. NOT a cleared competition submission; evidence/p5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.zip",
+      "sha256": "b481194c9ec5cb06611e1a257d1d99ba95e9e72c23583c3a4e546b99cda531db",
+      "bytes": 211493,
+      "note": "P5 LOQO magnetic-cover continuous research map; validated but negative on both holdouts and literal forward support. NOT a cleared competition submission; evidence/p5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-dualhorizon-37654-20261020.json",
+      "sha256": "359ab434d60ca69b3f7ae2a4c0b6a90357a0f277b6cc8bec42507b814720e794",
+      "bytes": 3448,
+      "note": "P6 dual-horizon LOQO scarp-rad-basement lane, writer receipt; evidence/p6_dualhorizon/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-dualhorizon-37654-20261020.tif",
+      "sha256": "bb014897052c478ca2f4690920e4d863fa2a6b810a05a15d8e33e129cc76de84",
+      "bytes": 146736,
+      "note": "P6 dual-horizon LOQO scarp-rad-basement lane (37654 binary dots, A=0.0790, B'=0.1440, B''=0.1234); review-only DO NOT SUBMIT (paired A vs P4 CI straddles zero, literal forward lattice overlap 1.00); evidence/p6_dualhorizon/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-dualhorizon-37654-20261020.zip",
+      "sha256": "edf4ca2e159fe16cff7ff2b34809a94d836589ee2ca6f55c9b6db3298331538e",
+      "bytes": 113440,
+      "note": "P6 dual-horizon lane, one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.json",
+      "sha256": "0a65bfd3d110081cc4adfba7d1cb00741bfa0192a2b3e8d1fa3dfe78ea3db0bc",
+      "bytes": 3474,
+      "note": "session 3 (P5), writer receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif",
+      "sha256": "0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931",
+      "bytes": 150877,
+      "note": "session 3 (P5) supervised within-halo ranking, published candidate; run card evidence/phase5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.zip",
+      "sha256": "a551e48e03e72240d8d0d75d845850eb4ba7f353cb8ebc961d3f65d6ababb56a",
+      "bytes": 118855,
+      "note": "session 3 (P5), one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.json",
+      "sha256": "5140d97ff0aaf409f86c3e990e9b8ca1365cc403f90c00b7538bcc4b76546126",
+      "bytes": 3636,
+      "note": "session 3 E1 proxy-trained ranking; pre-registered gate promote, VETOED by calibration diagnostic; DO NOT SUBMIT; card evidence/s3/run_card.json (writer receipt)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif",
+      "sha256": "e1982061f8ebbafcbd290e7383340306170a0df04a999905702f505f06ddabc9",
+      "bytes": 129039,
+      "note": "session 3 E1 proxy-trained ranking; pre-registered gate promote, VETOED by calibration diagnostic; DO NOT SUBMIT; card evidence/s3/run_card.json (TIFF)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.zip",
+      "sha256": "e11bde13a9f095200d02e2ff63115024b38dcffa1fa445e24807376e7b04c15f",
+      "bytes": 89711,
+      "note": "session 3 E1 proxy-trained ranking; pre-registered gate promote, VETOED by calibration diagnostic; DO NOT SUBMIT; card evidence/s3/run_card.json (one-TIFF ZIP)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.json",
+      "sha256": "6c0c4979f038a3308a30266b3c59aead9374fff7d1e0b675845bebee32543a7a",
+      "bytes": 3569,
+      "note": "session 3 E2 marginal-matched ranking; verdict negative; DO NOT SUBMIT; card evidence/s3/e2/run_card.json (writer receipt)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif",
+      "sha256": "41099fcd8cc1e81605383183266d829e8504964044435b876d8d4f5d6d14a2fc",
+      "bytes": 132735,
+      "note": "session 3 E2 marginal-matched ranking; verdict negative; DO NOT SUBMIT; card evidence/s3/e2/run_card.json (TIFF)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.zip",
+      "sha256": "e25dc0e51272e36e2fb8e19ea08282be47ac2069c98370daafbd85ae4a8722ae",
+      "bytes": 94237,
+      "note": "session 3 E2 marginal-matched ranking; verdict negative; DO NOT SUBMIT; card evidence/s3/e2/run_card.json (one-TIFF ZIP)"
     },
     {
       "path": "docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
       "sha256": "effd9a15628bd915ba9a6767ac2ebd6cd970c82809a0a6fa797508edaa37b881",
       "bytes": 498152,
       "note": "parallel H2 session (PR #18), blocked diagnostic, NOT a submission; card evidence/history/h2_stepover_negative/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.tif",
+      "sha256": "562a6b48a4a396c9fbabc180b67afd817b21824011482541bc7c9c2f90197d21",
+      "bytes": 184165,
+      "note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
+    },
+    {
+      "path": "docs/downloads/gems70e3-scarpcurv-60k-ex3-20261020-zeros.zip",
+      "sha256": "5c23877dc4c9343fee9de700b21b96f93495b7c012f7b6f73e8b01aefb8f4ebe",
+      "bytes": 151585,
+      "note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.tif",
+      "sha256": "a8cef5bdbbc030cd6bdd59ea275e09e27edf87b4ee8068d3e8052bdff1cb9667",
+      "bytes": 150240,
+      "role": "p7_loqo_within_halo_ranker_tif",
+      "verdict": "promote",
+      "download_ok": true,
+      "submit_recommended": false
+    },
+    {
+      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.zip",
+      "sha256": "0528f2809bf0208e46d36ddece74650aa14f4b3c8b7ca4bd3af4f9bd4b4c8e4d",
+      "bytes": 118468,
+      "role": "p7_loqo_within_halo_ranker_zip",
+      "verdict": "promote",
+      "download_ok": true,
+      "submit_recommended": false
+    },
+    {
+      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.json",
+      "sha256": "915fa941e37372b0bd3e8547d4c73ad4f07d892ee35a2dd2280cb0b8c632e4b6",
+      "bytes": 3484,
+      "role": "p7_loqo_within_halo_ranker_receipt"
     }
   ]
 }

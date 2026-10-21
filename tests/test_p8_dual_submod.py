@@ -4,7 +4,7 @@ from __future__ import annotations
 import numpy as np
 
 from gems70 import method_v2 as m2
-from gems70 import phase5
+from gems70 import method_p8 as phase5
 
 
 def test_unblurred_submodular_pack_centers_strictly_on_1px_ridge():

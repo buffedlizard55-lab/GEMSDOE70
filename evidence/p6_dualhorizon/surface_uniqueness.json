@@ -1,0 +1,7 @@
+{
+  "stage": "pre-placement continuous surface (rank01 in [0,1])",
+  "registry_rasters_checked": 62,
+  "worst_spearman_full_footprint": 0.08217950991829424,
+  "worst_rho_submission": "h60_officialstack_50k.tif",
+  "duplicate_by_rho": false
+}

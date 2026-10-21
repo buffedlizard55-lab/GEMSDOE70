@@ -1,0 +1,14 @@
+{
+  "started_utc": "2026-10-20T22:25:44.758695+00:00",
+  "experiment_id": "H70-2A",
+  "experiment_count_total": 2,
+  "maximum_experiments": 3,
+  "maximum_seconds": 7200,
+  "seed": 702,
+  "preregistration_sha256": "afae10f8dd5ebd211b73b1a0d55d03dd8d76d86f0823a2b19cadee18685e9430",
+  "source_sha256": {
+    "src/gems70/method2.py": "7267c909613d1bc95f6cd7e84636cb7700dbf1467d5c5dbe719d27d5ea3b6fe9",
+    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
+    "scripts/run_experiment2.py": "c114f09bc65178dd80d48aa31c3dab952d4c20dd8d1488d612755e87796600bd"
+  }
+}

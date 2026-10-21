@@ -1,0 +1,82 @@
+{
+  "rtp": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.5175864353855667,
+    "inverse_auc": 0.4824135646144333,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "tmi_hg": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.5284764594558784,
+    "inverse_auc": 0.4715235405441216,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "tmi_vg": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.4872830419132585,
+    "inverse_auc": 0.5127169580867414,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "tmi": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.5093245311809911,
+    "inverse_auc": 0.4906754688190089,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "cond_surf": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.47801990725200955,
+    "inverse_auc": 0.5219800927479905,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "cond_grad": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.5252043978005475,
+    "inverse_auc": 0.4747956021994525,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "rtp_grad": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.534255466831552,
+    "inverse_auc": 0.465744533168448,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "analytic": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.5300234661249006,
+    "inverse_auc": 0.4699765338750994,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "breach_raw": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.5317350401907959,
+    "inverse_auc": 0.46826495980920413,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "breach_rank": {
+    "evidence_class": "LEAKAGE-CANARY",
+    "auc": 0.5317350401907959,
+    "inverse_auc": 0.46826495980920413,
+    "withheld_positive_pixels": 11321,
+    "negative_sample_pixels": 200000,
+    "suspected_leakage": false
+  }
+}
