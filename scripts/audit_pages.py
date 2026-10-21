@@ -8,6 +8,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
 from gems70.pages_policy import check_source, check_output
+from gems70.release import published_artifacts
 
 
 def main():

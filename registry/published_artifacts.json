@@ -241,6 +241,30 @@
       "sha256": "5c23877dc4c9343fee9de700b21b96f93495b7c012f7b6f73e8b01aefb8f4ebe",
       "bytes": 151585,
       "note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.tif",
+      "sha256": "a8cef5bdbbc030cd6bdd59ea275e09e27edf87b4ee8068d3e8052bdff1cb9667",
+      "bytes": 150240,
+      "role": "p7_loqo_within_halo_ranker_tif",
+      "verdict": "promote",
+      "download_ok": true,
+      "submit_recommended": false
+    },
+    {
+      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.zip",
+      "sha256": "0528f2809bf0208e46d36ddece74650aa14f4b3c8b7ca4bd3af4f9bd4b4c8e4d",
+      "bytes": 118468,
+      "role": "p7_loqo_within_halo_ranker_zip",
+      "verdict": "promote",
+      "download_ok": true,
+      "submit_recommended": false
+    },
+    {
+      "path": "docs/downloads/gems70-p5-loqo-halo-37654-20261020.json",
+      "sha256": "915fa941e37372b0bd3e8547d4c73ad4f07d892ee35a2dd2280cb0b8c632e4b6",
+      "bytes": 3484,
+      "role": "p7_loqo_within_halo_ranker_receipt"
     }
   ]
 }

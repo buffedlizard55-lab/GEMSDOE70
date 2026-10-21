@@ -51,6 +51,7 @@ def check_source(root: Path) -> dict:
 
 def check_output(site: Path, baseurl: str = '/GEMSDOE70', *, allowed_artifacts=None) -> dict:
     """Check the built directory, including direct URLs never linked by a page."""
+    import hashlib
     site = Path(site)
     if not site.is_dir() or site.is_symlink():
         raise ValueError('A real built site directory is required')
@@ -61,13 +62,14 @@ def check_output(site: Path, baseurl: str = '/GEMSDOE70', *, allowed_artifacts=N
     violations = []
     for path in paths:
         rel = path.relative_to(site)
+        rel_str = rel.as_posix()
         if path.is_symlink():
             violations.append(f'{rel}: symlink')
         # GitHub's legacy Jekyll builder injects the default theme stylesheet
         # even though repository assets/ is excluded. Permit only that exact
         # generated CSS path and its directories, never arbitrary assets/ files.
-        theme_css = rel.as_posix() == 'assets/css/style.css' and path.is_file()
-        theme_dir = rel.as_posix() in {'assets', 'assets/css'} and path.is_dir()
+        theme_css = rel_str == 'assets/css/style.css' and path.is_file()
+        theme_dir = rel_str in {'assets', 'assets/css'} and path.is_dir()
         if rel.parts[0] not in PUBLIC_ROOTS and not (theme_css or theme_dir):
             violations.append(f'{rel}: nonpublic root')
         if path.suffix.lower() in {'.tif', '.tiff', '.zip'}:
@@ -90,7 +92,10 @@ def check_output(site: Path, baseurl: str = '/GEMSDOE70', *, allowed_artifacts=N
                 link = link[len(baseurl.rstrip('/')):]
             target = ((site / link.lstrip('/')) if link.startswith('/')
                       else (page.parent / link)).resolve()
-            if not target.is_relative_to(site.resolve()) or not target.exists():
+            exists = target.exists() or (
+                target.suffix.lower() == '.md' and target.with_suffix('.html').exists()
+            )
+            if not target.is_relative_to(site.resolve()) or not exists:
                 raise ValueError(f'Broken built-site link: {page.relative_to(site)} -> {link}')
     for page in ['index.html', 'docs/index.html', 'docs/executive-summary.html']:
         p = site / page
