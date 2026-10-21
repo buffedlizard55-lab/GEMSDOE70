@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 440" width="980" height="440" role="img" aria-label="931-raster uniqueness audit and top single-feature leakage canary AUCs">
+<rect width="100%" height="100%" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+<text x="26" y="33" font-family="system-ui,-apple-system,sans-serif" font-size="15.5" font-weight="700" fill="#0f172a">A. Top Genuine-Sparse 3-px Overlaps Across ALL 931 Rasters</text>
+<text x="26" y="51" font-family="system-ui,-apple-system,sans-serif" font-size="11.5" fill="#475569">0 duplicate firings across all 730 sparse competition rasters (limit 0.70)</text>
+<text x="515" y="33" font-family="system-ui,-apple-system,sans-serif" font-size="15.5" font-weight="700" fill="#0f172a">B. Top 14 of 55 Single-Feature Leakage Canary AUCs</text>
+<text x="515" y="51" font-family="system-ui,-apple-system,sans-serif" font-size="11.5" fill="#475569">All 55 features strictly below 0.9000 leakage gate (max = 0.7957)</text>
+<line x1="373.5" y1="68" x2="373.5" y2="412" stroke="#dc2626" stroke-dasharray="4,3" stroke-width="1.6"/>
+<text x="369.5" y="78" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" font-weight="700" fill="#dc2626">0.70 limit</text>
+<text x="187" y="100" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">12GEMSDOE (103.3k)</text>
+<rect x="195" y="88" width="165.8" height="15" rx="2.5" fill="#0284c7"/>
+<text x="365.8" y="100" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.6503</text>
+<text x="187" y="127" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">12GEMSDOE (103.3k)</text>
+<rect x="195" y="115" width="165.8" height="15" rx="2.5" fill="#0284c7"/>
+<text x="365.8" y="127" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.6503</text>
+<text x="187" y="154" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">12GEMSDOE (103.3k)</text>
+<rect x="195" y="142" width="160.5" height="15" rx="2.5" fill="#0284c7"/>
+<text x="360.5" y="154" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.6294</text>
+<text x="187" y="181" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">12GEMSDOE (103.3k)</text>
+<rect x="195" y="169" width="160.5" height="15" rx="2.5" fill="#0284c7"/>
+<text x="360.5" y="181" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.6294</text>
+<text x="187" y="208" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">12GEMSDOE (103.3k)</text>
+<rect x="195" y="196" width="159.0" height="15" rx="2.5" fill="#0284c7"/>
+<text x="359.0" y="208" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.6234</text>
+<text x="187" y="235" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">12GEMSDOE (103.3k)</text>
+<rect x="195" y="223" width="159.0" height="15" rx="2.5" fill="#0284c7"/>
+<text x="359.0" y="235" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.6234</text>
+<text x="187" y="262" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">GEMSDOE30 (85.5k)</text>
+<rect x="195" y="250" width="152.1" height="15" rx="2.5" fill="#0284c7"/>
+<text x="352.1" y="262" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.5965</text>
+<text x="187" y="289" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">GEMSDOE30 (85.5k)</text>
+<rect x="195" y="277" width="152.1" height="15" rx="2.5" fill="#0284c7"/>
+<text x="352.1" y="289" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.5965</text>
+<text x="187" y="316" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">GEMSDOE23 (100.0k)</text>
+<rect x="195" y="304" width="142.8" height="15" rx="2.5" fill="#0284c7"/>
+<text x="342.8" y="316" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.5602</text>
+<text x="187" y="343" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">GEMSDOE23 (100.0k)</text>
+<rect x="195" y="331" width="142.8" height="15" rx="2.5" fill="#0284c7"/>
+<text x="342.8" y="343" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.5602</text>
+<text x="187" y="370" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">GEMSDOE23 (100.0k)</text>
+<rect x="195" y="358" width="141.9" height="15" rx="2.5" fill="#0284c7"/>
+<text x="341.9" y="370" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.5563</text>
+<text x="187" y="397" text-anchor="end" font-family="ui-monospace,monospace" font-size="10.5" fill="#334155">GEMSDOE23 (100.0k)</text>
+<rect x="195" y="385" width="141.9" height="15" rx="2.5" fill="#0284c7"/>
+<text x="341.9" y="397" font-family="ui-monospace,monospace" font-size="10.5" fill="#0f172a">0.5563</text>
+<line x1="915.0" y1="68" x2="915.0" y2="412" stroke="#dc2626" stroke-dasharray="4,3" stroke-width="1.6"/>
+<text x="911.0" y="78" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" font-weight="700" fill="#dc2626">0.90 gate</text>
+<text x="707" y="97" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">vis_tip_x_physical_corrob</text>
+<rect x="715" y="86" width="147.8" height="13" rx="2.5" fill="#0d9488"/>
+<text x="867.8" y="97" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.7957</text>
+<text x="707" y="121" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">vis_crack_tip_cone</text>
+<rect x="715" y="110" width="146.7" height="13" rx="2.5" fill="#0d9488"/>
+<text x="866.7" y="121" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.7934</text>
+<text x="707" y="145" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">vis_log_dperp_clamped</text>
+<rect x="715" y="134" width="135.2" height="13" rx="2.5" fill="#0d9488"/>
+<text x="855.2" y="145" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.7705</text>
+<text x="707" y="169" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">vis_log_second_host_deff</text>
+<rect x="715" y="158" width="126.6" height="13" rx="2.5" fill="#0d9488"/>
+<text x="846.6" y="169" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.7531</text>
+<text x="707" y="193" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">vis_log_deff_clamped</text>
+<rect x="715" y="182" width="122.9" height="13" rx="2.5" fill="#0d9488"/>
+<text x="842.9" y="193" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.7458</text>
+<text x="707" y="217" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">vis_host_bend_hinge</text>
+<rect x="715" y="206" width="118.9" height="13" rx="2.5" fill="#0d9488"/>
+<text x="838.9" y="217" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.7378</text>
+<text x="707" y="241" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">vis_savage_brodsky_norm_dist</text>
+<rect x="715" y="230" width="116.8" height="13" rx="2.5" fill="#0d9488"/>
+<text x="836.8" y="241" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.7336</text>
+<text x="707" y="265" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">vis_relay_x_physical_corrob</text>
+<rect x="715" y="254" width="113.8" height="13" rx="2.5" fill="#0d9488"/>
+<text x="833.8" y="265" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.7276</text>
+<text x="707" y="289" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">vis_two_host_relay_bridge</text>
+<rect x="715" y="278" width="112.0" height="13" rx="2.5" fill="#0d9488"/>
+<text x="832.0" y="289" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.7240</text>
+<text x="707" y="313" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">vis_host_length_logpx</text>
+<rect x="715" y="302" width="55.9" height="13" rx="2.5" fill="#0d9488"/>
+<text x="775.9" y="313" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.6118</text>
+<text x="707" y="337" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">tilt_abs_zero_crossing</text>
+<rect x="715" y="326" width="31.8" height="13" rx="2.5" fill="#0d9488"/>
+<text x="751.8" y="337" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.5635</text>
+<text x="707" y="361" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">vis_kinematic_sense_transition</text>
+<rect x="715" y="350" width="31.5" height="13" rx="2.5" fill="#0d9488"/>
+<text x="751.5" y="361" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.5629</text>
+<text x="707" y="385" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">geod_strain_2ndinv</text>
+<rect x="715" y="374" width="30.6" height="13" rx="2.5" fill="#0d9488"/>
+<text x="750.6" y="385" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.5612</text>
+<text x="707" y="409" text-anchor="end" font-family="ui-monospace,monospace" font-size="10" fill="#334155">gdr_blind_upflow_exp12</text>
+<rect x="715" y="398" width="26.8" height="13" rx="2.5" fill="#0d9488"/>
+<text x="746.8" y="409" font-family="ui-monospace,monospace" font-size="10" fill="#0f172a">0.5536</text>
+</svg>

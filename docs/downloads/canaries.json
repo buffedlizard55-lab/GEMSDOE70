@@ -1,50 +1,1002 @@
 {
-  "rtp": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.5175864353855667,
-    "inverse_auc": 0.4824135646144333,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
-  },
-  "gravity": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.45875241166858055,
-    "inverse_auc": 0.5412475883314194,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
-  },
-  "basement": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.5243442341665931,
-    "inverse_auc": 0.47565576583340685,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
-  },
-  "termination": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.5252857815122339,
-    "inverse_auc": 0.47471421848776607,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
-  },
-  "gravity_edge": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.5287904977475488,
-    "inverse_auc": 0.4712095022524512,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
-  },
-  "basement_normal": {
-    "evidence_class": "LEAKAGE-CANARY",
-    "auc": 0.5426488839325148,
-    "inverse_auc": 0.45735111606748524,
-    "withheld_positive_pixels": 11321,
-    "negative_sample_pixels": 200000,
-    "suspected_leakage": false
-  }
+  "evidence_class": "LEAKAGE-CANARY",
+  "threshold": 0.9,
+  "all_passed": true,
+  "max_symmetric_auc_seed70": 0.795651,
+  "max_symmetric_auc_seed20": 0.787124,
+  "feature_count_per_split": 55,
+  "seed70_primary": [
+    {
+      "split": "seed70_primary",
+      "feature": "det_elev_slope",
+      "domain": "geomorph",
+      "auc": 0.524908,
+      "symmetric_auc": 0.524908,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "det_slope_local_anom",
+      "domain": "geomorph",
+      "auc": 0.515441,
+      "symmetric_auc": 0.515441,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "hessian_ridge_multiscale",
+      "domain": "geomorph",
+      "auc": 0.505994,
+      "symmetric_auc": 0.505994,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "scarp_worm_1500m",
+      "domain": "geomorph",
+      "auc": 0.544567,
+      "symmetric_auc": 0.544567,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "tectonic_strike_align",
+      "domain": "geodesy",
+      "auc": 0.473801,
+      "symmetric_auc": 0.526199,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "topo10_curv_prof_absmax",
+      "domain": "geomorph",
+      "auc": 0.540869,
+      "symmetric_auc": 0.540869,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "topo10_aspect_coherence",
+      "domain": "geomorph",
+      "auc": 0.505698,
+      "symmetric_auc": 0.505698,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "topo10_hs_lineament",
+      "domain": "geomorph",
+      "auc": 0.531569,
+      "symmetric_auc": 0.531569,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "topo10_piedmont_scarp_anom",
+      "domain": "geomorph",
+      "auc": 0.527958,
+      "symmetric_auc": 0.527958,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "dem10_chi_step_log",
+      "domain": "geomorph",
+      "auc": 0.50503,
+      "symmetric_auc": 0.50503,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "dem10_ksn_knickzone_anom",
+      "domain": "geomorph",
+      "auc": 0.49189,
+      "symmetric_auc": 0.50811,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "lidar_scarplet_rank_fused",
+      "domain": "geomorph",
+      "auc": 0.529215,
+      "symmetric_auc": 0.529215,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "lidar_crest_toe_dipole_fused",
+      "domain": "geomorph",
+      "auc": 0.538641,
+      "symmetric_auc": 0.538641,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "lidar_step_coh_fused",
+      "domain": "geomorph",
+      "auc": 0.535469,
+      "symmetric_auc": 0.535469,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "lidar_distributed_damage_ratio",
+      "domain": "geomorph",
+      "auc": 0.510153,
+      "symmetric_auc": 0.510153,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "lidar_coverage_flag",
+      "domain": "geomorph",
+      "auc": 0.497199,
+      "symmetric_auc": 0.502801,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "rtp_local_anom",
+      "domain": "potential",
+      "auc": 0.517428,
+      "symmetric_auc": 0.517428,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "tmi_hg",
+      "domain": "potential",
+      "auc": 0.541066,
+      "symmetric_auc": 0.541066,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "tilt_abs_zero_crossing",
+      "domain": "potential",
+      "auc": 0.563504,
+      "symmetric_auc": 0.563504,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "tmi_vg_abs",
+      "domain": "potential",
+      "auc": 0.524787,
+      "symmetric_auc": 0.524787,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "iso_grav_slope",
+      "domain": "potential",
+      "auc": 0.527904,
+      "symmetric_auc": 0.527904,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "iso_grav_vg_abs",
+      "domain": "potential",
+      "auc": 0.505473,
+      "symmetric_auc": 0.505473,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "iso_grav_hg",
+      "domain": "potential",
+      "auc": 0.496774,
+      "symmetric_auc": 0.503226,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "depth_to_basement_km",
+      "domain": "potential",
+      "auc": 0.525658,
+      "symmetric_auc": 0.525658,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "basement_step_worm_1500m",
+      "domain": "potential",
+      "auc": 0.513302,
+      "symmetric_auc": 0.513302,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "xgrad_topo_gravity",
+      "domain": "potential",
+      "auc": 0.549784,
+      "symmetric_auc": 0.549784,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "xgrad_topo_magnetics",
+      "domain": "potential",
+      "auc": 0.543666,
+      "symmetric_auc": 0.543666,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "xgrad_gravity_magnetics",
+      "domain": "potential",
+      "auc": 0.525704,
+      "symmetric_auc": 0.525704,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "mag_worm_1500m",
+      "domain": "potential",
+      "auc": 0.53645,
+      "symmetric_auc": 0.53645,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "grav_worm_1500m",
+      "domain": "potential",
+      "auc": 0.5313,
+      "symmetric_auc": 0.5313,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "shallow_magnetite_destruction",
+      "domain": "potential",
+      "auc": 0.497547,
+      "symmetric_auc": 0.502453,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "mt_cond_claycap_edge",
+      "domain": "hydrothermal",
+      "auc": 0.49694,
+      "symmetric_auc": 0.50306,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "mt_cond_local_anom",
+      "domain": "hydrothermal",
+      "auc": 0.502688,
+      "symmetric_auc": 0.502688,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "geodawn_potassic_alteration_anom",
+      "domain": "hydrothermal",
+      "auc": 0.4472,
+      "symmetric_auc": 0.5528,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "geodawn_uranium_redox_edge",
+      "domain": "hydrothermal",
+      "auc": 0.529579,
+      "symmetric_auc": 0.529579,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "gdr_thermal_spring_neglogd",
+      "domain": "hydrothermal",
+      "auc": 0.517106,
+      "symmetric_auc": 0.517106,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "gdr_2m_probe_paleo_neglogd",
+      "domain": "hydrothermal",
+      "auc": 0.516592,
+      "symmetric_auc": 0.516592,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "gdr_volcanic_vent_neglogd",
+      "domain": "hydrothermal",
+      "auc": 0.497195,
+      "symmetric_auc": 0.502805,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "geod_strain_2ndinv",
+      "domain": "geodesy",
+      "auc": 0.561194,
+      "symmetric_auc": 0.561194,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "geod_transtension_coupling",
+      "domain": "geodesy",
+      "auc": 0.55237,
+      "symmetric_auc": 0.55237,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "geod_dilatation_rate",
+      "domain": "geodesy",
+      "auc": 0.522689,
+      "symmetric_auc": 0.522689,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "seismicity_proximity_intensity",
+      "domain": "geodesy",
+      "auc": 0.525284,
+      "symmetric_auc": 0.525284,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "sgmc_raw_off_visible",
+      "domain": "bedrock_sgmc",
+      "auc": 0.520945,
+      "symmetric_auc": 0.520945,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "gdr_blind_upflow_exp12",
+      "domain": "hydrothermal",
+      "auc": 0.553587,
+      "symmetric_auc": 0.553587,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "vis_log_deff_clamped",
+      "domain": "visible_anatomy",
+      "auc": 0.254179,
+      "symmetric_auc": 0.745821,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "vis_log_dperp_clamped",
+      "domain": "visible_anatomy",
+      "auc": 0.229523,
+      "symmetric_auc": 0.770477,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "vis_crack_tip_cone",
+      "domain": "visible_anatomy",
+      "auc": 0.793408,
+      "symmetric_auc": 0.793408,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "vis_two_host_relay_bridge",
+      "domain": "visible_anatomy",
+      "auc": 0.724037,
+      "symmetric_auc": 0.724037,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "vis_host_bend_hinge",
+      "domain": "visible_anatomy",
+      "auc": 0.737757,
+      "symmetric_auc": 0.737757,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "vis_log_second_host_deff",
+      "domain": "visible_anatomy",
+      "auc": 0.246896,
+      "symmetric_auc": 0.753104,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "vis_savage_brodsky_norm_dist",
+      "domain": "visible_anatomy",
+      "auc": 0.266381,
+      "symmetric_auc": 0.733619,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "vis_host_length_logpx",
+      "domain": "visible_anatomy",
+      "auc": 0.388207,
+      "symmetric_auc": 0.611793,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "vis_kinematic_sense_transition",
+      "domain": "visible_anatomy",
+      "auc": 0.562933,
+      "symmetric_auc": 0.562933,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "vis_tip_x_physical_corrob",
+      "domain": "visible_anatomy",
+      "auc": 0.795651,
+      "symmetric_auc": 0.795651,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed70_primary",
+      "feature": "vis_relay_x_physical_corrob",
+      "domain": "visible_anatomy",
+      "auc": 0.727581,
+      "symmetric_auc": 0.727581,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    }
+  ],
+  "seed20_historical": [
+    {
+      "split": "seed20_historical",
+      "feature": "det_elev_slope",
+      "domain": "geomorph",
+      "auc": 0.563479,
+      "symmetric_auc": 0.563479,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "det_slope_local_anom",
+      "domain": "geomorph",
+      "auc": 0.492994,
+      "symmetric_auc": 0.507006,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "hessian_ridge_multiscale",
+      "domain": "geomorph",
+      "auc": 0.53701,
+      "symmetric_auc": 0.53701,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "scarp_worm_1500m",
+      "domain": "geomorph",
+      "auc": 0.570907,
+      "symmetric_auc": 0.570907,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "tectonic_strike_align",
+      "domain": "geodesy",
+      "auc": 0.475876,
+      "symmetric_auc": 0.524124,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "topo10_curv_prof_absmax",
+      "domain": "geomorph",
+      "auc": 0.585273,
+      "symmetric_auc": 0.585273,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "topo10_aspect_coherence",
+      "domain": "geomorph",
+      "auc": 0.493613,
+      "symmetric_auc": 0.506387,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "topo10_hs_lineament",
+      "domain": "geomorph",
+      "auc": 0.576452,
+      "symmetric_auc": 0.576452,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "topo10_piedmont_scarp_anom",
+      "domain": "geomorph",
+      "auc": 0.511253,
+      "symmetric_auc": 0.511253,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "dem10_chi_step_log",
+      "domain": "geomorph",
+      "auc": 0.498659,
+      "symmetric_auc": 0.501341,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "dem10_ksn_knickzone_anom",
+      "domain": "geomorph",
+      "auc": 0.461971,
+      "symmetric_auc": 0.538029,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "lidar_scarplet_rank_fused",
+      "domain": "geomorph",
+      "auc": 0.569788,
+      "symmetric_auc": 0.569788,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "lidar_crest_toe_dipole_fused",
+      "domain": "geomorph",
+      "auc": 0.585015,
+      "symmetric_auc": 0.585015,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "lidar_step_coh_fused",
+      "domain": "geomorph",
+      "auc": 0.577198,
+      "symmetric_auc": 0.577198,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "lidar_distributed_damage_ratio",
+      "domain": "geomorph",
+      "auc": 0.529486,
+      "symmetric_auc": 0.529486,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "lidar_coverage_flag",
+      "domain": "geomorph",
+      "auc": 0.53312,
+      "symmetric_auc": 0.53312,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "rtp_local_anom",
+      "domain": "potential",
+      "auc": 0.499394,
+      "symmetric_auc": 0.500606,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "tmi_hg",
+      "domain": "potential",
+      "auc": 0.529698,
+      "symmetric_auc": 0.529698,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "tilt_abs_zero_crossing",
+      "domain": "potential",
+      "auc": 0.529208,
+      "symmetric_auc": 0.529208,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "tmi_vg_abs",
+      "domain": "potential",
+      "auc": 0.51841,
+      "symmetric_auc": 0.51841,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "iso_grav_slope",
+      "domain": "potential",
+      "auc": 0.520855,
+      "symmetric_auc": 0.520855,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "iso_grav_vg_abs",
+      "domain": "potential",
+      "auc": 0.506905,
+      "symmetric_auc": 0.506905,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "iso_grav_hg",
+      "domain": "potential",
+      "auc": 0.491724,
+      "symmetric_auc": 0.508276,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "depth_to_basement_km",
+      "domain": "potential",
+      "auc": 0.524599,
+      "symmetric_auc": 0.524599,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "basement_step_worm_1500m",
+      "domain": "potential",
+      "auc": 0.5234,
+      "symmetric_auc": 0.5234,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "xgrad_topo_gravity",
+      "domain": "potential",
+      "auc": 0.559736,
+      "symmetric_auc": 0.559736,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "xgrad_topo_magnetics",
+      "domain": "potential",
+      "auc": 0.555336,
+      "symmetric_auc": 0.555336,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "xgrad_gravity_magnetics",
+      "domain": "potential",
+      "auc": 0.52227,
+      "symmetric_auc": 0.52227,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "mag_worm_1500m",
+      "domain": "potential",
+      "auc": 0.524591,
+      "symmetric_auc": 0.524591,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "grav_worm_1500m",
+      "domain": "potential",
+      "auc": 0.520692,
+      "symmetric_auc": 0.520692,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "shallow_magnetite_destruction",
+      "domain": "potential",
+      "auc": 0.500803,
+      "symmetric_auc": 0.500803,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "mt_cond_claycap_edge",
+      "domain": "hydrothermal",
+      "auc": 0.514625,
+      "symmetric_auc": 0.514625,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "mt_cond_local_anom",
+      "domain": "hydrothermal",
+      "auc": 0.525756,
+      "symmetric_auc": 0.525756,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "geodawn_potassic_alteration_anom",
+      "domain": "hydrothermal",
+      "auc": 0.442344,
+      "symmetric_auc": 0.557656,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "geodawn_uranium_redox_edge",
+      "domain": "hydrothermal",
+      "auc": 0.502077,
+      "symmetric_auc": 0.502077,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "gdr_thermal_spring_neglogd",
+      "domain": "hydrothermal",
+      "auc": 0.485277,
+      "symmetric_auc": 0.514723,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "gdr_2m_probe_paleo_neglogd",
+      "domain": "hydrothermal",
+      "auc": 0.50405,
+      "symmetric_auc": 0.50405,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "gdr_volcanic_vent_neglogd",
+      "domain": "hydrothermal",
+      "auc": 0.498741,
+      "symmetric_auc": 0.501259,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "geod_strain_2ndinv",
+      "domain": "geodesy",
+      "auc": 0.564824,
+      "symmetric_auc": 0.564824,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "geod_transtension_coupling",
+      "domain": "geodesy",
+      "auc": 0.54279,
+      "symmetric_auc": 0.54279,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "geod_dilatation_rate",
+      "domain": "geodesy",
+      "auc": 0.51461,
+      "symmetric_auc": 0.51461,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "seismicity_proximity_intensity",
+      "domain": "geodesy",
+      "auc": 0.48242,
+      "symmetric_auc": 0.51758,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "sgmc_raw_off_visible",
+      "domain": "bedrock_sgmc",
+      "auc": 0.519964,
+      "symmetric_auc": 0.519964,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "gdr_blind_upflow_exp12",
+      "domain": "hydrothermal",
+      "auc": 0.498076,
+      "symmetric_auc": 0.501924,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "vis_log_deff_clamped",
+      "domain": "visible_anatomy",
+      "auc": 0.246594,
+      "symmetric_auc": 0.753406,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "vis_log_dperp_clamped",
+      "domain": "visible_anatomy",
+      "auc": 0.240052,
+      "symmetric_auc": 0.759948,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "vis_crack_tip_cone",
+      "domain": "visible_anatomy",
+      "auc": 0.783812,
+      "symmetric_auc": 0.783812,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "vis_two_host_relay_bridge",
+      "domain": "visible_anatomy",
+      "auc": 0.724937,
+      "symmetric_auc": 0.724937,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "vis_host_bend_hinge",
+      "domain": "visible_anatomy",
+      "auc": 0.738016,
+      "symmetric_auc": 0.738016,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "vis_log_second_host_deff",
+      "domain": "visible_anatomy",
+      "auc": 0.230055,
+      "symmetric_auc": 0.769945,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "vis_savage_brodsky_norm_dist",
+      "domain": "visible_anatomy",
+      "auc": 0.256669,
+      "symmetric_auc": 0.743331,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "vis_host_length_logpx",
+      "domain": "visible_anatomy",
+      "auc": 0.411296,
+      "symmetric_auc": 0.588704,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "vis_kinematic_sense_transition",
+      "domain": "visible_anatomy",
+      "auc": 0.522758,
+      "symmetric_auc": 0.522758,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "vis_tip_x_physical_corrob",
+      "domain": "visible_anatomy",
+      "auc": 0.787124,
+      "symmetric_auc": 0.787124,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    },
+    {
+      "split": "seed20_historical",
+      "feature": "vis_relay_x_physical_corrob",
+      "domain": "visible_anatomy",
+      "auc": 0.729125,
+      "symmetric_auc": 0.729125,
+      "threshold": 0.9,
+      "leakage_suspect": false
+    }
+  ]
 }

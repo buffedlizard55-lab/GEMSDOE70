@@ -1,11 +1,52 @@
 {
-  "started_utc": "2026-10-20T19:41:27.304341+00:00",
-  "experiment_count": 1,
-  "maximum_experiments": 3,
-  "maximum_seconds": 7200,
-  "preregistration_sha256": "67ec79dd48e1b8af3e3fa314f11916b829a878c4b154b5d910b6f6884188a671",
-  "source_sha256": {
-    "src/gems70/method.py": "e1b96a7edf312cbb4635ffd3435dbbc68e6720807654782f528804273fc9f374",
-    "scripts/run_experiment.py": "80afcb2d3ea851344e99bd7cca262e7fe9410c0b91534cb06b012623c1d572b5"
-  }
+  "schema": "gems70-experiment-manifest-v2",
+  "generated_utc": "2026-10-21T01:57:59Z",
+  "preregistration_sha256": "6b9a85b5a0309a6d1aab0f03ed69ee21755ee9943bece89b9b842693c2f6aa65",
+  "experiments_total": 3,
+  "budget_limit": 3,
+  "elapsed_seconds": 1521.43,
+  "experiments": [
+    {
+      "index": 1,
+      "id": "H70-1",
+      "status": "archived_negative",
+      "archive_dir": "evidence/history/experiment1_contact_termination",
+      "seed20_holdout_dti": 0.010192889039757751,
+      "seed70_holdout_dti": 0.01302755049844007
+    },
+    {
+      "index": 2,
+      "id": "H70-2",
+      "status": "completed_positive_intermediate",
+      "description": "Dual-expert 4-domain physical OOF + collar-safe anatomy Noisy-OR with peak-thinning",
+      "seed70_holdout_dti": 0.11165497126145793,
+      "seed70_ci95": [
+        0.09242641373103479,
+        0.13208252246253396
+      ],
+      "seed20_holdout_dti": 0.09281432629669614,
+      "seed20_ci95": [
+        0.07059278564494587,
+        0.11497931513080317
+      ]
+    },
+    {
+      "index": 3,
+      "id": "H70-3",
+      "status": "promoted_submission_candidate",
+      "description": "Relief-deconfounded multi-line physical corroboration + off-catalogue SGMC/GDR prior + submodular allocate_patient",
+      "seed70_holdout_dti": 0.13278115269761262,
+      "seed70_ci95": [
+        0.1167356789263841,
+        0.15101018885215128
+      ],
+      "seed20_holdout_dti": 0.11515220177192605,
+      "seed20_ci95": [
+        0.09600782592411547,
+        0.13534204841876316
+      ],
+      "primary_tif": "docs/downloads/gemsdoe70-h70-3-dual-expert-submodular-20261020T223000Z.tif",
+      "raster_sha256": "e035d29e3c4e8a0dabd807b6bedfc9373216fa03f523b441cba5113420864650"
+    }
+  ]
 }

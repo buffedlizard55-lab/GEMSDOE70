@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 435" width="980" height="435" role="img" aria-label="Radial distance-to-catalogue forensic breakdown across scored submissions and H70-3">
+<rect width="100%" height="100%" fill="#ffffff" rx="10" stroke="#e2e8f0" stroke-width="1.5"/>
+<text x="28" y="34" font-family="system-ui,-apple-system,sans-serif" font-size="16.5" font-weight="700" fill="#0f172a">Forensic Geometry Anatomy Across Scored Leaderboard Rasters vs. GEMSDOE70 H70-3</text>
+<text x="28" y="54" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#475569">Fraction of emitted binary dots by Euclidean distance d_cat to mapped existing_faults.tif (computed directly from verified GeoTIFF bytes)</text>
+<rect x="275" y="68" width="12" height="12" rx="2" fill="#ef4444"/>
+<text x="292" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#334155">d <= 2 px (<=200m flank waste)</text>
+<rect x="468" y="68" width="12" height="12" rx="2" fill="#f59e0b"/>
+<text x="485" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#334155">2 < d <= 5 px (tips / splays)</text>
+<rect x="640" y="68" width="12" height="12" rx="2" fill="#0ea5e9"/>
+<text x="657" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#334155">5 < d <= 15 px (relay ramps)</text>
+<rect x="805" y="68" width="12" height="12" rx="2" fill="#10b981"/>
+<text x="822" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#334155">d > 15 px (>1.5 km detached faults)</text>
+<text x="263" y="115" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="500" fill="#1e293b">G32 H33 (0.2778 ORG-CONF)</text>
+<rect x="275.0" y="102" width="138.6" height="18" fill="#f59e0b"/>
+<text x="344.3" y="115" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">23.3%</text>
+<rect x="413.6" y="102" width="186.8" height="18" fill="#0ea5e9"/>
+<text x="507.1" y="115" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">31.4%</text>
+<rect x="600.5" y="102" width="269.5" height="18" fill="#10b981"/>
+<text x="735.2" y="115" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">45.3%</text>
+<text x="880" y="115" font-family="ui-monospace,monospace" font-size="11" fill="#334155">37,654 dots</text>
+<text x="263" y="155" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="500" fill="#1e293b">G36 (0.2750 ORG-CONF)</text>
+<rect x="275.0" y="142" width="146.4" height="18" fill="#f59e0b"/>
+<text x="348.2" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">24.6%</text>
+<rect x="421.4" y="142" width="196.9" height="18" fill="#0ea5e9"/>
+<text x="519.8" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">33.1%</text>
+<rect x="618.3" y="142" width="251.7" height="18" fill="#10b981"/>
+<text x="744.2" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">42.3%</text>
+<text x="880" y="155" font-family="ui-monospace,monospace" font-size="11" fill="#334155">35,789 dots</text>
+<text x="263" y="195" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="500" fill="#1e293b">G28 (0.2710 ORG-CONF)</text>
+<rect x="275.0" y="182" width="57.7" height="18" fill="#ef4444"/>
+<text x="303.9" y="195" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">9.7%</text>
+<rect x="332.7" y="182" width="122.0" height="18" fill="#f59e0b"/>
+<text x="393.7" y="195" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">20.5%</text>
+<rect x="454.7" y="182" width="169.6" height="18" fill="#0ea5e9"/>
+<text x="539.5" y="195" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">28.5%</text>
+<rect x="624.3" y="182" width="246.3" height="18" fill="#10b981"/>
+<text x="747.4" y="195" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">41.4%</text>
+<text x="880" y="195" font-family="ui-monospace,monospace" font-size="11" fill="#334155">42,913 dots</text>
+<text x="263" y="235" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="500" fill="#1e293b">G49 (0.2376 ORG-CONF)</text>
+<rect x="275.0" y="222" width="154.7" height="18" fill="#f59e0b"/>
+<text x="352.4" y="235" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">26.0%</text>
+<rect x="429.7" y="222" width="180.3" height="18" fill="#0ea5e9"/>
+<text x="519.8" y="235" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">30.3%</text>
+<rect x="610.0" y="222" width="260.0" height="18" fill="#10b981"/>
+<text x="740.0" y="235" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">43.7%</text>
+<text x="880" y="235" font-family="ui-monospace,monospace" font-size="11" fill="#334155">37,649 dots</text>
+<text x="263" y="275" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="500" fill="#1e293b">G63 (0.2303 ORG-CONF)</text>
+<rect x="275.0" y="262" width="172.0" height="18" fill="#f59e0b"/>
+<text x="361.0" y="275" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">28.9%</text>
+<rect x="447.0" y="262" width="229.7" height="18" fill="#0ea5e9"/>
+<text x="561.8" y="275" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">38.6%</text>
+<rect x="676.6" y="262" width="194.0" height="18" fill="#10b981"/>
+<text x="773.6" y="275" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">32.6%</text>
+<text x="880" y="275" font-family="ui-monospace,monospace" font-size="11" fill="#334155">30,519 dots</text>
+<text x="263" y="315" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="500" fill="#1e293b">G66 (0.1152 ORG-CONF)</text>
+<rect x="275.0" y="302" width="202.3" height="18" fill="#ef4444"/>
+<text x="376.1" y="315" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">34.0%</text>
+<rect x="477.3" y="302" width="61.9" height="18" fill="#f59e0b"/>
+<text x="508.2" y="315" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">10.4%</text>
+<rect x="539.2" y="302" width="82.7" height="18" fill="#0ea5e9"/>
+<text x="580.5" y="315" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">13.9%</text>
+<rect x="621.9" y="302" width="248.7" height="18" fill="#10b981"/>
+<text x="746.2" y="315" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">41.8%</text>
+<text x="880" y="315" font-family="ui-monospace,monospace" font-size="11" fill="#334155">72,731 dots</text>
+<text x="263" y="355" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="500" fill="#1e293b">G71 (0.0558 ORG-CONF)</text>
+<rect x="275.0" y="342" width="246.3" height="18" fill="#0ea5e9"/>
+<text x="398.2" y="355" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">41.4%</text>
+<rect x="521.3" y="342" width="348.7" height="18" fill="#10b981"/>
+<text x="695.7" y="355" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">58.6%</text>
+<text x="880" y="355" font-family="ui-monospace,monospace" font-size="11" fill="#334155">21,849 dots</text>
+<rect x="16" y="374" width="948" height="34" rx="5" fill="#ecfdf5" stroke="#a7f3d0"/>
+<text x="263" y="395" text-anchor="end" font-family="system-ui,-apple-system,sans-serif" font-size="12" font-weight="700" fill="#065f46">G70 H70-3 (CANDIDATE, 26,930 dots)</text>
+<rect x="275.0" y="382" width="97.2" height="18" fill="#f59e0b"/>
+<text x="323.6" y="395" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">16.3%</text>
+<rect x="372.2" y="382" width="214.2" height="18" fill="#0ea5e9"/>
+<text x="479.3" y="395" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">36.0%</text>
+<rect x="586.4" y="382" width="283.5" height="18" fill="#10b981"/>
+<text x="728.2" y="395" text-anchor="middle" font-family="ui-monospace,monospace" font-size="10.5" font-weight="700" fill="#ffffff">47.6%</text>
+<text x="880" y="395" font-family="ui-monospace,monospace" font-size="11" fill="#334155">26,930 dots</text>
+</svg>

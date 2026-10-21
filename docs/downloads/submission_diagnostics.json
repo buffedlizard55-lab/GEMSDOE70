@@ -1,0 +1,34 @@
+{
+  "allocation": {
+    "n_dots": 26930,
+    "expected_covered_credit": 9072.7581,
+    "expected_self_credit": 1882.3074,
+    "surrogate_dti": 0.200618,
+    "lazy_evals": 152357,
+    "k_truth": 48000.0
+  },
+  "geometry": {
+    "total_dots": 26930,
+    "footprint_fraction": 0.005211545595798871,
+    "footprint_3px_halo_coverage": 0.08851518943958564,
+    "nn_spacing_px": {
+      "min": 2.8284271247461903,
+      "p10": 2.8284271247461903,
+      "median": 3.0,
+      "mean": 3.5910416799295843,
+      "p90": 4.123105625617661
+    },
+    "distance_to_catalogue_fractions": {
+      "d_le_2px": 3.713330857779428e-05,
+      "d_gt2_le5px": 0.16342369105087262,
+      "d_gt5_le15px": 0.36000742666171553,
+      "d_gt15px": 0.476531748978834
+    },
+    "quadrant_dot_counts": {
+      "NW": 15644,
+      "NE": 4757,
+      "SW": 2920,
+      "SE": 3609
+    }
+  }
+}

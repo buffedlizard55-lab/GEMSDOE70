@@ -8,4 +8,6 @@ dist/
 submissions/
 data/external/
 data/training_features.tif
+data/existing_faults.tif
+data/sample_submission.tif
 evidence/ci-tests.xml
