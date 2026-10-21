@@ -72,3 +72,17 @@ Our automated gate returned **`verdict = negative`** on Run 1 because fold diagn
    emitted via exact unblurred 300 m submodular max-cover (`DOT_COUNT = 37,654`, `d_vis > 2.05 px`, `support_quantile = 0.90`, `gamma = 2.0`).
 4. **Identical All-Pass Promotion Gates**: Must pass EVERY single gate simultaneously (clean feature canaries, uniqueness on pre-placement surface & final dots across all 59 distinct rasters, `15/15` validator checks, and **strictly positive 95% paired spatial-block bootstrap CI against ALL benchmarks — including `h33_reference`, `h33_fold_fair`, `p4_reference`, `d28_reference`, and `random_control` — on BOTH Instrument A AND Instrument B′**).
 
+---
+
+## 5. Run-2 Outcome (`v5.1`, Experiment 2 of 3) & Frozen Run-3 Non-Lattice One-Way Uniqueness Tightening (`v5.2`, Final Experiment 3 of 3)
+
+### 5.1 Run-2 Outcome (`evidence/p8_dual_submod300/run2_v51_run_card.json`)
+Run 2 (`[0.45 neo, 0.30 unsup, 0.25 bed]`, `support_quantile = 0.90`) **passed all `11 / 11` scientific & mutual-uniqueness gates simultaneously**:
+- **Instrument A (`HOLDOUT-DTI`)**: **`0.10660`** (`95% CI [0.08986, 0.12595]`), beating `h33_reference` (`+0.10290`), `h33_fold_fair` (`+0.01618`, `95% CI [+0.00386, +0.02986]`), `d28_reference` (`+0.01468`, `95% CI [+0.00161, +0.02849]`), `p4_reference` (`+0.10179`), and `random_control` (`+0.05605`).
+- **Instrument B′ (`PROXY-DTI`, `d >= 3 px`)**: **`0.13181`** (`95% CI [0.11661, 0.14609]`), beating `h33_reference` (`+0.03804`, `95% CI [+0.02709, +0.04783]`), `d28_reference` (`+0.03828`), `p4_reference` (`+0.05065`), and `random_control` (`+0.06208`), AND beating merged `P7` (`0.12081` vs `0.09997`, `+0.02084`, `95% CI [+0.00818, +0.03394]`) on Instrument B″ (`d >= 6 px`).
+- **Pass-2 Uniqueness Tightening Audit**: Under mutual overlap across all `78` rasters (`62` archive + `16` local), `worst_mutual = 0.5475 <= 0.70` (`PASS`). However, checking one-way forward overlap on non-lattice (`< 100k`-dot) submissions revealed a single marginal exceedance of `+0.0082` (`fwd = 0.7082`, `rev = 0.5475`) against `GEMSDOE49__gate_ortho_w0.25-40k.tif` (a pure 10 m DEM topographic ridge submission).
+
+### 5.2 Frozen Run-3 Specification (`v5.2`, Final Experiment 3 of `<= 3`) — Locked Before Execution
+Using our 3rd and final allowed session experiment (`experiment_count = 3`), we tighten uniqueness by shifting `0.10` weight from pure topographic `r_unsup` to multi-sensor Quaternary `r_neo` (**`[w_neo = 0.55, w_unsup = 0.20, w_bed = 0.25]`**) and broadening submodular candidate support slightly (**`support_quantile = 0.88`**) so sub-surface geophysical/strain/hydrothermal faults receive stronger representation relative to pure 10 m DEM crests, and add a **12th mandatory gate**: **BOTH mutual overlap AND one-way forward overlap `<= 0.70` against EVERY `< 100k`-dot submission in all 78 archived + local rasters**, alongside all 11 gates from Section 4.
+
+
