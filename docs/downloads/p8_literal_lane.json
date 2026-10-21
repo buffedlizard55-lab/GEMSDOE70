@@ -1,0 +1,31 @@
+{
+  "lane": "p8_submodular",
+  "files": {
+    "gems70-p5-submodular-multiphysics-hydro-54000-20261020": {
+      "artifact": "docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif",
+      "raster_sha256": "00e8e1cb6ea34dbe2f6dc0ba3b7cc0d8d18ae2b0aaec11552bfa3ef11f1ea9f2",
+      "emitted_positive_pixels": 54000,
+      "pigeonhole_forward_overlap_lower_bound_vs_calib_r13lattice": 0.87687037,
+      "mutual_overlap_all_75_rasters_unique": true,
+      "worst_mutual_overlap_all_75": 0.4608888888888889,
+      "worst_sibling_mutual_overlap_13": 0.40625925925925926,
+      "worst_spearman_all_75": 0.04081722268490087,
+      "literal_lane_status": {
+        "policy": "literal-forward-v1",
+        "overlap_limit": 0.7,
+        "rho_limit": 0.9,
+        "stop_required": true,
+        "protocol_unique": false,
+        "complete_scan": true,
+        "duplicate_witnesses": [
+          "calib_r13lattice_00904.tif",
+          "r11_greedy_mp.tif",
+          "r13_lattice_s5_00904.tif",
+          "r14_union_tips10_lat6.tif"
+        ],
+        "invalid_rows": [],
+        "scope": "Only the supplied shared-tool measurements; no organizer/private registry claim."
+      }
+    }
+  }
+}

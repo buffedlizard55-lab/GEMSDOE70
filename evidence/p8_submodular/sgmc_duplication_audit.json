@@ -1,0 +1,170 @@
+{
+  "evidence_class": "DATA-MEASUREMENT",
+  "date_utc": "2026-10-20",
+  "sgmc_source": "USGS State Geologic Map Compilation (SGMC) 100m rasterized fault traces",
+  "total_footprint_pixels": 5167373,
+  "known_catalogue_pixels": 60988,
+  "off_catalogue_domain_pixels": 5106385,
+  "sgmc_off_catalogue_total_pixels": 78433,
+  "buffer_profile": [
+    {
+      "buffer_px": 1,
+      "buffer_m": 100,
+      "sgmc_within_buffer_px": 7215,
+      "sgmc_beyond_buffer_px": 71218,
+      "sgmc_within_fraction": 0.091989,
+      "domain_within_pixels": 122597,
+      "domain_within_fraction": 0.024009,
+      "enrichment_over_uniform": 3.8315
+    },
+    {
+      "buffer_px": 2,
+      "buffer_m": 200,
+      "sgmc_within_buffer_px": 12760,
+      "sgmc_beyond_buffer_px": 65673,
+      "sgmc_within_fraction": 0.162687,
+      "domain_within_pixels": 243560,
+      "domain_within_fraction": 0.047697,
+      "enrichment_over_uniform": 3.4108
+    },
+    {
+      "buffer_px": 3,
+      "buffer_m": 300,
+      "sgmc_within_buffer_px": 16769,
+      "sgmc_beyond_buffer_px": 61664,
+      "sgmc_within_fraction": 0.2138,
+      "domain_within_pixels": 383806,
+      "domain_within_fraction": 0.075162,
+      "enrichment_over_uniform": 2.8445
+    },
+    {
+      "buffer_px": 4,
+      "buffer_m": 400,
+      "sgmc_within_buffer_px": 19343,
+      "sgmc_beyond_buffer_px": 59090,
+      "sgmc_within_fraction": 0.246618,
+      "domain_within_pixels": 503394,
+      "domain_within_fraction": 0.098581,
+      "enrichment_over_uniform": 2.5017
+    },
+    {
+      "buffer_px": 5,
+      "buffer_m": 500,
+      "sgmc_within_buffer_px": 21966,
+      "sgmc_beyond_buffer_px": 56467,
+      "sgmc_within_fraction": 0.280061,
+      "domain_within_pixels": 652990,
+      "domain_within_fraction": 0.127877,
+      "enrichment_over_uniform": 2.1901
+    },
+    {
+      "buffer_px": 6,
+      "buffer_m": 600,
+      "sgmc_within_buffer_px": 23660,
+      "sgmc_beyond_buffer_px": 54773,
+      "sgmc_within_fraction": 0.301659,
+      "domain_within_pixels": 766764,
+      "domain_within_fraction": 0.150158,
+      "enrichment_over_uniform": 2.0089
+    },
+    {
+      "buffer_px": 8,
+      "buffer_m": 800,
+      "sgmc_within_buffer_px": 27001,
+      "sgmc_beyond_buffer_px": 51432,
+      "sgmc_within_fraction": 0.344256,
+      "domain_within_pixels": 1002104,
+      "domain_within_fraction": 0.196245,
+      "enrichment_over_uniform": 1.7542
+    },
+    {
+      "buffer_px": 10,
+      "buffer_m": 1000,
+      "sgmc_within_buffer_px": 30311,
+      "sgmc_beyond_buffer_px": 48122,
+      "sgmc_within_fraction": 0.386457,
+      "domain_within_pixels": 1248170,
+      "domain_within_fraction": 0.244433,
+      "enrichment_over_uniform": 1.581
+    },
+    {
+      "buffer_px": 15,
+      "buffer_m": 1500,
+      "sgmc_within_buffer_px": 37426,
+      "sgmc_beyond_buffer_px": 41007,
+      "sgmc_within_fraction": 0.477172,
+      "domain_within_pixels": 1783678,
+      "domain_within_fraction": 0.349303,
+      "enrichment_over_uniform": 1.3661
+    },
+    {
+      "buffer_px": 20,
+      "buffer_m": 2000,
+      "sgmc_within_buffer_px": 44168,
+      "sgmc_beyond_buffer_px": 34265,
+      "sgmc_within_fraction": 0.56313,
+      "domain_within_pixels": 2257340,
+      "domain_within_fraction": 0.442062,
+      "enrichment_over_uniform": 1.2739
+    },
+    {
+      "buffer_px": 30,
+      "buffer_m": 3000,
+      "sgmc_within_buffer_px": 54238,
+      "sgmc_beyond_buffer_px": 24195,
+      "sgmc_within_fraction": 0.69152,
+      "domain_within_pixels": 3023321,
+      "domain_within_fraction": 0.592067,
+      "enrichment_over_uniform": 1.168
+    },
+    {
+      "buffer_px": 32,
+      "buffer_m": 3200,
+      "sgmc_within_buffer_px": 55950,
+      "sgmc_beyond_buffer_px": 22483,
+      "sgmc_within_fraction": 0.713348,
+      "domain_within_pixels": 3150640,
+      "domain_within_fraction": 0.617,
+      "enrichment_over_uniform": 1.1562
+    },
+    {
+      "buffer_px": 50,
+      "buffer_m": 5000,
+      "sgmc_within_buffer_px": 67398,
+      "sgmc_beyond_buffer_px": 11035,
+      "sgmc_within_fraction": 0.859307,
+      "domain_within_pixels": 4039914,
+      "domain_within_fraction": 0.79115,
+      "enrichment_over_uniform": 1.0861
+    },
+    {
+      "buffer_px": 100,
+      "buffer_m": 10000,
+      "sgmc_within_buffer_px": 77693,
+      "sgmc_beyond_buffer_px": 740,
+      "sgmc_within_fraction": 0.990565,
+      "domain_within_pixels": 4987416,
+      "domain_within_fraction": 0.976702,
+      "enrichment_over_uniform": 1.0142
+    }
+  ],
+  "h33_true_distance_audit": {
+    "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "dot_count": 37654,
+    "percentiles_px": {
+      "0": 2.2361,
+      "5": 3.0,
+      "10": 4.0,
+      "25": 8.0623,
+      "50": 19.6469,
+      "75": 42.45,
+      "90": 68.0074,
+      "95": 81.8841,
+      "99": 118.44,
+      "100": 219.2715
+    },
+    "dots_beyond_32px": 12793,
+    "fraction_beyond_32px": 0.339751,
+    "finding": "H33 spans 2.24 px (224 m) to 219.27 px (21.93 km), with 33.98% (12,793 of 37,654) of its dots at d_cat > 32 px. The earlier statement in docs/h33-analysis.md calling H33 a uniform sample of a 0.2-3 km halo was factually incorrect: D28/H33 was Poisson-thinned from the whole-footprint H19-5 multi-physics ridge detector across all unmapped ranges."
+  }
+}

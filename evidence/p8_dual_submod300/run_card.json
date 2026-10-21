@@ -540,7 +540,7 @@
   "correlation_overlap_vs_registry": {
     "stage": "both continuous pre-placement surface AND final 37,654 binary dots",
     "rasters_checked_archived_62": 62,
-    "rasters_checked_all_with_local": 78,
+    "rasters_checked_all_with_local": 79,
     "unique_archived_62_mutual": true,
     "unique_all_with_local_mutual": true,
     "surface_worst_spearman_all": 0.17630094932921817,

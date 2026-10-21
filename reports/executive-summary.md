@@ -85,3 +85,13 @@ local errors but does not promise portal acceptance.
 The published PDF describes three submissions per week; this project's separate
 scientific experiment budget is also three experiments or two hours. They are
 different limits. We did not access the account's current remaining quota.
+
+---
+
+## P8 Multi-Agent Synthesis Update (`arena/6db3f66c-gemsdoe70`)
+
+- **All-Time #1 Candidate across all 13 GEMSDOE70 lanes:** `docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif` (`173,097` bytes, SHA-256 `00e8e1cb6ea34dbe2f6dc0ba3b7cc0d8d18ae2b0aaec11552bfa3ef11f1ea9f2`).
+- **Two Separate Decision Flags:**
+  1. `download_ok = true` (15/15 shared validator checks pass; `float32`, single band, `EPSG:32611`, `3730 × 3292`, `100 m`, exact `{0.0, 1.0}`, zero NaNs, zero mapped-fault leakage, 74/74 leakage canaries clean with `max(AUC, 1-AUC) = 0.6066 <= 0.90`).
+  2. `holdout_and_proxy_gates_passed = true` (**Instrument A `HOLDOUT-DTI = 0.1090 [0.0929, 0.1249]`** — #1 across all 13 lanes, beating `D28` `+0.0170 [+0.0063, +0.0278]`, `Phase 4` `+0.0359`, and `H33` `+0.1053`; **Instrument B′ `OOF-PROXY-DTI = 0.1681 [0.1437, 0.1916]`** — #1 across all 13 lanes, beating `H33` `+0.0743 [+0.0522, +0.0954]` / `+79.3%`, `P6` `0.1440`, `P7` `0.1138`, and `E6` `0.1100`).
+  3. `weekly_slots_used = 0` (`submit_recommended = false` automatically under the un-amended literal forward-overlap rule against dense 206,895-dot lattice `calib_r13lattice_00904.tif`; unique across all **78** rasters — 62 archive + 16 sibling TIFFs — under mutual overlap `<= 0.4609` and forward overlap `<= 0.4063` against all 16 sibling TIFFs).

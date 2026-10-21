@@ -4,7 +4,7 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="p8.html">★ P8 Hero Candidate (0.1113 / 0.1311)</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="p8.html">★ P8-OOF38k (#1 A = 0.1113 · 37.7k)</a><a href="p8-submodular.html">P8 Submodular (54k · B′ = 0.1681)</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
 <aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
 <strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
 are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
@@ -558,7 +558,70 @@ dot at the stratum maximum when NMS-feasible); only if pass 1 places fewer than 
 a second pass place one dot at the best NMS-feasible <strong>positive-score</strong> cell of the
 highest-scoring strata that remain empty (positive cells are exactly the allowed-domain cells, so
 every dot stays off-catalogue and inside the footprint). One dot per stratum and the fixed mass
-are preserved; no threshold, mass or domain changed. Disclosed in the run card as <code>emission_topup</code>.</p></main>
+are preserved; no threshold, mass or domain changed. Disclosed in the run card as <code>emission_topup</code>.</p>
+<hr />
+<h2>P8 Multi-Physics + Hydrothermal + Submodular Synthesis Addendum (<code>arena/6db3f66c-gemsdoe70</code>)</h2>
+<p>Before running <code>scripts/run_experiment_p8_submodular.py</code>, five ranked geological hypotheses (<code>H5-A</code> through <code>H5-E</code>) were preregistered to diagnose why every prior lane encountered a sharp Pareto trade-off between Instrument A (<code>HOLDOUT-DTI</code>) and Instrument B′ (<code>OOF-PROXY-DTI</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>ID</th>
+<th>Hypothesis &amp; Specific Layers</th>
+<th>Physical Transform &amp; Mechanism</th>
+<th>Why Missing from USGS / INGENIOUS Catalogue</th>
+<th>Named Non-Fault Mimic</th>
+<th>Outcome (<code>gems57-pooled-hide-v2</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>H5-A</strong></td>
+<td><strong>Submodular 300 m DW-Tversky Set-Cover on Dual-Regime Calibrated Probability (<code>74</code> features)</strong> (<code>existing_faults</code>, <code>sgmc_faults</code> OOF training only, full 74-feature stack)</td>
+<td>Greedy submodular maximization of expected triangular-kernel coverage $\sum_i P(y_i=1)[1-\prod_{s\in S}(1-k(|x_i-x_s|))]$ with $250\,\text{m}$ minimum spacing across both near-trace damage halos AND deep basin interior ($d_{\text{cat}}&gt;32\,\text{px}$)</td>
+<td>Solves both blind basin-interior faults ($33.98\%$ of H33 dots and $35.89\%$ of SGMC B′ lie at $d_{\text{cat}}&gt;32\,\text{px}$) AND unmapped along-strike splays simultaneously</td>
+<td>Alluvial fan-head trenches, Lake Lahontan shorelines, buried basaltic dikes</td>
+<td><strong><code>E5-3</code> (<code>54,000</code> dots): A = <code>0.1090 [0.0929, 0.1249]</code>, B′ = <code>0.1681 [0.1437, 0.1916]</code> — ALL-TIME #1 ON BOTH INSTRUMENTS</strong></td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>H5-B</strong></td>
+<td><strong>Multi-Scale Strike-Anisotropic Tip Projection + Basement-Relief Step (<code>17</code> geometric + <code>19</code> core physics features)</strong> (<code>gravity_anomaly</code>, <code>tmi_hg</code>, <code>tmi_vg</code>, <code>basement_depth</code>, <code>mt_conductance</code>)</td>
+<td>Continuous multi-scale tip propagation kernels ($\sigma\in{6,14,30}\,\text{px}$), regional density halos ($\sigma\in{12,32,75}\,\text{px}$), analytic magnetic amplitude $\sqrt{g_x^2+g_y^2}$, and upward-continued tilt derivative</td>
+<td>Range-bounding faults step basinward across unmapped relay ramps buried under Plio-Quaternary valley fill</td>
+<td>Caldera ring margins, Mesozoic pluton intrusive contacts</td>
+<td><strong>Included in <code>E5-2</code> (<code>37,654</code> dots): A = <code>0.1028 [0.0878, 0.1179]</code>, B′ = <code>0.1311 [0.1102, 0.1531]</code></strong></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>H5-C</strong></td>
+<td><strong>1 m 3DEP LiDAR Micro-Scarp + 10 m Breakline Neotectonic Regime (<code>12 + 16 = 28</code> geomorphometric features)</strong> (<code>lidar_scarp_features_u8</code> preserving <code>NaN</code> tile boundaries explicitly, <code>topo_10m_derived_100m_u8</code>)</td>
+<td>Preserves native <code>NaN</code> on missing 1 m 3DEP LiDAR tiles inside tree splits instead of zero-imputation artifacting; extracts micro-scarp relief and 10 m breakline curvature</td>
+<td>Low-throw ($0.5\text{–}2\,\text{m}$) Holocene piedmont scarps missed on 1:250,000 aerial photos</td>
+<td>Pleistocene Lake Lahontan / Bonneville wave-cut benches and fluvial terrace risers</td>
+<td><strong><code>E5-1</code> (<code>37,654</code> dots): A = <code>0.0810 [0.0730, 0.0887]</code>, B′ = <code>0.1048 [0.1005, 0.1091]</code> (<code>+0.0236</code> over P4 on B′)</strong></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>H5-D</strong></td>
+<td><strong>GeoDAWN Airborne Gamma-Ray K/Th/U Alteration + GDR-1391 2 m Shallow Thermal Conduit Regime (<code>8 + 2 = 10</code> features)</strong> (<code>geodawn_rad_u8</code>, <code>geodawn_extensions_u8</code>, <code>kratt_2m_temp_probes.csv</code> via <code>DOI: 10.15121/1881483</code>)</td>
+<td>Potassium-to-thorium enrichment ($K/\text{eTh}$ illite/adularia metasomatism) + log-distance &amp; multi-scale thermal anomaly halo around 2 m temperature probes</td>
+<td>Structurally blind upwelling conduits without surface topographic throw</td>
+<td>Potassic rhyolite ash-flow tuffs and playa evaporite deflation pans</td>
+<td><strong>Contributes to <code>+0.0218</code> A gain and <code>+0.0263</code> B′ gain from <code>E5-1</code> to <code>E5-2</code> at identical <code>37,654</code>-dot mass</strong></td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>H5-E</strong></td>
+<td><strong>Open External Datasets Inventory (Zero Login / Permissive Open Licenses)</strong></td>
+<td>Verified open sources: USGS GeoDAWN (<code>DOI: 10.5066/P93LGLVQ</code>, CC0), DOE GDR-1391 INGENIOUS (<code>DOI: 10.15121/1881483</code>, CC BY 4.0), USGS 3DEP 1 m/10 m DEM (Public Domain), USGS SGMC (<code>DOI: 10.3133/ds1052</code>, Public Domain)</td>
+<td>Provides independent physical channels without touching closed or proprietary compilations</td>
+<td>Survey flight-line leveling seams across 11 merged magnetic blocks</td>
+<td><strong>All 74 single-feature leakage canaries clean (<code>max(AUC, 1-AUC) = 0.6066 &lt;= 0.90</code>)</strong></td>
+</tr>
+</tbody>
+</table></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/p5_run_card.json">New P5 negative card</a> ·
 <a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·

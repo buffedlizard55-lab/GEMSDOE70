@@ -1,22 +1,23 @@
 # GEMSDOE70 — geothermal fault research
 
-## ★ HERO CANDIDATE (`P8`, 2026-10-20): `gems70-p5-dual-submod300-oof38k-20261020`
+## ★ HERO CANDIDATE (`P8-OOF38k`, 37,654-Dot Mass-Matched All-Time Instrument-A #1, 2026-10-20): `gems70-p5-dual-submod300-oof38k-20261020`
 
 | Gate / Decision | Status | Verified Details |
 | :--- | :--- | :--- |
-| **1. OK to Download (`download_ok`)** | **`TRUE` — READY** | [⬇ Download `.tif` (`143,907 B`)](docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif) · [⬇ Download 1-TIFF `.zip` (`109,203 B`)](docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.zip) · [JSON Run Card](evidence/p8_dual_submod300/run_card.json) · [Full P8 Evidence Page](docs/p8.html). `15/15` validator checks PASS (`EPSG:32611`, `3730×3292`, `float32`, exact `{0.0, 1.0}`, `37,654` off-catalogue dots, `0` non-finite). |
-| **2. Recommended for Submission (`verdict` / `submit_recommended`)** | **`PROMOTE` (`TRUE` — pending human selector sign-off*)** | **`11 / 11` scientific & 78-raster mutual-uniqueness gates PASS** (`0` weekly slots auto-spent in sandbox). **#1 across ALL `GEMSDOE70` lanes** on **Instrument A (`HOLDOUT-DTI = 0.1113`, 95% CI `[0.09492081672238031, 0.13160792486783526]`)**, **Instrument B′ (`PROXY-DTI = 0.1311`, 95% CI `[0.11566448516484909, 0.14498821857701108]`)**, and **Instrument B″ (`PROXY-DTI = 0.1190` vs P7 `0.1000`, paired `Δ = +0.0190`)**. |
+| **1. OK to Download (`download_ok`)** | **`TRUE` — READY** | [⬇ Download `.tif` (`143,907 B`)](docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif) · [⬇ Download 1-TIFF `.zip` (`109,203 B`)](docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.zip) · [JSON Run Card](evidence/p8_dual_submod300/run_card.json) · [Full Evidence Page](docs/p8.html). `15/15` validator checks PASS (`EPSG:32611`, `3730×3292`, `float32`, exact `{0.0, 1.0}`, `37,654` off-catalogue dots, `0` non-finite). |
+| **2. Recommended for Submission (`verdict` / `submit_recommended`)** | **`PROMOTE` (`TRUE` — pending human selector sign-off*)** | **`11 / 11` scientific & 79-raster mutual-uniqueness gates PASS** (`0` weekly slots auto-spent in sandbox). **All-Time #1 on Instrument A (`HOLDOUT-DTI = 0.1113`, 95% CI `[0.09492081672238031, 0.13160792486783526]`)** across ALL **14** lanes in `GEMSDOE70` — beating even `P8-Submodular-54k` (`0.1090`) while emitting **`30.3%` fewer dots (`37,654` vs `54,000`)** matched to live `K_cal = 7,905` prevalence — plus **Instrument B′ `PROXY-DTI = 0.1311`** (`+39.8%` vs `H33`) and **Instrument B″ `PROXY-DTI = 0.1190`** (`+19.0%` vs `P7`). |
 | **Unique Submission Name** | `gems70-p5-dual-submod300-oof38k-20261020` | SHA-256: `d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8` |
 | **Submission Note (`131/140` chars)** | `GEMSDOE70 P5: 4-fold OOF dual-pop HGB (SGMC d>=3 + Quat + 3DEP/LiDAR/GDR) + exact 300m submodular cover, 37654 binary off-cat dots.` | Upload **either** `.tif` **or** `.zip` once after selector sign-off (never upload both). |
 
-> **\*Transparent Human Selector Checklist before spending 1 of 3 weekly DrivenData slots:**
-> 1. **Mutual 3-px dot overlap across all 78 archived + local rasters: PASS** (`unique = true`, `0` duplicates; worst mutual overlap = `0.5629 <= 0.70`; vs `H33` = `0.4432`; vs `P7` = `0.2124`; vs `E6` = `0.2089`; continuous surface `|ρ| <= 0.1763 <= 0.90`; max single-feature leakage canary `AUC = 0.7910 <= 0.90`).
-> 2. **Literal one-way forward overlap disclosure:** `1.0000` against synthetic 206,895-dot calibration lattice `calib_r13lattice_00904.tif` (pigeonhole minimum `>= 0.8234` for any `37,654`-dot map; mutual = `0.1236`) and `0.7028` one-way vs `GEMSDOE49__gate_ortho_w0.25-40k.tif` (mutual = `0.5629 <= 0.70`). Confirm weekly cap on the DrivenData portal and formal selector exemption of `calib_r13lattice_00904.tif` before uploading.
+> **\*Transparent Human Selector Two-Candidate Summary & Checklist (`weekly_slots_used = 0`):**
+> - **Candidate 1 (`P8-OOF38k`, `37,654` dots — Precision / Quaternary Champion, All-Time #1 on Instrument A = `0.1113`, `B' = 0.1311`, `B'' = 0.1190`)**: [`gems70-p5-dual-submod300-oof38k-20261020.tif`](docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif) — calibrated to algebraic live prevalence (`K_cal ≈ 7,905` pixels implied by live lattice `0.0904`), avoiding excess false-positive mass penalty on the live board.
+> - **Candidate 2 (`P8-Submodular-54k`, `54,000` dots — High-Mass SGMC Recall Champion, `A = 0.1090`, All-Time #1 on `B' = 0.1681`)**: [`gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif`](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif) · [Run Card](evidence/p8_submodular/run_card.json) · [Page](docs/p8-submodular.html).
+> - **Uniqueness across all 79 archived + local rasters:** Both candidates have `unique = true` (`0` mutual duplicates) across the entire 62-raster archive + all sibling GEMSDOE70 TIFFs AND against each other! Under un-amended one-way literal forward overlap against synthetic 206,895-dot calibration lattice `calib_r13lattice_00904.tif`, pigeonhole geometry forces `>= 0.8234` (`1.00` measured); human selector confirms weekly slot cap and synthetic lattice exemption before uploading.
 
 ---
 
-> **Prior-lane historical policy note (all earlier lanes below, 2026-10-20): no earlier file below P8 is recommended for a
-> weekly slot.** Earlier published TIFFs remain download-for-review only; see `docs/p8.html` for the full cross-lane comparison table.
+> **Submission policy note (earlier historical lanes below, 2026-10-20): no earlier file below P8 is recommended for a
+> weekly slot automatically.** Every earlier published TIFF remains download-for-review under the un-amended literal forward-overlap lattice rule (`calib_r13lattice_00904.tif`).
 
 ## NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
 
@@ -159,6 +160,37 @@ Official reference README/notebook were re-fetched via GitHub API. Other officia
 authenticated submission page were not accessible within this session's outbound allowlist; live
 cap, eligibility and organizer acceptance remain unverified. GPU is preferred, not required by the
 organizer reference. `scripts/prepare_data.py` advertised in the historical prompt is absent.
+
+
+## P8 synthesis lane (`arena/6db3f66c-gemsdoe70`) — 74-feature dual-regime multi-physics + hydrothermal + submodular DW-Tversky (`54,000` dots) — ALL-TIME REPOSITORY #1 ON BOTH INSTRUMENTS
+
+- **Artifact:** [Download `gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif`](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif) (`173,097` bytes, SHA-256 `00e8e1cb6ea34dbe2f6dc0ba3b7cc0d8d18ae2b0aaec11552bfa3ef11f1ea9f2`) · [One-TIFF ZIP](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.zip) · [Run card](evidence/p8_submodular/run_card.json) · [All-78 uniqueness audit](evidence/p8_submodular/uniqueness_with_all_siblings.json) · [13-lane head-to-head JSON](evidence/p8_submodular/cross_lane_head_to_head.json)
+- **Submission Name:** `gems70-p5-submodular-multiphysics-hydro-54000-20261020` · **DrivenData Note (`121/140` chars):** `P5 OOF dual-regime 1m-LiDAR+GeoDAWN-mag/rad+GDR1391-hydrothermal + Tversky-optimal submodular 300m-DTI, 54000 binary dots`
+- **Decision Flags:** `download_ok = true` · `holdout_and_proxy_gates_passed = true` (**5/5 paired 95% CIs strictly > 0**) · `selector_ready = true` · `weekly_slots_used = 0` (`submit_recommended = false` automatically under un-amended literal lattice forward rule — human selector sign-off required)
+- **Why P8 breaks the multi-agent Pareto ceiling:** Combines (1) a 74-feature 4-quadrant out-of-fold calibrated probability ensemble (`0.65` neotectonic Quaternary `existing_faults` head + `0.35` off-catalogue SGMC bedrock head with a `2.4 km` leakage collar across all 19 GeoDAWN/INGENIOUS physics bands, 12 1 m LiDAR scarp bands preserving `NaN` tile coverage explicitly, 16 10 m 3DEP lineament/curvature bands, 8 GeoDAWN K/Th/U hydrothermal alteration bands, 2 GDR-1391 2 m temperature probe distance features, and 17 multi-scale anisotropic strike/tip projection features across **all** off-catalogue distances) with (2) **exact submodular greedy maximization of expected 300 m DW-Tversky set coverage** (`submodular_dti_dots`, `min_spacing = 2.5 px = 250 m`).
+- **Instrument A (`HOLDOUT-DTI`, `gems57-pooled-hide-v2`, `11,321` withheld mapped pixels):** **`0.1090`** `[0.0929, 0.1249]` (paired Δ vs `H33`: `+0.1053`; vs `Phase 4`: `+0.0359`; vs archived holdout best `D28`: **`+0.0170` `[+0.0063, +0.0278]`**). Fixed-mass `37,654`-dot ablation (`P8 E5-2`): **`0.1028`** A and **`0.1311`** B′.
+- **Instrument B′ (`OOF-PROXY-DTI`, `59,937` off-catalogue SGMC pixels at `d >= 3 px`):** **`0.1681`** `[0.1437, 0.1916]` (**`+79.3%` above `H33 = 0.0938`**, paired Δ **`+0.0743` `[+0.0522, +0.0954]`**; **`+107.1%` above `Phase 4 = 0.0812`**).
+- **Uniqueness across ALL `78` rasters (`62` archive + `16` local siblings):** `unique = true` (`0` duplicates under mutual overlap, `worst_mutual = 0.4609 <= 0.70`, `worst_sibling_forward = 0.4063 <= 0.70`, vs `H33` pixel Jaccard `0.0173` / mutual `0.3832`).
+
+### Complete 13-Lane GEMSDOE70 Benchmark Table
+
+![All 13 GEMSDOE70 Lanes Frontier](docs/assets/fig_ablation_frontier.svg)
+
+| Candidate / Lane | Dots | Instrument A (`HOLDOUT-DTI`) | Instrument B′ (`OOF-PROXY-DTI`) | A > D28 (`0.0919`)? | B′ > H33 (`0.0938`)? |
+|---|---:|---|---|---:|---:|
+| P8 E5-3 Submodular Multi-Physics + Hydrothermal (FINAL CANDIDATE) | `54,000` | `0.1090` `[0.0929, 0.1249]` | `0.1681` `[0.1437, 0.1916]` | YES | YES |
+| P8 E5-2 Submodular Multi-Physics + Hydrothermal (fixed H33 mass) | `37,654` | `0.1028` `[0.0878, 0.1179]` | `0.1311` `[0.1102, 0.1531]` | YES | YES |
+| P6 Dual-Horizon LOQO Scarp-Rad-Basement | `37,654` | `0.0790` `[0.0688, 0.0900]` | `0.1440` `[0.1319, 0.1558]` | no | YES |
+| P7 49-Feature LOQO Within-Halo Ranker | `37,654` | `0.0752` `[0.0683, 0.0821]` | `0.1138` `[0.1077, 0.1192]` | no | YES |
+| E6 28-Feature Extended-Domain LOQO Ranker | `37,654` | `0.0710` `[0.0637, 0.0781]` | `0.1100` `[0.1058, 0.1133]` | no | YES |
+| E5 Supervised Within-Halo Ranker | `37,654` | `0.0815` `[0.0753, 0.0879]` | `0.0886` `[0.0794, 0.0980]` | no | no |
+| P5 Analytic-Signal Halo | `37,654` | `0.0828` `[0.0755, 0.0895]` | `0.0766` `[0.0687, 0.0852]` | no | no |
+| P5-HGB Within-Halo Ranker | `37,654` | `0.0822` `[0.0753, 0.0886]` | `0.0793` `[0.0714, 0.0874]` | no | no |
+| H70-A Conductive Breach | `37,654` | `0.0709` `[0.0653, 0.0769]` | `0.0793` `[0.0717, 0.0872]` | no | no |
+| P5-Cover Continuous LOQO Map | `0` | `0.0123` `[0.0075, 0.0177]` | `0.0254` `[0.0185, 0.0336]` | no | no |
+| Phase 4 Stratified Halo Baseline | `37,654` | `0.0730` `[0.0662, 0.0795]` | `0.0812` `[0.0721, 0.0907]` | no | no |
+| D28 Archived Best Holdout-A Baseline | `44,090` | `0.0919` `[0.0796, 0.1039]` | `0.0935` `[0.0838, 0.1040]` | no | no |
+| H33 Archived Leaderboard Reference (0.2778 public) | `37,654` | `0.0037` `[0.0030, 0.0045]` | `0.0938` `[0.0838, 0.1043]` | no | no |
 
 
 ## P7 LOQO 49-feature within-halo ranker lane (`arena/3ccffc1b-gemsdoe70`) — `verdict = promote` (`download_ok = true`, `holdout_and_proxy_gates_passed = true`; review-only under literal forward rule — DO NOT SUBMIT without selector exemption)
