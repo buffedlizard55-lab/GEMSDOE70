@@ -52,3 +52,23 @@ Ranked prior to experimentation by **expected true off-catalogue DTI gain vs imp
    - **Format & Range gate:** Shared `submission_writer.py` + `validate_submission.py` pass `15/15` checks (`0` NaN, `0` Inf, binary `{0.0, 1.0}`, `37,654` dots, `0` on `existing_faults.tif`).
    - **Gate A (Instrument A — Catalogue Holdout):** `DTI(Exp 5C) > DTI(H33 = 0.0037)` AND `DTI(Exp 5C) > DTI(P4 = 0.0730)` AND **`DTI(Exp 5C) > DTI(D28 = 0.0919)`** with positive paired 95% spatial-block bootstrap CI vs `H33`, `random_control`, and `P4`!
    - **Gate B′ (Instrument B′ — Pre-Registered Target-Like `SGMC d_cat >= 3 px`, Strictly Out-of-Fold):** **`DTI(Exp 5C) > DTI(H33 = 0.0938)` with 95% paired spatial-block bootstrap CI strictly `> 0`** (AND `> DTI(D28 = 0.0935)` AND `> DTI(P4 = 0.0812)`)!
+
+---
+
+## 4. Run-1 Outcome (`v5.0`, Experiment 1 of 3) & Frozen Run-2 Specification (`v5.1`, Experiment 2 of `<= 3`)
+
+### 4.1 Run-1 Forensic Diagnosis (`evidence/phase5/run1_v50_run_card.json`)
+Run 1 (`v5.0`) achieved **`0.10210` (`95% CI [0.08511, 0.12074]`)** on Instrument A (surpassing `D28 = 0.09192`, `H33_fair = 0.09042`, `P4 = 0.00481`, and `H33 = 0.00370`) and **`0.11304` (`95% CI [0.08718, 0.13750]`)** on Instrument B′ (`d_cat >= 3 px`), while `Exp 5A` (`r_unsup`) reached **`0.16433` (`95% CI [0.14710, 0.17961]`)** on Instrument B′ and `Exp 5B` (`HANDOFF.md` Item #1, SGMC-only HGB) falsified pure SGMC supervision on Quaternary faults (`0.04143` on Instrument A).
+
+Our automated gate returned **`verdict = negative`** on Run 1 because fold diagnostics exposed two exact statistical bugs:
+1. **`IR-P5-1` (Hide-mask / survey-completeness covariate shift in `X[:, 38:41]`)**: Including `vis_dist_capped`, `vis_tip_lobe`, and `vis_host_len_prox` inside `M_bed` trained `M_bed` to up-weight mapped fault density. When Instrument A masked fault components inside `fold['region']`, `X[:, 38:41]` jumped inside `fold['region']`, starving all 4 test regions combined to only **`9,007 / 37,654` (`23.9%`)** of emitted dots in `Exp 5B` (`1,404` dots on Fold 1 of `Exp 5C`, scoring `0.04449` vs `0.13643` on Fold 0 and `0.13279` on Fold 3).
+2. **`IR-P5-2` (Cross-quadrant base-rate & regional level shift)**: Concatenating uncalibrated probabilities across 4 quadrant models trained with fixed `max_neg = 180,000` (penalizing Quadrant 1, where NE Nevada holds ~48% of SGMC faults, by `-0.46` log-odds) plus un-high-passed regional crust/strain levels starved Quadrant 1 on Instrument B′ to **`1,116 / 37,654` (`3.0%`)** of dots (`0.01901`), despite achieving **`0.18235`, `0.16474`, and `0.15382`** across Quadrants 0, 2, and 3!
+
+### 4.2 Frozen Run-2 Bug-Fix Specification (`H-P5-5`, Experiment 2 of `<= 3`) — Locked Before Execution
+1. **Strictly Catalogue-Free Physical Features (`n_features = N_STATIC_FEATURES = 38` for BOTH `M_neo` AND `M_bed`)** with high-pass localization (`x - G_12(x)`) applied to broad regional background fields (`b04`, `b07`, `b08`, `b15`, `b16`, `b17`) so trees split strictly on local fault steps rather than eastern-vs-western Nevada regional background.
+2. **Exact Per-Partition Out-of-Fold Rank Calibration**: Within every disjoint out-of-fold prediction partition (`H0`, `H1`, and `test_k` on Instrument A; each held-out quadrant `k in {0,1,2,3}` on Production / Instrument B′), compute empirical quantile ranks `rank01_domain(p)` **strictly within that partition** (zero test-label access), eliminating 100% of fold base-rate shift and ensuring balanced geographic coverage across all four quadrants.
+3. **Frozen Synthesis Weights**:
+   $$S_{\text{P5-5}}(x) = r_{\text{neo}}(x)^{0.45}\,r_{\text{unsup}}(x)^{0.30}\,r_{\text{bed}}(x)^{0.25}$$
+   emitted via exact unblurred 300 m submodular max-cover (`DOT_COUNT = 37,654`, `d_vis > 2.05 px`, `support_quantile = 0.90`, `gamma = 2.0`).
+4. **Identical All-Pass Promotion Gates**: Must pass EVERY single gate simultaneously (clean feature canaries, uniqueness on pre-placement surface & final dots across all 59 distinct rasters, `15/15` validator checks, and **strictly positive 95% paired spatial-block bootstrap CI against ALL benchmarks — including `h33_reference`, `h33_fold_fair`, `p4_reference`, `d28_reference`, and `random_control` — on BOTH Instrument A AND Instrument B′**).
+

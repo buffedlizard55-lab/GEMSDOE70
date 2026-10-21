@@ -1,0 +1,586 @@
+{
+  "threshold_symmetric_auc": 0.9,
+  "max_symmetric_auc_instrument_a_fold0": 0.7910248348933958,
+  "max_symmetric_auc_instrument_b_prime": 0.7612215635808163,
+  "leaks_a": [],
+  "leaks_b_prime": [],
+  "all_clean": true,
+  "per_feature_a_fold0": {
+    "b01_mag_anom_hp": {
+      "auc": 0.5103422607904315,
+      "symmetric_auc": 0.5103422607904315,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b02_rtp_hp": {
+      "auc": 0.46490502340093603,
+      "symmetric_auc": 0.535094976599064,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b03_tmi_hg": {
+      "auc": 0.5559394812792512,
+      "symmetric_auc": 0.5559394812792512,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b04_geod_2ndinv": {
+      "auc": 0.43257420566822674,
+      "symmetric_auc": 0.5674257943317733,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b05_iso_grav_slope": {
+      "auc": 0.5485476066042642,
+      "symmetric_auc": 0.5485476066042642,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b06_tc": {
+      "auc": 0.4347361492459698,
+      "symmetric_auc": 0.5652638507540302,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b07_geod_shearrate": {
+      "auc": 0.4316616458658346,
+      "symmetric_auc": 0.5683383541341653,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b08_geod_dilaterate": {
+      "auc": 0.660460595423817,
+      "symmetric_auc": 0.660460595423817,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b09_tmi_vg": {
+      "auc": 0.458386223348934,
+      "symmetric_auc": 0.541613776651066,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b10_deq": {
+      "auc": 0.3771542264690587,
+      "symmetric_auc": 0.6228457735309413,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b11_iso_grav_vg": {
+      "auc": 0.5122527951118045,
+      "symmetric_auc": 0.5122527951118045,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b12_det_elev_hp8": {
+      "auc": 0.4417096762870515,
+      "symmetric_auc": 0.5582903237129485,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b13_iso_grav_hp8": {
+      "auc": 0.5642411453458138,
+      "symmetric_auc": 0.5642411453458138,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b15_depth_base": {
+      "auc": 0.47408597243889766,
+      "symmetric_auc": 0.5259140275611023,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b15_basement_grad": {
+      "auc": 0.5092638611544462,
+      "symmetric_auc": 0.5092638611544462,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b16_ieq": {
+      "auc": 0.37250995709828394,
+      "symmetric_auc": 0.6274900429017161,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b16_ieq_grad": {
+      "auc": 0.4776002522100884,
+      "symmetric_auc": 0.5223997477899116,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b17_cond_surf": {
+      "auc": 0.5083830057202289,
+      "symmetric_auc": 0.5083830057202289,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b17_cond_grad": {
+      "auc": 0.5105237870514822,
+      "symmetric_auc": 0.5105237870514822,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b18_iso_grav_hg": {
+      "auc": 0.47089080343213724,
+      "symmetric_auc": 0.5291091965678627,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "b19_det_elev_slope": {
+      "auc": 0.6179897269890796,
+      "symmetric_auc": 0.6179897269890796,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "ms_ridge_100m": {
+      "auc": 0.6814045124804993,
+      "symmetric_auc": 0.6814045124804993,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "crossgrad_align": {
+      "auc": 0.534286911076443,
+      "symmetric_auc": 0.534286911076443,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "crossgrad_ortho": {
+      "auc": 0.5585385530421216,
+      "symmetric_auc": 0.5585385530421216,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "anderson_strike_fav": {
+      "auc": 0.5815691172646906,
+      "symmetric_auc": 0.5815691172646906,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "lidar_scarp_dipole": {
+      "auc": 0.5678434601122182,
+      "symmetric_auc": 0.5678434601122182,
+      "finite_fraction": 0.7586208604269945,
+      "n_positive": 1689,
+      "suspected_leakage": false
+    },
+    "lidar_step_max": {
+      "auc": 0.5863233397257923,
+      "symmetric_auc": 0.5863233397257923,
+      "finite_fraction": 0.7586208604269945,
+      "n_positive": 1689,
+      "suspected_leakage": false
+    },
+    "lidar_lap_curv": {
+      "auc": 0.5976292174934691,
+      "symmetric_auc": 0.5976292174934691,
+      "finite_fraction": 0.7586208604269945,
+      "n_positive": 1689,
+      "suspected_leakage": false
+    },
+    "lidar_coh_cross": {
+      "auc": 0.5856575670325923,
+      "symmetric_auc": 0.5856575670325923,
+      "finite_fraction": 0.7586208604269945,
+      "n_positive": 1689,
+      "suspected_leakage": false
+    },
+    "topo10_slope_std": {
+      "auc": 0.6024160127405096,
+      "symmetric_auc": 0.6024160127405096,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "topo10_curv_prof": {
+      "auc": 0.5842840483619343,
+      "symmetric_auc": 0.5842840483619343,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "topo10_hs_lineament": {
+      "auc": 0.5960191705668226,
+      "symmetric_auc": 0.5960191705668226,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "topo10_slope_p90": {
+      "auc": 0.6094529459178366,
+      "symmetric_auc": 0.6094529459178366,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "topo10_relief_hp": {
+      "auc": 0.4868977951118045,
+      "symmetric_auc": 0.5131022048881955,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "rad_alteration_edge": {
+      "auc": 0.5283077912116485,
+      "symmetric_auc": 0.5283077912116485,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "demag_shallow": {
+      "auc": 0.35555602184087365,
+      "symmetric_auc": 0.6444439781591264,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "hydro_conduit_near": {
+      "auc": 0.5166676222048883,
+      "symmetric_auc": 0.5166676222048883,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "hydro_conduit_far": {
+      "auc": 0.5752432475299012,
+      "symmetric_auc": 0.5752432475299012,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "vis_dist_capped": {
+      "auc": 0.25213490509620384,
+      "symmetric_auc": 0.7478650949037962,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "vis_tip_lobe": {
+      "auc": 0.7910248348933958,
+      "symmetric_auc": 0.7910248348933958,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    },
+    "vis_host_len_prox": {
+      "auc": 0.6908849349973999,
+      "symmetric_auc": 0.6908849349973999,
+      "finite_fraction": 1.0,
+      "n_positive": 1923,
+      "suspected_leakage": false
+    }
+  },
+  "per_feature_b_prime": {
+    "b01_mag_anom_hp": {
+      "auc": 0.5221159442422346,
+      "symmetric_auc": 0.5221159442422346,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b02_rtp_hp": {
+      "auc": 0.49077623937712045,
+      "symmetric_auc": 0.5092237606228796,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b03_tmi_hg": {
+      "auc": 0.4893181134918805,
+      "symmetric_auc": 0.5106818865081195,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b04_geod_2ndinv": {
+      "auc": 0.4760568610214434,
+      "symmetric_auc": 0.5239431389785566,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b05_iso_grav_slope": {
+      "auc": 0.4270037482706941,
+      "symmetric_auc": 0.5729962517293059,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b06_tc": {
+      "auc": 0.3779663119667973,
+      "symmetric_auc": 0.6220336880332027,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b07_geod_shearrate": {
+      "auc": 0.47640925623373626,
+      "symmetric_auc": 0.5235907437662637,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b08_geod_dilaterate": {
+      "auc": 0.43694187551467445,
+      "symmetric_auc": 0.5630581244853256,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b09_tmi_vg": {
+      "auc": 0.5044352407440956,
+      "symmetric_auc": 0.5044352407440956,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b10_deq": {
+      "auc": 0.4791806109390955,
+      "symmetric_auc": 0.5208193890609045,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b11_iso_grav_vg": {
+      "auc": 0.466939527611252,
+      "symmetric_auc": 0.533060472388748,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b12_det_elev_hp8": {
+      "auc": 0.4986972086531177,
+      "symmetric_auc": 0.5013027913468824,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b13_iso_grav_hp8": {
+      "auc": 0.6034248968592509,
+      "symmetric_auc": 0.6034248968592509,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b15_depth_base": {
+      "auc": 0.33569580980928226,
+      "symmetric_auc": 0.6643041901907177,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b15_basement_grad": {
+      "auc": 0.37934784252610426,
+      "symmetric_auc": 0.6206521574738957,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b16_ieq": {
+      "auc": 0.47743426558022334,
+      "symmetric_auc": 0.5225657344197767,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b16_ieq_grad": {
+      "auc": 0.4777062825685958,
+      "symmetric_auc": 0.5222937174314042,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b17_cond_surf": {
+      "auc": 0.5198961881567246,
+      "symmetric_auc": 0.5198961881567246,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b17_cond_grad": {
+      "auc": 0.49840275186106264,
+      "symmetric_auc": 0.5015972481389374,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b18_iso_grav_hg": {
+      "auc": 0.5057927704716888,
+      "symmetric_auc": 0.5057927704716888,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "b19_det_elev_slope": {
+      "auc": 0.7575911873744194,
+      "symmetric_auc": 0.7575911873744194,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "ms_ridge_100m": {
+      "auc": 0.7031565707039099,
+      "symmetric_auc": 0.7031565707039099,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "crossgrad_align": {
+      "auc": 0.4664138945205705,
+      "symmetric_auc": 0.5335861054794295,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "crossgrad_ortho": {
+      "auc": 0.4716635687110906,
+      "symmetric_auc": 0.5283364312889094,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "anderson_strike_fav": {
+      "auc": 0.4673817748855364,
+      "symmetric_auc": 0.5326182251144636,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "lidar_scarp_dipole": {
+      "auc": 0.739970191729116,
+      "symmetric_auc": 0.739970191729116,
+      "finite_fraction": 0.7321166931320431,
+      "n_positive": 39181,
+      "suspected_leakage": false
+    },
+    "lidar_step_max": {
+      "auc": 0.7522654192409217,
+      "symmetric_auc": 0.7522654192409217,
+      "finite_fraction": 0.7321166931320431,
+      "n_positive": 39181,
+      "suspected_leakage": false
+    },
+    "lidar_lap_curv": {
+      "auc": 0.756678582913598,
+      "symmetric_auc": 0.756678582913598,
+      "finite_fraction": 0.7321166931320431,
+      "n_positive": 39181,
+      "suspected_leakage": false
+    },
+    "lidar_coh_cross": {
+      "auc": 0.7181173881443592,
+      "symmetric_auc": 0.7181173881443592,
+      "finite_fraction": 0.7321166931320431,
+      "n_positive": 39181,
+      "suspected_leakage": false
+    },
+    "topo10_slope_std": {
+      "auc": 0.7361081023337396,
+      "symmetric_auc": 0.7361081023337396,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "topo10_curv_prof": {
+      "auc": 0.7169101932705294,
+      "symmetric_auc": 0.7169101932705294,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "topo10_hs_lineament": {
+      "auc": 0.7458541230360025,
+      "symmetric_auc": 0.7458541230360025,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "topo10_slope_p90": {
+      "auc": 0.7612215635808163,
+      "symmetric_auc": 0.7612215635808163,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "topo10_relief_hp": {
+      "auc": 0.49765381274910236,
+      "symmetric_auc": 0.5023461872508976,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "rad_alteration_edge": {
+      "auc": 0.5611195305757766,
+      "symmetric_auc": 0.5611195305757766,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "demag_shallow": {
+      "auc": 0.5390137936443888,
+      "symmetric_auc": 0.5390137936443888,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "hydro_conduit_near": {
+      "auc": 0.4725783911278369,
+      "symmetric_auc": 0.527421608872163,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "hydro_conduit_far": {
+      "auc": 0.4508299270397576,
+      "symmetric_auc": 0.5491700729602425,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "vis_dist_capped": {
+      "auc": 0.5075521986066734,
+      "symmetric_auc": 0.5075521986066734,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "vis_tip_lobe": {
+      "auc": 0.490353362841332,
+      "symmetric_auc": 0.509646637158668,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    },
+    "vis_host_len_prox": {
+      "auc": 0.5055271587502882,
+      "symmetric_auc": 0.5055271587502882,
+      "finite_fraction": 1.0,
+      "n_positive": 60718,
+      "suspected_leakage": false
+    }
+  }
+}

@@ -1,0 +1,629 @@
+{
+  "hypothesis": "H-P5-1 Dual-Population Multi-Sensor 4-Fold OOF HGB Synthesis + Exact Unblurred 300 m Submodular Max-Cover (chosen arm: exp_5c)",
+  "mechanism": "Out-of-fold dual-population HistGradientBoostingClassifier ensemble combining pre-2022 mapped bedrock faults outside the catalogue duplication band (SGMC d_cat >= 3 px) and Quaternary neotectonic traces across 41 localized physical channels (GeoDAWN gravity/magnetic/radiometric high-pass residuals & gradients, GPS crustal strain rates, USGS 3DEP 1 m LiDAR & seamless 10 m DEM scarp morphology, DOE GDR 1391 thermal springs, 2 m probes, and paleo-sinter conduits), emitted via exact unblurred 300 m triangular-kernel lazy-greedy submodular max-cover at exact 37,654 binary off-catalogue pixels.",
+  "non_fault_mimic": "Erosional range-front pediment breaks, volcanic flow margins, and intact pluton boundaries suppressed via high-pass anomaly localization and orthogonal cross-gradient features.",
+  "verdict": "negative",
+  "evidence_class": "HOLDOUT-DTI (Instrument A, gems57-pooled-hide-v2) and PROXY-DTI (Instrument B'/B/B'', gems57-pooled-hide-v2); neither organizer-confirmed",
+  "chosen_experiment": "exp_5c",
+  "preregistration_commit": "abc7c6e",
+  "promotion_gates": {
+    "canary_clean": true,
+    "uniqueness_surface_and_dots": true,
+    "inst_a_gt_h33_static_ci95": true,
+    "inst_a_gt_h33_fair_ci95": false,
+    "inst_a_gt_p4_ci95": true,
+    "inst_a_gt_d28_ci95": false,
+    "inst_a_gt_random_ci95": true,
+    "inst_bp_gt_h33_ci95": false,
+    "inst_bp_gt_p4_ci95": true,
+    "inst_bp_gt_d28_ci95": false,
+    "inst_bp_gt_random_ci95": true
+  },
+  "all_experiment_gates": {
+    "exp_5c": {
+      "canary_clean": true,
+      "uniqueness_surface_and_dots": true,
+      "inst_a_gt_h33_static_ci95": true,
+      "inst_a_gt_h33_fair_ci95": false,
+      "inst_a_gt_p4_ci95": true,
+      "inst_a_gt_d28_ci95": false,
+      "inst_a_gt_random_ci95": true,
+      "inst_bp_gt_h33_ci95": false,
+      "inst_bp_gt_p4_ci95": true,
+      "inst_bp_gt_d28_ci95": false,
+      "inst_bp_gt_random_ci95": true
+    },
+    "exp_5b": {
+      "canary_clean": true,
+      "uniqueness_surface_and_dots": true,
+      "inst_a_gt_h33_static_ci95": true,
+      "inst_a_gt_h33_fair_ci95": false,
+      "inst_a_gt_p4_ci95": true,
+      "inst_a_gt_d28_ci95": false,
+      "inst_a_gt_random_ci95": false,
+      "inst_bp_gt_h33_ci95": false,
+      "inst_bp_gt_p4_ci95": false,
+      "inst_bp_gt_d28_ci95": false,
+      "inst_bp_gt_random_ci95": true
+    },
+    "exp_5a": {
+      "canary_clean": true,
+      "uniqueness_surface_and_dots": true,
+      "inst_a_gt_h33_static_ci95": true,
+      "inst_a_gt_h33_fair_ci95": false,
+      "inst_a_gt_p4_ci95": true,
+      "inst_a_gt_d28_ci95": false,
+      "inst_a_gt_random_ci95": true,
+      "inst_bp_gt_h33_ci95": true,
+      "inst_bp_gt_p4_ci95": true,
+      "inst_bp_gt_d28_ci95": true,
+      "inst_bp_gt_random_ci95": true
+    }
+  },
+  "instrument_a_holdout": {
+    "exp_5c": {
+      "dti": 0.10210175470164058,
+      "ci95": [
+        0.08510983794225123,
+        0.12074499128069327
+      ],
+      "withheld_positive_pixels": 11321,
+      "calibrated_dti_k7905": 0.1062500721950105
+    },
+    "exp_5b": {
+      "dti": 0.041427586392543105,
+      "ci95": [
+        0.02887259598601726,
+        0.05599103930809656
+      ],
+      "withheld_positive_pixels": 11321,
+      "calibrated_dti_k7905": 0.04321782770480834
+    },
+    "exp_5a": {
+      "dti": 0.0650157420076258,
+      "ci95": [
+        0.0524046171040121,
+        0.07838910079288627
+      ],
+      "withheld_positive_pixels": 11321,
+      "calibrated_dti_k7905": 0.06775989098218078
+    },
+    "ablation_5c_nms28": {
+      "dti": 0.10217300933148685,
+      "ci95": [
+        0.08589967346643104,
+        0.11990750618129474
+      ],
+      "withheld_positive_pixels": 11321,
+      "calibrated_dti_k7905": 0.10632391250150824
+    },
+    "h33_reference": {
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.003037134722219959,
+        0.004497470563248019
+      ],
+      "withheld_positive_pixels": 11321,
+      "calibrated_dti_k7905": 0.003865632911182284
+    },
+    "h33_fold_fair": {
+      "dti": 0.09042151270185865,
+      "ci95": [
+        0.07859716676770803,
+        0.10404335380492362
+      ],
+      "withheld_positive_pixels": 11321,
+      "calibrated_dti_k7905": 0.09414016868536872
+    },
+    "p4_reference": {
+      "dti": 0.004809030158551737,
+      "ci95": [
+        0.004496051045070661,
+        0.005123656780688088
+      ],
+      "withheld_positive_pixels": 11321,
+      "calibrated_dti_k7905": 0.00502437751300307
+    },
+    "d28_reference": {
+      "dti": 0.09192198709430605,
+      "ci95": [
+        0.07982828585542338,
+        0.1054483233228743
+      ],
+      "withheld_positive_pixels": 11321,
+      "calibrated_dti_k7905": 0.09569648541493742
+    },
+    "random_control": {
+      "dti": 0.0505547543622084,
+      "ci95": [
+        0.045115887268522566,
+        0.05583407617316418
+      ],
+      "withheld_positive_pixels": 11321,
+      "calibrated_dti_k7905": 0.05271971845860568
+    }
+  },
+  "instrument_b_prime_proxy": {
+    "exp_5c": {
+      "dti": 0.11303671723800227,
+      "ci95": [
+        0.08718150101999524,
+        0.13749931152206502
+      ],
+      "withheld_positive_pixels": 59937,
+      "calibrated_dti_k7905": 0.0736415509686167
+    },
+    "exp_5b": {
+      "dti": 0.10472219302443911,
+      "ci95": [
+        0.07690095843319532,
+        0.13060223122539735
+      ],
+      "withheld_positive_pixels": 59937,
+      "calibrated_dti_k7905": 0.0682908763494407
+    },
+    "exp_5a": {
+      "dti": 0.16432946433558399,
+      "ci95": [
+        0.14710001242208043,
+        0.1796111375241244
+      ],
+      "withheld_positive_pixels": 59937,
+      "calibrated_dti_k7905": 0.10642246028336894
+    },
+    "ablation_5c_nms28": {
+      "dti": 0.11353541142282868,
+      "ci95": [
+        0.08721598567817732,
+        0.13970819843320983
+      ],
+      "withheld_positive_pixels": 59937,
+      "calibrated_dti_k7905": 0.07396214812353853
+    },
+    "h33_reference": {
+      "dti": 0.09377056861492462,
+      "ci95": [
+        0.08375251373533825,
+        0.104028711800872
+      ],
+      "withheld_positive_pixels": 59937,
+      "calibrated_dti_k7905": 0.06122729700555697
+    },
+    "p4_reference": {
+      "dti": 0.08116240066330835,
+      "ci95": [
+        0.07234947587460432,
+        0.09002008521926923
+      ],
+      "withheld_positive_pixels": 59937,
+      "calibrated_dti_k7905": 0.05307289353059235
+    },
+    "d28_reference": {
+      "dti": 0.09352659933526818,
+      "ci95": [
+        0.0834886489899833,
+        0.10381979373030419
+      ],
+      "withheld_positive_pixels": 59937,
+      "calibrated_dti_k7905": 0.061069736134462455
+    },
+    "random_control": {
+      "dti": 0.06972784527138284,
+      "ci95": [
+        0.06575396086921854,
+        0.07316676604814398
+      ],
+      "withheld_positive_pixels": 59937,
+      "calibrated_dti_k7905": 0.04565672681295229
+    }
+  },
+  "instrument_b_sensitivity_d5": {
+    "exp_5c": {
+      "dti": 0.10218765593369965,
+      "ci95": [
+        0.07653321671867669,
+        0.1286218934009402
+      ],
+      "withheld_positive_pixels": 55165
+    },
+    "exp_5b": {
+      "dti": 0.09769929937608611,
+      "ci95": [
+        0.07071508647779516,
+        0.12419450583764069
+      ],
+      "withheld_positive_pixels": 55165
+    },
+    "exp_5a": {
+      "dti": 0.16292949899966566,
+      "ci95": [
+        0.14614656738397017,
+        0.17794426607990146
+      ],
+      "withheld_positive_pixels": 55165
+    },
+    "ablation_5c_nms28": {
+      "dti": 0.10321328235859256,
+      "ci95": [
+        0.07584378577635141,
+        0.13078087843786151
+      ],
+      "withheld_positive_pixels": 55165
+    },
+    "h33_reference": {
+      "dti": 0.08784843047853066,
+      "ci95": [
+        0.07794212051792553,
+        0.09812064644375532
+      ],
+      "withheld_positive_pixels": 55165
+    },
+    "p4_reference": {
+      "dti": 0.06846276714255646,
+      "ci95": [
+        0.0601919524870532,
+        0.07634755051458514
+      ],
+      "withheld_positive_pixels": 55165
+    },
+    "d28_reference": {
+      "dti": 0.08590752846020656,
+      "ci95": [
+        0.07634530590821109,
+        0.09580132542857968
+      ],
+      "withheld_positive_pixels": 55165
+    },
+    "random_control": {
+      "dti": 0.06870323895926753,
+      "ci95": [
+        0.06467052538647708,
+        0.07221293485961282
+      ],
+      "withheld_positive_pixels": 55165
+    }
+  },
+  "instrument_b_unrestricted": {
+    "exp_5c": {
+      "dti": 0.11390721210329202,
+      "ci95": [
+        0.09108454510032445,
+        0.13540452856794308
+      ],
+      "withheld_positive_pixels": 74740
+    },
+    "exp_5b": {
+      "dti": 0.10163661486667018,
+      "ci95": [
+        0.07650360678696783,
+        0.12503391916004336
+      ],
+      "withheld_positive_pixels": 74740
+    },
+    "exp_5a": {
+      "dti": 0.14520645738725774,
+      "ci95": [
+        0.12847225119549202,
+        0.16027180463709892
+      ],
+      "withheld_positive_pixels": 74740
+    },
+    "ablation_5c_nms28": {
+      "dti": 0.1267639526353648,
+      "ci95": [
+        0.10302459453465147,
+        0.15122090814845932
+      ],
+      "withheld_positive_pixels": 74740
+    },
+    "h33_reference": {
+      "dti": 0.09059897608840377,
+      "ci95": [
+        0.08214959351246441,
+        0.09919171835657462
+      ],
+      "withheld_positive_pixels": 74740
+    },
+    "p4_reference": {
+      "dti": 0.09483894035517236,
+      "ci95": [
+        0.08573631335752449,
+        0.10339452460864469
+      ],
+      "withheld_positive_pixels": 74740
+    },
+    "d28_reference": {
+      "dti": 0.12592373057969453,
+      "ci95": [
+        0.11385738037935879,
+        0.1376251422895025
+      ],
+      "withheld_positive_pixels": 74740
+    },
+    "random_control": {
+      "dti": 0.07101315599892798,
+      "ci95": [
+        0.067852845424844,
+        0.07407922986767024
+      ],
+      "withheld_positive_pixels": 74740
+    }
+  },
+  "paired_differences_instrument_a": {
+    "exp_5b": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.06067416830909748,
+      "ci95": [
+        0.04983304650110164,
+        0.07295972181390142
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "exp_5a": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.03708601269401478,
+      "ci95": [
+        0.02171882337909242,
+        0.0528551170298633
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "ablation_5c_nms28": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": -7.125462984626518e-05,
+      "ci95": [
+        -0.0031852317215347536,
+        0.003251355735076356
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "h33_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.098401973016011,
+      "ci95": [
+        0.08147749635828262,
+        0.11672146418589333
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "h33_fold_fair": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.011680241999781932,
+      "ci95": [
+        -0.003958007969424531,
+        0.02798907026782001
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "p4_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.09729272454308885,
+      "ci95": [
+        0.08029819494847447,
+        0.1159978042510464
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "d28_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.010179767607334536,
+      "ci95": [
+        -0.005877957800921099,
+        0.02654163769803297
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "random_control": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.05154700033943218,
+      "ci95": [
+        0.035216820353074337,
+        0.06909804826358978
+      ],
+      "withheld_positive_pixels": 11321
+    }
+  },
+  "paired_differences_instrument_b_prime": {
+    "exp_5b": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.008314524213563157,
+      "ci95": [
+        -0.012299116782573382,
+        0.030552215672692243
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "exp_5a": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": -0.05129274709758172,
+      "ci95": [
+        -0.07885522996776678,
+        -0.02518105414838736
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "ablation_5c_nms28": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": -0.000498694184826412,
+      "ci95": [
+        -0.003916887630892747,
+        0.003026725016859614
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "h33_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.019266148623077642,
+      "ci95": [
+        -0.0049192329193468685,
+        0.043874909489157295
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "p4_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.03187431657469392,
+      "ci95": [
+        0.00571404283976101,
+        0.060011317192028825
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "d28_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.01951011790273409,
+      "ci95": [
+        -0.004509614454616406,
+        0.044112309258714164
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "random_control": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.04330887196661942,
+      "ci95": [
+        0.01832507993411997,
+        0.06754562802145074
+      ],
+      "withheld_positive_pixels": 59937
+    }
+  },
+  "feature_leakage_canary": {
+    "threshold_symmetric_auc": 0.9,
+    "max_symmetric_auc_instrument_a_fold0": 0.7910248348933958,
+    "max_symmetric_auc_instrument_b_prime": 0.7612215635808163,
+    "all_clean": true
+  },
+  "correlation_overlap_vs_registry": {
+    "stage": "both continuous pre-placement surface AND final 37,654 binary dots",
+    "rasters_checked": 59,
+    "surface_worst_spearman_full_footprint": 0.17321302975920094,
+    "surface_worst_rho_submission": "/tmp/60GEMSDOE/registry/rasters/calib_hedgev2_01563_sample.tif",
+    "worst_mutual_overlap": 0.40085,
+    "worst_mutual_submission": "/tmp/60GEMSDOE/registry/rasters/GEMSDOE49__gate_ortho_w0.25-40k.tif",
+    "worst_forward_overlap": 1.0,
+    "worst_forward_submission": "/tmp/60GEMSDOE/registry/rasters/calib_r13lattice_00904.tif",
+    "worst_reverse_overlap": 0.40085,
+    "worst_spearman_full_footprint": 0.05112578697161914,
+    "worst_rho_submission": "/tmp/60GEMSDOE/registry/rasters/calib_h161_01855.tif",
+    "worst_jaccard": 0.02760537226871518,
+    "duplicate": false
+  },
+  "distance_distribution": {
+    "dot_count": 37654,
+    "min_d_cat_px": 2.2360680103302,
+    "p25_d_cat_px": 5.0,
+    "median_d_cat_px": 13.416407585144043,
+    "p90_d_cat_px": 51.4781494140625,
+    "frac_3_to_10px": 0.3496042917087162,
+    "frac_10_to_32px": 0.3707972592553248,
+    "frac_gt_32px_blind_basins": 0.21246082753492324
+  },
+  "raster_sha256": "bb1d52f191a53be38a513639323d365e6576c6b85db1d35171ca81349c87a022",
+  "zip_sha256": "984bbe2459f224dd4dde01d28856319abcccfc10f185c709085c6f5546a2f71a",
+  "validator_output": {
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif",
+    "bytes": 136339,
+    "sha256": "bb1d52f191a53be38a513639323d365e6576c6b85db1d35171ca81349c87a022",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "emitted_positive_pixels": 37654,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 37654,
+    "footprint_fraction": 0.007286874781441169
+  },
+  "submission_name": "gems70-p5-dual-submod300-oof38k-20261020",
+  "submission_note": "GEMSDOE70 P5: 4-fold OOF dual-pop HGB (SGMC d>=3 + Quat + 3DEP/LiDAR/GDR) + exact 300m submodular cover, 37654 binary off-cat dots.",
+  "note_chars": 131,
+  "download_ok": false,
+  "submit_recommended": false,
+  "download_and_submit_ok": false,
+  "weekly_slots_used": 0,
+  "experiment_count": 3,
+  "elapsed_seconds": 1111.39,
+  "organizer_confirmed_score": null,
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "method_source_sha256": {
+    "src/gems70/phase5.py": "1b5b5951f62d6347222ddbc3a8252623846795f0a8bffdc5c808d28f462eb571",
+    "src/gems70/method_v2.py": "8e8896aba8a0b56737b5d1930d1f0898da7d29d8ec39f7f13e5cf1c7717b4a41",
+    "scripts/run_experiment_v5.py": "602ad48596b6c629e396608830670467d0f61aa234c916af47f7bd0e00d7236f"
+  },
+  "registered_parameters": {
+    "dot_count": 37654,
+    "collar_px": 2.05,
+    "erosion_px": 12.0,
+    "dual_weights": [
+      0.55,
+      0.35,
+      0.1
+    ],
+    "submodular_support_quantile": 0.9,
+    "submodular_gamma": 2.0,
+    "b_prime_gap_px": 3.0
+  }
+}
