@@ -1,0 +1,82 @@
+{
+  "det_elev_slope": {
+    "auc": 0.5635590912905221,
+    "auc_instrument_a": 0.5635590912905221,
+    "auc_instrument_b_prime": 0.7435157581525643,
+    "withheld_positive_pixels": 11321,
+    "sampled_negative_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "topo10_breakline": {
+    "auc": 0.5777205980037099,
+    "auc_instrument_a": 0.5777205980037099,
+    "auc_instrument_b_prime": 0.7423497981212789,
+    "withheld_positive_pixels": 11321,
+    "sampled_negative_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "lidar_scarp": {
+    "auc": 0.5939470150605071,
+    "auc_instrument_a": 0.5939470150605071,
+    "auc_instrument_b_prime": 0.5726016649507574,
+    "withheld_positive_pixels": 11321,
+    "sampled_negative_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "shallow_basement": {
+    "auc": 0.47573885323734655,
+    "auc_instrument_a": 0.47573885323734655,
+    "auc_instrument_b_prime": 0.6533287458698462,
+    "withheld_positive_pixels": 11321,
+    "sampled_negative_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "iso_grav_anom": {
+    "auc": 0.46007429334864414,
+    "auc_instrument_a": 0.46007429334864414,
+    "auc_instrument_b_prime": 0.607104269301984,
+    "withheld_positive_pixels": 11321,
+    "sampled_negative_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "geod_strain": {
+    "auc": 0.5672642789947885,
+    "auc_instrument_a": 0.5672642789947885,
+    "auc_instrument_b_prime": 0.4861277774984437,
+    "withheld_positive_pixels": 11321,
+    "sampled_negative_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "rad_alteration": {
+    "auc": 0.5080419759738539,
+    "auc_instrument_a": 0.5080419759738539,
+    "auc_instrument_b_prime": 0.5972928901897876,
+    "withheld_positive_pixels": 11321,
+    "sampled_negative_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "tmi_hg": {
+    "auc": 0.528428488428584,
+    "auc_instrument_a": 0.528428488428584,
+    "auc_instrument_b_prime": 0.494556926606969,
+    "withheld_positive_pixels": 11321,
+    "sampled_negative_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "p_oof_loqo_rank": {
+    "auc": 0.5657254544651532,
+    "auc_instrument_a": 0.5657254544651532,
+    "auc_instrument_b_prime": 0.7405296843924085,
+    "withheld_positive_pixels": 11321,
+    "sampled_negative_pixels": 200000,
+    "suspected_leakage": false
+  },
+  "breakline_unsupervised_rank": {
+    "auc": 0.5873602987810264,
+    "auc_instrument_a": 0.5873602987810264,
+    "auc_instrument_b_prime": 0.7335877330045172,
+    "withheld_positive_pixels": 11321,
+    "sampled_negative_pixels": 200000,
+    "suspected_leakage": false
+  }
+}

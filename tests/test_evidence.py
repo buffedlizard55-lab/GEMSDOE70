@@ -12,10 +12,9 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_saved_pooled_scores_match_fold_terms(phase):
     base = ROOT / 'evidence' / phase
     files = {'instrumentA_holdout.json': 'instrumentA_folds.json',
-             'instrumentA_quad.json': 'instrumentA_quad_folds.json',
              'instrumentB_proxy.json': 'instrumentB_folds.json',
              'instrumentB_prime.json': 'instrumentB_prime_folds.json',
-             'instrumentC_pied.json': 'instrumentC_pied_folds.json',
+             'instrumentB_double_prime.json': 'instrumentB_double_prime_folds.json',
              'instrumentB_all.json': None}
     checked = 0
     for summary_name, folds_name in files.items():
@@ -40,7 +39,7 @@ def test_saved_pooled_scores_match_fold_terms(phase):
     assert checked > 0
 
 
-def test_uniqueness_receipt_is_mutual_and_complete():
+def test_historical_receipt_is_mutual_but_not_a_literal_pass():
     audit = json.loads((ROOT / 'evidence/phase4/uniqueness.json').read_text())
     assert audit['registry_rasters_checked'] == 62
     assert audit['unique'] is True
@@ -49,6 +48,9 @@ def test_uniqueness_receipt_is_mutual_and_complete():
     assert audit['worst_forward_overlap'] >= audit['worst_dot_overlap']
     assert audit['worst_spearman_full_footprint'] <= 0.90
     assert 'mutual' in audit['overlap_definition']
+    from gems70.protocol import literal_lane_status
+    assert literal_lane_status(audit)['stop_required']
+    assert not literal_lane_status(audit)['protocol_unique']
 
 
 def test_published_tiff_matches_card_and_is_binary():
@@ -72,3 +74,31 @@ def test_no_historical_projection_is_current_score():
     assert audit['organizer_confirmed_scores'] is None
     assert audit['files']['h33']['positive_pixels'] == 37654
     assert audit['comparisons']['h27_to_h33']['removed'] == 2545
+
+
+def test_p5hgb_lane_receipts_exist_and_agree():
+    """My parallel lane (P5-HGB supervised within-halo ranking), evidence/p5hgb/."""
+    card = json.loads((ROOT / 'evidence/p5hgb/run_card.json').read_text())
+    assert card['phase_evidence']['dir'] == 'evidence/p5hgb'
+    for rel in ('uniqueness.json', 'canaries.json', 'surface_uniqueness.json',
+                'instrumentA_holdout.json', 'instrumentB_prime.json'):
+        p = ROOT / 'evidence/p5hgb' / rel
+        assert p.is_file(), rel
+    canaries = json.loads((ROOT / 'evidence/p5hgb/canaries.json').read_text())
+    assert canaries['stop'] is False
+    assert canaries['model_oof']['suspected_leakage'] is False
+    surface = json.loads((ROOT / 'evidence/p5hgb/surface_uniqueness.json').read_text())
+    assert surface['duplicate_count'] == 0
+    assert surface['worst_spearman_full_footprint'] <= 0.90
+    audit = json.loads((ROOT / 'evidence/p5hgb/uniqueness.json').read_text())
+    assert audit['registry_rasters_checked'] == 62
+    assert audit['unique'] is True and audit['duplicate_count'] == 0
+    assert audit['worst_dot_overlap'] <= 0.70
+    assert audit['worst_spearman_full_footprint'] <= 0.90
+    # the card's contamination disclosure is a measured fraction in [0, 1]
+    frac = card['contamination_disclosure']['a_truth_pixels_within_3px_of_proxy']
+    assert 0.0 <= frac <= 1.0
+    # the published TIFF matches the lane card
+    tif = ROOT / 'docs/downloads' / (card['submission_name'] + '.tif')
+    assert tif.is_file()
+    assert card['raster_sha256'] == __import__('hashlib').sha256(tif.read_bytes()).hexdigest()

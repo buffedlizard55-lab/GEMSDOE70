@@ -1,0 +1,135 @@
+{
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "alpha": 0.2,
+  "beta": 0.8,
+  "triangular_radius_m": 300.0,
+  "pooled": true,
+  "scores": {
+    "candidate": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.11906269750551317,
+      "ci95": [
+        0.10056776675618456,
+        0.1398837116251088
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 6694.001750636452,
+      "fpw": 34670.4663389802,
+      "fnw": 53242.99824936357
+    },
+    "exp5_2_nms": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.1162158966052439,
+      "ci95": [
+        0.11114863776545547,
+        0.12110816333827966
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 6542.8249035945155,
+      "fpw": 35203.578818937436,
+      "fnw": 53394.17509640553
+    },
+    "exp5_1_struct": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.1258218295649529,
+      "ci95": [
+        0.12052440761326585,
+        0.1308978238557493
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 7093.33757937428,
+      "fpw": 35038.90545557886,
+      "fnw": 52843.66242062576
+    },
+    "random_control": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.07472856159569954,
+      "ci95": [
+        0.0709607031890199,
+        0.07779621231131643
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 4155.158474151316,
+      "fpw": 34113.59880212096,
+      "fnw": 55781.841525848744
+    },
+    "h33_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.09377056861492461,
+      "ci95": [
+        0.08401950109331119,
+        0.10461733272417588
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 5213.410730189336,
+      "fpw": 33026.171471565896,
+      "fnw": 54723.589269810655
+    }
+  },
+  "best_comparable_control": "exp5_1_struct",
+  "paired_differences": {
+    "exp5_2_nms": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.0028468009002692723,
+      "ci95": [
+        -0.01548767585629568,
+        0.022685046902228546
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "exp5_1_struct": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": -0.006759132059439718,
+      "ci95": [
+        -0.024976651261701642,
+        0.012321411620196347
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "random_control": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.044334135909813624,
+      "ci95": [
+        0.02550432460964804,
+        0.06535304803596143
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "h33_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.02529212889058856,
+      "ci95": [
+        0.009803139346872457,
+        0.0426346730975399
+      ],
+      "withheld_positive_pixels": 59937
+    }
+  },
+  "bootstrap": {
+    "method": "paired physical spatial-cluster percentile",
+    "clusters": 159,
+    "draws": 1000,
+    "seed": 70520,
+    "confidence": 0.95,
+    "caveat": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+  },
+  "implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "instrument": "B': SGMC off-catalogue restricted to d_cat >= 3 px (100% out-of-fold)",
+  "proxy_positive_pixels_prime": 62649,
+  "proxy_positive_pixels_all": 78433
+}

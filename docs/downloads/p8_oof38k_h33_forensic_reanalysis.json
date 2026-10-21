@@ -1,0 +1,159 @@
+{
+  "evidence_class": "DATA-MEASUREMENT + USER-SUPPLIED-UNVERIFIED",
+  "key_findings": [
+    "100.0% (37,654 / 37,654) of H33 dots lie inside 19GEMSDOE H19-5 (121,131 px = 2.344% of footprint), refuting Session 2's claim that H33 is a detector-free uniform halo.",
+    "34.00% (12,803 / 37,654) of H33 dots and 31.9% of independent GEMSDOE49 dots lie at d_cat > 32 px (>3.2 km from any catalogued trace), whereas Session 2's P4 hard-zeroed d_cat > 32 px (0.00%).",
+    "Uniform 5-px lattice (calib_r13lattice_00904.tif, 206,895 dots, mean kernel cover c=0.5835 across off-catalogue footprint, user-reported live DTI=0.0904) algebraically implies ~7,500-8,000 hidden truth pixels (~0.15% footprint prevalence), 7.5x sparser than uncalibrated SGMC B' (59,937 px)."
+  ],
+  "uniform_lattice_prevalence_check": {
+    "lattice_dots": 206895,
+    "mean_offcat_kernel_cover": 0.37481850852642795,
+    "user_reported_live_dti": 0.0904,
+    "implied_hidden_truth_pixels": 12649.259296593269
+  },
+  "rasters": [
+    {
+      "id": "19GEMSDOE_H19_5",
+      "sha256": "ef2ae808eb7179861b9f1ff753fd3ded625ace7b7c158e29cec45bbd8fa3cfaa",
+      "user_reported_live_score": 0.1922,
+      "score_evidence_class": "USER-SUPPLIED-UNVERIFIED",
+      "positive_pixels": 121131,
+      "fraction_inside_h19_5": 1.0,
+      "median_d_cat_px": 14.560219778561036,
+      "fraction_d_cat_le_2px": 0.14303522632521815,
+      "fraction_d_cat_gt_32px": 0.2878371350026005,
+      "lidar_ex_max_mean_u8": 81.33772277832031,
+      "lidar_ex_max_bg_mean_u8": 63.523372650146484
+    },
+    {
+      "id": "GEMSDOE25_D28",
+      "sha256": "3e78737f0da8dd2ca66cc6caac0ce8eeefcd6715707f8d1bd3091845cd9bcc30",
+      "user_reported_live_score": 0.26,
+      "score_evidence_class": "USER-SUPPLIED-UNVERIFIED",
+      "positive_pixels": 44090,
+      "fraction_inside_h19_5": 1.0,
+      "median_d_cat_px": 15.0,
+      "fraction_d_cat_le_2px": 0.1459741437967793,
+      "fraction_d_cat_gt_32px": 0.2901564980721252,
+      "lidar_ex_max_mean_u8": 83.1805648803711,
+      "lidar_ex_max_bg_mean_u8": 63.523372650146484
+    },
+    {
+      "id": "GEMSDOE28_H27_4",
+      "sha256": "2fc94a38d77f74d4f4ed1a97a83e7bb71a1ceea090515ec641e6681cc47c44c8",
+      "user_reported_live_score": 0.2708,
+      "score_evidence_class": "USER-SUPPLIED-UNVERIFIED",
+      "positive_pixels": 40199,
+      "fraction_inside_h19_5": 1.0,
+      "median_d_cat_px": 17.69180601295413,
+      "fraction_d_cat_le_2px": 0.06331003258787532,
+      "fraction_d_cat_gt_32px": 0.31824174730714694,
+      "lidar_ex_max_mean_u8": 82.90955352783203,
+      "lidar_ex_max_bg_mean_u8": 63.523372650146484
+    },
+    {
+      "id": "GEMSDOE28_H36_1",
+      "sha256": "7c74270ad48fa0b865163853046a6d3815967c5bf37bbda5b74ca7fa22583a32",
+      "user_reported_live_score": 0.271,
+      "score_evidence_class": "USER-SUPPLIED-UNVERIFIED",
+      "positive_pixels": 37660,
+      "fraction_inside_h19_5": 1.0,
+      "median_d_cat_px": 17.72004514666935,
+      "fraction_d_cat_le_2px": 0.06248008497079129,
+      "fraction_d_cat_gt_32px": 0.31869357408390864,
+      "lidar_ex_max_mean_u8": 82.82617950439453,
+      "lidar_ex_max_bg_mean_u8": 63.523372650146484
+    },
+    {
+      "id": "GEMSDOE32_H33_B2",
+      "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+      "user_reported_live_score": 0.2778,
+      "score_evidence_class": "USER-SUPPLIED-UNVERIFIED",
+      "positive_pixels": 37654,
+      "fraction_inside_h19_5": 1.0,
+      "median_d_cat_px": 19.6468827043885,
+      "fraction_d_cat_le_2px": 0.0,
+      "fraction_d_cat_gt_32px": 0.3397514208317841,
+      "lidar_ex_max_mean_u8": 82.86473846435547,
+      "lidar_ex_max_bg_mean_u8": 63.523372650146484
+    },
+    {
+      "id": "GEMSDOE36_Anderson_PINN",
+      "sha256": "e15891020b9c57056ac7fa874a5e506fbd6ed9314a4ea8e73af0753887a3708a",
+      "user_reported_live_score": 0.275,
+      "score_evidence_class": "USER-SUPPLIED-UNVERIFIED",
+      "positive_pixels": 38854,
+      "fraction_inside_h19_5": 0.9691408863952231,
+      "median_d_cat_px": 19.235384061671343,
+      "fraction_d_cat_le_2px": 0.0,
+      "fraction_d_cat_gt_32px": 0.3332732794564266,
+      "lidar_ex_max_mean_u8": 83.13836669921875,
+      "lidar_ex_max_bg_mean_u8": 63.523372650146484
+    },
+    {
+      "id": "GEMSDOE49_GateOrtho_40k",
+      "sha256": "3722e26fbf9129874be1fb8c687825803952c57ef1154ed0a21029596bc412f1",
+      "user_reported_live_score": 0.2376,
+      "score_evidence_class": "USER-SUPPLIED-UNVERIFIED",
+      "positive_pixels": 40000,
+      "fraction_inside_h19_5": 0.085975,
+      "median_d_cat_px": 19.209372712298546,
+      "fraction_d_cat_le_2px": 0.0,
+      "fraction_d_cat_gt_32px": 0.318975,
+      "lidar_ex_max_mean_u8": 76.32177734375,
+      "lidar_ex_max_bg_mean_u8": 63.523372650146484
+    },
+    {
+      "id": "16GEMSDOE_H16_1",
+      "sha256": "055309694ed499ca3d87e76b3f5e81c292aef6e39c418d33ff5a817aa1309bea",
+      "user_reported_live_score": 0.1855,
+      "score_evidence_class": "USER-SUPPLIED-UNVERIFIED",
+      "positive_pixels": 123939,
+      "fraction_inside_h19_5": 0.735095490523564,
+      "median_d_cat_px": 14.866068747318506,
+      "fraction_d_cat_le_2px": 0.14034323336480042,
+      "fraction_d_cat_gt_32px": 0.2878432131935872,
+      "lidar_ex_max_mean_u8": 80.70901489257812,
+      "lidar_ex_max_bg_mean_u8": 63.523372650146484
+    },
+    {
+      "id": "13GEMSDOE_Lattice5px",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "user_reported_live_score": 0.0904,
+      "score_evidence_class": "USER-SUPPLIED-UNVERIFIED",
+      "positive_pixels": 206895,
+      "fraction_inside_h19_5": 0.023577176828826218,
+      "median_d_cat_px": 23.194827009486403,
+      "fraction_d_cat_le_2px": 0.058817274462891804,
+      "fraction_d_cat_gt_32px": 0.37883467459339276,
+      "lidar_ex_max_mean_u8": 63.62006759643555,
+      "lidar_ex_max_bg_mean_u8": 63.523372650146484
+    },
+    {
+      "id": "57GEMSDOE_H57R2",
+      "sha256": "9afe74ab2b2fa631e9276cd8e8685fc76086d96d01181101998309b0c0d06a47",
+      "user_reported_live_score": 0.0254,
+      "score_evidence_class": "USER-SUPPLIED-UNVERIFIED",
+      "positive_pixels": 40000,
+      "fraction_inside_h19_5": 0.042125,
+      "median_d_cat_px": 3.1622776601683795,
+      "fraction_d_cat_le_2px": 0.211975,
+      "fraction_d_cat_gt_32px": 0.0,
+      "lidar_ex_max_mean_u8": 66.6709976196289,
+      "lidar_ex_max_bg_mean_u8": 63.523372650146484
+    },
+    {
+      "id": "GEMSDOE70_P4_PrevSession",
+      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+      "user_reported_live_score": null,
+      "score_evidence_class": "NOT-SUBMITTED",
+      "positive_pixels": 37654,
+      "fraction_inside_h19_5": 0.02780581080363308,
+      "median_d_cat_px": 12.041594578792296,
+      "fraction_d_cat_le_2px": 0.0,
+      "fraction_d_cat_gt_32px": 0.0,
+      "lidar_ex_max_mean_u8": 67.44441223144531,
+      "lidar_ex_max_bg_mean_u8": 63.523372650146484
+    }
+  ]
+}

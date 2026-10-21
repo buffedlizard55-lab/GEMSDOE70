@@ -52,7 +52,9 @@
       "evaluation_region_label_blind": true
     }
   ],
-  "total_withheld_positive_pixels": 11425,
-  "visible_catalogue_pixels": 48557,
-  "catalogue_features_from": "visible traces only (holdout-visible mask)"
+  "total_withheld_positive_pixels": 11321,
+  "catalogue_predictors": [],
+  "valid_feature_pixels": 4989581,
+  "known_mask_rule": "catalogue minus globally withheld components, pixel exact",
+  "limitation": "Mapped components are a surrogate for previously unmapped faults; no hidden organizer labels."
 }

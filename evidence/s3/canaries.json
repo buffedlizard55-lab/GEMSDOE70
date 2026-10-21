@@ -1,0 +1,405 @@
+{
+  "evidence_class": "LEAKAGE-CANARY",
+  "label": "B' proxy",
+  "sample": 1000000,
+  "threshold": 0.9,
+  "alarms": [],
+  "features": {
+    "stack:mag_anom": {
+      "auc": 0.5188949055428513,
+      "strength": 0.5188949055428513,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:rtp": {
+      "auc": 0.5259196663025828,
+      "strength": 0.5259196663025828,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:grad_rtp": {
+      "auc": 0.48650225500365507,
+      "strength": 0.5134977449963449,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:tmi_hg": {
+      "auc": 0.48678233039984053,
+      "strength": 0.5132176696001595,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:geod_2ndinv": {
+      "auc": 0.4772403506119111,
+      "strength": 0.5227596493880888,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:iso_grav_anom_slope": {
+      "auc": 0.4335508553858893,
+      "strength": 0.5664491446141107,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:tc": {
+      "auc": 0.3774611754620092,
+      "strength": 0.6225388245379908,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:geod_shearrate": {
+      "auc": 0.47729353329847035,
+      "strength": 0.5227064667015296,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:geod_dilaterate": {
+      "auc": 0.4343827263916046,
+      "strength": 0.5656172736083954,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:tmi_vg": {
+      "auc": 0.4974481264870628,
+      "strength": 0.5025518735129372,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:deq_n100a15": {
+      "auc": 0.47816640083729123,
+      "strength": 0.5218335991627088,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:iso_grav_anom_vg": {
+      "auc": 0.4697613289692002,
+      "strength": 0.5302386710307998,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:det_elev": {
+      "auc": 0.705042168477354,
+      "strength": 0.705042168477354,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:grad_det_elev": {
+      "auc": 0.7576384175123528,
+      "strength": 0.7576384175123528,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:std5_det_elev": {
+      "auc": 0.7684644220876626,
+      "strength": 0.7684644220876626,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:iso_grav_anom": {
+      "auc": 0.6127012703776944,
+      "strength": 0.6127012703776944,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:grad_iso_grav_anom": {
+      "auc": 0.4366632911479674,
+      "strength": 0.5633367088520326,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:tmi": {
+      "auc": 0.5312534548719026,
+      "strength": 0.5312534548719026,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:grad_tmi": {
+      "auc": 0.48152261353453796,
+      "strength": 0.518477386465462,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:depth_to_base_surf": {
+      "auc": 0.3396737760890429,
+      "strength": 0.6603262239109571,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:grad_depth_to_base_surf": {
+      "auc": 0.38490084373816547,
+      "strength": 0.6150991562618345,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:ieq_n100a15": {
+      "auc": 0.478362032510537,
+      "strength": 0.521637967489463,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:cond_surf": {
+      "auc": 0.5196214106479382,
+      "strength": 0.5196214106479382,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:grad_cond_surf": {
+      "auc": 0.501859483691814,
+      "strength": 0.501859483691814,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:iso_grav_anom_hg": {
+      "auc": 0.5061272217007583,
+      "strength": 0.5061272217007583,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "stack:det_elev_slope": {
+      "auc": 0.7579810644131777,
+      "strength": 0.7579810644131777,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:ex_max": {
+      "auc": 0.672976456182179,
+      "strength": 0.672976456182179,
+      "missing_fraction": 0.24588200000000004,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:ex_mean": {
+      "auc": 0.6727273608858143,
+      "strength": 0.6727273608858143,
+      "missing_fraction": 0.24588200000000004,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:step_max": {
+      "auc": 0.6858247484194987,
+      "strength": 0.6858247484194987,
+      "missing_fraction": 0.24588200000000004,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:lapneg_max": {
+      "auc": 0.682638968974702,
+      "strength": 0.682638968974702,
+      "missing_fraction": 0.24588200000000004,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:lappos_max": {
+      "auc": 0.6864019714096501,
+      "strength": 0.6864019714096501,
+      "missing_fraction": 0.24588200000000004,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:downface_max": {
+      "auc": 0.6620154349460897,
+      "strength": 0.6620154349460897,
+      "missing_fraction": 0.38277799999999995,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:upface_max": {
+      "auc": 0.6526545150692581,
+      "strength": 0.6526545150692581,
+      "missing_fraction": 0.38277799999999995,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:cross_max": {
+      "auc": 0.6697473058931962,
+      "strength": 0.6697473058931962,
+      "missing_fraction": 0.38277799999999995,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:relief": {
+      "auc": 0.7017218371548263,
+      "strength": 0.7017218371548263,
+      "missing_fraction": 0.24588200000000004,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:coh100": {
+      "auc": 0.49067721207503734,
+      "strength": 0.5093227879249627,
+      "missing_fraction": 0.247699,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:strike": {
+      "auc": 0.499457298313847,
+      "strength": 0.500542701686153,
+      "missing_fraction": 0.24588200000000004,
+      "suspected_leakage": false
+    },
+    "aux:lidar_scarp_features:valid": {
+      "auc": 0.49961924551622,
+      "strength": 0.5003807544837799,
+      "missing_fraction": 0.24573500000000004,
+      "suspected_leakage": false
+    },
+    "aux:geodawn_rad:K": {
+      "auc": 0.34385059734376994,
+      "strength": 0.65614940265623,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:geodawn_rad:Th": {
+      "auc": 0.44185718260314966,
+      "strength": 0.5581428173968503,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:geodawn_rad:U": {
+      "auc": 0.40503493345482006,
+      "strength": 0.59496506654518,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:geodawn_rad:TC": {
+      "auc": 0.3774575199707104,
+      "strength": 0.6225424800292896,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:geodawn_extensions:ThK": {
+      "auc": 0.5526246579059496,
+      "strength": 0.5526246579059496,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:geodawn_extensions:UK": {
+      "auc": 0.5655710396867503,
+      "strength": 0.5655710396867503,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:geodawn_extensions:UTh": {
+      "auc": 0.5059617337954667,
+      "strength": 0.5059617337954667,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:geodawn_extensions:TMI_up150": {
+      "auc": 0.5504191678734678,
+      "strength": 0.5504191678734678,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:topo_10m_derived_100m:slope_p90": {
+      "auc": 0.7619892052806758,
+      "strength": 0.7619892052806758,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:topo_10m_derived_100m:slope_max": {
+      "auc": 0.7615473314790131,
+      "strength": 0.7615473314790131,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:topo_10m_derived_100m:steep_frac": {
+      "auc": 0.7458808929315992,
+      "strength": 0.7458808929315992,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:topo_10m_derived_100m:slope_std": {
+      "auc": 0.7390375050230036,
+      "strength": 0.7390375050230036,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:topo_10m_derived_100m:relief_local": {
+      "auc": 0.761761853533204,
+      "strength": 0.761761853533204,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:topo_10m_derived_100m:curv_prof_absmax": {
+      "auc": 0.7217627733440236,
+      "strength": 0.7217627733440236,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:topo_10m_derived_100m:aspect_coherence": {
+      "auc": 0.5086721944154408,
+      "strength": 0.5086721944154408,
+      "missing_fraction": 0.011418999999999957,
+      "suspected_leakage": false
+    },
+    "aux:topo_10m_derived_100m:hs_lineament": {
+      "auc": 0.7482563380537153,
+      "strength": 0.7482563380537153,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:topo_10m_derived_100m:dem_mean": {
+      "auc": 0.7110851243636669,
+      "strength": 0.7110851243636669,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "aux:dem10_chi_100m:chan_n": {
+      "auc": 0.5033921920488801,
+      "strength": 0.5033921920488801,
+      "missing_fraction": 0.782153,
+      "suspected_leakage": false
+    },
+    "aux:dem10_chi_100m:knick_n": {
+      "auc": 0.4999923198206473,
+      "strength": 0.5000076801793527,
+      "missing_fraction": 0.982285,
+      "suspected_leakage": false
+    },
+    "aux:dem10_chi_100m:raised_n": {
+      "auc": 0.5043368829123973,
+      "strength": 0.5043368829123973,
+      "missing_fraction": 0.882823,
+      "suspected_leakage": false
+    },
+    "aux:dem10_chi_100m:valid_n": {
+      "auc": 0.5,
+      "strength": 0.5,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "cat_d": {
+      "auc": 0.4658835997318308,
+      "strength": 0.5341164002681692,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "cat_logd": {
+      "auc": 0.4658831838408437,
+      "strength": 0.5341168161591563,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "cat_tip_along": {
+      "auc": 0.4663590284866741,
+      "strength": 0.5336409715133259,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "cat_tip_across": {
+      "auc": 0.4850342002666947,
+      "strength": 0.5149657997333053,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "cat_density15": {
+      "auc": 0.5169156486013122,
+      "strength": 0.5169156486013122,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "cat_density41": {
+      "auc": 0.5242776844972774,
+      "strength": 0.5242776844972774,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    },
+    "cat_host_loglen": {
+      "auc": 0.5235167793158264,
+      "strength": 0.5235167793158264,
+      "missing_fraction": 0.0,
+      "suspected_leakage": false
+    }
+  }
+}

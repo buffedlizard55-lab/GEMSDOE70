@@ -1,0 +1,392 @@
+{
+  "mag_anom": {
+    "auc": 0.509942,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "rtp": {
+    "auc": 0.518654,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "tmi_hg": {
+    "auc": 0.528013,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "geod_2ndinv": {
+    "auc": 0.565919,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "iso_grav_anom_slope": {
+    "auc": 0.523116,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "tc": {
+    "auc": 0.470929,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "geod_shearrate": {
+    "auc": 0.565466,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "geod_dilaterate": {
+    "auc": 0.51688,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "tmi_vg": {
+    "auc": 0.487043,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "deq_n100a15": {
+    "auc": 0.536619,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "iso_grav_anom_vg": {
+    "auc": 0.515891,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "det_elev": {
+    "auc": 0.512529,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "iso_grav_anom": {
+    "auc": 0.459801,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "tmi": {
+    "auc": 0.510147,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "depth_to_base_surf": {
+    "auc": 0.524531,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "ieq_n100a15": {
+    "auc": 0.542298,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "cond_surf": {
+    "auc": 0.478619,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "iso_grav_anom_hg": {
+    "auc": 0.4928,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "det_elev_slope": {
+    "auc": 0.563004,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "grav_hg_worm": {
+    "auc": 0.463896,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "mag_hg_worm": {
+    "auc": 0.497596,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "basement_grad": {
+    "auc": 0.537994,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "basement_curv": {
+    "auc": 0.483533,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "cond_grad": {
+    "auc": 0.523557,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "det_elev_lrm": {
+    "auc": 0.426794,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "lidar_has_coverage": {
+    "auc": 0.531678,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "lidar_ex_max": {
+    "auc": 0.585901,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_ex_mean": {
+    "auc": 0.575662,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_step_max": {
+    "auc": 0.588394,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_lapneg_max": {
+    "auc": 0.591523,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_lappos_max": {
+    "auc": 0.596007,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_downface_max": {
+    "auc": 0.599326,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_upface_max": {
+    "auc": 0.605557,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_cross_max": {
+    "auc": 0.597892,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_relief": {
+    "auc": 0.583965,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_coh100": {
+    "auc": 0.486517,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_strike": {
+    "auc": 0.513849,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_crest_toe_dipole": {
+    "auc": 0.595094,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "lidar_scarp_sharpness": {
+    "auc": 0.547788,
+    "suspected_leakage": false,
+    "finite_eval_rows": 160496
+  },
+  "topo10_slope_p90": {
+    "auc": 0.568308,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "topo10_slope_max": {
+    "auc": 0.571565,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "topo10_steep_frac": {
+    "auc": 0.551039,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "topo10_slope_std": {
+    "auc": 0.587921,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "topo10_relief_local": {
+    "auc": 0.565063,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "topo10_curv_prof_absmax": {
+    "auc": 0.584933,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "topo10_aspect_coherence": {
+    "auc": 0.48919,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "topo10_hs_lineament": {
+    "auc": 0.575877,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "topo10_dem_mean": {
+    "auc": 0.52946,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "topo10_hs_dog": {
+    "auc": 0.508913,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "topo10_curv_dog": {
+    "auc": 0.512867,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "chi_step_max": {
+    "auc": 0.499918,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "chi_step_min": {
+    "auc": 0.499967,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "chi_ksn_max": {
+    "auc": 0.50256,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "chi_log10_area": {
+    "auc": 0.499935,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "chi_zmean_m": {
+    "auc": 0.526647,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "chi_ksn_dog": {
+    "auc": 0.470178,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "pluvial_shoreline_elev_dist_m": {
+    "auc": 0.436104,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "zmean_std_300m": {
+    "auc": 0.566398,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "zmean_lrm_400m": {
+    "auc": 0.425476,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "rad_K": {
+    "auc": 0.464507,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "rad_Th": {
+    "auc": 0.479631,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "rad_U": {
+    "auc": 0.473158,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "rad_TC": {
+    "auc": 0.470951,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "ext_ThK": {
+    "auc": 0.502857,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "ext_UK": {
+    "auc": 0.508932,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "ext_UTh": {
+    "auc": 0.510119,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "ext_TMI_up150": {
+    "auc": 0.510147,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "rad_K_alteration_halo": {
+    "auc": 0.445674,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "tmi_demagnetization_trough": {
+    "auc": 0.513507,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "gdr_thermal_upflow_s5": {
+    "auc": 0.485005,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "gdr_thermal_upflow_s16": {
+    "auc": 0.489712,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "probe2m_dab_s5": {
+    "auc": 0.521416,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "probe2m_dab_s14": {
+    "auc": 0.513483,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "paleo_sinter_tufa_s6": {
+    "auc": 0.489308,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "paleo_sinter_tufa_s18": {
+    "auc": 0.465655,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "quaternary_volcanic_vent_s16": {
+    "auc": 0.493986,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "fold_safe_crack_tip_lobe": {
+    "auc": 0.753822,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  },
+  "fold_safe_relay_stepover_annulus": {
+    "auc": 0.770886,
+    "suspected_leakage": false,
+    "finite_eval_rows": 211321
+  }
+}

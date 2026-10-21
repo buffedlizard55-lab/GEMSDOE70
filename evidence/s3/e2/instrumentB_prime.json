@@ -1,0 +1,133 @@
+{
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "alpha": 0.2,
+  "beta": 0.8,
+  "triangular_radius_m": 300.0,
+  "pooled": true,
+  "scores": {
+    "candidate": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.11542868879986497,
+      "ci95": [
+        0.09096804478733513,
+        0.13929489396290856
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 6460.051671352233,
+      "fpw": 33620.63470283567,
+      "fnw": 53476.94832864779
+    },
+    "random_stratified": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.10796449266400739,
+      "ci95": [
+        0.10242309820362691,
+        0.11354270315726864
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 6055.680515506032,
+      "fpw": 34644.10218059314,
+      "fnw": 53881.31948449402
+    },
+    "random_control": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.07739031021699651,
+      "ci95": [
+        0.07379830093107205,
+        0.08086210220319481
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 4323.047735714848,
+      "fpw": 35230.567905400414,
+      "fnw": 55613.95226428517
+    },
+    "h33_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.09377056861492462,
+      "ci95": [
+        0.08375251373533825,
+        0.104028711800872
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 5213.410730189337,
+      "fpw": 33026.171471565896,
+      "fnw": 54723.58926981065
+    },
+    "s3_e1_candidate": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.4613585261081098,
+      "ci95": [
+        0.43976936768700753,
+        0.4797726525460116
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 26876.382547141642,
+      "fpw": 24649.98463387933,
+      "fnw": 33060.61745285835
+    }
+  },
+  "best_comparable_control": "s3_e1_candidate",
+  "paired_differences": {
+    "random_stratified": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.0074641961358575815,
+      "ci95": [
+        -0.018560513707153777,
+        0.03273870190823666
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "random_control": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.03803837858286846,
+      "ci95": [
+        0.01298005648125159,
+        0.062219026635653776
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "h33_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.021658120184940344,
+      "ci95": [
+        -0.0021092744855364634,
+        0.04425788260453811
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "s3_e1_candidate": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": -0.34592983730824484,
+      "ci95": [
+        -0.3772712495541664,
+        -0.3139313033263905
+      ],
+      "withheld_positive_pixels": 59937
+    }
+  },
+  "bootstrap": {
+    "method": "paired physical spatial-cluster percentile",
+    "clusters": 159,
+    "draws": 1000,
+    "seed": 70420,
+    "confidence": 0.95,
+    "caveat": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+  },
+  "implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "instrument": "B': SGMC proxy, d_cat >= 3 px; LOQO out-of-fold"
+}

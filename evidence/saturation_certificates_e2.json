@@ -1,0 +1,67 @@
+{
+  "calib_r13lattice_00904.tif": {
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "witness_file": ".cache/src/g60/registry/rasters/calib_r13lattice_00904.tif",
+    "witness_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "positive_pixels": 206895,
+    "allowed_pixels": 5106385,
+    "uncovered_allowed_pixels": 6514,
+    "covered_allowed_fraction": 0.9987243421716145,
+    "universal_overlap_blocker": false,
+    "overlap_limit": 0.7,
+    "support_definition": "finite prediction > 0 (inherited literal support rule)",
+    "implication": "No universal blockage established."
+  },
+  "r11_greedy_mp.tif": {
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "witness_file": ".cache/src/g60/registry/rasters/r11_greedy_mp.tif",
+    "witness_sha256": "033df94ceef16350030a69d5cfdec0afe7bc605bb155d8f3b98b203aabf80abd",
+    "positive_pixels": 272853,
+    "allowed_pixels": 5106385,
+    "uncovered_allowed_pixels": 1344906,
+    "covered_allowed_fraction": 0.7366226792535228,
+    "universal_overlap_blocker": false,
+    "overlap_limit": 0.7,
+    "support_definition": "finite prediction > 0 (inherited literal support rule)",
+    "implication": "No universal blockage established."
+  },
+  "r14_union_tips10_lat6.tif": {
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "witness_file": ".cache/src/g60/registry/rasters/r14_union_tips10_lat6.tif",
+    "witness_sha256": "c9d1398e464603350e464fff7213a8a5e380f1ccf505e263a685607970ae28ef",
+    "positive_pixels": 192231,
+    "allowed_pixels": 5106385,
+    "uncovered_allowed_pixels": 1214733,
+    "covered_allowed_fraction": 0.7621148816628593,
+    "universal_overlap_blocker": false,
+    "overlap_limit": 0.7,
+    "support_definition": "finite prediction > 0 (inherited literal support rule)",
+    "implication": "No universal blockage established."
+  },
+  "17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif": {
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "witness_file": ".cache/src/g17/docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+    "witness_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+    "positive_pixels": 5167373,
+    "allowed_pixels": 5106385,
+    "uncovered_allowed_pixels": 0,
+    "covered_allowed_fraction": 1.0,
+    "universal_overlap_blocker": true,
+    "overlap_limit": 0.7,
+    "support_definition": "finite prediction > 0 (inherited literal support rule)",
+    "implication": "Every nonempty candidate dot set in the allowed domain has forward overlap 1.0 with this prior; therefore it cannot pass the 0.70 gate."
+  },
+  "GEMSDOE32__h33-2-b2-zeros.tif": {
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "witness_file": ".cache/src/g60/registry/rasters/GEMSDOE32__h33-2-b2-zeros.tif",
+    "witness_sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+    "positive_pixels": 37654,
+    "allowed_pixels": 5106385,
+    "uncovered_allowed_pixels": 4330826,
+    "covered_allowed_fraction": 0.15188024404740338,
+    "universal_overlap_blocker": false,
+    "overlap_limit": 0.7,
+    "support_definition": "finite prediction > 0 (inherited literal support rule)",
+    "implication": "No universal blockage established."
+  }
+}

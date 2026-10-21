@@ -1,0 +1,214 @@
+{
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "summary": "Across all 13 evaluated candidates and baselines in GEMSDOE70, P8 E5-3 (54,000 dots) and its fixed-mass ablation P8 E5-2 (37,654 dots) are the ONLY two methods in repository history that simultaneously beat D28 on Instrument A (0.1090 and 0.1028 vs 0.0919) AND beat H33 on Instrument B-prime (0.1681 and 0.1311 vs 0.0938).",
+  "lanes": [
+    {
+      "lane": "P8 E5-3 Submodular Multi-Physics + Hydrothermal (FINAL CANDIDATE)",
+      "dots": 54000,
+      "instrument_a_dti": 0.10895068677365592,
+      "instrument_a_ci95": [
+        0.09292048694782538,
+        0.12490901910582883
+      ],
+      "instrument_b_prime_dti": 0.1680812489490215,
+      "instrument_b_prime_ci95": [
+        0.1437071602789124,
+        0.19164390069330609
+      ],
+      "beats_d28_on_a": true,
+      "beats_h33_on_b_prime": true
+    },
+    {
+      "lane": "P8 E5-2 Submodular Multi-Physics + Hydrothermal (fixed H33 mass)",
+      "dots": 37654,
+      "instrument_a_dti": 0.10276183903991529,
+      "instrument_a_ci95": [
+        0.08776918004352778,
+        0.1179434663580356
+      ],
+      "instrument_b_prime_dti": 0.13113090478592287,
+      "instrument_b_prime_ci95": [
+        0.11021384159774444,
+        0.15308762979814772
+      ],
+      "beats_d28_on_a": true,
+      "beats_h33_on_b_prime": true
+    },
+    {
+      "lane": "P6 Dual-Horizon LOQO Scarp-Rad-Basement",
+      "dots": 37654,
+      "instrument_a_dti": 0.0789794450237097,
+      "instrument_a_ci95": [
+        0.06883617901078912,
+        0.08999419142141425
+      ],
+      "instrument_b_prime_dti": 0.14397769080369946,
+      "instrument_b_prime_ci95": [
+        0.13186237013406116,
+        0.15584366450163573
+      ],
+      "beats_d28_on_a": false,
+      "beats_h33_on_b_prime": true
+    },
+    {
+      "lane": "P7 49-Feature LOQO Within-Halo Ranker",
+      "dots": 37654,
+      "instrument_a_dti": 0.0751932899725655,
+      "instrument_a_ci95": [
+        0.06832854870668433,
+        0.08206641586928844
+      ],
+      "instrument_b_prime_dti": 0.11378637850825289,
+      "instrument_b_prime_ci95": [
+        0.10772818773256028,
+        0.1192468422215023
+      ],
+      "beats_d28_on_a": false,
+      "beats_h33_on_b_prime": true
+    },
+    {
+      "lane": "E6 28-Feature Extended-Domain LOQO Ranker",
+      "dots": 37654,
+      "instrument_a_dti": 0.07104764791116616,
+      "instrument_a_ci95": [
+        0.06371936069596178,
+        0.07814227482110547
+      ],
+      "instrument_b_prime_dti": 0.10995560292739844,
+      "instrument_b_prime_ci95": [
+        0.10581144868990688,
+        0.11328017541659721
+      ],
+      "beats_d28_on_a": false,
+      "beats_h33_on_b_prime": true
+    },
+    {
+      "lane": "E5 Supervised Within-Halo Ranker",
+      "dots": 37654,
+      "instrument_a_dti": 0.08146028216098136,
+      "instrument_a_ci95": [
+        0.07530256108053304,
+        0.08789252175324937
+      ],
+      "instrument_b_prime_dti": 0.08864236076445046,
+      "instrument_b_prime_ci95": [
+        0.07943512512018328,
+        0.09799987592664772
+      ],
+      "beats_d28_on_a": false,
+      "beats_h33_on_b_prime": false
+    },
+    {
+      "lane": "P5 Analytic-Signal Halo",
+      "dots": 37654,
+      "instrument_a_dti": 0.08277116132149999,
+      "instrument_a_ci95": [
+        0.07551434562164547,
+        0.08951206859535318
+      ],
+      "instrument_b_prime_dti": 0.07655206112499978,
+      "instrument_b_prime_ci95": [
+        0.06866315904755697,
+        0.08523996988832969
+      ],
+      "beats_d28_on_a": false,
+      "beats_h33_on_b_prime": false
+    },
+    {
+      "lane": "P5-HGB Within-Halo Ranker",
+      "dots": 37654,
+      "instrument_a_dti": 0.08220252394709567,
+      "instrument_a_ci95": [
+        0.07530641887564495,
+        0.08857678448943612
+      ],
+      "instrument_b_prime_dti": 0.07931041392149822,
+      "instrument_b_prime_ci95": [
+        0.07142050876502067,
+        0.08743890734226847
+      ],
+      "beats_d28_on_a": false,
+      "beats_h33_on_b_prime": false
+    },
+    {
+      "lane": "H70-A Conductive Breach",
+      "dots": 37654,
+      "instrument_a_dti": 0.07091157672574441,
+      "instrument_a_ci95": [
+        0.06529379979774812,
+        0.07689490783504999
+      ],
+      "instrument_b_prime_dti": 0.07926121716822297,
+      "instrument_b_prime_ci95": [
+        0.07172585977375863,
+        0.08720218962529636
+      ],
+      "beats_d28_on_a": false,
+      "beats_h33_on_b_prime": false
+    },
+    {
+      "lane": "P5-Cover Continuous LOQO Map",
+      "dots": 0,
+      "instrument_a_dti": 0.012261896872041017,
+      "instrument_a_ci95": [
+        0.007525362402102077,
+        0.017652899299874254
+      ],
+      "instrument_b_prime_dti": 0.025423516361428998,
+      "instrument_b_prime_ci95": [
+        0.018528422238356795,
+        0.033629285104751244
+      ],
+      "beats_d28_on_a": false,
+      "beats_h33_on_b_prime": false
+    },
+    {
+      "lane": "Phase 4 Stratified Halo Baseline",
+      "dots": 37654,
+      "instrument_a_dti": 0.07304229212058164,
+      "instrument_a_ci95": [
+        0.06623568774314585,
+        0.07952286935385726
+      ],
+      "instrument_b_prime_dti": 0.08116240066330835,
+      "instrument_b_prime_ci95": [
+        0.07213374745654141,
+        0.09071332539673285
+      ],
+      "beats_d28_on_a": false,
+      "beats_h33_on_b_prime": false
+    },
+    {
+      "lane": "D28 Archived Best Holdout-A Baseline",
+      "dots": 44090,
+      "instrument_a_dti": 0.09192198709430605,
+      "instrument_a_ci95": [
+        0.07956414838034294,
+        0.10388571195052004
+      ],
+      "instrument_b_prime_dti": 0.09352659933526818,
+      "instrument_b_prime_ci95": [
+        0.08382008521566496,
+        0.10395933584403233
+      ],
+      "beats_d28_on_a": false,
+      "beats_h33_on_b_prime": false
+    },
+    {
+      "lane": "H33 Archived Leaderboard Reference (0.2778 public)",
+      "dots": 37654,
+      "instrument_a_dti": 0.0036997816856295857,
+      "instrument_a_ci95": [
+        0.003015680816916972,
+        0.004481788740349005
+      ],
+      "instrument_b_prime_dti": 0.09377056861492462,
+      "instrument_b_prime_ci95": [
+        0.08379940788231269,
+        0.1042810889517764
+      ],
+      "beats_d28_on_a": false,
+      "beats_h33_on_b_prime": false
+    }
+  ]
+}

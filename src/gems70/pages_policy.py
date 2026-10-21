@@ -49,17 +49,17 @@ def check_source(root: Path) -> dict:
             'excluded_private_roots': sorted(private)}
 
 
-def check_output(site: Path, baseurl: str = '/GEMSDOE70',
-                 allowed_rasters: dict[str, str | None] | None = None) -> dict:
+def check_output(site: Path, baseurl: str = '/GEMSDOE70', *, allowed_artifacts=None) -> dict:
     """Check the built directory, including direct URLs never linked by a page."""
     import hashlib
     site = Path(site)
     if not site.is_dir() or site.is_symlink():
         raise ValueError('A real built site directory is required')
-    allowed = allowed_rasters or {}
+    import hashlib
+    allowed_artifacts = allowed_artifacts or {}
+    raster_count = 0
     paths = list(site.rglob('*'))
     violations = []
-    verified_rasters = 0
     for path in paths:
         rel = path.relative_to(site)
         rel_str = rel.as_posix()
@@ -72,16 +72,13 @@ def check_output(site: Path, baseurl: str = '/GEMSDOE70',
         theme_dir = rel_str in {'assets', 'assets/css'} and path.is_dir()
         if rel.parts[0] not in PUBLIC_ROOTS and not (theme_css or theme_dir):
             violations.append(f'{rel}: nonpublic root')
-        if path.is_file() and path.suffix.lower() in {'.tif', '.tiff', '.zip'}:
-            if rel_str not in allowed:
+        if path.suffix.lower() in {'.tif', '.tiff', '.zip'}:
+            expected = allowed_artifacts.get(rel.as_posix())
+            if (not expected or not path.is_file() or path.is_symlink()
+                    or hashlib.sha256(path.read_bytes()).hexdigest() != expected):
                 violations.append(f'{rel}: stopped-run raster/archive')
             else:
-                expected_sha = allowed[rel_str]
-                actual_sha = hashlib.sha256(path.read_bytes()).hexdigest()
-                if expected_sha and actual_sha != expected_sha:
-                    violations.append(f'{rel}: published hash mismatch')
-                else:
-                    verified_rasters += 1
+                raster_count += 1
     if violations:
         raise ValueError('Unsafe Pages build: ' + '; '.join(violations))
     # Check the deployed tree, not the checkout where excluded evidence still
@@ -95,17 +92,18 @@ def check_output(site: Path, baseurl: str = '/GEMSDOE70',
                 link = link[len(baseurl.rstrip('/')):]
             target = ((site / link.lstrip('/')) if link.startswith('/')
                       else (page.parent / link)).resolve()
-            if not target.is_relative_to(site.resolve()) or not target.exists():
+            exists = target.exists() or (
+                target.suffix.lower() == '.md' and target.with_suffix('.html').exists()
+            )
+            if not target.is_relative_to(site.resolve()) or not exists:
                 raise ValueError(f'Broken built-site link: {page.relative_to(site)} -> {link}')
     for page in ['index.html', 'docs/index.html', 'docs/executive-summary.html']:
         p = site / page
         if not p.is_file():
             raise ValueError('Missing Pages entry point: ' + page)
         text = p.read_text()
-        if ('DO NOT SUBMIT' not in text
-                and 'Do not submit this run.' not in text
-                and 'SUBMIT WEEKLY SLOT: RECOMMENDED' not in text):
+        if 'DO NOT SUBMIT' not in text and 'Do not submit this run.' not in text:
             raise ValueError('Missing negative banner: ' + page)
     return {'built_output_ok': True, 'files_checked': sum(p.is_file() for p in paths),
-            'raster_downloads': verified_rasters,
+            'raster_downloads': raster_count,
             'scope': 'Built-site publication only; not organizer acceptance or a scientific score.'}

@@ -1,0 +1,133 @@
+{
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "alpha": 0.2,
+  "beta": 0.8,
+  "triangular_radius_m": 300.0,
+  "pooled": true,
+  "scores": {
+    "candidate": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.1275884233909884,
+      "ci95": [
+        0.11029265811646333,
+        0.14683813395645118
+      ],
+      "withheld_positive_pixels": 74740,
+      "tpw": 8717.733193876926,
+      "fpw": 33957.22718030455,
+      "fnw": 66022.26680612312
+    },
+    "exp5_2_nms": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.11690454383801736,
+      "ci95": [
+        0.11246911670183778,
+        0.12106062385318474
+      ],
+      "withheld_positive_pixels": 74740,
+      "tpw": 7989.6434333944435,
+      "fpw": 34766.90457627342,
+      "fnw": 66750.35656660564
+    },
+    "exp5_1_struct": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.12556151337523466,
+      "ci95": [
+        0.1207209668185284,
+        0.13016169349905862
+      ],
+      "withheld_positive_pixels": 74740,
+      "tpw": 8591.630525927507,
+      "fpw": 34576.71338196325,
+      "fnw": 66148.36947407255
+    },
+    "random_control": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.06668431526035201,
+      "ci95": [
+        0.06277932781146195,
+        0.07028699201718513
+      ],
+      "withheld_positive_pixels": 74740,
+      "tpw": 4500.871228343959,
+      "fpw": 34015.13124475964,
+      "fnw": 70239.1287716561
+    },
+    "h33_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.09059897608840377,
+      "ci95": [
+        0.08234522402913841,
+        0.09969546803477931
+      ],
+      "withheld_positive_pixels": 74740,
+      "tpw": 6121.079807576225,
+      "fpw": 32730.674356370182,
+      "fnw": 68618.9201924238
+    }
+  },
+  "best_comparable_control": "exp5_1_struct",
+  "paired_differences": {
+    "exp5_2_nms": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.010683879552971023,
+      "ci95": [
+        -0.006508989704254154,
+        0.029506510868690227
+      ],
+      "withheld_positive_pixels": 74740
+    },
+    "exp5_1_struct": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.0020269100157537245,
+      "ci95": [
+        -0.015444257822846788,
+        0.019797034124561946
+      ],
+      "withheld_positive_pixels": 74740
+    },
+    "random_control": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.060904108130636375,
+      "ci95": [
+        0.04351128020671962,
+        0.08072870210782286
+      ],
+      "withheld_positive_pixels": 74740
+    },
+    "h33_reference": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": 0.03698944730258462,
+      "ci95": [
+        0.021170685285951354,
+        0.05421699806459966
+      ],
+      "withheld_positive_pixels": 74740
+    }
+  },
+  "bootstrap": {
+    "method": "paired physical spatial-cluster percentile",
+    "clusters": 159,
+    "draws": 1000,
+    "seed": 70520,
+    "confidence": 0.95,
+    "caveat": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+  },
+  "implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "instrument": "B: SGMC off-catalogue unrestricted proxy"
+}

@@ -92,12 +92,3 @@ That would be a discretionary exemption. The mutual test is representation-blind
 every raster, uses no density threshold, and still catches copying (both directions high). It also
 does not retroactively bless the family's own priority: H33 is a pruned subset of H27, so
 subset-relations were never intended to count as duplication.
-
----
-
-# Session verification & upstream patch bundle (2026-10-20, `arena/4584df76-gemsdoe70`)
-
-1. **Unified diff against `buffedlizard55-lab/60GEMSDOE @ 32024716f218d06a94e01464157392119c03cb15`:** exported cleanly to `evidence/upstream_patch.diff`.
-2. **Upstream regression test suite execution on clean `60GEMSDOE` clone:** `190 passed, 8 skipped, 0 failed` (`evidence/upstream_suite_verification.json`).
-3. **Full 59-raster corrected mutual-overlap re-audit of parallel `E2` (`evidence/e2/corrected_full_uniqueness.json`):** `unique_under_corrected_mutual_gate = true`, `duplicate_count = 0`, `worst_mutual_overlap = 0.2876 <= 0.70`, `worst_spearman_full_footprint = 0.0156 <= 0.90`. `E2` remains strictly **DO NOT SUBMIT (`submit_ok = false`, `verdict = "negative"`)** due to its `0.0494` vs `D28` `0.0919` holdout regression and `0.0029` `Instrument B'` collapse.
-

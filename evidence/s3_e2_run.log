@@ -1,0 +1,174 @@
+23:21:02 features (4989581, 59) (4989581, 7)
+23:21:03 quota total 37654
+23:22:07 LOQO 0 0.7459
+23:23:06 LOQO 1 0.6994
+23:24:13 LOQO 2 0.8143
+23:25:10 LOQO 3 0.7349
+23:25:12 arms {'candidate': 37654, 'random_stratified': 37654, 'random_control': 37654, 'h33_reference': 37654, 's3_e1_candidate': 37654}
+23:25:28 B prime {'candidate': 0.1154, 'random_stratified': 0.108, 'random_control': 0.0774, 'h33_reference': 0.0938, 's3_e1_candidate': 0.4614}
+23:28:10 production {'n': 37654, 'steep_top_quartile': 0.19405640834971052, 'd_quantiles_5_25_50_75_95': [3.605551242828369, 9.0, 20.2237491607666, 43.13930892944336, 81.83519744873047]}
+23:30:17 A fold 0 shortfalls 0 0
+23:32:34 A fold 1 shortfalls 0 0
+23:34:50 A fold 2 shortfalls 0 0
+23:36:59 A fold 3 shortfalls 0 0
+23:38:11 uniqueness mutual 0.26522222222222225 rho 0.019494432444291027 surface rho 0.0753097299014113 E1 sibling overlap 0.7978700802039624
+23:38:12 DONE negative {'b_prime_beats_h33': False, 'b_prime_beats_random_stratified': False, 'a_ge_h33': True, 'steep_fraction_matched': True, 'unique': True, 'validator': True}
+{
+  "verdict": "negative",
+  "gates": {
+    "b_prime_beats_h33": false,
+    "b_prime_beats_random_stratified": false,
+    "a_ge_h33": true,
+    "steep_fraction_matched": true,
+    "unique": true,
+    "validator": true
+  },
+  "instrument_b_prime_proxy": {
+    "candidate": {
+      "dti": 0.11542868879986497,
+      "ci95": [
+        0.09096804478733513,
+        0.13929489396290856
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "random_stratified": {
+      "dti": 0.10796449266400739,
+      "ci95": [
+        0.10242309820362691,
+        0.11354270315726864
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "random_control": {
+      "dti": 0.07739031021699651,
+      "ci95": [
+        0.07379830093107205,
+        0.08086210220319481
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "h33_reference": {
+      "dti": 0.09377056861492462,
+      "ci95": [
+        0.08375251373533825,
+        0.104028711800872
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "s3_e1_candidate": {
+      "dti": 0.4613585261081098,
+      "ci95": [
+        0.43976936768700753,
+        0.4797726525460116
+      ],
+      "withheld_positive_pixels": 59937
+    }
+  },
+  "instrument_a_holdout": {
+    "candidate": {
+      "dti": 0.06494297498574911,
+      "ci95": [
+        0.05109618289784243,
+        0.08011653840895261
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "random_stratified": {
+      "dti": 0.07645549584796744,
+      "ci95": [
+        0.06832450012647132,
+        0.08454765858922283
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "h33_reference": {
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.003036453331747875,
+        0.004429583992821134
+      ],
+      "withheld_positive_pixels": 11321
+    }
+  },
+  "marginals": {
+    "candidate": {
+      "n": 37654,
+      "steep_top_quartile": 0.19405640834971052,
+      "d_quantiles_5_25_50_75_95": [
+        3.1622776985168457,
+        8.9442720413208,
+        20.2237491607666,
+        43.046485900878906,
+        83.44279365539549
+      ]
+    },
+    "random_stratified": {
+      "n": 37654,
+      "steep_top_quartile": 0.19405640834971052,
+      "d_quantiles_5_25_50_75_95": [
+        3.605551242828369,
+        9.0,
+        20.248456954956055,
+        43.13930892944336,
+        83.48652648925781
+      ]
+    },
+    "random_control": {
+      "n": 37654,
+      "steep_top_quartile": 0.2519519838529771,
+      "d_quantiles_5_25_50_75_95": [
+        4.242640495300293,
+        12.165525436401367,
+        25.0,
+        45.880279541015625,
+        83.74365997314453
+      ]
+    },
+    "h33_reference": {
+      "n": 37654,
+      "steep_top_quartile": 0.1938439475221756,
+      "d_quantiles_5_25_50_75_95": [
+        3.0,
+        8.062257766723633,
+        19.646883010864258,
+        42.44997024536133,
+        81.88406372070312
+      ]
+    },
+    "s3_e1_candidate": {
+      "n": 37654,
+      "steep_top_quartile": 0.6294683167790939,
+      "d_quantiles_5_25_50_75_95": [
+        3.1622776985168457,
+        9.848857879638672,
+        21.21320343017578,
+        39.31920623779297,
+        72.89718627929688
+      ]
+    },
+    "production": {
+      "n": 37654,
+      "steep_top_quartile": 0.19405640834971052,
+      "d_quantiles_5_25_50_75_95": [
+        3.605551242828369,
+        9.0,
+        20.2237491607666,
+        43.13930892944336,
+        81.83519744873047
+      ]
+    }
+  },
+  "correlation_overlap_vs_registry": {
+    "surface_worst_spearman": 0.0753097299014113,
+    "final_rasters_checked": 62,
+    "final_worst_mutual_overlap": 0.26522222222222225,
+    "final_worst_mutual_submission": "gems32-bayesopt-dilation-scarp-d28-20261004-nan.tif",
+    "final_worst_forward_overlap": 1.0,
+    "final_worst_spearman": 0.019494432444291027,
+    "sibling_s3_e1_mutual_overlap": 0.7978700802039624,
+    "duplicate": false,
+    "inventory_scope": "62 single-band rasters in 60GEMSDOE registry/rasters; not exhaustive"
+  },
+  "raster_sha256": "41099fcd8cc1e81605383183266d829e8504964044435b876d8d4f5d6d14a2fc"
+}
