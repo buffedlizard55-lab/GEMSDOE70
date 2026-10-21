@@ -101,15 +101,17 @@ def test_fresh_review_binds_every_archived_final_file_and_does_not_claim_univers
         assert digest(ROOT / f['artifact']) == f['raster_sha256']
     p8_oof38k = json.loads((ROOT / 'evidence/p8_dual_submod300/literal_lane.json').read_text())['files']
     p8_sub = json.loads((ROOT / 'evidence/p8_submodular/literal_lane.json').read_text())['files']
+    p9_sub = json.loads((ROOT / 'evidence/p9_piedmont_submod/literal_lane.json').read_text())['files']
     p8_paths = {f['artifact'] for f in p8_oof38k.values()} | {f['artifact'] for f in p8_sub.values()}
-    for f in (*p8_oof38k.values(), *p8_sub.values()):
+    p9_paths = {f['artifact'] for f in p9_sub.values()}
+    for f in (*p8_oof38k.values(), *p8_sub.values(), *p9_sub.values()):
         assert f['literal_lane_status']['stop_required'] is True
         assert f['literal_lane_status']['protocol_unique'] is False
         assert digest(ROOT / f['artifact']) == f['raster_sha256']
     assert expected - frozen == ({'docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif',
                                   'docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif',
                                   'docs/downloads/gems70-p5-loqo-halo-37654-20261020.tif'}
-                                 | s3_paths | s2_paths | p8_paths)
+                                 | s3_paths | s2_paths | p8_paths | p9_paths)
     for row in review['archived_artifacts']:
         assert digest(ROOT / row['artifact']) == row['raster_sha256']
         assert literal_lane_status(row['shared_measurements'])['stop_required']

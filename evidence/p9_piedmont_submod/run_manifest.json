@@ -1,0 +1,19 @@
+{
+  "started_utc": "2026-10-21T01:12:42.538192+00:00",
+  "phase": "phase5-multiphysics-submodular",
+  "experiment_count_planned": 3,
+  "maximum_experiments": 3,
+  "maximum_seconds": 7200.0,
+  "preregistration_sha256": "2e9cce5fc24b9d9b76b86240fa5ee9680bb2c597117f1cf4d1314eb17398912a",
+  "source_sha256": {
+    "src/gems70/phase5_features.py": "235e46704628fa3dc3ff45dde4182f188ba0b92bc35d9082d2f88012e43dfa76",
+    "src/gems70/phase5_emit.py": "6e7a530669f6d6ce51fa7719824feef05b6138c59ebe7e9d40decaeb712ea0e0",
+    "scripts/run_experiment_phase5.py": "5f8c6ab920942d8774783d8eafec7dc2f3232920db9a602cbb6aebec7e0893c6"
+  },
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  }
+}

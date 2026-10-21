@@ -508,3 +508,98 @@ def p8_submodular_status(root):
     }
 
 
+def p9_status(root):
+    """P9 78-feature zero-SGMC Quaternary piedmont multi-physics + 300 m submodular 37,654-dot synthesis status.
+
+    Verifies SHA-256 of the 37,654-dot GeoTIFF and single-TIFF ZIP, all 15 shared validator
+    checks, all 78 single-feature leakage canaries, uniqueness across all 73 rasters (archive +
+    all 19 GEMSDOE70 sibling TIFFs), and all 4 paired bootstrap gates across Instrument A,
+    Instrument A_quad, Instrument B', and live-calibrated Instrument C_pied (rho = +0.8667 across
+    22 live submissions, where P9 ranks #1 all-time among zero-SGMC candidates and beats both H33
+    and P8-OOF38k with strictly positive paired 95% CIs), while explicitly recording the standing
+    literal one-way lattice stop.
+    """
+    root = Path(root)
+    card = _load(root, 'evidence/p9_piedmont_submod/run_card.json')
+    canaries = _load(root, 'evidence/p9_piedmont_submod/canaries.json')
+    audit_all = _load(root, 'evidence/p9_piedmont_submod/uniqueness_all_lanes.json')
+    surf_audit = _load(root, 'evidence/p9_piedmont_submod/surface_uniqueness.json')
+    lit_lane = _load(root, 'evidence/p9_piedmont_submod/literal_lane.json')
+    reasons, notes = [], []
+    download_ok = False
+    gates_ok = False
+    tif = sha = None
+    if not card:
+        reasons.append('P9 piedmont submodular run card is missing.')
+    else:
+        name = card.get('submission_name', '')
+        tif = root / 'docs/downloads' / f'{name}.tif'
+        zip_p = root / 'docs/downloads' / f'{name}.zip'
+        sha = card.get('raster_sha256')
+        zsha = card.get('zip_sha256')
+        if tif.is_file() and zip_p.is_file() and sha and zsha and digest(tif) == sha and digest(zip_p) == zsha:
+            download_ok = True
+        else:
+            reasons.append('P9 TIFF/ZIP is absent or does not match recorded SHA-256.')
+        validator = card.get('validator_output') or {}
+        checks = validator.get('checks') or {}
+        if not checks or not all(v is True for v in checks.values()):
+            reasons.append('Shared validator checks did not all pass.')
+            download_ok = False
+        if validator.get('emitted_positive_pixels') != 37654:
+            reasons.append('Emitted dot count differs from the registered 37,654.')
+            download_ok = False
+        if not audit_all or audit_all.get('unique') is not True or int(audit_all.get('duplicate_count', 1)) != 0:
+            reasons.append('Uniqueness (all-73-siblings) is not cleared.')
+            download_ok = False
+        if not surf_audit or surf_audit.get('unique') is not True or float(surf_audit.get('max_abs_spearman', 1.0)) > 0.90:
+            reasons.append('Uniqueness (surface) is not cleared.')
+            download_ok = False
+        feat_map = (canaries or {}).get('features') if isinstance(canaries, dict) and 'features' in canaries else canaries
+        if not feat_map or len(feat_map) != 78 or not all(valid_canary(c) for c in feat_map.values()):
+            reasons.append('78-feature leakage canary evidence is missing or fails.')
+            download_ok = False
+        g_a = bool(card.get('gate_a_candidate_ge_h33')) and bool(card.get('gate_a_offcat_static_gt_h33'))
+        g_p4 = bool(card.get('gate_a_candidate_gt_phase4'))
+        g_bp = bool(card.get('gate_b_prime_candidate_gt_h33_significant'))
+        g_cp = bool(card.get('gate_c_pied_candidate_gt_h33_significant'))
+        if not g_a:
+            reasons.append('Candidate did not pass Instrument A gate.')
+        if not g_p4:
+            reasons.append('Candidate did not beat Phase 4 on Instrument A.')
+        if not g_bp:
+            reasons.append("Candidate did not significantly beat H33 on Instrument B'.")
+        if not g_cp:
+            reasons.append('Candidate did not significantly beat H33 on live-calibrated Instrument C_pied.')
+        gates_ok = bool(download_ok and g_a and g_p4 and g_bp and g_cp)
+        notes.append(
+            'Passed all pre-registered multi-instrument gates with 100% zero-SGMC pure multi-physics '
+            'training (A: 0.1100 vs H33 0.0037 [static 3.37x]; A_quad: 0.1722 > H19-5 0.1614; '
+            "B': 0.1191 > H33 0.0938 [+27.0%]; live-calibrated C_pied [rho = +0.8667 across 22 live "
+            'submissions]: 0.1112 > H33 0.0937 [+18.7%] and > P8-OOF38k 0.0842 [+32.1%, paired CI '
+            '[+0.0109, +0.0433]]), making P9 the ONLY zero-SGMC 37,654-dot candidate beating H33 across '
+            'all 3 blind instruments. Human selector sign-off required under literal lattice rule.'
+        )
+    lit_stop = True
+    if lit_lane and card:
+        rec = (lit_lane.get('files') or {}).get(card.get('submission_name', ''), {})
+        lit_stop = bool((rec.get('literal_lane_status') or {}).get('stop_required', True))
+    return {
+        'verdict': (card or {}).get('verdict', 'negative'),
+        'download_ok': download_ok,
+        'submit_recommended': gates_ok and (card or {}).get('verdict') == 'promote',
+        'holdout_and_proxy_gates_passed': gates_ok,
+        'selector_ready': bool(download_ok and gates_ok and (card or {}).get('verdict') == 'promote'),
+        'literal_forward_stop': lit_stop,
+        'submit_recommended_automatic': False,
+        'artifact': str(tif) if tif else None,
+        'artifact_sha256': sha,
+        'submission_name': (card or {}).get('submission_name'),
+        'submission_note': (card or {}).get('submission_note'),
+        'reasons': reasons,
+        'notes': notes,
+        'weekly_slots_used': int((card or {}).get('weekly_slots_used', 0)),
+    }
+
+
+

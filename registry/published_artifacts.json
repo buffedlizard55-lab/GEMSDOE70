@@ -274,7 +274,7 @@
       "verdict": "promote",
       "download_ok": true,
       "submit_recommended": false,
-      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 — #1 on B-prime; selector sign-off required under literal lattice rule)"
+      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 \u2014 #1 on B-prime; selector sign-off required under literal lattice rule)"
     },
     {
       "path": "docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.zip",
@@ -284,7 +284,7 @@
       "verdict": "promote",
       "download_ok": true,
       "submit_recommended": false,
-      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 — #1 on B-prime; selector sign-off required under literal lattice rule)"
+      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 \u2014 #1 on B-prime; selector sign-off required under literal lattice rule)"
     },
     {
       "path": "docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.json",
@@ -294,7 +294,7 @@
       "verdict": "promote",
       "download_ok": true,
       "submit_recommended": false,
-      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 — #1 on B-prime; selector sign-off required under literal lattice rule)"
+      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 \u2014 #1 on B-prime; selector sign-off required under literal lattice rule)"
     },
     {
       "path": "docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif",
@@ -321,6 +321,18 @@
       "sha256": "b925ed515b7a0db9d660d198ae13b1acfafd68f61c9c7a507d871a5339dfc403",
       "bytes": 3556,
       "role": "p8_dual_submod300_oof_receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.tif",
+      "sha256": "f19a78d511f9d822b47ad4d9ce56cf2ccfa415e3d1ca49709a342158de6e7a84",
+      "bytes": 138252,
+      "role": "P9 zero-SGMC multi-physics + 300m submodular 37,654-dot GeoTIFF (#1 all-time zero-SGMC on live-calibrated C_pied = 0.1112; beats H33 across all 3 blind instruments A/B'/C_pied)"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.zip",
+      "sha256": "dcea88235dda10383dd73a9718ba366f88089413e586ea3401135bdec05959c3",
+      "bytes": 101848,
+      "role": "P9 single-TIFF ZIP archive matching gems70-p5-multiphysics-submodular-37654-20261020.tif"
     }
   ]
 }

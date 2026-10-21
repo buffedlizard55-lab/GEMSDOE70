@@ -1,6 +1,26 @@
 # GEMSDOE70 — geothermal fault research
 
-## ★ HERO CANDIDATE (`P8-OOF38k`, 37,654-Dot Mass-Matched All-Time Instrument-A #1, 2026-10-20): `gems70-p5-dual-submod300-oof38k-20261020`
+## ★ HERO CANDIDATE `P9-PiedmontSubmod` (Zero-SGMC 3-Instrument H33-Beater & All-Time #1 on Live-Calibrated `C_pied`, PR #48): `gems70-p5-multiphysics-submodular-37654-20261020`
+
+| Gate / Decision | Status | Verified Details |
+| :--- | :--- | :--- |
+| **1. OK to Download (`download_ok`)** | **`TRUE` — READY** | [⬇ Download `.tif` (`138,252 B`)](docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.tif) · [⬇ Download 1-TIFF `.zip` (`101,848 B`)](docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.zip) · [JSON Run Card](evidence/p9_piedmont_submod/run_card.json) · [Full P9 Evidence & Figures Page](docs/p9.html). `15/15` shared validator checks PASS (`EPSG:32611`, `3730×3292`, `float32`, exact `{0.0, 1.0}`, `37,654` off-catalogue dots, `0` non-finite — cannot trigger `"Predicted values must be in range [0, 1]"`). |
+| **2. Recommended for Submission (`verdict` / `submit_recommended`)** | **`PROMOTE` (`TRUE` — pending human selector sign-off*)** | **100% Zero-SGMC pure multi-physics training & inference (`78/78` leakage canaries PASS, `max AUC = 0.7709 <= 0.90`)**; **`unique = true` across ALL `73` archive + sibling rasters** (`max mutual = 0.4771 <= 0.70`, `vs H33 = 0.4066`). **ONLY zero-SGMC `37,654`-dot candidate in `GEMSDOE70` that beats `H33` with strictly positive paired 95% CIs across ALL THREE blind out-of-fold instruments simultaneously:** **Live-Calibrated `Instrument C_pied` (`ρ = +0.8667, p = 1.82e-07` across 22 live submissions) = `0.1112` (`+18.7%` vs `H33 = 0.0937`, paired `Δ +0.0176` `[0.0001370290734368537, 0.03459337701525984]`; `+32.1%` vs `P8-OOF38k = 0.0842`, paired `Δ +0.0270` `[0.010854307917716672, 0.04332711737461808]`)** · **`Instrument B'` = `0.1191`** (`+27.0%` vs `H33`) · **`Instrument A` (`HOLDOUT-DTI`) = `0.1100`** (static off-cat `3.37× H33`; `A_quad = 0.1722 > H19-5 = 0.1614`). |
+| **Unique Submission Name** | `gems70-p5-multiphysics-submodular-37654-20261020` | SHA-256: `f19a78d511f9d822b47ad4d9ce56cf2ccfa415e3d1ca49709a342158de6e7a84` |
+| **Submission Note (`97/140` chars)** | `P5 LOQO 72-feat multi-physics M_Q+M_S + 300m submodular DTI allocation, 37654 binary dots off-cat` | Upload **either** `.tif` **or** `.zip` once after selector sign-off (never upload both). |
+
+### ★ Multi-Champion Pareto Selector Comparison Across All 20 Rasters in `GEMSDOE70` (`weekly_slots_used = 0`)
+
+| Candidate Role | Artifact (`docs/downloads/`) | Dots | `Instrument A` (`HOLDOUT-DTI`) | `Instrument B'` (`SGMC \ cat`) | `Instrument C_pied` (`ρ = +0.8667` vs 22 Live) | Pairwise Mutual vs `P9` |
+| :--- | :--- | ---: | ---: | ---: | ---: | ---: |
+| **1. `P9-PiedmontSubmod` (Zero-SGMC All-Rounder & `#1 C_pied`)** | [`gems70-p5-multiphysics-submodular-37654-20261020.tif`](docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.tif) | `37,654` | **`0.1100`** | **`0.1191`** (`+27.0%`) | **`0.1112` (`#1`, `+18.7%`)** | — |
+| **2. `P8-OOF38k` (`#1 Instrument A` Dual-Head)** | [`gems70-p5-dual-submod300-oof38k-20261020.tif`](docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif) | `37,654` | **`0.1113` (`#1`)** | **`0.1311`** (`+39.8%`) | `0.0842` (`-10.1%` vs `H33`) | `0.4771` (`unique`) |
+| **3. `P8-Submodular-54k` (`#1 Instrument B'` High-Mass)** | [`gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif`](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif) | `54,000` | `0.1090` | **`0.1681` (`#1`)** | `0.1001` (`+6.8%` vs `H33`) | `0.4304` (`unique`) |
+| **Incumbent Benchmark (`GEMSDOE32` `H33`, `0.2778` user-supplied)** | `gemsdoe32-h33-h33-2-b2-...-zeros.tif` | `37,654` | `0.0037` | `0.0938` | `0.0937` | `0.4066` (`unique`) |
+
+---
+
+## ★ CO-HERO CANDIDATE (`P8-OOF38k`, 37,654-Dot Mass-Matched All-Time Instrument-A #1, 2026-10-20): `gems70-p5-dual-submod300-oof38k-20261020`
 
 | Gate / Decision | Status | Verified Details |
 | :--- | :--- | :--- |

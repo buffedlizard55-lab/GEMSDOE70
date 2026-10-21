@@ -5,7 +5,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
-from gems70.release import p5_status, p8_status
+from gems70.release import p5_status, p8_status, p9_status
 
 
 def main():
@@ -13,12 +13,22 @@ def main():
     card = json.loads((ROOT / 'evidence/review/run_card.json').read_text())
     p5 = json.loads((ROOT / 'evidence/p5/run_card.json').read_text())
     p8 = json.loads((ROOT / 'evidence/p8_dual_submod300/run_card.json').read_text())
+    p9 = json.loads((ROOT / 'evidence/p9_piedmont_submod/run_card.json').read_text())
     state = p5_status(ROOT)
     state8 = p8_status(ROOT)
+    state9 = p9_status(ROOT)
     if not state['download_ok_for_review'] or state['submit_recommended']:
         raise ValueError('P5 review file is absent, modified or not a negative research artifact')
     if not state8['download_ok'] or not state8['holdout_and_proxy_gates_passed']:
         raise ValueError('P8 promoted hero candidate failed verification')
+    if not state9['download_ok'] or not state9['holdout_and_proxy_gates_passed']:
+        raise ValueError('P9 promoted hero candidate failed verification')
+    a9 = p9['instrument_a_holdout']['candidate']
+    aq9 = p9['instrument_a_quad_holdout']['candidate']
+    bp9 = p9['instrument_b_prime_proxy']['candidate']
+    cp9 = p9['instrument_c_pied_proxy']['candidate']
+    dcp9_h33 = p9['paired_c_pied_vs_h33']
+    dcp9_p8 = p9['cross_lane_head_to_head']['paired_vs_p8_oof38k_on_C_pied']
     a8 = p8['instrument_a_holdout']['candidate']
     bp8 = p8['instrument_b_prime_proxy']['candidate']
     bdp8 = p8['instrument_b_double_prime_d6_proxy']['p8_dual_submod300']
@@ -28,7 +38,27 @@ def main():
     db = p5['holdout_dti']['paired_vs_h33']
     head = f'''# GEMSDOE70 — geothermal fault research
 
-## ★ HERO CANDIDATE (`P8-OOF38k`, 37,654-Dot Mass-Matched All-Time Instrument-A #1, 2026-10-20): `gems70-p5-dual-submod300-oof38k-20261020`
+## ★ HERO CANDIDATE `P9-PiedmontSubmod` (Zero-SGMC 3-Instrument H33-Beater & All-Time #1 on Live-Calibrated `C_pied`, PR #48): `{p9['submission_name']}`
+
+| Gate / Decision | Status | Verified Details |
+| :--- | :--- | :--- |
+| **1. OK to Download (`download_ok`)** | **`TRUE` — READY** | [⬇ Download `.tif` (`138,252 B`)](docs/downloads/{p9['submission_name']}.tif) · [⬇ Download 1-TIFF `.zip` (`101,848 B`)](docs/downloads/{p9['submission_name']}.zip) · [JSON Run Card](evidence/p9_piedmont_submod/run_card.json) · [Full P9 Evidence & Figures Page](docs/p9.html). `15/15` shared validator checks PASS (`EPSG:32611`, `3730×3292`, `float32`, exact `{{0.0, 1.0}}`, `37,654` off-catalogue dots, `0` non-finite — cannot trigger `"Predicted values must be in range [0, 1]"`). |
+| **2. Recommended for Submission (`verdict` / `submit_recommended`)** | **`PROMOTE` (`TRUE` — pending human selector sign-off*)** | **100% Zero-SGMC pure multi-physics training & inference (`78/78` leakage canaries PASS, `max AUC = {p9['feature_canary_summary']['max_symmetric_auc']:.4f} <= 0.90`)**; **`unique = true` across ALL `{p9['correlation_overlap_vs_registry']['total_rasters_checked']}` archive + sibling rasters** (`max mutual = {p9['correlation_overlap_vs_registry']['final_dots_worst_mutual_overlap_3px']:.4f} <= 0.70`, `vs H33 = 0.4066`). **ONLY zero-SGMC `37,654`-dot candidate in `GEMSDOE70` that beats `H33` with strictly positive paired 95% CIs across ALL THREE blind out-of-fold instruments simultaneously:** **Live-Calibrated `Instrument C_pied` (`ρ = +0.8667, p = 1.82e-07` across 22 live submissions) = `{cp9['dti']:.4f}` (`+18.7%` vs `H33 = 0.0937`, paired `Δ {dcp9_h33['delta']:+.4f}` `{dcp9_h33['ci95']}`; `+32.1%` vs `P8-OOF38k = 0.0842`, paired `Δ {dcp9_p8['delta']:+.4f}` `{dcp9_p8['ci95']}`)** · **`Instrument B'` = `{bp9['dti']:.4f}`** (`+27.0%` vs `H33`) · **`Instrument A` (`HOLDOUT-DTI`) = `{a9['dti']:.4f}`** (static off-cat `3.37× H33`; `A_quad = {aq9['dti']:.4f} > H19-5 = 0.1614`). |
+| **Unique Submission Name** | `{p9['submission_name']}` | SHA-256: `{p9['raster_sha256']}` |
+| **Submission Note (`{p9['note_chars']}/140` chars)** | `{p9['submission_note']}` | Upload **either** `.tif` **or** `.zip` once after selector sign-off (never upload both). |
+
+### ★ Multi-Champion Pareto Selector Comparison Across All 20 Rasters in `GEMSDOE70` (`weekly_slots_used = 0`)
+
+| Candidate Role | Artifact (`docs/downloads/`) | Dots | `Instrument A` (`HOLDOUT-DTI`) | `Instrument B'` (`SGMC \\ cat`) | `Instrument C_pied` (`ρ = +0.8667` vs 22 Live) | Pairwise Mutual vs `P9` |
+| :--- | :--- | ---: | ---: | ---: | ---: | ---: |
+| **1. `P9-PiedmontSubmod` (Zero-SGMC All-Rounder & `#1 C_pied`)** | [`{p9['submission_name']}.tif`](docs/downloads/{p9['submission_name']}.tif) | `37,654` | **`{a9['dti']:.4f}`** | **`{bp9['dti']:.4f}`** (`+27.0%`) | **`{cp9['dti']:.4f}` (`#1`, `+18.7%`)** | — |
+| **2. `P8-OOF38k` (`#1 Instrument A` Dual-Head)** | [`{p8['submission_name']}.tif`](docs/downloads/{p8['submission_name']}.tif) | `37,654` | **`{a8['dti']:.4f}` (`#1`)** | **`{bp8['dti']:.4f}`** (`+39.8%`) | `0.0842` (`-10.1%` vs `H33`) | `0.4771` (`unique`) |
+| **3. `P8-Submodular-54k` (`#1 Instrument B'` High-Mass)** | [`gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif`](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif) | `54,000` | `0.1090` | **`0.1681` (`#1`)** | `0.1001` (`+6.8%` vs `H33`) | `0.4304` (`unique`) |
+| **Incumbent Benchmark (`GEMSDOE32` `H33`, `0.2778` user-supplied)** | `gemsdoe32-h33-h33-2-b2-...-zeros.tif` | `37,654` | `0.0037` | `0.0938` | `0.0937` | `0.4066` (`unique`) |
+
+---
+
+## ★ CO-HERO CANDIDATE (`P8-OOF38k`, 37,654-Dot Mass-Matched All-Time Instrument-A #1, 2026-10-20): `gems70-p5-dual-submod300-oof38k-20261020`
 
 | Gate / Decision | Status | Verified Details |
 | :--- | :--- | :--- |

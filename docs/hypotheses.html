@@ -4,7 +4,7 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="p8.html">★ P8-OOF38k (#1 A = 0.1113 · 37.7k)</a><a href="p8-submodular.html">P8 Submodular (54k · B′ = 0.1681)</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="p9.html">★ P9-Piedmont (#1 Live-Cal C_pied = 0.1112 · Zero-SGMC)</a><a href="p8.html">★ P8-OOF38k (#1 A = 0.1113 · 37.7k)</a><a href="p8-submodular.html">P8 Submodular (54k · B′ = 0.1681)</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
 <aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
 <strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
 are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
@@ -621,7 +621,17 @@ are preserved; no threshold, mass or domain changed. Disclosed in the run card a
 <td><strong>All 74 single-feature leakage canaries clean (<code>max(AUC, 1-AUC) = 0.6066 &lt;= 0.90</code>)</strong></td>
 </tr>
 </tbody>
-</table></main>
+</table>
+<hr />
+<h2>P9 Lane Addendum — Five Zero-SGMC Multi-Physics + Exact 300 m Submodular Hypotheses (<code>docs/preregistration-p9-piedmont-submod.md</code>)</h2>
+<p>Preregistered in <a href="preregistration-p9-piedmont-submod.md"><code>docs/preregistration-p9-piedmont-submod.md</code></a> and verified in <a href="downloads/p9_run_card.json"><code>evidence/p9_piedmont_submod/run_card.json</code></a> (<code>78/78</code> single-feature leakage canaries PASS, <code>max symmetric AUC = 0.7709 &lt;= 0.9000</code>, <strong>zero <code>SGMC</code> features or targets used anywhere in training or inference</strong>):</p>
+<ol>
+<li><strong><code>H-P9-1</code> — Potential-Field Structural Gradient &amp; Tilt Alignment (<code>tmi_hg</code>, <code>tmi_vg</code>, analytic signal <code>hypot(tmi_hg, tmi_vg)</code>, TMI tilt angle <code>atan2(tmi_vg, hypot)</code>, multi-scale CBA/isostatic gravity horizontal gradient &amp; curvature):</strong> Detects concealed basement horst/graben edges beneath non-magnetic basin fill where surface scarps have eroded.</li>
+<li><strong><code>H-P9-2</code> — Depth-to-Basement Growth-Fault Throw &amp; Basin-Margin Inflection (<code>depth_to_basement</code> multi-scale DoG <code>sigma = {2, 5, 10, 20} px</code> &amp; steepness inflection within piedmont fans):</strong> Captures blind range-front step-overs and buried accommodation zones across <code>depth &gt;= 250 m</code> basins.</li>
+<li><strong><code>H-P9-3</code> — Subtle Alluvial Micro-Scarp &amp; Multi-Scale Topographic Breaklines (<code>1 m</code> LiDAR scarp density + <code>10 m</code> 3DEP directional slope/relief breaklines normalized within low-relief piedmont fans):</strong> Separates subtle Holocene piedmont fault scarps from steep pre-Quaternary bedrock canyon walls.</li>
+<li><strong><code>H-P9-4</code> — Magnetotelluric Conductive Clay-Cap / Brine Upflow Coupling &amp; GeoDAWN K/Th Hydrothermal Alteration (<code>MT</code> shallow/mid/deep log-conductivity contrasts + <code>K/eTh</code> potassium enrichment):</strong> Targets permeable fault conduits carrying geothermal fluids rather than sealed Mesozoic bedrock structures.</li>
+<li><strong><code>H-P9-5</code> — Dual Leave-One-Quadrant-Out (<code>0.58 M_Q + 0.42 M_S</code>, zero <code>d_cat</code> in <code>M_Q</code>) + Fold-Safe Crack-Tip / Relay Mechanics + Exact 300 m Submodular Expected-DTI Allocation (<code>37,654</code> dots):</strong> Eliminates distance-to-catalogue halo memorization (<code>M_Q</code> uses zero catalogue geometry) and replaces fixed greedy NMS with exact lazy greedy maximization of marginal 300 m expected Tversky recall <code>sum_{u in B_3(x)} p_u * prod_{y in S cap B_3(u)} (1 - q_y)</code>, raising <code>Instrument A</code> from <code>0.0806 -&gt; 0.1100</code> (<code>+36.4%</code>) and <code>Instrument C_pied</code> from <code>0.0759 -&gt; 0.1112</code> (<code>+46.6%</code>) at identical <code>37,654</code>-dot mass.</li>
+</ol></main>
 <footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
 <a href="downloads/p5_run_card.json">New P5 negative card</a> ·
 <a href="downloads/phase4_run_card.json">Concurrent analytic-halo run card</a> ·

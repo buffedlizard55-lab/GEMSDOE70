@@ -1,0 +1,16 @@
+{
+  "evidence_class": "TEST-VERIFICATION",
+  "verified_at_utc": "2026-10-20T00:00:00Z",
+  "upstream_repo": "buffedlizard55-lab/60GEMSDOE",
+  "upstream_head_commit": "b99591eede63c6d45c8a896255b8cd34824fa00b",
+  "template_pin_commit": "32024716f218d06a94e01464157392119c03cb15",
+  "patched_file": "src/gems57/uniqueness.py",
+  "patched_sha256": "93726c6a7773e1743813fb63e4e8fe70e784efbce2564268e22cec90eb6e8349",
+  "patch_file": "evidence/upstream_patch.diff",
+  "suite_command": "PYTHONPATH=/tmp/60GEMSDOE/src:/tmp/py60extra .venv/bin/python -m pytest -q /tmp/60GEMSDOE/tests",
+  "passed": 190,
+  "skipped": 8,
+  "failed": 0,
+  "errors": 0,
+  "push_constraint": "Arena session branch policy permits git push only to buffedlizard55-lab/GEMSDOE70 branch arena/4584df76-gemsdoe70; patch is git-apply verified cleanly on buffedlizard55-lab/60GEMSDOE HEAD b99591eede63c6d45c8a896255b8cd34824fa00b with 190 passed, 0 failed."
+}

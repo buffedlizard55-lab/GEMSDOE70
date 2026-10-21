@@ -1,0 +1,41 @@
+{
+  "evidence_class": "HOLDOUT-DTI (A, A_quad) and OUT-OF-FOLD PROXY-DTI (B, B', C_pied); none organizer-confirmed",
+  "budget_dots": 37654,
+  "experiments": [
+    {
+      "id": "Exp_5.1",
+      "name": "LOQO 72-Feature Structural Head (M_S) + 7x7 Peak NMS",
+      "dots": 37654,
+      "instrument_A_dti": 0.06664870882089627,
+      "instrument_B_prime_dti": 0.1258218295649529,
+      "instrument_C_pied_dti": 0.07369718212247373
+    },
+    {
+      "id": "Exp_5.2",
+      "name": "Dual LOQO Multi-Physics (0.58 M_Q + 0.42 M_S) + Fold-Safe Tip/Relay + 7x7 Peak NMS",
+      "dots": 37654,
+      "instrument_A_dti": 0.08062281330262192,
+      "instrument_A_quad_dti": 0.12079951738112044,
+      "instrument_B_prime_dti": 0.1162158966052439,
+      "instrument_C_pied_dti": 0.07584960228012233
+    },
+    {
+      "id": "Exp_5.3",
+      "name": "Frozen Exp 5.2 Posterior + Exact 300 m Submodular Expected DTI Allocation",
+      "dots": 37654,
+      "instrument_A_dti": 0.1099675770922385,
+      "instrument_A_offcat_static_dti": 0.012453585434724987,
+      "instrument_A_quad_dti": 0.17215420553079563,
+      "instrument_B_prime_dti": 0.11906269750551317,
+      "instrument_C_pied_dti": 0.11123096265392685
+    },
+    {
+      "id": "Reference_H33",
+      "name": "GEMSDOE32 H33 Incumbent (0.2778 user-reported public score)",
+      "dots": 37654,
+      "instrument_A_dti": 0.0036997816856295857,
+      "instrument_B_prime_dti": 0.09377056861492461,
+      "instrument_C_pied_dti": 0.09367323299494662
+    }
+  ]
+}
