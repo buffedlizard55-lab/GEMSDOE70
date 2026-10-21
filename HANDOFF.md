@@ -298,3 +298,14 @@ Spent seeds for this lane: 702/703 — do not retune. Zero slots used.
   - SGMC vs QFaults buffer calibration (`1..20 px`, `evidence/p6_dualhorizon/sgmc_buffer_audit.json`) and E2 62-raster mutual re-audit (`evidence/p6_dualhorizon/e2_mutual_uniqueness.json`) recorded.
   - Held fail-closed because paired Instrument A vs P4 CI straddles zero, SGMC B′ sits at `13.42°` median slope vs Quaternary catalogue `5.55°`, and literal forward overlap vs the dense lattice is `1.00` (worst mutual overlap `0.4230 <= 0.70`, worst Spearman `0.0300 <= 0.90`). No weekly slot used.
 
+
+---
+
+## Latest Synthesis Lane: P8 74-Feature Dual-Regime Multi-Physics + Hydrothermal + Submodular DW-Tversky (`arena/6db3f66c-gemsdoe70`)
+
+- **Artifact:** `docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif` (`173,097` bytes, SHA-256 `00e8e1cb6ea34dbe2f6dc0ba3b7cc0d8d18ae2b0aaec11552bfa3ef11f1ea9f2`) + `.zip` + `.json`
+- **Code & Reproducibility:** `src/gems70/method_p8_submodular.py`, `scripts/run_experiment_p8_submodular.py`, `scripts/verify_p8_all_lanes.py`, `scripts/build_figures_p8.py`, `tests/test_p8_submodular.py`, receipts in `evidence/p8_submodular/`
+- **Scores (`gems57-pooled-hide-v2`, 1,000 spatial-block bootstrap draws):**
+  - **Instrument A (`HOLDOUT-DTI`, `11,321` withheld mapped pixels):** **`0.1090 [0.0929, 0.1249]`** (`#1` across all 13 lanes; paired Δ vs `D28`: `+0.0170 [+0.0063, +0.0278]`, vs `P4`: `+0.0359 [+0.0208, +0.0505]`, vs `H33`: `+0.1053 [+0.0890, +0.1210]`; fixed `37,654`-dot ablation `P8 E5-2`: `0.1028 [0.0878, 0.1179]`)
+  - **Instrument B′ (`OOF-PROXY-DTI`, `59,937` off-catalogue SGMC pixels at `d >= 3 px`):** **`0.1681 [0.1437, 0.1916]`** (`#1` across all 13 lanes; paired Δ vs `H33`: `+0.0743 [+0.0522, +0.0954]`, `+79.3%`; fixed `37,654`-dot ablation `P8 E5-2`: `0.1311 [0.1102, 0.1531]`, `+39.8%`)
+- **Uniqueness (`78` total rasters = `62` archive + `16` sibling GEMSDOE70 TIFFs):** `0` duplicates under mutual 3-px overlap (`worst_mutual = 0.4609 <= 0.70`, `worst_sibling_forward = 0.4063 <= 0.70`, vs `H33` pixel Jaccard `0.0173` / mutual `0.3832`). Held for human selector sign-off solely due to un-amended literal forward overlap (`1.00`) against dense `206,895`-dot archived lattice `calib_r13lattice_00904.tif` (`weekly_slots_used = 0`).

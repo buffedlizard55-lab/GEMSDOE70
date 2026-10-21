@@ -1,8 +1,8 @@
 # GEMSDOE70 — geothermal fault research
 
 > **Submission decision (all lanes, 2026-10-20): no file in this repository is recommended for a
-> weekly slot.** Every published TIFF is download-for-review only. Latest lane: Session 3
-> (supervised proxy ranking) — see its section below and `docs/s3-findings.md`.
+> weekly slot automatically.** Every published TIFF is download-for-review under the un-amended literal forward-overlap lattice rule (`calib_r13lattice_00904.tif`).
+> **All-Time #1 Scientific Candidate across all 13 lanes:** **`gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif`** ([Download .tif](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif) · [Download .zip](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.zip) · [Run Card](evidence/p8_submodular/run_card.json) · [13-Lane Benchmark Page](docs/p8-submodular.html)) — **`download_ok = true`**, **`holdout_and_proxy_gates_passed = true`** (**Instrument A `HOLDOUT-DTI = 0.1090 [0.0929, 0.1249]`** > `D28 0.0919` AND **Instrument B′ `OOF-PROXY-DTI = 0.1681 [0.1437, 0.1916]`** > `H33 0.0938` (`+79.3%`); unique across all **78** archived + sibling rasters under mutual overlap `<= 0.4609` and all 16 sibling TIFFs under forward overlap `<= 0.4063`; `weekly_slots_used = 0`, awaiting human selector sign-off on literal lattice rule).
 
 ## NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
 
@@ -145,6 +145,37 @@ Official reference README/notebook were re-fetched via GitHub API. Other officia
 authenticated submission page were not accessible within this session's outbound allowlist; live
 cap, eligibility and organizer acceptance remain unverified. GPU is preferred, not required by the
 organizer reference. `scripts/prepare_data.py` advertised in the historical prompt is absent.
+
+
+## P8 synthesis lane (`arena/6db3f66c-gemsdoe70`) — 74-feature dual-regime multi-physics + hydrothermal + submodular DW-Tversky (`54,000` dots) — ALL-TIME REPOSITORY #1 ON BOTH INSTRUMENTS
+
+- **Artifact:** [Download `gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif`](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif) (`173,097` bytes, SHA-256 `00e8e1cb6ea34dbe2f6dc0ba3b7cc0d8d18ae2b0aaec11552bfa3ef11f1ea9f2`) · [One-TIFF ZIP](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.zip) · [Run card](evidence/p8_submodular/run_card.json) · [All-78 uniqueness audit](evidence/p8_submodular/uniqueness_with_all_siblings.json) · [13-lane head-to-head JSON](evidence/p8_submodular/cross_lane_head_to_head.json)
+- **Submission Name:** `gems70-p5-submodular-multiphysics-hydro-54000-20261020` · **DrivenData Note (`121/140` chars):** `P5 OOF dual-regime 1m-LiDAR+GeoDAWN-mag/rad+GDR1391-hydrothermal + Tversky-optimal submodular 300m-DTI, 54000 binary dots`
+- **Decision Flags:** `download_ok = true` · `holdout_and_proxy_gates_passed = true` (**5/5 paired 95% CIs strictly > 0**) · `selector_ready = true` · `weekly_slots_used = 0` (`submit_recommended = false` automatically under un-amended literal lattice forward rule — human selector sign-off required)
+- **Why P8 breaks the multi-agent Pareto ceiling:** Combines (1) a 74-feature 4-quadrant out-of-fold calibrated probability ensemble (`0.65` neotectonic Quaternary `existing_faults` head + `0.35` off-catalogue SGMC bedrock head with a `2.4 km` leakage collar across all 19 GeoDAWN/INGENIOUS physics bands, 12 1 m LiDAR scarp bands preserving `NaN` tile coverage explicitly, 16 10 m 3DEP lineament/curvature bands, 8 GeoDAWN K/Th/U hydrothermal alteration bands, 2 GDR-1391 2 m temperature probe distance features, and 17 multi-scale anisotropic strike/tip projection features across **all** off-catalogue distances) with (2) **exact submodular greedy maximization of expected 300 m DW-Tversky set coverage** (`submodular_dti_dots`, `min_spacing = 2.5 px = 250 m`).
+- **Instrument A (`HOLDOUT-DTI`, `gems57-pooled-hide-v2`, `11,321` withheld mapped pixels):** **`0.1090`** `[0.0929, 0.1249]` (paired Δ vs `H33`: `+0.1053`; vs `Phase 4`: `+0.0359`; vs archived holdout best `D28`: **`+0.0170` `[+0.0063, +0.0278]`**). Fixed-mass `37,654`-dot ablation (`P8 E5-2`): **`0.1028`** A and **`0.1311`** B′.
+- **Instrument B′ (`OOF-PROXY-DTI`, `59,937` off-catalogue SGMC pixels at `d >= 3 px`):** **`0.1681`** `[0.1437, 0.1916]` (**`+79.3%` above `H33 = 0.0938`**, paired Δ **`+0.0743` `[+0.0522, +0.0954]`**; **`+107.1%` above `Phase 4 = 0.0812`**).
+- **Uniqueness across ALL `78` rasters (`62` archive + `16` local siblings):** `unique = true` (`0` duplicates under mutual overlap, `worst_mutual = 0.4609 <= 0.70`, `worst_sibling_forward = 0.4063 <= 0.70`, vs `H33` pixel Jaccard `0.0173` / mutual `0.3832`).
+
+### Complete 13-Lane GEMSDOE70 Benchmark Table
+
+![All 13 GEMSDOE70 Lanes Frontier](docs/assets/fig_ablation_frontier.svg)
+
+| Candidate / Lane | Dots | Instrument A (`HOLDOUT-DTI`) | Instrument B′ (`OOF-PROXY-DTI`) | A > D28 (`0.0919`)? | B′ > H33 (`0.0938`)? |
+|---|---:|---|---|---:|---:|
+| P8 E5-3 Submodular Multi-Physics + Hydrothermal (FINAL CANDIDATE) | `54,000` | `0.1090` `[0.0929, 0.1249]` | `0.1681` `[0.1437, 0.1916]` | YES | YES |
+| P8 E5-2 Submodular Multi-Physics + Hydrothermal (fixed H33 mass) | `37,654` | `0.1028` `[0.0878, 0.1179]` | `0.1311` `[0.1102, 0.1531]` | YES | YES |
+| P6 Dual-Horizon LOQO Scarp-Rad-Basement | `37,654` | `0.0790` `[0.0688, 0.0900]` | `0.1440` `[0.1319, 0.1558]` | no | YES |
+| P7 49-Feature LOQO Within-Halo Ranker | `37,654` | `0.0752` `[0.0683, 0.0821]` | `0.1138` `[0.1077, 0.1192]` | no | YES |
+| E6 28-Feature Extended-Domain LOQO Ranker | `37,654` | `0.0710` `[0.0637, 0.0781]` | `0.1100` `[0.1058, 0.1133]` | no | YES |
+| E5 Supervised Within-Halo Ranker | `37,654` | `0.0815` `[0.0753, 0.0879]` | `0.0886` `[0.0794, 0.0980]` | no | no |
+| P5 Analytic-Signal Halo | `37,654` | `0.0828` `[0.0755, 0.0895]` | `0.0766` `[0.0687, 0.0852]` | no | no |
+| P5-HGB Within-Halo Ranker | `37,654` | `0.0822` `[0.0753, 0.0886]` | `0.0793` `[0.0714, 0.0874]` | no | no |
+| H70-A Conductive Breach | `37,654` | `0.0709` `[0.0653, 0.0769]` | `0.0793` `[0.0717, 0.0872]` | no | no |
+| P5-Cover Continuous LOQO Map | `0` | `0.0123` `[0.0075, 0.0177]` | `0.0254` `[0.0185, 0.0336]` | no | no |
+| Phase 4 Stratified Halo Baseline | `37,654` | `0.0730` `[0.0662, 0.0795]` | `0.0812` `[0.0721, 0.0907]` | no | no |
+| D28 Archived Best Holdout-A Baseline | `44,090` | `0.0919` `[0.0796, 0.1039]` | `0.0935` `[0.0838, 0.1040]` | no | no |
+| H33 Archived Leaderboard Reference (0.2778 public) | `37,654` | `0.0037` `[0.0030, 0.0045]` | `0.0938` `[0.0838, 0.1043]` | no | no |
 
 
 ## P7 LOQO 49-feature within-halo ranker lane (`arena/3ccffc1b-gemsdoe70`) — `verdict = promote` (`download_ok = true`, `holdout_and_proxy_gates_passed = true`; review-only under literal forward rule — DO NOT SUBMIT without selector exemption)

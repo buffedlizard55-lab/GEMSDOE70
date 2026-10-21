@@ -265,6 +265,36 @@
       "sha256": "915fa941e37372b0bd3e8547d4c73ad4f07d892ee35a2dd2280cb0b8c632e4b6",
       "bytes": 3484,
       "role": "p7_loqo_within_halo_ranker_receipt"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif",
+      "sha256": "00e8e1cb6ea34dbe2f6dc0ba3b7cc0d8d18ae2b0aaec11552bfa3ef11f1ea9f2",
+      "bytes": 173097,
+      "role": "p8_submodular_multiphysics_hydro_tif",
+      "verdict": "promote",
+      "download_ok": true,
+      "submit_recommended": false,
+      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 \u2014 #1 across all lanes; selector sign-off required under literal lattice rule)"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.zip",
+      "sha256": "43babecdbc51721aa6cc1cd9cc7f5e4cf912edc03a75a97daf7f8983ad318cb7",
+      "bytes": 139280,
+      "role": "p8_submodular_multiphysics_hydro_zip",
+      "verdict": "promote",
+      "download_ok": true,
+      "submit_recommended": false,
+      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 \u2014 #1 across all lanes; selector sign-off required under literal lattice rule)"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.json",
+      "sha256": "2f4b7be763ecb7988da3d8147975ea6128979ec39dd4ee873ca21477e0b22767",
+      "bytes": 3542,
+      "role": "p8_submodular_multiphysics_hydro_receipt",
+      "verdict": "promote",
+      "download_ok": true,
+      "submit_recommended": false,
+      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 \u2014 #1 across all lanes; selector sign-off required under literal lattice rule)"
     }
   ]
 }
