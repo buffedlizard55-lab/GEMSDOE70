@@ -1,3 +1,42 @@
+# Handoff — 2026-10-20 (Lane P8 Hero Candidate, branch `arena/c7049280-gemsdoe70`)
+
+## State after Lane P8 (`p8_dual_submod300`) — `verdict = promote` (`download_ok = true`, `weekly_slots_used = 0`)
+
+- **Promoted Hero Candidate (`docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.{tif,zip,json}`)**:
+  - `.tif`: `143,907` bytes · SHA-256 `d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8`
+  - `.zip`: `109,203` bytes · SHA-256 `fc6eec02fd78ab61df918d9020c406f0ac321ad748c83bdda72734f3b2cbb5df`
+  - `.json` writer receipt: `3,556` bytes · SHA-256 `b925ed515b7a0db9d660d198ae13b1acfafd68f61c9c7a507d871a5339dfc403`
+  - Unique submission name: `gems70-p5-dual-submod300-oof38k-20261020`
+  - Submission note (`130 / 140` chars): `P8 dual-pop 4f-OOF HGB (Quat+SGMC>=300m, 41 localized multi-sensor feats) + exact 300m submod cover; 37654 binary off-cat dots.`
+- **Why P8 breaks both prior ceilings simultaneously (`evidence/p8_dual_submod300/run_card.json`)**:
+  - Prior lanes either truncated predictions to `d_cat <= 32 px` (`P4`, `E5`, `P5-HGB`, `P7`) — missing `34.0%` of `H33` across blind basins like Beowawe (`61.7 px`) — or trained purely on steep pre-Quaternary bedrock faults (`S3 = 0.0473`, `P6 = 0.0790`), losing active Basin-and-Range alluvial scarps on Instrument A.
+  - `P8` fuses **two** 100% catalogue-free 38-feature 4-fold OOF physical `HistGradientBoostingClassifier` experts (`0.55 M_neo` on Quaternary faults + `0.25 M_bed` on pre-2022 `SGMC d_cat >= 3 px`) + multi-scale `100 m / 10 m 3DEP / 1 m LiDAR` strike-coherent ridge (`0.20 r_unsup`), per-partition quantile calibration (`rank01_domain`), and **exact unblurred `300 m` lazy-greedy submodular max-cover** across all `5,101,859` off-catalogue pixels.
+  - **Instrument A (`HOLDOUT-DTI`, `gems57-pooled-hide-v2`, `K = 11,321`)**: **`0.11129` (`95% CI [0.09492, 0.13161]`)** — `#1` in `GEMSDOE70` (`+21.1%` vs `D28 = 0.09192`, `+23.1%` vs fair `H33 = 0.09042`, `+48.0%` vs `P7 = 0.07519`, `+52.4%` vs `P4 = 0.07304`).
+  - **Instrument B′ (`PROXY-DTI`, `d_cat >= 3 px`, `K = 59,937`)**: **`0.13109` (`95% CI [0.11566, 0.14499]`)** — `+39.8%` vs `H33 = 0.09377`, `+61.5%` vs `P4 = 0.08116`, `+15.2%` vs `P7 = 0.11379`, and `+6.1%` vs blurred greedy `thin = 2.8 px` on the identical surface (`0.12353`).
+  - **Instrument B″ (`PROXY-DTI`, `d_cat >= 6 px`, `K = 52,767`)**: **`0.11897`** vs `P7 = 0.09997` (`paired Δ = +0.01900`, `95% CI [+0.00562, +0.03212]`).
+  - **Uniqueness (`78` rasters = `62` archive + `16` local)**: `unique = true` (`0` mutual duplicates; `worst_mutual = 0.5629 <= 0.70`; surface `|ρ| <= 0.1763 <= 0.90`; literal one-way forward vs synthetic 206,895-dot lattice `calib_r13lattice_00904.tif` = `1.0000` and vs `GEMSDOE49__gate_ortho_w0.25-40k.tif` = `0.7028` disclosed for human selector sign-off).
+
+## Reproduce Lane P8 (CPU; strict 3/3 budget documented in `docs/preregistration-p8-dual-submod300.md`)
+
+```bash
+python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
+.venv/bin/python scripts/restore_data.py && .venv/bin/python scripts/fetch_data.py
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
+.venv/bin/python scripts/run_p8_audits.py
+# Re-audit existing bytes across all 78 rasters & cross-lane B'/B'' without refitting:
+.venv/bin/python scripts/audit_p8_against_all_lanes.py
+.venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+.venv/bin/python scripts/audit_pages.py && .venv/bin/python -m pytest -q
+```
+
+## Next session
+
+1. Human selector step: inspect `evidence/p8_dual_submod300/run_card.json` & `docs/p8.html`, verify live DrivenData weekly slot balance (`<= 3/week`), confirm selector exemption of synthetic dense lattice `calib_r13lattice_00904.tif`, upload **either** `docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif` **or** `.zip` once, and record the returned portal receipt as `ORGANIZER-CONFIRMED`.
+2. Open upstream PR applying `evidence/p8_dual_submod300/upstream_uniqueness_patch.diff` to `buffedlizard55-lab/60GEMSDOE` (`190 passed, 8 skipped, 0 failed` verified).
+3. If a further scientific cycle runs with more compute/data, fit multi-scale 2D patch U-Net / ConvNeXt OOF spatial context on top of the 38 localized physical channels while keeping exact `300 m` submodular max-cover and strict 18-score LOO live-proxy calibration.
+
+---
+
 # Handoff — 2026-10-20 (session 3, branch arena/a0382202-gemsdoe70)
 
 Read README.md, PROJECT_BRIEF.md, AGENTS.md, this file, `docs/s3-findings.md` and

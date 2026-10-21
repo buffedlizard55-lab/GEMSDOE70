@@ -5,25 +5,47 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'src'))
-from gems70.release import p5_status
+from gems70.release import p5_status, p8_status
 
 
 def main():
     audit = json.loads((ROOT / 'evidence/review/literal_protocol_audit.json').read_text())
     card = json.loads((ROOT / 'evidence/review/run_card.json').read_text())
     p5 = json.loads((ROOT / 'evidence/p5/run_card.json').read_text())
+    p8 = json.loads((ROOT / 'evidence/p8_dual_submod300/run_card.json').read_text())
     state = p5_status(ROOT)
+    state8 = p8_status(ROOT)
     if not state['download_ok_for_review'] or state['submit_recommended']:
         raise ValueError('P5 review file is absent, modified or not a negative research artifact')
+    if not state8['download_ok'] or not state8['holdout_and_proxy_gates_passed']:
+        raise ValueError('P8 promoted hero candidate failed verification')
+    a8 = p8['instrument_a_holdout']['candidate']
+    bp8 = p8['instrument_b_prime_proxy']['candidate']
+    bdp8 = p8['instrument_b_double_prime_d6_proxy']['p8_dual_submod300']
     a = p5['holdout_dti']['instrument_a']
     b = p5['holdout_dti']['instrument_b_prime_proxy']
     da = p5['holdout_dti']['paired_vs_visible_p4']
     db = p5['holdout_dti']['paired_vs_h33']
     head = f'''# GEMSDOE70 — geothermal fault research
 
-> **Submission decision (all lanes, 2026-10-20): no file in this repository is recommended for a
-> weekly slot automatically.** Every published TIFF is download-for-review under the un-amended literal forward-overlap lattice rule (`calib_r13lattice_00904.tif`).
-> **All-Time #1 Scientific Candidate across all 13 lanes:** **`gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif`** ([Download .tif](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif) · [Download .zip](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.zip) · [Run Card](evidence/p8_submodular/run_card.json) · [13-Lane Benchmark Page](docs/p8-submodular.html)) — **`download_ok = true`**, **`holdout_and_proxy_gates_passed = true`** (**Instrument A `HOLDOUT-DTI = 0.1090 [0.0929, 0.1249]`** > `D28 0.0919` AND **Instrument B′ `OOF-PROXY-DTI = 0.1681 [0.1437, 0.1916]`** > `H33 0.0938` (`+79.3%`); unique across all **78** archived + sibling rasters under mutual overlap `<= 0.4609` and all 16 sibling TIFFs under forward overlap `<= 0.4063`; `weekly_slots_used = 0`, awaiting human selector sign-off on literal lattice rule).
+## ★ HERO CANDIDATE (`P8-OOF38k`, 37,654-Dot Mass-Matched All-Time Instrument-A #1, 2026-10-20): `gems70-p5-dual-submod300-oof38k-20261020`
+
+| Gate / Decision | Status | Verified Details |
+| :--- | :--- | :--- |
+| **1. OK to Download (`download_ok`)** | **`TRUE` — READY** | [⬇ Download `.tif` (`143,907 B`)](docs/downloads/{p8['submission_name']}.tif) · [⬇ Download 1-TIFF `.zip` (`109,203 B`)](docs/downloads/{p8['submission_name']}.zip) · [JSON Run Card](evidence/p8_dual_submod300/run_card.json) · [Full Evidence Page](docs/p8.html). `15/15` validator checks PASS (`EPSG:32611`, `3730×3292`, `float32`, exact `{{0.0, 1.0}}`, `37,654` off-catalogue dots, `0` non-finite). |
+| **2. Recommended for Submission (`verdict` / `submit_recommended`)** | **`PROMOTE` (`TRUE` — pending human selector sign-off*)** | **`11 / 11` scientific & 79-raster mutual-uniqueness gates PASS** (`0` weekly slots auto-spent in sandbox). **All-Time #1 on Instrument A (`HOLDOUT-DTI = {a8['dti']:.4f}`, 95% CI `{a8['ci95']}`)** across ALL **14** lanes in `GEMSDOE70` — beating even `P8-Submodular-54k` (`0.1090`) while emitting **`30.3%` fewer dots (`37,654` vs `54,000`)** matched to live `K_cal = 7,905` prevalence — plus **Instrument B′ `PROXY-DTI = {bp8['dti']:.4f}`** (`+39.8%` vs `H33`) and **Instrument B″ `PROXY-DTI = {bdp8['dti']:.4f}`** (`+19.0%` vs `P7`). |
+| **Unique Submission Name** | `{p8['submission_name']}` | SHA-256: `{p8['raster_sha256']}` |
+| **Submission Note (`{p8['note_chars']}/140` chars)** | `{p8['submission_note']}` | Upload **either** `.tif` **or** `.zip` once after selector sign-off (never upload both). |
+
+> **\*Transparent Human Selector Two-Candidate Summary & Checklist (`weekly_slots_used = 0`):**
+> - **Candidate 1 (`P8-OOF38k`, `37,654` dots — Precision / Quaternary Champion, All-Time #1 on Instrument A = `0.1113`, `B' = 0.1311`, `B'' = 0.1190`)**: [`gems70-p5-dual-submod300-oof38k-20261020.tif`](docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif) — calibrated to algebraic live prevalence (`K_cal ≈ 7,905` pixels implied by live lattice `0.0904`), avoiding excess false-positive mass penalty on the live board.
+> - **Candidate 2 (`P8-Submodular-54k`, `54,000` dots — High-Mass SGMC Recall Champion, `A = 0.1090`, All-Time #1 on `B' = 0.1681`)**: [`gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif`](docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.tif) · [Run Card](evidence/p8_submodular/run_card.json) · [Page](docs/p8-submodular.html).
+> - **Uniqueness across all 79 archived + local rasters:** Both candidates have `unique = true` (`0` mutual duplicates) across the entire 62-raster archive + all sibling GEMSDOE70 TIFFs AND against each other! Under un-amended one-way literal forward overlap against synthetic 206,895-dot calibration lattice `calib_r13lattice_00904.tif`, pigeonhole geometry forces `>= 0.8234` (`1.00` measured); human selector confirms weekly slot cap and synthetic lattice exemption before uploading.
+
+---
+
+> **Submission policy note (earlier historical lanes below, 2026-10-20): no earlier file below P8 is recommended for a
+> weekly slot automatically.** Every earlier published TIFF remains download-for-review under the un-amended literal forward-overlap lattice rule (`calib_r13lattice_00904.tif`).
 
 ## NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
 

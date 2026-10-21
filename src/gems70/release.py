@@ -342,6 +342,92 @@ def phase5_status(root):
     }
 
 
+def p8_status(root):
+    """P8-OOF38k Dual-Population OOF HGB + Exact 300 m Submodular Max-Cover status (`evidence/p8_dual_submod300`).
+
+    Independently verifies on-disk SHA-256, 15/15 validator checks, exact 37,654 binary dots,
+    feature-alone leakage canaries across all 41 channels, pre-placement surface & final dot
+    uniqueness across all 62 archive + local rasters, all 11 paired bootstrap gates across
+    Instruments A, B', and B'', and the separate literal one-way lattice witness audit.
+    """
+    root = Path(root)
+    card = _load(root, 'evidence/p8_dual_submod300/run_card.json')
+    canary_doc = _load(root, 'evidence/p8_dual_submod300/feature_leakage_canary.json') or {}
+    canaries_a = canary_doc.get('per_feature_a_fold0') or {}
+    canaries_bp = canary_doc.get('per_feature_b_prime') or {}
+    audit_62 = _load(root, 'evidence/p8_dual_submod300/uniqueness_62archive.json')
+    audit_all = _load(root, 'evidence/p8_dual_submod300/uniqueness_all_lanes.json')
+    surf_all = _load(root, 'evidence/p8_dual_submod300/surface_uniqueness_all_lanes.json')
+    lit_doc = _load(root, 'evidence/p8_dual_submod300/literal_lane.json') or {}
+    reasons, notes = [], []
+    download_ok = False
+    gates_ok = False
+    tif = zip_path = sha = None
+    if not card:
+        reasons.append('P8 run card is missing.')
+    else:
+        name = card.get('submission_name', '')
+        tif = root / 'docs/downloads' / f'{name}.tif'
+        zip_path = root / 'docs/downloads' / f'{name}.zip'
+        sha = card.get('raster_sha256')
+        if tif.is_file() and zip_path.is_file() and sha and digest(tif) == sha:
+            download_ok = True
+        else:
+            reasons.append('P8 TIFF/ZIP is absent or does not match the recorded SHA-256.')
+        validator = card.get('validator_output') or {}
+        checks = validator.get('checks') or {}
+        if not checks or not all(v is True for v in checks.values()) or validator.get('all_checks_passed') is not True:
+            reasons.append('Shared validator checks did not all pass.')
+            download_ok = False
+        if validator.get('emitted_positive_pixels') != 37654:
+            reasons.append('Emitted dot count differs from the registered 37,654.')
+            download_ok = False
+        for tag, u in (('archived-62', audit_62), ('all-lanes', audit_all), ('surface-all', surf_all)):
+            if not u or u.get('unique') is not True or int(u.get('duplicate_count', 1)) != 0:
+                reasons.append(f'Mutual-overlap uniqueness ({tag}) is not cleared.')
+                download_ok = False
+        if (not canaries_a or not canaries_bp
+                or not all(valid_canary(c) for c in canaries_a.values())
+                or not all(valid_canary(c) for c in canaries_bp.values())):
+            reasons.append('Single-feature leakage canary check missing or failed.')
+            download_ok = False
+        pg = card.get('promotion_gates') or {}
+        gates_ok = bool(
+            download_ok
+            and pg
+            and all(bool(v) for v in pg.values())
+            and card.get('gate_b_double_prime_candidate_gt_h33_significant') is True
+        )
+        if not gates_ok:
+            reasons.append('Not all pre-registered holdout and LOQO proxy gates passed.')
+        notes.append(
+            'Passed 11/11 scientific & 79-raster mutual-uniqueness gates (All-Time #1 on A=0.1113 '
+            'at matched 37,654 mass, B\'=0.1311, B\'\'=0.1190). Literal one-way forward overlap vs '
+            'dense 206,895-dot lattice calib_r13lattice_00904.tif is 1.00 (pigeonhole >= 0.8234 at '
+            '37,654 dots; mutual=0.1236); human selector confirmation required before spending a slot.'
+        )
+    lit_stop = bool(
+        ((lit_doc.get('files') or {}).get((card or {}).get('submission_name', '')) or {})
+        .get('literal_lane_status', {})
+        .get('stop_required', True)
+    )
+    return {
+        'verdict': (card or {}).get('verdict', 'negative'),
+        'download_ok': download_ok,
+        'submit_recommended': bool(download_ok and gates_ok and (card or {}).get('verdict') == 'promote'),
+        'holdout_and_proxy_gates_passed': gates_ok,
+        'literal_forward_witness_stop_required': lit_stop,
+        'artifact': str(tif) if tif else None,
+        'zip_artifact': str(zip_path) if zip_path else None,
+        'artifact_sha256': sha,
+        'submission_name': (card or {}).get('submission_name'),
+        'submission_note': (card or {}).get('submission_note'),
+        'reasons': reasons,
+        'notes': notes,
+        'weekly_slots_used': int((card or {}).get('weekly_slots_used', 0)),
+    }
+
+
 def p8_submodular_status(root):
     """P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis status.
 

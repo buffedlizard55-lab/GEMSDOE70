@@ -274,7 +274,7 @@
       "verdict": "promote",
       "download_ok": true,
       "submit_recommended": false,
-      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 \u2014 #1 across all lanes; selector sign-off required under literal lattice rule)"
+      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 — #1 on B-prime; selector sign-off required under literal lattice rule)"
     },
     {
       "path": "docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.zip",
@@ -284,7 +284,7 @@
       "verdict": "promote",
       "download_ok": true,
       "submit_recommended": false,
-      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 \u2014 #1 across all lanes; selector sign-off required under literal lattice rule)"
+      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 — #1 on B-prime; selector sign-off required under literal lattice rule)"
     },
     {
       "path": "docs/downloads/gems70-p5-submodular-multiphysics-hydro-54000-20261020.json",
@@ -294,7 +294,33 @@
       "verdict": "promote",
       "download_ok": true,
       "submit_recommended": false,
-      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 \u2014 #1 across all lanes; selector sign-off required under literal lattice rule)"
+      "note": "P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis (54,000 dots; A=0.1090, B-prime=0.1681 — #1 on B-prime; selector sign-off required under literal lattice rule)"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.tif",
+      "sha256": "d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8",
+      "bytes": 143907,
+      "role": "p8_dual_submod300_oof_tif",
+      "verdict": "promote",
+      "download_ok": true,
+      "submit_recommended": true,
+      "note": "P8-OOF38k dual-population 4-fold OOF HGB + exact 300m submodular max-cover (exact 37,654 mass-matched dots); All-Time #1 on Instrument A (0.1113 > 0.1090) + B'=0.1311 + B''=0.1190; card evidence/p8_dual_submod300/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.zip",
+      "sha256": "fc6eec02fd78ab61df918d9020c406f0ac321ad748c83bdda72734f3b2cbb5df",
+      "bytes": 109203,
+      "role": "p8_dual_submod300_oof_zip",
+      "verdict": "promote",
+      "download_ok": true,
+      "submit_recommended": true,
+      "note": "P8-OOF38k one-TIFF competition ZIP matching SHA-256 d0e41ce921afcf3af33b7d86d75f6a258653dfbb4d050e864babe643245f0ea8"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-dual-submod300-oof38k-20261020.json",
+      "sha256": "b925ed515b7a0db9d660d198ae13b1acfafd68f61c9c7a507d871a5339dfc403",
+      "bytes": 3556,
+      "role": "p8_dual_submod300_oof_receipt"
     }
   ]
 }

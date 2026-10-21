@@ -88,6 +88,16 @@ block at every mass. The archived mutual-rule receipts have not been rewritten t
 - No authenticated submission-page score receipt exists. H33's reported 0.2778 is user-supplied;
   historical public leaderboard captures are not receipts for our own submissions. Conflicting
   leader values in the brief are not current verified targets.
+
+## Lane P8 (`arena/c7049280-gemsdoe70`) — Two new spatial-learning pitfalls discovered & fixed (`IR-P5-1`, `IR-P5-2`)
+
+In executing the 3-experiment progression (`evidence/p8_dual_submod300/`), fold diagnostics uncovered and resolved two general pitfalls for geospatial fault detection:
+
+1. **`IR-P5-1` (Hide-mask / survey-completeness covariate shift from visible-catalogue features)**:
+   In Run 1 (`evidence/p8_dual_submod300/run1_v50_run_card.json`), supplying visible-catalogue proximity features (`vis_dist_capped`, `vis_tip_lobe`, `vis_host_len_prox`) to `M_bed` caused trees to learn USGS mapping density rather than fault physics. On Instrument A (where connected components are hidden inside `fold['region']`), `d_vis` jumped inside `fold['region']`, starving all 4 test regions combined to only `9,007 / 37,654` (`23.9%`) of dots in `Exp 5B` (`verdict = negative`). Restricting **both** `M_neo` and `M_bed` strictly to the `38` catalogue-free physical sensor channels completely eliminated this shift.
+2. **`IR-P5-2` (Cross-quadrant sample base-rate & regional background level shift)**:
+   Holding out NE Nevada (`Quadrant 1`, containing ~48% of SGMC bedrock faults) while keeping `max_neg = 180,000` fixed reduced positive prior log-odds by `-0.46` relative to other folds, starving Quadrant 1 to `1,116 / 37,654` dots under global probability ranking despite strong within-quadrant discrimination (`0.182, 0.165, 0.154` on the other three quadrants). High-pass localizing regional background fields (`x - G_12(x)`) and rank-calibrating predictions strictly within each out-of-fold spatial partition (`rank01_domain`) resolved the imbalance across all 4 quadrants without touching any held-out label (`HOLDOUT-DTI A = 0.11129`, `PROXY-DTI B' = 0.13109`, `PROXY-DTI B'' = 0.11897`).
+3. **Upstream verification receipt**: `vendor/gems57/uniqueness.py` (`sha256: 93726c6a...`) was tested directly inside an isolated clone of `buffedlizard55-lab/60GEMSDOE` (`commit 32024716`): **`190 passed, 8 skipped, 0 failed`** (`evidence/p8_dual_submod300/upstream_template_suite.json`, diff in `evidence/p8_dual_submod300/upstream_uniqueness_patch.diff`).
 - Local format validity is not portal acceptance. The frozen reviewed TIFFs are single-band float32,
   finite in [0,1], and match the pinned sample's CRS, shape and transform. The rejected upload's
   exact error cannot be diagnosed without its bytes. The footprint-zero policy differs from a

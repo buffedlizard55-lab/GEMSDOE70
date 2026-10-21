@@ -1,0 +1,122 @@
+{
+  "evidence_class": "DATA-MEASUREMENT",
+  "purpose": "Quantify SGMC off-catalogue duplication band against existing_faults.tif (HANDOFF item 2)",
+  "footprint_px": 5167373,
+  "catalogue_px": 60988,
+  "off_catalogue_footprint_px": 5106385,
+  "sgmc_in_footprint_px": 82151,
+  "sgmc_off_catalogue_px": 78433,
+  "derived_sgmc_off_catalogue_px": 79615,
+  "shells": [
+    {
+      "buffer_px": 1,
+      "buffer_m": 100,
+      "sgmc_off_inside_px": 7215,
+      "sgmc_off_inside_fraction": 0.09198934122116965,
+      "sgmc_off_outside_px": 71218,
+      "offcat_domain_inside_px": 122597,
+      "offcat_domain_inside_fraction": 0.02400856966327451,
+      "spatial_enrichment_vs_domain": 3.8315210989800925
+    },
+    {
+      "buffer_px": 2,
+      "buffer_m": 200,
+      "sgmc_off_inside_px": 12760,
+      "sgmc_off_inside_fraction": 0.16268662425254676,
+      "sgmc_off_outside_px": 65673,
+      "offcat_domain_inside_px": 243560,
+      "offcat_domain_inside_fraction": 0.04769714778654567,
+      "spatial_enrichment_vs_domain": 3.4108250032182665
+    },
+    {
+      "buffer_px": 3,
+      "buffer_m": 300,
+      "sgmc_off_inside_px": 16769,
+      "sgmc_off_inside_fraction": 0.2138003136434919,
+      "sgmc_off_outside_px": 61664,
+      "offcat_domain_inside_px": 383806,
+      "offcat_domain_inside_fraction": 0.07516197858171682,
+      "spatial_enrichment_vs_domain": 2.8445274815516752
+    },
+    {
+      "buffer_px": 4,
+      "buffer_m": 400,
+      "sgmc_off_inside_px": 19343,
+      "sgmc_off_inside_fraction": 0.24661813267374702,
+      "sgmc_off_outside_px": 59090,
+      "offcat_domain_inside_px": 503394,
+      "offcat_domain_inside_fraction": 0.09858128597824097,
+      "spatial_enrichment_vs_domain": 2.5016729111058766
+    },
+    {
+      "buffer_px": 5,
+      "buffer_m": 500,
+      "sgmc_off_inside_px": 21966,
+      "sgmc_off_inside_fraction": 0.2800606887407086,
+      "sgmc_off_outside_px": 56467,
+      "offcat_domain_inside_px": 652990,
+      "offcat_domain_inside_fraction": 0.12787715771529173,
+      "spatial_enrichment_vs_domain": 2.1900759583993987
+    },
+    {
+      "buffer_px": 6,
+      "buffer_m": 600,
+      "sgmc_off_inside_px": 23660,
+      "sgmc_off_inside_fraction": 0.30165874058113296,
+      "sgmc_off_outside_px": 54773,
+      "offcat_domain_inside_px": 766764,
+      "offcat_domain_inside_fraction": 0.15015789056250164,
+      "spatial_enrichment_vs_domain": 2.00894364892247
+    },
+    {
+      "buffer_px": 8,
+      "buffer_m": 800,
+      "sgmc_off_inside_px": 27001,
+      "sgmc_off_inside_fraction": 0.34425560669616107,
+      "sgmc_off_outside_px": 51432,
+      "offcat_domain_inside_px": 1002104,
+      "offcat_domain_inside_fraction": 0.19624528898623977,
+      "spatial_enrichment_vs_domain": 1.7542108066619597
+    },
+    {
+      "buffer_px": 10,
+      "buffer_m": 1000,
+      "sgmc_off_inside_px": 30311,
+      "sgmc_off_inside_fraction": 0.3864572310124565,
+      "sgmc_off_outside_px": 48122,
+      "offcat_domain_inside_px": 1248170,
+      "offcat_domain_inside_fraction": 0.24443319491186036,
+      "spatial_enrichment_vs_domain": 1.5810341600771871
+    },
+    {
+      "buffer_px": 15,
+      "buffer_m": 1500,
+      "sgmc_off_inside_px": 37426,
+      "sgmc_off_inside_fraction": 0.4771715986893272,
+      "sgmc_off_outside_px": 41007,
+      "offcat_domain_inside_px": 1783678,
+      "offcat_domain_inside_fraction": 0.34930347006737644,
+      "spatial_enrichment_vs_domain": 1.36606601302096
+    },
+    {
+      "buffer_px": 20,
+      "buffer_m": 2000,
+      "sgmc_off_inside_px": 44168,
+      "sgmc_off_inside_fraction": 0.5631303150459628,
+      "sgmc_off_outside_px": 34265,
+      "offcat_domain_inside_px": 2257340,
+      "offcat_domain_inside_fraction": 0.442062241683696,
+      "spatial_enrichment_vs_domain": 1.273871102180433
+    },
+    {
+      "buffer_px": 32,
+      "buffer_m": 3200,
+      "sgmc_off_inside_px": 55950,
+      "sgmc_off_inside_fraction": 0.7133476980352658,
+      "sgmc_off_outside_px": 22483,
+      "offcat_domain_inside_px": 3150640,
+      "offcat_domain_inside_fraction": 0.6170000891041314,
+      "spatial_enrichment_vs_domain": 1.156154935197868
+    }
+  ]
+}

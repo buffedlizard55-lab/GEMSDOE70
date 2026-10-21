@@ -99,9 +99,10 @@ def test_fresh_review_binds_every_archived_final_file_and_does_not_claim_univers
         assert f['literal_lane_status']['stop_required'] is True
         assert f['literal_lane_status']['protocol_unique'] is False
         assert digest(ROOT / f['artifact']) == f['raster_sha256']
-    p8 = json.loads((ROOT / 'evidence/p8_submodular/literal_lane.json').read_text())['files']
-    p8_paths = {f['artifact'] for f in p8.values()}
-    for f in p8.values():
+    p8_oof38k = json.loads((ROOT / 'evidence/p8_dual_submod300/literal_lane.json').read_text())['files']
+    p8_sub = json.loads((ROOT / 'evidence/p8_submodular/literal_lane.json').read_text())['files']
+    p8_paths = {f['artifact'] for f in p8_oof38k.values()} | {f['artifact'] for f in p8_sub.values()}
+    for f in (*p8_oof38k.values(), *p8_sub.values()):
         assert f['literal_lane_status']['stop_required'] is True
         assert f['literal_lane_status']['protocol_unique'] is False
         assert digest(ROOT / f['artifact']) == f['raster_sha256']
