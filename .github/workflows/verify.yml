@@ -21,7 +21,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: python scripts/audit.py
       - run: python scripts/make_run_card.py
-      - run: python scripts/release_gate.py --expect-negative
+      - run: python scripts/release_gate.py
       - run: python scripts/build_site.py
       - run: python -m pytest -q --junitxml=evidence/ci-tests.xml
       - name: Retain audit, not a competition submission

@@ -3,6 +3,24 @@
   "policy": "Every TIFF/ZIP in docs/ must appear here with a matching SHA-256; the build refuses anything else.",
   "artifacts": [
     {
+      "path": "docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.tif",
+      "sha256": "f19a78d511f9d822b47ad4d9ce56cf2ccfa415e3d1ca49709a342158de6e7a84",
+      "bytes": 138252,
+      "note": "Phase 5 promoted candidate (37,654 binary 1.0 dots); run card evidence/phase5/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.zip",
+      "sha256": "dcea88235dda10383dd73a9718ba366f88089413e586ea3401135bdec05959c3",
+      "bytes": 101848,
+      "note": "Phase 5 promoted candidate, one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.json",
+      "sha256": "015db7f98bcf224a41e21224851f7112d685e5ee7fc7fcce99fef9afe6936f5b",
+      "bytes": 3409,
+      "note": "Phase 5 shared submission_writer receipt"
+    },
+    {
       "path": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
       "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
       "bytes": 126097,

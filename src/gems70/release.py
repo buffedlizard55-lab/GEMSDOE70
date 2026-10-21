@@ -43,18 +43,19 @@ def _load(root, rel):
     return json.loads(p.read_text()) if p.is_file() else None
 
 
-def release_status(root):
+def release_status(root, phase='phase5'):
     """Report the published candidate's status without ever inventing a score."""
     root = Path(root)
-    card = _load(root, 'evidence/phase4/run_card.json')
-    canaries = _load(root, 'evidence/phase2/canaries.json')
-    audit = _load(root, 'evidence/phase4/uniqueness.json')
+    card = _load(root, f'evidence/{phase}/run_card.json') or _load(root, 'evidence/run_card.json')
+    canaries = (_load(root, f'evidence/{phase}/canaries.json')
+                or _load(root, 'evidence/phase2/canaries.json'))
+    audit = _load(root, f'evidence/{phase}/uniqueness.json')
     reasons, notes = [], []
     download_ok = False
     submit = False
     tif = sha = None
     if not card:
-        reasons.append('Phase-4 run card is missing.')
+        reasons.append(f'{phase} run card is missing.')
     else:
         name = card.get('submission_name', '')
         tif = root / 'docs/downloads' / f'{name}.tif'
@@ -76,12 +77,18 @@ def release_status(root):
             download_ok = False
         if not canaries or not all(valid_canary(c) for c in canaries.values()):
             reasons.append('Feature-alone leakage evidence is missing or fails.')
+            download_ok = False
         submit = bool(card.get('download_and_submit_ok') is True and download_ok)
         if not card.get('gate_a_candidate_ge_h33'):
             reasons.append("Candidate did not match H33 on instrument A.")
         if not card.get('gate_b_prime_candidate_gt_h33_significant'):
             reasons.append("Candidate did not beat H33 on instrument B' with a 95% CI above zero.")
-        notes.append('A downloadable, validated file is not a validated leaderboard improvement.')
+        if phase == 'phase5' and not card.get('gate_c_pied_candidate_gt_h33_significant'):
+            reasons.append("Candidate did not beat H33 on live-calibrated instrument C_pied with a 95% CI above zero.")
+        notes.append(
+            'All reported numbers are HOLDOUT-DTI or OUT-OF-FOLD PROXY-DTI; '
+            'no score is ORGANIZER-CONFIRMED until uploaded to the portal.'
+        )
     return {
         'verdict': (card or {}).get('verdict', 'negative'),
         'download_ok': download_ok,

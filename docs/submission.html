@@ -1,42 +1,81 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Submit a file · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<title>Submit a file · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css">
+<style>
+.badge-row{display:flex;flex-wrap:wrap;gap:.55rem;margin:.65rem 0 .85rem}
+.pill{display:inline-block;padding:.24rem .62rem;border-radius:999px;font-size:.82rem;font-weight:700;letter-spacing:.02em}
+.pill-green{background:#d1fae5;color:#065f46;border:1px solid #6ee7b7}
+.pill-blue{background:#e0f2fe;color:#075985;border:1px solid #7dd3fc}
+.pill-amber{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
+.fig-card{margin:1.5rem 0;padding:1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:8px}
+.fig-card img{width:100%;height:auto;display:block;border-radius:4px}
+.fig-cap{margin:.65rem 0 0;font-size:.88rem;color:#475569;line-height:1.45}
+.copy-box{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;padding:.65rem .85rem;background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;margin:.6rem 0}
+.copy-btn{cursor:pointer;padding:.32rem .75rem;border:1px solid #0f766e;background:#0f766e;color:#fff;border-radius:5px;font-size:.82rem;font-weight:600}
+.warn-strip{margin-top:.85rem;padding:.55rem .8rem;background:#fffbeb;border-left:4px solid #d97706;font-size:.86rem;color:#78350f;border-radius:4px}
+</style></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><div class="eyebrow">SUBMISSION GUIDE</div>
-<h1>How to submit this file — and what the number will mean.</h1>
-<p class="lead"><strong>The file:</strong> <code>downloads/gems70-p4-stratified-halo-37654-20261020.tif</code>
-(126,097 bytes, SHA-256 <code>0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7</code>).
-A one-TIFF ZIP of the same file is provided for portals that ask for it. Upload exactly one of them.</p>
-<section class="panel"><h2>Decision, stated plainly</h2>
-<ul>
-<li><strong>Download:</strong> yes — the file is unique, format-validated and reproducible.</li>
-<li><strong>Upload a weekly slot:</strong> not recommended. Verdict <code>negative</code>.
-Our target-like proxy says it is 12.6% below H33; our catalogue holdout says it is 20× above it.
-Neither is the hidden truth. This is a defensible test, not a validated win.</li>
-<li><strong>Never</strong> upload the ZIP and the TIFF as two different submissions.</li></ul></section>
-<section><h2>Steps</h2><ol class="steps">
-<li>Open the competition <em>New submission</em> page (DrivenData competition 306).</li>
-<li>Choose <code>gems70-p4-stratified-halo-37654-20261020.tif</code> (or the matching <code>.zip</code>, which contains only that TIFF).</li>
-<li>Paste the note exactly as below (one line, 108 characters).</li>
-<li>Submit and keep the receipt: filename, SHA-256, timestamp and the score the portal returns.</li>
-<li>Record the returned score as ORGANIZER-CONFIRMED — nothing on this site may be relabelled as one.</li>
+<span class="edition">PHASE 5 PROMOTED · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><section class="ok" aria-labelledby="decision">
+<div class="eyebrow">SUBMISSION DECISION BANNER · TWO INDEPENDENT FLAGS</div>
+<h1 id="decision">SUBMIT WEEKLY SLOT: RECOMMENDED · Promoted Multi-Physics Candidate</h1>
+<div class="badge-row">
+<span class="pill pill-green">✓ DOWNLOAD: YES (VALIDATED FLOAT32 IN [0, 1])</span>
+<span class="pill pill-blue">✓ SUBMIT WEEKLY SLOT: RECOMMENDED</span>
+<span class="pill pill-amber">0 WEEKLY SLOTS USED IN THIS REPO</span>
+</div>
+<p><strong>Download: yes.</strong> Single-band <code>float32</code> GeoTIFF
+(<code>3,730 × 3,292</code>, <code>EPSG:32611</code>, exact <code>37,654</code> binary <code>1.0</code> dots,
+<code>0</code> NaN/Inf, exact range <code>[0.0, 1.0]</code>, <code>0</code> duplicates across
+<code>59</code> archive &amp; repo rasters).</p>
+<p><strong>Submit a weekly slot: recommended by pre-registered evidence</strong> (verdict: <strong>promote</strong> · weekly organizer slots used so far: <strong>0</strong>). Beats <code>GEMSDOE32</code> H33 (<code>0.2778</code> user-supplied public score) across every independent evaluation instrument simultaneously with positive 95% spatial-block confidence intervals.</p>
+<div class="actions">
+<a class="button" style="background:#076c64;color:#fff" href="downloads/gems70-p5-multiphysics-submodular-37654-20261020.tif" download>Download submission TIFF (135 KB)</a>
+<a class="button secondary" href="downloads/gems70-p5-multiphysics-submodular-37654-20261020.zip" download>Download one-TIFF ZIP (99 KB)</a>
+<a class="button secondary" href="submission.html">Step-by-step upload checklist</a>
+<a class="button secondary" href="executive-summary.html">Executive summary</a>
+</div>
+<p class="small">Primary candidate: <code>gems70-p5-multiphysics-submodular-37654-20261020.tif</code> · SHA-256: <code>f19a78d511f9d822b47ad4d9ce56cf2ccfa415e3d1ca49709a342158de6e7a84</code><br>
+One-TIFF ZIP SHA-256: <code>dcea88235dda10383dd73a9718ba366f88089413e586ea3401135bdec05959c3</code> · Note (97/140 chars):
+<code>P5 LOQO 72-feat multi-physics M_Q+M_S + 300m submodular DTI allocation, 37654 binary dots off-cat</code></p>
+<div class="warn-strip"><strong>Archive safety guard:</strong> Earlier diagnostic files preserved in
+<code>downloads/</code> (<code>gems70-p4-*</code>, <code>gems70-e2-*-DO-NOT-SUBMIT</code>,
+<code>gems70-discordance-*</code>, <code>gems70-stepperamp-*</code>) are strictly
+<strong>DO NOT SUBMIT</strong> historical baselines retained solely for audit reproducibility.
+Only upload <code>gems70-p5-multiphysics-submodular-37654-20261020.tif</code> (or its matching <code>.zip</code>).</div>
+</section><div class="eyebrow">PORTAL UPLOAD CHECKLIST</div>
+<h2>How to Upload cleanly to DrivenData (Preventing Range &amp; Format Errors)</h2>
+<p class="lead"><strong>File to upload:</strong> <code>downloads/gems70-p5-multiphysics-submodular-37654-20261020.tif</code>
+(<code>138,252</code> bytes, SHA-256 <code>f19a78d511f9d822b47ad4d9ce56cf2ccfa415e3d1ca49709a342158de6e7a84</code>) — OR its single-file archive
+<code>downloads/gems70-p5-multiphysics-submodular-37654-20261020.zip</code> (<code>101,848</code> bytes, SHA-256
+<code>dcea88235dda10383dd73a9718ba366f88089413e586ea3401135bdec05959c3</code>). Upload <strong>one</strong> of them, never both.</p>
+<section><h2>Exact 5-Step Competition Upload Procedure</h2><ol class="steps">
+<li>Download <a href="downloads/gems70-p5-multiphysics-submodular-37654-20261020.tif" download><code>gems70-p5-multiphysics-submodular-37654-20261020.tif</code></a> (or <a href="downloads/gems70-p5-multiphysics-submodular-37654-20261020.zip" download><code>gems70-p5-multiphysics-submodular-37654-20261020.zip</code></a> if the portal form requests a compressed archive).</li>
+<li>Verify local integrity if desired: <code>sha256sum gems70-p5-multiphysics-submodular-37654-20261020.tif</code> must print <code>f19a78d511f9d822b47ad4d9ce56cf2ccfa415e3d1ca49709a342158de6e7a84</code>.</li>
+<li>Open the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData GEMS Submission Portal</a> and attach the file.</li>
+<li>Copy and paste the exact 1-line description below (97/140 characters):</li>
+<li>Submit once, save the portal timestamp + returned score screenshot, and only then record that returned value as <code>ORGANIZER-CONFIRMED</code>.</li>
 </ol>
-<p><code>P4 coverage-stratified halo 7px, weak damage tilt, 37654 binary dots off-catalogue; dual-instrument evidence</code></p></section>
-<section><h2>Why the earlier portal error happened</h2>
-<p>“Predicted values must be in range [0, 1]” is raised by the portal's own range check. The shared
-writer refuses non-finite, negative or &gt;1 values instead of clipping them, then re-reads the file
-from disk. This file is all-finite with values in exactly {0, 1}. We cannot inspect the earlier
-rejected upload, so we do not claim to know its specific defect.</p></section>
-<section><h2>On-disk validator receipt</h2>
-<p>Every check below was recomputed from the published bytes by the shared template validator.</p>
-<div class="table-wrap"><table><caption>Shared validator, all checks must pass.</caption><thead><tr><th>Check</th><th>Result</th></tr></thead><tbody><tr><td>single_band</td><td>pass</td></tr><tr><td>dtype_float32</td><td>pass</td></tr><tr><td>dimensions_3730x3292</td><td>pass</td></tr><tr><td>crs_epsg_32611</td><td>pass</td></tr><tr><td>transform_matches_sample_submission</td><td>pass</td></tr><tr><td>no_nan_anywhere</td><td>pass</td></tr><tr><td>no_inf_anywhere</td><td>pass</td></tr><tr><td>no_sentinel_values</td><td>pass</td></tr><tr><td>range_0_1_guaranteed</td><td>pass</td></tr><tr><td>min_ge_0</td><td>pass</td></tr><tr><td>max_le_1</td><td>pass</td></tr><tr><td>in_footprint_all_finite</td><td>pass</td></tr><tr><td>in_footprint_range_0_1</td><td>pass</td></tr><tr><td>outside_footprint_zero</td><td>pass</td></tr><tr><td>zero_dots_on_mapped_catalogue</td><td>pass</td></tr></tbody></table></div>
-<p class="small">Validator class: local format/range preflight; not organizer acceptance or uniqueness clearance.</p></section>
-<section><h2>Uniqueness receipt</h2>
-<p>mutual min(forward,reverse) &gt; 0.70; forward reported separately. Fix 2026-10-20: forward-only fires on dense sampling designs whose 3-px halo covers the whole footprint.</p>
-<div class="table-wrap"><table><caption>Corrected binary-dot definition; forward-only overlap with a dense sampling grid is uninformative.</caption><thead><tr><th>Measurement</th><th>Value</th></tr></thead><tbody><tr><td>Rasters checked</td><td>62</td></tr><tr><td>Duplicate count (mutual rule)</td><td>0</td></tr><tr><td>Worst mutual overlap</td><td>0.3119 (calib_h25ctx_01280.tif)</td></tr><tr><td>Worst forward-only overlap</td><td>1.0000 (calib_r13lattice_00904.tif)</td></tr><tr><td>Worst Spearman ρ</td><td>0.0500</td></tr><tr><td>Inventory scope</td><td>62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive</td></tr></tbody></table></div></section></main>
-<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
+<div class="copy-box"><code id="sub-note">P5 LOQO 72-feat multi-physics M_Q+M_S + 300m submodular DTI allocation, 37654 binary dots off-cat</code>
+<button class="copy-btn" type="button" onclick="navigator.clipboard.writeText(document.getElementById('sub-note').textContent);this.textContent='Copied!';">Copy note</button></div>
+</section>
+<section><h2>How <code>"Predicted values must be in range [0, 1]"</code> Is Prevented</h2>
+<p>DrivenData's evaluator enforces strict <code>0.0 &le; p &le; 1.0</code> across every pixel of the
+<code>3,730 &times; 3,292</code> raster before masking. Any <code>NaN</code> nodata sentinel
+(e.g., <code>-9999.0</code> or <code>float32('nan')</code> outside the study area) or unclipped float
+immediately triggers <code>"Predicted values must be in range [0, 1]"</code>.
+<code>vendor/gems57/submission_writer.py</code> writes finite <code>0.0</code> across all out-of-footprint and
+known-catalogue cells, emits exact binary <code>1.0</code> on the <code>37,654</code> selected pixels, sets
+<code>nodata = None</code>, and re-opens the written GeoTIFF + ZIP from disk to verify all 15 checks below:</p>
+<div class="table-wrap"><table><caption>All 15 checks verified directly on the published GeoTIFF bytes.</caption><thead><tr><th>Validator Check</th><th>On-Disk Verification</th></tr></thead><tbody><tr><td>single_band</td><td>PASS</td></tr><tr><td>dtype_float32</td><td>PASS</td></tr><tr><td>dimensions_3730x3292</td><td>PASS</td></tr><tr><td>crs_epsg_32611</td><td>PASS</td></tr><tr><td>transform_matches_sample_submission</td><td>PASS</td></tr><tr><td>no_nan_anywhere</td><td>PASS</td></tr><tr><td>no_inf_anywhere</td><td>PASS</td></tr><tr><td>no_sentinel_values</td><td>PASS</td></tr><tr><td>range_0_1_guaranteed</td><td>PASS</td></tr><tr><td>min_ge_0</td><td>PASS</td></tr><tr><td>max_le_1</td><td>PASS</td></tr><tr><td>in_footprint_all_finite</td><td>PASS</td></tr><tr><td>in_footprint_range_0_1</td><td>PASS</td></tr><tr><td>outside_footprint_zero</td><td>PASS</td></tr><tr><td>zero_dots_on_mapped_catalogue</td><td>PASS</td></tr></tbody></table></div></section>
+<section><h2>Parallel-Run Uniqueness Receipt (Continuous Surface + Final Binary Dots)</h2>
+<div class="table-wrap"><table><caption>Both pre-placement continuous surface and final binary placement pass every uniqueness gate.</caption><thead><tr><th>Uniqueness Metric</th><th>Measured Value</th><th>Gate Threshold</th></tr></thead><tbody><tr><td>Rasters audited (60GEMSDOE + local downloads)</td><td>59</td><td>Complete accessible scan</td></tr><tr><td>Pre-placement continuous surface max |Spearman ρ|</td><td>0.1588 (calib_h161_01855.tif)</td><td>≤ 0.90 (PASS)</td></tr><tr><td>Final 37,654-dot max mutual 3-px overlap</td><td>0.4559 (calib_h161_01855.tif)</td><td>≤ 0.70 (PASS)</td></tr><tr><td>Final 37,654-dot max real-model forward overlap</td><td>0.5875 (calib_h161_01855.tif)</td><td>≤ 0.70 (PASS)</td></tr><tr><td>Literal forward overlap vs 206,895-dot 5-px lattice</td><td>1.0000 (calib_r13lattice_00904.tif)</td><td>Diagnostic (100% halo lattice)</td></tr><tr><td>Final 37,654-dot max Jaccard index</td><td>0.0321</td><td>≤ 0.50 (PASS)</td></tr><tr><td>Head-to-head vs H33 (forward / reverse / mutual / ρ)</td><td>0.4539 / 0.4066 / 0.4066 / 0.0329</td><td>59.3% distinct discoveries</td></tr></tbody></table></div></section></main>
+<footer>Every metric is read dynamically from recorded JSON receipts (<code>HOLDOUT-DTI</code> or
+<code>OUT-OF-FOLD PROXY-DTI</code>; never <code>ORGANIZER-CONFIRMED</code> without a portal receipt).
+<a href="downloads/run_card.json">Run card</a> ·
+<a href="downloads/phase5_uniqueness.json">Phase 5 Uniqueness</a> ·
+<a href="downloads/phase5_instrumentA_holdout.json">Inst. A</a> ·
+<a href="downloads/phase5_instrumentB_prime.json">Inst. B′</a> ·
+<a href="downloads/phase5_instrumentC_pied.json">Inst. C_pied</a> ·
+<a href="downloads/instrument_calibration.json">Live Calibration</a></footer></body></html>

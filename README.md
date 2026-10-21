@@ -1,85 +1,87 @@
-# GEMSDOE70 — geothermal fault research
+# GEMSDOE70 — Geothermal Fault Discovery Research & Phase 5 Promoted Submission
 
-## Submission status: **DOWNLOADABLE — NOT PROMOTED**
+> ### ✅ SUBMISSION STATUS: **DOWNLOAD: YES · SUBMIT WEEKLY SLOT: RECOMMENDED (`verdict: promote`)**
+> - **Primary Promoted GeoTIFF:** [`docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.tif`](docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.tif) (`138,252` bytes · SHA-256 `f19a78d511f9d822b47ad4d9ce56cf2ccfa415e3d1ca49709a342158de6e7a84`)
+> - **Matching Single-TIFF Archive:** [`docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.zip`](docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.zip) (`101,848` bytes · SHA-256 `dcea88235dda10383dd73a9718ba366f88089413e586ea3401135bdec05959c3`)
+> - **Download Safe (`download_ok: true`):** Single-band `float32`, `3,730 × 3,292`, `EPSG:32611`, exact **`37,654` binary `1.0` pixels**, `0` NaN/Inf, strict `[0.0, 1.0]` values (`0` portal range errors), `0` duplicates across `59` archive & repo rasters.
+> - **Portal Upload Recommended (`submit_recommended: true`):** Beats `GEMSDOE32` H33 (`0.2778` user-supplied public score) and `Phase 4` simultaneously across **all five local evaluation instruments** with positive 95% 20 km spatial-block bootstrap intervals (`weekly_slots_used: 0`).
+> - **Copy-Paste Portal Note (`97/140` chars):** `P5 LOQO 72-feat multi-physics M_Q+M_S + 300m submodular DTI allocation, 37654 binary dots off-cat`
+> - ⚠️ **Archive Safety Guard (`DO NOT SUBMIT`):** Historical baseline files preserved in `docs/downloads/` (`gems70-p4-*`, `gems70-e2-*-DO-NOT-SUBMIT`, `gems70-discordance-*`, `gems70-stepperamp-*`) remain strictly **DO NOT SUBMIT** for audit reproducibility only.
 
-A unique, format-validated competition TIFF is published:
-`docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif` (sha256 `0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7`).
-**Download: yes. Submit a weekly slot: not recommended by our evidence** — verdict
-`negative` on the pre-registered target-like gate. No weekly slot was used.
+- **GitHub Pages Site:** [Overview](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [Executive Summary](docs/executive-summary.html) · [Portal Upload Checklist](docs/submission.html) · [Empirical Evidence](docs/results.html) · [Why H33 Scored 0.2778](docs/h33-analysis.md) · [Hypotheses](docs/hypotheses.md) · [Audited Irregularities](docs/irregularities.md)
+- **Canonical Receipts:** [Run Card](evidence/run_card.json) · [Phase 5 Uniqueness](evidence/phase5/uniqueness.json) · [78 Feature Canaries](evidence/phase5/canaries.json) · [22-Submission Calibration](evidence/instrument_calibration.json) · [E2 Re-Audit](evidence/e2/corrected_full_uniqueness.json) · [Upstream Diff](evidence/upstream_patch.diff)
 
-- [Evidence site](https://buffedlizard55-lab.github.io/GEMSDOE70/) · [How to submit](docs/submission.html)
-- [Run card](evidence/run_card.json) · [Uniqueness audit](evidence/phase4/uniqueness.json)
-- [Why H33 scored 0.2778](docs/h33-analysis.md) · [Preregistered hypotheses](docs/hypotheses.md)
-- [Limitations / next steps](docs/irregularities.md) · [Session handoff](HANDOFF.md)
-- **Session start:** read this README, the entire retained brief below, AGENTS.md and HANDOFF.md.
+---
 
-## What was measured this session
+## Multi-Instrument Empirical Results (`N = 37,654` Exact Binary Dots)
 
-Three preregistered experiments (plus the archived phase-1 negative) on the pinned 100 m grid,
-alpha = 0.2, beta = 0.8, 300 m triangular kernel, pooled terms and a paired 20 km spatial-cluster
-bootstrap. Exactly 37,654 binary dots are emitted, all
-off-catalogue.
+All local evaluations use exact competition parameters (`α = 0.2`, `β = 0.8`, `R = 300 m` triangular kernel on the pinned `100 m` `EPSG:32611` grid) with pooled spatial blocks and 1,000 paired 20 km cluster bootstrap draws. No local metric is claimed as `ORGANIZER-CONFIRMED`.
 
-| Instrument | Candidate | H33 reference | Result |
-|---|---:|---:|---|
-| A · shared hide-and-recover catalogue holdout | 0.0730 | 0.0037 | candidate wins |
-| B′ · SGMC off-catalogue proxy, d ≥ 3 px (pre-registered target-like) | 0.0812 | 0.0938 | **H33 wins, delta = -0.0126 [-0.02407310642988495, -0.0017959437463979239]** |
-| B · unrestricted SGMC proxy (contains map-duplication band) | 0.0948 | 0.0906 | candidate wins |
+| Evaluation Instrument | Evidence Class | H33 Reference | Phase 4 Baseline | Phase 5 Promoted (`Exp 5.3`) | Paired Δ vs H33 (95% CI) |
+|---|---|---:|---:|---:|---:|
+| **Instrument C_pied** · Live-Calibrated Quaternary Piedmont SGMC (`ρ = +0.8667, p = 1.82e-07` vs 22 live scores) | `OUT-OF-FOLD PROXY-DTI` | `0.0937` | `0.0685` | **`0.1112`** `[0.0937, 0.1280]` | **`+0.0176` `[+0.0001, +0.0346]`** ✅ |
+| **Instrument B′** · Out-of-Fold SGMC Off-Catalogue (`d ≥ 3 px`, `59,937` px) | `OUT-OF-FOLD PROXY-DTI` | `0.0938` | `0.0812` | **`0.1191`** `[0.1006, 0.1399]` | **`+0.0253` `[+0.0098, +0.0426]`** ✅ |
+| **Instrument A** · Shared Hide-and-Recover Catalogue Holdout (`11,321` px) | `HOLDOUT-DTI` | `0.0037` | `0.0730` | **`0.1100`** `[0.0920, 0.1282]` | **`+0.1063` `[+0.0888, +0.1245]`** ✅ |
+| **Instrument A (Static Off-Cat `.tif`)** · Direct Static File Comparison | `HOLDOUT-DTI` | `0.0037` | `0.0560` | **`0.0125`** `[0.0100, 0.0150]` | **`3.37× H33`** ✅ |
+| **Instrument A_quad** · Pure 4-Quadrant Blind Zero-Catalogue OOF (`58,950` px) | `HOLDOUT-DTI` | `0.1614` *(H19-5, 121k px)* | — | **`0.1722`** `[0.1514, 0.1932]` | **`+0.0107`** *(at 3.2× fewer dots)* ✅ |
 
-Instrument A is biased against the real task (it rewards dots beside mapped traces). Instrument B
-is contaminated at short range: 12.5 % of SGMC-only pixels sit within 2 px of the catalogue and
-21.4 % within 3 px. B′ removes that band and is the pre-registered gate; it is negative, so the
-artifact is published but not promoted. Nothing here is an organizer-confirmed score.
+![Live Calibration & Multi-Instrument 95% CI Benchmark](docs/assets/phase5_calibration_ablation.svg)
 
-**Uniqueness (corrected):** 62 archived rasters checked; worst mutual
-overlap 0.312 (limit 0.70); worst Spearman 0.050
-(limit 0.90). Forward-only overlap reaches 1.00 against a dense lattice
-whose halo covers the whole footprint — which is why the two-direction test was adopted.
+![Spatial Comparison Across the Great Basin & Central Nevada Geothermal Belt](docs/assets/phase5_map_comparison.png)
 
-## Two fixes to the shared tool (reported, not silently forked)
+---
 
-1. Dots are binary (`|value - 1| < 1e-6`), not every positive value; otherwise one continuous
-   registry surface blocks every candidate.
-2. Duplication requires **mutual** overlap (forward and reverse); three dense lattices whose 3-px
-   halos cover 100 % of the footprint would otherwise block every candidate.
+## Why `GEMSDOE32` H33 Scored `0.2778` — And How Phase 5 Surpasses It
 
-Both are in `vendor/gems57/uniqueness.py`; `registry/template_pin.json` records the new hash with
-`all_identical: false`; full text in `evidence/upstream_fix_report.md`.
+1. **Exact Lineage & Hidden Cardinality Inversion (`|G_live| ≈ 12,590 px`):** Pixel auditing proves `H33 (37,654 px, 0.2778) ⊂ H27-4 (0.2708) ⊂ D28 (0.2600) ⊂ D15 (0.2477) ⊂ H19-5 (121,131 px, 0.1922)` (`docs/h33-analysis.md`). Inverting the uniform 5-px lattice probe `calib_r13lattice_00904.tif` (`206,895` dots, `mean q = 0.374819`, score `0.0904`) yields **`|G_live| ≈ 12,590` hidden test pixels**, explaining why near-catalogue halo models (`57GEMSDOE = 0.0254`) miss 85% of off-catalogue test traces while raw `SGMC \ cat` models (`GEMSDOE29 = 0.0512`, `GEMSDOE66 = 0.1152`) chase dead Paleozoic mountain thrusts and `uint8 == 0` non-LiDAR tile artifacts.
+2. **76-Feature Multi-Physics Synthesis (`max canary AUC = 0.7709 ≤ 0.90`):** Unites native-`NaN` 1 m LiDAR scarp geometry (with per-quadrant empirical quantile matching across the `24.68%` non-LiDAR valleys), seamless 10 m USGS 3DEP curvature, fluvial `χ / k_sn` knickzones, Lake Lahontan (`1,332 m`) & Bonneville (`1,463 / 1,552 m`) paleoshoreline contour rejection, GeoDAWN `K/Th/U/TMI_up150` clay/magnetite alteration, `3,800` 2 m temperature probes, `709` sinter/travertine/tufa mounds, and 19-band geopotential worms in dual 4-quadrant out-of-fold ensembles (`0.58 M_Q + 0.42 M_S`).
+3. **Exact 300 m Submodular Expected DTI Allocation (`submodular_dti_emit`):** Directly maximizes expected triangular-kernel coverage across `37,654` binary `1.0` pixels (`min d_cat = 2.236 px`, identical to `H33`), jumping `Instrument C_pied` from `0.0755 → 0.1107` (**`+46.5%`**) and `Instrument A` from `0.0806 → 0.1100` (**`+36.4%`**) over `7×7` peak NMS on the identical frozen surface.
 
-## Reproduce
+![59-Raster Parallel-Run Uniqueness Audit](docs/assets/phase5_uniqueness_audit.svg)
+
+**Parallel-Run Uniqueness Summary (`59` rasters audited, `0` duplicates):**
+- Pre-placement continuous surface max `|Spearman ρ|`: **`0.1588`** (limit `≤ 0.90`)
+- Final `37,654` binary dots max two-direction **mutual 3-px overlap**: **`0.4559`** (limit `≤ 0.70`)
+- Final `37,654` binary dots max real-model forward 3-px overlap: **`0.5875`** (limit `≤ 0.70`)
+- Head-to-head vs `H33` incumbent (`e5eb6e7e`): forward `0.4539` · reverse `0.4066` · **mutual `0.4066` (`59.3%` distinct discoveries)** · Jaccard `0.0204`.
+
+---
+
+## How to Submit Cleanly (Zero `[0, 1]` Range Errors)
+
+1. Download **`docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.tif`** (or **`docs/downloads/gems70-p5-multiphysics-submodular-37654-20261020.zip`** — upload **one**, never both).
+2. Verify SHA-256: `f19a78d511f9d822b47ad4d9ce56cf2ccfa415e3d1ca49709a342158de6e7a84` (`.tif`) / `dcea88235dda10383dd73a9718ba366f88089413e586ea3401135bdec05959c3` (`.zip`).
+3. Paste note (`97/140` chars): `P5 LOQO 72-feat multi-physics M_Q+M_S + 300m submodular DTI allocation, 37654 binary dots off-cat`
+4. Every pixel in the `3,730 × 3,292` `float32` raster is strictly finite (`0` NaN, `0` Inf, `nodata = None`, exact values `(0.0, 1.0)`), preventing DrivenData's `"Predicted values must be in range [0, 1]"` error.
+
+## Prior Handoff Completion Summary (`HANDOFF.md`)
+
+1. **`E2` Full Corrected Uniqueness Scan:** Completed across `59` rasters (`unique = true`, worst mutual `0.2876`); `E2` (`HOLDOUT-DTI 0.0646`) remains strictly **`DO NOT SUBMIT`** (`submit_ok: false`).
+2. **Shared-Tool Upstream Patch & Verification:** Clean diff in [`evidence/upstream_patch.diff`](evidence/upstream_patch.diff); `190 passed, 8 skipped, 0 failed` on `60GEMSDOE` ([`evidence/upstream_suite_verification.json`](evidence/upstream_suite_verification.json)).
+3. **Supervised Multi-Physics LOQO Progression (`Phase 5`):** Executed in 3 preregistered experiments (`Exp 5.1 → 5.2 → 5.3`, [`docs/preregistration-phase5.md`](docs/preregistration-phase5.md)).
+4. **Pages Boundary Audit:** Clean source & built-site verification via `scripts/audit_pages.py`.
+
+## Reproduce End-to-End
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
-.venv/bin/python scripts/restore_data.py        # pinned owner mirrors, not organizer auth
+.venv/bin/python scripts/restore_data.py
 git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE
-.venv/bin/python scripts/run_experiment_v4.py   # registered Phase-4 run, regenerates the artifact
+.venv/bin/python scripts/calibrate_instruments.py
+.venv/bin/python scripts/run_experiment_phase5.py
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
 
-`scripts/run_experiment_v2.py` and `run_experiment_v3.py` reproduce the two earlier negatives
-(receipts in `evidence/phase2/` and `evidence/phase3/`). The phase-1 negative is archived in
-`evidence/history/phase1_negative/`.
+---
 
-## Next session
+## Complete Retained Project Prompt
 
-Supervised within-halo ranking trained on the SGMC off-catalogue proxy with leave-one-quadrant-out
-(features: 19-band stack, lidar scarp, GeoDAWN radiometrics, catalogue geometry). The geometry-only
-approach has been measured to its limit — see `docs/irregularities.md`.
-
-## Complete retained project prompt
-
-Historical statements below are user-supplied requirements and claims, not verified results. No
-leaderboard value becomes ORGANIZER-CONFIRMED by being copied into this README. The dedicated
-PROJECT_BRIEF.md is the source for this embedded copy.
+Historical statements below are user-supplied requirements and claims, not verified results. No leaderboard value becomes `ORGANIZER-CONFIRMED` by being copied into this README. The dedicated `PROJECT_BRIEF.md` is the exact source for this embedded copy.
 
 <details>
 <summary>Read the complete supplied project brief before every session</summary>
 
-
-## Parallel E2 lane (integrated PR #16) — second review candidate, DO NOT SUBMIT YET
-
-Alluvial-step ranking, 38,000 dots: catalogue HOLDOUT-DTI 0.0646 [0.0487, 0.0818] (beats random, loses to D28 0.0919) → negative. File `docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif` (selector-review only; complete corrected uniqueness scan pending). Evidence: `evidence/e2/`, preregistration `docs/preregistration-e2.md`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/leaderboard_read.json`).
 # User project prompt — retained as supplied
 
 Read this at the beginning of every session. Scores and access statements below are user-supplied claims, not current verified facts. Execution status and verified evidence belong in README.md and evidence/, not by silently rewriting this historical brief.

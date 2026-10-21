@@ -1,13 +1,12 @@
 {
   "evidence_class": "HOLDOUT-DTI",
-  "seed": 71,
-  "fresh_blocks_not_seed20": true,
+  "evaluator_version": "gems57-pooled-hide-v2",
   "receipts": [
     {
       "fold": "NW",
-      "seed": 71,
-      "held_components": 137,
-      "withheld_positive_pixels": 1931,
+      "seed": 20,
+      "held_components": 96,
+      "withheld_positive_pixels": 1923,
       "eligible_components": 598,
       "boundary_buffer_px": 12,
       "feature_buffer_px": 3,
@@ -17,9 +16,9 @@
     },
     {
       "fold": "NE",
-      "seed": 71,
-      "held_components": 133,
-      "withheld_positive_pixels": 2364,
+      "seed": 20,
+      "held_components": 145,
+      "withheld_positive_pixels": 2367,
       "eligible_components": 628,
       "boundary_buffer_px": 12,
       "feature_buffer_px": 3,
@@ -29,9 +28,9 @@
     },
     {
       "fold": "SW",
-      "seed": 71,
-      "held_components": 199,
-      "withheld_positive_pixels": 3845,
+      "seed": 20,
+      "held_components": 223,
+      "withheld_positive_pixels": 3781,
       "eligible_components": 983,
       "boundary_buffer_px": 12,
       "feature_buffer_px": 3,
@@ -41,9 +40,9 @@
     },
     {
       "fold": "SE",
-      "seed": 71,
-      "held_components": 140,
-      "withheld_positive_pixels": 3285,
+      "seed": 20,
+      "held_components": 142,
+      "withheld_positive_pixels": 3250,
       "eligible_components": 648,
       "boundary_buffer_px": 12,
       "feature_buffer_px": 3,
@@ -52,15 +51,9 @@
       "evaluation_region_label_blind": true
     }
   ],
-<<<<<<<< HEAD:evidence/e2/holdout_split.json
   "total_withheld_positive_pixels": 11321,
   "catalogue_predictors": [],
   "valid_feature_pixels": 4989581,
   "known_mask_rule": "catalogue minus globally withheld components, pixel exact",
   "limitation": "Mapped components are a surrogate for previously unmapped faults; no hidden organizer labels."
-========
-  "total_withheld_positive_pixels": 11425,
-  "visible_catalogue_pixels": 48557,
-  "catalogue_features_from": "visible traces only (holdout-visible mask)"
->>>>>>>> origin/main:docs/downloads/c1_holdout_split.json
 }

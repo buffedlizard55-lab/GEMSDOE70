@@ -13,13 +13,13 @@ class Links(HTMLParser):
         super().__init__(); self.links = []
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
-        if tag == 'a' and 'href' in attrs: self.links.append(attrs['href'])
-        if tag == 'link' and 'href' in attrs: self.links.append(attrs['href'])
+        if tag in {'a', 'link'} and 'href' in attrs: self.links.append(attrs['href'])
+        if tag == 'img' and 'src' in attrs: self.links.append(attrs['src'])
 
 
 def test_site_rebuild_has_no_broken_local_link():
     main()
-    for p in ROOT.glob('*.html'):
+    for p in list(ROOT.glob('*.html')) + list((ROOT / 'docs').glob('*.html')):
         text = p.read_text()
         assert '<html lang="en">' in text
         parser = Links(); parser.feed(text)
@@ -44,7 +44,9 @@ def test_every_published_artifact_is_inventoried():
 
 
 def test_decision_is_explicit_on_the_landing_page():
-    home = (ROOT / 'docs/index.html').read_text()
-    assert 'Download: yes.' in home
-    assert 'Submit a weekly slot: not recommended' in home
-    assert 'Download submission TIFF' in home
+    for rel in ('docs/index.html', 'docs/executive-summary.html', 'docs/submission.html', 'index.html'):
+        page = (ROOT / rel).read_text()
+        assert 'Download: yes.' in page
+        assert 'Submit a weekly slot: recommended' in page
+        assert 'DO NOT SUBMIT' in page
+        assert 'Download submission TIFF' in page

@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 430" role="img" aria-label="Live Calibration and Multi-Instrument 95% Confidence Interval Benchmark" style="font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#ffffff;border:1px solid #e2e8f0;border-radius:10px">
+<text x="275" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">A. Zero-Parameter Calibration vs 22 Live Scores (ρ = +0.867)</text>
+<text x="805" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">B. Phase 5 vs H33 &amp; Phase 4 Across All 4 Primary Instruments</text>
+<rect x="371.5" y="66" width="108.3" height="290" fill="#10b981" fill-opacity="0.11"/>
+<rect x="76" y="66" width="415" height="290" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="76" y1="356.0" x2="491" y2="356.0" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="68" y="360.0" text-anchor="end" font-size="11" fill="#475569">0.00</text>
+<line x1="76" y1="273.6" x2="491" y2="273.6" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="68" y="277.6" text-anchor="end" font-size="11" fill="#475569">0.10</text>
+<line x1="76" y1="191.3" x2="491" y2="191.3" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="68" y="195.3" text-anchor="end" font-size="11" fill="#475569">0.20</text>
+<line x1="76" y1="108.9" x2="491" y2="108.9" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="68" y="112.9" text-anchor="end" font-size="11" fill="#475569">0.30</text>
+<line x1="76.0" y1="66" x2="76.0" y2="356" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="76.0" y="373" text-anchor="middle" font-size="11" fill="#475569">0.00</text>
+<line x1="202.2" y1="66" x2="202.2" y2="356" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="202.2" y="373" text-anchor="middle" font-size="11" fill="#475569">0.04</text>
+<line x1="328.3" y1="66" x2="328.3" y2="356" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="328.3" y="373" text-anchor="middle" font-size="11" fill="#475569">0.08</text>
+<line x1="454.5" y1="66" x2="454.5" y2="356" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="454.5" y="373" text-anchor="middle" font-size="11" fill="#475569">0.12</text>
+<line x1="76.0" y1="405.9" x2="470.2" y2="42.4" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,4"/>
+<line x1="426.8" y1="66" x2="426.8" y2="356" stroke="#059669" stroke-width="2.4" stroke-dasharray="6,3"/>
+<text x="420.8" y="84" text-anchor="end" font-size="11" font-weight="700" fill="#047857">Phase 5 OOF = 0.1112</text>
+<text x="420.8" y="98" text-anchor="end" font-size="10.5" fill="#047857">Beat H33 (+19.1%, 95% CI &gt; 0)</text>
+<circle cx="173.3" cy="335.1" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="321.8" cy="281.6" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<text x="281.3" y="274.1" font-size="10" font-weight="600" fill="#b45309">GEMSDOE66 (0.1152)</text>
+<circle cx="273.3" cy="261.1" r="5.5" fill="#d97706" stroke="#ffffff" stroke-width="1"/>
+<circle cx="263.7" cy="250.6" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="240.7" cy="227.3" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="266.4" cy="214.1" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="358.0" cy="204.6" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="288.0" cy="203.2" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="276.5" cy="200.0" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<text x="262.7" y="201.7" text-anchor="end" font-size="10" font-weight="600" fill="#4f46e5">H19-5 (0.1922)</text>
+<circle cx="270.7" cy="197.7" r="5.5" fill="#6366f1" stroke="#ffffff" stroke-width="1"/>
+<circle cx="300.8" cy="160.3" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="342.5" cy="154.3" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="337.2" cy="152.0" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="339.6" cy="145.2" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="351.5" cy="141.9" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="361.5" cy="139.2" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="357.1" cy="137.8" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="366.1" cy="133.1" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="362.6" cy="133.0" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="365.2" cy="132.8" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<circle cx="370.4" cy="129.5" r="4.2" fill="#334155" stroke="#ffffff" stroke-width="1"/>
+<text x="357.0" y="119.2" text-anchor="end" font-size="10.5" font-weight="700" fill="#0369a1">H33 (0.2778)</text>
+<circle cx="365.0" cy="127.2" r="6.2" fill="#0284c7" stroke="#ffffff" stroke-width="1"/>
+<text x="283" y="400" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e293b">Instrument C_pied DTI (Quaternary Piedmont SGMC Off-Catalogue)</text>
+<text x="22" y="211" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1e293b" transform="rotate(-90 22 211)">User-Supplied Public Leaderboard DTI</text>
+<rect x="575" y="66" width="470" height="290" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+<line x1="575" y1="356.0" x2="1045" y2="356.0" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="567" y="360.0" text-anchor="end" font-size="11" fill="#475569">0.00</text>
+<line x1="575" y1="285.3" x2="1045" y2="285.3" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="567" y="289.3" text-anchor="end" font-size="11" fill="#475569">0.05</text>
+<line x1="575" y1="214.5" x2="1045" y2="214.5" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="567" y="218.5" text-anchor="end" font-size="11" fill="#475569">0.10</text>
+<line x1="575" y1="143.8" x2="1045" y2="143.8" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="567" y="147.8" text-anchor="end" font-size="11" fill="#475569">0.15</text>
+<line x1="575" y1="73.1" x2="1045" y2="73.1" stroke="#e2e8f0" stroke-dasharray="3,3"/>
+<text x="567" y="77.1" text-anchor="end" font-size="11" fill="#475569">0.20</text>
+<rect x="602.0" y="350.8" width="25" height="5.2" fill="#0284c7" rx="2"/>
+<rect x="630.0" y="252.7" width="25" height="103.3" fill="#cbd5e1" stroke="#64748b" stroke-width="0.8" rx="2"/>
+<rect x="658.0" y="200.4" width="26" height="155.6" fill="#059669" rx="2"/>
+<line x1="671.0" y1="174.7" x2="671.0" y2="225.9" stroke="#064e3b" stroke-width="1.8"/>
+<line x1="666.0" y1="174.7" x2="676.0" y2="174.7" stroke="#064e3b" stroke-width="1.8"/>
+<line x1="666.0" y1="225.9" x2="676.0" y2="225.9" stroke="#064e3b" stroke-width="1.8"/>
+<text x="671.0" y="168.7" text-anchor="middle" font-size="10.5" font-weight="700" fill="#065f46">0.1100</text>
+<text x="643.0" y="373" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Inst. A</text>
+<text x="643.0" y="387" text-anchor="middle" font-size="10" fill="#64748b">Hide-Recover</text>
+<rect x="716.0" y="127.7" width="25" height="228.3" fill="#0284c7" rx="2"/>
+<rect x="772.0" y="112.5" width="26" height="243.5" fill="#059669" rx="2"/>
+<line x1="785.0" y1="82.8" x2="785.0" y2="141.8" stroke="#064e3b" stroke-width="1.8"/>
+<line x1="780.0" y1="82.8" x2="790.0" y2="82.8" stroke="#064e3b" stroke-width="1.8"/>
+<line x1="780.0" y1="141.8" x2="790.0" y2="141.8" stroke="#064e3b" stroke-width="1.8"/>
+<text x="785.0" y="76.8" text-anchor="middle" font-size="10.5" font-weight="700" fill="#065f46">0.1722</text>
+<text x="757.0" y="373" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Inst. A_quad</text>
+<text x="757.0" y="387" text-anchor="middle" font-size="10" fill="#64748b">4-Quad Blind</text>
+<rect x="830.0" y="223.3" width="25" height="132.7" fill="#0284c7" rx="2"/>
+<rect x="858.0" y="241.2" width="25" height="114.8" fill="#cbd5e1" stroke="#64748b" stroke-width="0.8" rx="2"/>
+<rect x="886.0" y="187.6" width="26" height="168.4" fill="#059669" rx="2"/>
+<line x1="899.0" y1="158.1" x2="899.0" y2="213.7" stroke="#064e3b" stroke-width="1.8"/>
+<line x1="894.0" y1="158.1" x2="904.0" y2="158.1" stroke="#064e3b" stroke-width="1.8"/>
+<line x1="894.0" y1="213.7" x2="904.0" y2="213.7" stroke="#064e3b" stroke-width="1.8"/>
+<text x="899.0" y="152.1" text-anchor="middle" font-size="10.5" font-weight="700" fill="#065f46">0.1191</text>
+<text x="871.0" y="373" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Inst. B′</text>
+<text x="871.0" y="387" text-anchor="middle" font-size="10" fill="#64748b">SGMC d ≥ 3 px</text>
+<rect x="944.0" y="223.5" width="25" height="132.5" fill="#0284c7" rx="2"/>
+<rect x="972.0" y="259.1" width="25" height="96.9" fill="#cbd5e1" stroke="#64748b" stroke-width="0.8" rx="2"/>
+<rect x="1000.0" y="198.6" width="26" height="157.4" fill="#059669" rx="2"/>
+<line x1="1013.0" y1="174.9" x2="1013.0" y2="223.5" stroke="#064e3b" stroke-width="1.8"/>
+<line x1="1008.0" y1="174.9" x2="1018.0" y2="174.9" stroke="#064e3b" stroke-width="1.8"/>
+<line x1="1008.0" y1="223.5" x2="1018.0" y2="223.5" stroke="#064e3b" stroke-width="1.8"/>
+<text x="1013.0" y="168.9" text-anchor="middle" font-size="10.5" font-weight="700" fill="#065f46">0.1112</text>
+<text x="985.0" y="373" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">Inst. C_pied</text>
+<text x="985.0" y="387" text-anchor="middle" font-size="10" fill="#64748b">Live Calib.</text>
+<rect x="587" y="75" width="12" height="10" fill="#0284c7" rx="1"/><text x="604" y="84" font-size="10.5" fill="#1e293b">H33 Incumbent (H19-5 on A_quad)</text>
+<rect x="795" y="75" width="12" height="10" fill="#cbd5e1" stroke="#64748b"/><text x="812" y="84" font-size="10.5" fill="#1e293b">Phase 4 Baseline</text>
+<rect x="920" y="75" width="12" height="10" fill="#059669" rx="1"/><text x="937" y="84" font-size="10.5" font-weight="700" fill="#065f46">Phase 5 Promoted</text>
+</svg>

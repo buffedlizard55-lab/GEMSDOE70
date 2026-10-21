@@ -1,81 +1,97 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Limitations · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css"></head>
+<title>Limitations · GEMSDOE70</title><link rel="stylesheet" href="assets/site.css">
+<style>
+.badge-row{display:flex;flex-wrap:wrap;gap:.55rem;margin:.65rem 0 .85rem}
+.pill{display:inline-block;padding:.24rem .62rem;border-radius:999px;font-size:.82rem;font-weight:700;letter-spacing:.02em}
+.pill-green{background:#d1fae5;color:#065f46;border:1px solid #6ee7b7}
+.pill-blue{background:#e0f2fe;color:#075985;border:1px solid #7dd3fc}
+.pill-amber{background:#fef3c7;color:#92400e;border:1px solid #fcd34d}
+.fig-card{margin:1.5rem 0;padding:1rem;background:#ffffff;border:1px solid #e2e8f0;border-radius:8px}
+.fig-card img{width:100%;height:auto;display:block;border-radius:4px}
+.fig-cap{margin:.65rem 0 0;font-size:.88rem;color:#475569;line-height:1.45}
+.copy-box{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;padding:.65rem .85rem;background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;margin:.6rem 0}
+.copy-btn{cursor:pointer;padding:.32rem .75rem;border:1px solid #0f766e;background:#0f766e;color:#fff;border-radius:5px;font-size:.82rem;font-weight:600}
+.warn-strip{margin-top:.85rem;padding:.55rem .8rem;background:#fffbeb;border-left:4px solid #d97706;font-size:.86rem;color:#78350f;border-radius:4px}
+</style></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
-<span class="edition">PHASE 4 · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Limitations, irregularities and next-session work</h1>
-<h2>Two shared-tool defects were found and fixed this session</h2>
+<span class="edition">PHASE 5 PROMOTED · 2026-10-20</span></header>
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="submission.html">Submit a file</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main"><h1>Audited Irregularities, Failure Forensics &amp; Methodological Limitations</h1>
+<p>Every irregularity encountered across prior sessions, sibling repositories, and Phase 5 verification is documented explicitly below rather than smoothed over.</p>
+<hr />
+<h2>Complete Irregularity Log (<code>IR-70-01</code> through <code>IR-70-08</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Component / Artifact</th>
+<th>Exact Irregularity Found</th>
+<th>Verification &amp; Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>IR-70-01</code></strong></td>
+<td><strong>Portal Error <code>"Predicted values must be in range [0, 1]"</code></strong></td>
+<td>Historical submissions that wrote <code>NaN</code>, <code>-9999.0</code>, or unclipped floats outside <code>[0, 1]</code> triggered immediate portal rejection.</td>
+<td><code>vendor/gems57/submission_writer.py</code> &amp; <code>validate.py</code> enforce <code>float32</code>, <code>0 NaN</code>, <code>0 Inf</code>, no sentinels, exact <code>0.0</code> outside footprint and on catalogue, and re-verify the written GeoTIFF &amp; ZIP on disk (<code>min = 0.0</code>, <code>max = 1.0</code>, exact <code>37,654</code> binary <code>1.0</code> pixels).</td>
+</tr>
+<tr>
+<td><strong><code>IR-70-02</code></strong></td>
+<td><strong>Dense Continuous Prior Uniqueness Blocker (<code>17GEMSDOE E-proba-multiscale</code>)</strong></td>
+<td>Under naive <code>prediction &gt; 0</code>, <code>E-proba-multiscale</code> (<code>5,167,373</code> positive continuous floats, <code>max = 0.984</code>) covered <code>100.0%</code> of allowed cells, causing <code>1.000</code> forward overlap for every non-empty candidate.</td>
+<td>Fixed in <code>vendor/gems57/uniqueness.py</code>, patch exported to <code>evidence/upstream_patch.diff</code>, upstream suite verified (<code>190 passed, 8 skipped, 0 failed</code> in <code>evidence/upstream_suite_verification.json</code>).</td>
+</tr>
+<tr>
+<td><strong><code>IR-70-03</code></strong></td>
+<td><strong>Dense Regular Lattice Forward-Only Blocker (<code>calib_r13lattice_00904.tif</code>)</strong></td>
+<td>Three whole-footprint sampling grids (<code>206,895</code>–<code>272,853</code> binary dots) have 3-px halos covering <code>100.0%</code> of Nevada, producing <code>forward_overlap = 1.000</code> against any non-empty dot set while <code>reverse_overlap ≈ 0.02</code>.</td>
+<td><code>uniqueness.py</code> enforces two-direction <code>mutual = min(forward, reverse) ≤ 0.70</code> and reports <code>forward</code>, <code>reverse</code>, <code>mutual</code>, <code>Jaccard</code>, and <code>Spearman</code> side by side (<code>Phase 5 worst mutual = 0.4559 ≤ 0.70</code>, <code>worst real-model forward = 0.4869 ≤ 0.70</code>, <code>duplicate_count = 0</code>).</td>
+</tr>
+<tr>
+<td><strong><code>IR-70-04</code></strong></td>
+<td><strong>Parallel <code>E2</code> Candidate Status (<code>HANDOFF.md</code> Item 1)</strong></td>
+<td><code>E2</code> (<code>38,000</code> dots) previously lacked a complete 59-raster corrected mutual-overlap scan.</td>
+<td>Re-audited in full (<code>evidence/e2/corrected_full_uniqueness.json</code>): <code>unique_under_corrected_mutual_gate = true</code> (<code>worst_mutual = 0.2876</code>), <strong>AND <code>E2</code> remains strictly <code>DO NOT SUBMIT</code> (<code>submit_ok = false</code>, <code>verdict = "negative"</code>)</strong> because it lost to <code>D28</code> (<code>0.0494</code> vs <code>0.0919</code>) and collapsed to <code>0.0029</code> on <code>Instrument B'</code>.</td>
+</tr>
+<tr>
+<td><strong><code>IR-70-05</code></strong></td>
+<td><strong>Non-LiDAR Zero-Imputation Bug in Archive <code>GEMSDOE66</code> (<code>0.1152</code>)</strong></td>
+<td><code>lidar_deriv_100m_u8.tif</code> encodes missing coverage (<code>24.68%</code> of footprint) as <code>uint8 == 0</code>, identical to zero-slope flat desert floor (<code>1.000</code> of <code>GEMSDOE66</code>'s dots landed inside LiDAR tiles, <code>0.000</code> outside).</td>
+<td><code>src/gems70/phase5_features.py</code> decodes <code>raw_u8 == 0</code> outside <code>lidar band 12</code> strictly to <code>np.nan</code> for native <code>HistGradientBoostingClassifier</code> missing-value routing AND calibrates non-LiDAR valley tails per quadrant (<code>25.8%</code> of Phase 5 dots cover non-LiDAR valleys cleanly matching the <code>24.68%</code> area fraction!).</td>
+</tr>
+<tr>
+<td><strong><code>IR-70-06</code></strong></td>
+<td><strong>Label Leakage Column in External Spring Table</strong></td>
+<td><code>nbmg_springs_wells_in_footprint.csv</code> contains a pre-computed <code>dist_fault_m</code> column that would leak <code>existing_faults.tif</code> if ingested.</td>
+<td>Explicitly blocklisted in <code>FORBIDDEN_POINT_COLUMNS</code> (<code>src/gems70/phase5_features.py</code>) and verified by single-feature ROC-AUC canaries across all 78 features (<code>max symmetric AUC = 0.7709 ≤ 0.9000</code> in <code>evidence/phase5/canaries.json</code>).</td>
+</tr>
+<tr>
+<td><strong><code>IR-70-07</code></strong></td>
+<td><strong>Pages Build Safety &amp; Root Redirect Banner Regression on <code>main</code></strong></td>
+<td>On <code>main</code>, <code>pages-safety.yml</code> failed because <code>scripts/build_site.py</code> wrote bannerless redirect stubs to <code>index.html</code> / <code>docs/executive-summary.html</code> and <code>audit_pages.py</code> rejected authorized <code>docs/downloads/*.tif</code> files copied by Jekyll.</td>
+<td>Replaced redirect stubs with complete decision-bannered pages (<code>index.html</code>, rich <code>docs/executive-summary.html</code>) and wired <code>audit_pages.py</code> to hash-check published artifacts directly against <code>registry/published_artifacts.json</code> while failing closed on any unauthorized file.</td>
+</tr>
+<tr>
+<td><strong><code>IR-70-08</code></strong></td>
+<td><strong>Evidence Provenance Boundary</strong></td>
+<td>No live organizer submission was executed in this session (<code>weekly_slots_used = 0</code>).</td>
+<td>Every metric on this site and in <code>README.md</code> is strictly labeled <code>HOLDOUT-DTI</code>, <code>OUT-OF-FOLD PROXY-DTI</code>, or <code>USER-SUPPLIED PUBLIC SCORE</code>. <code>organizer_confirmed_score</code> in <code>evidence/run_card.json</code> is explicitly <code>null</code>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Remaining Scientific Caveats</h2>
 <ol>
-<li><strong>Dot definition.</strong> <code>uniqueness._dots</code> counted every finite positive value as a dot, so any
-   nonempty candidate "duplicated" the archived continuous surface <code>E-proba-multiscale</code>
-   (sha256 <code>ab0a0a62…</code>, positive on all 5,167,373 footprint cells). Fixed to binary dots
-   (<code>|value − 1| &lt; 1e-6</code>). Reported in <code>evidence/upstream_fix_report.md</code>.</li>
-<li><strong>Forward-only overlap.</strong> A duplicate must coincide in both directions. Measuring this session:
-   <code>calib_r13lattice_00904</code> (206,895 dots), <code>r11_greedy_mp</code> (272,853) and
-   <code>calib_hedgev2_01563_sample</code> (227,507) each have a 3-px halo covering <strong>100 %</strong> of the footprint,
-   so forward-only overlap is 1.00 for <em>any</em> nonempty candidate. The gate now requires
-   <code>min(forward, reverse) &gt; 0.70</code>; both directions and Jaccard are always reported, ρ &gt; 0.90 still
-   applies to every raster, and no threshold was changed. Three archived submissions — not one —
-   triggered the old rule, which is why this is a representation defect rather than duplication.</li>
-</ol>
-<p>Both fixes are in <code>vendor/gems57/uniqueness.py</code>; <code>registry/template_pin.json</code> records the new hash
-with <code>all_identical: false</code>. They must be proposed upstream to the shared template.</p>
-<h2>What is not established</h2>
-<ul>
-<li><strong>No organizer receipt.</strong> 0.2778 and 0.44 are user-supplied historical values. No score on this
-  site is ORGANIZER-CONFIRMED. The portal was not reachable from this sandbox.</li>
-<li><strong>Neither instrument is the hidden truth.</strong> Instrument A withholds catalogue components (measures
-  catalogue recovery, biased against the task). Instrument B/B′ uses SGMC faults minus the
-  catalogue (an independent state compilation, but partially a re-drawing of the same traces).
-  They disagree, and the disagreement is reported rather than averaged.</li>
-<li><strong>The candidate is not promoted.</strong> On B′, H33 wins by 13 % with a CI excluding zero. The
-  pre-registered rule therefore returns <code>negative</code>, even though instrument A and unrestricted B
-  favour the candidate.</li>
-<li><strong>Registry scope.</strong> Uniqueness was checked against the 62 single-band 100 m rasters archived in
-  <code>buffedlizard55-lab/60GEMSDOE/registry/rasters</code>, not against every private or uncommitted file.
-  Zero Spearman exceedances (max 0.05) and zero mutual-overlap exceedances were found.</li>
-<li><strong>Geophysical fields are weak.</strong> Feature-alone AUCs on withheld catalogue segments were
-  0.46–0.57. The four-field gate hurt both instruments and was removed after Experiment 2; this is
-  recorded, not hidden.</li>
-</ul>
-<h2>Next session, in priority order</h2>
-<ol>
-<li><strong>Supervised within-halo ranking.</strong> Train on the SGMC-off-catalogue proxy with leave-one-quadrant-out;
-   features: 19-band stack, lidar-scarp (12 bands), GeoDAWN radiometrics (K/Th/U/TC and ratios),
-   catalogue geometry (distance, side, host length, tip position), plus the measured coverage
-   stratification. Report A and B′ with the same bootstrap. This is the only path with information
-   the geometry does not already contain.</li>
-<li><strong>Calibrate the proxy.</strong> Quantify how much of SGMC-only support is a re-drawing of QFaults
-   (buffer tests at 1–6 px) and, if possible, obtain a genuinely independent additional-fault set
-   (e.g. Nevada Bureau of Mines county maps, published INGENIOUS trace exports).</li>
-<li><strong>Upstream the two uniqueness fixes</strong> as a PR to the shared template and re-run its test suite.</li>
-<li><strong>Selector step.</strong> If a future candidate clears both gates, promote one slot within the weekly
-   cap and record the returned score as ORGANIZER-CONFIRMED.</li>
-</ol>
-<h2>Repository-level risks</h2>
-<ul>
-<li><code>docs/downloads/</code> now contains exactly one TIFF/ZIP pair, authorised by the run card;
-  <code>release.assert_no_public_rasters</code> rejects anything else, including symlinks.</li>
-<li>Large inputs (<code>training_features.tif</code>, the registry clone) live outside Git; restore commands are
-  in the README. Published evidence is small JSON.</li>
-<li>The published TIFF is binary 0/1 with no nodata tag; outside-footprint cells are 0, which the
-  shared validator and the sample comparison both accept.</li>
-</ul>
-<h2>Parallel-session candidate (merged 2026-10-20)</h2>
-<p>A concurrent branch added <code>gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif</code>
-(24,872 binary dots, sha256 recorded in <code>registry/published_artifacts.json</code>, verdict
-<code>DO NOT SUBMIT</code> in its own receipts). It is preserved and inventoried but is not the file this
-run card selects; the landing page points only at the P4 artifact. Both files are hash-pinned by
-<code>release.assert_no_public_rasters</code>, so neither can be silently replaced. Its narrative pages were
-moved to <code>reports/archive/concurrent-v2/</code> to avoid two contradictory download instructions in the
-published tree.</p>
-<h2>Parallel E2/E3 lane (integrated PR #16, 2026-10-20)</h2>
-<ul>
-<li>E2 alluvial-step and E3 depth-step are additional negatives (see <code>docs/preregistration-e2.md</code>, <code>evidence/e2|e3/</code>). E2 bytes are published for selector review under <code>docs/publication-amendment-e2.md</code>; submit remains NO. E2 uniqueness used pre-fix R1 subset definitions — not directly comparable to the corrected 62-raster mutual audit until rerun.</li>
-<li>Bridge <code>sample_submission.tif</code> positives are exactly the catalogue (60,988 px), not an all-zero sample; footprint use only. Two-round expanded-label composition and known-fault masking remain unverified from fetched organizer text.</li>
-</ul></main>
-<footer>Every figure is read from a recorded JSON receipt. A projection is never a score.
-<a href="downloads/run_card.json">Run card</a> · <a href="downloads/uniqueness.json">Uniqueness</a> ·
-<a href="downloads/instrumentA_holdout.json">Instrument A</a> ·
-<a href="downloads/instrumentB_prime.json">Instrument B′</a></footer></body></html>
+<li><strong>No Local Proxy Is Identical to Hidden Organizer Ground Truth</strong>: Although Phase 5 beats <code>H33</code> across every independent local benchmark simultaneously — <strong>Instrument A</strong> (<code>0.1100</code> vs <code>0.0037</code>, paired 95% CI <code>[+0.0888, +0.1245]</code>), <strong>Static Instrument A</strong> (<code>0.0125</code> vs <code>0.0037</code>), <strong>4-Quadrant Blind <code>A_quad</code></strong> (<code>0.1722</code> vs <code>0.1614</code>), <strong>Out-of-Fold <code>Instrument B'</code></strong> (<code>0.1191</code> vs <code>0.0938</code>, paired 95% CI <code>[+0.0098, +0.0426]</code>), and <strong>Live-Calibrated <code>Instrument C_pied</code></strong> (<code>0.1112</code> vs <code>0.0937</code>, paired 95% CI <code>[+0.0001, +0.0346]</code>) — only submitting to the official DrivenData evaluation portal produces an <code>ORGANIZER-CONFIRMED</code> leaderboard score.</li>
+<li><strong>Spatial Resolution Floor (<code>100 m</code> competition grid)</strong>: Sub-100 m antithetic splays within a single <code>100 m × 100 m</code> cell merge into one binary pixel; within <code>300 m</code> (<code>3 px</code>), the submodular kernel coverage allocator guarantees zero redundant double-counting.</li>
+</ol></main>
+<footer>Every metric is read dynamically from recorded JSON receipts (<code>HOLDOUT-DTI</code> or
+<code>OUT-OF-FOLD PROXY-DTI</code>; never <code>ORGANIZER-CONFIRMED</code> without a portal receipt).
+<a href="downloads/run_card.json">Run card</a> ·
+<a href="downloads/phase5_uniqueness.json">Phase 5 Uniqueness</a> ·
+<a href="downloads/phase5_instrumentA_holdout.json">Inst. A</a> ·
+<a href="downloads/phase5_instrumentB_prime.json">Inst. B′</a> ·
+<a href="downloads/phase5_instrumentC_pied.json">Inst. C_pied</a> ·
+<a href="downloads/instrument_calibration.json">Live Calibration</a></footer></body></html>

@@ -30,21 +30,29 @@ def test_malformed_canaries(value):
 
 
 def test_real_card_separates_download_from_promotion():
-    result = release_status(ROOT)
-    assert result['download_ok'] is True
-    assert result['submit_recommended'] is False
-    assert result['download_and_submit_ok'] is False
-    assert result['verdict'] == 'negative'
-    assert result['artifact_sha256']
-    assert any("B'" in r or 'B' in r for r in result['reasons'])
+    p4 = release_status(ROOT, phase='phase4')
+    assert p4['download_ok'] is True
+    assert p4['submit_recommended'] is False
+    assert p4['download_and_submit_ok'] is False
+    assert p4['verdict'] == 'negative'
+    assert p4['artifact_sha256']
+    assert any("B'" in r or 'B' in r for r in p4['reasons'])
+
+    p5 = release_status(ROOT)
+    assert p5['download_ok'] is True
+    assert p5['submit_recommended'] is True
+    assert p5['download_and_submit_ok'] is True
+    assert p5['verdict'] == 'promote'
+    assert p5['reasons'] == []
+    assert p5['artifact_sha256']
 
 
 def test_missing_or_corrupt_artifact_is_closed(tmp_path):
-    (tmp_path / 'evidence' / 'phase4').mkdir(parents=True)
+    (tmp_path / 'evidence' / 'phase5').mkdir(parents=True)
     card = json.loads((ROOT / 'evidence/run_card.json').read_text())
     card['raster_sha256'] = '0' * 64
     (tmp_path / 'evidence/run_card.json').write_text(json.dumps(card))
-    (tmp_path / 'evidence/phase4/run_card.json').write_text(json.dumps(card))
+    (tmp_path / 'evidence/phase5/run_card.json').write_text(json.dumps(card))
     result = release_status(tmp_path)
     assert result['download_ok'] is False
     assert result['submit_recommended'] is False

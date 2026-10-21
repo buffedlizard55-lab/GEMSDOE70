@@ -8,12 +8,14 @@ import rasterio
 ROOT = Path(__file__).resolve().parents[1]
 
 
-@pytest.mark.parametrize('phase', ['phase2', 'phase3', 'phase4'])
+@pytest.mark.parametrize('phase', ['phase2', 'phase3', 'phase4', 'phase5'])
 def test_saved_pooled_scores_match_fold_terms(phase):
     base = ROOT / 'evidence' / phase
     files = {'instrumentA_holdout.json': 'instrumentA_folds.json',
+             'instrumentA_quad.json': 'instrumentA_quad_folds.json',
              'instrumentB_proxy.json': 'instrumentB_folds.json',
              'instrumentB_prime.json': 'instrumentB_prime_folds.json',
+             'instrumentC_pied.json': 'instrumentC_pied_folds.json',
              'instrumentB_all.json': None}
     checked = 0
     for summary_name, folds_name in files.items():

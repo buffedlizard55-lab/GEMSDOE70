@@ -34,7 +34,9 @@ def main():
     (ROOT / 'evidence/release-status.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result, indent=2))
     if not args.expect_negative:
-        return 0 if result.get('approved_for_weekly_slot') is True else 2
+        ok = (result.get('approved_for_weekly_slot') is True
+              and bool(result.get('template_integrity_ok')))
+        return 0 if ok else 2
     # '--expect-negative' now means: verdict negative, NOT promoted, no slot used.
     # A downloadable (non-promoted) artifact is the expected state of this repo.
     expected = (result.get('verdict') == 'negative'
