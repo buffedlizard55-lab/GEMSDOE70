@@ -1,0 +1,126 @@
+{
+  "hypothesis": "Deferred: supervised within-halo ranking from the previous handoff",
+  "mechanism": "Learn residual fault evidence using leave-one-quadrant-out proxy training; not run because literal lane preflight stops.",
+  "non_fault_mimic": "SGMC re-digitization offsets, lithologic contacts and erosional scarps",
+  "holdout_dti": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": null,
+    "ci95": null,
+    "withheld_positive_pixels": null,
+    "reason": "No new experiment after fixed-mass overlap stop."
+  },
+  "archived_p4_holdout_not_a_new_result": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "dti": 0.08277116132149999,
+    "ci95": [
+      0.07551434562164547,
+      0.08951206859535318
+    ],
+    "withheld_positive_pixels": 11321,
+    "source": "evidence/phase4/run_card.json"
+  },
+  "correlation_overlap_vs_registry": {
+    "source": "evidence/review/literal_protocol_audit.json",
+    "witness_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "witness_rasters_checked": 1,
+    "footprint_halo_coverage": 0.9987132726822701,
+    "minimum_forward_overlap_at_fixed_budget": 0.8234184947150369,
+    "new_surface_spearman": null,
+    "archived_p4_vs_witness": {
+      "repo": "buffedlizard55-lab/60GEMSDOE",
+      "submission": "registry/rasters/calib_r13lattice_00904.tif",
+      "file": ".cache/registry/calib_r13lattice_00904.tif",
+      "sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+      "decoded_sha256": "3140ac4bcfca3d20dc2684c1efb7d8b770d9f861ac3f1869e360b0451970cfec",
+      "their_dots": 206895,
+      "my_dots_within_3px_of_theirs": 1.0,
+      "their_dots_within_3px_of_mine": 0.21055607917059377,
+      "mutual_overlap": 0.21055607917059377,
+      "spearman_full_footprint": -0.0004249861963070026,
+      "jaccard_dot_sets": 0.006051555467792231,
+      "identical_bytes": false,
+      "identical_decoded_predictions": false,
+      "duplicate_by_rho": false,
+      "duplicate_by_overlap": false,
+      "forward_only_overlap_warning": true,
+      "duplicate_by_jaccard": false
+    },
+    "stop_required": true
+  },
+  "raster_sha256": null,
+  "new_raster_generated": false,
+  "validator_output": null,
+  "archived_p4": {
+    "artifact": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+    "raster_sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+    "validator_output": {
+      "file": "docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif",
+      "bytes": 126097,
+      "sha256": "0fd1ad9ef58c9bbe0ed1781d36a31f76424db11930502623153dd69581ab35e7",
+      "meta": {
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "dtype": "float32",
+        "count": 1,
+        "nodata": null,
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "profile_compress": "deflate"
+      },
+      "band_description": [
+        null
+      ],
+      "n_finite": 12279160,
+      "n_nan": 0,
+      "n_infinite": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.0030664964579045773,
+      "emitted_positive_pixels": 37654,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "dimensions_3730x3292": true,
+        "crs_epsg_32611": true,
+        "transform_matches_sample_submission": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "no_sentinel_values": true,
+        "range_0_1_guaranteed": true,
+        "min_ge_0": true,
+        "max_le_1": true,
+        "in_footprint_all_finite": true,
+        "in_footprint_range_0_1": true,
+        "outside_footprint_zero": true,
+        "zero_dots_on_mapped_catalogue": true
+      },
+      "all_checks_passed": true,
+      "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+      "on_catalogue_positive_pixels": 0,
+      "in_footprint_positive_pixels": 37654,
+      "footprint_fraction": 0.007286874781441169
+    },
+    "download_ok_for_review": true,
+    "protocol_unique": false,
+    "submit_recommended": false
+  },
+  "submission_name": "gems70-literal-lane-review-20261020-NO-SUBMISSION",
+  "submission_note": "Negative preflight: fixed-mass overlap exceeds literal gate against binary registry lattice. No new TIFF or slot.",
+  "verdict": "negative",
+  "download_ok": false,
+  "submit_recommended": false,
+  "weekly_slots_used": 0,
+  "new_scientific_experiments": 0,
+  "organizer_confirmed_score": null
+}

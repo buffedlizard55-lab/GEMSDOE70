@@ -1,0 +1,23 @@
+{
+  "evidence_class": "LITERAL-LANE RECEIPT (session-2 lane; shared vendor/gems57 uniqueness rows in evidence/uniqueness3.json)",
+  "files": {
+    "S2-E3": {
+      "artifact": "docs/downloads/gems70-fusion-dotted-37654-20261020.tif",
+      "raster_sha256": "83b711a20b518eb89040456f70e6d750d3d361536390df198184c4d2818b9c74",
+      "literal_lane_status": {
+        "policy": "literal-forward-v1",
+        "overlap_limit": 0.7,
+        "rho_limit": 0.9,
+        "stop_required": true,
+        "protocol_unique": false,
+        "complete_scan": true,
+        "duplicate_witnesses": [
+          "57GEMSDOE:registry/rasters/GEMSDOE49__gate_ortho_w0.25-40k.tif (forward 3px overlap 0.896)",
+          "13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif (forward 3px overlap 0.9999, near-universal lattice)"
+        ],
+        "invalid_rows": [],
+        "scope": "940 SHA-verified accessible rasters (71 repos + quarantined H70-C) via scripts/run_uniqueness_batch.py; not an organizer/private registry."
+      }
+    }
+  }
+}

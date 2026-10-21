@@ -1,0 +1,218 @@
+{
+  "hypothesis": "P5 cover-conditioned analytic-signal width ranking, SGMC LOQO cross-fit",
+  "mechanism": "Gaussian-scale magnetic analytic-signal width x gravity gradient x basement cover, trained on SGMC-only proxy faults, restricted 3..32 px off visible catalogue",
+  "non_fault_mimic": "buried volcanic dike or remanence boundary; acquisition-flight leveling seam",
+  "evidence_class": "HOLDOUT-DTI on A, proxy HOLDOUT-DTI on B'; no organizer-confirmed submission receipt",
+  "hypothesis_source": "docs/preregistration-p5.md",
+  "preregistration_sha256": "bf19b11a73ff82531495efec7fc3c69a102b78e46fff91116e7a43939447a8f8",
+  "holdout_dti": {
+    "instrument_a": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.012261896872041017,
+      "ci95": [
+        0.007525362402102077,
+        0.017652899299874254
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 173.95462263586575,
+      "fpw": 25475.043938340707,
+      "fnw": 11147.045377364133
+    },
+    "paired_vs_visible_p4": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": -0.06078039524854062,
+      "ci95": [
+        -0.06869402290922029,
+        -0.05215269960053514
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "instrument_b_prime_proxy": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.025423516361428998,
+      "ci95": [
+        0.018528422238356795,
+        0.033629285104751244
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 1344.0583191641003,
+      "fpw": 23241.62000772985,
+      "fnw": 58592.941680835924
+    },
+    "paired_vs_h33": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "delta": -0.06834705225349563,
+      "ci95": [
+        -0.08194331910889527,
+        -0.05446790963256574
+      ],
+      "withheld_positive_pixels": 59937
+    }
+  },
+  "comparators": {
+    "a_visible_only_p4": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.07304229212058164,
+      "ci95": [
+        0.06633926457325817,
+        0.07924179489641048
+      ],
+      "withheld_positive_pixels": 11321,
+      "tpw": 1208.3106567824766,
+      "fpw": 36220.773893449084,
+      "fnw": 10112.689343217526
+    },
+    "b_prime_h33_frozen": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.09377056861492462,
+      "ci95": [
+        0.08406025672026415,
+        0.10431615494156674
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 5213.410730189337,
+      "fpw": 33026.171471565896,
+      "fnw": 54723.58926981065
+    },
+    "b_prime_p4_frozen": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.08116240066330835,
+      "ci95": [
+        0.07171297971609517,
+        0.09028148578537261
+      ],
+      "withheld_positive_pixels": 59937,
+      "tpw": 4534.37510614471,
+      "fpw": 35057.26178772765,
+      "fnw": 55402.62489385531
+    }
+  },
+  "correlation_overlap_vs_registry": {
+    "stage": "final continuous production surface; no dot placement by preregistered literal stop",
+    "rasters_checked": 70,
+    "inventory_scope": "62 archived 60GEMSDOE rasters plus 8 locally inventoried prior TIFFs; external/unindexed/private files not enumerated. Binary-dot checker reports zero dots for this continuous field; positive-support overlap is independent.",
+    "worst_spearman_full_footprint": 0.023162112298445472,
+    "worst_rho_submission": "h60_officialstack_50k.tif",
+    "binary_one_dots": 0,
+    "forward_overlap_positive_support_lattice": 1.0,
+    "literal_3px_forward_gate_passes": false,
+    "literal_witness_file": "calib_r13lattice_00904.tif",
+    "literal_witness_sha256": "b4570b406efec198eb2f4d142ad8d0d6184b14b66f2f52b5c4d697f0647dc9b2",
+    "positive_support_pixels": 54512,
+    "shared_tool_dot_uniqueness": false,
+    "shared_tool_note": "Shared _dots uses exact-one binary definition, so zero dot overlap here is NOT a forward-overlap clearance."
+  },
+  "gate_results": {
+    "a_beats_visible_p4_significant": false,
+    "b_prime_beats_h33_significant": false,
+    "literal_dot_overlap_gate_passed": false,
+    "no_canary_alarm": true,
+    "no_surface_rho_alarm": true,
+    "local_format_validated": true
+  },
+  "raster_sha256": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a",
+  "validator_output": {
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+    "bytes": 259128,
+    "sha256": "30a52f9af75af5e9241e0928cc941a71189cf2e3301d2320460ff70d230c396a",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 0.9899818301200867,
+    "mean": 0.002197776222601533,
+    "emitted_positive_pixels": 54512,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 54512,
+    "footprint_fraction": 0.010549267490463723
+  },
+  "submission_name": "gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT",
+  "submission_note": "P5 magnetic width and cover, SGMC LOQO proxy; continuous review map. Literal dot overlap blocks promotion; DO NOT SUBMIT",
+  "note_chars": 120,
+  "raster_path": "docs/downloads/gems70-p5-cover-magnetic-loqo-20261020-DO-NOT-SUBMIT.tif",
+  "download_ok": true,
+  "submit_recommended": false,
+  "download_and_submit_ok": false,
+  "verdict": "negative",
+  "verdict_reason": "The literal forward 3px dot-overlap rule has a hash-verified 100%-interior-cover lattice: any dot placement inside the feature-valid domain is a duplicate. This continuous map is for review, not a promoted competition submission; holdout gates also require both CIs >0.",
+  "weekly_slots_used": 0,
+  "organizer_confirmed_score": null,
+  "experiment_count": 1,
+  "elapsed_seconds": 80.36,
+  "max_elapsed_seconds": 7200,
+  "canaries_path": "evidence/p5/canaries.json",
+  "blocker_path": "evidence/p5/literal_blocker.json",
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "method_source_sha256": {
+    "src/gems70/phase5.py": "7e3670bc712a56ea39142e8a349ba753f10ecf86b845b713f8853075033d5cf3",
+    "scripts/run_experiment_p5_cover.py": "f8cffee242b2ad3a76ccf40a6cc2f0439991037894899cbec3144826c8fef422"
+  },
+  "production_train_receipt": {
+    "positives_sampled": 25000,
+    "negatives_sampled": 125000,
+    "fold_index": 4,
+    "seed": 70505,
+    "train_region_pixels": 4882621
+  },
+  "limitations": [
+    "The SGMC map is not the hidden expert truth and may redraw the same faults.",
+    "Training data are pinned owner mirrors, not independently organizer-authenticated.",
+    "No calibrated probabilities, private-test score or organizer acceptance is asserted.",
+    "Positive-support overlap (not exact-one dots) against the lattice is above the user limit; never upload as a cleared dot submission."
+  ],
+  "reporting_amendment": "After concurrent main integration: re-read unchanged TIFF; expanded comparison from 66 to current registry; repaired mislabelled training-region metadata, NOT the model or scores. Integration path relocation preserves main\u2019s unrelated P5 script; model output unchanged. New concurrent inventory expands scan 68->70; TIFF and fold scores unchanged. P4 comparator fold receipt pinned at evidence/p5/p4_visible_baseline_folds.json after main changed canonical phase4; scores and TIFF unchanged.",
+  "p4_visible_baseline_folds_sha256": "e020d9f2ca79416a5c943bc9938ba46080008fe5bba252a9e120697c11a8b401"
+}

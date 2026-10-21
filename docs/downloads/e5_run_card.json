@@ -1,0 +1,219 @@
+{
+  "hypothesis": "E5-1 supervised within-halo ranking: HGB on SGMC off-catalogue proxy (d>=3px), leave-one-quadrant-out",
+  "mechanism": "OOF probability surface from 25 features (19-band stack, analytic signal, 3 gradient magnitudes, catalogue geometry); P4 emission (one dot per 7x7 stratum at stratum max, 5px NMS) plus Amendment-1 same-NMS fill to exactly 37,654 binary dots, band 2.4-32 px",
+  "non_fault_mimic": "SGMC compilation/redrawing bias and lithologic contacts sharing the potential-field signature",
+  "verdict": "negative",
+  "evidence_class": "HOLDOUT-DTI (A) and PROXY-DTI (B/B'); neither organizer-confirmed",
+  "instrument_a_holdout": {
+    "candidate": {
+      "dti": 0.08146028216098136,
+      "ci95": [
+        0.07530256108053304,
+        0.08789252175324937
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "random_control": {
+      "dti": 0.04552157113483009,
+      "ci95": [
+        0.040533040959797983,
+        0.05073492147255337
+      ],
+      "withheld_positive_pixels": 11321
+    },
+    "h33_reference": {
+      "dti": 0.0036997816856295857,
+      "ci95": [
+        0.003037134722219959,
+        0.004497470563248019
+      ],
+      "withheld_positive_pixels": 11321
+    }
+  },
+  "instrument_b_prime_proxy": {
+    "candidate": {
+      "dti": 0.08864236076445046,
+      "ci95": [
+        0.07943512512018328,
+        0.09799987592664772
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "random_control": {
+      "dti": 0.07275602594973297,
+      "ci95": [
+        0.06877802653742267,
+        0.07635308518903165
+      ],
+      "withheld_positive_pixels": 59937
+    },
+    "h33_reference": {
+      "dti": 0.09377056861492462,
+      "ci95": [
+        0.08375251373533825,
+        0.104028711800872
+      ],
+      "withheld_positive_pixels": 59937
+    }
+  },
+  "instrument_b_unrestricted": {
+    "candidate": {
+      "dti": 0.09436659256741703,
+      "ci95": [
+        0.08597171712899104,
+        0.10238355850809006
+      ]
+    },
+    "random_control": {
+      "dti": 0.07250914548419705,
+      "ci95": [
+        0.06915499189462358,
+        0.07585722359909393
+      ]
+    },
+    "h33_reference": {
+      "dti": 0.09059897608840377,
+      "ci95": [
+        0.08214959351246441,
+        0.09919171835657462
+      ]
+    }
+  },
+  "paired_a_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": 0.07776050047535178,
+    "ci95": [
+      0.07161482210856254,
+      0.08411439809934336
+    ],
+    "withheld_positive_pixels": 11321
+  },
+  "paired_b_prime_vs_h33": {
+    "evidence_class": "HOLDOUT-DTI",
+    "evaluator_version": "gems57-pooled-hide-v2",
+    "delta": -0.005128207850474159,
+    "ci95": [
+      -0.01607804038154162,
+      0.0052556937589088235
+    ],
+    "withheld_positive_pixels": 59937
+  },
+  "gate_a_candidate_ge_h33": true,
+  "gate_b_prime_candidate_gt_h33_significant": false,
+  "canary_worst_single_feature_auc": 0.7545956807802461,
+  "oof_auc_by_quadrant": {
+    "0": 0.6889014562867857,
+    "1": 0.751954844557529,
+    "2": 0.7806340397160824,
+    "3": 0.7040324511066424
+  },
+  "correlation_overlap_vs_registry": {
+    "surface_stage": {
+      "worst_spearman_full_footprint": 0.09856215977177266,
+      "worst_rho_submission": "57GEMSDOE__faultzone-anatomy-60000px-prev.tif",
+      "duplicate_count": 0
+    },
+    "final_dots_stage": {
+      "rasters_checked": 62,
+      "inventory_scope": "62 single-band 100 m rasters archived in buffedlizard55-lab/60GEMSDOE registry/rasters; not an organizer registry and not exhaustive",
+      "worst_mutual_overlap": 0.3079572064833096,
+      "worst_mutual_submission": "calib_h25ctx_01280.tif",
+      "worst_forward_overlap": 1.0,
+      "worst_forward_submission": "calib_r13lattice_00904.tif",
+      "worst_spearman_full_footprint": 0.014668621970587822,
+      "worst_rho_submission": "r11_greedy_mp.tif",
+      "worst_jaccard": 0.011169836881303387,
+      "duplicate": false
+    }
+  },
+  "raster_sha256": "8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2",
+  "raster_sha256_reason": null,
+  "validator_output": {
+    "file": "/home/user/GEMSDOE70/docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif",
+    "bytes": 150815,
+    "sha256": "8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2",
+    "meta": {
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "dtype": "float32",
+      "count": 1,
+      "nodata": null,
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "profile_compress": "deflate"
+    },
+    "band_description": [
+      null
+    ],
+    "n_finite": 12279160,
+    "n_nan": 0,
+    "n_infinite": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.0030664964579045773,
+    "emitted_positive_pixels": 37654,
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "dimensions_3730x3292": true,
+      "crs_epsg_32611": true,
+      "transform_matches_sample_submission": true,
+      "no_nan_anywhere": true,
+      "no_inf_anywhere": true,
+      "no_sentinel_values": true,
+      "range_0_1_guaranteed": true,
+      "min_ge_0": true,
+      "max_le_1": true,
+      "in_footprint_all_finite": true,
+      "in_footprint_range_0_1": true,
+      "outside_footprint_zero": true,
+      "zero_dots_on_mapped_catalogue": true
+    },
+    "all_checks_passed": true,
+    "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+    "on_catalogue_positive_pixels": 0,
+    "in_footprint_positive_pixels": 37654,
+    "footprint_fraction": 0.007286874781441169
+  },
+  "submission_name": "gems70-e5-supervised-loqo-37654-20261020",
+  "submission_note": "E5 supervised LOQO within-halo ranking on SGMC proxy, 37654 binary dots; HOLDOUT+PROXY evidence",
+  "note_chars": 95,
+  "download_ok": true,
+  "submit_recommended": false,
+  "weekly_slots_used": 0,
+  "experiment_count_this_lane": 1,
+  "elapsed_seconds": 286.76,
+  "organizer_confirmed_score": null,
+  "evaluator_implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
+  "method_source_sha256": {
+    "scripts/run_experiment_e5.py": "47cd203352948034109cdbbd4534120fd34a7d0b76ddd6dab689346838118751",
+    "scripts/run_experiment_v4.py": "b68360644e42164505b41f25de70b9ee72bc99c08b310a1caf7319cec04ac462",
+    "docs/preregistration-e5.md": "24b87253dcbccde132a29c4b730b774a47a43e7bd07e35283ff7d2280302431d"
+  },
+  "registered_parameters": {
+    "dot_count": 37654,
+    "block_px": 7,
+    "nms_px": 5.0,
+    "d_min_px": 2.4,
+    "d_max_px": 32.0,
+    "b_prime_gap_px": 3.0,
+    "seed": 70501,
+    "neg_cap": 240000,
+    "model": "HistGradientBoostingClassifier(max_iter=300,learning_rate=0.06,max_leaf_nodes=31,min_samples_leaf=40,l2=1.0)"
+  }
+}
