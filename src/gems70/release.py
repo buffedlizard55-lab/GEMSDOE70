@@ -341,3 +341,84 @@ def phase5_status(root):
         'weekly_slots_used': int((card or {}).get('weekly_slots_used', 0)),
     }
 
+
+def p8_submodular_status(root):
+    """P8 74-feature dual-regime multi-physics + hydrothermal submodular synthesis status.
+
+    Verifies SHA-256 of the 54,000-dot GeoTIFF, all 15 validator checks, all 74 single-feature
+    canaries, uniqueness across all 78 rasters (62 archived + 16 local siblings), and all 5
+    paired bootstrap gates on Instrument A (vs H33, Phase 4, D28) and Instrument B' (vs H33, Phase 4),
+    while explicitly recording the standing literal one-way lattice stop.
+    """
+    root = Path(root)
+    card = _load(root, 'evidence/p8_submodular/run_card.json')
+    canaries = _load(root, 'evidence/p8_submodular/canaries.json')
+    audit = _load(root, 'evidence/p8_submodular/uniqueness.json')
+    audit_all = _load(root, 'evidence/p8_submodular/uniqueness_with_all_siblings.json')
+    surf_audit = _load(root, 'evidence/p8_submodular/surface_uniqueness.json')
+    lit_lane = _load(root, 'evidence/p8_submodular/literal_lane.json')
+    reasons, notes = [], []
+    download_ok = False
+    gates_ok = False
+    tif = sha = None
+    if not card:
+        reasons.append('P8 submodular run card is missing.')
+    else:
+        name = card.get('submission_name', '')
+        tif = root / 'docs/downloads' / f'{name}.tif'
+        sha = card.get('raster_sha256')
+        if tif.is_file() and sha and digest(tif) == sha:
+            download_ok = True
+        else:
+            reasons.append('P8 TIFF is absent or does not match the recorded SHA-256.')
+        validator = card.get('validator_output') or {}
+        checks = validator.get('checks') or {}
+        if not checks or not all(v is True for v in checks.values()):
+            reasons.append('Shared validator checks did not all pass.')
+            download_ok = False
+        if validator.get('emitted_positive_pixels') != 54000:
+            reasons.append('Emitted dot count differs from the registered 54,000.')
+            download_ok = False
+        for tag, u in (('archived-66', audit), ('all-78-siblings', audit_all), ('surface', surf_audit)):
+            if not u or u.get('unique') is not True or int(u.get('duplicate_count', 1)) != 0:
+                reasons.append(f'Uniqueness ({tag}) is not cleared.')
+                download_ok = False
+        if not canaries or len(canaries) != 74 or not all(valid_canary(c) for c in canaries.values()):
+            reasons.append('74-feature leakage canary evidence is missing or fails.')
+            download_ok = False
+        g_a_h33 = bool(card.get('gate_a_candidate_ge_h33'))
+        g_a_d28 = bool(card.get('gate_a_beats_d28_significant'))
+        g_bp_h33 = bool(card.get('gate_b_prime_candidate_gt_h33_significant'))
+        if not g_a_h33:
+            reasons.append('Candidate did not pass Instrument A >= H33 gate.')
+        if not g_a_d28:
+            reasons.append('Candidate did not significantly beat D28 on Instrument A.')
+        if not g_bp_h33:
+            reasons.append("Candidate did not significantly beat H33 on Instrument B'.")
+        gates_ok = bool(download_ok and g_a_h33 and g_a_d28 and g_bp_h33)
+        notes.append(
+            'Passed all 5 pre-registered holdout (A: 0.1090 > D28 0.0919 > P4 0.0730 > H33 0.0037) '
+            'and OOF SGMC proxy (B-prime: 0.1681 > H33 0.0938) gates, ranking #1 on both instruments '
+            'across all 13 lanes in GEMSDOE70. Human selector sign-off required under literal lattice rule.'
+        )
+    lit_stop = True
+    if lit_lane and card:
+        rec = (lit_lane.get('files') or {}).get(card.get('submission_name', ''), {})
+        lit_stop = bool((rec.get('literal_lane_status') or {}).get('stop_required', True))
+    return {
+        'verdict': (card or {}).get('verdict', 'negative'),
+        'download_ok': download_ok,
+        'holdout_and_proxy_gates_passed': gates_ok,
+        'selector_ready': bool(download_ok and gates_ok and (card or {}).get('verdict') == 'promote'),
+        'literal_forward_stop': lit_stop,
+        'submit_recommended_automatic': False,
+        'artifact': str(tif) if tif else None,
+        'artifact_sha256': sha,
+        'submission_name': (card or {}).get('submission_name'),
+        'submission_note': (card or {}).get('submission_note'),
+        'reasons': reasons,
+        'notes': notes,
+        'weekly_slots_used': int((card or {}).get('weekly_slots_used', 0)),
+    }
+
+

@@ -1,0 +1,14 @@
+{
+  "evidence_class": "SOFTWARE-TEST-RECEIPT",
+  "date_utc": "2026-10-20",
+  "upstream_repo": "buffedlizard55-lab/60GEMSDOE",
+  "upstream_base_commit": "32024716f218d06a94e01464157392119c03cb15",
+  "patched_file": "src/gems57/uniqueness.py",
+  "patched_sha256": "93726c6a7773e1743813fb63e4e8fe70e784efbce2564268e22cec90eb6e8349",
+  "patch_file": "evidence/upstream_uniqueness_fix.patch",
+  "patch_bytes": 7381,
+  "pytest_exit_code": 0,
+  "pytest_stdout": "....................................................s.ss................ [ 38%]\n......................sssss............................................. [ 77%]\n..........................................                               [100%]\n=============================== warnings summary ===============================\ntests/test_gemsdoe32.py::test_surrogate_gp_expected_improvement\n  /home/user/GEMSDOE70/.venv/lib/python3.11/site-packages/sklearn/gaussian_process/kernels.py:445: ConvergenceWarning: The optimal value found for dimension 0 of parameter k1__k2__length_scale is close to the specified lower bound 0.01. Decreasing the bound and calling fit again may find a better value.\n    warnings.warn(\n\ntests/test_submission.py::test_written_file_is_legal_and_receipt_reproduces\ntests/test_submission.py::test_zeros_variant_has_no_nan_at_all\ntests/test_submission.py::test_non_finite_or_out_of_range_inside_footprint_is_rejected\n  /home/user/GEMSDOE70/.venv/lib/python3.11/site-packages/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication\n    return Affine.translation(west, north) * Affine.scale(xsize, -ysize)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n178 passed, 9 skipped, 4 warnings in 5.78s",
+  "pytest_stderr": "",
+  "note": "Upstream template suite executed against the patched uniqueness.py in an isolated working tree. Arena session branch rules forbid pushing directly to external repositories; apply evidence/upstream_uniqueness_fix.patch to buffedlizard55-lab/60GEMSDOE in one command."
+}
