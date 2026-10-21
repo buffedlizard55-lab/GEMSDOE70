@@ -4,7 +4,7 @@
 <body><a class="skip" href="#main">Skip to content</a>
 <header><a class="brand" href="index.html">GEMS<span>DOE70</span></a>
 <span class="edition">PROTOCOL REVIEW · 2026-10-20</span></header>
-<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="limitations.html">Limitations</a></nav><main id="main">
+<nav aria-label="Main"><a href="index.html">Overview</a><a href="executive-summary.html">Executive summary</a><a href="p5.html">P5-cover research TIFF</a><a href="protocol-review.html">Protocol review</a><a href="submission.html">Submission guide</a><a href="results.html">Evidence</a><a href="hypotheses.html">Hypotheses</a><a href="h33-analysis.html">Why H33 scored</a><a href="e3-candidate.html">Archived scarp E3</a><a href="sources.html">Sources</a><a href="s3-findings.html">Session 3</a><a href="limitations.html">Limitations</a></nav><main id="main">
 <aside class="stop"><strong>Current protocol: DO NOT SUBMIT.</strong>
 <strong>DO NOT SUBMIT — literal protocol stop.</strong> Old archives and the new P5 continuous TIFF
 are downloadable for <em>review only</em>. Positive-support overlap fails the literal forward
@@ -306,8 +306,190 @@ near 1, a different placement does not. Thresholds are unchanged, both direction
 and Spearman &gt; 0.90 still applies to every raster. Reported in <code>evidence/upstream_fix_report.md</code>.</p>
 <h2>Promotion rule</h2>
 <p>Identical to Experiment 3: pass uniqueness (mutual), validator, A ≥ H33, and B′ &gt; H33 with the
-paired 95 % CI excluding zero. Otherwise <strong>NOT PROMOTED</strong>, published with an explicit label.
-Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p>
+paired 95 % CI excluding zero. Otherwise <strong>NOT PROMOTED</strong>, published with an explicit label.</p>
+<h2>Session 3 (2026-10-20, branch arena/a0382202) — candidates, ranking, what was tested</h2>
+<p>Ranking is qualitative (expected live-DTI gain ÷ cost) and was revised after the instrument
+calibration diagnostic (<code>evidence/s3/proxy_calibration.json</code>): offline B′ and A <strong>do not</strong> order
+archived files the way the live board did (Spearman −0.28 and −0.64, n = 18 owner/user-reported
+scores). Any new idea therefore needs an instrument that tracks the board before it can be promoted.</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Hypothesis / layers</th>
+<th>Physical signature</th>
+<th>Why it could catch faults missing from the USGS/INGENIOUS catalogue</th>
+<th>Named mimic</th>
+<th>Difference from repo</th>
+<th>Cost</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tested E1</td>
+<td>S3 supervised proxy ranking: 19-band stack + 6 gradients + 33 LiDAR/topo/chi/radiometric bands + 7 catalogue-geometry, LOQO GBM on SGMC-only faults</td>
+<td>learned combination; strongest single features are 10 m-DEM slope/relief (AUC 0.76)</td>
+<td>geologic-map faults absent from the Quaternary catalogue</td>
+<td>bedrock/map-density bias</td>
+<td>first supervised model in this repo trained on an off-catalogue population</td>
+<td>medium</td>
+<td>in hand</td>
+</tr>
+<tr>
+<td>tested E2</td>
+<td>Same model, ranking only <strong>within</strong> H33's distance × slope strata</td>
+<td>within-stratum ranking</td>
+<td>removes terrain/distance confound</td>
+<td>lithologic contacts</td>
+<td>marginal-matched placement (new)</td>
+<td>low</td>
+<td>in hand</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Live-calibrated instrument: choose, among a small pre-declared family of proxy definitions (SGMC-only by distance band; catalogue holdout by fault age/slip-rate class from <code>qfault_attributes.csv</code>), the one whose ranking of the 18 scored archives best matches the live board, then re-test E2 on it</td>
+<td>meta-measurement</td>
+<td>without it no candidate can be promoted on evidence</td>
+<td>over-fitting 18 points</td>
+<td>nothing like it exists in the family</td>
+<td>low</td>
+<td>in hand</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Basin-floor LiDAR micro-scarp continuity: <code>lidar_scarp_features_u8</code> step_max/downface_max with coh100 strike coherence, restricted to the lowest two slope quartiles</td>
+<td>young intrabasin scarps in alluvium</td>
+<td>Quaternary catalogues under-sample short, low-relief intrabasin scarps; the opposite terrain to E1's bias</td>
+<td>shorelines, canal/road berms</td>
+<td>E1 learned bedrock; this explicitly targets low-slope terrain</td>
+<td>low</td>
+<td>in hand (24.6 % LiDAR gaps)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Thermal-spring/well alignment: <code>gdr_wellspring_in_footprint.csv</code> (GDR 1391) points, Hough-style alignment lines through ≥ 3 springs within 20 km</td>
+<td>fault-controlled fluid outflow</td>
+<td>springs line up on permeable faults that may be unmapped</td>
+<td>groundwater discharge at lithologic contacts</td>
+<td>no repo method uses spring geometry</td>
+<td>medium</td>
+<td>in hand (owner mirror of GDR 1391; https://gdr.openei.org/submissions/1391)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Drainage knickpoint lines: <code>dem10_chi_100m_u8</code> knick_n aligned across ≥ 3 adjacent catchments</td>
+<td>footwall uplift across drainages</td>
+<td>blind/young faults deform drainage before scarps are mapped</td>
+<td>lithologic knickpoints</td>
+<td>by submission name, chi was used before as a corridor score (60GEMSDOE h73), not as cross-catchment alignment</td>
+<td>medium</td>
+<td>in hand</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Radiometric alteration halo at basin margins: GeoDAWN K and Th/K (<code>geodawn_rad_u8</code>, <code>geodawn_extensions_u8</code>) local anomaly 0.5–3 km from range fronts</td>
+<td>hydrothermal K depletion/enrichment along fluid pathways</td>
+<td>alteration can mark permeable unmapped faults</td>
+<td>primary lithology; flight-line artifacts</td>
+<td>by submission name, radiometrics were used before in a scarp fusion (GEMSDOE46 r11f/r12), not as a margin-anomaly operator</td>
+<td>medium</td>
+<td>in hand (USGS DOI 10.5066/P93LGLVQ)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1>Experiment E6 (<code>arena/effcd5f7-gemsdoe70</code>) — 28-feature Multi-Modal Extended-Domain LOQO + 7×7 Stratification</h1>
+<p>Full preregistration in <code>docs/preregistration-e6.md</code>; reproducible driver in <code>scripts/run_experiment_e6.py</code>; receipts in <code>evidence/e6/</code>.</p>
+<ul>
+<li><strong>Hypothesis (<code>H-E6-1</code>):</strong> Extending the off-catalogue domain from $d \in [2.4, 32]\text{ px}$ to $d \in [3.0, 96.0]\text{ px}$ (capturing the <code>35.89%</code> of <code>SGMC B′</code> positives at $d &gt; 32\text{ px}$ missed by <code>P4</code> and <code>E5</code>) and training a 4-fold Leave-One-Quadrant-Out <code>HistGradientBoostingClassifier</code> on <strong>28 multi-modal features</strong> (100 m DEM gradient-directional scarp curvature/coherence, 8 core 19-band channels, 5 1 m LiDAR scarp channels, 5 GeoDAWN radiometric channels, 4 10 m DEM lineament/curvature channels, and 3 catalogue geometry channels) with <strong>7×7 regional coverage stratification</strong> (<code>block = 7 px</code>, <code>nms = 5.0 px</code>, <code>37,654</code> binary dots) will beat <code>H33</code> on <code>Instrument B′</code> with a 95% spatial-cluster bootstrap CI strictly above zero while also beating <code>H33</code> on <code>Instrument A</code> and bounding regional terrain concentration via 7×7 stratification.</li>
+<li><strong>Measured results (<code>37,654</code> binary dots):</strong></li>
+<li><strong><code>candidate</code> (<code>E6</code>, $d \in [3, 96]$, 28-feat, 7×7 strat):</strong> <code>Instrument A = 0.0710 [0.0637, 0.0781]</code>, <strong><code>Instrument B′ = 0.1100 [0.1058, 0.1133]</code></strong> (paired $\Delta$ vs <code>H33</code> = <strong><code>+0.0162</code> <code>[+0.0045, +0.0270]</code></strong>; <code>gate_a = true</code>, <code>gate_b_prime = true</code>).</li>
+<li><code>ablation_truncated_d32</code> ($d \in [2.4, 32]$, 28-feat, 7×7 strat): <code>Instrument A = 0.0843</code>, <code>Instrument B′ = 0.0879 [0.0779, 0.0977]</code> (paired $\Delta$ vs <code>E6</code> = <code>+0.0221 [0.0124, 0.0324]</code>).</li>
+<li><code>ablation_no_external</code> ($d \in [3, 96]$, 11-feat 19-band/geom, 7×7 strat): <code>Instrument A = 0.0711</code>, <code>Instrument B′ = 0.0945 [0.0868, 0.1011]</code> (paired $\Delta$ vs <code>E6</code> = <code>+0.0155 [0.0092, 0.0231]</code>).</li>
+<li><code>ablation_unstratified_sep28</code> ($d \in [3, 96]$, 28-feat, greedy <code>sep=2.8 px</code>): <code>Instrument A = 0.0564</code>, <code>Instrument B′ = 0.0946 [0.0721, 0.1201]</code>.</li>
+<li><code>random_control</code>: <code>Instrument A = 0.0457</code>, <code>Instrument B′ = 0.0751 [0.0717, 0.0784]</code>.</li>
+<li><code>h33_reference</code>: <code>Instrument A = 0.0037</code>, <code>Instrument B′ = 0.0938 [0.0839, 0.1044]</code>.</li>
+</ul>
+<h2>P6 dual-horizon LOQO scarp–rad–basement addendum (branch <code>arena/c6a19d32-gemsdoe70</code>, 2026-10-20)</h2>
+<p>Written before running <code>scripts/run_experiment_dualhorizon.py</code>, executing the handoff's priority #1 (within-halo physical ranking with leave-one-quadrant-out cross-validation including <code>lidar_scarp_features_u8</code>, <code>topo_10m_derived_100m_u8</code>, and <code>geodawn_rad_u8</code> / <code>geodawn_extensions_u8</code>) and priority #2 (SGMC vs QFaults buffer calibration <code>1–20 px</code>). All named external rasters were verified present and SHA-pinned in <code>/tmp/60GEMSDOE/data/external/</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Hypothesis ID &amp; specific layers</th>
+<th>Physical signature / mechanism</th>
+<th>Why it catches faults missing from the USGS/INGENIOUS catalogue</th>
+<th>Named non-fault mimic</th>
+<th>Difference from repo implementations</th>
+<th>Expected DTI gain &amp; cost</th>
+<th>Free official external source &amp; obtainability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1 (tested: Exp 5.1)</strong></td>
+<td><strong>H-P5-1 · Leave-One-Quadrant-Out Supervised Within-Stratum Scarp–Radiometric–Basement Ranker:</strong> 19-band stack (<code>det_elev_slope</code>, <code>depth_to_base_surf</code>, <code>iso_grav_anom</code>, <code>geod_2ndinv</code>, <code>geod_shearrate</code>, <code>tmi_hg</code>), 1 m LiDAR scarp (<code>lidar_scarp_features_u8</code> bands 3,6,7,8), 10 m 3DEP breaklines (<code>topo_10m_derived_100m_u8</code> bands 1,4,5,6,8), GeoDAWN radiometrics/extensions (<code>geodawn_rad_u8</code> K,Th,U,TC gradients; <code>geodawn_extensions_u8</code> <code>ThK</code>, <code>UK</code>, <code>TMI_up150</code>), visible-catalogue geometry (<code>d_cat</code>, <code>tip</code>, <code>host_len</code>, <code>side</code>)</td>
+<td>L2-regularized logistic probability (<code>C = 1.0</code>) trained strictly out-of-fold (leave-one-quadrant-out on <code>d_cat &gt;= 3 px</code>) fused with the visible-catalogue tip/host-length halo across <code>2.4 &lt;= d_cat &lt;= 80 px</code>, selecting 1 dot per <code>7×7</code> stratum (<code>5.0 px</code> NMS, <code>37,654</code> binary dots)</td>
+<td>The Quaternary catalogue (<code>existing_faults.tif</code>) prioritizes prominent late-Quaternary alluvial scarps (<code>median slope = 5.55°</code>) and misses pre-Quaternary/Cenozoic bedrock faults, horst-margin faults (<code>-depth_to_base_surf</code> <code>AUC_B' = 0.664</code>, <code>iso_grav_anom</code> <code>AUC_B' = 0.610</code>), and potassium-altered conduits (<code>UK</code> <code>AUC_B' = 0.559</code>, <code>ThK</code> <code>AUC_B' = 0.546</code>)</td>
+<td>Differential erosion along resistant volcanic/carbonate hogbacks and primary felsic-vs-mafic K/Th/U lithologic contrasts</td>
+<td>Combines multi-scale 1 m LiDAR + 10 m 3DEP + GeoDAWN radiometrics across an extended <code>80 px</code> halo (<code>A = 0.0775</code>, <code>B' = 0.1250</code>, <code>B'' = 0.1122</code>)</td>
+<td>High gain on B′ (+33.3% over H33); Low-Medium CPU cost (~40 s)</td>
+<td>USGS 3DEP 1 m &amp; 10 m DEMs; USGS GeoDAWN (DOI <code>10.5066/P93LGLVQ</code>); USGS SGMC (DOI <code>10.3133/ds1052</code>, used <strong>only</strong> as out-of-fold target). Verified obtainable in <code>/tmp/60GEMSDOE/data/external/</code></td>
+</tr>
+<tr>
+<td><strong>2 (tested: Exp 5.2)</strong></td>
+<td><strong>H-P5-2 · Unsupervised Multi-Scale 10 m 3DEP Breakline + 1 m LiDAR Scarp + GeoDAWN Radiometric Concordance:</strong> <code>topo_10m_derived_100m_u8</code> (<code>slope_p90</code>, <code>slope_std</code>, <code>relief_local</code>, <code>curv_prof_absmax</code>, <code>hs_lineament</code>), <code>lidar_scarp_features_u8</code> (<code>step_max</code>, <code>downface_max</code>, <code>upface_max</code>, <code>cross_max</code>), <code>det_elev_slope</code>, <code>geodawn_extensions_u8</code> (<code>ThK</code>, <code>UK</code>, <code>TMI_up150</code>), visible-catalogue halo (<code>2.4 &lt;= d_cat &lt;= 80 px</code>)</td>
+<td>Label-free weighted percentile concordance (<code>0.45 * topo10_breakline + 0.25 * det_elev_slope + 0.20 * lidar_scarp + 0.10 * rad_alteration</code>) modulating the <code>7×7</code> stratified halo (<code>5.0 px</code> NMS, <code>37,654</code> dots), with <strong>zero SGMC training</strong></td>
+<td>Degraded piedmont and range-interior faults outside the 75.4% 1 m LiDAR coverage still exhibit continuous 10 m 3DEP profile curvature (<code>curv_prof_absmax</code> <code>AUC_B' = 0.719</code>), hillshade lineaments (<code>hs_lineament</code> <code>AUC_B' = 0.748</code>), and slope breaks (<code>slope_p90</code> <code>AUC_B' = 0.761</code>)</td>
+<td>Pleistocene pluvial Lake Lahontan wave-cut shorelines, fluvial terrace risers, and volcanic flow margins</td>
+<td>Completely independent of SGMC during scoring (<code>A = 0.0774</code>, <code>B' = 0.1201</code>, <code>B'' = 0.1070</code>, +28.1% over H33 on B′)</td>
+<td>High gain on both A and B′; Low CPU cost (~25 s)</td>
+<td>USGS 3DEP 10 m &amp; 1 m DEMs; USGS GeoDAWN (<code>10.5066/P93LGLVQ</code>). Verified obtainable in <code>/tmp/60GEMSDOE/data/external/</code></td>
+</tr>
+<tr>
+<td><strong>3 (tested: Exp 5.3)</strong></td>
+<td><strong>H-P5-3 · Submodular Dual-Horizon Allocation (<code>5×5</code> Strata, <code>3.2 px</code> NMS, Full Off-Catalogue Horizon <code>d_cat &gt;= 2.4 px</code>):</strong> Combines the near-catalogue tip/host-length propagation envelope (<code>0.35 * env</code>) with the leave-one-quadrant-out multi-modal scarp–radiometric–basement ranker (<code>0.65 * p_oof_rank</code>) across the entire <code>d_cat &gt;= 2.4 px</code> footprint</td>
+<td>Replaces <code>7×7</code> (<code>700 m</code>) one-dot-per-block cap with <code>5×5</code> (<code>500 m</code>) strata and <code>3.2 px</code> (<code>320 m</code>) Euclidean NMS across the full <code>d_cat &gt;= 2.4 px</code> domain, matching the empirical geometry of continuous fault traces (<code>5.19</code> catalogue px and <code>5.56</code> SGMC B′ px per occupied <code>7×7</code> block)</td>
+<td>Captures both near-field fault-tip propagation/relay splays (<code>2.4 &lt;= d_cat &lt;= 24 px</code>) and the <code>35.9%</code> of unmapped range-block/intrabasin faults located at <code>d_cat &gt; 32 px</code> (<code>A = 0.0790</code>, <code>B' = 0.1440</code>, <code>B'' = 0.1234</code>, +53.5% over H33 on B′)</td>
+<td>Erosional range-front embayments in the far field and alluvial fan-head trenches in the near field</td>
+<td>Tests submodular along-trace density (<code>5×5</code> strata, <code>3.2 px</code> NMS) and full-horizon (<code>d_cat &gt;= 2.4 px</code>) allocation (<code>evidence/p6_dualhorizon/</code>)</td>
+<td>Highest local DTI on both Instrument A (<code>0.0790</code>) and Instrument B′ (<code>0.1440</code>); Low-Medium CPU cost (~40 s)</td>
+<td>Same verified <code>/tmp/60GEMSDOE/data/external/</code> stack as H-P5-1 and H-P5-2</td>
+</tr>
+<tr>
+<td><strong>4 (research queue)</strong></td>
+<td><strong>H-P5-4 · GDR 1391 Thermal Well / Geothermometer &amp; 2 m Temperature-Probe Conduit Inversion:</strong> <code>gdr_wellspring_in_footprint.csv</code> (<code>27,092</code> wells/springs), <code>cond_surf</code> (band 17), <code>ThK</code>/<code>UK</code></td>
+<td>Anisotropic strike-aligned conduit corridors linking thermal anomalies (<code>temp_c &gt;= 30°C</code> or <code>geothermquartz_c &gt;= 90°C</code>) to the nearest topographic/gravity breakline</td>
+<td>Blind geothermal upflow zones in basin fill or step-overs where surface scarps were erased by playas or young alluvium</td>
+<td>Lateral warm outflow plumes in permeable alluvial aquifers down-gradient from range-front fault recharge</td>
+<td>Held in queue because <code>GEMSDOE71</code> tested a pure hydrothermal conduit lane and scored <code>0.0558</code> live due to spatial clustering around drilled prospects</td>
+<td>Low-Moderate; Medium cost</td>
+<td>DOE GDR Submission 1391 (<code>https://gdr.openei.org/submissions/1391</code>, DOI <code>10.15121/1881483</code>), verified present in <code>/tmp/60GEMSDOE/data/external/</code></td>
+</tr>
+<tr>
+<td><strong>5 (research queue)</strong></td>
+<td><strong>H-P5-5 · Fluvial $\chi$-Discontinuity &amp; Knickpoint Alignment (<code>dem10_chi_100m_u8</code>):</strong> <code>chan_n</code>, <code>knick_n</code>, <code>raised_n</code> from 10 m 3DEP drainage network $\chi$ integration</td>
+<td>Strike-aligned bands of elevated fluvial knickpoints (<code>knick_n</code>) and raised channel reaches (<code>raised_n</code>) across adjacent drainage basins marking transient footwall uplift</td>
+<td>Bedrock and piedmont normal faults whose interfluve scarps have diffused over $10^5\text{–}10^6$ yr still preserve transient knickpoint steps in crossing streams</td>
+<td>Lithologic knickpoints at resistant basalt/welded-tuff ledges and pluvial lake base-level fall knickpoints</td>
+<td>Held in queue because single-band canary AUCs on <code>dem10_chi_100m_u8</code> (<code>0.451–0.502</code>) are near-null at 100 m grid scale (<code>60GEMSDOE</code> scored <code>0.0351</code> live)</td>
+<td>Low; Low cost</td>
+<td><code>dem10_chi_100m_u8.tif</code> derived from USGS 3DEP 10 m DEM, verified present in <code>/tmp/60GEMSDOE/data/external/</code></td>
+</tr>
+<tr>
+<td>---</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Potential-field inversions are nonunique. Magnetic amplitude changes can reflect magnetization rather than displacement; gravity and basement depth may share inversion priors and are not necessarily independent evidence. This test can falsify a useful ranking but cannot establish a geothermal vent, temperature, permeability, or economic resource. The actual target is new fault traces, as described by the organizer's fault-detection reference notebook, not a vent catalogue.</p>
 <h2>P5-HGB lane addendum (parallel session 3) — preregistered 2026-10-20 (before the run)</h2>
 <p>Session priority from <code>HANDOFF.md</code>: supervised within-halo ranking. This is experiment 5 overall
 (in-session 1 of 3; budget 3 experiments / 2 hours). Written before any model was trained.</p>

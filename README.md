@@ -1,5 +1,9 @@
 # GEMSDOE70 — geothermal fault research
 
+> **Submission decision (all lanes, 2026-10-20): no file in this repository is recommended for a
+> weekly slot.** Every published TIFF is download-for-review only. Latest lane: Session 3
+> (supervised proxy ranking) — see its section below and `docs/s3-findings.md`.
+
 ## NEW P5-COVER FILE: **DOWNLOAD FOR RESEARCH; DO NOT SUBMIT**
 
 A newly generated, format-validated **continuous** GeoTIFF is available:
@@ -73,9 +77,9 @@ not copied from a P5 submission. See [official problem](https://www.drivendata.o
 [USGS GeoDAWN](https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and),
 [DOE rules](https://docs.nlr.gov/docs/fy26osti/96647.pdf).
 
-## PRIOR REVIEW (9 archived dot files): DO NOT SUBMIT — literal lane stop
+## PRIOR REVIEW (10 archived dot files): DO NOT SUBMIT — literal lane stop
 
-**Download: yes, 9 older archived TIFFs for review only. Submit: NO.**
+**Download: yes, 10 older archived TIFFs for review only. Submit: NO.**
 That *prior* review generated no new protocol-compliant TIFF, geological experiment or slot.
 P5 above is a later, separate research-only negative, not a promoted competition submission.
 The frozen prior-review negative run card is [here](evidence/review/run_card.json).
@@ -93,7 +97,7 @@ The frozen prior-review negative run card is [here](evidence/review/run_card.jso
 
 The previous mutual-overlap gate weakened the prompt's **forward**-overlap rule without approval.
 Current policy applies the literal rule to shared-tool measurements; it does not change the
-metric, writer or frozen historical evidence. The 9 historically reviewed dot TIFFs have measured forward
+metric, writer or frozen historical evidence. The 10 historically reviewed dot TIFFs have measured forward
 overlap **1.0** against the pinned binary lattice, exceeding **0.70**. They are duplicates under
 the prompt's rule, even though their bytes differ. Small rank correlation does not cancel overlap.
 
@@ -103,7 +107,7 @@ handoff's fixed **37,654-dot mass**, even the minimum possible overlap is
 **0.823418495**, still a stop. This does not prove
 impossibility at every smaller mass. We did not optimize a boundary-only loophole.
 
-All 9 reviewed dot TIFFs pass shared local format checks (single-band float32, finite [0,1],
+All 10 reviewed dot TIFFs pass shared local format checks (single-band float32, finite [0,1],
 CRS/shape/transform matching the pinned sample); that is not portal acceptance or uniqueness.
 The previous canonical P4 card and historical receipts remain frozen and superseded for current
 policy by `evidence/review/run_card.json`.
@@ -143,6 +147,27 @@ cap, eligibility and organizer acceptance remain unverified. GPU is preferred, n
 organizer reference. `scripts/prepare_data.py` advertised in the historical prompt is absent.
 
 
+## E6 lane — multi-modal extended-domain LOQO ranker (2026-10-20, `arena/effcd5f7-gemsdoe70`), `scientific_verdict = promote` (`download_ok = true`, `submit_recommended = false` under literal forward rule — DO NOT SUBMIT without selector exemption)
+
+Diagnoses why P4 (`0.0812`) and E5 (`0.0886`) trailed H33 (`0.0938`) on Instrument B′: **35.89% of all SGMC B′ off-catalogue fault pixels lie at `d_cat > 32 px`** (`evidence/e6/sgmc_buffer_audit.json`), which P4 and E5 truncated to zero, and E5 omitted the external LiDAR scarp, 10 m DEM lineament/curvature, GeoDAWN radiometric, and 100 m scarp-curvature channels (`HANDOFF.md` Next Steps 1–2). Training a 4-fold Leave-One-Quadrant-Out HGB across **28 multi-modal features in `d_cat in [3.0, 96.0] px`** with 7×7 regional coverage stratification (`37,654` binary dots; preregistered in `docs/preregistration-e6.md`, driver `scripts/run_experiment_e6.py`) achieves:
+- **Instrument B′ (`PROXY-DTI`, `d >= 3 px`, 59,937 positives):** **`0.1100`** `[0.1058, 0.1133]` vs H33 **`0.0938`** — **paired Δ `+0.0162`, 95% CI `[+0.0045, 0.0270]` (strictly positive; `gate_b_prime_candidate_gt_h33_significant = true`)**, beating H33 (+17.3%), E5 (+24.0%), and P4 (+35.5%).
+- **Instrument A (`HOLDOUT-DTI`, 11,321 withheld catalogue pixels):** **`0.0710`** `[0.0637, 0.0781]` vs H33 **`0.0037`** (`gate_a_candidate_ge_h33 = true`).
+- **Uniqueness:** Passes amended mutual-overlap uniqueness across all 62 registry rasters (worst mutual `0.2960 <= 0.70`, worst non-lattice forward `0.3526 <= 0.70`, worst Spearman `0.0133 <= 0.90`) and all 11 sibling repository TIFFs (`worst_mutual = 0.3508`). Blocked from automatic slot upload ONLY by literal one-way forward overlap (`1.00 > 0.70`) against the dense binary lattice witness `calib_r13lattice_00904.tif`.
+- **Artifact:** `docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif` (sha256 `9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771`), evidence in `evidence/e6/` (including 62-raster E2 re-audit `e2_uniqueness_62rasters.json` and 7-lane B′ audit `cross_lane_bprime.json`). No weekly slot used.
+## Session 3 (branch arena/a0382202): supervised proxy ranking — **download for review, do NOT submit**
+
+| File | Download | Submit | Why |
+|---|---|---|---|
+| [`gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif`](docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif) | yes | **NO** | E1: pre-registered proxy gate passed (B′ Δ vs H33 +0.0300, 95 % CI [+0.0034, +0.0557]) but **vetoed** — offline B′ does not track the live board (Spearman -0.28, n = 18) and the gain is confounded with steep terrain |
+| [`gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif`](docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif) | yes | **NO** | E2: negative — within H33's distance × slope strata, no gain over random placement (B′ Δ +0.0075, CI [-0.0186, +0.0327]) |
+
+Key finding for every lane: the offline instruments (B′ and A) do not order the 18 archived files
+with reported live scores the way the board did (Spearman -0.28 and
+-0.64). [Findings](docs/s3-findings.md) · [E1 card](evidence/s3/run_card.json) ·
+[E2 card](evidence/s3/e2/run_card.json) · [calibration](evidence/s3/proxy_calibration.json) ·
+preregistrations [S3](docs/preregistration-s3.md), [S3-E2](docs/preregistration-s3-e2.md).
+
+
 ## E5 lane — supervised within-halo ranking (2026-10-20), verdict `negative` — DO NOT SUBMIT
 
 SGMC-proxy LOQO ranker (the previously deferred next step, now executed under its own preregistration `docs/preregistration-e5.md`), 37,654 dots: A HOLDOUT-DTI 0.0815 vs H33 0.0037; B′ PROXY-DTI 0.0886 vs H33 0.0938 (Δ -0.0051 [-0.0161, +0.0053] — includes zero) → negative. File `docs/downloads/gems70-e5-supervised-loqo-37654-20261020.tif` (sha256 `8b7d67e9c2b0ddb4562b70d5726f76dd4ef84b4b1842bdffc98d017575b97bd2`), review-only under the literal policy above (forward overlap 1.00 vs the dense lattice; mutual 0.308). Evidence: `evidence/e5/`. Public leader at organizer-page read 2026-10-20: 0.4413 (`evidence/e5/leaderboard_read.json`). No weekly slot used.
@@ -151,6 +176,10 @@ SGMC-proxy LOQO ranker (the previously deferred next step, now executed under it
 ## Parallel P5 analytic-signal lane (arena/97660a79-gemsdoe70) — DO NOT SUBMIT
 
 Analytic-signal halo 7px, 37,654 dots, `tmi_hg`+`tmi_vg` rank in 2.4–32 px halo with tip kernel. HOLDOUT-DTI A 0.0828 [0.0755,0.0895] vs H33 0.0037 win; **B′ 0.0766 [0.0687,0.0852] vs 0.0938 H33 win Δ -0.0172 [-0.027760492095023067, -0.006296864003715159] → negative**, no slot. Uniqueness: 62 rasters worst mutual 0.30 (limit 0.70) worst ρ 0.042; forward 1.00 vs dense lattice `calib_r13lattice_00904.tif` (literal duplicate, review only). File `docs/downloads/gems70-p5-analytic-halo-37654-20261020.tif` (sha256 `aa3799b2a341a6a5c1a37527e7002c6b22c27d7ea57eb23ab97772926b8f33d4`, 149,414 bytes, ZIP `bf61cacc...`). Evidence `evidence/phase5/` (run_card, instrument holds, uniqueness, canaries), method `src/gems70/method_p5.py`. Hypotheses.md now ranks 5 candidates (H-2 tested P5, H-3 radiometric GeoDAWN already fetched 36+26 MB, H-4 lidar scarp 36 MB, H-5 conductive breach, H-6 basement curvature) with preregistered validation rule; h33-analysis.md PhD-level byte audit + metric algebra. Under literal forward rule, P5 is duplicate (as is H70 and P4) — download for review only.
+
+## Parallel P6 dual-horizon LOQO scarp-rad-basement lane (arena/c6a19d32-gemsdoe70) — DO NOT SUBMIT
+
+Preregistered hypotheses (`H-P5-1` through `H-P5-5` in `docs/hypotheses.md`): leave-one-quadrant-out scarp–radiometric–basement ranker (19-band stack + `lidar_scarp_features_u8` + `topo_10m_derived_100m_u8` + `geodawn_rad_u8`/`geodawn_extensions_u8`) + visible-catalogue tip/host-length halo, `5×5` strata, `3.2 px` NMS, `37,654` binary dots off-catalogue (`download_ok = true`, `submit_recommended = false`, verdict `negative`). HOLDOUT-DTI A `0.0790` `[0.0688, 0.0900]` (vs P4 `0.0730`, paired Δ `+0.0059` `[-0.0050, +0.0163]` includes zero; vs H33 `0.0037`); PROXY-DTI B′ (`d ≥ 3 px`, LOQO) `0.1440` `[0.1319, 0.1558]` vs H33 `0.0938` (paired Δ `+0.0502` `[+0.0339, +0.0663]`, +53.5%) and vs P4 `0.0812` (+77.4%); PROXY-DTI B′′ (`d ≥ 6 px`) `0.1234` vs H33 `0.0850`; unsupervised breakline ablation (`Exp 5.2`, zero SGMC supervision) scores `0.1201` on B′ and `0.0774` on A. SGMC vs QFaults buffer calibration (`1..20 px`, `evidence/p6_dualhorizon/sgmc_buffer_audit.json`) proves `21.38%` of off-catalogue SGMC pixels lie at `d ≤ 3 px` (`2.84×` enrichment) and `SGMC B′` sits at `13.42°` median slope vs Quaternary catalogue `5.55°` (explaining why sibling SGMC-promoted runs `GEMSDOE49 = 0.1304` and `GEMSDOE68 = 0.0680` regressed live). Uniqueness vs `62` registry rasters: worst mutual overlap `0.4230` (limit 0.70), worst ρ `0.0300` (limit 0.90), forward overlap `1.00` vs dense lattice `calib_r13lattice_00904.tif` (literal stop). E2 62-raster mutual re-audit (`evidence/p6_dualhorizon/e2_mutual_uniqueness.json`): worst mutual overlap `0.2876`. File `docs/downloads/gems70-p5-dualhorizon-37654-20261020.tif` (SHA-256 `bb014897052c478ca2f4690920e4d863fa2a6b810a05a15d8e33e129cc76de84`, `146,736` bytes), evidence `evidence/p6_dualhorizon/`, method `src/gems70/method_dualhorizon.py`, runner `scripts/run_experiment_dualhorizon.py`.
 ## Complete retained project prompt
 
 Historical statements below are user-supplied requirements and claims, not verified results.

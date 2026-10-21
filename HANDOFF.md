@@ -1,62 +1,23 @@
-# Handoff — 2026-10-20 (session 3, P5-HGB lane, branch arena/9fff0647-gemsdoe70)
+# Handoff — 2026-10-20 (session 3, branch arena/a0382202-gemsdoe70)
 
-Read README.md, PROJECT_BRIEF.md, this file and `docs/irregularities.md` first.
+Read README.md, PROJECT_BRIEF.md, AGENTS.md, this file, `docs/s3-findings.md` and
+`docs/irregularities.md` first.
 
-## State
+## State after session 3
 
-* **Artifact published:** `docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.tif`
-  (150,877 bytes, sha256 `0390166b425dc9238bac4c0ec91a2bf013d91b7ae2597cb43d29f98854b06931`),
-  plus a one-TIFF ZIP and the writer receipt. **Verdict: negative.** `download_ok = true`,
-  `submit_recommended = false`. No weekly slot used; no organizer-confirmed score exists.
+* **Two new unique, validated files, both DO NOT SUBMIT** (`docs/downloads/`):
+  * `gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif`
+    (sha256 `e1982061f8ebbafcbd290e7383340306170a0df04a999905702f505f06ddabc9`) — E1, pre-registered
+    proxy gate passed (B′ +0.0300 vs H33, CI [+0.0034, +0.0557]) but **vetoed** after calibration.
+  * `gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif`
+    (sha256 `41099fcd8cc1e81605383183266d829e8504964044435b876d8d4f5d6d14a2fc`) — E2, negative.
+* **Key finding:** offline instruments do not track the live board (Spearman −0.28 for B′, −0.64 for
+  A, n = 18 reported scores). E1's proxy gain is concentrated in steep terrain (64 % vs H33 20 %),
+  like gate_ortho (48 %, reported 0.2376 live). With terrain and distance matched (E2) the model adds
+  no significant information.
+* Budget: 2 of 3 experiments, ≈ 1 h of 2 h. Weekly slots used: 0. No organizer-confirmed score.
 
-## What was done (experiment 5 = session-3 in-session experiment 1 of 3)
-
-1. **Preregistered H-P5-1** (`docs/hypotheses.md` Phase-5 addendum) *before* the run: supervised
-   within-halo ranking — HistGradientBoosting over the 19-band stack + visible-catalogue geometry
-   (d, tip u, v), trained on the SGMC off-catalogue proxy (d ≥ 3 px) with leave-one-quadrant-out;
-   emission = P4 coverage-stratified design at fixed mass 37,654; arms candidate / random / H33 /
-   P4; canaries (A-truth, proxy-label disclosure, OOF); surface Spearman pre-check; mutual-overlap
-   final audit; both gates.
-2. **Result (negative, informative):** A 0.0822 [0.0745, 0.0902] (random 0.0531); B′ LOQO
-   0.0793 [0.0716, 0.0879] vs H33 0.0938 (gate fails, Δ −0.0145) and vs P4 0.0812
-   (indistinguishable, Δ −0.0019 CI [−0.0060, +0.0024]); OOF AUC 0.641. **The proxy, not the
-   learner, is the ceiling.** Canaries clean (worst A-truth feature AUC 0.565). Contamination
-   disclosed and measured: 31.9 % of A-truth pixels within 3 px of proxy pixels.
-3. **Two implementation events, both disclosed:** the emission top-up amendment (fixed mass under
-   NMS collisions; pass 1 byte-identical to P4, unit-tested) and a writer-caught defect (first
-   top-up placed dots on catalogue zero-score cells; shared writer rejected it; fixed + regression
-   test). See `docs/irregularities.md`.
-4. **Repo contract:** `release.py` now resolves the current candidate from the canonical card's
-   `phase_evidence` mapping (dot count card-driven); `registry/published_artifacts.json` pins the
-   three new files; site/readme regenerated from receipts; tests extended (155 passing at
-   handoff).
-
-## Do not
-
-* Do not relabel the P5 artifact as promoted, and do not edit the card's gates.
-* Do not describe 0.2778 / 0.44 / 0.3195 as organizer-confirmed (all user-supplied).
-* Do not rerun `run_experiment_v5.py` expecting an overwrite — the writer refuses existing files.
-* Do not remove the emission amendment or its regression tests.
-
-## Parallel-lane merge note (2026-10-20)
-
-This branch merged origin/main after other parallel lanes landed: `evidence/phase5/` is the
-analytic-halo P5 lane (renamed here to avoid collision: my lane lives in `evidence/p5hgb/`),
-`evidence/e5/` is the E5 supervised-LOQO lane, `evidence/h70/` is the conductive-breach lane
-(current canonical card), and a literal forward-overlap protocol review now gates every dot-field
-artifact to review-only. My P5-HGB lane is preserved unchanged with its receipts; its dots are
-re-audited against the new lane rasters in `evidence/p5hgb/uniqueness_delta.json`.
-
-## Next session, in order
-
-1. Quantify SGMC-vs-QFaults duplication (buffer tests 1–6 px), then pursue an independent truth
-   source (NBMG county maps, INGENIOUS trace exports) — the measured bottleneck.
-2. Registered band-widening experiment (D_MAX 48/64 px at fixed mass) — 36.3 % of B′ truth lies
-   beyond the current 32-px halo.
-3. Registered dot-count sweep (25k/37k/50k) on the existing P5 surface, B′ LOQO only.
-4. Upstream the two uniqueness fixes to the template and run its suite.
-
-## Reproduce
+## Reproduce session 3
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -r requirements.lock
@@ -66,6 +27,24 @@ git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSD
 .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
 .venv/bin/python -m pytest -q
 ```
+
+=== S3 lane (parallel) ===
+git clone --depth 1 https://github.com/buffedlizard55-lab/60GEMSDOE /tmp/60GEMSDOE   # HEAD b99591e used
+.venv/bin/python scripts/run_experiment_s3.py        # ~25 min on 2 CPU / 3 GB
+.venv/bin/python scripts/proxy_calibration_s3.py     # ~1 min
+.venv/bin/python scripts/run_experiment_s3_e2.py     # ~20 min (needs E1 TIFF at its original name;
+                                                     #  see evidence/s3/run_card.json 'artifact')
+.venv/bin/python scripts/terrain_marginals_s3.py
+.venv/bin/python scripts/build_s3_report.py && .venv/bin/python scripts/build_site.py && .venv/bin/python scripts/build_readme.py
+.venv/bin/python -m pytest -q
+```
+
+## Next session (from docs/irregularities.md)
+
+1. Live-calibrated instrument (pre-declared proxy family, leave-one-file-out against the 18 scores).
+2. Only then a new candidate (basin-floor LiDAR micro-scarps is the queued geological idea).
+3. Upstream the two uniqueness fixes. 4. Selector step only for a candidate that beats H33 on the
+   calibrated instrument.
 
 ---
 
@@ -291,3 +270,31 @@ consistency against cached reference metadata, not organizer acceptance.
 - Reproduce: audit_current_protocol.py, build_site.py, build_readme.py, pytest; no data download needed.
 
 Integration: main advanced concurrently with PRs adding a separate E3 scarp artifact and a literal-protocol review. All those frozen receipts, artifacts, tests and drivers were retained. This session's four conditional hypotheses and fresh P4 format card are supplemental (`docs/supplemental-protocol-review.html`), not a replacement for the concurrent review or an authorization of E3.
+
+## Session-2 lane (arena/9a895360, merged additively)
+
+Exp2 (seed 702, gate hurt) and Exp3 (seed 703, fusion 0.09161) both negative; unique TIFF
+`gems70-fusion-dotted-37654-20261020.tif` is DO NOT SUBMIT (holdout CI gate + 0.896 3-px
+overlap vs GEMSDOE49 parent). Card `evidence/s2_run_card.json`, findings `docs/s2-findings.md`,
+prereg `docs/s2-hypotheses.md` + `docs/hypotheses-exp3.md`, method `src/gems70/method_s2.py`.
+Spent seeds for this lane: 702/703 — do not retune. Zero slots used.
+
+## Parallel E6 multi-modal extended-domain LOQO lane & completed selector audits (2026-10-20, `arena/effcd5f7-gemsdoe70`)
+
+1. **SGMC vs. QFaults buffer calibration ($r = 1\dots 6\text{ px}$, `evidence/e6/sgmc_buffer_audit.json`):**
+   Off-catalogue SGMC shell enrichment is `3.83×` at `(0, 1]` px, `2.98×` at `(1, 2]` px, `1.86×` at `(2, 3]` px, `1.40×` at `(3, 4]` px, `1.14×` at `(4, 5]` px, and `0.97×` at `(5, 6]` px; **35.89% of all `SGMC B′` ($d \ge 3\text{ px}$) fault pixels lie at $d_{\text{cat}} > 32\text{ px}$** (`p50 = 22.80 px`, `p75 = 41.98 px`), explaining why `P4` (`0.0812`) and `E5` (`0.0886`) trailed `H33` (`0.0938`) when restricted to $d \le 32\text{ px}$.
+2. **Experiment E6 (`docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif`, sha256 `9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771`):**
+   28-feature LOQO HGB across $d_{\text{cat}} \in [3.0, 96.0]\text{ px}$ with 7×7 regional coverage stratification (`37,654` binary dots; preregistered in `docs/preregistration-e6.md`, driver `scripts/run_experiment_e6.py`) achieves `Instrument B′ = 0.1100 [0.1058, 0.1133]` vs. `H33` `0.0938 [0.0839, 0.1044]` (**paired $\Delta = +0.0162$, 95% CI `[+0.0045, +0.0270]`**, `gate_b_prime_candidate_gt_h33_significant = true`) and `Instrument A = 0.0710 [0.0637, 0.0781]` vs. `H33` `0.0037` (`gate_a_candidate_ge_h33 = true`). Passes amended mutual-overlap uniqueness across all 62 registry rasters (`worst_mutual = 0.2960 <= 0.70`, `worst_nonlattice_forward = 0.3526 <= 0.70`, `worst_spearman = 0.0133 <= 0.90`) and all sibling repository TIFFs (`worst_mutual = 0.3508`). Published with `download_ok = true` and `submit_recommended = false` under the active literal one-way forward-overlap gate (`1.00 > 0.70` against `calib_r13lattice_00904.tif`).
+3. **Completed selector audits (`evidence/e6/e2_uniqueness_62rasters.json` and `evidence/e6/cross_lane_bprime.json`):**
+   Full 62-raster E2 uniqueness re-audit (`worst_mutual = 0.2876 <= 0.70`, `worst_nonlattice_forward = 0.4795 <= 0.70`) and 7-lane `Instrument B′` comparison (`E3` `60,000` dots `0.2137`; `E6` `0.1100`; `E2` `0.1048`; `H33` `0.0938`; `E5` `0.0886`; `P4` `0.0812`; `H70-A` `0.0792`).
+
+## P6 dual-horizon LOQO scarp–rad–basement lane & SGMC 1–20 px buffer audit (`arena/c6a19d32-gemsdoe70`, 2026-10-20)
+
+- **Artifact published (review only, DO NOT SUBMIT):** `docs/downloads/gems70-p5-dualhorizon-37654-20261020.tif` (`146,736` bytes, SHA-256 `bb014897052c478ca2f4690920e4d863fa2a6b810a05a15d8e33e129cc76de84`, `37,654` binary `1.0` dots, `0` on-catalogue dots), plus `.zip` and `.json` registered in `registry/published_artifacts.json`.
+- **Verdict: negative (`download_ok = true`, `submit_recommended = false`).**
+  - Instrument A (`HOLDOUT-DTI`, `11,321` withheld positives): `Exp 5.3` `0.0790` `[0.0688, 0.0900]` vs P4 `0.0730` (Δ `+0.0059` `[-0.0050, +0.0163]`) and H33 `0.0037`.
+  - Instrument B′ (`PROXY-DTI`, `SGMC d >= 3 px`, `59,937` positives, LOQO): `Exp 5.3` `0.1440` `[0.1319, 0.1558]` vs H33 `0.0938` (Δ `+0.0502` `[+0.0339, +0.0663]`, +53.5%) and P4 `0.0812` (+77.4%). `Exp 5.1` (LOQO `7×7`) scores `0.1250`; `Exp 5.2` (unsupervised 10m-3DEP breakline + LiDAR scarp + rad `7×7`) scores `0.1201`.
+  - Instrument B′′ (`PROXY-DTI`, `SGMC d >= 6 px`, `52,767` positives): `Exp 5.3` `0.1234` `[0.1118, 0.1359]` vs H33 `0.0850` (Δ `+0.0384` `[+0.0217, +0.0553]`).
+  - SGMC vs QFaults buffer calibration (`1..20 px`, `evidence/p6_dualhorizon/sgmc_buffer_audit.json`) and E2 62-raster mutual re-audit (`evidence/p6_dualhorizon/e2_mutual_uniqueness.json`) recorded.
+  - Held fail-closed because paired Instrument A vs P4 CI straddles zero, SGMC B′ sits at `13.42°` median slope vs Quaternary catalogue `5.55°`, and literal forward overlap vs the dense lattice is `1.00` (worst mutual overlap `0.4230 <= 0.70`, worst Spearman `0.0300 <= 0.90`). No weekly slot used.
+

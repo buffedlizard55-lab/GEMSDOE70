@@ -1,5 +1,6 @@
 {
   "evidence_class": "PUBLICATION-INVENTORY",
+  "policy": "Every TIFF/ZIP in docs/ must appear here with a matching SHA-256; the build refuses anything else.",
   "artifacts": [
     {
       "path": "docs/downloads/gems70-discordance-corridor-v1-20261020-7f3a9c2e.tif",
@@ -48,6 +49,36 @@
       "sha256": "56cf2b7a4b02a0b5cd7e4bd887a8910d6ae1beb5ccc59518f406834b2d6efba2",
       "bytes": 118675,
       "note": "E5 lane, one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.json",
+      "sha256": "37c2101497baeec72dcc6cea815f0f76b29b3e6445078b67e000241c2d9f66b3",
+      "bytes": 3445,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker), shared writer receipt; card evidence/e6/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif",
+      "sha256": "9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771",
+      "bytes": 152601,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker, 37,654 dots), scientific gates PASS (B-prime 0.1100 vs H33 0.0938, paired delta +0.0162 [+0.0045, +0.0270]; A 0.0710 vs H33 0.0037; mutual uniqueness ok), review-only under literal forward rule; card evidence/e6/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.zip",
+      "sha256": "f77fee7df72848478d5a7b82b44f1999d20aeb265939f5060478b02f050bfb88",
+      "bytes": 120996,
+      "note": "parallel session (E6 28-feature multi-modal extended-domain LOQO ranker), one-TIFF ZIP; card evidence/e6/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-fusion-dotted-37654-20261020.tif",
+      "sha256": "83b711a20b518eb89040456f70e6d750d3d361536390df198184c4d2818b9c74",
+      "bytes": 128726,
+      "note": "session-2 lane (arena/9a895360) H70-3A fusion; verdict DO NOT SUBMIT in evidence/s2/run_card.json (holdout CI gate + 0.896 3px overlap vs GEMSDOE49 parent)"
+    },
+    {
+      "path": "docs/downloads/gems70-fusion-dotted-37654-20261020.zip",
+      "sha256": "ba771f859fc38ca5d682576168507577077378da51c9a41a5383f8d4ceeed939",
+      "bytes": 91925,
+      "note": "session-2 lane (arena/9a895360) H70-3A fusion; verdict DO NOT SUBMIT in evidence/s2/run_card.json (holdout CI gate + 0.896 3px overlap vs GEMSDOE49 parent)"
     },
     {
       "path": "docs/downloads/gems70-h70-conductive-breach-37654-20261020.json",
@@ -122,6 +153,24 @@
       "note": "P5 LOQO magnetic-cover continuous research map; validated but negative on both holdouts and literal forward support. NOT a cleared competition submission; evidence/p5/run_card.json"
     },
     {
+      "path": "docs/downloads/gems70-p5-dualhorizon-37654-20261020.json",
+      "sha256": "359ab434d60ca69b3f7ae2a4c0b6a90357a0f277b6cc8bec42507b814720e794",
+      "bytes": 3448,
+      "note": "P6 dual-horizon LOQO scarp-rad-basement lane, writer receipt; evidence/p6_dualhorizon/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-dualhorizon-37654-20261020.tif",
+      "sha256": "bb014897052c478ca2f4690920e4d863fa2a6b810a05a15d8e33e129cc76de84",
+      "bytes": 146736,
+      "note": "P6 dual-horizon LOQO scarp-rad-basement lane (37654 binary dots, A=0.0790, B'=0.1440, B''=0.1234); review-only DO NOT SUBMIT (paired A vs P4 CI straddles zero, literal forward lattice overlap 1.00); evidence/p6_dualhorizon/run_card.json"
+    },
+    {
+      "path": "docs/downloads/gems70-p5-dualhorizon-37654-20261020.zip",
+      "sha256": "edf4ca2e159fe16cff7ff2b34809a94d836589ee2ca6f55c9b6db3298331538e",
+      "bytes": 113440,
+      "note": "P6 dual-horizon lane, one-TIFF ZIP"
+    },
+    {
       "path": "docs/downloads/gems70-p5-halo-rank-hgb-37654-20261020.json",
       "sha256": "0a65bfd3d110081cc4adfba7d1cb00741bfa0192a2b3e8d1fa3dfe78ea3db0bc",
       "bytes": 3474,
@@ -138,6 +187,42 @@
       "sha256": "a551e48e03e72240d8d0d75d845850eb4ba7f353cb8ebc961d3f65d6ababb56a",
       "bytes": 118855,
       "note": "session 3 (P5), one-TIFF ZIP"
+    },
+    {
+      "path": "docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.json",
+      "sha256": "5140d97ff0aaf409f86c3e990e9b8ca1365cc403f90c00b7538bcc4b76546126",
+      "bytes": 3636,
+      "note": "session 3 E1 proxy-trained ranking; pre-registered gate promote, VETOED by calibration diagnostic; DO NOT SUBMIT; card evidence/s3/run_card.json (writer receipt)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.tif",
+      "sha256": "e1982061f8ebbafcbd290e7383340306170a0df04a999905702f505f06ddabc9",
+      "bytes": 129039,
+      "note": "session 3 E1 proxy-trained ranking; pre-registered gate promote, VETOED by calibration diagnostic; DO NOT SUBMIT; card evidence/s3/run_card.json (TIFF)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3-proxyrank-h33spacing-37654-20261020-DO-NOT-SUBMIT.zip",
+      "sha256": "e11bde13a9f095200d02e2ff63115024b38dcffa1fa445e24807376e7b04c15f",
+      "bytes": 89711,
+      "note": "session 3 E1 proxy-trained ranking; pre-registered gate promote, VETOED by calibration diagnostic; DO NOT SUBMIT; card evidence/s3/run_card.json (one-TIFF ZIP)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.json",
+      "sha256": "6c0c4979f038a3308a30266b3c59aead9374fff7d1e0b675845bebee32543a7a",
+      "bytes": 3569,
+      "note": "session 3 E2 marginal-matched ranking; verdict negative; DO NOT SUBMIT; card evidence/s3/e2/run_card.json (writer receipt)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.tif",
+      "sha256": "41099fcd8cc1e81605383183266d829e8504964044435b876d8d4f5d6d14a2fc",
+      "bytes": 132735,
+      "note": "session 3 E2 marginal-matched ranking; verdict negative; DO NOT SUBMIT; card evidence/s3/e2/run_card.json (TIFF)"
+    },
+    {
+      "path": "docs/downloads/gems70-s3e2-marginmatched-proxyrank-37654-20261020-DO-NOT-SUBMIT.zip",
+      "sha256": "e25dc0e51272e36e2fb8e19ea08282be47ac2069c98370daafbd85ae4a8722ae",
+      "bytes": 94237,
+      "note": "session 3 E2 marginal-matched ranking; verdict negative; DO NOT SUBMIT; card evidence/s3/e2/run_card.json (one-TIFF ZIP)"
     },
     {
       "path": "docs/downloads/gems70-stepperamp-relay-diagnostic-BLOCKED-DO-NOT-SUBMIT.tif",
@@ -157,6 +242,5 @@
       "bytes": 151585,
       "note": "parallel session (E3 scarp-curvature), promote-to-selector on catalogue holdout; B-prime not yet scored; run card evidence/run_card_e3_amended.json"
     }
-  ],
-  "policy": "Every TIFF/ZIP in docs/ must appear here with a matching SHA-256; the build refuses anything else."
+  ]
 }

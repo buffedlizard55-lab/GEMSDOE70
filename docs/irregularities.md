@@ -187,3 +187,50 @@ literal decision rule. P5 uses the same shared evaluator/writer and a separate h
 artifact; it did not change the shared metric or its threshold. See the
 [scientific review](https://github.com/buffedlizard55-lab/GEMSDOE70/blob/main/reports/p5-scientific-review.md)
 for new source receipts, a failed controlled test and reproducible commands.
+
+## Session 3 (2026-10-20, branch arena/a0382202) — irregularities and limits
+
+1. **Offline instruments are not calibrated to the live board** (most important). Spearman of
+   reported live score vs B′ = −0.28 and vs A = −0.64 over 18 archived files
+   (`evidence/s3/proxy_calibration.json`). No offline gate in this repo can currently justify a slot.
+2. **Conservative post-hoc veto of S3-E1.** E1's frozen rule returned `promote`; it was overridden
+   to `negative` after the calibration diagnostic. The veto can only block, never promote, and both
+   the raw card (`evidence/s3/run_card_raw.json`) and final card are published.
+3. **E2 design error, disclosed.** The pre-registered "E1 candidate (reference)" arm used the E1
+   production file, which is in-sample on B′ (0.4614). It is annotated and used in no gate.
+4. **H33 domain count.** 2,438 of H33's 37,654 dots fall outside the scored valid domain (12-px edge
+   erosion or d < 2.4 px), so H33 is slightly handicapped on B′ against arms that place all dots
+   in-domain. E2 therefore gates on random-within-strata as well.
+5. **Name-matched scores.** Seven calibration rows take their live score from the user brief by
+   repository file name only; byte identity to the scored upload is not authenticated.
+6. **Same-lane siblings.** E1 and E2 have mutual 3-px overlap 0.80 with each other; at most one
+   should ever be considered.
+7. **Sandbox limits.** No DrivenData login and no network beyond GitHub/PyPI: organizer pages,
+   SGMC/USGS originals and the GDR could not be re-fetched; all inputs are SHA-pinned owner mirrors.
+
+### Next session, in priority order
+
+1. **Build a live-calibrated instrument.** Pre-declare a small family of proxy definitions
+   (SGMC-only by distance band; catalogue holdout stratified by `qfault_attributes.csv` age/slip
+   class; truth subsampled to a fixed size), select the one whose ranking of the 18 scored files
+   best matches the live board (leave-one-file-out), then re-test E2 and P4 on it.
+2. **Test the opposite terrain hypothesis** (basin-floor LiDAR micro-scarps, `docs/hypotheses.md`
+   Session-3 rank 2) only after step 1 exists.
+3. **Upstream the two uniqueness fixes** to the shared template (still pending from session 2).
+4. **Selector step.** Only a candidate that beats H33 on a live-calibrated instrument should use
+   a weekly slot; record any returned score as ORGANIZER-CONFIRMED with the receipt.
+
+## E6 multi-modal extended-domain LOQO lane & completed selector audits (2026-10-20, `arena/effcd5f7-gemsdoe70`)
+
+- **SGMC vs. QFaults buffer calibration ($r = 1\dots 6\text{ px}$, `evidence/e6/sgmc_buffer_audit.json`):**
+  Off-catalogue SGMC shell enrichment is `3.83×` in `(0, 1]` px, `2.98×` in `(1, 2]` px, `1.86×` in `(2, 3]` px, `1.40×` in `(3, 4]` px, `1.14×` in `(4, 5]` px, and `0.97×` in `(5, 6]` px; `35.89%` of `SGMC B′` pixels lie at $d_{\text{cat}} > 32\text{ px}$.
+- **Experiment E6 (`docs/downloads/gems70-e6-multimodal-extdomain-loqo-37654-20261020.tif`, sha256 `9b4f225f9656b1b3ab106750be431a4053e7ad804fe3bb9e2dac163d49601771`):**
+  28-feature LOQO HGB across $d_{\text{cat}} \in [3.0, 96.0]\text{ px}$ with 7×7 regional coverage stratification (`37,654` binary dots) beats `H33` on `Instrument A` (`0.0710 vs 0.0037`) and `Instrument B′` (`0.1100 [0.1058, 0.1133] vs 0.0938 [0.0839, 0.1044]`, paired $\Delta = +0.0162$, 95% CI `[+0.0045, +0.0270]`), passes amended mutual-overlap uniqueness across all 62 registry rasters (`worst_mutual = 0.2960 <= 0.70`, `worst_nonlattice_forward = 0.3526 <= 0.70`, `worst_spearman = 0.0133 <= 0.90`) and all 11 sibling repository TIFFs (`worst_mutual = 0.3508`), and remains review-only (`download_ok = true`, `submit_recommended = false`) under the active literal one-way forward-overlap gate (`1.00 > 0.70` against `calib_r13lattice_00904.tif`) and live-board calibration caution.
+- **Full 62-raster E2 uniqueness re-audit (`evidence/e6/e2_uniqueness_62rasters.json`) & 7-lane `Instrument B′` comparison (`evidence/e6/cross_lane_bprime.json`):**
+  `E2` has `worst_mutual = 0.2876 <= 0.70` (`unique = true`), `worst_nonlattice_forward = 0.4795 <= 0.70`, `worst_forward = 1.00`. On `Instrument B′`, `E3` (`60,000` dots) scores `0.2137 [0.2002, 0.2261]`; among `37,654`-dot mass-matched candidates, `E6` ranks first at `0.1100 [0.1058, 0.1133]`, ahead of `E2` (`0.1048`), `H33` (`0.0938`), `E5` (`0.0886`), `P4` (`0.0812`), and `H70-A` (`0.0792`).
+
+
+## P6 dual-horizon LOQO scarp–rad–basement lane & SGMC buffer calibration (`arena/c6a19d32-gemsdoe70`, 2026-10-20)
+- Executed handoff priority #1 (`lidar_scarp_features_u8` + `topo_10m_derived_100m_u8` + `geodawn_rad_u8`/`geodawn_extensions_u8` + 19-band stack + visible-catalogue geometry, `evidence/p6_dualhorizon/`) and priority #2 (`1–20 px` SGMC vs QFaults buffer calibration, `evidence/p6_dualhorizon/sgmc_buffer_audit.json`, plus E2 62-raster mutual re-audit `evidence/p6_dualhorizon/e2_mutual_uniqueness.json`).
+- Exp 5.3 (`gems70-p5-dualhorizon-37654-20261020.tif`, SHA-256 `bb014897052c478ca2f4690920e4d863fa2a6b810a05a15d8e33e129cc76de84`) clears H33 on Instrument A (`0.0790` vs `0.0037`), Instrument B′ (`0.1440` vs `0.0938`, Δ `+0.0502` `[+0.0339, +0.0663]`), and Instrument B′′ (`d >= 6 px`, `0.1234` vs `0.0850`), as does the unsupervised breakline ablation Exp 5.2 (`A = 0.0774`, `B′ = 0.1201`).
+- Verdict remains `negative` (`download_ok = true`, `submit_recommended = false`): paired Instrument A vs P4 CI straddles zero (`[-0.0050, +0.0163]`), `SGMC B′` over-weights steep pre-Quaternary bedrock ranges (`13.42°` median slope vs catalogue `5.55°`), and literal forward overlap vs the dense lattice is `1.00` (worst mutual overlap `0.4230 <= 0.70`, worst Spearman `0.0300 <= 0.90`).

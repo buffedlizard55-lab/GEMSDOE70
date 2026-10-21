@@ -1,0 +1,97 @@
+{
+  "evidence_class": "OOF-AUC (B' proxy, LOQO)",
+  "folds": [
+    {
+      "fold": 0,
+      "train_rows": 3508122,
+      "test_rows": 1063990,
+      "candidate": {
+        "n_pos": 51000,
+        "n_neg": 306000,
+        "n_iter": 300,
+        "oof_auc_region": 0.7458676080785857
+      },
+      "abl_physics_only": {
+        "n_pos": 51000,
+        "n_neg": 306000,
+        "n_iter": 300,
+        "oof_auc_region": 0.7301413537450281
+      },
+      "abl_geometry_only": {
+        "n_pos": 51000,
+        "n_neg": 306000,
+        "n_iter": 300,
+        "oof_auc_region": 0.5942860815651672
+      }
+    },
+    {
+      "fold": 1,
+      "train_rows": 3259508,
+      "test_rows": 1297609,
+      "candidate": {
+        "n_pos": 35466,
+        "n_neg": 212796,
+        "n_iter": 300,
+        "oof_auc_region": 0.699433409972291
+      },
+      "abl_physics_only": {
+        "n_pos": 35466,
+        "n_neg": 212796,
+        "n_iter": 300,
+        "oof_auc_region": 0.6887929788801217
+      },
+      "abl_geometry_only": {
+        "n_pos": 35466,
+        "n_neg": 212796,
+        "n_iter": 300,
+        "oof_auc_region": 0.5288006453182756
+      }
+    },
+    {
+      "fold": 2,
+      "train_rows": 3315231,
+      "test_rows": 1266596,
+      "candidate": {
+        "n_pos": 49809,
+        "n_neg": 298854,
+        "n_iter": 300,
+        "oof_auc_region": 0.8143090429897909
+      },
+      "abl_physics_only": {
+        "n_pos": 49809,
+        "n_neg": 298854,
+        "n_iter": 300,
+        "oof_auc_region": 0.803888571570029
+      },
+      "abl_geometry_only": {
+        "n_pos": 49809,
+        "n_neg": 298854,
+        "n_iter": 300,
+        "oof_auc_region": 0.5457305887030989
+      }
+    },
+    {
+      "fold": 3,
+      "train_rows": 3553867,
+      "test_rows": 1013651,
+      "candidate": {
+        "n_pos": 43536,
+        "n_neg": 261216,
+        "n_iter": 300,
+        "oof_auc_region": 0.7348571948553061
+      },
+      "abl_physics_only": {
+        "n_pos": 43536,
+        "n_neg": 261216,
+        "n_iter": 300,
+        "oof_auc_region": 0.7435490625469774
+      },
+      "abl_geometry_only": {
+        "n_pos": 43536,
+        "n_neg": 261216,
+        "n_iter": 300,
+        "oof_auc_region": 0.4771309753821021
+      }
+    }
+  ]
+}

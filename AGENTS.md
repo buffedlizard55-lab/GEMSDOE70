@@ -43,3 +43,10 @@ No new lane paragraph was identifiable. Do not generate a new candidate or silen
 stop. `gems70.protocol` is a policy adapter over frozen measurements, not a replacement metric.
 The shared scientific cards/evaluator/writer remain unchanged. Review-only downloads are allowed;
 no slot is authorized. A passing historical subset audit cannot certify current registry coverage.
+
+## Session-3 addendum (2026-10-20)
+- `evidence/s3/` (E1, E2, calibration, terrain marginals) is frozen. E1's raw script card is
+  `evidence/s3/run_card_raw.json`; the final card adds a conservative post-hoc veto. Never reverse a
+  veto into a promotion without a new pre-registered, live-calibrated test.
+- No offline instrument in this repo is calibrated to the live board (`evidence/s3/proxy_calibration.json`).
+  Any future promotion must first show its gate orders the scored archive files like the live board.
