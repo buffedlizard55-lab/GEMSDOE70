@@ -106,15 +106,15 @@ def main():
     p4a = load('evidence/phase4/instrumentA_holdout.json')
     p4b = load('evidence/phase4/instrumentB_prime.json')
     p4ball = load('evidence/phase4/instrumentB_all.json')
-    p5card = load('evidence/phase5/run_card.json', {})
-    p5a = load('evidence/phase5/instrumentA_holdout.json')
-    p5bp = load('evidence/phase5/instrumentB_prime.json')
-    p5bdp = load('evidence/phase5/instrumentB_double_prime.json')
-    p5ball = load('evidence/phase5/instrumentB_all.json')
-    p5uniq = load('evidence/phase5/uniqueness.json', {})
-    p5uniq_local = load('evidence/phase5/uniqueness_with_local.json', {})
-    p5surf = load('evidence/phase5/surface_uniqueness.json', {})
-    p5can = load('evidence/phase5/canaries.json', {})
+    p7card = load('evidence/p7/run_card.json', {})
+    p7a = load('evidence/p7/instrumentA_holdout.json')
+    p7bp = load('evidence/p7/instrumentB_prime.json')
+    p7bdp = load('evidence/p7/instrumentB_double_prime.json')
+    p7ball = load('evidence/p7/instrumentB_all.json')
+    p7uniq = load('evidence/p7/uniqueness.json', {})
+    p7uniq_local = load('evidence/p7/uniqueness_with_local.json', {})
+    p7surf = load('evidence/p7/surface_uniqueness.json', {})
+    p7can = load('evidence/p7/canaries.json', {})
     h33 = load('evidence/h33_audit.json', {})
     receipt = load(f'docs/downloads/{name}.json', {})
     sources = load('registry/sources.json', [])
@@ -145,19 +145,19 @@ def main():
         'evidence/phase4/instrumentB_prime.json': 'instrumentB_prime.json',
         'evidence/phase4/instrumentB_all.json': 'instrumentB_all.json',
         'evidence/phase4/instrumentB_prime_folds.json': 'instrumentB_prime_folds.json',
-        'evidence/phase5/run_card.json': 'phase5_run_card.json',
-        'evidence/phase5/uniqueness.json': 'phase5_uniqueness.json',
-        'evidence/phase5/uniqueness_with_local.json': 'phase5_uniqueness_with_local.json',
-        'evidence/phase5/surface_uniqueness.json': 'phase5_surface_uniqueness.json',
-        'evidence/phase5/instrumentA_holdout.json': 'phase5_instrumentA_holdout.json',
-        'evidence/phase5/instrumentB_prime.json': 'phase5_instrumentB_prime.json',
-        'evidence/phase5/instrumentB_double_prime.json': 'phase5_instrumentB_double_prime.json',
-        'evidence/phase5/instrumentB_all.json': 'phase5_instrumentB_all.json',
-        'evidence/phase5/canaries.json': 'phase5_canaries.json',
-        'evidence/phase5/sgmc_buffer_audit.json': 'sgmc_buffer_audit.json',
-        'evidence/phase5/e2_uniqueness_62rasters_corrected.json': 'e2_uniqueness_62rasters_corrected.json',
-        'evidence/phase5/upstream_verification.json': 'upstream_verification.json',
-        'evidence/phase5/upstream_uniqueness.patch': 'upstream_uniqueness.patch',
+        'evidence/p7/run_card.json': 'p7_run_card.json',
+        'evidence/p7/uniqueness.json': 'p7_uniqueness.json',
+        'evidence/p7/uniqueness_with_local.json': 'p7_uniqueness_with_local.json',
+        'evidence/p7/surface_uniqueness.json': 'p7_surface_uniqueness.json',
+        'evidence/p7/instrumentA_holdout.json': 'p7_instrumentA_holdout.json',
+        'evidence/p7/instrumentB_prime.json': 'p7_instrumentB_prime.json',
+        'evidence/p7/instrumentB_double_prime.json': 'p7_instrumentB_double_prime.json',
+        'evidence/p7/instrumentB_all.json': 'p7_instrumentB_all.json',
+        'evidence/p7/canaries.json': 'p7_canaries.json',
+        'evidence/p7/sgmc_buffer_audit.json': 'p7_sgmc_buffer_audit.json',
+        'evidence/p7/e2_uniqueness_62rasters_corrected.json': 'e2_uniqueness_62rasters_corrected.json',
+        'evidence/p7/upstream_verification.json': 'upstream_verification.json',
+        'evidence/p7/upstream_uniqueness.patch': 'upstream_uniqueness.patch',
         'evidence/phase2/canaries.json': 'canaries.json',
         'evidence/phase2/instrumentA_holdout.json': 'phase2_instrumentA.json',
         'evidence/phase2/instrumentB_proxy.json': 'phase2_instrumentB.json',
@@ -227,31 +227,32 @@ def main():
             shutil.copyfile(s, DOWN / dst)
 
     # --------------------------------------------------------------- Phase-5 box
-    p5_section = ''
-    if p5card and p5a and p5bp and p5bdp:
-        p5_name = p5card['submission_name']
-        p5_sha = p5card['raster_sha256']
-        p5_a_sc = p5a['scores']['candidate']
-        p5_bp_sc = p5bp['scores']['candidate']
-        p5_bdp_sc = p5bdp['scores']['candidate']
-        p5_d_bp = p5bp['paired_differences']['h33_reference']
-        p5_d_bdp = p5bdp['paired_differences']['h33_reference']
-        p5_section = f'''<section class="ok" aria-labelledby="p5-decision">
-<div class="eyebrow">PHASE 5 · LOQO SUPERVISED WITHIN-HALO RANKER (SELECTOR-READY)</div>
-<h2 id="p5-decision">Phase-5 Candidate: <code>{esc(p5_name)}</code> · Verdict: <code>{esc(p5card['verdict'])}</code></h2>
-<p><strong>Download (`download_ok = true`): yes.</strong> Unique across all 66 checked rasters (62 archived registry + 4 local GEMSDOE70 candidates; worst mutual overlap {p5uniq_local.get('worst_dot_overlap', 0):.4f} &le; 0.70, worst surface Spearman &rho; {p5surf.get('worst_spearman_full_footprint', 0):.4f} &le; 0.90), passes all 15 shared validator checks, and passes all 49 single-feature leakage canaries (max deviation AUC {p5card.get('leakage_canary_summary', {}).get('max_deviation_auc', 0):.4f} &le; 0.90).</p>
+    # --------------------------------------------------------------- P7 LOQO-halo box
+    p7_section = ''
+    if p7card and p7a and p7bp and p7bdp:
+        p7_name = p7card['submission_name']
+        p7_sha = p7card['raster_sha256']
+        p7_a_sc = p7a['scores']['candidate']
+        p7_bp_sc = p7bp['scores']['candidate']
+        p7_bdp_sc = p7bdp['scores']['candidate']
+        p7_d_bp = p7bp['paired_differences']['h33_reference']
+        p7_d_bdp = p7bdp['paired_differences']['h33_reference']
+        p7_section = f'''<section class="panel" style="border-left:4px solid #076c64" aria-labelledby="p7-decision">
+<div class="eyebrow">PHASE 5 / P7 · 49-FEATURE LOQO SUPERVISED WITHIN-HALO RANKER (37,654 DOTS)</div>
+<h2 id="p7-decision">Candidate <code>{esc(p7_name)}</code> · scientific verdict: <code>{esc(p7card['verdict'])}</code> (<code>download_ok = true</code>; review-only under literal forward rule — DO NOT SUBMIT without selector exemption)</h2>
+<p><strong>Download (`download_ok = true`): yes.</strong> Unique across all 66 checked rasters under the mutual-overlap rule (62 archived registry + 4 local GEMSDOE70 candidates; worst mutual overlap {p7uniq_local.get('worst_dot_overlap', 0):.4f} &le; 0.70, worst surface Spearman &rho; {p7surf.get('worst_spearman_full_footprint', 0):.4f} &le; 0.90), passes all 15 shared validator checks, and passes all 49 single-feature leakage canaries (max deviation AUC {p7card.get('leakage_canary_summary', {}).get('max_deviation_auc', 0):.4f} &le; 0.90).</p>
 <p><strong>Holdout &amp; LOQO Proxy Gates (`holdout_and_proxy_gates_passed = true`): all passed.</strong>
-Instrument A HOLDOUT-DTI <strong>{p5_a_sc['dti']:.4f}</strong> {ci(p5_a_sc)} (vs P4 0.0730, H33 0.0037) ·
-Instrument B&prime; (d &ge; 3 px) LOQO-PROXY-DTI <strong>{p5_bp_sc['dti']:.4f}</strong> {ci(p5_bp_sc)} (vs H33 0.0938, paired &Delta; {p5_d_bp['delta']:+.4f} {ci(p5_d_bp)}) ·
-Instrument B&Prime; (d &ge; 6 px, outside 1:500k duplication band) LOQO-PROXY-DTI <strong>{p5_bdp_sc['dti']:.4f}</strong> {ci(p5_bdp_sc)} (vs H33 0.0850, paired &Delta; {p5_d_bdp['delta']:+.4f} {ci(p5_d_bdp)}).
+Instrument A HOLDOUT-DTI <strong>{p7_a_sc['dti']:.4f}</strong> {ci(p7_a_sc)} (vs P4 0.0730, H33 0.0037) ·
+Instrument B&prime; (d &ge; 3 px) LOQO-PROXY-DTI <strong>{p7_bp_sc['dti']:.4f}</strong> {ci(p7_bp_sc)} (vs H33 0.0938, paired &Delta; {p7_d_bp['delta']:+.4f} {ci(p7_d_bp)}) ·
+Instrument B&Prime; (d &ge; 6 px, outside 1:500k duplication band) LOQO-PROXY-DTI <strong>{p7_bdp_sc['dti']:.4f}</strong> {ci(p7_bdp_sc)} (vs H33 0.0850, paired &Delta; {p7_d_bdp['delta']:+.4f} {ci(p7_d_bdp)}).
 Under Protocol Rule 6, 0 weekly slots were spent automatically in the sandbox because SGMC is a state-compilation proxy rather than the hidden organizer truth.</p>
 <div class="actions">
-<a class="button" style="background:#076c64;color:#fff" href="downloads/{esc(p5_name)}.tif" download>Download Phase-5 TIFF</a>
-<a class="button secondary" href="downloads/{esc(p5_name)}.zip" download>Download Phase-5 one-TIFF ZIP</a>
-<a class="button secondary" href="downloads/phase5_run_card.json" download>Phase-5 run card</a>
-<a class="button secondary" href="preregistration-phase5.html">Phase-5 preregistration</a>
+<a class="button secondary" href="downloads/{esc(p7_name)}.tif" download>Download P7 LOQO-halo TIFF (review-only under literal rule — DO NOT SUBMIT)</a>
+<a class="button secondary" href="downloads/{esc(p7_name)}.zip" download>Download P7 one-TIFF ZIP</a>
+<a class="button secondary" href="downloads/p7_run_card.json" download>P7 run card</a>
+<a class="button secondary" href="preregistration-phase5.html">P7 preregistration</a>
 </div>
-<p class="small">SHA-256: <code>{esc(p5_sha)}</code> · Note ({p5card.get('note_chars', 0)}/140 chars): <code>{esc(p5card.get('submission_note', ''))}</code></p></section>'''
+<p class="small">SHA-256: <code>{esc(p7_sha)}</code> · Note ({p7card.get('note_chars', 0)}/140 chars): <code>{esc(p7card.get('submission_note', ''))}</code></p></section>'''
 
     # --------------------------------------------------------------- decision box
     # The frozen experiment card is evidence, never the current policy decision.
@@ -494,7 +495,7 @@ SHA-256 <code>{esc(p6card['raster_sha256'])}</code>.</p>
         for r in review['archived_artifacts']]
     archives = f'<h2>{len(review["archived_artifacts"])} frozen prior dot TIFFs — forensic review only</h2>' + table(
         ['Archive', 'Download', 'Local format', 'Forward overlap (limit 0.70)'], archive_rows)
-    (DOCS / 'index.html').write_text(frame('Overview', index + e6_section + s3_site.banner() + p6_section + e5_section + e2_section + p5_section + archives))
+    (DOCS / 'index.html').write_text(frame('Overview', index + p7_section + e6_section + s3_site.banner() + p6_section + e5_section + e2_section + p5_section + archives))
 
     # ------------------------------------------------------------- submit guide
     vrows = [[esc(k), 'pass' if v else 'FAIL'] for k, v in checks.items()]
@@ -847,6 +848,7 @@ Full inventory (862) scan remains a selector step. Literal readings are in the r
                             ('docs/h33-analysis.md', 'h33-analysis.html', 'Why H33 scored'),
                             ('docs/irregularities.md', 'limitations.html', 'Limitations'),
                             ('docs/protocol-review.md', 'protocol-review.html', 'Protocol review'),
+                            ('docs/preregistration-phase5.md', 'preregistration-phase5.html', 'P7 LOQO Preregistration'),
                             s3_site.MARKDOWN]:
         text = (ROOT / src).read_text()
         body = markdown.markdown(text, extensions=['tables'])
@@ -910,7 +912,7 @@ as a predictor.</li></ul>
             '<!doctype html><html lang="en"><head><meta charset="utf-8">'
             f'<meta http-equiv="refresh" content="0;url={target}"><title>GEMSDOE70</title>'
             f'</head><body><p>This page moved. <a href="{target}">Continue</a>.</p></body></html>\n')
-    executive = latest_decision + decision + e6_section + '''<h2>Exactly how submission approval works</h2>
+    executive = latest_decision + decision + p7_section + e6_section + '''<h2>Exactly how submission approval works</h2>
 <ol class="steps"><li>Do not upload the new P5 review file or any earlier archive. The literal overlap gate fails.</li>
 <li>A future candidate must be newly generated using the shared writer, beat a matched current-best
 holdout, clear feature-alone canaries and both-stage literal uniqueness, and pass the local validator.</li>

@@ -259,8 +259,44 @@ requirements are retained there; the current active branch is recorded in HANDOF
             f"worst mutual overlap `0.2876`. File `docs/downloads/{_p6['submission_name']}.tif` (SHA-256 `{_p6['raster_sha256']}`, `146,736` bytes), "
             f"evidence `evidence/p6_dualhorizon/`, method `src/gems70/method_dualhorizon.py`, runner `scripts/run_experiment_dualhorizon.py`.\n"
         )
+    p7_note = ''
+    p7p = ROOT / 'evidence/p7/run_card.json'
+    if p7p.is_file():
+        _p7 = json.loads(p7p.read_text())
+        _p7a = _p7['instrument_a_holdout']
+        _p7bp = _p7['instrument_b_prime_proxy']
+        _p7bdp = _p7['instrument_b_double_prime_proxy']
+        _p7dbp = _p7['paired_b_prime_vs_h33']
+        _p7dbdp = _p7['paired_b_double_prime_vs_h33']
+        _p7u = _p7['correlation_overlap_vs_registry']
+        p7_note = (
+            f"\n## P7 LOQO 49-feature within-halo ranker lane (`arena/3ccffc1b-gemsdoe70`) — "
+            f"`verdict = {_p7['verdict']}` (`download_ok = true`, `holdout_and_proxy_gates_passed = true`; "
+            f"review-only under literal forward rule — DO NOT SUBMIT without selector exemption)\n\n"
+            f"Preregistered in `docs/preregistration-phase5.md`: 4-fold Leave-One-Quadrant-Out `HistGradientBoostingClassifier` "
+            f"across 49 features (19 GeoDAWN/INGENIOUS bands + 12 LiDAR scarp bands + 8 GeoDAWN radiometric/ratio bands + "
+            f"2 GDR-1391 hydrothermal conduit features + 8 visible catalogue geometry features), quadrant-rank-normalized and "
+            f"combined with the tip/damage-zone halo prior on `d_cat >= 3 px` (no 32-px truncation), emitted as `37,654` binary dots "
+            f"via `7×7` block stratification + `5 px` NMS (`src/gems70/method_v5.py`, `scripts/run_experiment_v5.py`):\n"
+            f"- **Instrument A (`HOLDOUT-DTI`, `11,321` withheld catalogue pixels):** **`{_p7a['candidate']['dti']:.4f}`** "
+            f"`[{_p7a['candidate']['ci95'][0]:.4f}, {_p7a['candidate']['ci95'][1]:.4f}]` vs P4 `{_p7a['p4_reference']['dti']:.4f}` "
+            f"and H33 `{_p7a['h33_reference']['dti']:.4f}` (47-feature `ablation_no_hydro`: `{_p7a['ablation_no_hydro']['dti']:.4f}`).\n"
+            f"- **Instrument B′ (`LOQO-PROXY-DTI`, `d >= 3 px`, `59,937` positives):** **`{_p7bp['candidate']['dti']:.4f}`** "
+            f"`[{_p7bp['candidate']['ci95'][0]:.4f}, {_p7bp['candidate']['ci95'][1]:.4f}]` vs H33 **`{_p7bp['h33_reference']['dti']:.4f}`** "
+            f"(paired Δ `{_p7dbp['delta']:+.4f}` `[{_p7dbp['ci95'][0]:+.4f}, {_p7dbp['ci95'][1]:+.4f}]`, strictly positive; "
+            f"`ablation_no_hydro`: `{_p7bp['ablation_no_hydro']['dti']:.4f}`).\n"
+            f"- **Instrument B″ (`LOQO-PROXY-DTI`, `d >= 6 px` outside 1:500k duplication band, `52,767` positives):** **`{_p7bdp['candidate']['dti']:.4f}`** "
+            f"`[{_p7bdp['candidate']['ci95'][0]:.4f}, {_p7bdp['candidate']['ci95'][1]:.4f}]` vs H33 **`{_p7bdp['h33_reference']['dti']:.4f}`** "
+            f"(paired Δ `{_p7dbdp['delta']:+.4f}` `[{_p7dbdp['ci95'][0]:+.4f}, {_p7dbdp['ci95'][1]:+.4f}]`, strictly positive; "
+            f"`ablation_no_hydro`: `{_p7bdp['ablation_no_hydro']['dti']:.4f}`).\n"
+            f"- **Uniqueness (66 rasters = 62 archived + 4 local):** `unique = true` under mutual overlap (`worst_mutual_overlap_all_66 = {_p7u['worst_mutual_overlap_all_66']:.4f} <= 0.70`, "
+            f"`worst_spearman_all_66 = {_p7u['worst_spearman_full_footprint_all_66']:.4f} <= 0.90`; forward overlap `1.00` vs dense lattice `calib_r13lattice_00904.tif`).\n"
+            f"- **Artifact:** `docs/downloads/{_p7['submission_name']}.tif` (SHA-256 `{_p7['raster_sha256']}`), evidence in `evidence/p7/` "
+            f"(including SGMC buffer audit `sgmc_buffer_audit.json`, E2 62-raster re-audit `e2_uniqueness_62rasters_corrected.json`, "
+            f"and upstream patch verification `upstream_verification.json` / `upstream_uniqueness.patch`). No weekly slot used.\n"
+        )
     head = head.replace('## Complete retained project prompt',
-                          e6_note + s3_site.readme_block() + e5_note + p5_note + p6_note + '## Complete retained project prompt', 1)
+                          p7_note + e6_note + s3_site.readme_block() + e5_note + p5_note + p6_note + '## Complete retained project prompt', 1)
     (ROOT / 'README.md').write_text(head + (ROOT / 'PROJECT_BRIEF.md').read_text() + '\n</details>\n')
 
 

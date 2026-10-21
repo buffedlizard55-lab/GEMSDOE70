@@ -22,8 +22,8 @@ ROOT = Path(__file__).resolve().parents[1]
 CLONE = Path('/tmp/60GEMSDOE')
 UPSTREAM_GEMS57 = CLONE / 'src' / 'gems57'
 LOCAL_GEMS57 = ROOT / 'vendor' / 'gems57'
-OUT_PATCH = ROOT / 'evidence' / 'phase5' / 'upstream_uniqueness.patch'
-OUT_JSON = ROOT / 'evidence' / 'phase5' / 'upstream_verification.json'
+OUT_PATCH = ROOT / 'evidence' / 'p7' / 'upstream_uniqueness.patch'
+OUT_JSON = ROOT / 'evidence' / 'p7' / 'upstream_verification.json'
 
 
 def sha(p: Path) -> str:

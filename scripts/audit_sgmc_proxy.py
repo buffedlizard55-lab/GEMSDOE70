@@ -37,7 +37,7 @@ H33 = CLONE / 'docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-z
 D28 = CLONE / 'registry/rasters/GEMSDOE25__dotted-h19-5-d2-8.tif'
 P4 = ROOT / 'docs/downloads/gems70-p4-stratified-halo-37654-20261020.tif'
 E2 = ROOT / 'docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif'
-OUT = ROOT / 'evidence' / 'phase5' / 'sgmc_buffer_audit.json'
+OUT = ROOT / 'evidence' / 'p7' / 'sgmc_buffer_audit.json'
 
 
 def main():

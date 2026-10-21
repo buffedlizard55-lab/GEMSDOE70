@@ -108,7 +108,7 @@ def test_phase5_status_and_artifact_integrity():
     assert st['weekly_slots_used'] == 0
     assert st['reasons'] == []
 
-    card = json.loads((ROOT / 'evidence/phase5/run_card.json').read_text())
+    card = json.loads((ROOT / 'evidence/p7/run_card.json').read_text())
     assert card['organizer_confirmed_score'] is None
     assert len(card['submission_note']) <= 140
     assert card['note_chars'] == len(card['submission_note'])
@@ -129,7 +129,7 @@ def test_phase5_status_and_artifact_integrity():
 
 
 def test_phase5_canaries_uniqueness_and_audits():
-    canaries = json.loads((ROOT / 'evidence/phase5/canaries.json').read_text())
+    canaries = json.loads((ROOT / 'evidence/p7/canaries.json').read_text())
     assert len(canaries) == 49
     assert all(valid_canary(c) for c in canaries.values())
 
@@ -138,35 +138,35 @@ def test_phase5_canaries_uniqueness_and_audits():
         ('uniqueness_with_local.json', 66),
         ('surface_uniqueness.json', 66),
     ]:
-        u = json.loads((ROOT / 'evidence/phase5' / fname).read_text())
+        u = json.loads((ROOT / 'evidence/p7' / fname).read_text())
         assert u['registry_rasters_checked'] == expected_n
         assert u['unique'] is True
         assert u['duplicate_count'] == 0
         assert u['worst_dot_overlap'] <= 0.70
         assert u['worst_spearman_full_footprint'] <= 0.90
 
-    buf = json.loads((ROOT / 'evidence/phase5/sgmc_buffer_audit.json').read_text())
+    buf = json.loads((ROOT / 'evidence/p7/sgmc_buffer_audit.json').read_text())
     assert buf['population_summary']['sgmc_off_catalogue_pixels'] == 78433
     r3 = [row for row in buf['proxy_dti_sensitivity_across_buffers'] if row['min_catalogue_distance_px'] == 3.0][0]
     assert r3['scored_truth_pixels'] == 59937
     assert r3['proxy_dti']['h33_reference'] > r3['proxy_dti']['d28_reference'] > r3['proxy_dti']['p4_stratified_halo']
 
-    e2_u = json.loads((ROOT / 'evidence/phase5/e2_uniqueness_62rasters_corrected.json').read_text())
+    e2_u = json.loads((ROOT / 'evidence/p7/e2_uniqueness_62rasters_corrected.json').read_text())
     assert e2_u['registry_rasters_checked'] == 62
     assert e2_u['unique'] is True
     assert e2_u['duplicate_count'] == 0
 
-    up = json.loads((ROOT / 'evidence/phase5/upstream_verification.json').read_text())
+    up = json.loads((ROOT / 'evidence/p7/upstream_verification.json').read_text())
     assert up['other_20_files_identical_to_upstream'] is True
     assert up['pytest_returncode'] == 0
-    assert (ROOT / 'evidence/phase5/upstream_uniqueness.patch').is_file()
+    assert (ROOT / 'evidence/p7/upstream_uniqueness.patch').is_file()
 
 
 def test_phase5_status_fails_closed_on_corrupted_card(tmp_path):
-    (tmp_path / 'evidence/phase5').mkdir(parents=True)
-    card = json.loads((ROOT / 'evidence/phase5/run_card.json').read_text())
+    (tmp_path / 'evidence/p7').mkdir(parents=True)
+    card = json.loads((ROOT / 'evidence/p7/run_card.json').read_text())
     card['raster_sha256'] = '0' * 64
-    (tmp_path / 'evidence/phase5/run_card.json').write_text(json.dumps(card))
+    (tmp_path / 'evidence/p7/run_card.json').write_text(json.dumps(card))
     st = phase5_status(tmp_path)
     assert st['download_ok'] is False
     assert st['holdout_and_proxy_gates_passed'] is False

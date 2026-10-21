@@ -271,18 +271,18 @@ def candidate_status(root):
 
 
 def phase5_status(root):
-    """Phase-5 LOQO supervised within-halo ranker candidate status.
+    """Phase-5 LOQO supervised within-halo ranker candidate status (evidence/p7).
 
     Reports ``download_ok``, ``holdout_and_proxy_gates_passed``, and
     ``selector_ready`` independently from ``release_status`` (Phase-4 frozen
     baseline) and ``candidate_status`` (parallel E2 lane).
     """
     root = Path(root)
-    card = _load(root, 'evidence/phase5/run_card.json')
-    canaries = _load(root, 'evidence/phase5/canaries.json')
-    audit = _load(root, 'evidence/phase5/uniqueness.json')
-    audit_local = _load(root, 'evidence/phase5/uniqueness_with_local.json')
-    surf_audit = _load(root, 'evidence/phase5/surface_uniqueness.json')
+    card = _load(root, 'evidence/p7/run_card.json')
+    canaries = _load(root, 'evidence/p7/canaries.json')
+    audit = _load(root, 'evidence/p7/uniqueness.json')
+    audit_local = _load(root, 'evidence/p7/uniqueness_with_local.json')
+    surf_audit = _load(root, 'evidence/p7/surface_uniqueness.json')
     reasons, notes = [], []
     download_ok = False
     gates_ok = False

@@ -23,7 +23,7 @@ from restore_data import DATA, sha
 CLONE = Path('/tmp/60GEMSDOE')
 REG = CLONE / 'registry' / 'rasters'
 E2_TIF = ROOT / 'docs/downloads/gems70-e2-alluvialstep-38000-20261020T221218Z-zeros-DO-NOT-SUBMIT.tif'
-OUT = ROOT / 'evidence' / 'phase5' / 'e2_uniqueness_62rasters_corrected.json'
+OUT = ROOT / 'evidence' / 'p7' / 'e2_uniqueness_62rasters_corrected.json'
 
 
 def main():

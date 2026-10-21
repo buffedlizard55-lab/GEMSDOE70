@@ -34,7 +34,7 @@ from gems70 import method_v5 as m5
 from restore_data import DATA, PINS, sha
 from run_experiment_v4 import cropped
 
-E = ROOT / 'evidence' / 'phase5'
+E = ROOT / 'evidence' / 'p7'
 CACHE = ROOT / '.cache'
 CLONE = Path('/tmp/60GEMSDOE')
 EXT = CLONE / 'data' / 'external'
